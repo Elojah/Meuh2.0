@@ -2,6 +2,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#include <sys/types.h>
+#include <dirent.h>
+
 char		*read_user(void)
 {
 	char	*buf;
@@ -13,19 +16,60 @@ char		*read_user(void)
 	return (buf);
 }
 
-t_cmd		*parse(char *s)
+static char	*get_valid_path(char **paths, char *exe)
 {
-	t_cmd		*cmd;
+	int				i;
+	DIR				*d;
+	struct dirent	*dir;
 
-	cmd = (t_cmd *)malloc(sizeof(t_cmd));
+	i = -1;
+	while (paths[++i] != NULL)
+	{
+		if ((d = opendir(paths[i])))
+		{
+			while ((dir = readdir(d)))
+			{
+				if ((ft_strcmp(exe, dir->d_name)) == 0)
+					return (paths[i]);
+			}
+			closedir(d);
+		}
+	}
+	return (NULL);
+}
 
-	cmd->args = (char **)malloc(2 * sizeof(char *));
-	cmd->env = NULL;
+static void	get_env(t_cmd *cmd)
+{
+	extern char		**environ;
+	int				i;
 
-	/*some stuff to do*/
-	cmd->exe = ft_strjoin("/bin/", s);
-	cmd->args[0] = ft_strjoin(cmd->exe, "");
-	cmd->args[1] = NULL;
+	i = -1;
+	cmd->env = environ;
+	while (environ[++i])
+	{
+		if ((ft_strncmp(environ[i], "PATH", 4)) == 0)
+		{
+			cmd->path = get_valid_path(ft_strsplit(environ[i] + 5, ':'), cmd->exe);
+			cmd->path = ft_strjoin(cmd->path, "/");
+			break ;
+		}
+	}
+}
 
-	return (cmd);
+void		parse(t_cmd *cmd, char *s)
+{
+	char		**split_cmd;
+	int			i;
+
+	i = -1;
+	split_cmd = ft_strsplit(s, ' ');
+	while (split_cmd[++i])
+		split_cmd[i] = ft_strtrim(split_cmd[i]);
+	cmd->exe = split_cmd[0];
+	if (split_cmd)
+		cmd->args = split_cmd;
+	else
+		cmd->args = NULL;
+	cmd->path = NULL;
+	get_env(cmd);
 }

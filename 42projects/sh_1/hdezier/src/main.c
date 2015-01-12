@@ -3,15 +3,15 @@
 
 static void	main_loop(void)
 {
-	t_cmd	*cmd;
-	char	*s;
+	t_cmd			cmd;
+	char			*s;
 
 	while (1)
 	{
-		ft_putstr_fd("$>", 2);
+		ft_putstr("$>");
 		s = read_user();
-		cmd = parse(s);
-		exec_cmd(cmd);
+		parse(&cmd, s);
+		exec_cmd(&cmd);
 	}
 }
 

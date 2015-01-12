@@ -3,33 +3,39 @@
 
 # define IS_DIGIT(n) ((n) >= '0' && (n) <= '9')
 # define BUFF_SIZE 1024
+# define NB_BUILTIN 4
 
 # include <stdlib.h>
+# include "libft.h"
 
 typedef struct	s_cmd
 {
 	char		*exe;
 	char		**args;
 	char		**env;
+	char		*path;
+	char		current_dir[BUFF_SIZE];
 }				t_cmd;
 
 /*
 **PARSE
 */
 char		*read_user(void);
-t_cmd		*parse(char *s);
+void		parse(t_cmd *cmd, char *s);
+
+/*
+**BUILTIN
+*/
+int		exec_builtin(t_cmd *cmd);
+void	sh_cd(t_cmd *cmd);
+void	sh_setenv(t_cmd *cmd);
+void	sh_unsetenv(t_cmd *cmd);
+void	sh_env(t_cmd *cmd);
+void	sh_exit(t_cmd *cmd);
 
 /*
 **CALCULUS
 */
 void		exec_cmd(t_cmd *cmd);
-
-/*
-**LIBFT
-*/
-void		ft_exit(int test, char *s);
-void		ft_putstr_fd(char *s, int fd);
-char		*ft_strjoin(char *s, char *t);
-int			ft_uatoi(char **nbr);
 
 #endif

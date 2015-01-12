@@ -3,20 +3,25 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#include <errno.h>
-#include <stdio.h>
-
 void		exec_cmd(t_cmd *cmd)
 {
 	pid_t	f;
 	int		status;
 
-	ft_putstr_fd(cmd->exe, 1);
+	if (!ft_strcmp("exit", cmd->exe))
+		sh_exit(cmd);
 	f = fork();
 	if (f == 0)
-		execve(cmd->exe, cmd->args, cmd->env);
-		//  == -1, "Command execution failed\n");
-		// ft_exit(
+	{
+		if (!exec_builtin(cmd))
+		{
+			if (cmd->path && cmd->exe)
+				execve(ft_strjoin(cmd->path, cmd->exe), cmd->args, cmd->env);
+			else
+				ft_putendl_fd("Commande introuvable", 2);
+		}
+		exit(1);
+	}
 	else
 	{
 		if (waitpid(f, &status, 0) == -1)
@@ -24,5 +29,4 @@ void		exec_cmd(t_cmd *cmd)
 		if (!WIFEXITED(status))
 			ft_putstr_fd("Command execution terminated unnormally\n", 2);
 	}
-	printf("errno: %d\n", errno);
 }
