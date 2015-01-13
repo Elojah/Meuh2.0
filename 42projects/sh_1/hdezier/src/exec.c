@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/01/13 23:14:10 by hdezier           #+#    #+#             */
+/*   Updated: 2015/01/13 23:14:10 by hdezier          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_minishell.h"
 #include <unistd.h>
 #include <sys/types.h>
@@ -20,7 +32,6 @@ void		exec_cmd(t_cmd *cmd)
 			else
 				ft_putendl_fd("Commande introuvable", 2);
 		}
-		exit(1);
 	}
 	else
 	{
@@ -28,5 +39,7 @@ void		exec_cmd(t_cmd *cmd)
 			ft_putstr_fd("Error waiting command execution", 2);
 		if (!WIFEXITED(status))
 			ft_putstr_fd("Command execution terminated unnormally\n", 2);
+		if (exec_builtin(cmd))
+			exit(1);
 	}
 }

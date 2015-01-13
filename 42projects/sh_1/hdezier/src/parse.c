@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/01/13 23:14:16 by hdezier           #+#    #+#             */
+/*   Updated: 2015/01/13 23:14:17 by hdezier          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_minishell.h"
 #include <fcntl.h>
 #include <unistd.h>
@@ -10,7 +22,7 @@ char		*read_user(void)
 	char	*buf;
 	int		r;
 
-	buf = (char *)malloc((BUFF_SIZE + 1) * sizeof(char));
+	buf = (char *)ft_memalloc((BUFF_SIZE + 1) * sizeof(char));
 	r = read(0, buf, BUFF_SIZE);
 	buf[r] = '\0';
 	return (buf);
@@ -40,20 +52,35 @@ static char	*get_valid_path(char **paths, char *exe)
 
 static void	get_env(t_cmd *cmd)
 {
-	extern char		**environ;
 	int				i;
 
 	i = -1;
-	cmd->env = environ;
-	while (environ[++i])
+	cmd->path = NULL;
+	while (cmd->env[++i])
 	{
-		if ((ft_strncmp(environ[i], "PATH", 4)) == 0)
+		if ((ft_strncmp(cmd->env[i], "PATH", 4)) == 0)
 		{
-			cmd->path = get_valid_path(ft_strsplit(environ[i] + 5, ':'), cmd->exe);
+			cmd->path = get_valid_path(ft_strsplit(cmd->env[i] + 5, ':')
+				, cmd->exe);
 			cmd->path = ft_strjoin(cmd->path, "/");
 			break ;
 		}
 	}
+}
+
+char		*get_var_env(t_cmd *cmd, char *s)
+{
+	int		i;
+	char	**s_env;
+
+	i = -1;
+	while (cmd->env[++i])
+	{
+		s_env = ft_strsplit(cmd->env[i], '=');
+		if (!ft_strcmp(s_env[0], s))
+			return (s_env[1]);
+	}
+	return (NULL);
 }
 
 void		parse(t_cmd *cmd, char *s)
@@ -70,6 +97,5 @@ void		parse(t_cmd *cmd, char *s)
 		cmd->args = split_cmd;
 	else
 		cmd->args = NULL;
-	cmd->path = NULL;
 	get_env(cmd);
 }
