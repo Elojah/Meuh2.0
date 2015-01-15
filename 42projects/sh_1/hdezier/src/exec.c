@@ -30,7 +30,7 @@ void		exec_cmd(t_cmd *cmd)
 			if (cmd->path && cmd->exe)
 				execve(ft_strjoin(cmd->path, cmd->exe), cmd->args, cmd->env);
 			else
-				ft_putendl_fd("Commande introuvable", 2);
+				ft_exit(1, "Commande introuvable");
 		}
 	}
 	else
