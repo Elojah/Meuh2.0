@@ -14,11 +14,16 @@
 #include "mlx.h"
 #include "libft.h"
 
+static void		set_param_koch(t_map *m)
+{
+	m->kd.depth = 2;
+}
+
 static void		set_param_julia(t_map *m)
 {
 	m->jd.c_x = 0.3;
 	m->jd.c_y = 0.5;
-	m->jd.depth = 300;
+	m->jd.depth = 50;
 }
 
 static void		set_param_dragon(t_map *m)
@@ -35,14 +40,16 @@ static void		set_param(t_map *m)
 	m->move[1] = 0;
 	set_param_julia(m);
 	set_param_dragon(m);
+	set_param_koch(m);
 }
 
-int		main_loop(t_map *m)
+int				main_loop(t_map *m)
 {
 	set_param(m);
 	calculus(m);
 	mlx_key_hook(m->win, &get_loop_key, m);
-	mlx_do_key_autorepeaton(m->mlx);
+	mlx_hook(m->win, 6, (1l << 6), &get_loop_mouse, m);
+	mlx_hook(m->win, 2, (1L << 0), &get_loop_key, m);
 	mlx_loop(m->mlx);
 	return (0);
 }

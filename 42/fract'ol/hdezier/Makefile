@@ -16,8 +16,10 @@ FILES = main.c\
 		calculus.c\
 		draw_lib.c\
 		get_loop_key.c\
+		get_loop_mouse.c\
 		main_loop.c\
 		julia.c\
+		koch.c\
 		dragon_curve.c\
 
 SRC = $(addprefix src/, $(FILES))

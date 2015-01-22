@@ -13,8 +13,8 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define WIN_W 1600
-# define WIN_H 1200
+# define WIN_W 800.0
+# define WIN_H 600.0
 # define ERR_VAL 0
 
 /*
@@ -24,6 +24,7 @@
 # define MIN(a, b) ((a) > (b) ? (b) : (a))
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
 # define SQ(n) ((n) * (n))
+# define D_TO_R(n) ((n) * M_PI / 180)
 
 /*
 **PARAM
@@ -76,11 +77,16 @@ typedef union				u_color
 	char					rgba[4];
 }							t_color;
 
+typedef struct				s_koch_data
+{
+	int						depth;
+}							t_koch_data;
+
 typedef struct				s_julia_data
 {
+	int						depth;
 	float					c_x;
 	float					c_y;
-	int						depth;
 }							t_julia_data;
 
 typedef struct				s_dragon_data
@@ -101,6 +107,7 @@ typedef struct				s_map
 	char					*fractal_name;
 	struct s_julia_data		jd;
 	struct s_dragon_data	dd;
+	struct s_koch_data		kd;
 }							t_map;
 
 /*
@@ -108,6 +115,7 @@ typedef struct				s_map
 */
 void						calculus(t_map *m);
 int							get_loop_key(int key_press, t_map *m);
+int							get_loop_mouse(int x, int y, t_map *m);
 int							main_loop(t_map *m);
 
 /*
@@ -119,6 +127,11 @@ void						julia_set(t_map *m);
 **Dragon curve
 */
 void						dragon_curve(t_map *m);
+
+/*
+**Koch
+*/
+void						koch(t_map *m);
 
 /*
 **DRAW LINE
