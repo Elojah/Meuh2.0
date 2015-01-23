@@ -17,6 +17,7 @@ static int	color_deg(int h)
 {
 	return (h);
 }
+
 static void	draw_horizontal_line(t_map *m, t_point *origin
 	, int delta[2], int inc[2])
 {

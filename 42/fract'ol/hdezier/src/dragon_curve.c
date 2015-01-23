@@ -14,7 +14,6 @@
 #include "libft.h"
 #include <math.h>
 
-
 static void	add_dragon_string(t_map *m, char c, char **res)
 {
 	char	*tmp;
@@ -64,9 +63,7 @@ static int	color_dragon(int i[2])
 	return (color);
 }
 
-static int	dirs[4][2] = {{1,0},{0,1},{-1,0},{0,-1}};
-
-static void	interpret_dragon(t_map *m)
+static void	interpret_dragon(t_map *m, int dirs[4][2])
 {
 	int		di;
 	int		i[2];
@@ -87,7 +84,7 @@ static void	interpret_dragon(t_map *m)
 		else if (m->dd.s[i[0]] == 'F')
 		{
 			draw_line(m, (t_point){xy[0], xy[1], color_dragon(i)}
-				,(t_point){(tmp[0] = xy[0] + m->zoom * dirs[di][0])
+				, (t_point){(tmp[0] = xy[0] + m->zoom * dirs[di][0])
 				, (tmp[1] = xy[1] + m->zoom * dirs[di][1]), color_dragon(i)});
 			xy[0] = tmp[0];
 			xy[1] = tmp[1];
@@ -95,15 +92,16 @@ static void	interpret_dragon(t_map *m)
 	}
 }
 
-void	dragon_curve(t_map *m)
+void		dragon_curve(t_map *m)
 {
-	int		i;
+	static	int	dirs[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+	int			i;
 
 	i = -1;
 	m->zoom = 5;
 	m->dd.s = ft_strdup("FX");
 	while (++i < m->dd.depth)
 		dragon_evolution(m);
-	interpret_dragon(m);
+	interpret_dragon(m, dirs);
 	ft_memdel((void **)&(m->dd.s));
 }

@@ -24,11 +24,11 @@ static void	clear_image(t_map *m)
 	{
 		j = -1;
 		while (++j < WIN_H)
-			ft_put_pixel_to_image(m, i, j, C_WHITE);
+			ft_put_pixel_to_image(m, i, j, C_BLACK);
 	}
 }
 
-void	calculus(t_map *m)
+void		calculus(t_map *m)
 {
 	clear_image(m);
 	ft_putstr("Start process ");
@@ -37,6 +37,8 @@ void	calculus(t_map *m)
 		julia_set(m);
 	else if (!ft_strcmp(m->fractal_name, "dragon"))
 		dragon_curve(m);
+	else if (!ft_strcmp(m->fractal_name, "koch"))
+		koch(m);
 	else
 		ft_exit(1, "Fractal name not valid");
 	ft_putstr("Done: process ");

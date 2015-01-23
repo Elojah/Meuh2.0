@@ -46,7 +46,7 @@ static void		draw_point_julia(t_map *m, int i, int j)
 		ft_put_pixel_to_image(m, i, j, color_julia(n));
 }
 
-void		julia_set(t_map *m)
+void			julia_set(t_map *m)
 {
 	int		i;
 	int		j;

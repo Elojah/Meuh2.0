@@ -14,6 +14,16 @@
 # define LIBFT_H
 # include <unistd.h>
 
+# define BUFF_SIZE 1023
+
+typedef struct		s_gnl
+{
+	char			buf[BUFF_SIZE + 1];
+	int				ret;
+	int				cur_fd;
+	char			*to_free;
+}					t_gnl;
+
 typedef struct		s_list
 {
 	void			*content;
@@ -80,5 +90,7 @@ void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 size_t				ft_lstlen(t_list *lst);
+void				ft_exit(int test, char *error_msg);
+int					get_next_line(const int fd, char **line);
 
 #endif
