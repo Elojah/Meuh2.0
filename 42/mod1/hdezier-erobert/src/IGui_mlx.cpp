@@ -1,6 +1,9 @@
-#include "Gui_mlx.h"
+#include "IGui_mlx.h"
+#include "mlx.h"
+#include <cstring>
 
-Gui_mlx::Gui_mlx()
+
+IGui_mlx::IGui_mlx()
 {
 	std::strcpy(this->win.name, "Test");
 	this->win.h = 600;
@@ -9,12 +12,19 @@ Gui_mlx::Gui_mlx()
 	this->img = mlx_new_image(this->mlx_ptr, this->win.w, this->win.h);
 }
 
-Gui_mlx::~Gui_mlx()
+IGui_mlx::~IGui_mlx()
 {
 	;
 }
 
-void	Gui_mlx::init_window(void)
+void	IGui_mlx::init_window(void)
 {
 	this->win.ptr = mlx_new_window(this->mlx_ptr, this->win.w, this->win.h, this->win.name);
+}
+
+void	IGui_mlx::loop(void)
+{
+	// mlx_expose_hook(m->win, &draw_window, m);
+	// mlx_key_hook(m->win, &get_loop_key, m);
+	mlx_loop(this->mlx_ptr);
 }
