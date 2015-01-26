@@ -40,10 +40,6 @@ LIBS += $(LIB_OTHER)
 
 #Includes
 INC += $(addprefix -I,$(INC_DIR))
-<<<<<<< HEAD
-=======
-INC += $(addprefix -I,$(LIB_DIR))
->>>>>>> 0c2b1ff51b8bffff7d4f4ba56b5d4a98c08881e3
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 
 #RULES
@@ -67,11 +63,7 @@ dirbuild:
 #Build rules
 $(TARGET) : $(OBJ)
 	@echo "\n\033[1;4;34mDEP:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
-<<<<<<< HEAD
 	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
-=======
-	$(CC) $(CFLAGS) $(INC) $^ $(LIBS) -o $@
->>>>>>> 0c2b1ff51b8bffff7d4f4ba56b5d4a98c08881e3
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT) $(DEP)
 	@echo "\n\033[1;4;34mSRC:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m\n"
