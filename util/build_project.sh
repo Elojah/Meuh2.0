@@ -40,11 +40,20 @@ DEP = $(addsuffix .h, $(addprefix $(INC_DIR)/, $(CLASS)))
 OBJ = $(addsuffix .o, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 
 #Flags
-CFLAGS = -MMD -MP -Wall -Wextra -Werror -O3 -g -std=c++0x
+CFLAGS = -MMD -MP -Wall -Wextra -Werror -O3 -g -std=c++98
 LFLAGS =
+
+#Libs
+LIB_LOCAL =
+LIB_GLOBAL =
+LIB_OTHER =
+LIB = $(addprefix -L,$(LIB_LOCAL))
+LIB += $(addprefix -l,$(LIB_GLOBAL))
+LIB += $(LIB_OTHER)
+
+#Includes
 INC = $(addprefix -I,$(INC_DIR))
-LIB_NAMES =
-LIB = $(addprefix -l,$(LIB_NAMES))
+INC += $(addprefix -I,$(LIB_LOCAL))
 
 #RULES
 all : dirbuild $(TARGET)
@@ -66,11 +75,11 @@ dirbuild:
 
 #Build rules
 $(TARGET) : $(OBJ)
-	@echo "\\n\\033[1;4;34mDEP:\\033[0m\\n"$(DEP)"\\n\\033[36mLinking objects ...\\033[0m\\n"
+	@echo "\\n\\033[1;4;34mDEP:\\033[0m\\n"$^"\\n\\033[36mLinking objects ...\\033[0m\\n"
 	$(CC) $(LFLAGS) $^ -o $@ $(LIB)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT) $(DEP)
-	@echo "\\n\\033[1;4;34mSRC:\\033[0m\\n"$(SRC)"\\n\\033[36mCompiling src ...\\033[0m\\n"
+	@echo "\\n\\033[1;4;34mSRC:\\033[0m\\n"$<"\\n\\033[36mCompiling src ...\\033[0m\\n"
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
 $(OBJ): $(DEP)
