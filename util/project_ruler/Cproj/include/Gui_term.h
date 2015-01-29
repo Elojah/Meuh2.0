@@ -1,19 +1,21 @@
 #ifndef GUI_TERM_H
 # define GUI_TERM_H
 
-# include "I_gui.h"
-class	I_WinCurse;
+# include "Igui.h"
+class	WinCurse_menu;
+class	WinCurse_proj;
 
-class Gui_term : public I_gui
+class Gui_term : public Igui
 {
 public:
 	Gui_term(void);
 	~Gui_term(void);
 	void	init(void);
-	void	loop(void);
+	void	start(void);
 protected:
 private:
-	I_WinCurse	*win;
+	WinCurse_menu	*_startMenu;
+	WinCurse_proj	*_cProj;
 };
 
 #endif

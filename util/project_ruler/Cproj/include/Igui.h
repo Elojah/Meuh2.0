@@ -1,12 +1,14 @@
 #ifndef I_GUI_H
 # define I_GUI_H
 
-class I_gui
+#include <ncurses.h>
+
+class Igui
 {
 public:
-	virtual ~I_gui(void) {};
+	virtual ~Igui(void) {};
 	virtual void	init(void) = 0;
-	virtual void	loop(void) = 0;
+	virtual void	start(void) = 0;
 protected:
 private:
 };
