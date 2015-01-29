@@ -19,6 +19,8 @@ CLASS = main\
 		WinCurse_proj\
 		Mod_classList\
 		Mod_classListFactory\
+		Mod_attrList\
+		Mod_attrListFactory\
 
 #List interfaces here
 INTERFACE = Igui\
@@ -70,7 +72,7 @@ $(TARGET) : $(OBJ)
 	@echo "\n\033[1;4;34mDEP:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
 	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT) $(DEP)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)
 	@echo "\n\033[1;4;34mSRC:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 

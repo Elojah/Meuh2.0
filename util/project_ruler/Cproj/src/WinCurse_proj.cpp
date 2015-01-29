@@ -50,7 +50,7 @@ void	WinCurse_proj::_createMods(std::string s)
 	{
 		if (_modsFact.find(line) == _modsFact.end())
 			continue ;
-		_mods.push_back(_modsFact[line]->create(_size.h / 2, _size.w / 2, 1, 1));
+		_mods.push_back(_modsFact[line]->create(_size.h / 2, _size.w / 4, 1, 1));
 	}
 }
 
