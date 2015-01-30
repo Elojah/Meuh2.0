@@ -46,7 +46,10 @@ void			WinCurse_menu::setValues(Strings s, std::string title)
 {
 	Strings::iterator it;
 
+	wclear(_win);
 	_m.title = title;
+	_values[0].clear();
+	_values[1].clear();
 	for (it = s.begin(); it != s.end(); ++it) {
 		_values[0].push_back(*it);
 		_values[1].push_back("");

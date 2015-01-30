@@ -15,6 +15,9 @@ public:
 protected:
 private:
 	Strings			_srcs;
+	std::string		_path;
+
+	void	_showAttributes(std::string);
 };
 
 #endif

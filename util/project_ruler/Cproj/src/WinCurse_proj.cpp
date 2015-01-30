@@ -1,5 +1,6 @@
 #include "WinCurse_proj.h"
-#include "Mod_classListFactory.h"
+#include "ModuleFactory.h"
+#include "IWinCurse_mod.h"
 #include <fstream>
 
 WinCurse_proj::WinCurse_proj(void) :
@@ -12,11 +13,13 @@ WinCurse_proj::WinCurse_proj(std::string path) :
 	WinCurse::WinCurse(),
 	_path(path)
 {
+	_fMods = new ModuleFactory();
+
 	box(_win, 0, 0);
 	mvwaddstr(_win, 0, (_size.w - _path.size()) / 2, _path.c_str());
 	wrefresh(_win);
-	_initMods();
-	_createMods("./cfg/.modules");
+
+	_initMods("./cfg/.modules");
 	_launchMods();
 }
 
@@ -25,32 +28,17 @@ WinCurse_proj::~WinCurse_proj(void)
 	;
 }
 
-void	WinCurse_proj::_initMods(void)
-{
-	/*Add modules here*/
-	_modsFact.insert(std::pair<std::string, IFactoryMod *>(
-		"classList",
-		new Mod_classListFactory()
-	));
-	/*
-	**EXAMPLE
-	_modsFact.insert(std::pair<std::string, IFactoryMod *>(
-		"name",
-		new Mod_nameFactory()
-	));
-	*/
-}
-
-void	WinCurse_proj::_createMods(std::string s)
+void	WinCurse_proj::_initMods(std::string s)
 {
 	std::ifstream	ifs(s.c_str());
 	std::string		line;
+	IWinCurse_mod	*tmp;
+	int				size[4] = {_size.h / 2, _size.w / 2, 1, 1};/*HARDCODE*/
 
 	while (std::getline(ifs, line))
 	{
-		if (_modsFact.find(line) == _modsFact.end())
-			continue ;
-		_mods.push_back(_modsFact[line]->create(_size.h / 2, _size.w / 4, 1, 1));
+		if ((tmp = _fMods->create(line, size)) != NULL)/*HARDCODE*/
+			_mods.push_back(tmp);
 	}
 }
 
