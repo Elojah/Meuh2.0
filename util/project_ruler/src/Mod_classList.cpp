@@ -77,6 +77,7 @@ void	Mod_classList::_createNewClass(void)
 	name = readUser();
 	_createNewFile(name, std::string("src"));
 	_createNewFile(name, std::string("include"));
+	this->init(_path);
 }
 
 void	Mod_classList::_createNewFile(const std::string &name, const std::string &type)
@@ -95,8 +96,10 @@ void	Mod_classList::_createNewFile(const std::string &name, const std::string &t
 			line.replace(found, 7, name);
 		while ((found = line.find("${NAME_MAJ}")) != std::string::npos)/*HARDCODE SRC NAME*/
 			line.replace(found, 11, nameMaj);
-		ofs << line << '\n';
+		ofs << line << std::endl;
 	}
+	ifs.close();
+	ofs.close();
 }
 
 std::string	Mod_classList::_nameMaj(std::string str)

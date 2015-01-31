@@ -48,14 +48,21 @@ void	Gui_term::start(void)
 
 void	Gui_term::_createNewProject(std::string s)
 {
-	std::ifstream	ifs("./cfg/templates/project.template");
-	std::ofstream	ofs((s + "/Makefile").c_str());
+	std::ifstream	ifsProj("./cfg/templates/project.template");
+	std::ifstream	ifsMake("./cfg/templates/Makefile.template");
+	std::ofstream	ofsMake;
+	std::ofstream	ofsCfg;
 	std::string		line;
 
 	mkdir(s.c_str(), S_IRWXU);
-	while (std::getline(ifs, line))
+	while (std::getline(ifsProj, line))
 		mkdir((s + "/" + line).c_str(), S_IRWXU);
-	ifs.close();
-	ifs.open("./cfg/templates/Makefile");
-	ofs << ifs.rdbuf();
+	ofsMake.open((s + "/Makefile").c_str());
+	ofsMake << ifsMake.rdbuf();
+	ofsCfg.open("./cfg/.proj", std::ios::app);
+	ofsCfg << s << std::endl;
+	ifsProj.close();
+	ifsMake.close();
+	ofsMake.close();
+	ofsCfg.close();
 }
