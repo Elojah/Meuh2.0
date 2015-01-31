@@ -25,7 +25,7 @@ WinCurse_proj::WinCurse_proj(std::string path) :
 
 WinCurse_proj::~WinCurse_proj(void)
 {
-	;
+	delete _fMods;
 }
 
 void	WinCurse_proj::_initMods(std::string s)

@@ -14,28 +14,13 @@ WinCurse_menu::WinCurse_menu(int h, int w, int y, int x) :
 	;
 }
 
-WinCurse_menu::WinCurse_menu(std::string const s) :
-	WinCurse()
-{
-	std::ifstream	ifs(s.c_str());
-	std::string		line;
-
-	_m.title = s;
-	while (std::getline(ifs, line))
-	{
-		_values[0].push_back(std::string(line));
-		_values[1].push_back(_getFileName(line));
-	}
-	_createMenu();
-}
-
 WinCurse_menu::~WinCurse_menu(void)
 {
 	int		i;
 
 	unpost_menu(_m.menu);
 	free_menu(_m.menu);
-	for(i = 0; i < _m.nb_item; ++i)
+	for (i = 0; i < _m.nb_item; ++i)
 		free_item(_m.items[i]);
 	wborder(_m.win_menu, ' ', ' ', ' ',' ',' ',' ',' ',' ');
 	wrefresh(_m.win_menu);
@@ -89,12 +74,12 @@ void		WinCurse_menu::_createMenu(void)
 	_m.items[i + 1] = NULL;
 	_m.menu = new_menu((ITEM **)_m.items);
 
-	_m.win_menu = derwin(_win, _size.h - 4, _size.w - 20, 2, 10);
+	_m.win_menu = derwin(_win, _size.h - 4, _size.w - 4, 2, 2);
 	set_menu_win(_m.menu, _win);
 	set_menu_sub(_m.menu,_m.win_menu);
 	set_menu_mark(_m.menu, "> ");
 	box(_win, 0, 0);
-	set_menu_format(_m.menu, _size.h, 1);
+	set_menu_format(_m.menu, _size.h - 4, 1);
 	mvwaddstr(_win, 0, (_size.w - _m.title.size()) / 2, _m.title.c_str());
 	refresh();
 }

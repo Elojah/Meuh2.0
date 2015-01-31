@@ -13,17 +13,9 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		Gui_term\
-		Mod_classList\
-		ModuleFactory\
-		StartMenu\
-		WinCurse\
-		WinCurse_menu\
-		WinCurse_proj\
 
 #List interfaces here
-INTERFACE = Igui\
-			IWinCurse_mod\
+INTERFACE =
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
@@ -36,7 +28,7 @@ LFLAGS =
 
 #Libs
 LIB_LOCAL =
-LIB_GLOBAL = ncurses menu
+LIB_GLOBAL =
 LIB_OTHER =
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
@@ -72,4 +64,3 @@ $(TARGET) : $(OBJ)
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)
 	@echo "\n\033[1;4;34mSRC:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
-

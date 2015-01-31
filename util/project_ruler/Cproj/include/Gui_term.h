@@ -2,6 +2,7 @@
 # define GUI_TERM_H
 
 # include "Igui.h"
+# include <string>
 class	WinCurse_menu;
 class	WinCurse_proj;
 
@@ -15,7 +16,9 @@ public:
 protected:
 private:
 	WinCurse_menu	*_startMenu;
-	WinCurse_proj	*_cProj;
+	WinCurse_proj		*_cProj;
+
+	void	_createNewProject(std::string s);
 };
 
 #endif

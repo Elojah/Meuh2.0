@@ -10,6 +10,8 @@ public:
 	WinCurse(void);
 	WinCurse(int, int, int, int);
 	~WinCurse(void);
+	WINDOW	*getWin(void);
+	std::string		readUser(void);
 protected:
 	typedef struct	s_winSize
 	{

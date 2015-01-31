@@ -14,10 +14,12 @@ public:
 	void	init(std::string);
 protected:
 private:
-	Strings			_srcs;
 	std::string		_path;
 
 	void	_showAttributes(std::string);
+	void	_createNewClass(void);
+	void	_createNewFile(const std::string&, const std::string&);
+	std::string	_nameMaj(std::string str);
 };
 
 #endif

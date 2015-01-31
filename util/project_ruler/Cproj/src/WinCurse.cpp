@@ -27,6 +27,11 @@ WinCurse::~WinCurse(void)
 	delwin(_win);
 }
 
+WINDOW	*WinCurse::getWin(void)
+{
+	return (_win);
+}
+
 std::string		WinCurse::_getFileName(std::string const s)
 {
 	std::string	result;
@@ -53,4 +58,18 @@ void	WinCurse::_setDefaultSize(void)
 	_size.w = ws.ws_col;
 	_size.y = 0;
 	_size.x = 0;
+}
+
+std::string	WinCurse::readUser(void)
+{
+
+	WinCurse	*field;
+	char		str[64];
+
+	field = new WinCurse(1, _size.w - 2, _size.h - 1, 2);
+	echo();
+	wgetstr(field->getWin(), str);
+	noecho();
+	delete field;
+	return (std::string(str));
 }
