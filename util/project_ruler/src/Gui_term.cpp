@@ -35,11 +35,13 @@ void	Gui_term::start(void)
 	_startMenu = new StartMenu("./cfg/.proj");
 	s = _startMenu->choosen_value();
 	if (s.empty())
-		return ;
+		delete _startMenu;
 	else if (s.compare("New Project") == 0)
 	{
 		s = _startMenu->readUser();
 		_createNewProject(s);
+		delete _startMenu;
+		this->start();
 	}
 	else
 		_cProj = new WinCurse_proj(s);

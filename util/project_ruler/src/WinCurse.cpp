@@ -60,7 +60,7 @@ void	WinCurse::_setDefaultSize(void)
 	_size.x = 0;
 }
 
-std::string	WinCurse::readUser(void)
+std::string	WinCurse::readUser(void) const
 {
 
 	WinCurse	*field;

@@ -11,7 +11,7 @@ public:
 	WinCurse(int, int, int, int);
 	~WinCurse(void);
 	WINDOW	*getWin(void);
-	std::string		readUser(void);
+	std::string		readUser(void) const;
 protected:
 	typedef struct	s_winSize
 	{
@@ -22,8 +22,8 @@ protected:
 	}				t_winSize;
 	WINDOW			*_win;
 	t_winSize		_size;
-	std::string		_getFileName(std::string s);
-	std::string		_getFilePath(std::string s);
+	static std::string		_getFileName(std::string s);
+	static std::string		_getFilePath(std::string s);
 private:
 	void	_setDefaultSize(void);
 };

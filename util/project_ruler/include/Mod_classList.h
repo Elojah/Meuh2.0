@@ -18,7 +18,8 @@ private:
 
 	void	_showAttributes(std::string);
 	void	_createNewClass(void);
-	void	_createNewFile(const std::string&, const std::string&);
+	void	_createNewFile(const std::string&, const std::string&, const std::string&);
+	void	_addToMakefile(const std::string name);
 	std::string	_nameMaj(std::string str);
 };
 

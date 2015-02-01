@@ -15,6 +15,7 @@ RM = rm -rf
 CLASS = main\
 		Gui_term\
 		Mod_classList\
+		Mod_cpuUsage\
 		ModuleFactory\
 		StartMenu\
 		WinCurse\
