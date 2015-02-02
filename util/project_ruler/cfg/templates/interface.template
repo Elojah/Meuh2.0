@@ -1,0 +1,12 @@
+#ifndef ${NAME_MAJ}_H
+# define ${NAME_MAJ}_H
+
+class ${NAME}
+{
+public:
+	virtual ~${NAME}(void) {};
+protected:
+private:
+};
+
+#endif
