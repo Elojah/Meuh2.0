@@ -13,6 +13,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
+		FileTemplate\
 		Gui_term\
 		Mod_classList\
 		Mod_cpuUsage\
@@ -73,4 +74,3 @@ $(TARGET) : $(OBJ)
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)
 	@echo "\n\033[1;4;34mSRC:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
-

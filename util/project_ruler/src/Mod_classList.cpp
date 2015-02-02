@@ -1,4 +1,5 @@
 #include "Mod_classList.h"
+#include "FileTemplate.h"
 #include <dirent.h>
 #include <fstream>
 
@@ -26,16 +27,17 @@ void	Mod_classList::init(std::string s)
 	Strings			srcs;
 	std::string		value;
 	int				found;
+	FileTemplate	ftmpl;
 
 	_path = s;
-	s += "/src";
+	s += "/include";
 	if ((dir = opendir(s.c_str())) == NULL)
 		return ;
 	while ((ent = readdir(dir)) != NULL)
 	{
 		value = std::string(ent->d_name);
 		found = value.find_last_of(".");
-		if (value.compare(found + 1, value.size(), "cpp") == 0
+		if (value.compare(found + 1, value.size(), "hpp") == 0
 			&& !value.substr(0, found).empty())
 			srcs.push_back(value.substr(0, found));
 	}
@@ -45,8 +47,9 @@ void	Mod_classList::init(std::string s)
 	setValues(srcs, "Classes/Interfaces");
 	value = choosen_value();
 	if (value == "New")
-		_createNewClass();
+		ftmpl.createFile(readUser(), _path);
 	_showAttributes(value);
+	this->init(_path);
 }
 
 void	Mod_classList::_showAttributes(std::string s)
@@ -73,74 +76,4 @@ void	Mod_classList::_showAttributes(std::string s)
 	/*else {
 	**TODO attributes selected ?
 	}*/
-}
-
-void	Mod_classList::_createNewClass(void)
-{
-	std::string	name;
-
-	name = readUser();
-	_createNewFile(name, std::string("src"), std::string(".cpp"));
-	_createNewFile(name, std::string("include"), std::string(".hpp"));
-	_addToMakefile(name);
-	this->init(_path);
-}
-
-void	Mod_classList::_addToMakefile(const std::string name)
-{
-	std::ifstream	ifs((_path + "/Makefile").c_str());
-	std::ofstream	ofs;
-	std::string		line;
-	Strings			tmpFile;
-
-	while (std::getline(ifs, line))
-		tmpFile.push_back(line);
-	for (Strings::iterator itRead = tmpFile.begin(); itRead != tmpFile.end(); ++itRead) {
-		if ((*itRead).compare(0, 5, "CLASS") != 0)
-			continue ;
-		tmpFile.insert(itRead + 1, "\t\t" + name + "\\");
-		break ;
-	}
-	ifs.close();
-	ofs.open((_path + "/Makefile").c_str());
-	for (Strings::iterator itWrite = tmpFile.begin(); itWrite != tmpFile.end(); ++itWrite) {
-		ofs << *itWrite << std::endl;
-	}
-	ofs.close();
-}
-
-void	Mod_classList::_createNewFile(const std::string &name
-	, const std::string &folder, const std::string &ext)
-{
-	std::ifstream	ifs(("./cfg/templates/" + folder + ".template").c_str());
-	std::ofstream	ofs;
-	std::string		line;
-	std::string		nameMaj;
-	std::size_t		found;
-
-	nameMaj = _nameMaj(name);
-	ofs.open((_path + "/" + folder + "/" + name + ext).c_str());
-	while (std::getline(ifs, line))
-	{
-		while ((found = line.find("${NAME}")) != std::string::npos)/*HARDCODE SRC NAME*/
-			line.replace(found, 7, name);
-		while ((found = line.find("${NAME_MAJ}")) != std::string::npos)/*HARDCODE SRC NAME*/
-			line.replace(found, 11, nameMaj);
-		ofs << line << std::endl;
-	}
-	ifs.close();
-	ofs.close();
-}
-
-std::string	Mod_classList::_nameMaj(std::string str)
-{
-	std::string				result;
-
-	for (std::string::size_type i = 0; i < str.size(); ++i)
-	{
-		if (str[i] >= 'A' && str[i] <= 'Z' && i != 0)
-			result.push_back('_');
-		result.push_back(std::toupper(str[i]));
-	}
-	return (result);
 }
