@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/22 11:23:04 by erobert           #+#    #+#             */
-/*   Updated: 2015/01/30 19:21:21 by erobert          ###   ########.fr       */
+/*   Updated: 2015/02/02 13:49:24 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ static int			ft_get_fractal(char **av, t_data *d)
 	else if (!ft_strcmp(av[1], "mandelbrot"))
 		d->fract.type = MANDELBROT;
 	else if (!ft_strcmp(av[1], "carpet"))
+	{
+		d->fract.p[0] = 0;
+		d->fract.p[1] = 0;
 		d->fract.type = CARPET;
+	}
 	else if (!ft_strcmp(av[1], "sierpinski"))
 		d->fract.type = SIERPINSKI;
 	else

@@ -6,7 +6,7 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/17 17:24:53 by erobert           #+#    #+#              #
-#    Updated: 2015/01/30 19:13:29 by erobert          ###   ########.fr        #
+#    Updated: 2015/02/02 13:54:42 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,7 +14,7 @@ NAME = fractol
 FILES = ft_error.c ft_parser.c ft_put_pixel_to_image.c \
 		ft_change_color.c \
 		ft_draw_julia.c ft_draw_mandelbrot.c \
-		ft_draw_carpet.c ft_draw_sierpinski.c\
+		ft_draw_carpet.c ft_draw_sierpinski.c \
 		ft_draw_fractol.c main.c
 SRCS = $(addprefix srcs/, $(FILES))
 OBJS = $(SRCS:srcs/%.c=objs/%.o)

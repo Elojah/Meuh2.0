@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/21 13:13:38 by erobert           #+#    #+#             */
-/*   Updated: 2015/01/30 19:21:44 by erobert          ###   ########.fr       */
+/*   Updated: 2015/02/02 13:54:51 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef enum		e_type
 	MANDELBROT,
 	CARPET,
 	SIERPINSKI,
+	EXPONENTIAL,
 	NUM_TYPE
 }					t_type;
 

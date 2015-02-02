@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/21 13:14:05 by erobert           #+#    #+#             */
-/*   Updated: 2015/01/30 18:17:01 by erobert          ###   ########.fr       */
+/*   Updated: 2015/02/02 13:54:32 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void				ft_draw_fractol(t_data *d)
 				i = ft_draw_mandelbrot(d, x, y);
 			else if (d->fract.type == CARPET)
 				i = ft_draw_carpet(d, x, y);
-			else
+			else if (d->fract.type == SIERPINSKI)
 				i = ft_draw_sierpinski(d, x, y);
 			ft_put_pixel_to_image(d, x, y, d->color[i % 256]);
 		}
