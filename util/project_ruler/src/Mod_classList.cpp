@@ -48,11 +48,11 @@ void	Mod_classList::init(std::string s)
 	value = choosen_value();
 	if (value.compare("New") == 0)
 		ftmpl.createFile(readUser(), _path);
-	// else
-	// 	_showAttributes(value);
-	if (value.compare("Exit") != 0)
-		this->init(_path);
-
+	else if (value.compare("Exit") == 0)
+		return ;
+	else
+		_showAttributes(value);
+	this->init(_path);
 }
 
 void	Mod_classList::_showAttributes(std::string s)
@@ -71,12 +71,12 @@ void	Mod_classList::_showAttributes(std::string s)
 		if ((found = line.find(s)) != std::string::npos && line [0] != '#')
 			attr.push_back(line.substr(found + s.size() + 2));
 	}
-	attr.push_back("Return");
 	setValues(attr, s);
 	line = choosen_value();
-	if (line.compare("Return") == 0)
-		this->init(_path);
-	/*else {
-	**TODO attributes selected ?
-	}*/
+	if (line.compare("Exit") != 0)
+	{
+		/*TODO
+		**Attributes selected
+		*/
+	}
 }

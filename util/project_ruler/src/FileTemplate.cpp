@@ -113,7 +113,7 @@ std::string	FileTemplate::_nameMaj(std::string const &str)
 	std::string				result;
 	std::string				tmp;
 
-	tmp = std::string(str);
+	tmp = _nameClass(str);
 	for (std::string::size_type i = 0; i < tmp.size(); ++i)
 	{
 		if (tmp[i] >= 'A' && tmp[i] <= 'Z' && i != 0)
