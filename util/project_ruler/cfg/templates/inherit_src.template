@@ -1,0 +1,11 @@
+#include "${NAME}"
+
+${NAME}::${NAME}(void)
+{
+	;
+}
+
+${NAME}::~${NAME}(void)
+{
+	;
+}

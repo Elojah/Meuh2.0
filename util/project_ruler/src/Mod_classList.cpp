@@ -31,6 +31,7 @@ void	Mod_classList::init(std::string s)
 
 	_path = s;
 	s += "/include";
+	srcs.push_back("New");
 	if ((dir = opendir(s.c_str())) == NULL)
 		return ;
 	while ((ent = readdir(dir)) != NULL)
@@ -43,13 +44,15 @@ void	Mod_classList::init(std::string s)
 	}
 	closedir(dir);
 
-	srcs.push_back("New");
 	setValues(srcs, "Classes/Interfaces");
 	value = choosen_value();
-	if (value == "New")
+	if (value.compare("New") == 0)
 		ftmpl.createFile(readUser(), _path);
-	_showAttributes(value);
-	this->init(_path);
+	// else
+	// 	_showAttributes(value);
+	if (value.compare("Exit") != 0)
+		this->init(_path);
+
 }
 
 void	Mod_classList::_showAttributes(std::string s)

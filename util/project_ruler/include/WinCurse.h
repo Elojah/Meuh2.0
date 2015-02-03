@@ -12,6 +12,7 @@ public:
 	~WinCurse(void);
 	WINDOW	*getWin(void);
 	std::string		readUser(void) const;
+	void	notifyUser(const std::string &str) const;
 protected:
 	typedef struct	s_winSize
 	{
