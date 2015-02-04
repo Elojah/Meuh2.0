@@ -17,6 +17,7 @@ FILES = main.c\
 		draw_lib.c\
 		get_loop_key.c\
 		get_loop_mouse.c\
+		get_loop_scroll.c\
 		main_loop.c\
 		julia.c\
 		koch.c\
