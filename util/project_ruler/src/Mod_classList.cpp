@@ -1,3 +1,4 @@
+#include "Mod_memberList.h"
 #include "Mod_classList.h"
 #include "FileTemplate.h"
 #include <dirent.h>
@@ -48,35 +49,16 @@ void	Mod_classList::init(std::string s)
 	value = choosen_value();
 	if (value.compare("New") == 0)
 		ftmpl.createFile(readUser(), _path);
-	else if (value.compare("Exit") == 0)
+	else if (value.compare("Return") == 0)
 		return ;
 	else
-		_showAttributes(value);
+		_selectedClass(value);
 	this->init(_path);
 }
 
-void	Mod_classList::_showAttributes(std::string s)
+void	Mod_classList::_selectedClass(std::string &s)
 {
-	Strings			attr;
-	std::string		line;
-	line = _path + "/src/" + s + ".cpp";
-	std::ifstream	ifs(line.c_str());
-	std::size_t		found;
+	Mod_memberList	members(_size.h, _size.w / 2, _size.y, _size.x + _size.w / 2);
 
-	if (!ifs)
-		return ;
-	/*Parse to check Interface & remove & New*/
-	while (std::getline(ifs, line))
-	{
-		if ((found = line.find(s)) != std::string::npos && line [0] != '#')
-			attr.push_back(line.substr(found + s.size() + 2));
-	}
-	setValues(attr, s);
-	line = choosen_value();
-	if (line.compare("Exit") != 0)
-	{
-		/*TODO
-		**Attributes selected
-		*/
-	}
+	members.init(_path, s);
 }

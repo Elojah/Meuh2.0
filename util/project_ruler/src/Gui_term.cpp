@@ -34,16 +34,19 @@ void	Gui_term::start(void)
 	std::string	s;
 
 	s = _startMenu.choosen_value();
-	if (s.empty())
-		;
+	if (s.empty() || s.compare("Return") == 0)
+		return ;
 	else if (s.compare("New Project") == 0)
 	{
 		s = _startMenu.readUser();
 		_createNewProject(s);
-		this->start();
 	}
 	else
+	{
 		_cProj = new WinCurse_proj(s);
+		delete _cProj;
+	}
+	this->start();
 }
 
 void	Gui_term::_createNewProject(std::string s)

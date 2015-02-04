@@ -17,6 +17,7 @@ CLASS = main\
 		Gui_term\
 		Mod_classList\
 		Mod_cpuUsage\
+		Mod_memberList\
 		ModuleFactory\
 		StartMenu\
 		WinCurse\
