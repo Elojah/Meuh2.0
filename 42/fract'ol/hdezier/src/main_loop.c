@@ -48,8 +48,8 @@ int				main_loop(t_map *m)
 	set_param(m);
 	calculus(m);
 	mlx_key_hook(m->win, &get_loop_key, m);
+	mlx_mouse_hook(m->win, &get_loop_scroll, m);
 	mlx_hook(m->win, 6, (1l << 6), &get_loop_mouse, m);
-	mlx_hook(m->win, 2, (1L << 0), &get_loop_key, m);
 	mlx_loop(m->mlx);
 	return (0);
 }
