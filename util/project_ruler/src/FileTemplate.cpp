@@ -11,30 +11,59 @@ FileTemplate::~FileTemplate(void)
 	;
 }
 
-
-void	FileTemplate::createFile(std::string const &name, std::string path)
+/*
+**Define parsing & creation from string read
+*/
+void	FileTemplate::createFile(std::string const &entry, std::string &path)
 {
-	Strings		tmp;
-
 	_path = path;
-	if (_parseInterface(name))
+	if (_parseInterface(entry))
 	{
-		_createNewFile(name, std::string("interface"), std::string("include"), std::string(".hpp"));
-		_addToMakefile(name, "INTERFACE");
+		_createNewFile(entry, "interface", "include", ".hpp");
+		_addToMakefile(entry, "INTERFACE");
 	}
-	else if (!(tmp = _parseInheritance(name)).empty())
+	else if (_parseInheritance(entry))
 	{
-		;
+		_createNewFile(entry, "inherit_src", "src", ".cpp");
+		_createNewFile(entry, "inherit_include", "include", ".hpp");
+		_addToMakefile(entry, "CLASS");
 	}
 	else
 	{
-		_createNewFile(name, std::string("src"), std::string("src"), std::string(".cpp"));
-		_createNewFile(name, std::string("include"), std::string("include"), std::string(".hpp"));
-		_addToMakefile(name, "CLASS");
+		_createNewFile(entry, "src", "src", ".cpp");
+		_createNewFile(entry, "include", "include", ".hpp");
+		_addToMakefile(entry, "CLASS");
 	}
 }
 
-void	FileTemplate::_addToMakefile(const std::string name, const std::string type)
+void	FileTemplate::_createNewFile(std::string const &entry, std::string const &type
+	, std::string const &folder, std::string const &ext)
+{
+	std::ifstream	ifs(("./cfg/templates/" + type + ".template").c_str());
+	std::ofstream	ofs;
+	std::string		line;
+	std::string		tmpName;
+	std::size_t		found;
+
+	ofs.open((_path + "/" + folder + "/" + _nameClass(entry) + ext).c_str());
+	while (std::getline(ifs, line))
+	{
+		/*Not opti, calculus tmpName too many times
+		**Make fct _initMap() ?
+		**/
+		for (std::map<std::string, std::string(*)(const std::string&)>::iterator it = _mapName.begin();
+				it != _mapName.end(); it++) {
+			tmpName = it->second(entry);
+			while ((found = line.find(it->first)) != std::string::npos)
+				line.replace(found, it->first.length(), tmpName);
+		}
+		ofs << line << std::endl;
+	}
+	ifs.close();
+	ofs.close();
+}
+
+void	FileTemplate::_addToMakefile(const std::string &name, const std::string &type)
 {
 	std::ifstream	ifs((_path + "/Makefile").c_str());
 	std::ofstream	ofs;
@@ -46,7 +75,7 @@ void	FileTemplate::_addToMakefile(const std::string name, const std::string type
 	for (Strings::iterator itRead = tmpFile.begin(); itRead != tmpFile.end(); ++itRead) {
 		if ((*itRead).compare(0, type.length(), type) != 0)
 			continue ;
-		tmpFile.insert(itRead + 1, "\t\t" + name + "\\");
+		tmpFile.insert(itRead + 1, "\t\t" + _nameClass(name) + "\\");
 		break ;
 	}
 	ifs.close();
@@ -57,72 +86,54 @@ void	FileTemplate::_addToMakefile(const std::string name, const std::string type
 	ofs.close();
 }
 
-void	FileTemplate::_createNewFile(std::string const &name, std::string const &type
-	, std::string const &folder, std::string const &ext)
-{
-	std::ifstream	ifs(("./cfg/templates/" + type + ".template").c_str());
-	std::ofstream	ofs;
-	std::string		line;
-	std::string		namePreproc;
-	std::size_t		found;
-
-	namePreproc = _nameMaj(name);
-	ofs.open((_path + "/" + folder + "/" + name + ext).c_str());
-	while (std::getline(ifs, line))
-	{
-		while ((found = line.find("${NAME}")) != std::string::npos)/*HARDCODE SRC NAME*/
-			line.replace(found, 7, name);
-		while ((found = line.find("${NAME_MAJ}")) != std::string::npos)/*HARDCODE SRC NAME*/
-			line.replace(found, 11, namePreproc);
-		ofs << line << std::endl;
-	}
-	ifs.close();
-	ofs.close();
-}
-
+/*
+**Boolean parsing to define behavior
+*/
 bool	FileTemplate::_parseInterface(std::string const &s)
 {
 	return ((s.c_str())[0] == 'I' && (s.c_str())[1] >= 'A' && (s.c_str())[1] <= 'Z');
 }
 
-std::vector<std::string>	FileTemplate::_parseInheritance(const std::string &s)
+bool	FileTemplate::_parseInheritance(const std::string &s)
 {
-	std::size_t	found;
-	Strings		result;
-
-/*Jusre un if ici */
-	found = s.find(':');
-	if (found == std::string::npos)
-		return (result);
-	return (result);
+	return (s.find(':') != std::string::npos);
 }
 
-std::string	FileTemplate::_nameCpy(std::string const &str)
+/*
+**Replacement name in templates
+*/
+std::string	FileTemplate::_nameClass(std::string const &str)
 {
-	return std::string(str);
+	/*parse class name*/
+	return str.substr(0, str.find(':'));
 }
 
 std::string	FileTemplate::_nameMaj(std::string const &str)
 {
 	std::string				result;
+	std::string				tmp;
 
-	for (std::string::size_type i = 0; i < str.size(); ++i)
+	tmp = _nameClass(str);
+	for (std::string::size_type i = 0; i < tmp.size(); ++i)
 	{
-		if (str[i] >= 'A' && str[i] <= 'Z' && i != 0)
+		if (tmp[i] >= 'A' && tmp[i] <= 'Z' && i != 0)
 			result.push_back('_');
-		result.push_back(std::toupper(str[i]));
+		result.push_back(std::toupper(tmp[i]));
 	}
 	return (result);
 }
 
 std::string	FileTemplate::_nameParent(std::string const &str)
 {
-	return std::string(str);
+	return (str.substr(str.find(' ') + 1));
 }
 
 std::string	FileTemplate::_accessParent(std::string const &str)
 {
-	return std::string(str);
+	std::size_t	found;
+
+	found = str.find(':');
+	return (str.substr(found + 1, str.find(' ') - found - 1));
 }
 
 std::map<std::string, std::string(*)(const std::string&)>	FileTemplate::_createMapName(void)
@@ -131,7 +142,7 @@ std::map<std::string, std::string(*)(const std::string&)>	FileTemplate::_createM
 	std::map<std::string, replaceName>	m;
 	m.insert(std::pair<std::string, replaceName>(
 		"${NAME}",
-		&(FileTemplate::_nameCpy)
+		&(FileTemplate::_nameClass)
 		));
 	m.insert(std::pair<std::string, replaceName>(
 		"${NAME_MAJ}",

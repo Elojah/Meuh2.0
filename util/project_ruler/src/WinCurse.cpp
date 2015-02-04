@@ -27,6 +27,27 @@ WinCurse::~WinCurse(void)
 	delwin(_win);
 }
 
+std::string	WinCurse::readUser(void) const
+{
+
+	WinCurse	field(1, _size.w - 2, _size.h - 1, 2);
+	char		str[64];
+
+	echo();
+	wgetstr(field.getWin(), str);
+	noecho();
+	return (std::string(str));
+}
+
+void	WinCurse::notifyUser(const std::string &str) const
+{
+
+	WinCurse	field(1, _size.w - 2, _size.h - 1, 2);
+
+	waddstr(field.getWin(), str.c_str());
+	/*Some asynchrnous stuff could be great*/
+}
+
 WINDOW	*WinCurse::getWin(void)
 {
 	return (_win);
@@ -60,16 +81,3 @@ void	WinCurse::_setDefaultSize(void)
 	_size.x = 0;
 }
 
-std::string	WinCurse::readUser(void) const
-{
-
-	WinCurse	*field;
-	char		str[64];
-
-	field = new WinCurse(1, _size.w - 2, _size.h - 1, 2);
-	echo();
-	wgetstr(field->getWin(), str);
-	noecho();
-	delete field;
-	return (std::string(str));
-}

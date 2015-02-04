@@ -30,22 +30,23 @@ void	Gui_term::init(void)
 
 void	Gui_term::start(void)
 {
+	StartMenu	_startMenu("./cfg/.proj");
 	std::string	s;
 
-	_startMenu = new StartMenu("./cfg/.proj");
-	s = _startMenu->choosen_value();
-	if (s.empty())
-		delete _startMenu;
+	s = _startMenu.choosen_value();
+	if (s.empty() || s.compare("Return") == 0)
+		return ;
 	else if (s.compare("New Project") == 0)
 	{
-		s = _startMenu->readUser();
+		s = _startMenu.readUser();
 		_createNewProject(s);
-		delete _startMenu;
-		this->start();
 	}
 	else
+	{
 		_cProj = new WinCurse_proj(s);
-	delete _startMenu;
+		delete _cProj;
+	}
+	this->start();
 }
 
 void	Gui_term::_createNewProject(std::string s)

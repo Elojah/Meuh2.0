@@ -16,7 +16,7 @@ protected:
 private:
 	std::string		_path;
 
-	void	_showAttributes(std::string);
+	void			_selectedClass(std::string&);
 };
 
 #endif

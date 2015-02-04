@@ -1,3 +1,4 @@
+#include "Mod_memberList.h"
 #include "Mod_classList.h"
 #include "FileTemplate.h"
 #include <dirent.h>
@@ -31,6 +32,7 @@ void	Mod_classList::init(std::string s)
 
 	_path = s;
 	s += "/include";
+	srcs.push_back("New");
 	if ((dir = opendir(s.c_str())) == NULL)
 		return ;
 	while ((ent = readdir(dir)) != NULL)
@@ -43,37 +45,20 @@ void	Mod_classList::init(std::string s)
 	}
 	closedir(dir);
 
-	srcs.push_back("New");
 	setValues(srcs, "Classes/Interfaces");
 	value = choosen_value();
-	if (value == "New")
+	if (value.compare("New") == 0)
 		ftmpl.createFile(readUser(), _path);
-	_showAttributes(value);
+	else if (value.compare("Return") == 0)
+		return ;
+	else
+		_selectedClass(value);
 	this->init(_path);
 }
 
-void	Mod_classList::_showAttributes(std::string s)
+void	Mod_classList::_selectedClass(std::string &s)
 {
-	Strings			attr;
-	std::string		line;
-	line = _path + "/src/" + s + ".cpp";
-	std::ifstream	ifs(line.c_str());
-	std::size_t		found;
+	Mod_memberList	members(_size.h, _size.w / 2, _size.y, _size.x + _size.w / 2);
 
-	if (!ifs)
-		return ;
-	/*Parse to check Interface & remove & New*/
-	while (std::getline(ifs, line))
-	{
-		if ((found = line.find(s)) != std::string::npos && line [0] != '#')
-			attr.push_back(line.substr(found + s.size() + 2));
-	}
-	attr.push_back("Return");
-	setValues(attr, s);
-	line = choosen_value();
-	if (line.compare("Return") == 0)
-		this->init(_path);
-	/*else {
-	**TODO attributes selected ?
-	}*/
+	members.init(_path, s);
 }

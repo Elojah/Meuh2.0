@@ -2,6 +2,7 @@
 # define WINCURSE_MENU_H
 
 # define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
+# define MAX_ITEMS 256
 
 # include <menu.h>
 # include <vector>
@@ -23,8 +24,8 @@ protected:
 	{
 		std::string						title;
 		MENU							*menu;
-		WINDOW							*win_menu;
-		ITEM							*items[32];/*Nb proj max*/
+		WINDOW						*win_menu;
+		ITEM							*items[MAX_ITEMS];
 		ITEM							*cur_item;
 		unsigned short					nb_item;
 	}									t_menu;
