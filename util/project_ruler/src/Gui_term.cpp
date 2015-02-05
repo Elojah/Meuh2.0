@@ -39,7 +39,8 @@ void	Gui_term::start(void)
 	else if (s.compare("New Project") == 0)
 	{
 		s = _startMenu.readUser();
-		_createNewProject(s);
+		if (!s.empty())
+			_createNewProject(s);
 	}
 	else
 	{

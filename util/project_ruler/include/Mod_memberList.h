@@ -15,9 +15,9 @@ private:
 	std::string			_path;
 	std::string			_class;
 
-	void	_showClass(void);
-	void	_showAttributes(void);
-	void	_showMethods(void);
+	void							_showClass(void);
+	std::vector<std::string>		_parseAttributes(void);
+	std::vector<std::string>		_parseMethods(void);
 };
 
 #endif

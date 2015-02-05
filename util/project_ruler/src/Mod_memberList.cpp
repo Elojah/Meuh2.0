@@ -27,37 +27,69 @@ void	Mod_memberList::init(std::string path, std::string attClass)
 
 void	Mod_memberList::_showClass(void)
 {
-	_showAttributes();
-	_showMethods();
+	std::string	value;
+	Strings		attr;
+	Strings		methods;
+	Strings		items;
+
+	attr = _parseAttributes();
+	methods = _parseMethods();
+	items.reserve(attr.size() + methods.size());
+	items.insert(items.end(), methods.begin(), methods.end());
+	items.insert(items.end(), attr.begin(), attr.end());
+	setValues(items, _class);
+
+	value = choosen_value();
+	if (value.compare("Return") != 0)
+	{
+		/*TODO
+		**Attributes selected
+		*/
+	}
 }
 
 
-void	Mod_memberList::_showAttributes(void)
+std::vector<std::string>	Mod_memberList::_parseAttributes(void)
 {
+	Strings			result;
+	std::string		line;
+	line = _path + "/include/" + _class + ".hpp";
+	std::ifstream	ifs(line.c_str());
+
+	if (!ifs)
+		return (result);
+	while (std::getline(ifs, line))
+	{
+		/*Compare to class _class instead ?*/
+		if (line.compare("public:") == 0)
+		{
+			result.push_back(line);
+			// while (std::getline(ifs, line)) //&& line.compare("};") != 0 && !line.empty())
+			// {
+			// 	waddstr(_win, line.c_str());
+			// 	result.push_back(line);
+			// }
+		}
+	}
+	ifs.close();
+	return (result);
 }
 
-void	Mod_memberList::_showMethods(void)
+std::vector<std::string>	Mod_memberList::_parseMethods(void)
 {
-	Strings			attr;
+	Strings			result;
 	std::string		line;
 	line = _path + "/src/" + _class + ".cpp";
 	std::ifstream	ifs(line.c_str());
 	std::size_t		found;
 
 	if (!ifs)
-		return ;
-	/*Parse to check Interface & remove & New*/
+		return (result);
 	while (std::getline(ifs, line))
 	{
 		if ((found = line.find(_class)) != std::string::npos && line [0] != '#')
-			attr.push_back(line.substr(found + _class.size() + 2));
+			result.push_back(line.substr(found + _class.size() + 2));
 	}
-	setValues(attr, _class);
-	line = choosen_value();
-	if (line.compare("Return") != 0)
-	{
-		/*TODO
-		**Attributes selected
-		*/
-	}
+	ifs.close();
+	return (result);
 }
