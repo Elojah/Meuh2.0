@@ -30,7 +30,7 @@
 **PARAM
 */
 # define MOVE_SPEED 0.1
-# define ZOOM_SPEED 1
+# define ZOOM_SPEED 0.1
 
 /*
 **KEY_PRESS
@@ -116,6 +116,8 @@ typedef struct				s_map
 void						calculus(t_map *m);
 int							get_loop_key(int key_press, t_map *m);
 int							get_loop_mouse(int x, int y, t_map *m);
+int							get_loop_scroll(int button
+	, int x, int y, t_map *m);
 int							main_loop(t_map *m);
 
 /*
