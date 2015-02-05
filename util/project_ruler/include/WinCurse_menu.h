@@ -33,6 +33,7 @@ protected:
 	t_menu								_m;
 	Strings								_values[2];
 	void								_createMenu(void);
+	void								setNonSelect(std::vector<std::string>);
 private:
 };
 
