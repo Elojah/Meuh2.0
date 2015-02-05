@@ -20,6 +20,8 @@ StartMenu::StartMenu(std::string const s) :
 	_m.title = s;
 	while (std::getline(ifs, line))
 	{
+		if (line.at(0) == '#')
+			continue ;
 		_values[0].push_back(std::string(line));
 		_values[1].push_back(_getFileName(line));
 	}

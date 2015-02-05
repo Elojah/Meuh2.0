@@ -33,7 +33,7 @@ void	Mod_memberList::_showClass(void)
 	Strings		items;
 
 	attr = _parseAttributes();
-	methods = _parseMethods();
+	// methods = _parseMethods();
 	items.reserve(attr.size() + methods.size());
 	items.insert(items.end(), methods.begin(), methods.end());
 	items.insert(items.end(), attr.begin(), attr.end());
@@ -61,14 +61,18 @@ std::vector<std::string>	Mod_memberList::_parseAttributes(void)
 	while (std::getline(ifs, line))
 	{
 		/*Compare to class _class instead ?*/
-		if (line.compare("public:") == 0)
+		if (line.find("class " + _class) != std::string::npos
+			&& std::getline(ifs, line) && line.compare("{") == 0)
 		{
-			result.push_back(line);
-			// while (std::getline(ifs, line)) //&& line.compare("};") != 0 && !line.empty())
-			// {
-			// 	waddstr(_win, line.c_str());
-			// 	result.push_back(line);
-			// }
+			while (std::getline(ifs, line) && line.compare("};") != 0)
+			{
+				if (line.compare("public:") != 0 && line.compare("protected:") != 0
+					&& line.compare("private:") != 0)
+					line.insert(0, "  ");
+				result.push_back(line);
+				while (ifs.peek() == '\t' || ifs.peek() == ' ')
+					ifs.ignore();
+			}
 		}
 	}
 	ifs.close();

@@ -83,3 +83,8 @@ void		WinCurse_menu::_createMenu(void)
 	post_menu(_m.menu);
 	refresh();
 }
+
+void		WinCurse_menu::setNonSelect(std::vector<std::string> s)
+{
+	;
+}
