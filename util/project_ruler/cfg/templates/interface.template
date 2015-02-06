@@ -4,7 +4,7 @@
 class ${NAME}
 {
 public:
-	virtual ~${NAME}(void) {};
+	virtual ~${NAME}(void) {}
 protected:
 private:
 };
