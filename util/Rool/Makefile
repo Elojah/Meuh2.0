@@ -13,19 +13,16 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		FileTemplate\
-		Gui_term\
-		Mod_classList\
-		Mod_cpuUsage\
-		Mod_memberList\
-		ModuleFactory\
-		StartMenu\
-		WinCurse\
-		WinCurse_menu\
-		WinCurse_proj\
+		GUI\
+		Window\
+		Boot\
+		Project\
+		Classes\
+		Template\
+		Menu\
 
 #List interfaces here
-INTERFACE =
+INTERFACE = IModule\
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))

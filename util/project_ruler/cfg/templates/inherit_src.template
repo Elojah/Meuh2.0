@@ -1,4 +1,4 @@
-#include "${NAME}"
+#include "${NAME}.hpp"
 
 ${NAME}::${NAME}(void)
 {
