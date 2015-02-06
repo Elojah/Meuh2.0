@@ -25,8 +25,7 @@ CLASS = main\
 		WinCurse_proj\
 
 #List interfaces here
-INTERFACE = Igui\
-			IWinCurse_mod\
+INTERFACE =
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
@@ -63,9 +62,12 @@ re : fclean all
 dirbuild:
 	mkdir -p build
 
-.PHONY: all clean fclean re dirbuild
+dirbin:
+	mkdir -p bin
 
-.SILENT: dirbuild
+.PHONY: all clean fclean re
+
+.SILENT: dirbuild dirbin
 
 #Build rules
 $(TARGET) : $(OBJ)

@@ -33,7 +33,7 @@ void	WinCurse_proj::_initMods(std::string s)
 	std::ifstream	ifs(s.c_str());
 	std::string		line;
 	IWinCurse_mod	*tmp;
-	int				size[4] = {_size.h / 2, _size.w, 1, 1};/*HARDCODE*/
+	int				size[4] = {_size.h / 2, _size.w - 2, 1, 1};/*HARDCODE*/
 
 	while (std::getline(ifs, line))
 	{

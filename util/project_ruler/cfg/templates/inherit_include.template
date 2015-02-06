@@ -1,7 +1,7 @@
 #ifndef ${NAME_MAJ}_H
 # define ${NAME_MAJ}_H
 
-# include "${PARENT}"
+# include "${PARENT}.hpp"
 
 class ${NAME} : ${PARENT_ACCESS} ${PARENT}
 {

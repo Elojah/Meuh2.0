@@ -1,6 +1,7 @@
 #include "WinCurse_menu.h"
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 
 WinCurse_menu::WinCurse_menu(void) :
 	WinCurse()
@@ -73,6 +74,13 @@ void		WinCurse_menu::_createMenu(void)
 	_m.items[i + 1] = NULL;
 	_m.menu = new_menu((ITEM **)_m.items);
 
+	init_pair(1, COLOR_RED, COLOR_BLACK);
+	init_pair(2, COLOR_GREEN, COLOR_BLACK);
+	init_pair(3, COLOR_MAGENTA, COLOR_BLACK);
+	set_menu_fore(_m.menu, COLOR_PAIR(1) | A_REVERSE);
+	set_menu_back(_m.menu, COLOR_PAIR(2));
+	set_menu_grey(_m.menu, COLOR_PAIR(3));
+
 	_m.win_menu = derwin(_win, _size.h - 4, _size.w - 4, 2, 2);
 	set_menu_win(_m.menu, _win);
 	set_menu_sub(_m.menu,_m.win_menu);
@@ -84,7 +92,13 @@ void		WinCurse_menu::_createMenu(void)
 	refresh();
 }
 
-void		WinCurse_menu::setNonSelect(std::vector<std::string> s)
+void		WinCurse_menu::setNonSelect(std::vector<std::string> const &s)
 {
-	;
+	int		i;
+
+	for (i = 0; _m.items[i]; i++)
+	{
+		if (std::find(s.begin(), s.end(), std::string(item_name(_m.items[i]))) != s.end())
+			item_opts_off(_m.items[i], O_SELECTABLE);
+	}
 }
