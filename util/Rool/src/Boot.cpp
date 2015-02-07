@@ -1,37 +1,61 @@
 #include "Boot.hpp"
 #include <fstream>
 #include <iostream>
+#include <sys/stat.h>
+#include <sys/types.h>
 
-Boot::Boot(void)
-{
-	;
+Boot::Boot(void) : Menu() {
+	loop();
 }
 
-Boot::Boot(std::string const &str) : Menu()
-{
-	std::ifstream	ifs(str.c_str());
-	std::string		line;
-	ListItem		list;
+Boot::~Boot(void) {
+}
 
-	if (ifs.fail())
-	{
-		std::cout << "Error: File " << str << " doesn't exist." << std::endl;
+void		Boot::loop(void) {
+	std::ifstream	ifs("./config/.proj");
+	std::string		line;
+	ITEM			*tmp;
+
+	if (ifs.fail()) {
+		std::cout << "Error: File ./config/.proj doesn't exist." << std::endl;
 		return ;
 	}
-	while (std::getline(ifs, line))
-	{
-		if (line.at(0) == '#')
+	while (std::getline(ifs, line)) {
+		if (line.empty() || line.at(0) == '#') {
 			continue ;
-		list.push_back((t_item_full){line, "", NULL});
+		}
+		if ((tmp = new_item(line.c_str(), "")) != NULL)
+			items[tmp] = static_cast<Callback>(&Boot::errorCallback);
 	}
-	list.push_back((t_item_full){"New project", "", NULL});
+	items[new_item("New project", "")] = static_cast<Callback>(&Boot::newProject);
 	ifs.close();
 	setTitle("Projects list");
-	setItems(list);
+	setItems();
 	waitUser();
 }
 
-Boot::~Boot(void)
-{
-	;
+void		Boot::newProject(ITEM *item) {
+	std::string		projName;
+	std::ifstream	ifsProj("./config/templates/project.template");
+	std::ifstream	ifsMake("./config/templates/Makefile.template");
+	std::ofstream	ofsMake;
+	std::ofstream	ofsCfg;
+	std::string		line;
+
+	(void)item;
+	projName = readUser();
+	if (!projName.empty()) {
+		mkdir(projName.c_str(), S_IRWXU);
+		while (std::getline(ifsProj, line))
+			mkdir((projName + "/" + line).c_str(), S_IRWXU);
+		ofsMake.open((projName + "/Makefile").c_str());
+		ofsMake << ifsMake.rdbuf();
+		ofsCfg.open("./config/.proj", std::ios::app);
+		ofsCfg << projName << std::endl;
+		notifyUser("Project " + projName + " created successfully !");
+	}
+	ifsProj.close();
+	ifsMake.close();
+	ofsMake.close();
+	ofsCfg.close();
 }

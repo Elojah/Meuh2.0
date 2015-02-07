@@ -1,0 +1,13 @@
+#ifndef ${NAME_MAJ}_H
+# define ${NAME_MAJ}_H
+
+class ${NAME}
+{
+public:
+	${NAME}(void);
+	~${NAME}(void);
+protected:
+private:
+};
+
+#endif

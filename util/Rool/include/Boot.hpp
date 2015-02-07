@@ -7,11 +7,12 @@
 class Boot : public Menu
 {
 public:
-	Boot(const std::string&);
+	Boot(void);
 	~Boot(void);
 protected:
 private:
-	Boot(void);
+	void		newProject(ITEM *item);
+	void		loop(void);
 };
 
 #endif

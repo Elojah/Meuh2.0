@@ -1,8 +1,7 @@
 #include "GUI.hpp"
 #include <ncurses.h>
 
-GUI::GUI(void)
-{
+GUI::GUI(void) {
 	initscr();
 	clear();
 	noecho();
@@ -12,7 +11,6 @@ GUI::GUI(void)
 	keypad(stdscr, TRUE);
 }
 
-GUI::~GUI(void)
-{
+GUI::~GUI(void) {
 	endwin();
 }

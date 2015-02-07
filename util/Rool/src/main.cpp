@@ -4,7 +4,7 @@
 int		main(void)
 {
 	GUI		ctx;
-	Boot	b("./config/.proj");
+	Boot	b;
 
 	return (0);
 }
