@@ -2,20 +2,27 @@
 # define PROJECT_H
 
 # include "Menu.hpp"
+# include <vector>
+# include "ModuleFactory.hpp"
 
-class Project : public Menu
+class Project : public Window
 {
 public:
 					Project(const std::string&);
 					~Project(void);
 protected:
 private:
+	typedef IModule		*(ModuleFactory::*makeFn)(int, int, int, int);
+
 	std::string		_path;
 	std::string		_name;
+	std::vector<IModule *>		_mods;
+	ModuleFactory	_modsFactory;
 
 					Project(void);
-	void			loop(void);
-	void			createItems(void);
+
+void		setModules(const std::string&);
+void		initModules(void);
 
 };
 

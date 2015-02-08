@@ -13,11 +13,12 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
+		ClassList\
+		ModuleFactory\
 		GUI\
 		Window\
 		Boot\
 		Project\
-		Classes\
 		Template\
 		Menu\
 

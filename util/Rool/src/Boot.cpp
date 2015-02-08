@@ -113,6 +113,5 @@ void		Boot::newProject(ITEM *item) {
 }
 
 void		Boot::openProject(ITEM *item) {
-	(void)item;
-	// Project		p(std::string(item_description(item)));
+	Project		p(std::string(item_description(item)));
 }
