@@ -23,9 +23,16 @@ Window::Window(int hSet, int wSet, int ySet, int xSet) :
 }
 
 Window::~Window(void) {
-	wborder(win, ' ', ' ', ' ',' ',' ',' ',' ',' ');
-	wrefresh(win);
-	delwin(win);
+	if (win) {
+		wborder(win, ' ', ' ', ' ',' ',' ',' ',' ',' ');
+		wrefresh(win);
+		delwin(win);
+	}
+	if (user) {
+		wborder(user, ' ', ' ', ' ',' ',' ',' ',' ',' ');
+		wrefresh(user);
+		delwin(user);
+	}
 }
 
 std::string	Window::readUser(void) const {

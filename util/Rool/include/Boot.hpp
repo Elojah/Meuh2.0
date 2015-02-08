@@ -11,8 +11,13 @@ public:
 	~Boot(void);
 protected:
 private:
-	void		newProject(ITEM *item);
+	static bool	sortFn(const ITEM *, const ITEM *);
+	void		sortMenu(size_t length);
+	void		createItems(const std::string&);
 	void		loop(void);
+	void		newProject(ITEM *item);
+	void		openProject(ITEM *item);
+
 };
 
 #endif
