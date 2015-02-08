@@ -36,6 +36,7 @@ void			Menu::waitUser(void)
 
 	_createMenu();
 	wrefresh(win);
+	curs_set(0);
 	while((key = wgetch(win)) != 27)
 	{
 		if (key == 's') {
@@ -47,24 +48,33 @@ void			Menu::waitUser(void)
 				(this->*(it->second))(current_item(menu));
 			else
 				errorCallback(current_item(menu));
-			// return ;
+			loop();
 		}
 		wrefresh(win);
 	}
 }
 
+void		Menu::reset(void) {
+	size_t	i;
+
+	for (i = 0; menuItems[i]; i++) {
+		free_item(menuItems[i]);
+	}
+	items.clear();
+	itemNames.clear();
+}
+
 void			Menu::errorCallback(ITEM *item) {
 	notifyUser(std::string(item_name(item)) + " callback is not define");
-	getch();
+	wgetch(user);
 }
 
 void			Menu::setTitle(std::string const &titleSet)
 {
 	title = std::string(titleSet);
-	mvwaddstr(win, 0, (w - title.size()) / 2, title.c_str());
 }
 
-void			Menu::setItems(void)
+void			Menu::setMenuItems(void)
 {
 	size_t		i;
 
@@ -86,6 +96,8 @@ void			Menu::_createMenu(void)
 	box(win, 0, 0);
 	set_menu_format(menu, h - 4, 1);
 	post_menu(menu);
+	mvwaddstr(win, 0, (w - title.size()) / 2, title.c_str());
 	wrefresh(winMenu);
+	wrefresh(win);
 	refresh();
 }

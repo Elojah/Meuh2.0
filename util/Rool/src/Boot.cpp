@@ -14,8 +14,8 @@ Boot::~Boot(void) {
 void		Boot::loop(void) {
 	std::ifstream	ifs("./config/.proj");
 	std::string		line;
-	ITEM			*tmp;
 
+	reset();
 	if (ifs.fail()) {
 		std::cout << "Error: File ./config/.proj doesn't exist." << std::endl;
 		return ;
@@ -24,13 +24,13 @@ void		Boot::loop(void) {
 		if (line.empty() || line.at(0) == '#') {
 			continue ;
 		}
-		if ((tmp = new_item(line.c_str(), "")) != NULL)
-			items[tmp] = static_cast<Callback>(&Boot::errorCallback);
+		itemNames.push_back(line);
+		items[new_item(itemNames.back().c_str(), "")] = static_cast<Callback>(&Boot::errorCallback);
 	}
 	items[new_item("New project", "")] = static_cast<Callback>(&Boot::newProject);
 	ifs.close();
 	setTitle("Projects list");
-	setItems();
+	setMenuItems();
 	waitUser();
 }
 
