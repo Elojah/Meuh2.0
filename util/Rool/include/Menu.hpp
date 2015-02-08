@@ -6,33 +6,40 @@
 # include "Window.hpp"
 # include <menu.h>
 # include <vector>
+# include <map>
 
 class Menu : public Window
 {
 public:
+	typedef std::vector<std::string>	Strings;
+
 	Menu(void);
 	Menu(int, int, int, int);
 	~Menu(void);
 
-	typedef struct	s_item_full
-	{
-		std::string	name;
-		std::string	descr;
-		void		(*callback)(char *);
-	}				t_item_full;
-	typedef std::vector<std::string>	Strings;
-	typedef std::vector<t_item_full>	ListItem;
+	void			waitUser(void);
 
-	ITEM			*waitUser(void);
 protected:
-	std::string		title;
-	MENU			*menu;
-	WINDOW		*winMenu;
-	ITEM			*items[MAX_ITEMS];
+	typedef void	(Menu::*Callback)(ITEM *);
+	typedef std::map<ITEM *, Callback> Items;
+
+	std::string						title;
+	MENU							*menu;
+	WINDOW						*winMenu;
+	/*Final Items*/
+	ITEM							*menuItems[MAX_ITEMS];
+	/*Item map for callback*/
+	Items							items;
+	/*Name saving*/
+	Strings							itemNames;
+
+	void			reset(void);
+	void			errorCallback(ITEM *);
 	void			setTitle(const std::string&);
-	void			setItems(const ListItem&);
+	void			setMenuItems(void);
 private:
 	void			_createMenu(void);
+	virtual void		loop(void){}
 };
 
 #endif

@@ -11,8 +11,6 @@ public:
 	Window(int, int, int, int);
 	~Window(void);
 	WINDOW			*getWin(void) const;
-	std::string			readUser(void) const;
-	void				notifyUser(const std::string&) const;
 
 protected:
 	WINDOW			*win;
@@ -21,6 +19,9 @@ protected:
 	int					w;
 	int					y;
 	int					x;
+
+	std::string			readUser(void) const;
+	void				notifyUser(const std::string&) const;
 private:
 	void				_setDefaultSize(void);
 };

@@ -1,0 +1,15 @@
+#ifndef ${NAME_MAJ}_H
+# define ${NAME_MAJ}_H
+
+# include "${PARENT}.hpp"
+
+class ${NAME} : ${PARENT_ACCESS} ${PARENT}
+{
+public:
+	${NAME}(void);
+	~${NAME}(void);
+protected:
+private:
+};
+
+#endif

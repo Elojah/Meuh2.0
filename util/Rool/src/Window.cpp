@@ -1,8 +1,7 @@
 #include "Window.hpp"
 #include <sys/ioctl.h>
 
-Window::Window(void)
-{
+Window::Window(void) {
 	_setDefaultSize();
 	win = newwin(h, w, y, x);
 	user = newwin(1, w - 2, h - 1, 2);
@@ -15,8 +14,7 @@ Window::Window(int hSet, int wSet, int ySet, int xSet) :
 											h(hSet),
 											w(wSet),
 											y(ySet),
-											x(xSet)
-{
+											x(xSet) {
 	win = newwin(h, w, y, x);
 	user = newwin(1, w - 2, h - 1, 2);
 	keypad(win, TRUE);
@@ -24,35 +22,39 @@ Window::Window(int hSet, int wSet, int ySet, int xSet) :
 	refresh();
 }
 
-Window::~Window(void)
-{
+Window::~Window(void) {
 	wborder(win, ' ', ' ', ' ',' ',' ',' ',' ',' ');
 	wrefresh(win);
 	delwin(win);
 }
 
-std::string	Window::readUser(void) const
-{
+std::string	Window::readUser(void) const {
+	std::string	result;
 	char		str[64];
 
+	wclear(user);
 	echo();
+	curs_set(1);
 	wgetstr(user, str);
+	curs_set(0);
 	noecho();
-	return (std::string(str));
+	result.assign(str);
+	return (result);
 }
 
-void	Window::notifyUser(const std::string &str) const
-{
+void	Window::notifyUser(const std::string &str) const {
+	wclear(user);
 	waddstr(user, str.c_str());
+	wrefresh(user);
 	/*Some asynchrnous stuff could be great*/
 }
 
-void	Window::_setDefaultSize(void)
-{
+void	Window::_setDefaultSize(void) {
 	struct winsize			ws;
 
-	if (ioctl(0, TIOCGWINSZ, &ws) == -1)
+	if (ioctl(0, TIOCGWINSZ, &ws) == -1) {
 		return ;
+	}
 	h = ws.ws_row;
 	w = ws.ws_col;
 	y = 0;
