@@ -26,20 +26,22 @@ protected:
 	std::string						title;
 	MENU							*menu;
 	WINDOW						*winMenu;
-	/*Final Items*/
-	ITEM							*menuItems[MAX_ITEMS];
 	/*Item map for callback*/
 	Items							items;
+	/*Final Items*/
+	ITEM							*menuItems[MAX_ITEMS];
 	/*Name saving*/
-	Strings							itemNames;
+	Strings							itemNames[2];
 
-	void			reset(void);
-	void			errorCallback(ITEM *);
-	void			setTitle(const std::string&);
-	void			setMenuItems(void);
+	void				reset(void);
+	void				createMenu(void);
+	void				errorCallback(ITEM *);
+	void				setTitle(const std::string&);
+	void				setMenuItems(void);
+	void				endMenu(ITEM *);
 private:
-	void			_createMenu(void);
-	virtual void		loop(void){}
+	virtual void			loop(void){}
+	virtual void			sortMenu(size_t length){(void)length;}
 };
 
 #endif

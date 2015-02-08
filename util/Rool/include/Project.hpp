@@ -1,13 +1,29 @@
 #ifndef PROJECT_H
 # define PROJECT_H
 
-class Project
+# include "Menu.hpp"
+# include <vector>
+# include "ModuleFactory.hpp"
+
+class Project : public Window
 {
 public:
-	Project(void);
-	~Project(void);
+					Project(const std::string&);
+					~Project(void);
 protected:
 private:
+	typedef IModule		*(ModuleFactory::*makeFn)(int, int, int, int);
+
+	std::string		_path;
+	std::string		_name;
+	std::vector<IModule *>		_mods;
+	ModuleFactory	_modsFactory;
+
+					Project(void);
+
+void		setModules(const std::string&);
+void		initModules(void);
+
 };
 
 #endif
