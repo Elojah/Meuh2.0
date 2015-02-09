@@ -58,5 +58,5 @@ void		ClassList::newClass(ITEM *item) {
 
 	(void)item;
 	className = readUser();
-	tpl.create(className);
+	notifyUser(tpl.create(className));
 }

@@ -10,14 +10,14 @@ Template::Template(std::string const &path) {
 Template::~Template(void) {
 }
 
-void			Template::create(const std::string &str) {
+std::string		Template::create(const std::string &str) {
 	_currentMapName = generateNameMap(str);
 	for (std::map<parseNameFn, patternFn>::const_iterator it = _patternMap.begin(); it != _patternMap.end(); it++) {
 		if (it->first(str)) {
-			(this->*(it->second))(str);
-			return ;
+			return ((this->*(it->second))(str));
 		}
 	}
+	return ("No pattern matched with entry ...");
 }
 
 std::map<std::string, std::string>	Template::generateNameMap(const std::string &str) {
@@ -51,14 +51,15 @@ bool			Template::isUsualClass(std::string const &str) {
 	(void)str;
 	return (true);
 }
-void			Template::makeUsualClass(std::string const &str) {
+std::string		Template::makeUsualClass(std::string const &str) {
 	(void)str;
 	/*
 	**createSrc, createInclude, addMakefile
 	*/
+	return ("Usual class " + str + " created successfully!");
 }
 
-std::map<bool(*)(const std::string&), void(Template::*)(const std::string&)>	Template::_createPatternMap(void) {
+std::map<bool(*)(const std::string&), std::string(Template::*)(const std::string&)>	Template::_createPatternMap(void) {
 	std::map<parseNameFn, patternFn>	m;
 
 	m[&Template::isUsualClass] = &Template::makeUsualClass;
@@ -77,7 +78,7 @@ std::map<std::string, std::string(*)(const std::string&)>	Template::_createMapNa
 	return (m);
 }
 
-const std::map<bool(*)(const std::string&), void(Template::*)(const std::string&)>
+const std::map<bool(*)(const std::string&), std::string(Template::*)(const std::string&)>
 	Template::_patternMap = _createPatternMap();
 
 const std::map<std::string, std::string(*)(const std::string&)>

@@ -53,6 +53,8 @@ void	Window::notifyUser(const std::string &str) const {
 	wclear(user);
 	waddstr(user, str.c_str());
 	wrefresh(user);
+	noecho();
+	wgetch(user);
 	/*Some asynchrnous stuff could be great*/
 }
 

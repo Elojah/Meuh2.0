@@ -9,11 +9,11 @@ class Template
 public:
 	Template(const std::string&);
 	~Template(void);
-	void												create(const std::string&);
+	std::string											create(const std::string&);
 protected:
 private:
 	typedef bool		(*parseNameFn)(const std::string&);
-	typedef void		(Template::*patternFn)(const std::string&);
+	typedef std::string	(Template::*patternFn)(const std::string&);
 	typedef std::string	(*lexNameFn)(const std::string&);
 
 	Template(void);
@@ -28,7 +28,7 @@ private:
 	static std::map<std::string, lexNameFn>			_createMapName(void);
 
 	static bool											isUsualClass(const std::string&);
-	void												makeUsualClass(const std::string&);
+	std::string											makeUsualClass(const std::string&);
 
 	static std::string									parseClassName(const std::string&);
 	static std::string									parseIncGuard(const std::string&);
