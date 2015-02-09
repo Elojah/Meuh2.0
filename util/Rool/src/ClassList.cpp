@@ -1,4 +1,5 @@
 #include "ClassList.hpp"
+#include "Template.hpp"
 #include <dirent.h>
 #include <fstream>
 
@@ -47,13 +48,15 @@ void		ClassList::createItems(void) {
 	}
 	closedir(dir);
 
-	items[new_item("New class", "")] = static_cast<Callback>(&ClassList::errorCallback);
+	items[new_item("New class", "")] = static_cast<Callback>(&ClassList::newClass);
 	items[new_item("Return", "")] = static_cast<Callback>(&ClassList::endMenu);
 }
 
 void		ClassList::newClass(ITEM *item) {
 	std::string	className;
+	Template	tpl(_path);
 
 	(void)item;
 	className = readUser();
+	tpl.create(className);
 }
