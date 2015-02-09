@@ -16,6 +16,7 @@ private:
 	ClassList(void);
 	void		loop(void);
 	void		createItems(void);
+	void		newClass(ITEM *);
 };
 
 #endif

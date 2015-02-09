@@ -19,8 +19,8 @@ CLASS = main\
 		Window\
 		Boot\
 		Project\
-		Template\
 		Menu\
+		Template\
 
 #List interfaces here
 INTERFACE = IModule\

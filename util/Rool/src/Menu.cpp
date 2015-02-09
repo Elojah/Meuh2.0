@@ -33,7 +33,6 @@ void			Menu::waitUser(void)
 	char			key;
 	Items::iterator	it;
 
-	wrefresh(win);
 	curs_set(0);
 	while((key = wgetch(win)) != 27)
 	{
@@ -51,7 +50,6 @@ void			Menu::waitUser(void)
 			}
 			loop();
 		}
-		wrefresh(win);
 	}
 }
 
@@ -85,7 +83,6 @@ void			Menu::errorCallback(ITEM *item) {
 		return ;
 	}
 	notifyUser(std::string(item_name(item)) + " callback is not define");
-	wgetch(user);
 }
 
 void			Menu::setTitle(std::string const &titleSet) {
@@ -114,7 +111,4 @@ void			Menu::createMenu(void) {
 	set_menu_format(menu, h - 4, 1);
 	post_menu(menu);
 	mvwaddstr(win, 0, (w - title.size()) / 2, title.c_str());
-	wrefresh(winMenu);
-	wrefresh(win);
-	refresh();
 }
