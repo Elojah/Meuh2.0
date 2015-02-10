@@ -2,17 +2,20 @@
 # define MEMBER_TEMPLATE_H
 
 # include <string>
+# include "ITemplate.hpp"
 
-class MemberTemplate
+class MemberTemplate : public ITemplate
 {
 public:
 	MemberTemplate(const std::string&);
 	~MemberTemplate(void);
-	std::string											create(const std::string&);
 protected:
 private:
-	std::string		_path;
 	MemberTemplate(void);
+
+	std::map<parseNameFn, patternFn>					createPatternMap(void);
+	std::map<std::string, lexNameFn>					createMapName(void);
+
 };
 
 #endif
