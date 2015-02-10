@@ -19,9 +19,11 @@ protected:
 	int					w;
 	int					y;
 	int					x;
+	std::string			title;
 
 	std::string			readUser(void) const;
 	void				notifyUser(const std::string&) const;
+	void				setTitle(const std::string&);
 private:
 	void				_setDefaultSize(void);
 };

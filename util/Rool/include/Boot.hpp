@@ -11,10 +11,11 @@ public:
 	~Boot(void);
 protected:
 private:
-	static bool	sortFn(const ITEM *, const ITEM *);
-	void		sortMenu(size_t length);
-	void		createItems(const std::string&);
-	void		loop(void);
+	void		createItems(void);
+
+	/*
+	**Callbacks
+	*/
 	void		newProject(ITEM *item);
 	void		openProject(ITEM *item);
 

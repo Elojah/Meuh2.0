@@ -1,4 +1,6 @@
 #include "Menu.hpp"
+#include "SortItems.hpp"
+#include <algorithm>
 
 Menu::Menu(void) : Window(),
 					menu(NULL),
@@ -28,6 +30,40 @@ Menu::~Menu(void) {
 	}
 }
 
+/*
+**Util
+*/
+void				Menu::addItem(const std::string &str, void (Menu::*call)(ITEM *)) {
+	itemNames[0].push_back(str);
+	items[new_item(itemNames[0].back().c_str(), "")] = call;
+}
+
+/*
+**MAIN FUNCTIONS
+*/
+void		Menu::simpleCreate(const std::string &title, const std::string &up, const std::string &down) {
+	sortObject = new SortItems(up, down);
+	setTitle(title);
+	loop();
+	waitUser();
+}
+
+
+void		Menu::sortMenu(size_t length) {
+	if (!sortObject) {
+		return ;
+	}
+	std::sort(menuItems, menuItems + length
+		, *sortObject);
+}
+
+void		Menu::loop(void) {
+	reset();
+	createItems();
+	setMenuItems();
+	createMenu();
+}
+
 void			Menu::waitUser(void)
 {
 	char			key;
@@ -53,10 +89,9 @@ void			Menu::waitUser(void)
 	}
 }
 
-void		Menu::endMenu(ITEM *item) {
-	(void)item;
-}
-
+/*
+**LOOP FUNCTIONS
+*/
 void		Menu::reset(void) {
 	size_t	i;
 
@@ -78,17 +113,6 @@ void		Menu::reset(void) {
 	}
 }
 
-void			Menu::errorCallback(ITEM *item) {
-	if (!item) {
-		return ;
-	}
-	notifyUser(std::string(item_name(item)) + " callback is not define");
-}
-
-void			Menu::setTitle(std::string const &titleSet) {
-	title = std::string(titleSet);
-}
-
 void			Menu::setMenuItems(void) {
 	size_t		i;
 
@@ -107,8 +131,22 @@ void			Menu::createMenu(void) {
 	set_menu_win(menu, win);
 	set_menu_sub(menu, winMenu);
 	set_menu_mark(menu, "> ");
-	box(win, 0, 0);
 	set_menu_format(menu, h - 4, 1);
 	post_menu(menu);
 	mvwaddstr(win, 0, (w - title.size()) / 2, title.c_str());
 }
+
+/*
+**Usual callbacks
+*/
+void			Menu::errorCallback(ITEM *item) {
+	if (!item) {
+		return ;
+	}
+	notifyUser(std::string(item_name(item)) + " callback is not define");
+}
+
+void		Menu::endMenu(ITEM *item) {
+	(void)item;
+}
+
