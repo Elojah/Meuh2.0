@@ -9,12 +9,13 @@ class ITemplate
 {
 public:
 	ITemplate(const std::string &pathSet) :
-											path(std::string(pathSet)),
-											patternMap(createPatternMap()),
-											mapName(createMapName()){}
+											path(std::string(pathSet)){}
 	~ITemplate(void){}
-
-	std::string		create(const std::string &str) {
+	virtual void							initMaps(void) {
+		patternMap = createPatternMap();
+		mapName = createMapName();
+	}
+	virtual std::string						create(const std::string &str) {
 		genMapName = generateMapName(str);
 		for (std::map<parseNameFn, patternFn>::const_iterator it = patternMap.begin(); it != patternMap.end(); it++) {
 			if (it->first(str)) {
@@ -32,8 +33,8 @@ protected:
 
 	std::string											path;
 	std::map<std::string, std::string>					genMapName;
-	const std::map<parseNameFn, patternFn>				patternMap;
-	const std::map<std::string, lexNameFn>				mapName;
+	std::map<parseNameFn, patternFn>					patternMap;
+	std::map<std::string, lexNameFn>					mapName;
 
 	ITemplate(void){}
 
@@ -41,7 +42,7 @@ protected:
 	virtual std::map<std::string, lexNameFn>			createMapName(void){return(std::map<std::string, lexNameFn>());}
 
 
-	std::map<std::string, std::string>					generateMapName(const std::string &str){
+	virtual std::map<std::string, std::string>					generateMapName(const std::string &str){
 		std::map<std::string, std::string>		result;
 
 		for (std::map<std::string, lexNameFn>::const_iterator it = mapName.begin(); it != mapName.end(); it++) {
