@@ -37,7 +37,7 @@ bool																	MemberTemplate::isMethod(std::string const &str) {
 	return (true);
 }
 std::string																MemberTemplate::makeMethod(void) {
-	return ("Method " + genMapName["$METHOD_NAME"] + " created successfully !");
+	return ("Method " + genMapName["${METHOD_NAME}"] + " created successfully !");
 }
 
 /*

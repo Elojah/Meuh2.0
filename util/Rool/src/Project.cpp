@@ -32,7 +32,7 @@ void		Project::setModules(std::string const &configFile) {
 	while (std::getline(ifs, line)) {
 		tmp = _modsFactory.makeModule(line);
 		if (tmp) {
-			_mods.push_back((_modsFactory.*tmp)(h / 2, w / 2, y + 1, x + 1));
+			_mods.push_back((_modsFactory.*tmp)(h / 2 - 2, w - 2, y + 1, x + 1));/*HARDCODE*/
 		}
 	}
 }

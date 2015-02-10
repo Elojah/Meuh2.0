@@ -17,7 +17,7 @@ ClassList::~ClassList(void) {
 void		ClassList::init(const std::string &path, const std::string &name) {
 	_path = path;
 	_name = name;
-	simpleCreate(_name, "New class", "Return");
+	simpleCreate("Classes", "New class", "Return");
 }
 
 void		ClassList::createItems(void) {
@@ -57,7 +57,7 @@ void		ClassList::newClass(ITEM *item) {
 
 void	ClassList::listAttributes(ITEM *item) {
 	std::string		className(item_name(item));
-	MemberList		member(h, w /2, 1, w / 2);
+	MemberList		member(h - 1, w / 2, 2, w / 2);
 
 	member.init(_path, className);
 }

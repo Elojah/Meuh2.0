@@ -32,12 +32,13 @@ void	MemberList::createItems(void) {
 	}
 	while (std::getline(ifs, line))
 	{
-		if (line.find("class " + _name) != std::string::npos
-			&& std::getline(ifs, line) && line.compare("{") == 0)
+		if (line.find("class " + _name) != std::string::npos && std::getline(ifs, line))
 		{
 			while (std::getline(ifs, line) && line.compare("};") != 0)
 			{
-				if (line.compare("public:") == 0) {
+				if (line.empty()) {
+					continue ;
+				} else if (line.compare("public:") == 0) {
 					access = "|  ";
 				} else if (line.compare("protected:") == 0) {
 					access = "/  ";
@@ -65,6 +66,7 @@ void		MemberList::newMember(ITEM *item) {
 
 	(void)item;
 	tpl.initMaps();
+	box(user, 1, 1);
 	memberName = readUser();
 	notifyUser(tpl.create(memberName));
 }
