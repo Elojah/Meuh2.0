@@ -14,9 +14,13 @@ public:
 protected:
 private:
 	ClassList(void);
-	void		loop(void);
 	void		createItems(void);
+
+	/*
+	**Callbacks
+	*/
 	void		newClass(ITEM *);
+	void		listAttributes(ITEM *item);
 };
 
 #endif

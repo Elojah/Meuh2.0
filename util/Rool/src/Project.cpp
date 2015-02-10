@@ -16,6 +16,7 @@ Project::Project(std::string const &path) : Window() {
 	_path = std::string(path);
 	_name = std::string(basename(tmp));
 	free(tmp);
+	setTitle(_name);
 	setModules("./config/.modules");
 	initModules();
 }

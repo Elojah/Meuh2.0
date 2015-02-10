@@ -1,5 +1,6 @@
 #include "Boot.hpp"
 #include "Project.hpp"
+#include "SortItems.hpp"
 #include <fstream>
 #include <iostream>
 #include <sys/stat.h>
@@ -7,59 +8,20 @@
 #include <string.h>
 #include <stdlib.h>
 #include <libgen.h>
-#include <algorithm>
 
 Boot::Boot(void) : Menu() {
-	loop();
-	waitUser();
+	simpleCreate("Projects List", "New project", "Return");
 }
 
 Boot::~Boot(void) {
 }
 
-bool		Boot::sortFn(const ITEM *lhs, const ITEM *rhs) {
-	if (!lhs || !rhs) {
-		return (false);
-	}
-	std::string	lstr(item_name(lhs));
-	std::string	rstr(item_name(rhs));
-
-	if (lstr.compare("Return") == 0 || rstr.compare("New project") == 0) {
-		return (false);
-	}
-	if (lstr.compare("New project") == 0 || rstr.compare("Return") == 0) {
-		return (true);
-	}
-	return (lstr.compare(rstr) < 0);
-}
-
-void		Boot::sortMenu(size_t length) {
-	std::sort(menuItems, menuItems + length
-		, Boot::sortFn);
-	// size_t	i;
-	// for (i = 0; i < length - 1; i++) {
-	// 	notifyUser(item_name(menuItems[i]));
-	// 	getch();
-	// }
-}
-
-/*
-**Main loop
-*/
-void		Boot::loop(void) {
-	reset();
-	createItems("./config/.proj");
-	setTitle("Projects list");
-	setMenuItems();
-	createMenu();
-}
-
 /*
 **Class dependant item creation
 */
-void		Boot::createItems(const std::string &configFile)
+void		Boot::createItems(void)
 {
-	std::ifstream	ifs(configFile.c_str());
+	std::ifstream	ifs("./config/.proj");
 	std::string		line;
 	char			*tmp;
 
@@ -78,8 +40,8 @@ void		Boot::createItems(const std::string &configFile)
 		items[new_item(itemNames[0].back().c_str(), itemNames[1].back().c_str())]
 			= static_cast<Callback>(&Boot::openProject);
 	}
-	items[new_item("New project", "")] = static_cast<Callback>(&Boot::newProject);
-	items[new_item("Return", "")] = static_cast<Callback>(&Boot::endMenu);
+	addItem("New project", static_cast<Callback>(&Boot::newProject));
+	addItem("Return", static_cast<Callback>(&Boot::endMenu));
 	ifs.close();
 }
 

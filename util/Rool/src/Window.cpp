@@ -58,6 +58,13 @@ void	Window::notifyUser(const std::string &str) const {
 	/*Some asynchrnous stuff could be great*/
 }
 
+void			Window::setTitle(std::string const &titleSet) {
+	title = std::string(titleSet);
+	box(win, 0, 0);
+	mvwaddstr(win, 0, (w - title.size()) / 2, title.c_str());
+	wrefresh(win);
+}
+
 void	Window::_setDefaultSize(void) {
 	struct winsize			ws;
 

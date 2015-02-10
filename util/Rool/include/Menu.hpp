@@ -8,6 +8,8 @@
 # include <vector>
 # include <map>
 
+class SortItems;
+
 class Menu : public Window
 {
 public:
@@ -23,25 +25,35 @@ protected:
 	typedef void	(Menu::*Callback)(ITEM *);
 	typedef std::map<ITEM *, Callback> Items;
 
-	std::string						title;
 	MENU							*menu;
-	WINDOW						*winMenu;
+	WINDOW							*winMenu;
 	/*Item map for callback*/
 	Items							items;
 	/*Final Items*/
 	ITEM							*menuItems[MAX_ITEMS];
+	SortItems						*sortObject;
 	/*Name saving*/
 	Strings							itemNames[2];
 
+	void				simpleCreate(const std::string&, const std::string&, const std::string&);
+	void				loop(void);
 	void				reset(void);
 	void				createMenu(void);
-	void				errorCallback(ITEM *);
-	void				setTitle(const std::string&);
 	void				setMenuItems(void);
+
+	/*
+	**Usual callbacks
+	*/
+	void				errorCallback(ITEM *);
 	void				endMenu(ITEM *);
+
+	/*
+	**Util
+	*/
+	void				addItem(const std::string&, Callback);
 private:
-	virtual void			loop(void){}
-	virtual void			sortMenu(size_t length){(void)length;}
+	virtual void			createItems(void){}
+	void					sortMenu(size_t length);
 };
 
 #endif

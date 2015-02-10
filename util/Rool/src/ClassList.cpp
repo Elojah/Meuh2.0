@@ -1,5 +1,7 @@
 #include "ClassList.hpp"
-#include "Template.hpp"
+#include "ClassTemplate.hpp"
+#include "SortItems.hpp"
+#include "MemberList.hpp"
 #include <dirent.h>
 #include <fstream>
 
@@ -15,16 +17,7 @@ ClassList::~ClassList(void) {
 void		ClassList::init(const std::string &path, const std::string &name) {
 	_path = path;
 	_name = name;
-	loop();
-	waitUser();
-}
-
-void		ClassList::loop(void) {
-	reset();
-	createItems();
-	setTitle(_name);
-	setMenuItems();
-	createMenu();
+	simpleCreate(_name, "New class", "Return");
 }
 
 void		ClassList::createItems(void) {
@@ -32,7 +25,6 @@ void		ClassList::createItems(void) {
 	struct dirent	*ent;
 	std::string		value;
 	int				found;
-	// FileTemplate	ftmpl;
 
 	if ((dir = opendir((_path + "/include").c_str())) == NULL) {
 		return ;
@@ -42,21 +34,29 @@ void		ClassList::createItems(void) {
 		found = value.find_last_of(".");
 		if (value.compare(found + 1, value.size(), "hpp") == 0
 			&& !value.substr(0, found).empty()) {
-			itemNames[0].push_back(value.substr(0, found));
-			items[new_item(itemNames[0].back().c_str(), "")] = static_cast<Callback>(&ClassList::errorCallback);
+			addItem(value.substr(0, found), static_cast<Callback>(&ClassList::listAttributes));
 		}
 	}
 	closedir(dir);
-
-	items[new_item("New class", "")] = static_cast<Callback>(&ClassList::newClass);
-	items[new_item("Return", "")] = static_cast<Callback>(&ClassList::endMenu);
+	addItem("New class", static_cast<Callback>(&ClassList::newClass));
+	addItem("Return", static_cast<Callback>(&ClassList::endMenu));
 }
 
+/*
+**Callbacks fcts
+*/
 void		ClassList::newClass(ITEM *item) {
-	std::string	className;
-	Template	tpl(_path);
+	std::string		className;
+	ClassTemplate	tpl(_path);
 
 	(void)item;
 	className = readUser();
 	notifyUser(tpl.create(className));
+}
+
+void	ClassList::listAttributes(ITEM *item) {
+	std::string		className(item_name(item));
+	MemberList		member(h, w /2, 1, w / 2);
+
+	member.init(_path, className);
 }

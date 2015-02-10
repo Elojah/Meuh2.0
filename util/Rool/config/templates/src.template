@@ -1,11 +1,11 @@
-#include "${NAME}.hpp"
+#include "${CLASS_NAME}.hpp"
 
-${NAME}::${NAME}(void)
+${CLASS_NAME}::${CLASS_NAME}(void)
 {
 	;
 }
 
-${NAME}::~${NAME}(void)
+${CLASS_NAME}::~${CLASS_NAME}(void)
 {
 	;
 }
