@@ -64,6 +64,7 @@ void		MemberList::newMember(ITEM *item) {
 	MemberTemplate	tpl(_path);
 
 	(void)item;
+	tpl.initMaps();
 	memberName = readUser();
 	notifyUser(tpl.create(memberName));
 }
