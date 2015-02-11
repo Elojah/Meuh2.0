@@ -51,9 +51,9 @@ protected:
 	**Util
 	*/
 	void				addItem(const std::string&, Callback);
+	virtual void		sortMenu(size_t length);
 private:
-	virtual void			createItems(void){}
-	void					sortMenu(size_t length);
+	virtual void		createItems(void){}
 };
 
 #endif

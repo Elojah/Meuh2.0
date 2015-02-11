@@ -52,13 +52,11 @@ void		Menu::simpleCreate(const std::string &title, const std::string &up, const 
 	waitUser();
 }
 
-
 void		Menu::sortMenu(size_t length) {
 	if (!sortObject) {
 		return ;
 	}
-	std::sort(menuItems, menuItems + length
-		, *sortObject);
+	std::sort(menuItems, menuItems + length, *sortObject);
 }
 
 void		Menu::loop(void) {

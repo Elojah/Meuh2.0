@@ -16,6 +16,9 @@ public:
 		mapName = createMapName();
 	}
 	virtual std::string						create(const std::string &str) {
+		if (str.empty()) {
+			return ("Nothing done");
+		}
 		genMapName = generateMapName(str);
 		for (std::map<parseNameFn, patternFn>::const_iterator it = patternMap.begin(); it != patternMap.end(); it++) {
 			if (it->first(str)) {
