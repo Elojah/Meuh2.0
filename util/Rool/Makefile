@@ -27,7 +27,7 @@ CLASS = main\
 
 #List interfaces here
 INTERFACE = IModule\
-		ITemplate\
+			ITemplate\
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))

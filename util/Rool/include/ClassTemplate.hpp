@@ -13,6 +13,7 @@ public:
 	~ClassTemplate(void);
 protected:
 private:
+	typedef std::vector<std::string>	Strings;
 	ClassTemplate(void);
 
 /*
@@ -28,6 +29,8 @@ private:
 	std::string											makeUsualClass(void);
 	static bool											isReplaceClassName(std::string const&);
 	std::string											makeReplaceClassName(void);
+	static bool											isInherit(std::string const &str);
+	std::string											makeInheritClass(void);
 
 /*
 **Parse functions
@@ -35,7 +38,6 @@ private:
 	static std::string									parseClassName(const std::string&);
 	static std::string									parseIncGuard(const std::string&);
 	static std::string									parseParent(const std::string&);
-	static std::string									parseParentAccess(const std::string&);
 	static std::string									parseOldName(std::string const &str);
 	static std::string									parseNewName(std::string const &str);
 
@@ -45,6 +47,7 @@ private:
 	void	createNewFile(const std::string&, const std::string&, const std::string&);
 	void	replaceMapToMap(const std::string&, const std::string&, std::map<std::string, std::string>&);
 	void	addToMakefile(const std::string&);
+	void	addParents(std::vector<std::string>&);
 };
 
 #endif

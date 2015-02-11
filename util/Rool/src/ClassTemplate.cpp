@@ -1,5 +1,6 @@
 #include "ClassTemplate.hpp"
 #include <fstream>
+#include <string.h>
 
 ClassTemplate::ClassTemplate(void) {
 }
@@ -18,6 +19,7 @@ std::map<bool(*)(const std::string&), std::string(ITemplate::*)(void)>	ClassTemp
 
 	m[&ClassTemplate::isReplaceClassName] = static_cast<patternFn>(&ClassTemplate::makeReplaceClassName);
 	m[&ClassTemplate::isUsualClass] = static_cast<patternFn>(&ClassTemplate::makeUsualClass);
+	m[&ClassTemplate::isInherit] = static_cast<patternFn>(&ClassTemplate::makeInheritClass);
 	/*Add differents patterns here (Interface/Inherit/etc.)*/
 	return (m);
 }
@@ -28,8 +30,7 @@ std::map<std::string, std::string(*)(const std::string&)>	ClassTemplate::createM
 	/*Add differents names here*/
 	m["${CLASS_NAME}"] = static_cast<lexNameFn>(&ClassTemplate::parseClassName);
 	m["${INC_GUARD}"] = static_cast<lexNameFn>(&ClassTemplate::parseIncGuard);
-	m["${PARENT}"] = static_cast<lexNameFn>(&ClassTemplate::parseParent);
-	m["${PARENT_ACCESS}"] = static_cast<lexNameFn>(&ClassTemplate::parseParentAccess);
+	m["${PARENTS}"] = static_cast<lexNameFn>(&ClassTemplate::parseParent);
 	m["${OLD_REPLACE}"] = static_cast<lexNameFn>(&ClassTemplate::parseOldName);
 	m["${NEW_REPLACE}"] = static_cast<lexNameFn>(&ClassTemplate::parseNewName);
 	return (m);
@@ -63,13 +64,35 @@ std::string		ClassTemplate::makeReplaceClassName(void) {
 	genMapName = generateMapName(genMapName["${OLD_REPLACE}"]);
 	replaceMapToMap("src", ".cpp", newMap);
 	replaceMapToMap("include", ".hpp", newMap);
+	/*REPLACE IN MAKEFILE !*/
 	return (genMapName["${CLASS_NAME}"] + " has successfully been replaced by " + newMap["${CLASS_NAME}"]);
+}
+bool		ClassTemplate::isInherit(std::string const &str) {
+	return (str.find(':') != std::string::npos);
+}
+std::string		ClassTemplate::makeInheritClass(void) {
+	Strings		parents;
+	char		*pch;
+
+	makeUsualClass();
+	pch = strtok(genMapName["${PARENTS}"],",");
+	while (pch != NULL) {
+		parents.push_back(std::string(pch));
+		pch = strtok (NULL, ",");
+	}
+	addParents(parents);/*All together for 1 ifs, 1 ofs*/
+	return ("");
 }
 
 /*
 **Parse functions
 */
 std::string		ClassTemplate::parseClassName(std::string const &str) {
+	std::size_t	found;
+
+	if ((found = str.find_first_of(':')) != std::string::npos) {
+		return (str.substr(0, found - 1));
+	}
 	return (std::string(str));
 }
 std::string		ClassTemplate::parseIncGuard(std::string const &str) {
@@ -86,11 +109,14 @@ std::string		ClassTemplate::parseIncGuard(std::string const &str) {
 	return (result);
 }
 std::string		ClassTemplate::parseParent(std::string const &str) {
-	return (std::string(str));
+	std::size_t	found;
+
+	if ((found = str.find_first_of(':')) != std::string::npos) {
+		return (str.substr(str.find_last_of(' ') + 1));
+	}
+	return ("");
 }
-std::string		ClassTemplate::parseParentAccess(std::string const &str) {
-	return (std::string(str));
-}
+
 std::string		ClassTemplate::parseOldName(std::string const &str) {
 	std::size_t	found;
 
@@ -107,7 +133,6 @@ std::string		ClassTemplate::parseNewName(std::string const &str) {
 		found += 14;/*HARDCODE*/
 		return (str.substr(found, str.find_first_of('}', found) - found));
 	}
-
 	return ("");
 }
 
@@ -187,4 +212,15 @@ void	ClassTemplate::addToMakefile(const std::string &type)
 		ofs << *itWrite << std::endl;
 	}
 	ofs.close();
+}
+
+void	ClassTemplate::addParents(std::vector<std::string> &parents) {
+	std::ifstream	ifs;
+	std::ofstream	ofs;
+	std::string		line;
+	std::size_t		found;
+
+	for (Strings::iterator it = parents.begin(); it != parents.end(); ++it) {
+		;
+	}
 }
