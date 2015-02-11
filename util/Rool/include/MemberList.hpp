@@ -12,13 +12,18 @@ public:
 	~MemberList(void);
 	void		init(const std::string&, const std::string&);
 protected:
+	void		sortMenu(size_t length);
 private:
 	std::string		_path;
 	std::string		_name;
 
 	MemberList(void);
+
 	void		createItems(void);
 	void		newMember(ITEM *);
+	void		renameClass(ITEM *);
+
+	void		parseLine(std::string &line);
 };
 
 #endif

@@ -26,6 +26,8 @@ private:
 */
 	static bool											isUsualClass(const std::string&);
 	std::string											makeUsualClass(void);
+	static bool											isReplaceClassName(std::string const&);
+	std::string											makeReplaceClassName(void);
 
 /*
 **Parse functions
@@ -34,11 +36,14 @@ private:
 	static std::string									parseIncGuard(const std::string&);
 	static std::string									parseParent(const std::string&);
 	static std::string									parseParentAccess(const std::string&);
+	static std::string									parseOldName(std::string const &str);
+	static std::string									parseNewName(std::string const &str);
 
 /*
 **Util functions
 */
 	void	createNewFile(const std::string&, const std::string&, const std::string&);
+	void	replaceMapToMap(const std::string&, const std::string&, std::map<std::string, std::string>&);
 	void	addToMakefile(const std::string&);
 };
 

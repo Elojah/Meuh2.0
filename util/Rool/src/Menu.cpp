@@ -34,8 +34,12 @@ Menu::~Menu(void) {
 **Util
 */
 void				Menu::addItem(const std::string &str, void (Menu::*call)(ITEM *)) {
+	ITEM			*tmp;
+
 	itemNames[0].push_back(str);
-	items[new_item(itemNames[0].back().c_str(), "")] = call;
+	if ((tmp = new_item(itemNames[0].back().c_str(), ""))) {
+		items[tmp] = call;
+	}
 }
 
 /*
@@ -48,13 +52,11 @@ void		Menu::simpleCreate(const std::string &title, const std::string &up, const 
 	waitUser();
 }
 
-
 void		Menu::sortMenu(size_t length) {
 	if (!sortObject) {
 		return ;
 	}
-	std::sort(menuItems, menuItems + length
-		, *sortObject);
+	std::sort(menuItems, menuItems + length, *sortObject);
 }
 
 void		Menu::loop(void) {
