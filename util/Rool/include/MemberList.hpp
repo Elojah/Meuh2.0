@@ -19,6 +19,8 @@ private:
 	MemberList(void);
 	void		createItems(void);
 	void		newMember(ITEM *);
+
+	void		parseLine(std::string &line);
 };
 
 #endif

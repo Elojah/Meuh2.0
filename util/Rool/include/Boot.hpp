@@ -13,12 +13,11 @@ protected:
 private:
 	void		createItems(void);
 
-	/*
-	**Callbacks
-	*/
+/*
+**Callbacks
+*/
 	void		newProject(ITEM *item);
 	void		openProject(ITEM *item);
-
 };
 
 #endif

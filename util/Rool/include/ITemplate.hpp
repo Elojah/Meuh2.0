@@ -42,7 +42,7 @@ protected:
 	virtual std::map<std::string, lexNameFn>			createMapName(void){return(std::map<std::string, lexNameFn>());}
 
 
-	virtual std::map<std::string, std::string>					generateMapName(const std::string &str){
+	virtual std::map<std::string, std::string>					generateMapName(const std::string &str) {
 		std::map<std::string, std::string>		result;
 
 		for (std::map<std::string, lexNameFn>::const_iterator it = mapName.begin(); it != mapName.end(); it++) {

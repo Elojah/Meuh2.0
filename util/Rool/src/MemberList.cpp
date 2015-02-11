@@ -1,5 +1,6 @@
 #include "MemberList.hpp"
 #include "MemberTemplate.hpp"
+#include <algorithm>
 #include <fstream>
 
 MemberList::MemberList(void) {
@@ -36,8 +37,9 @@ void	MemberList::createItems(void) {
 		{
 			while (std::getline(ifs, line) && line.compare("};") != 0)
 			{
+				parseLine(line);
 				if (line.empty()) {
-					continue ;
+					;
 				} else if (line.compare("public:") == 0) {
 					access = "|  ";
 				} else if (line.compare("protected:") == 0) {
@@ -47,9 +49,11 @@ void	MemberList::createItems(void) {
 				} else {
 					addItem(access + line, static_cast<Callback>(&MemberList::errorCallback));
 				}
-				while (ifs.peek() == '\t' || ifs.peek() == ' ')
+				while (ifs.peek() == '\t' || ifs.peek() == ' ') {
 					ifs.ignore();
+				}
 			}
+			break ;
 		}
 	}
 	ifs.close();
@@ -69,4 +73,22 @@ void		MemberList::newMember(ITEM *item) {
 	box(user, 1, 1);
 	memberName = readUser();
 	notifyUser(tpl.create(memberName));
+}
+
+void	MemberList::parseLine(std::string &line) {
+	std::size_t		found;
+
+	if (line.empty()) {
+		return ;
+	}
+	std::replace(line.begin(), line.end(), '\t', ' ');
+	while (!line.empty() && line.at(0) == ' ') {
+		line.erase(0, 1);
+	}
+	if ((found = line.find("//")) != std::string::npos
+		|| (found = line.find("/*")) != std::string::npos
+		|| (found = line.find("**")) != std::string::npos
+		|| (found = line.find("*/")) != std::string::npos) {
+		line = line.substr(0, found);
+	}
 }

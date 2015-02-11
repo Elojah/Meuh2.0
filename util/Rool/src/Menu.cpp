@@ -34,8 +34,12 @@ Menu::~Menu(void) {
 **Util
 */
 void				Menu::addItem(const std::string &str, void (Menu::*call)(ITEM *)) {
+	ITEM			*tmp;
+
 	itemNames[0].push_back(str);
-	items[new_item(itemNames[0].back().c_str(), "")] = call;
+	if ((tmp = new_item(itemNames[0].back().c_str(), ""))) {
+		items[tmp] = call;
+	}
 }
 
 /*
