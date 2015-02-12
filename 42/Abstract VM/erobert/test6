@@ -1,0 +1,8 @@
+push float(599999999999999999999999999999999)
+push float(0.00000000001)
+pop
+pop
+dump
+div
+dump
+exit
