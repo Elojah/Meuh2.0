@@ -32,9 +32,11 @@ void	MemberList::createItems(void) {
 	std::string		line;
 	std::ifstream	ifs;
 	std::string		access;
+	std::size_t		count;
 
 	line = _path + "/include/" + _name + ".hpp";
 	access = "";
+	count = 0;
 	ifs.open(line.c_str());
 	if (!ifs) {
 		return ;
@@ -45,7 +47,7 @@ void	MemberList::createItems(void) {
 		{
 			while (std::getline(ifs, line) && line.compare("};") != 0)
 			{
-				parseLine(line);
+				parseLine(line, count);
 				if (line.empty()) {
 					;
 				} else if (line.compare("public:") == 0) {
@@ -98,20 +100,32 @@ void		MemberList::renameClass(ITEM *item) {
 	it->second = static_cast<Callback>(&MemberList::endMenu);
 }
 
-void	MemberList::parseLine(std::string &line) {
+void	MemberList::parseLine(std::string &line, std::size_t &count) {
 	std::size_t		found;
+	int				bracket;
 
+	bracket = -1;
 	if (line.empty()) {
 		return ;
+	}
+	bracket = -1;
+	while (static_cast<std::size_t>(bracket = line.find('}', bracket + 1)) != std::string::npos) {
+		count--;
+	}
+	while (static_cast<std::size_t>(bracket = line.find('{', bracket + 1)) != std::string::npos) {
+		count++;
 	}
 	std::replace(line.begin(), line.end(), '\t', ' ');
 	while (!line.empty() && line.at(0) == ' ') {
 		line.erase(0, 1);
 	}
-	if ((found = line.find("//")) != std::string::npos
+	if (count != 0 && bracket == 0) {
+		line.clear();
+	} else if ((found = line.find("//")) != std::string::npos
 		|| (found = line.find("/*")) != std::string::npos
 		|| (found = line.find("**")) != std::string::npos
-		|| (found = line.find("*/")) != std::string::npos) {
+		|| (found = line.find("*/")) != std::string::npos
+		|| (found = line.find("{")) != std::string::npos) {
 		line = line.substr(0, found);
 	}
 }

@@ -23,7 +23,7 @@ private:
 	void		newMember(ITEM *);
 	void		renameClass(ITEM *);
 
-	void		parseLine(std::string &line);
+	void		parseLine(std::string&, std::size_t&);
 };
 
 #endif
