@@ -1,10 +1,10 @@
-#ifndef ${NAME_MAJ}_H
-# define ${NAME_MAJ}_H
+#ifndef ${INC_GUARD}_H
+# define ${INC_GUARD}_H
 
-class ${NAME}
+class ${CLASS_NAME}
 {
 public:
-	virtual ~${NAME}(void) {}
+	virtual ~${CLASS_NAME}(void) {}
 protected:
 private:
 };

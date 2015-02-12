@@ -1,13 +1,12 @@
-#ifndef ${NAME_MAJ}_H
-# define ${NAME_MAJ}_H
+#ifndef ${INC_GUARD}_H
+# define ${INC_GUARD}_H
 
-# include "${PARENT}.hpp"
-
-class ${NAME} : ${PARENT_ACCESS} ${PARENT}
+$[parent_include_self]
+class ${CLASS_NAME} : $[parent_include_trueName]
 {
 public:
-	${NAME}(void);
-	~${NAME}(void);
+	${CLASS_NAME}(void);
+	~${CLASS_NAME}(void);
 protected:
 private:
 };
