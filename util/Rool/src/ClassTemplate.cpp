@@ -30,7 +30,7 @@ std::map<std::string, std::string(*)(const std::string&)>	ClassTemplate::createM
 	/*Add differents names here*/
 	m["${CLASS_NAME}"] = static_cast<lexNameFn>(&ClassTemplate::parseClassName);
 	m["${INC_GUARD}"] = static_cast<lexNameFn>(&ClassTemplate::parseIncGuard);
-	m["${PARENTS}"] = static_cast<lexNameFn>(&ClassTemplate::parseParent);
+	m["${PARENTS}"] = static_cast<lexNameFn>(&ClassTemplate::parseParents);
 	m["${OLD_REPLACE}"] = static_cast<lexNameFn>(&ClassTemplate::parseOldName);
 	m["${NEW_REPLACE}"] = static_cast<lexNameFn>(&ClassTemplate::parseNewName);
 	return (m);
@@ -41,12 +41,12 @@ std::map<std::string, std::string(*)(const std::string&)>	ClassTemplate::createM
 */
 bool			ClassTemplate::isUsualClass(std::string const &str) {
 	(void)str;
-	return (str.at(0) != '$');
+	return (str.at(0) != '$' && str.find(':') == std::string::npos);
 }
 std::string		ClassTemplate::makeUsualClass(void) {
 	createNewFile("src", "src", ".cpp");
 	createNewFile("include", "include", ".hpp");
-	addToMakefile("CLASS");
+	addToMakefile("CLASS", false);
 	return ("Usual class " + genMapName["${CLASS_NAME}"] + " created successfully!");
 }
 
@@ -58,30 +58,30 @@ bool			ClassTemplate::isReplaceClassName(std::string const &str) {
 	return (false);
 }
 std::string		ClassTemplate::makeReplaceClassName(void) {
-	std::map<std::string, std::string>	newMap;
+	std::map<std::string, std::string>	oldMap;
 
-	newMap = generateMapName(genMapName["${NEW_REPLACE}"]);
-	genMapName = generateMapName(genMapName["${OLD_REPLACE}"]);
-	replaceMapToMap("src", ".cpp", newMap);
-	replaceMapToMap("include", ".hpp", newMap);
-	/*REPLACE IN MAKEFILE !*/
-	return (genMapName["${CLASS_NAME}"] + " has successfully been replaced by " + newMap["${CLASS_NAME}"]);
+	oldMap = generateMapName(genMapName["${OLD_REPLACE}"]);
+	genMapName = generateMapName(genMapName["${NEW_REPLACE}"]);
+	replaceMapToMap("src", ".cpp", oldMap);
+	replaceMapToMap("include", ".hpp", oldMap);
+	addToMakefile("\t\t" + oldMap["${CLASS_NAME}"] + "\\", true);
+	return (oldMap["${CLASS_NAME}"] + " has successfully been replaced by " + genMapName["${CLASS_NAME}"]);
 }
 bool		ClassTemplate::isInherit(std::string const &str) {
 	return (str.find(':') != std::string::npos);
 }
 std::string		ClassTemplate::makeInheritClass(void) {
-	Strings		parents;
 	char		*pch;
 
-	makeUsualClass();
-	pch = strtok(genMapName["${PARENTS}"],",");
+	pch = strtok(strdup(genMapName["${PARENTS}"].c_str()),",");
 	while (pch != NULL) {
-		parents.push_back(std::string(pch));
-		pch = strtok (NULL, ",");
+		_parents.push_back(std::string(pch));
+		pch = strtok(NULL, ",");
 	}
-	addParents(parents);/*All together for 1 ifs, 1 ofs*/
-	return ("");
+	createNewFile("inherit_src", "src", ".cpp");
+	createNewFile("inherit_include", "include", ".hpp");
+	addToMakefile("CLASS", false);
+	return ("Inherit class " + genMapName["${CLASS_NAME}"] + " created successfully!");
 }
 
 /*
@@ -91,7 +91,7 @@ std::string		ClassTemplate::parseClassName(std::string const &str) {
 	std::size_t	found;
 
 	if ((found = str.find_first_of(':')) != std::string::npos) {
-		return (str.substr(0, found - 1));
+		return (str.substr(0, found));
 	}
 	return (std::string(str));
 }
@@ -108,11 +108,11 @@ std::string		ClassTemplate::parseIncGuard(std::string const &str) {
 	}
 	return (result);
 }
-std::string		ClassTemplate::parseParent(std::string const &str) {
+std::string		ClassTemplate::parseParents(std::string const &str) {
 	std::size_t	found;
 
 	if ((found = str.find_first_of(':')) != std::string::npos) {
-		return (str.substr(str.find_last_of(' ') + 1));
+		return (str.substr(found + 1));
 	}
 	return ("");
 }
@@ -153,9 +153,14 @@ void	ClassTemplate::createNewFile(std::string const &type, std::string const &fo
 	while (std::getline(ifs, line))
 	{
 		for (std::map<std::string, std::string>::iterator it = genMapName.begin(); it != genMapName.end(); it++) {
-			while ((found = line.find(it->first)) != std::string::npos) {
+			found = 0;
+			while ((found = line.find(it->first, found)) != std::string::npos) {
 				line.replace(found, it->first.length(), it->second);
 			}
+		}
+		if ((found = line.find("$[")) != std::string::npos) {
+			found += 2;
+			line = line.substr(0, found - 2) + loopTemplate(line.substr(found, line.find(']', found) - found));
 		}
 		ofs << line << std::endl;
 	}
@@ -164,23 +169,23 @@ void	ClassTemplate::createNewFile(std::string const &type, std::string const &fo
 }
 
 void	ClassTemplate::replaceMapToMap(const std::string &dir, const std::string &ext
-	, std::map<std::string, std::string> &newMap) {
+	, std::map<std::string, std::string> &oldMap) {
 	std::ifstream	ifs;
 	std::ofstream	ofs;
 	std::string		line;
 	std::size_t		found;
 
-	ifs.open((path + '/' + dir + '/' + genMapName["${CLASS_NAME}"] + ext).c_str());
-	ofs.open((path + '/' + dir + '/' + newMap["${CLASS_NAME}"] + ext).c_str());
+	ifs.open((path + '/' + dir + '/' + oldMap["${CLASS_NAME}"] + ext).c_str());
+	ofs.open((path + '/' + dir + '/' + genMapName["${CLASS_NAME}"] + ext).c_str());
 	/*
 	**Triple Loop, BIM !
 	*/
 	while (std::getline(ifs, line))
 	{
-		for (std::map<std::string, std::string>::iterator it = genMapName.begin(); it != genMapName.end(); it++) {
+		for (std::map<std::string, std::string>::iterator it = oldMap.begin(); it != oldMap.end(); it++) {
 			found = 0;
 			while ((found = line.find(it->second, found)) != std::string::npos) {
-				line.replace(found, it->second.length(), newMap[it->first]);
+				line.replace(found, it->second.length(), genMapName[it->first]);
 				found++;
 			}
 		}
@@ -188,10 +193,10 @@ void	ClassTemplate::replaceMapToMap(const std::string &dir, const std::string &e
 	}
 	ifs.close();
 	ofs.close();
-	remove((path + '/' + dir + '/' + genMapName["${CLASS_NAME}"] + ext).c_str());
+	remove((path + '/' + dir + '/' + oldMap["${CLASS_NAME}"] + ext).c_str());
 }
 
-void	ClassTemplate::addToMakefile(const std::string &type)
+void	ClassTemplate::addToMakefile(const std::string &type, bool removeOld)
 {
 	std::ifstream	ifs((path + "/Makefile").c_str());
 	std::ofstream	ofs;
@@ -204,6 +209,9 @@ void	ClassTemplate::addToMakefile(const std::string &type)
 		if ((*itRead).compare(0, type.length(), type) != 0)
 			continue ;
 		tmpFile.insert(itRead + 1, "\t\t" + genMapName["${CLASS_NAME}"] + "\\");
+		if (removeOld) {
+			tmpFile.erase(itRead);
+		}
 		break ;
 	}
 	ifs.close();
@@ -214,13 +222,36 @@ void	ClassTemplate::addToMakefile(const std::string &type)
 	ofs.close();
 }
 
-void	ClassTemplate::addParents(std::vector<std::string> &parents) {
-	std::ifstream	ifs;
-	std::ofstream	ofs;
+/*
+**PARENT_ACCESS = 0
+**PARENT_NAME = 1
+** BOURRIN/NOT GENERIC
+*/
+std::string		ClassTemplate::loopTemplate(const std::string &fileName) {
+	std::ifstream	ifs(("./config/templates/" + fileName + ".template").c_str());
 	std::string		line;
+	std::string		lineToAppend;
+	std::string		result;
 	std::size_t		found;
+	std::size_t		foundParse;
 
-	for (Strings::iterator it = parents.begin(); it != parents.end(); ++it) {
-		;
+	if (ifs.fail()) {
+		return ("[ERROR<File " + fileName + " not found>]");
 	}
+	std::getline(ifs, line, '^');
+	for (Strings::iterator it = _parents.begin(); it != _parents.end(); ++it) {
+		lineToAppend = std::string(line);
+		foundParse = it->find_last_of(' ');
+		if ((found = lineToAppend.find("${PARENT_ACCESS}")) != std::string::npos) {
+			lineToAppend.replace(found, 16, it->substr(0, foundParse));
+			if (it != _parents.begin()) {
+				lineToAppend.insert(found, ", ");
+			}
+		}
+		if ((found = lineToAppend.find("${PARENT_NAME}")) != std::string::npos) {
+			lineToAppend.replace(found, 14, it->substr(foundParse + 1));
+		}
+		result.append(lineToAppend);
+	}
+	return (result);
 }
