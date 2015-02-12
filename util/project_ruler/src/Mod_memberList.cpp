@@ -38,6 +38,11 @@ void	Mod_memberList::_showClass(void)
 	items.insert(items.end(), methods.begin(), methods.end());
 	items.insert(items.end(), attr.begin(), attr.end());
 	setValues(items, _class);
+	attr.clear();
+	attr.push_back("public:");
+	attr.push_back("protected:");
+	attr.push_back("private:");
+	setNonSelect(attr);
 
 	value = choosen_value();
 	if (value.compare("Return") != 0)

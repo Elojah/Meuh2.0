@@ -13,9 +13,21 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
+		Boot\
+		ClassList\
+		ClassTemplate\
+		GUI\
+		MemberList\
+		MemberTemplate\
+		Menu\
+		ModuleFactory\
+		Project\
+		SortItems\
+		Window\
 
 #List interfaces here
-INTERFACE =
+INTERFACE = IModule\
+			ITemplate\
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
@@ -28,7 +40,7 @@ LFLAGS =
 
 #Libs
 LIB_LOCAL =
-LIB_GLOBAL =
+LIB_GLOBAL = ncurses menu
 LIB_OTHER =
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))

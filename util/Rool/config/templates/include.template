@@ -1,0 +1,13 @@
+#ifndef ${INC_GUARD}_H
+# define ${INC_GUARD}_H
+
+class ${CLASS_NAME}
+{
+public:
+	${CLASS_NAME}(void);
+	~${CLASS_NAME}(void);
+protected:
+private:
+};
+
+#endif
