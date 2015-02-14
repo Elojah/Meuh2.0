@@ -6,13 +6,14 @@
 */
 
 #include "X11Win.hpp"
+#include "SimpleTriangle.hpp"
 
-int main(int argc, char ** argv) {
-	X11Win		win(800, 600);
+int main(void) {
+	X11Win			win(800, 600);
+	SimpleTriangle	t;
 
 	win.init();
+	t.draw();
 	win.loop();
-	(void)argc;
-	(void)argv;
 	return (0);
 }

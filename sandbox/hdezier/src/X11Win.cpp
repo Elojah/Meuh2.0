@@ -9,35 +9,67 @@ X11Win::X11Win(std::size_t width, std::size_t height) :
 															_height(height)
 {
 	if (!(_d = XOpenDisplay(NULL))) {
-		std::cout << "Error: Display environment variable is wrong" << std::endl;
+		std::cout << "Error: display environment variable is wrong" << std::endl;
 		return ;
 	}
-	_root = XDefaultRootWindow(_d);
-	_screen = XDefaultScreen(_d);
-	_v = XDefaultVisual(_d, _screen);
 }
 
 X11Win::~X11Win(void) {
+	glXDestroyContext(_d, _ctx);
+	XDestroyWindow(_d, _w);
+	XFreeColormap(_d, _cmap);
+	XCloseDisplay(_d);
 }
 
 void		X11Win::init(void) {
+	glXCreateContextAttribsARBProc	glXCreateContextAttribsARB;
+	XSetWindowAttributes				swa;
+	XVisualInfo							*vi;
 
+	static int				context_attribs[] = {
+		GLX_CONTEXT_MAJOR_VERSION_ARB, 3,
+		GLX_CONTEXT_MINOR_VERSION_ARB, 0,
+		//GLX_CONTEXT_FLAGS_ARB, GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB,
+		None
+	};
+
+	assignBestFBC();
+	vi = glXGetVisualFromFBConfig(_d, _fbc);
+	swa.colormap = _cmap = XCreateColormap(_d,
+												RootWindow(_d, vi->screen),
+												vi->visual, AllocNone);
+	swa.background_pixmap = None;
+	swa.border_pixel = 0;
+	swa.event_mask = StructureNotifyMask|KeyPressMask|KeyReleaseMask;
 	/*Window XCreateWindow(
-	display, parent, x, y, width, height, border_width, depth,
+	_d, parent, x, y, width, height, border_width, depth,
 		class, visual, valuemask, attributes)*/
-	_w =  XCreateWindow(_d
-						, _root
-						, 0
-						, 0
-						, _width
-						, _height
-						, 0
-						, XDefaultDepth(_d, _screen)
-						, 1
-						, _v
-						, 0
-						, NULL);
+	_w = XCreateWindow(_d,
+							RootWindow(_d, vi->screen)
+							, 0
+							, 0
+							, _width
+							, _height
+							, 0
+							, vi->depth
+							, InputOutput
+							, vi->visual
+							, CWBorderPixel|CWColormap|CWEventMask
+							, &swa);
+	XFree(vi);
+	XStoreName(_d, _w, "GL Window");
 	XMapWindow(_d, _w);
+	glXCreateContextAttribsARB = (glXCreateContextAttribsARBProc)glXGetProcAddressARB(
+		(const GLubyte *)"glXCreateContextAttribsARB");
+	_ctx = glXCreateContextAttribsARB(_d, _fbc, 0, True, context_attribs);
+	XSync(_d, False);
+	glXMakeCurrent(_d, _w, _ctx);
+
+	glClearColor(0, 0.5, 1, 1);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glXSwapBuffers (_d, _w);
+
+	glXMakeCurrent(_d, 0, 0);
 }
 /*
 	typedef union				_XEvent {
@@ -77,7 +109,58 @@ void		X11Win::init(void) {
 }						XEvent;
 */
 void		X11Win::loop(void) {
+	// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	while (true) {
 		XNextEvent(_d, &_e);
+		std::cout << _e.xkey.keycode << std::endl;
+		if (_e.xkey.keycode == 9) {/*ESC*/
+			break ;
+		}
 	}
+}
+
+void		X11Win::assignBestFBC(void) {
+	GLXFBConfig		*tmp_fbc;
+	XVisualInfo			*vi;
+	int					fbcount;
+	int					best_fbc, worst_fbc, best_num_samp, worst_num_samp;
+	int					samp_buf, samples;
+	static int			_v_att[] = {
+		GLX_X_RENDERABLE, True,
+		GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
+		GLX_RENDER_TYPE, GLX_RGBA_BIT,
+		GLX_X_VISUAL_TYPE, GLX_TRUE_COLOR,
+		GLX_RED_SIZE, 8,
+		GLX_GREEN_SIZE, 8,
+		GLX_BLUE_SIZE, 8,
+		GLX_ALPHA_SIZE, 8,
+		GLX_DEPTH_SIZE, 24,
+		GLX_STENCIL_SIZE, 8,
+		GLX_DOUBLEBUFFER, True,
+		GLX_SAMPLE_BUFFERS  , 1,
+		GLX_SAMPLES, 4,
+		None
+	};
+
+	tmp_fbc = glXChooseFBConfig(_d, DefaultScreen(_d), _v_att, &fbcount);
+	best_fbc = worst_fbc = best_num_samp = -1;
+	worst_num_samp = 999;
+
+	for (int i = 0; i < fbcount; ++i) {
+		if ((vi = glXGetVisualFromFBConfig(_d, tmp_fbc[i]))) {
+			glXGetFBConfigAttrib(_d, tmp_fbc[i], GLX_SAMPLE_BUFFERS, &samp_buf);
+			glXGetFBConfigAttrib(_d, tmp_fbc[i], GLX_SAMPLES, &samples);
+			if (best_fbc < 0 || (samp_buf && samples > best_num_samp)) {
+				best_fbc = i;
+				best_num_samp = samples;
+			}
+			if (worst_fbc < 0 || !samp_buf || samples < worst_num_samp) {
+				worst_fbc = i;
+				worst_num_samp = samples;
+			}
+		}
+		XFree(vi);
+	}
+	_fbc = tmp_fbc[best_fbc];
+	XFree(tmp_fbc);
 }
