@@ -68,6 +68,7 @@ void		X11Win::init(void) {
 	_ctx = glXCreateContextAttribsARB(_d, _fbc, 0, True, context_attribs);
 	XSync(_d, False);
 	glXMakeCurrent(_d, _glxWin, _ctx);
+	glClearColor(0, 0.5, 1, 1);
 }
 /*
 	typedef union				_XEvent {
@@ -107,14 +108,15 @@ void		X11Win::init(void) {
 }						XEvent;
 */
 void		X11Win::loop(std::vector<IObject> &objects) {
-	glClearColor(0, 0.5, 1, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glXSwapBuffers(_d, _glxWin);
 	while (true) {
 
-		glClear(GL_COLOR_BUFFER_BIT);
 		for (std::vector<IObject>::iterator it = objects.begin(); it != objects.end(); ++it) {
-			it->loop();
+			it->draw();
+		}
+
+		if (glGetError() == GL_NO_ERROR) {
+			std::cout << "Rendering ok" << std::endl;
 		}
 
 		XNextEvent(_d, &_e);
@@ -126,6 +128,16 @@ void		X11Win::loop(std::vector<IObject> &objects) {
 		}
 	}
 }
+/*
+GL_NO_ERROR
+GL_INVALID_ENUM
+GL_INVALID_VALUE
+GL_INVALID_OPERATION
+GL_INVALID_FRAMEBUFFER_OPERATION
+GL_OUT_OF_MEMORY
+GL_STACK_UNDERFLOW
+GL_STACK_OVERFLOW
+*/
 
 void		X11Win::assignBestFBC(void) {
 	GLXFBConfig		*tmp_fbc;

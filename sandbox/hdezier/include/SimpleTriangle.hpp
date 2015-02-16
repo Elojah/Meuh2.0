@@ -9,6 +9,7 @@ class SimpleTriangle : public IObject
 public:
 	SimpleTriangle(void);
 	~SimpleTriangle(void);
+	void	init(void);
 	void	draw(void);
 protected:
 private:

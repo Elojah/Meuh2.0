@@ -1,6 +1,7 @@
 #include "LoadShaders.h"
 GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path) {
 	// Crée les shaders
+	GLuint ProgramID;
 	GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 	// Lit le code du vertex shader à partir du fichier
@@ -52,7 +53,7 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
 	}
 	// Lit le programme
 	fprintf(stdout, "Linking program\n");
-	GLuint ProgramID = glCreateProgram();
+	ProgramID = glCreateProgram();
 	glAttachShader(ProgramID, VertexShaderID);
 	glAttachShader(ProgramID, FragmentShaderID);
 	glLinkProgram(ProgramID);
@@ -60,9 +61,9 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
 	glGetProgramiv(ProgramID, GL_LINK_STATUS, &Result);
 	glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
 	std::vector<char>ProgramErrorMessage(std::max(InfoLogLength, int(1)));
-	glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-	if (&ProgramErrorMessage[0]) {
-		fprintf(stdout, "%s\n", &ProgramErrorMessage[0]);
+	glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &(ProgramErrorMessage[0]));
+	if (&(ProgramErrorMessage[0])) {
+		fprintf(stdout, "%s\n", &(ProgramErrorMessage[0]));
 	}
 	glDeleteShader(VertexShaderID);
 	glDeleteShader(FragmentShaderID);

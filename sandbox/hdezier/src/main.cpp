@@ -11,15 +11,17 @@
 #include "SimpleTriangle.hpp"
 
 int main(void) {
-	X11Win			win(800, 600);
+	X11Win					win(800, 600);
+	SimpleTriangle			t;
 	std::vector<IObject>	objects;
 
-	SimpleTriangle	t;
 
 	win.init();
-	objects.push_back(t);
+	t.init();
 
-	t.draw();/*draw all objects ?*/
+	t.draw();
+
+	objects.push_back(t);
 
 	win.loop(objects);
 	return (0);
