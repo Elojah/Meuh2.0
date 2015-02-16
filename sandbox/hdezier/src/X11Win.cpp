@@ -109,15 +109,19 @@ void		X11Win::init(void) {
 void		X11Win::loop(std::vector<IObject> &objects) {
 	glClearColor(0, 0.5, 1, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glXSwapBuffers(_d, _glxWin);
 	while (true) {
 
+		glClear(GL_COLOR_BUFFER_BIT);
 		for (std::vector<IObject>::iterator it = objects.begin(); it != objects.end(); ++it) {
 			it->loop();
 		}
 
-		glXSwapBuffers (_d, _glxWin);
 		XNextEvent(_d, &_e);
-		if (_e.xkey.keycode == 9) {/*ESC*/
+		if (_e.xkey.keycode == 24) {/*A*/
+			glXSwapBuffers(_d, _glxWin);
+		}
+		else if (_e.xkey.keycode == 9) {/*ESC*/
 			break ;
 		}
 	}

@@ -20,7 +20,11 @@ SimpleTriangle::~SimpleTriangle(void) {
 }
 
 void	SimpleTriangle::draw(void) {
-	glBindVertexArray(_vertexArrayID);
+	// glBindVertexArray(_vertexArrayID);
+
+	_progID = LoadShaders("./src/shaders/SimpleTriangleVert.glsl", "./src/shaders/SimpleTriangleFrag.glsl");
+	glUseProgram(_progID);
+
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(
 		0,// attribut 0. Aucune raison particulière pour 0, mais cela doit correspondre au « layout » dans le shader
@@ -32,6 +36,4 @@ void	SimpleTriangle::draw(void) {
 	);
 	glDisableVertexAttribArray(0);
 	glBindVertexArray(0);
-
-	_progID = LoadShaders("./src/shaders/SimpleTriangleVert.glsl", "./src/shaders/SimpleTriangleFrag.glsl" );
 }

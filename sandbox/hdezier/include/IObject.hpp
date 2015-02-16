@@ -10,9 +10,9 @@ public:
 	virtual ~IObject(void){}
 	virtual void	draw(void){}
 	virtual void	loop(void){
-		glUseProgram(_progID);
 		glBindVertexArray(_vertexArrayID);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glBindVertexArray(0);
 	}
 protected:
 	GLuint			_vertexBuffer;
