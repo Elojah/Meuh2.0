@@ -2,15 +2,14 @@
 #include "LoadShaders.h"
 
 SimpleTriangle::SimpleTriangle(void) {
-	GLuint			VertexArrayID;
 	static const		GLfloat g_vertex_buffer_data[] = {
 		-1.0f, -1.0f, 0.0f,
 		1.0f, -1.0f, 0.0f,
-		0.0f,  1.0f, 0.0f,
+		0.0f, 1.0f, 0.0f,
 	};
 
-	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
+	glGenVertexArrays(1, &_vertexArrayID);
+	glBindVertexArray(_vertexArrayID);
 
 	glGenBuffers(1, &_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
@@ -21,10 +20,8 @@ SimpleTriangle::~SimpleTriangle(void) {
 }
 
 void	SimpleTriangle::draw(void) {
-	GLuint	progID;
-
+	glBindVertexArray(_vertexArrayID);
 	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
 	glVertexAttribPointer(
 		0,// attribut 0. Aucune raison particulière pour 0, mais cela doit correspondre au « layout » dans le shader
 		3,// taille
@@ -33,9 +30,8 @@ void	SimpleTriangle::draw(void) {
 		0,// nombre d'octets séparant deux sommets dans le tampon
 		(void*)0// décalage du tableau de tampon
 	);
-
-	glDrawArrays(GL_TRIANGLES, 0, 3);
 	glDisableVertexAttribArray(0);
-	progID = LoadShaders("shaders/SimpleTriangleVert.glsl", "shaders/SimpleTriangleFrag.glsl" );
-	glUseProgram(progID);
+	glBindVertexArray(0);
+
+	_progID = LoadShaders("./src/shaders/SimpleTriangleVert.glsl", "./src/shaders/SimpleTriangleFrag.glsl" );
 }

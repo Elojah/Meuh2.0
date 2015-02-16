@@ -1,11 +1,15 @@
 #ifndef X11_WIN_H
 # define X11_WIN_H
+# define GL_GLEXT_PROTOTYPES
 
-# include <cstddef>
+# include <vector>
+# include <string>
 # include <X11/Xlib.h>
 # include <X11/Xutil.h>
 # include <GL/gl.h>
 # include <GL/glx.h>
+
+class IObject;
 
 class X11Win
 {
@@ -13,7 +17,7 @@ public:
 						X11Win(std::size_t, std::size_t);
 						~X11Win(void);
 	void				init(void);
-	void				loop(void);
+	void				loop(std::vector<IObject>&);
 protected:
 private:
 	typedef GLXContext(*glXCreateContextAttribsARBProc)(Display*, GLXFBConfig, GLXContext, Bool, const int*);
@@ -35,8 +39,9 @@ private:
 /*
 **GL
 */
-	GLXFBConfig		_fbc;
+	GLXWindow		_glxWin;
 	GLXContext			_ctx;
+	GLXFBConfig		_fbc;
 };
 
 #endif

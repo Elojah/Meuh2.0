@@ -3,8 +3,6 @@
 # define GL_GLEXT_PROTOTYPES
 
 # include "IObject.hpp"
-# include <GL/gl.h>
-# include <GL/glx.h>
 
 class SimpleTriangle : public IObject
 {
@@ -14,7 +12,6 @@ public:
 	void	draw(void);
 protected:
 private:
-	GLuint			_vertexBuffer;
 };
 
 #endif

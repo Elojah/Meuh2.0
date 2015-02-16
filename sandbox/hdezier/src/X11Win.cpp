@@ -1,4 +1,5 @@
 #include "X11Win.hpp"
+#include "IObject.hpp"
 #include <iostream>
 
 X11Win::X11Win(void) {
@@ -15,6 +16,7 @@ X11Win::X11Win(std::size_t width, std::size_t height) :
 }
 
 X11Win::~X11Win(void) {
+	glXMakeCurrent(_d, 0, 0);
 	glXDestroyContext(_d, _ctx);
 	XDestroyWindow(_d, _w);
 	XFreeColormap(_d, _cmap);
@@ -40,7 +42,7 @@ void		X11Win::init(void) {
 												vi->visual, AllocNone);
 	swa.background_pixmap = None;
 	swa.border_pixel = 0;
-	swa.event_mask = StructureNotifyMask|KeyPressMask|KeyReleaseMask;
+	swa.event_mask = ExposureMask|KeyPressMask|ButtonPressMask|StructureNotifyMask;
 	/*Window XCreateWindow(
 	_d, parent, x, y, width, height, border_width, depth,
 		class, visual, valuemask, attributes)*/
@@ -54,22 +56,18 @@ void		X11Win::init(void) {
 							, vi->depth
 							, InputOutput
 							, vi->visual
-							, CWBorderPixel|CWColormap|CWEventMask
+							, CWBackPixel|CWBackPixmap|CWBorderPixel|CWColormap|CWEventMask
 							, &swa);
+	_glxWin = glXCreateWindow(_d, _fbc, _w, NULL);
 	XFree(vi);
 	XStoreName(_d, _w, "GL Window");
 	XMapWindow(_d, _w);
+
 	glXCreateContextAttribsARB = (glXCreateContextAttribsARBProc)glXGetProcAddressARB(
 		(const GLubyte *)"glXCreateContextAttribsARB");
 	_ctx = glXCreateContextAttribsARB(_d, _fbc, 0, True, context_attribs);
 	XSync(_d, False);
-	glXMakeCurrent(_d, _w, _ctx);
-
-	glClearColor(0, 0.5, 1, 1);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glXSwapBuffers (_d, _w);
-
-	glXMakeCurrent(_d, 0, 0);
+	glXMakeCurrent(_d, _glxWin, _ctx);
 }
 /*
 	typedef union				_XEvent {
@@ -108,11 +106,17 @@ void		X11Win::init(void) {
 	long pad[24];
 }						XEvent;
 */
-void		X11Win::loop(void) {
-	// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+void		X11Win::loop(std::vector<IObject> &objects) {
+	glClearColor(0, 0.5, 1, 1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	while (true) {
+
+		for (std::vector<IObject>::iterator it = objects.begin(); it != objects.end(); ++it) {
+			it->loop();
+		}
+
+		glXSwapBuffers (_d, _glxWin);
 		XNextEvent(_d, &_e);
-		std::cout << _e.xkey.keycode << std::endl;
 		if (_e.xkey.keycode == 9) {/*ESC*/
 			break ;
 		}
@@ -137,8 +141,8 @@ void		X11Win::assignBestFBC(void) {
 		GLX_DEPTH_SIZE, 24,
 		GLX_STENCIL_SIZE, 8,
 		GLX_DOUBLEBUFFER, True,
-		GLX_SAMPLE_BUFFERS  , 1,
-		GLX_SAMPLES, 4,
+		// GLX_SAMPLE_BUFFERS , 1,
+		// GLX_SAMPLES, 4,
 		None
 	};
 
