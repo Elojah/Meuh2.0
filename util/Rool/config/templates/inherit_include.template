@@ -2,7 +2,7 @@
 # define ${INC_GUARD}_H
 
 $[parent_include_self]
-class ${CLASS_NAME} : $[parent_include_trueName]
+class ${CLASS_NAME} $[parent_include_trueName]
 {
 public:
 	${CLASS_NAME}(void);

@@ -18,8 +18,9 @@ std::map<bool(*)(const std::string&), std::string(ITemplate::*)(void)>	ClassTemp
 	std::map<parseNameFn, patternFn>	m;
 
 	m[&ClassTemplate::isReplaceClassName] = static_cast<patternFn>(&ClassTemplate::makeReplaceClassName);
-	m[&ClassTemplate::isUsualClass] = static_cast<patternFn>(&ClassTemplate::makeUsualClass);
 	m[&ClassTemplate::isInherit] = static_cast<patternFn>(&ClassTemplate::makeInheritClass);
+	m[&ClassTemplate::isInterface] = static_cast<patternFn>(&ClassTemplate::makeInterface);
+	m[&ClassTemplate::isUsualClass] = static_cast<patternFn>(&ClassTemplate::makeUsualClass);
 	/*Add differents patterns here (Interface/Inherit/etc.)*/
 	return (m);
 }
@@ -67,6 +68,16 @@ std::string		ClassTemplate::makeReplaceClassName(void) {
 	addToMakefile("\t\t" + oldMap["${CLASS_NAME}"] + "\\", true);
 	return (oldMap["${CLASS_NAME}"] + " has successfully been replaced by " + genMapName["${CLASS_NAME}"]);
 }
+
+bool			ClassTemplate::isInterface(std::string const &str) {
+	return ((str.c_str())[0] == 'I' && (str.c_str())[1] >= 'A' && (str.c_str())[1] <= 'Z');
+}
+std::string		ClassTemplate::makeInterface(void) {
+	createNewFile("interface", "include", ".hpp");
+	addToMakefile("INTERFACE", false);
+	return ("Interface " + genMapName["${CLASS_NAME}"] + " created successfully!");
+}
+
 bool		ClassTemplate::isInherit(std::string const &str) {
 	return (str.find(':') != std::string::npos);
 }
@@ -145,6 +156,7 @@ void	ClassTemplate::createNewFile(std::string const &type, std::string const &fo
 	std::ofstream	ofs;
 	std::string		line;
 	std::size_t		found;
+	std::size_t		foundEnd;
 
 	ofs.open((path + '/' + folder + '/' + genMapName["${CLASS_NAME}"] + ext).c_str());
 	/*
@@ -156,11 +168,13 @@ void	ClassTemplate::createNewFile(std::string const &type, std::string const &fo
 			found = 0;
 			while ((found = line.find(it->first, found)) != std::string::npos) {
 				line.replace(found, it->first.length(), it->second);
+				found++;
 			}
 		}
 		if ((found = line.find("$[")) != std::string::npos) {
 			found += 2;
-			line = line.substr(0, found - 2) + loopTemplate(line.substr(found, line.find(']', found) - found));
+			foundEnd = line.find(']', found);
+			line.replace(found - 2, foundEnd + 1, loopTemplate(line.substr(found, foundEnd - found)));
 		}
 		ofs << line << std::endl;
 	}
@@ -244,7 +258,9 @@ std::string		ClassTemplate::loopTemplate(const std::string &fileName) {
 		foundParse = it->find_last_of(' ');
 		if ((found = lineToAppend.find("${PARENT_ACCESS}")) != std::string::npos) {
 			lineToAppend.replace(found, 16, it->substr(0, foundParse));
-			if (it != _parents.begin()) {
+			if (it == _parents.begin()) {
+				lineToAppend.insert(found, ": ");
+			} else {
 				lineToAppend.insert(found, ", ");
 			}
 		}
