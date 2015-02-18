@@ -5,8 +5,24 @@
 * @Last Modified time: 2015-02-13 10:50:54
 */
 
-int main(int argc, char ** argv) {
-	(void)argc;
-	(void)argv;
+# include <vector>
+#include "X11Win.hpp"
+#include "IObject.hpp"
+#include "SimpleTriangle.hpp"
+
+int main(void) {
+	X11Win					win(800, 600);
+	SimpleTriangle			t;
+	std::vector<IObject>	objects;
+
+
+	win.init();
+	t.init();
+
+	t.draw();
+
+	objects.push_back(t);
+
+	win.loop(objects);
 	return (0);
 }

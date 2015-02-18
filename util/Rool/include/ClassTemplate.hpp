@@ -22,7 +22,7 @@ private:
 **Init
 */
 	std::map<parseNameFn, patternFn>					createPatternMap(void);
-	std::map<std::string, lexNameFn>					createMapName(void);
+	std::map<std::string, lexNameFn>						createMapName(void);
 
 /*
 **Match/Pattern
@@ -33,6 +33,8 @@ private:
 	std::string											makeReplaceClassName(void);
 	static bool											isInherit(std::string const &str);
 	std::string											makeInheritClass(void);
+	static bool											isInterface(std::string const&);
+	std::string											makeInterface(void);
 
 /*
 **Parse functions
@@ -46,9 +48,9 @@ private:
 /*
 **Util functions
 */
-	void	createNewFile(const std::string&, const std::string&, const std::string&);
-	void	replaceMapToMap(const std::string&, const std::string&, std::map<std::string, std::string>&);
-	void	addToMakefile(const std::string&, bool);
+	void		createNewFile(const std::string&, const std::string&, const std::string&);
+	void		replaceMapToMap(const std::string&, const std::string&, std::map<std::string, std::string>&);
+	void		addToMakefile(const std::string&, bool);
 	std::string	loopTemplate(const std::string&);
 };
 

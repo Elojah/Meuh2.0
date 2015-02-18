@@ -12,10 +12,10 @@ SRC_EXT = .cpp
 RM = rm -rf
 
 #List classes here
-CLASS = main\
+CLASS = \
 
 #List interfaces here
-INTERFACE =
+INTERFACE = \
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
