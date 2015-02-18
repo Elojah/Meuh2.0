@@ -50,7 +50,6 @@ void		ClassList::newClass(ITEM *item) {
 	ClassTemplate	tpl(_path);
 
 	(void)item;
-	tpl.initMaps();
 	className = readUser();
 	notifyUser(tpl.create(className));
 }

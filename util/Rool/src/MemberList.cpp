@@ -91,10 +91,9 @@ void		MemberList::renameClass(ITEM *item) {
 	ClassTemplate	tpl(_path);
 
 	(void)item;
-	tpl.initMaps();
 	newName = readUser();
 	/*Force replacement behaviour*/
-	newName = "${NEW_REPLACE=" + newName + "}${OLD_REPLACE=" + _name + "}";
+	newName = "${NEW_NAME=" + newName + "}${OLD_NAME=" + _name + "}";
 	notifyUser(tpl.create(newName));
 	it = items.find(current_item(menu));
 	it->second = static_cast<Callback>(&MemberList::endMenu);

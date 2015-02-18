@@ -3,55 +3,24 @@
 
 # include <string>
 # include <vector>
-# include <map>
-# include "ITemplate.hpp"
 
-class ClassTemplate : public ITemplate
+class TemplateBehavior;
+
+class ClassTemplate
 {
 public:
 	ClassTemplate(const std::string&);
 	~ClassTemplate(void);
+	std::string						create(const std::string&);
 protected:
 private:
-	typedef std::vector<std::string>	Strings;
+	typedef std::vector<TemplateBehavior *>	tBehaviors;
 	ClassTemplate(void);
 
-	Strings												_parents;/*HARDCODE*/
-	/*Les Strings servent a loop dans template, ici seul _parents peut*/
-/*
-**Init
-*/
-	std::map<parseNameFn, patternFn>					createPatternMap(void);
-	std::map<std::string, lexNameFn>						createMapName(void);
+	std::string						_path;
 
-/*
-**Match/Pattern
-*/
-	static bool											isUsualClass(const std::string&);
-	std::string											makeUsualClass(void);
-	static bool											isReplaceClassName(std::string const&);
-	std::string											makeReplaceClassName(void);
-	static bool											isInherit(std::string const &str);
-	std::string											makeInheritClass(void);
-	static bool											isInterface(std::string const&);
-	std::string											makeInterface(void);
-
-/*
-**Parse functions
-*/
-	static std::string									parseClassName(const std::string&);
-	static std::string									parseIncGuard(const std::string&);
-	static std::string									parseParents(const std::string&);
-	static std::string									parseOldName(std::string const &str);
-	static std::string									parseNewName(std::string const &str);
-
-/*
-**Util functions
-*/
-	void		createNewFile(const std::string&, const std::string&, const std::string&);
-	void		replaceMapToMap(const std::string&, const std::string&, std::map<std::string, std::string>&);
-	void		addToMakefile(const std::string&, bool);
-	std::string	loopTemplate(const std::string&);
+	const static tBehaviors			_behav;
+	static std::vector<TemplateBehavior *>		createBehavMap(void);
 };
 
 #endif
