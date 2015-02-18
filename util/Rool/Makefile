@@ -13,6 +13,9 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
+		UsualInterface\
+		ReplaceClassName\
+		UsualClass\
 		Boot\
 		ClassList\
 		ClassTemplate\
@@ -23,6 +26,7 @@ CLASS = main\
 		ModuleFactory\
 		Project\
 		SortItems\
+		TemplateBehavior\
 		Window\
 
 #List interfaces here
