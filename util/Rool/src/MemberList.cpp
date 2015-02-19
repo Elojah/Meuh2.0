@@ -101,24 +101,27 @@ void		MemberList::renameClass(ITEM *item) {
 
 void	MemberList::parseLine(std::string &line, std::size_t &count) {
 	std::size_t		found;
-	int				bracket;
+	std::size_t		bracket;
 
-	bracket = -1;
 	if (line.empty()) {
 		return ;
 	}
-	bracket = -1;
-	while (static_cast<std::size_t>(bracket = line.find('}', bracket + 1)) != std::string::npos) {
-		count--;
-	}
-	while (static_cast<std::size_t>(bracket = line.find('{', bracket + 1)) != std::string::npos) {
+	bracket = 0;
+	while ((bracket = line.find('{', bracket)) != std::string::npos) {
 		count++;
+		bracket++;
+	}
+	bracket = 0;
+	while ((bracket = line.find('}', bracket)) != std::string::npos) {
+		count--;
+		bracket++;
 	}
 	std::replace(line.begin(), line.end(), '\t', ' ');
 	while (!line.empty() && line.at(0) == ' ') {
 		line.erase(0, 1);
 	}
-	if (count != 0 && bracket == 0) {
+	if ((count != 0 || line.find('}') != std::string::npos)
+		&& (line.find('{') == std::string::npos || count > 1)) {
 		line.clear();
 	} else if ((found = line.find("//")) != std::string::npos
 		|| (found = line.find("/*")) != std::string::npos
@@ -126,5 +129,8 @@ void	MemberList::parseLine(std::string &line, std::size_t &count) {
 		|| (found = line.find("*/")) != std::string::npos
 		|| (found = line.find("{")) != std::string::npos) {
 		line = line.substr(0, found);
+	}
+	if (line.find('(') != std::string::npos) {
+		line.insert(0, "()  ");
 	}
 }
