@@ -74,13 +74,17 @@ std::vector<std::map<std::string, std::string> >					TemplateBehavior::parseLoop
 	while (pch != NULL) {
 		wholeParent = std::string(pch);
 		found = wholeParent.find_first_not_of(' ');
-		tmp["${ACCESS}"] = wholeParent.substr(found, (foundEnd = wholeParent.find(' ', found)) - found + 1);
+		tmp["${ACCESS}"] = ", " + wholeParent.substr(found, (foundEnd = wholeParent.find(' ', found)) - found);
 		found = wholeParent.find_first_not_of(' ', foundEnd);
-		tmp["${CLASS_NAME}"] = wholeParent.substr(found, wholeParent.find(' ', found) - found + 1);
+		tmp["${CLASS_NAME}"] = wholeParent.substr(found, wholeParent.find(' ', found) - found);
 		result.push_back(std::map<std::string, std::string>(tmp));
 		pch = std::strtok(NULL,",");
 	}
 	free(toFree);
+
+	/*HARDCODE*/
+	(result.front())["${ACCESS}"].replace(0, 2, " : ");
+	/*!HARDCODE*/
 	return (result);
 }
 
@@ -128,6 +132,7 @@ void	TemplateBehavior::createNewFile(std::string const &type, std::string const 
 }
 std::string		TemplateBehavior::loopTemplate(const std::string &fileName) {
 	std::ifstream	ifs(("./config/templates/" + fileName.substr(2, fileName.length() - 3) + ".template").c_str());
+	std::string		loopVar;
 	std::string		line;
 	std::string		tmp;
 	std::string		lineToAppend;
@@ -140,12 +145,12 @@ std::string		TemplateBehavior::loopTemplate(const std::string &fileName) {
 	if (ifs.fail()) {
 		return ("[ERROR<File " + fileName + " not found>]");
 	}
-	std::getline(ifs, line);
-	if (loopMapName.find(line) == loopMapName.end() || loopMapName[line].empty()) {/*Not mandatory ?*/
+	std::getline(ifs, loopVar);
+	if (loopMapName.find(loopVar) == loopMapName.end() || loopMapName[loopVar].empty()) {/*Not mandatory ?*/
 		return ("");
 	}
 	std::getline(ifs, line, '^');
-	for (std::vector<std::map<std::string, std::string> >::iterator it = loopMapName[line].begin(); it != loopMapName[line].end(); ++it) {
+	for (std::vector<std::map<std::string, std::string> >::iterator it = loopMapName[loopVar].begin(); it != loopMapName[loopVar].end(); ++it) {
 		/*Same bloc than createnewfile, shortcut ?*/
 		lineToAppend = std::string(line);
 		found = 0;
@@ -153,8 +158,8 @@ std::string		TemplateBehavior::loopTemplate(const std::string &fileName) {
 			foundEnd = lineToAppend.find('}', found);
 			len = foundEnd - found + 1;
 			tmp = lineToAppend.substr(found, len);
-			if (it->find(tmp) != it->end()) {
-				lineToAppend.replace(found, len, "");
+			if (it->find(tmp) == it->end()) {
+				lineToAppend.replace(found, len,"");
 			} else {
 				lineToAppend.replace(found, len, (*it)[tmp]);
 			}
