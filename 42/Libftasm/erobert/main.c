@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/03 16:39:39 by erobert           #+#    #+#             */
-/*   Updated: 2015/02/19 16:07:58 by erobert          ###   ########.fr       */
+/*   Updated: 2015/02/19 18:19:41 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,12 +178,12 @@ int			main(void)
 	ft_putstr("ft_strdup(""): ");
 	ft_puts(ft_strdup(""));
 	ft_puts("cat-------------");
-//	ft_puts("ft_cat(-1): ");
+	ft_puts("ft_cat(-1): ");
 	ft_cat(-1);
 	fd = open(__FILE__, O_RDONLY);
-//	ft_puts("ft_cat(fd): ");
+	ft_puts("ft_cat(fd): ");
 	ft_cat(fd);
-//	ft_puts("ft_cat(0): ");
+	ft_puts("ft_cat(0): ");
 	ft_cat(0);
 	close(fd);
 	return (0);

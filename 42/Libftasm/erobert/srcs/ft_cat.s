@@ -6,7 +6,7 @@
 ;    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/02/19 13:31:38 by erobert           #+#    #+#              ;
-;    Updated: 2015/02/19 16:07:30 by erobert          ###   ########.fr        ;
+;    Updated: 2015/02/19 18:19:28 by erobert          ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -31,7 +31,7 @@ _ft_cat:
 	read:
 		pop			rdi
 		mov			rdx,		1
-		lea			rcx,		[rel string.buffer]
+		lea			rsi,		[rel string.buffer]
 		mov			rax,		MACH_SYSCALL(READ)
 		syscall
 		cmp			rax,		0

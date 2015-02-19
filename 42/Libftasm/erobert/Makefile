@@ -6,7 +6,7 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 09:31:53 by erobert           #+#    #+#              #
-#    Updated: 2015/02/19 16:07:06 by erobert          ###   ########.fr        #
+#    Updated: 2015/02/19 18:21:10 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -53,7 +53,7 @@ fclean: clean tclean
 re: fclean all
 
 tclean:
-	/bin/rm -f main.o -main.c~
+	/bin/rm -f main.o main.c~
 
 tmain: re
 	$(CC) -g -O -c main.c
