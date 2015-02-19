@@ -12,10 +12,13 @@ SRC_EXT = .cpp
 RM = rm -rf
 
 #List classes here
-CLASS = \
+CLASS = main\
+		SimpleTriangle\
+		X11Win\
 
 #List interfaces here
 INTERFACE = \
+		IObject\
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
@@ -27,8 +30,8 @@ CFLAGS = -MMD -Wall -Wextra -Werror -O3 -g -std=c++98
 LFLAGS =
 
 #Libs
-LIB_LOCAL =
-LIB_GLOBAL =
+LIB_LOCAL = lib/LoadShaders
+LIB_GLOBAL = X11 GL LoadShaders
 LIB_OTHER =
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))

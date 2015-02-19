@@ -32,9 +32,11 @@ void	MemberList::createItems(void) {
 	std::string		line;
 	std::ifstream	ifs;
 	std::string		access;
+	std::size_t		count;
 
 	line = _path + "/include/" + _name + ".hpp";
 	access = "";
+	count = 0;
 	ifs.open(line.c_str());
 	if (!ifs) {
 		return ;
@@ -45,7 +47,7 @@ void	MemberList::createItems(void) {
 		{
 			while (std::getline(ifs, line) && line.compare("};") != 0)
 			{
-				parseLine(line);
+				parseLine(line, count);
 				if (line.empty()) {
 					;
 				} else if (line.compare("public:") == 0) {
@@ -89,29 +91,46 @@ void		MemberList::renameClass(ITEM *item) {
 	ClassTemplate	tpl(_path);
 
 	(void)item;
-	tpl.initMaps();
 	newName = readUser();
 	/*Force replacement behaviour*/
-	newName = "${NEW_REPLACE=" + newName + "}${OLD_REPLACE=" + _name + "}";
+	newName = "${NEW_NAME=" + newName + "}${OLD_NAME=" + _name + "}";
 	notifyUser(tpl.create(newName));
 	it = items.find(current_item(menu));
 	it->second = static_cast<Callback>(&MemberList::endMenu);
 }
 
-void	MemberList::parseLine(std::string &line) {
+void	MemberList::parseLine(std::string &line, std::size_t &count) {
 	std::size_t		found;
+	std::size_t		bracket;
 
 	if (line.empty()) {
 		return ;
+	}
+	bracket = 0;
+	while ((bracket = line.find('{', bracket)) != std::string::npos) {
+		count++;
+		bracket++;
+	}
+	bracket = 0;
+	while ((bracket = line.find('}', bracket)) != std::string::npos) {
+		count--;
+		bracket++;
 	}
 	std::replace(line.begin(), line.end(), '\t', ' ');
 	while (!line.empty() && line.at(0) == ' ') {
 		line.erase(0, 1);
 	}
-	if ((found = line.find("//")) != std::string::npos
+	if ((count != 0 || line.find('}') != std::string::npos)
+		&& (line.find('{') == std::string::npos || count > 1)) {
+		line.clear();
+	} else if ((found = line.find("//")) != std::string::npos
 		|| (found = line.find("/*")) != std::string::npos
 		|| (found = line.find("**")) != std::string::npos
-		|| (found = line.find("*/")) != std::string::npos) {
+		|| (found = line.find("*/")) != std::string::npos
+		|| (found = line.find("{")) != std::string::npos) {
 		line = line.substr(0, found);
+	}
+	if (line.find('(') != std::string::npos) {
+		line.insert(0, "()  ");
 	}
 }

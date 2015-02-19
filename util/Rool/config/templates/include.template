@@ -1,7 +1,8 @@
 #ifndef ${INC_GUARD}_H
 # define ${INC_GUARD}_H
 
-class ${CLASS_NAME}
+$[parent_include_self]
+class ${CLASS_NAME}$[parent_include_trueName]
 {
 public:
 	${CLASS_NAME}(void);

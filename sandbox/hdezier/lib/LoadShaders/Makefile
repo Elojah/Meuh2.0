@@ -1,4 +1,4 @@
-TARGET = bin/runner
+TARGET = lib/libLoadShaders.a
 
 #Directories
 SRC_DIR = src
@@ -12,7 +12,7 @@ SRC_EXT = .cpp
 RM = rm -rf
 
 #List classes here
-CLASS = \
+CLASS = LoadShaders\
 
 #List interfaces here
 INTERFACE = \
@@ -28,7 +28,7 @@ LFLAGS =
 
 #Libs
 LIB_LOCAL =
-LIB_GLOBAL =
+LIB_GLOBAL = GL
 LIB_OTHER =
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
@@ -62,7 +62,7 @@ dirbin:
 #Build rules
 $(TARGET) : $(OBJ)
 	@echo "\n\033[1;4;34mDEP:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+	ar -rcs $@ $^
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)
 	@echo "\n\033[1;4;34mSRC:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"

@@ -1,2 +1,3 @@
-# include "${PARENT_NAME}.hpp"
+${PARENTS}
+# include "${CLASS_NAME}.hpp"
 ^

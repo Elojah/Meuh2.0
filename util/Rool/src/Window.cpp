@@ -1,4 +1,5 @@
 #include "Window.hpp"
+#include <string.h>
 #include <sys/ioctl.h>
 
 Window::Window(void) {
@@ -42,7 +43,7 @@ std::string	Window::readUser(void) const {
 	wclear(user);
 	echo();
 	curs_set(1);
-	wgetstr(user, str);
+	wscanw(user, str);
 	curs_set(0);
 	noecho();
 	result.assign(str);
