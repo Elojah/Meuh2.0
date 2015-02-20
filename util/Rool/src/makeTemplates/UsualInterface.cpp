@@ -1,4 +1,6 @@
 #include "UsualInterface.hpp"
+#include "parseStr.hpp"
+#include "fileManip.hpp"
 
 UsualInterface::UsualInterface(void) {
 }
@@ -10,18 +12,18 @@ bool			UsualInterface::isBehavior(std::string const &str) {
 	return ((str.c_str())[0] == 'I' && (str.c_str())[1] >= 'A' && (str.c_str())[1] <= 'Z');
 }
 std::string		UsualInterface::makeBehavior(void) {
-	createNewFile("interface", "include", ".hpp");
-	addToMakefile("INTERFACE", false);
+	createNewFile("interface", path + "/include/" + genMapName["${CLASS_NAME}"] + ".hpp", genMapName, loopMapName);
+	addToFile("INTERFACE", genMapName["${CLASS_NAME}"], path + "/Makefile", false);
 	return ("Interface " + genMapName["${CLASS_NAME}"] + " created successfully!");
 }
 
 std::map<std::string, std::string(*)(const std::string&)>	UsualInterface::createMapName(void) {
-	std::map<std::string, lexNameFn>	m;
+	std::map<std::string, parseStr>	m;
 
 	/*Add differents names here*/
-	m["${CLASS_NAME}"] = static_cast<lexNameFn>(&TemplateBehavior::parseClassName);
-	m["${INC_GUARD}"] = static_cast<lexNameFn>(&TemplateBehavior::parseIncGuard);
-	m["${PARENTS}"] = static_cast<lexNameFn>(&TemplateBehavior::parseParents);
+	m["${CLASS_NAME}"] = &parseClassName;
+	m["${INC_GUARD}"] = &parseIncGuard;
+	m["${PARENTS}"] = &parseParents;
 	return (m);
 }
 
