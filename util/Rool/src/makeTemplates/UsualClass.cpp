@@ -34,7 +34,8 @@ std::map<std::string, std::vector<std::map<std::string, std::string> > >	UsualCl
 	loopMap			m;
 
 	/*Add differents names here*/
-	if (genMapName.find("${PARENTS}") != genMapName.end()) {/*Not mandatory ?*/
+	if (genMapName.find("${PARENTS}") != genMapName.end()
+		&& !genMapName["${PARENTS}"].empty()) {/*Not mandatory ?*/
 		m["${PARENTS}"] = parseLoopParents(genMapName["${PARENTS}"]);
 	}
 	return (m);

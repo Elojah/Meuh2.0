@@ -39,8 +39,8 @@ std::string		parseParents(std::string const &str) {
 std::string		parseOldName(std::string const &str) {
 	std::size_t	found;
 
-	if ((found = str.find("${OLD_REPLACE=")) != std::string::npos) {
-		found += 14;/*HARDCODE*/
+	if ((found = str.find("${OLD_NAME=")) != std::string::npos) {
+		found += 11;/*HARDCODE*/
 		return (str.substr(found, str.find('}', found) - found));
 	}
 	return ("");
@@ -48,8 +48,8 @@ std::string		parseOldName(std::string const &str) {
 std::string		parseNewName(std::string const &str) {
 	std::size_t	found;
 
-	if ((found = str.find("${NEW_REPLACE=")) != std::string::npos) {
-		found += 14;/*HARDCODE*/
+	if ((found = str.find("${NEW_NAME=")) != std::string::npos) {
+		found += 11;/*HARDCODE*/
 		return (str.substr(found, str.find('}', found) - found));
 	}
 	return ("");
@@ -64,6 +64,9 @@ std::vector<std::map<std::string, std::string> >					parseLoopParents(const std:
 	std::size_t										found;
 	std::size_t										foundEnd;
 
+	if (str.empty()) {
+		return (std::vector<std::map<std::string, std::string> >());
+	}
 	pch = std::strtok((toFree = strdup(str.c_str())),",");
 	while (pch != NULL) {
 		wholeParent = std::string(pch);

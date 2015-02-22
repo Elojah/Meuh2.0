@@ -1,7 +1,6 @@
 #include "ClassTemplate.hpp"
 #include "TemplateBehavior.hpp"
 #include "UsualInterface.hpp"
-#include "ReplaceClassName.hpp"
 #include "UsualClass.hpp"
 #include <fstream>
 #include <string.h>
@@ -32,7 +31,6 @@ std::vector<TemplateBehavior *>		ClassTemplate::createBehavMap(void) {
 	tBehaviors		result;
 
 	result.push_back(new UsualInterface);
-	result.push_back(new ReplaceClassName);
 	result.push_back(new UsualClass);/*Keep UsualClass in last item*/
 	return (result);
 }

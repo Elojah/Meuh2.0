@@ -2,40 +2,25 @@
 # define MEMBER_TEMPLATE_H
 
 # include <string>
-# include "ITemplate.hpp"
+# include <vector>
 
-class MemberTemplate : public ITemplate
+class TemplateBehavior;
+
+class MemberTemplate
 {
 public:
 	MemberTemplate(const std::string&);
 	~MemberTemplate(void);
+	std::string						create(const std::string&);
 protected:
 private:
+	typedef std::vector<TemplateBehavior *>	tBehaviors;
 	MemberTemplate(void);
 
-/*
-**Init
-*/
-	std::map<parseNameFn, patternFn>					createPatternMap(void);
-	std::map<std::string, lexNameFn>					createMapName(void);
+	std::string						_path;
 
-/*
-**Match/Pattern
-*/
-	static bool											isMethod(std::string const &str);
-	std::string											makeMethod(void);
-
-/*
-**Parse functions
-*/
-	static std::string									parseMethodName(std::string const &str);
-	static std::string									parseAttName(std::string const &str);
-	static std::string									parseAccess(std::string const &str);
-	static std::string									parseArguments(std::string const &str);
-
-/*
-**Util functions
-*/
+	const static tBehaviors			_behav;
+	static std::vector<TemplateBehavior *>		createBehavMap(void);
 };
 
 #endif
