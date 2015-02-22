@@ -11,7 +11,7 @@ public:
 	bool		isBehavior(std::string const&);
 	std::string	makeBehavior(void);
 protected:
-	std::map<std::string, lexNameFn>											createMapName(void);
+	std::map<std::string, parseStr>												createMapName(void);
 	loopMap																		createLoopMapName(void);
 private:
 };

@@ -13,22 +13,20 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		UsualInterface\
-		ReplaceClassName\
-		UsualClass\
-		Boot\
-		ClassList\
-		ClassTemplate\
+		makeTemplates/UsualClass\
+		makeTemplates/UsualInterface\
+		makeTemplates/ReplaceClassName\
+		structParents/Menu\
+		structParents/Window\
+		menuLists/ClassList\
+		menuLists/MemberList\
 		GUI\
-		MemberList\
-		MemberTemplate\
-		Menu\
-		ModuleFactory\
+		Boot\
 		Project\
 		SortItems\
-		TemplateBehavior\
-		Window\
-		testDir/test\
+		ClassTemplate\
+		MemberTemplate\
+		ModuleFactory\
 
 #List interfaces here
 INTERFACE = IModule\
@@ -45,8 +43,8 @@ CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++98
 LFLAGS =
 
 #Libs
-LIB_LOCAL =
-LIB_GLOBAL = ncurses menu
+LIB_LOCAL = lib/parseStr lib/fileManip
+LIB_GLOBAL = ncurses menu parseStr fileManip
 LIB_OTHER =
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
