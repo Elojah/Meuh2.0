@@ -12,10 +12,8 @@ public:
 	bool		isBehavior(std::string const&);
 	std::string	makeBehavior(void);
 protected:
-	std::map<std::string, lexNameFn>	createMapName(void);
+	std::map<std::string, parseStr>	createMapName(void);
 private:
-	static std::string						parseOldName(std::string const&);
-	static std::string						parseNewName(std::string const&);
 };
 
 #endif
