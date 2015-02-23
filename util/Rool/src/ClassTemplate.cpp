@@ -3,7 +3,6 @@
 #include "UsualInterface.hpp"
 #include "UsualClass.hpp"
 #include <fstream>
-#include <string.h>
 
 ClassTemplate::ClassTemplate(void) {
 }

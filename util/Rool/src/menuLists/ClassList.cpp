@@ -8,7 +8,7 @@
 ClassList::ClassList(void) {
 }
 
-ClassList::ClassList(int h, int w, int y, int x) : Menu(h, w, y, x){
+ClassList::ClassList(int h, int w, int y, int x) : Menu(h, w, y, x) {
 }
 
 ClassList::~ClassList(void) {

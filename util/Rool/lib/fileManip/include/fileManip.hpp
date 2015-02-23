@@ -13,5 +13,7 @@
 	void				replaceMapToMap(const std::string&, const std::string&
 		, std::map<std::string, std::string>&, std::map<std::string, std::string>&);
 	void				addToFile(const std::string&, const std::string&, const std::string&, bool);
+	std::string			searchInFile(std::string const&, std::string const&);
+	std::vector<std::string>	getDirBaseName(std::string const &str);
 
 #endif

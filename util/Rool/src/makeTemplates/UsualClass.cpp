@@ -1,6 +1,8 @@
 #include "UsualClass.hpp"
 #include "parseStr.hpp"
 #include "fileManip.hpp"
+#include <sys/stat.h>
+#include <sys/types.h>
 
 UsualClass::UsualClass(void) {
 }
@@ -13,8 +15,24 @@ bool																		UsualClass::isBehavior(std::string const &str) {
 	return (true);
 }
 
+void																		UsualClass::init(const std::string &str, const std::string &pathSet) {
+	path = pathSet;
+	genMapName["${FULL_ENTRY}"] = std::string(str);
+	mapName = createMapName();
+}
+
 std::string																	UsualClass::makeBehavior(void) {
-	createNewFile("src", path + "/src/" + genMapName["${CLASS_NAME}"] + ".cpp", genMapName, loopMapName);
+	std::vector<std::string>	names;
+
+	names = getDirBaseName(genMapName["${FULL_ENTRY}"]);
+	if (!names[0].empty()) {
+		mkdir((path + "/src/" + names[0]).c_str(), S_IRWXU);
+	} else {
+		names[0].clear();
+	}
+	genMapName = generateMapName(names[1]);
+	loopMapName = createLoopMapName();
+	createNewFile("src", path + "/src/" + names[0] + '/' + genMapName["${CLASS_NAME}"] + ".cpp", genMapName, loopMapName);
 	createNewFile("include", path + "/include/" + genMapName["${CLASS_NAME}"] + ".hpp", genMapName, loopMapName);
 	addToFile("CLASS", genMapName["${CLASS_NAME}"], path + "/Makefile", false);
 	return ("Usual class " + genMapName["${CLASS_NAME}"] + " created successfully!");

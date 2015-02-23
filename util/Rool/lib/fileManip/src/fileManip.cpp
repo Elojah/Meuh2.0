@@ -1,5 +1,7 @@
 #include "fileManip.hpp"
 #include <fstream>
+#include <strings.h>
+#include <stdlib.h>
 
 const static std::string		schemaDir = "./config/templates/";
 
@@ -148,4 +150,30 @@ void	addToFile(const std::string &oldName, const std::string &newName, const std
 		ofs << *itWrite << std::endl;
 	}
 	ofs.close();
+}
+
+std::string		searchInFile(std::string const &fileName, std::string const &str) {
+	std::ifstream	ifs((fileName).c_str());
+	std::string		line;
+
+	while (std::getline(ifs, line)) {
+		if (line.find(str)) {
+			return (line);
+		}
+	}
+	return (std::string());
+}
+
+std::vector<std::string>	getDirBaseName(std::string const &str) {
+	std::vector<std::string>	result;
+	std::size_t					found;
+
+	if ((found = str.find_last_of('/')) != std::string::npos) {
+		result.push_back(str.substr(0, found));
+		result.push_back(str.substr(found + 1));
+	} else {
+		result.push_back(std::string());
+		result.push_back(std::string(str));
+	}
+	return (result);
 }
