@@ -1,6 +1,5 @@
 #include "MemberList.hpp"
 #include "MemberTemplate.hpp"
-#include "ClassTemplate.hpp"
 #include "SortItems.hpp"
 #include <algorithm>
 #include <fstream>
@@ -80,7 +79,6 @@ void		MemberList::newMember(ITEM *item) {
 	MemberTemplate	tpl(_path);
 
 	(void)item;
-	tpl.initMaps();
 	memberName = readUser();
 	notifyUser(tpl.create(memberName));
 }
@@ -88,7 +86,7 @@ void		MemberList::newMember(ITEM *item) {
 void		MemberList::renameClass(ITEM *item) {
 	Items::iterator	it;
 	std::string		newName;
-	ClassTemplate	tpl(_path);
+	MemberTemplate	tpl(_path);
 
 	(void)item;
 	newName = readUser();

@@ -43,7 +43,7 @@ std::string	Window::readUser(void) const {
 	wclear(user);
 	echo();
 	curs_set(1);
-	wscanw(user, str);
+	wgetstr(user, str);
 	curs_set(0);
 	noecho();
 	result.assign(str);
