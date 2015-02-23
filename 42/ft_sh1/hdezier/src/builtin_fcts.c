@@ -95,5 +95,6 @@ void		sh_env(t_cmd *cmd)
 
 void		sh_exit(t_cmd *cmd)
 {
-	ft_exit(1, cmd->exe);
+	(void)cmd;
+	ft_exit(1, "See ya !\n");
 }

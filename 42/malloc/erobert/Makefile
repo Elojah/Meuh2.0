@@ -31,7 +31,7 @@ all: objs_dir $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -shared -o $(NAME) $(OBJS)
-	ln -s $(NAME) libft_malloc.so 
+	ln -s $(NAME) libft_malloc.so
 
 objs/%.o : srcs/%.c
 	$(CC) $(CFLAGS) -o $@ -c $^
