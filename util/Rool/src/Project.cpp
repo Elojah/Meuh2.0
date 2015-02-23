@@ -27,7 +27,7 @@ Project::~Project(void) {
 void		Project::setModules(std::string const &configFile) {
 	std::ifstream		ifs(configFile.c_str());
 	std::string			line;
-	makeFn			tmp;
+	makeFn				tmp;
 
 	while (std::getline(ifs, line)) {
 		tmp = _modsFactory.makeModule(line);
