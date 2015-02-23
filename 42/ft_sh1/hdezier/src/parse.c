@@ -13,22 +13,10 @@
 #include "ft_minishell.h"
 #include <fcntl.h>
 #include <unistd.h>
-
 #include <sys/types.h>
 #include <dirent.h>
 
-char		*read_user(void)
-{
-	char	*buf;
-	int		r;
-
-	buf = (char *)ft_memalloc((BUFF_SIZE + 1) * sizeof(char));
-	r = read(0, buf, BUFF_SIZE);
-	buf[r] = '\0';
-	return (buf);
-}
-
-static char	*get_valid_path(char **paths, char *exe)
+static char			*get_valid_path(char **paths, char *exe)
 {
 	int				i;
 	DIR				*d;
@@ -47,10 +35,12 @@ static char	*get_valid_path(char **paths, char *exe)
 			closedir(d);
 		}
 	}
+	if (access(exe, F_OK) == 0)
+		return ("");
 	return (NULL);
 }
 
-static void	get_env(t_cmd *cmd)
+static void			get_env(t_cmd *cmd)
 {
 	int				i;
 
@@ -68,7 +58,7 @@ static void	get_env(t_cmd *cmd)
 	}
 }
 
-char		*get_var_env(t_cmd *cmd, char *s)
+char				*get_var_env(t_cmd *cmd, char *s)
 {
 	int		i;
 	char	**s_env;
@@ -83,15 +73,21 @@ char		*get_var_env(t_cmd *cmd, char *s)
 	return (NULL);
 }
 
-void		parse(t_cmd *cmd, char *s)
+void				parse(t_cmd *cmd, char *s)
 {
 	char		**split_cmd;
 	int			i;
 
-	i = -1;
+	i = 0;
 	split_cmd = ft_strsplit(s, ' ');
-	while (split_cmd[++i])
-		split_cmd[i] = ft_strtrim(split_cmd[i]);
+	while (split_cmd[i])
+	{
+		if ((split_cmd[i] = ft_strtrim(split_cmd[i]))[0] == '\0')
+			split_cmd[i] = split_cmd[i + 1];
+		else
+			i++;
+	}
+	split_cmd[i] = NULL;
 	cmd->exe = split_cmd[0];
 	if (split_cmd)
 		cmd->args = split_cmd;

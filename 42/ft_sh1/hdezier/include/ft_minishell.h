@@ -32,7 +32,6 @@ typedef struct	s_cmd
 /*
 **PARSE
 */
-char			*read_user(void);
 void			parse(t_cmd *cmd, char *s);
 char			*get_var_env(t_cmd *cmd, char *s);
 
