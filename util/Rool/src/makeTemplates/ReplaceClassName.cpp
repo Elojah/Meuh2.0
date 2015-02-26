@@ -15,18 +15,22 @@ bool			ReplaceClassName::isBehavior(std::string const &str) {
 	}
 	return (false);
 }
+
 std::string		ReplaceClassName::makeBehavior(void) {
 	std::map<std::string, std::string>	oldMap;
+	std::string							srcPath;
 
+	srcPath = getStrLine(path + "/Makefile", genMapName["${OLD_NAME}"] + '\\');
+	srcPath = getDirBaseName(srcPath)[0];
 	oldMap = generateMapName(genMapName["${OLD_NAME}"]);
 	genMapName = generateMapName(genMapName["${NEW_NAME}"]);
-	replaceMapToMap(path + "/src/" + oldMap["${CLASS_NAME}"] + ".cpp"
-		, path + "/src/" + genMapName["${CLASS_NAME}"] + ".cpp"
+	replaceMapToMap(path + "/src/" + srcPath + oldMap["${CLASS_NAME}"] + ".cpp"
+		, path + "/src/" + srcPath + genMapName["${CLASS_NAME}"] + ".cpp"
 		,oldMap, genMapName);
 	replaceMapToMap(path + "/include/" + oldMap["${CLASS_NAME}"] + ".hpp"
 		, path + "/include/" + genMapName["${CLASS_NAME}"] + ".hpp"
 		,oldMap, genMapName);
-	addToFile(oldMap["${CLASS_NAME}"], genMapName["${CLASS_NAME}"], path + "/Makefile", true);
+	addToFile(oldMap["${CLASS_NAME}"] + '\\', srcPath + genMapName["${CLASS_NAME}"], path + "/Makefile", true);
 	return (oldMap["${CLASS_NAME}"] + " has successfully been replaced by " + genMapName["${CLASS_NAME}"]);
 }
 
