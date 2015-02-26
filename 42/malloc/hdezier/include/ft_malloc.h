@@ -1,0 +1,69 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_malloc.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/02/04 12:30:54 by hdezier           #+#    #+#             */
+/*   Updated: 2015/02/04 12:30:54 by hdezier          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FT_MALLOC_H
+# define FT_MALLOC_H
+
+# define TINY_PAGE 4
+# define SMALL_PAGE 16
+# define LARGE_PAGE 64
+
+# include <stdlib.h>
+
+typedef struct		s_mem
+{
+	size_t			size;
+	int				free;
+	struct s_mem	*next;
+}					t_mem;
+
+/*
+**head represents nb_bytes allocated on current page
+*/
+typedef struct		s_heap
+{
+	t_mem			*mem;
+	size_t			head;
+	size_t			stock;
+}					t_heap;
+
+typedef struct		s_data
+{
+	t_heap			tiny;
+	t_heap			small;
+	t_heap			large;
+	struct rlimit	limit;
+	size_t			total;
+}					t_data;
+
+/*
+**Malloc
+*/
+void				*malloc(size_t len);
+
+/*
+**Show alloc mem
+*/
+void				show_alloc_mem(void);
+t_data				*set_get_data(t_data *data);
+
+/*
+**Free
+*/
+void				free(void *ptr);
+
+/*
+**Realloc
+*/
+void				*ft_realloc(void *ptr, size_t size);
+
+#endif
