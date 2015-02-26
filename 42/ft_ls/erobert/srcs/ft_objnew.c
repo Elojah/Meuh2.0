@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/05 18:14:06 by erobert           #+#    #+#             */
-/*   Updated: 2015/02/25 13:55:53 by erobert          ###   ########.fr       */
+/*   Updated: 2015/02/26 13:54:03 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void		ft_getinfo(char *dir, t_obj *obj)
 	obj->epoch = dp_time;
 }
 
-static void		ft_linkname(struct dirent *dp, t_obj *obj)
+static void		ft_linkname(struct dirent *dp, char *dir, t_obj *obj)
 {
 	char		buff[256];
 	char		*tmp;
@@ -49,7 +49,10 @@ static void		ft_linkname(struct dirent *dp, t_obj *obj)
 
 	if (listxattr(dp->d_name, NULL, 0, 0) > 1)
 		obj->mode[10] = '@';
-	i = readlink(dp->d_name, buff, 255);
+	if (dir[0] == '/' && dir[1] == '/')
+		i = readlink(dir + 1, buff, 255);
+	else
+		i = readlink(dir, buff, 255);
 	if (!i)
 		return ;
 	buff[i] = '\0';
@@ -69,7 +72,7 @@ t_obj			*ft_objnew(struct dirent *dp, char *dir, int *arg)
 	dir = ft_strjoin(dir, dp->d_name);
 	ft_getinfo(dir, obj);
 	if (*(obj->mode) == 'l' && arg[L])
-		ft_linkname(dp, obj);
+		ft_linkname(dp, dir, obj);
 	else
 	{
 		if (listxattr(dir, NULL, 0, 0) > 1)
