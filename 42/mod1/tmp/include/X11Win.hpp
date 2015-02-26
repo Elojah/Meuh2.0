@@ -23,13 +23,13 @@ private:
 	typedef GLXContext(*glXCreateContextAttribsARBProc)(Display*, GLXFBConfig, GLXContext, Bool, const int*);
 						X11Win(void);
 	void				assignBestFBC(void);
+	void				assignPBuffer(void);
 /*
 **X11
 */
 	Display				*_d;
 	Window				_w;
 	Colormap			_cmap;
-	int					_screen;
 	std::size_t			_width;
 	std::size_t			_height;
 /*
@@ -42,6 +42,7 @@ private:
 	GLXWindow			_glxWin;
 	GLXContext			_ctx;
 	GLXFBConfig			_fbc;
+	GLXPbuffer			_pbuf;
 };
 
 #endif

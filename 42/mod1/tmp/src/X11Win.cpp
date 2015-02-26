@@ -1,7 +1,6 @@
 #include "X11Win.hpp"
 #include "IObject.hpp"
 #include <iostream>
-#include <GL/glu.h>
 
 X11Win::X11Win(void) {
 }
@@ -29,8 +28,7 @@ X11Win::~X11Win(void) {
 void		X11Win::init(void) {
 	XSetWindowAttributes				swa;
 	XVisualInfo							*vi;
-
-	// std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
+	GLint								v_att[] = { GLX_RGBA, GLX_DEPTH_SIZE, 24, GLX_DOUBLEBUFFER, None };
 #ifndef __APPLE__
 	glXCreateContextAttribsARBProc	glXCreateContextAttribsARB;
 	static int				context_attribs[] = {
@@ -40,8 +38,14 @@ void		X11Win::init(void) {
 		None
 	};
 #endif
-	assignBestFBC();
-	vi = glXGetVisualFromFBConfig(_d, _fbc);
+
+	// assignBestFBC();
+	// if (!(vi = glXGetVisualFromFBConfig(_d, _fbc))) {
+	// 	std::cout << "Error: No visual found" << std::endl;
+	// } else {
+	// 	std::cout << "Chosen visualID: " << vi->visualid << std::endl;
+	// }
+	vi = glXChooseVisual(_d, 0, v_att);
 	swa.colormap = _cmap = XCreateColormap(_d,
 												RootWindow(_d, vi->screen),
 												vi->visual, AllocNone);
@@ -77,13 +81,16 @@ void		X11Win::init(void) {
 
 	XFree(vi);
 	XSync(_d, False);
-	glXMakeCurrent(_d, _glxWin, _ctx);
+	if (!glXMakeContextCurrent(_d, _w, _w, _ctx)) {
+		std::cout << "Error context: Can't make current" << std::endl;
+	}
 	glClearColor(0, 0.5, 1, 1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glXSwapBuffers(_d, _glxWin);
-	glClearColor(0, 0.5, 0.5, 0.5);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glXSwapBuffers(_d, _glxWin);
+	// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	// glXSwapBuffers(_d, _glxWin);
+	// glClearColor(0, 0.5, 0.5, 0.5);
+	// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	// glXSwapBuffers(_d, _glxWin);
+	glEnable(GL_DEPTH_TEST);
 }
 /*
 	typedef union				_XEvent {
@@ -123,18 +130,13 @@ void		X11Win::init(void) {
 }						XEvent;
 */
 void		X11Win::loop(std::vector<IObject> &objects) {
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
-
 	while (true) {
-		glColor3f(1.0, 1.0, 1.0);
-		glBegin(GL_LINES);
+		// glBegin(GL_POLYGON);
 		for (std::vector<IObject>::iterator it = objects.begin(); it != objects.end(); ++it) {
 			it->draw();
 		}
-		glEnd();
-		glFlush();
+		// glEnd();
+		// glFlush();
 		glXSwapBuffers(_d, _glxWin);
 
 		if (glGetError() == GL_NO_ERROR) {
@@ -145,8 +147,7 @@ void		X11Win::loop(std::vector<IObject> &objects) {
 		XNextEvent(_d, &_e);
 		if (_e.xkey.keycode == 8) {/*A*/
 			glXSwapBuffers(_d, _glxWin);
-		}
-		else if (_e.xkey.keycode == 61) {/*ESC*/
+		} else if (_e.xkey.keycode == 61) {/*ESC*/
 			break ;
 		}
 	}
@@ -164,24 +165,26 @@ GL_STACK_OVERFLOW
 void		X11Win::assignBestFBC(void) {
 	GLXFBConfig			*tmp_fbc;
 	int					fbcount;
-	static GLint		_v_att[] = {
-		GLX_X_RENDERABLE, True,
-		GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
-		GLX_RENDER_TYPE, GLX_RGBA_BIT,
-		GLX_X_VISUAL_TYPE, GLX_TRUE_COLOR,
-		GLX_RED_SIZE, 8,
-		GLX_GREEN_SIZE, 8,
-		GLX_BLUE_SIZE, 8,
-		GLX_ALPHA_SIZE, 8,
+	static GLint		v_att[] = {
+		// GLX_X_RENDERABLE, True,
+		// GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
+		// GLX_RENDER_TYPE, GLX_RGBA_BIT,
+		// GLX_X_VISUAL_TYPE, GLX_TRUE_COLOR,
+		GLX_RGBA,
 		GLX_DEPTH_SIZE, 24,
-		GLX_STENCIL_SIZE, 8,
-		GLX_DOUBLEBUFFER, True,
+		GLX_DOUBLEBUFFER,
+		// GLX_RED_SIZE, 8,
+		// GLX_GREEN_SIZE, 8,
+		// GLX_BLUE_SIZE, 8,
+		// GLX_ALPHA_SIZE, 8,
+		// GLX_STENCIL_SIZE, 8,
+		// GLX_DOUBLEBUFFER, True,
 		// GLX_SAMPLE_BUFFERS , 1,
 		// GLX_SAMPLES, 4,
 		None
 	};
 
-	tmp_fbc = glXChooseFBConfig(_d, DefaultScreen(_d), _v_att, &fbcount);
+	tmp_fbc = glXChooseFBConfig(_d, DefaultScreen(_d), v_att, &fbcount);
 	if (!tmp_fbc) {
 		std::cout << "No framebuffer config found" << std::endl;
 	}
