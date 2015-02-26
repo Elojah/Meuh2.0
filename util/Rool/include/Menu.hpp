@@ -5,6 +5,7 @@
 
 # include "Window.hpp"
 # include <menu.h>
+# include <string>
 # include <vector>
 # include <map>
 
@@ -24,6 +25,7 @@ public:
 protected:
 	typedef void	(Menu::*Callback)(ITEM *);
 	typedef std::map<ITEM *, Callback> Items;
+	typedef std::map<std::string, std::vector<std::map<std::string, std::string> > >	loopMap;
 
 	MENU							*menu;
 	WINDOW							*winMenu;
