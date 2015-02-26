@@ -1,6 +1,7 @@
 #include "X11Win.hpp"
 #include "IObject.hpp"
 #include <iostream>
+#include <GL/glu.h>
 
 X11Win::X11Win(void) {
 }
@@ -17,7 +18,7 @@ X11Win::X11Win(std::size_t width, std::size_t height) :
 }
 
 X11Win::~X11Win(void) {
-	glXMakeCurrent(_d, 0, 0);
+	glXMakeCurrent(_d, None, NULL);
 	glXDestroyWindow(_d, _glxWin);
 	XDestroyWindow(_d, _w);
 	glXDestroyContext(_d, _ctx);
@@ -29,6 +30,7 @@ void		X11Win::init(void) {
 	XSetWindowAttributes				swa;
 	XVisualInfo							*vi;
 
+	// std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
 #ifndef __APPLE__
 	glXCreateContextAttribsARBProc	glXCreateContextAttribsARB;
 	static int				context_attribs[] = {
@@ -38,7 +40,6 @@ void		X11Win::init(void) {
 		None
 	};
 #endif
-
 	assignBestFBC();
 	vi = glXGetVisualFromFBConfig(_d, _fbc);
 	swa.colormap = _cmap = XCreateColormap(_d,
@@ -78,6 +79,11 @@ void		X11Win::init(void) {
 	XSync(_d, False);
 	glXMakeCurrent(_d, _glxWin, _ctx);
 	glClearColor(0, 0.5, 1, 1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glXSwapBuffers(_d, _glxWin);
+	glClearColor(0, 0.5, 0.5, 0.5);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glXSwapBuffers(_d, _glxWin);
 }
 /*
 	typedef union				_XEvent {
@@ -117,16 +123,24 @@ void		X11Win::init(void) {
 }						XEvent;
 */
 void		X11Win::loop(std::vector<IObject> &objects) {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
+
 	while (true) {
-		glBegin(GL_TRIANGLES);
+		glColor3f(1.0, 1.0, 1.0);
+		glBegin(GL_LINES);
 		for (std::vector<IObject>::iterator it = objects.begin(); it != objects.end(); ++it) {
 			it->draw();
 		}
 		glEnd();
+		glFlush();
+		glXSwapBuffers(_d, _glxWin);
 
 		if (glGetError() == GL_NO_ERROR) {
-			std::cout << "Rendering ok" << std::endl;
+			std::cout << "Rendering... OK" << std::endl;
+		} else {
+			std::cout << "Rendering... ERROR" << std::endl;
 		}
 		XNextEvent(_d, &_e);
 		if (_e.xkey.keycode == 8) {/*A*/
@@ -148,9 +162,9 @@ GL_STACK_UNDERFLOW
 GL_STACK_OVERFLOW
 */
 void		X11Win::assignBestFBC(void) {
-	GLXFBConfig		*tmp_fbc;
+	GLXFBConfig			*tmp_fbc;
 	int					fbcount;
-	static int			_v_att[] = {
+	static GLint		_v_att[] = {
 		GLX_X_RENDERABLE, True,
 		GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
 		GLX_RENDER_TYPE, GLX_RGBA_BIT,
@@ -168,6 +182,9 @@ void		X11Win::assignBestFBC(void) {
 	};
 
 	tmp_fbc = glXChooseFBConfig(_d, DefaultScreen(_d), _v_att, &fbcount);
+	if (!tmp_fbc) {
+		std::cout << "No framebuffer config found" << std::endl;
+	}
 	_fbc = tmp_fbc[0];
 	XFree(tmp_fbc);
 }

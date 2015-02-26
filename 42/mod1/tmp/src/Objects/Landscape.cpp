@@ -8,12 +8,9 @@ Landscape::~Landscape(void) {
 }
 
 void	Landscape::draw(void) {
-	glColor3f(  1.0, 0.0, 0.0);
-	glVertex3f(-0.5, 0.0, 0.0);
-
-	glColor3f(  0.0, 0.0, 1.0);
-	glVertex3f( 0.0, 0.5, 0.0);
-
-	glColor3f(  0.0, 1.0, 0.0);
-	glVertex3f( 0.5, 0.0, 0.0);
+  glColor3f(1.0f, 0.0f, 0.0f); // Red
+  glVertex2f(-0.5f, -0.5f);    // x, y
+  glVertex2f( 0.5f, -0.5f);
+  glVertex2f( 0.5f,  0.5f);
+  glVertex2f(-0.5f,  0.5f);
 }
