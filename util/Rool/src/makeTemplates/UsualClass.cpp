@@ -32,9 +32,9 @@ std::string																	UsualClass::makeBehavior(void) {
 	}
 	genMapName = generateMapName(names[1]);
 	loopMapName = createLoopMapName();
-	createNewFile("src", path + "/src/" + names[0] + '/' + genMapName["${CLASS_NAME}"] + ".cpp", genMapName, loopMapName);
+	createNewFile("src", path + "/src/" + names[0] + genMapName["${CLASS_NAME}"] + ".cpp", genMapName, loopMapName);
 	createNewFile("include", path + "/include/" + genMapName["${CLASS_NAME}"] + ".hpp", genMapName, loopMapName);
-	addToFile("CLASS", genMapName["${CLASS_NAME}"], path + "/Makefile", false);
+	addToFile("CLASS", names[0] + genMapName["${CLASS_NAME}"], path + "/Makefile", false);
 	return ("Usual class " + genMapName["${CLASS_NAME}"] + " created successfully!");
 }
 

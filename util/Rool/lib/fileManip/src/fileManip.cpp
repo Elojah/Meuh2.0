@@ -2,8 +2,25 @@
 #include <fstream>
 #include <strings.h>
 #include <stdlib.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 const static std::string		schemaDir = "./config/templates/";
+
+void	createArbo(std::string const &schema, std::string const &path, std::string const &name) {
+	std::ifstream	ifs(("./config/templates/" + schema + ".template").c_str());
+	std::string		line;
+	std::string		pathDir;
+
+	if (ifs.fail()) {
+		return ;
+	}
+	pathDir = path + "/" + name;
+	mkdir(pathDir.c_str(), S_IRWXU);
+	while (std::getline(ifs, line))
+		mkdir((pathDir + "/" + line).c_str(), S_IRWXU);
+	ifs.close();
+}
 
 void	createNewFile(std::string const &schema, std::string const &fileName
 	, std::map<std::string, std::string> &mapName, loopMap &loopMapName) {
@@ -135,7 +152,7 @@ void	addToFile(const std::string &oldName, const std::string &newName, const std
 		tmpFile.push_back(line);
 	}
 	for (Strings::iterator itRead = tmpFile.begin(); itRead != tmpFile.end(); ++itRead) {
-		if ((*itRead).find(oldName) != std::string::npos) {
+		if ((*itRead).find(oldName) == std::string::npos) {
 			continue ;
 		}
 		tmpFile.insert(itRead + 1, "\t\t" + newName + "\\");
@@ -169,11 +186,27 @@ std::vector<std::string>	getDirBaseName(std::string const &str) {
 	std::size_t					found;
 
 	if ((found = str.find_last_of('/')) != std::string::npos) {
-		result.push_back(str.substr(0, found));
+		result.push_back(str.substr(0, found + 1));
 		result.push_back(str.substr(found + 1));
 	} else {
 		result.push_back(std::string());
 		result.push_back(std::string(str));
 	}
 	return (result);
+}
+
+std::string		getStrLine(std::string const &fileName, std::string const &str) {
+	std::ifstream	ifs(fileName.c_str());
+	std::string		line;
+
+	if (str.empty()) {
+		return (std::string());
+	}
+	while (std::getline(ifs, line)) {
+		if (line.find(str) != std::string::npos) {
+			line.erase(0, line.find_first_not_of('\t'));
+			return (line);
+		}
+	}
+	return (std::string());
 }

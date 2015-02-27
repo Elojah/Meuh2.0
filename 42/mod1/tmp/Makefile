@@ -13,9 +13,13 @@ RM = rm -rf
 
 #List classes here
 CLASS = \
+		Objects/Landscape\
+		main\
+		X11Win\
 
 #List interfaces here
 INTERFACE = \
+		IObject\
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
@@ -29,8 +33,13 @@ LFLAGS =
 
 #Libs
 LIB_LOCAL = \
+			/usr/X11R6\
 
 LIB_GLOBAL = \
+			X11\
+			Xext\
+			GL\
+			GLU\
 
 LIB_OTHER = \
 

@@ -1,10 +1,9 @@
 #include "Boot.hpp"
 #include "Project.hpp"
 #include "SortItems.hpp"
+#include "fileManip.hpp"
 #include <fstream>
 #include <iostream>
-#include <sys/stat.h>
-#include <sys/types.h>
 #include <string.h>
 #include <stdlib.h>
 #include <libgen.h>
@@ -50,28 +49,17 @@ void		Boot::createItems(void)
 */
 void		Boot::newProject(ITEM *item) {
 	std::string		projName;
-	std::ifstream	ifsProj("./config/templates/project.template");
-	std::ifstream	ifsMake("./config/templates/Makefile.template");
-	std::ofstream	ofsMake;
-	std::ofstream	ofsCfg;
-	std::string		line;
+	std::ofstream	ofs("./config/.proj", std::ios::app);
+	std::map<std::string, std::string>	tmpMap;
+	loopMap								tmpLoopMap;
 
 	(void)item;
 	projName = readUser();
-	if (!projName.empty()) {
-		mkdir(projName.c_str(), S_IRWXU);
-		while (std::getline(ifsProj, line))
-			mkdir((projName + "/" + line).c_str(), S_IRWXU);
-		ofsMake.open((projName + "/Makefile").c_str());
-		ofsMake << ifsMake.rdbuf();
-		ofsCfg.open("./config/.proj", std::ios::app);
-		ofsCfg << projName << std::endl;
-		notifyUser("Project " + projName + " created successfully !");
-	}
-	ifsProj.close();
-	ifsMake.close();
-	ofsMake.close();
-	ofsCfg.close();
+	createArbo("project", projName, "");
+	createNewFile("Makefile", projName + "/Makefile", tmpMap, tmpLoopMap);
+	ofs << projName << std::endl;
+	ofs.close();
+	notifyUser("Project " + projName + " created successfully !");
 }
 
 void		Boot::openProject(ITEM *item) {

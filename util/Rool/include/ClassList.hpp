@@ -12,6 +12,7 @@ public:
 	~ClassList(void);
 	void		init(const std::string&, const std::string&);
 protected:
+	void		sortMenu(size_t length);
 private:
 	ClassList(void);
 	void		createItems(void);
@@ -19,8 +20,9 @@ private:
 	/*
 	**Callbacks
 	*/
-	void		newClass(ITEM *);
-	void		listAttributes(ITEM *item);
+	void		newClass(ITEM*);
+	void		newLib(ITEM*);
+	void		listAttributes(ITEM*);
 };
 
 #endif
