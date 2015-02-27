@@ -28,7 +28,6 @@ X11Win::~X11Win(void) {
 void		X11Win::init(void) {
 	XSetWindowAttributes				swa;
 	XVisualInfo							*vi;
-	GLint								v_att[] = { GLX_RGBA, GLX_DEPTH_SIZE, 24, GLX_DOUBLEBUFFER, None };
 #ifndef __APPLE__
 	glXCreateContextAttribsARBProc	glXCreateContextAttribsARB;
 	static int				context_attribs[] = {
@@ -39,16 +38,15 @@ void		X11Win::init(void) {
 	};
 #endif
 
-	// assignBestFBC();
-	// if (!(vi = glXGetVisualFromFBConfig(_d, _fbc))) {
-	// 	std::cout << "Error: No visual found" << std::endl;
-	// } else {
-	// 	std::cout << "Chosen visualID: " << vi->visualid << std::endl;
-	// }
-	vi = glXChooseVisual(_d, 0, v_att);
+	assignBestFBC();
+	if (!(vi = glXGetVisualFromFBConfig(_d, _fbc))) {
+		std::cout << "Error: No visual found" << std::endl;
+	} else {
+		std::cout << "Chosen visualID: " << vi->visualid << std::endl;
+	}
 	swa.colormap = _cmap = XCreateColormap(_d,
-												RootWindow(_d, vi->screen),
-												vi->visual, AllocNone);
+											RootWindow(_d, vi->screen),
+											vi->visual, AllocNone);
 	swa.background_pixmap = None;
 	swa.border_pixel = 0;
 	swa.event_mask = ExposureMask|KeyPressMask|ButtonPressMask|StructureNotifyMask;
@@ -81,16 +79,15 @@ void		X11Win::init(void) {
 
 	XFree(vi);
 	XSync(_d, False);
-	if (!glXMakeContextCurrent(_d, _w, _w, _ctx)) {
+	if (!glXMakeContextCurrent(_d, _glxWin, _glxWin, _ctx)) {
 		std::cout << "Error context: Can't make current" << std::endl;
 	}
 	glClearColor(0, 0.5, 1, 1);
-	// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	// glXSwapBuffers(_d, _glxWin);
-	// glClearColor(0, 0.5, 0.5, 0.5);
-	// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	// glXSwapBuffers(_d, _glxWin);
-	glEnable(GL_DEPTH_TEST);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glXSwapBuffers(_d, _glxWin);
+	glClearColor(0, 0.5, 0.5, 0.5);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glXSwapBuffers(_d, _glxWin);
 }
 /*
 	typedef union				_XEvent {
@@ -129,14 +126,14 @@ void		X11Win::init(void) {
 	long pad[24];
 }						XEvent;
 */
-void		X11Win::loop(std::vector<IObject> &objects) {
+void		X11Win::loop(std::vector<IObject *> &objects) {
 	while (true) {
-		// glBegin(GL_POLYGON);
-		for (std::vector<IObject>::iterator it = objects.begin(); it != objects.end(); ++it) {
-			it->draw();
+		glBegin(GL_TRIANGLE_STRIP);
+		for (std::vector<IObject *>::iterator it = objects.begin(); it != objects.end(); ++it) {
+			(*it)->draw();
 		}
-		// glEnd();
-		// glFlush();
+		glEnd();
+		glFlush();
 		glXSwapBuffers(_d, _glxWin);
 
 		if (glGetError() == GL_NO_ERROR) {
@@ -163,31 +160,47 @@ GL_STACK_UNDERFLOW
 GL_STACK_OVERFLOW
 */
 void		X11Win::assignBestFBC(void) {
-	GLXFBConfig			*tmp_fbc;
+	GLXFBConfig		*tmp_fbc;
+	XVisualInfo			*vi;
 	int					fbcount;
-	static GLint		v_att[] = {
-		// GLX_X_RENDERABLE, True,
-		// GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
-		// GLX_RENDER_TYPE, GLX_RGBA_BIT,
-		// GLX_X_VISUAL_TYPE, GLX_TRUE_COLOR,
-		GLX_RGBA,
+	int					best_fbc, worst_fbc, best_num_samp, worst_num_samp;
+	int					samp_buf, samples;
+	static int			_v_att[] = {
+		GLX_X_RENDERABLE, True,
+		GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
+		GLX_RENDER_TYPE, GLX_RGBA_BIT,
+		GLX_X_VISUAL_TYPE, GLX_TRUE_COLOR,
+		GLX_RED_SIZE, 8,
+		GLX_GREEN_SIZE, 8,
+		GLX_BLUE_SIZE, 8,
+		GLX_ALPHA_SIZE, 8,
 		GLX_DEPTH_SIZE, 24,
-		GLX_DOUBLEBUFFER,
-		// GLX_RED_SIZE, 8,
-		// GLX_GREEN_SIZE, 8,
-		// GLX_BLUE_SIZE, 8,
-		// GLX_ALPHA_SIZE, 8,
-		// GLX_STENCIL_SIZE, 8,
-		// GLX_DOUBLEBUFFER, True,
+		GLX_STENCIL_SIZE, 8,
+		GLX_DOUBLEBUFFER, True,
 		// GLX_SAMPLE_BUFFERS , 1,
 		// GLX_SAMPLES, 4,
 		None
 	};
 
-	tmp_fbc = glXChooseFBConfig(_d, DefaultScreen(_d), v_att, &fbcount);
-	if (!tmp_fbc) {
-		std::cout << "No framebuffer config found" << std::endl;
+	tmp_fbc = glXChooseFBConfig(_d, DefaultScreen(_d), _v_att, &fbcount);
+	best_fbc = worst_fbc = best_num_samp = -1;
+	worst_num_samp = 999;
+
+	for (int i = 0; i < fbcount; ++i) {
+		if ((vi = glXGetVisualFromFBConfig(_d, tmp_fbc[i]))) {
+			glXGetFBConfigAttrib(_d, tmp_fbc[i], GLX_SAMPLE_BUFFERS, &samp_buf);
+			glXGetFBConfigAttrib(_d, tmp_fbc[i], GLX_SAMPLES, &samples);
+			if (best_fbc < 0 || (samp_buf && samples > best_num_samp)) {
+				best_fbc = i;
+				best_num_samp = samples;
+			}
+			if (worst_fbc < 0 || !samp_buf || samples < worst_num_samp) {
+				worst_fbc = i;
+				worst_num_samp = samples;
+			}
+		}
+		XFree(vi);
 	}
-	_fbc = tmp_fbc[0];
+	_fbc = tmp_fbc[best_fbc];
 	XFree(tmp_fbc);
 }
