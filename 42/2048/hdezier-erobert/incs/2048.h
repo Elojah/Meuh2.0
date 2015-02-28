@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:14:09 by erobert           #+#    #+#             */
-/*   Updated: 2015/02/28 16:58:23 by erobert          ###   ########.fr       */
+/*   Updated: 2015/02/28 17:57:04 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define KEY_ESC 27
 # define TPL_WIDTH 7
 # define TPL_HEIGHT 3
+# define TPL_SIZE 25
+# define TPL_FOLDER "tpls/"
 
 typedef enum	e_const
 {
@@ -41,17 +43,20 @@ typedef enum	e_numbers
 	N_1024,
 	N_2048,
 	N_4096,
-	N_8192
+	N_8192,
+	NB
 }				t_numbers;
 
 typedef struct	s_data
 {
-	char		tpls[14][25];
+	char		tpls[NB][TPL_SIZE];
 	int			size;
 	int			grid[5][5];
 }				t_data;
 
 int				ft_strcmp(const char *s1, const char *s2);
+char			*ft_itoa(int n);
+char			*ft_strjoin(char const *s1, char const *s2);
 void			ft_display_grid(t_data *d);
 void			ft_play(t_data *data, char input);
 

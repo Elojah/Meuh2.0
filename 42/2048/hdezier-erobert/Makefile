@@ -6,7 +6,7 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/17 17:24:53 by erobert           #+#    #+#              #
-#    Updated: 2015/02/28 16:56:19 by erobert          ###   ########.fr        #
+#    Updated: 2015/02/28 17:36:48 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -30,7 +30,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LFLAGS)
 
 objs/%.o : srcs/%.c
-	$(CC) $(CFLAGS) -Iinc -I./libft -o $@ -c $^
+	$(CC) $(CFLAGS) -Iinc -I./incs -o $@ -c $^
 
 objs_dir:
 	mkdir -p objs
