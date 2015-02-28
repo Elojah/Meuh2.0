@@ -1,7 +1,7 @@
 #include "X11Win.hpp"
 #include "IObject.hpp"
+#include "Camera.hpp"
 #include <iostream>
-#include <GL/glu.h>
 
 X11Win::X11Win(void) {
 }
@@ -29,8 +29,6 @@ X11Win::~X11Win(void) {
 void		X11Win::init(void) {
 	XSetWindowAttributes				swa;
 	XVisualInfo							*vi;
-
-	// std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
 #ifndef __APPLE__
 	glXCreateContextAttribsARBProc	glXCreateContextAttribsARB;
 	static int				context_attribs[] = {
@@ -40,11 +38,16 @@ void		X11Win::init(void) {
 		None
 	};
 #endif
+
 	assignBestFBC();
-	vi = glXGetVisualFromFBConfig(_d, _fbc);
+	if (!(vi = glXGetVisualFromFBConfig(_d, _fbc))) {
+		std::cout << "Error: No visual found" << std::endl;
+	} else {
+		std::cout << "Chosen visualID: " << vi->visualid << std::endl;
+	}
 	swa.colormap = _cmap = XCreateColormap(_d,
-												RootWindow(_d, vi->screen),
-												vi->visual, AllocNone);
+											RootWindow(_d, vi->screen),
+											vi->visual, AllocNone);
 	swa.background_pixmap = None;
 	swa.border_pixel = 0;
 	swa.event_mask = ExposureMask|KeyPressMask|ButtonPressMask|StructureNotifyMask;
@@ -77,13 +80,16 @@ void		X11Win::init(void) {
 
 	XFree(vi);
 	XSync(_d, False);
-	glXMakeCurrent(_d, _glxWin, _ctx);
+	if (!glXMakeContextCurrent(_d, _glxWin, _glxWin, _ctx)) {
+		std::cout << "Error context: Can't make current" << std::endl;
+	}
 	glClearColor(0, 0.5, 1, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glXSwapBuffers(_d, _glxWin);
 	glClearColor(0, 0.5, 0.5, 0.5);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glXSwapBuffers(_d, _glxWin);
+	glEnable(GL_DEPTH_TEST);
 }
 /*
 	typedef union				_XEvent {
@@ -122,16 +128,15 @@ void		X11Win::init(void) {
 	long pad[24];
 }						XEvent;
 */
-void		X11Win::loop(std::vector<IObject> &objects) {
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
+void		X11Win::loop(std::vector<IObject *> &objects) {
+	Camera			cam;
 
 	while (true) {
-		glColor3f(1.0, 1.0, 1.0);
-		glBegin(GL_LINES);
-		for (std::vector<IObject>::iterator it = objects.begin(); it != objects.end(); ++it) {
-			it->draw();
+		cam.setView();
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glBegin(GL_QUADS);
+		for (std::vector<IObject *>::iterator it = objects.begin(); it != objects.end(); ++it) {
+			(*it)->draw();
 		}
 		glEnd();
 		glFlush();
@@ -143,14 +148,20 @@ void		X11Win::loop(std::vector<IObject> &objects) {
 			std::cout << "Rendering... ERROR" << std::endl;
 		}
 		XNextEvent(_d, &_e);
-		if (_e.xkey.keycode == 8) {/*A*/
-			glXSwapBuffers(_d, _glxWin);
-		}
-		else if (_e.xkey.keycode == 61) {/*ESC*/
-			break ;
+		switch(_e.xkey.keycode) {
+			case 21: cam.zoom(-0.05);
+					break ;
+			case 8: cam.rotateAround(0.05);
+					break ;
+			case 9: cam.zoom(0.05);
+					break ;
+			case 10: cam.rotateAround(-0.05);
+					break ;
+			case 61: return ;
 		}
 	}
 }
+
 /*
 GL_NO_ERROR
 GL_INVALID_ENUM
@@ -162,9 +173,12 @@ GL_STACK_UNDERFLOW
 GL_STACK_OVERFLOW
 */
 void		X11Win::assignBestFBC(void) {
-	GLXFBConfig			*tmp_fbc;
+	GLXFBConfig		*tmp_fbc;
+	XVisualInfo			*vi;
 	int					fbcount;
-	static GLint		_v_att[] = {
+	int					best_fbc, worst_fbc, best_num_samp, worst_num_samp;
+	int					samp_buf, samples;
+	static int			_v_att[] = {
 		GLX_X_RENDERABLE, True,
 		GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
 		GLX_RENDER_TYPE, GLX_RGBA_BIT,
@@ -182,9 +196,24 @@ void		X11Win::assignBestFBC(void) {
 	};
 
 	tmp_fbc = glXChooseFBConfig(_d, DefaultScreen(_d), _v_att, &fbcount);
-	if (!tmp_fbc) {
-		std::cout << "No framebuffer config found" << std::endl;
+	best_fbc = worst_fbc = best_num_samp = -1;
+	worst_num_samp = 999;
+
+	for (int i = 0; i < fbcount; ++i) {
+		if ((vi = glXGetVisualFromFBConfig(_d, tmp_fbc[i]))) {
+			glXGetFBConfigAttrib(_d, tmp_fbc[i], GLX_SAMPLE_BUFFERS, &samp_buf);
+			glXGetFBConfigAttrib(_d, tmp_fbc[i], GLX_SAMPLES, &samples);
+			if (best_fbc < 0 || (samp_buf && samples > best_num_samp)) {
+				best_fbc = i;
+				best_num_samp = samples;
+			}
+			if (worst_fbc < 0 || !samp_buf || samples < worst_num_samp) {
+				worst_fbc = i;
+				worst_num_samp = samples;
+			}
+		}
+		XFree(vi);
 	}
-	_fbc = tmp_fbc[0];
+	_fbc = tmp_fbc[best_fbc];
 	XFree(tmp_fbc);
 }

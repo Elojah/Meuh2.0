@@ -13,6 +13,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = \
+		Camera\
 		Objects/Landscape\
 		main\
 		X11Win\
