@@ -6,11 +6,11 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/17 17:24:53 by erobert           #+#    #+#              #
-#    Updated: 2015/02/28 17:36:48 by erobert          ###   ########.fr        #
+#    Updated: 2015/02/28 19:40:17 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME = 2048
+NAME = game_2048
 FILES = ft_display_grid.c main.c ft_play.c
 SRCS = $(addprefix srcs/, $(FILES))
 OBJS = $(SRCS:srcs/%.c=objs/%.o)
