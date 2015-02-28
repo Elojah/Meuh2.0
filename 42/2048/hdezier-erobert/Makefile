@@ -11,7 +11,7 @@
 #******************************************************************************#
 
 NAME = 2048
-FILES = ft_display_grid.c main.c
+FILES = ft_display_grid.c main.c ft_play.c
 SRCS = $(addprefix srcs/, $(FILES))
 OBJS = $(SRCS:srcs/%.c=objs/%.o)
 TMPS = $(SRCS:.c=.c~) Makefile~ incs/2048.h~

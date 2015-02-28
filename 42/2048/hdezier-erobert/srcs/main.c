@@ -57,7 +57,7 @@ int			main(int ac, char **av)
 //	int i = 0;
 	while (input != KEY_ESC)
 	{
-//		ft_play(&d, input);
+		// ft_play(&d, input);
 		ft_display_grid(&d);
 		refresh();
 		input = getch();
