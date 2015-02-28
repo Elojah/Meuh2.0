@@ -6,12 +6,12 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/17 17:24:53 by erobert           #+#    #+#              #
-#    Updated: 2015/02/28 19:40:17 by erobert          ###   ########.fr        #
+#    Updated: 2015/02/28 20:52:23 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = game_2048
-FILES = ft_display_grid.c main.c ft_play.c
+FILES = ft_signal.c ft_play.c ft_display_grid.c main.c
 SRCS = $(addprefix srcs/, $(FILES))
 OBJS = $(SRCS:srcs/%.c=objs/%.o)
 TMPS = $(SRCS:.c=.c~) Makefile~ incs/2048.h~

@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:14:09 by erobert           #+#    #+#             */
-/*   Updated: 2015/02/28 18:45:31 by erobert          ###   ########.fr       */
+/*   Updated: 2015/02/28 21:01:47 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <fcntl.h>
 # include <ncurses.h>
+# include <signal.h>
+# include <stdlib.h>
 # include <unistd.h>
 
 # define KEY_ESC 27
@@ -57,6 +59,7 @@ typedef struct	s_data
 int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_itoa(int n);
 char			*ft_strjoin(char const *s1, char const *s2);
+void			ft_signal(int i);
 void			ft_display_grid(t_data *d);
 void			ft_play(t_data *data, char input);
 
