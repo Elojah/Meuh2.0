@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:17:48 by erobert           #+#    #+#             */
-/*   Updated: 2015/02/28 19:38:06 by erobert          ###   ########.fr       */
+/*   Updated: 2015/02/28 21:10:08 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,13 @@ static void	ft_init_grid(t_data *d)
 	d->grid[3][0] = N_2;
 }
 
-static void	ft_init_color(void)
+static void	ft_init_data(t_data *d, int ac, char **av)
 {
+	if (ac == 2 && !ft_strcmp(av[1], "5"))
+		d->size = 5;
+	else
+		d->size = 4;
+	ft_init_grid(d);
 	start_color();
 	init_pair(N_0, COLOR_WHITE, COLOR_BLACK);
 	init_pair(N_2, COLOR_CYAN, COLOR_BLACK);
@@ -92,17 +97,13 @@ int			main(int ac, char **av)
 	t_data	d;
 	char	input;
 
+	signal(SIGINT, &ft_signal);
+	signal(SIGQUIT, &ft_signal);
 	ft_get_tpls(&d);
-	if (ac == 2 && !ft_strcmp(av[1], "5"))
-		d.size = 5;
-	else
-		d.size = 4;
 	initscr();
-	raw();
 	noecho();
 	curs_set(0);
-	ft_init_color();
-	ft_init_grid(&d);
+	ft_init_data(&d, ac, av);
 	ft_display_grid(&d);
 	input = getch();
 	while (input != KEY_ESC)
