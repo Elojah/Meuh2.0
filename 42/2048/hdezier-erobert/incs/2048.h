@@ -53,5 +53,6 @@ typedef struct	s_data
 
 int				ft_strcmp(const char *s1, const char *s2);
 void			ft_display_grid(t_data *d);
+void			ft_play(t_data *data, char input);
 
 #endif
