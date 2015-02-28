@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:14:09 by erobert           #+#    #+#             */
-/*   Updated: 2015/02/28 17:57:04 by erobert          ###   ########.fr       */
+/*   Updated: 2015/02/28 18:45:31 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define KEY_ESC 27
 # define TPL_WIDTH 7
 # define TPL_HEIGHT 3
-# define TPL_SIZE 25
+# define TPL_SIZE 24
 # define TPL_FOLDER "tpls/"
 
 typedef enum	e_const
