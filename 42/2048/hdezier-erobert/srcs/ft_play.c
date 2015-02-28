@@ -11,73 +11,94 @@
 /* ************************************************************************** */
 
 #include "2048.h"
+#include <stdlib.h>
 
-static void		ft_move_horizontal(t_data *data, int inc)
+static void		pop_new(t_data *data)
 {
 	int			i;
 	int			j;
+	int			n;
+	int			random;
+	int			tmp[25][2];
 
-	i = -1;
+	n = i = -1;
 	while (++i < data->size)
 	{
-		j = inc > 0 ? 0 : data->size - 1;
+		j = - 1;
+		while (++j < data->size)
+		{
+			if (data->grid[i][j] == N_0)
+			{
+				tmp[++n][0] = i;
+				tmp[n][1] = j;
+			}
+		}
+	}
+	if (n == -1)//lost
+		return ;
+	random = rand() % (n + 1);
+	data->grid[tmp[random][0]][tmp[random][1]] = rand() % 2 + 1;
+}
+
+static int		ft_move_case(t_data *data, int index[2], int inc[2], int *done)
+{
+	int			next_index[2];
+
+	next_index[0] = index[0] - inc[0];
+	next_index[1] = index[1] - inc[1];
+	if (data->grid[index[0]][index[1]] != N_0
+		&& next_index[0] >= 0 && next_index[0] < data->size
+		&& next_index[1] >= 0 && next_index[1] < data->size)
+	{
+		if (data->grid[next_index[0]][next_index[1]] == N_0)
+			data->grid[next_index[0]][next_index[1]] = data->grid[index[0]][index[1]];
+		else if (data->grid[next_index[0]][next_index[1]] == data->grid[index[0]][index[1]] && !(*done))
+		{
+			data->grid[next_index[0]][next_index[1]]++;
+			*done = 1;
+		}
+		else
+			return (1);
+		data->grid[index[0]][index[1]] = N_0;
+		return (-1);
+	}
+	return (1);
+}
+
+static void		ft_move(t_data *data, int index, int inc[2], int dir)
+{
+	int					i;
+	int					j;
+	int					done;
+	int					save_inc;
+
+	i = -1;
+	save_inc = ((index == 0) ? 1 : -1);
+	while (++i < data->size)
+	{
+		done = 0;
+		j = index;
 		while (j < data->size && j >= 0)
 		{
-			if (data->grid[i][j] != N_0
-				&& j - inc >= 0 && j - inc < data->size)
-			{
-				if (data->grid[i][j - inc] == N_0)
-					data->grid[i][j - inc] = data->grid[i][j];
-				else if (data->grid[i][j - inc] == data->grid[i][j])
-					data->grid[i][j - inc]++;
-				else if ((j += inc) || 1)
-					continue ;
-				data->grid[i][j] = 0;
-				j -= inc;
-			}
+			if (dir)
+				j += (save_inc * ft_move_case(data, (int[2]){i, j}, inc, &done));
 			else
-				j += inc;
+				j += (save_inc * ft_move_case(data, (int[2]){j, i}, inc, &done));
 		}
 	}
 }
 
-static void		ft_move_vertical(t_data *data, int inc)
-{
-	int			i;
-	int			j;
-
-	i = -1;
-	while (++i < data->size)
-	{
-		j = inc > 0 ? 0 : data->size - 1;
-		while (j < data->size && j >= 0)
-		{
-			if (data->grid[j][i] != N_0
-				&& j - inc >= 0 && j - inc < data->size)
-			{
-				if (data->grid[j - inc][i] == N_0)
-					data->grid[j - inc][i] = data->grid[j][i];
-				else if (data->grid[j - inc][i] == data->grid[j][i])
-					data->grid[j - inc][i]++;
-				else if ((j += inc) || 1)
-					continue ;
-				data->grid[j][i] = 0;
-				j -= inc;
-			}
-			else
-				j += inc;
-		}
-	}
-}
-
-void	ft_play(t_data *data, char input)
+void			ft_play(t_data *data, char input)
 {
 	if (input == 'w')
-		ft_move_vertical(data, 1);
+		ft_move(data, 0, (int[2]){1, 0}, 0);
 	else if (input == 'a')
-		ft_move_horizontal(data, 1);
+		ft_move(data, 0, (int[2]){0, 1}, 1);
 	else if (input == 's')
-		ft_move_vertical(data, -1);
+		ft_move(data, data->size - 1, (int[2]){-1, 0}, 0);
 	else if (input == 'd')
-		ft_move_horizontal(data, -1);
+		ft_move(data, data->size - 1, (int[2]){0, -1}, 1);
+	else
+		return ;
+	pop_new(data);
 }
