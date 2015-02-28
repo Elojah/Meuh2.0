@@ -6,25 +6,29 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:17:48 by erobert           #+#    #+#             */
-/*   Updated: 2015/02/28 17:03:02 by erobert          ###   ########.fr       */
+/*   Updated: 2015/02/28 18:26:29 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/2048.h"
-#include <stdio.h>
-static int	ft_get_tpl(t_data *d, char *name)
+#include <stdlib.h>
+#include "2048.h"
+
+static int	ft_get_tpl(t_data *d, int i, char *name)
 {
 	int		fd;
-//	int			buf[2];
-	fd = open(name, O_RDONLY);
+	char	*tmp;
+
+	tmp = ft_strjoin(TPL_FOLDER, name);
+	if (!tmp)
+		return (1);
+	fd = open(tmp, O_RDONLY);
+	free(tmp);
+	free(name);
 	if (fd == -1)
 		return (1);
-//	printf("%d\n", (int)read(fd, d->tpls[0], 1));
-	if (!read(fd, d->tpls[N_0], 24))
-//		return (1);
-//	write(1, tpl, 24);
-//	write(1, "HEY\n", 4);
-	d->tpls[0][25] = '\0';
+	if (!read(fd, d->tpls[i], 24))
+		return (1);
+	d->tpls[i][TPL_SIZE] = '\0';
 	if (close(fd) == -1)
 		return (1);
 	return (0);
@@ -32,9 +36,30 @@ static int	ft_get_tpl(t_data *d, char *name)
 
 static int	ft_get_tpls(t_data *d)
 {
-	if (ft_get_tpl(d, "tpls/128"))
-		return (1);
+	int		i;
+
+	ft_get_tpl(d, 0, ft_itoa(0));
+	i = 0;
+	while (++i < NB)
+	{
+		if (ft_get_tpl(d, i, ft_itoa(1 << i)))
+			return (1);
+	}
 	return (0);
+}
+
+static void	ft_init_grid(t_data *d)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < d->size)
+	{
+		j = -1;
+		while (++j < d->size)
+			d->grid[i][j] = N_0;
+	}
 }
 
 int			main(int ac, char **av)
@@ -47,17 +72,18 @@ int			main(int ac, char **av)
 		d.size = 5;
 	else
 		d.size = 4;
-	(void)ac;
-	(void)av;
 	initscr();
 	raw();
 	noecho();
 	curs_set(0);
 	input = getch();
-//	int i = 0;
+	start_color();
+	init_pair(1, COLOR_RED, COLOR_BLACK);
+	ft_init_grid(&d);
+	d.grid[0][0] = N_2048;
 	while (input != KEY_ESC)
 	{
-		// ft_play(&d, input);
+		ft_play(&d, input);
 		ft_display_grid(&d);
 		refresh();
 		input = getch();
