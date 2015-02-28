@@ -60,6 +60,12 @@ static void	ft_init_grid(t_data *d)
 		while (++j < d->size)
 			d->grid[i][j] = N_0;
 	}
+	d->grid[0][0] = N_2;
+	d->grid[0][2] = N_4;
+	d->grid[0][3] = N_8;
+	d->grid[1][1] = N_8;
+	d->grid[1][2] = N_4;
+	d->grid[3][0] = N_2;
 }
 
 static void	ft_init_color(void)
@@ -96,8 +102,9 @@ int			main(int ac, char **av)
 	noecho();
 	curs_set(0);
 	ft_init_color();
-	input = getch();
 	ft_init_grid(&d);
+	ft_display_grid(&d);
+	input = getch();
 	while (input != KEY_ESC)
 	{
 		ft_play(&d, input);

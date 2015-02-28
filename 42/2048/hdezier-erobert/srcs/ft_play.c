@@ -12,12 +12,10 @@
 
 #include "2048.h"
 
-static void		ft_move(t_data *data, int inc, int dir)
+static void		ft_move_horizontal(t_data *data, int inc)
 {
 	int			i;
 	int			j;
-	int			save_i;
-	int			save_j;
 
 	i = -1;
 	while (++i < data->size)
@@ -25,25 +23,49 @@ static void		ft_move(t_data *data, int inc, int dir)
 		j = inc > 0 ? 0 : data->size - 1;
 		while (j < data->size && j >= 0)
 		{
-
-			save_i = i;
-			save_j = j;
-			if (dir)
+			if (data->grid[i][j] != N_0
+				&& j - inc >= 0 && j - inc < data->size)
 			{
-				i = save_j;
-				j = save_i;
-			}
-			if (data->grid[i][j]
-				&& !((inc > 0 && j == data->size - 1) || (inc < 0 && !j))
-				&& !data->grid[i][j + inc])
-			{
-				data->grid[i][j + inc] = data->grid[i][j];
+				if (data->grid[i][j - inc] == N_0)
+					data->grid[i][j - inc] = data->grid[i][j];
+				else if (data->grid[i][j - inc] == data->grid[i][j])
+					data->grid[i][j - inc]++;
+				else if ((j += inc) || 1)
+					continue ;
 				data->grid[i][j] = 0;
+				j -= inc;
 			}
-			i = save_i;
-			j = save_j;
+			else
+				j += inc;
+		}
+	}
+}
 
-			j += inc;
+static void		ft_move_vertical(t_data *data, int inc)
+{
+	int			i;
+	int			j;
+
+	i = -1;
+	while (++i < data->size)
+	{
+		j = inc > 0 ? 0 : data->size - 1;
+		while (j < data->size && j >= 0)
+		{
+			if (data->grid[j][i] != N_0
+				&& j - inc >= 0 && j - inc < data->size)
+			{
+				if (data->grid[j - inc][i] == N_0)
+					data->grid[j - inc][i] = data->grid[j][i];
+				else if (data->grid[j - inc][i] == data->grid[j][i])
+					data->grid[j - inc][i]++;
+				else if ((j += inc) || 1)
+					continue ;
+				data->grid[j][i] = 0;
+				j -= inc;
+			}
+			else
+				j += inc;
 		}
 	}
 }
@@ -51,11 +73,11 @@ static void		ft_move(t_data *data, int inc, int dir)
 void	ft_play(t_data *data, char input)
 {
 	if (input == 'w')
-		ft_move(data, 1, 1);
+		ft_move_vertical(data, 1);
 	else if (input == 'a')
-		ft_move(data, -1, 0);
+		ft_move_horizontal(data, 1);
 	else if (input == 's')
-		ft_move(data, -1, 1);
+		ft_move_vertical(data, -1);
 	else if (input == 'd')
-		ft_move(data, 1, 0);
+		ft_move_horizontal(data, -1);
 }
