@@ -1,6 +1,7 @@
 #include "X11Win.hpp"
 #include "IObject.hpp"
 #include <iostream>
+# include <GL/glu.h>
 
 X11Win::X11Win(void) {
 }
@@ -128,7 +129,8 @@ void		X11Win::init(void) {
 */
 void		X11Win::loop(std::vector<IObject *> &objects) {
 	while (true) {
-		glBegin(GL_TRIANGLE_STRIP);
+		setView();
+		glBegin(GL_QUADS);
 		for (std::vector<IObject *>::iterator it = objects.begin(); it != objects.end(); ++it) {
 			(*it)->draw();
 		}
@@ -142,12 +144,23 @@ void		X11Win::loop(std::vector<IObject *> &objects) {
 			std::cout << "Rendering... ERROR" << std::endl;
 		}
 		XNextEvent(_d, &_e);
-		if (_e.xkey.keycode == 8) {/*A*/
-			glXSwapBuffers(_d, _glxWin);
-		} else if (_e.xkey.keycode == 61) {/*ESC*/
-			break ;
+		switch(_e.xkey.keycode) {
+			case 8: ;
+					break ;
+			case 61: return ;
 		}
 	}
+}
+
+void	X11Win::setView(void) {
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(60.0, 1.0, 1.0, 1500.0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt(800.0, 700.0, 600.0,
+				50.0, 50.0, 0.0,
+				0.0, 0.0, 1.0);
 }
 /*
 GL_NO_ERROR

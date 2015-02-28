@@ -24,6 +24,7 @@ private:
 						X11Win(void);
 	void				assignBestFBC(void);
 	void				assignPBuffer(void);
+	void				setView(void);
 /*
 **X11
 */

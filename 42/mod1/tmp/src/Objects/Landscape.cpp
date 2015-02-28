@@ -19,6 +19,7 @@ Landscape::Landscape(std::string const &filename) {
 	if (ifs.fail()) {
 		std::cout << "File doesn't exist." << std::endl;
 	}
+	clearMap();
 	while (std::getline(ifs, line)) {
 		toFree = strdup(line.c_str());
 		tmp = strtok(toFree, "(");
@@ -30,6 +31,8 @@ Landscape::Landscape(std::string const &filename) {
 		}
 		free(toFree);
 	}
+	smoothMap();
+	// printMap();
 }
 
 Landscape::~Landscape(void) {
@@ -47,11 +50,11 @@ void	Landscape::assignValue(char *str) {
 	found = value.find_first_of("0123456789", foundEnd);
 	foundEnd = value.find_first_not_of(".0123456789", found + 1);
 	x = strtof(value.substr(found, foundEnd - found).c_str(), NULL);
-	found = value.find_first_of("0123456789", foundEnd);
-	foundEnd = value.find_first_not_of(".0123456789", found + 1);
+	found = value.find_first_of("0123456789", foundEnd + 1);
+	foundEnd = value.find_first_not_of(".0123456789", found);
 	y = strtof(value.substr(found, foundEnd - found).c_str(), NULL);
-	found = value.find_first_of("0123456789", foundEnd);
-	foundEnd = value.find_first_not_of(".0123456789", found + 1);
+	found = value.find_first_of("0123456789", foundEnd + 1);
+	foundEnd = value.find_first_not_of(".0123456789", found);
 	z = strtof(value.substr(found, foundEnd - found).c_str(), NULL);
 
 	x = fmod((x / WIDTH_DIVIDE), WIDTH_MAP);
@@ -65,33 +68,86 @@ void	Landscape::assignValue(char *str) {
 
 void	Landscape::smoothMap(void) {
 	t_point		closestPoint;
-	float		slope;
 
 	for (std::vector<t_point>::iterator it = _immovablePoints.begin(); it != _immovablePoints.end(); ++it) {
-		Landscape::findClosestPoint((*it), closestPoint);
-		slope = (closestPoint.z - it->z) / sqrt(pow(it->x - closestPoint.x, 2) + pow(it->y - closestPoint.y, 2));
-		recursiveFill(it->x, it->y, it->z, slope);
+		findClosestPoint((*it), closestPoint);
+		std::cout << "Closest point from: " << it->x << ", " << it->y <<std::endl
+		<< "found at: \t" << closestPoint.x << ", " << closestPoint.y << std::endl;
+		std::cout << "Fill map for point (" << it->x << ", " << it->y << ") ..." << std::endl;
+		smoothPoint(*it, closestPoint);
+		std::cout << "Fill map: DONE" << std::endl;
 	}
 }
 
-void	Landscape::recursiveFill(unsigned int x, unsigned int y, float z, float const &slope) {
-	if (x > WIDTH_MAP || y > HEIGHT_MAP || z <= 0 || z < _map[x][y]) {
-		return ;
+void	Landscape::smoothPoint(t_point const &originPoint, t_point const &closestPoint) {
+	unsigned int	i;
+	unsigned int	j;
+	float			z;
+	float			dist;
+	float			maxDist;
+
+	maxDist = (pow(originPoint.x > closestPoint.x ? originPoint.x - closestPoint.x : closestPoint.x - originPoint.x, 2)
+			+ pow(originPoint.y > closestPoint.y ? originPoint.y - closestPoint.y : closestPoint.y - originPoint.y, 2));
+	std::cout << "Dist: " << (maxDist) << std::endl;
+	for (i = 0; i < WIDTH_MAP; ++i) {
+		for (j = 0; j < HEIGHT_MAP; ++j) {
+			dist = pow(originPoint.x > i ? originPoint.x - i : i - originPoint.x, 2)
+					+ pow(originPoint.y > j ? originPoint.y - j : j - originPoint.y, 2);
+			if (dist < maxDist) {
+				z = ((sin((M_PI / 2) + sqrt(dist / maxDist) * M_PI) + 1.) / 2.) * originPoint.z;
+				if (z > _map[i][j]) {
+					_map[i][j] = z;
+				}
+			}
+		}
 	}
-	_map[x][y] = z;
-	z -= slope;
-	recursiveFill(x - 1, y, z, slope);
-	recursiveFill(x + 1, y, z, slope);
-	recursiveFill(x, y - 1, z, slope);
-	recursiveFill(x, y + 1, z, slope);
+}
+
+void		Landscape::printMap(void) const {
+	unsigned int	i;
+	unsigned int	j;
+
+	for (i = 0; i < WIDTH_MAP; ++i) {
+		for (j = 0; j < HEIGHT_MAP; ++j) {
+			// if (_map[i][j] != 0.) {
+				std::cout << static_cast<int>(_map[i][j]) << "\t";
+			// }
+		}
+		std::cout << std::endl;
+	}
+}
+
+void		Landscape::clearMap(void) {
+	unsigned int	i;
+	unsigned int	j;
+
+	for (i = 0; i < WIDTH_MAP; ++i) {
+		for (j = 0; j < HEIGHT_MAP; ++j) {
+			_map[i][j] = 0;
+		}
+	}
 }
 
 void	Landscape::findClosestPoint(t_point const &origin, t_point &closest) {
 	unsigned int	xDist;
 	unsigned int	yDist;
+	unsigned int	xTmp;
+	unsigned int	yTmp;
 
 	xDist = origin.x > WIDTH_MAP / 2 ? WIDTH_MAP - origin.x : origin.x;
 	yDist = origin.y > HEIGHT_MAP / 2 ? HEIGHT_MAP - origin.y : origin.y;
+	for (std::vector<t_point>::iterator it = _immovablePoints.begin(); it != _immovablePoints.end(); ++it) {
+		xTmp = it->x > origin.x ? it->x - origin.x : origin.x - it->x;
+		yTmp = it->y > origin.y ? it->y - origin.y : origin.y - it->y;
+		if ((xTmp != 0 || yTmp != 0)
+			&& xTmp * xTmp + yTmp * yTmp < xDist * xDist + yDist * yDist) {
+			closest.x = it->x;
+			closest.y = it->y;
+			closest.z = it->z;
+			return ;
+		}
+	}
+
 	if (xDist > yDist) {
 		closest.x = origin.x;
 		closest.y = origin.y > HEIGHT_MAP / 2 ? HEIGHT_MAP : 0;
@@ -103,5 +159,19 @@ void	Landscape::findClosestPoint(t_point const &origin, t_point &closest) {
 }
 
 void	Landscape::draw(void) {
-	;
+	unsigned int	x;
+	unsigned int	y;
+
+	for (x = 0; x < WIDTH_MAP - 1; ++x) {
+		for (y = 0; y < HEIGHT_MAP - 1; ++y) {
+			glColor3f(_map[x][y], _map[x][y], _map[x][y]);
+			glVertex3f(x, y, _map[x][y] * Z_MULT);
+			glColor3f(_map[x + 1][y], _map[x + 1][y], _map[x + 1][y]);
+			glVertex3f(x + 1, y, _map[x + 1][y] * Z_MULT);
+			glColor3f(_map[x + 1][y + 1], _map[x + 1][y + 1], _map[x + 1][y + 1]);
+			glVertex3f(x + 1, y + 1, _map[x + 1][y + 1] * Z_MULT);
+			glColor3f(_map[x][y + 1], _map[x][y + 1], _map[x][y + 1]);
+			glVertex3f(x, y + 1, _map[x][y + 1] * Z_MULT);
+		}
+	}
 }
