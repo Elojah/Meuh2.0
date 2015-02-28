@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:17:48 by erobert           #+#    #+#             */
-/*   Updated: 2015/02/28 18:26:29 by erobert          ###   ########.fr       */
+/*   Updated: 2015/02/28 19:03:02 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,28 @@ static void	ft_init_grid(t_data *d)
 	d->grid[0][0] = N_2;
 	d->grid[0][2] = N_4;
 	d->grid[0][3] = N_8;
-	d->grid[1][1] = N_16;
-	d->grid[1][2] = N_32;
-	d->grid[3][0] = N_2048;
+	d->grid[1][1] = N_8;
+	d->grid[1][2] = N_4;
+	d->grid[3][0] = N_2;
+}
+
+static void	ft_init_color(void)
+{
+	start_color();
+	init_pair(N_0, COLOR_WHITE, COLOR_BLACK);
+	init_pair(N_2, COLOR_CYAN, COLOR_BLACK);
+	init_pair(N_4, COLOR_CYAN, COLOR_BLACK);
+	init_pair(N_8, COLOR_CYAN, COLOR_BLACK);
+	init_pair(N_16, COLOR_BLUE, COLOR_BLACK);
+	init_pair(N_32, COLOR_BLUE, COLOR_BLACK);
+	init_pair(N_64, COLOR_BLUE, COLOR_BLACK);
+	init_pair(N_128, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(N_256, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(N_512, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(N_1024, COLOR_RED, COLOR_BLACK);
+	init_pair(N_2048, COLOR_RED, COLOR_BLACK);
+	init_pair(N_4096, COLOR_RED, COLOR_BLACK);
+	init_pair(N_8192, COLOR_RED, COLOR_BLACK);
 }
 
 int			main(int ac, char **av)
@@ -82,13 +101,14 @@ int			main(int ac, char **av)
 	raw();
 	noecho();
 	curs_set(0);
-	input = getch();
-	start_color();
-	init_pair(1, COLOR_RED, COLOR_BLACK);
+	ft_init_color();
 	ft_init_grid(&d);
+	ft_display_grid(&d);
+	input = getch();
 	while (input != KEY_ESC)
 	{
 		ft_play(&d, input);
+		clear();
 		ft_display_grid(&d);
 		refresh();
 		input = getch();

@@ -30,7 +30,7 @@ static void		ft_move_horizontal(t_data *data, int inc)
 					data->grid[i][j - inc] = data->grid[i][j];
 				else if (data->grid[i][j - inc] == data->grid[i][j])
 					data->grid[i][j - inc]++;
-				else
+				else if ((j += inc) || 1)
 					continue ;
 				data->grid[i][j] = 0;
 				j -= inc;
@@ -59,7 +59,7 @@ static void		ft_move_vertical(t_data *data, int inc)
 					data->grid[j - inc][i] = data->grid[j][i];
 				else if (data->grid[j - inc][i] == data->grid[j][i])
 					data->grid[j - inc][i]++;
-				else
+				else if ((j += inc) || 1)
 					continue ;
 				data->grid[j][i] = 0;
 				j -= inc;
