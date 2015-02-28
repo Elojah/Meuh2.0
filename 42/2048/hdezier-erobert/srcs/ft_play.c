@@ -61,7 +61,6 @@ static int		ft_move_case(t_data *data, int index[2], int inc[2])
 			data->grid[next_index[0]][next_index[1]]++;
 			data->grid[index[0]][index[1]] = N_0;
 		}
-		return (1);
 	}
 	return (1);
 }
