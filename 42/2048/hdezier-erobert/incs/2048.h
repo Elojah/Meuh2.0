@@ -20,7 +20,7 @@
 # define KEY_ESC 27
 # define TPL_WIDTH 7
 # define TPL_HEIGHT 3
-# define TPL_SIZE 25
+# define TPL_SIZE 24
 # define TPL_FOLDER "tpls/"
 
 typedef enum	e_const
