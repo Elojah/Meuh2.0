@@ -32,6 +32,7 @@ Landscape::Landscape(std::string const &filename) {
 		free(toFree);
 	}
 	smoothMap();
+	useMap();
 	// printMap();
 }
 
@@ -79,6 +80,13 @@ void	Landscape::smoothMap(void) {
 	}
 }
 
+float	Landscape::magicFunction(float n) {
+	/*
+	**0. > n >= 1.
+	*/
+	return ((asin(n) * 0.66));
+}
+
 void	Landscape::smoothPoint(t_point const &originPoint, t_point const &closestPoint) {
 	unsigned int	i;
 	unsigned int	j;
@@ -93,10 +101,14 @@ void	Landscape::smoothPoint(t_point const &originPoint, t_point const &closestPo
 		for (j = 0; j < HEIGHT_MAP; ++j) {
 			dist = pow(originPoint.x > i ? originPoint.x - i : i - originPoint.x, 2)
 					+ pow(originPoint.y > j ? originPoint.y - j : j - originPoint.y, 2);
-			if (dist < maxDist) {
+			if (dist != 0. && dist < maxDist) {
 				z = ((sin((M_PI / 2) + sqrt(dist / maxDist) * M_PI) + 1.) / 2.) * originPoint.z;
-				if (z > _map[i][j]) {
+				if (_map[i][j] == -1.) {
 					_map[i][j] = z;
+				} else if (_map[i][j] < z) {
+					_map[i][j] = z + magicFunction(_map[i][j]);
+				} else if (_map[i][j] > z) {
+					_map[i][j] = _map[i][j] + magicFunction(z);
 				}
 			}
 		}
@@ -110,7 +122,7 @@ void		Landscape::printMap(void) const {
 	for (i = 0; i < WIDTH_MAP; ++i) {
 		for (j = 0; j < HEIGHT_MAP; ++j) {
 			// if (_map[i][j] != 0.) {
-				std::cout << static_cast<int>(_map[i][j]) << "\t";
+				std::cout << _map[i][j] << "\t";
 			// }
 		}
 		std::cout << std::endl;
@@ -123,12 +135,25 @@ void		Landscape::clearMap(void) {
 
 	for (i = 0; i < WIDTH_MAP; ++i) {
 		for (j = 0; j < HEIGHT_MAP; ++j) {
-			_map[i][j] = 0;
+			_map[i][j] = -1.;
 		}
 	}
 }
 
-void	Landscape::findClosestPoint(t_point const &origin, t_point &closest) {
+void		Landscape::useMap(void) {
+	unsigned int	i;
+	unsigned int	j;
+
+	for (i = 0; i < WIDTH_MAP; ++i) {
+		for (j = 0; j < HEIGHT_MAP; ++j) {
+			if (_map[i][j] == -1.) {
+				_map[i][j] = 0.;
+			}
+		}
+	}
+}
+
+void	Landscape::findClosestPoint(t_point const &origin, t_point &closest) const {
 	unsigned int	xDist;
 	unsigned int	yDist;
 	unsigned int	xTmp;
@@ -136,7 +161,18 @@ void	Landscape::findClosestPoint(t_point const &origin, t_point &closest) {
 
 	xDist = origin.x > WIDTH_MAP / 2 ? WIDTH_MAP - origin.x : origin.x;
 	yDist = origin.y > HEIGHT_MAP / 2 ? HEIGHT_MAP - origin.y : origin.y;
-	for (std::vector<t_point>::iterator it = _immovablePoints.begin(); it != _immovablePoints.end(); ++it) {
+	if (xDist > yDist) {
+		closest.x = origin.x;
+		closest.y = origin.y > HEIGHT_MAP / 2 ? HEIGHT_MAP : 0;
+		xDist = 0;
+	} else {
+		closest.x = origin.x > WIDTH_MAP / 2 ? WIDTH_MAP : 0;
+		closest.y = origin.y;
+		yDist = 0;
+	}
+	closest.z = 0;
+
+	for (std::vector<t_point>::const_iterator it = _immovablePoints.begin(); it != _immovablePoints.end(); ++it) {
 		xTmp = it->x > origin.x ? it->x - origin.x : origin.x - it->x;
 		yTmp = it->y > origin.y ? it->y - origin.y : origin.y - it->y;
 		if ((xTmp != 0 || yTmp != 0)
@@ -144,18 +180,27 @@ void	Landscape::findClosestPoint(t_point const &origin, t_point &closest) {
 			closest.x = it->x;
 			closest.y = it->y;
 			closest.z = it->z;
-			return ;
+			break ;
 		}
 	}
+}
 
-	if (xDist > yDist) {
-		closest.x = origin.x;
-		closest.y = origin.y > HEIGHT_MAP / 2 ? HEIGHT_MAP : 0;
+void	Landscape::drawPoint(unsigned int const x, unsigned int const y) const {
+	static float		z;
+
+	z = _map[x][y];
+	if (z < 0.1) {
+		glColor3f(0., 0., 0.9 + z);
+	} else if (z < 0.105) {
+		glColor3f(1., 1., 1 - z);
+	} else if (z < 0.4) {
+		glColor3f(0.2, z, 0.2);
+	} else if (z < 0.6) {
+		glColor3f(0.1 + z, z, 0.1);
 	} else {
-		closest.x = origin.x > WIDTH_MAP / 2 ? WIDTH_MAP : 0;
-		closest.y = origin.y;
+		glColor3f(0.9, 0.8, 0.7);
 	}
-	closest.z = 0;
+	glVertex3f(x, y, z * Z_MULT);
 }
 
 void	Landscape::draw(void) {
@@ -164,14 +209,10 @@ void	Landscape::draw(void) {
 
 	for (x = 0; x < WIDTH_MAP - 1; ++x) {
 		for (y = 0; y < HEIGHT_MAP - 1; ++y) {
-			glColor3f(_map[x][y], _map[x][y], _map[x][y]);
-			glVertex3f(x, y, _map[x][y] * Z_MULT);
-			glColor3f(_map[x + 1][y], _map[x + 1][y], _map[x + 1][y]);
-			glVertex3f(x + 1, y, _map[x + 1][y] * Z_MULT);
-			glColor3f(_map[x + 1][y + 1], _map[x + 1][y + 1], _map[x + 1][y + 1]);
-			glVertex3f(x + 1, y + 1, _map[x + 1][y + 1] * Z_MULT);
-			glColor3f(_map[x][y + 1], _map[x][y + 1], _map[x][y + 1]);
-			glVertex3f(x, y + 1, _map[x][y + 1] * Z_MULT);
+			drawPoint(x, y);
+			drawPoint(x + 1, y);
+			drawPoint(x + 1, y + 1);
+			drawPoint(x, y + 1);
 		}
 	}
 }

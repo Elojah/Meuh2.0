@@ -23,8 +23,6 @@ private:
 	typedef GLXContext(*glXCreateContextAttribsARBProc)(Display*, GLXFBConfig, GLXContext, Bool, const int*);
 						X11Win(void);
 	void				assignBestFBC(void);
-	void				assignPBuffer(void);
-	void				setView(void);
 /*
 **X11
 */

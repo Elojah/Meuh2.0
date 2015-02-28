@@ -1,7 +1,7 @@
 #include "X11Win.hpp"
 #include "IObject.hpp"
+#include "Camera.hpp"
 #include <iostream>
-# include <GL/glu.h>
 
 X11Win::X11Win(void) {
 }
@@ -89,6 +89,7 @@ void		X11Win::init(void) {
 	glClearColor(0, 0.5, 0.5, 0.5);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glXSwapBuffers(_d, _glxWin);
+	glEnable(GL_DEPTH_TEST);
 }
 /*
 	typedef union				_XEvent {
@@ -128,8 +129,11 @@ void		X11Win::init(void) {
 }						XEvent;
 */
 void		X11Win::loop(std::vector<IObject *> &objects) {
+	Camera			cam;
+
 	while (true) {
-		setView();
+		cam.setView();
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBegin(GL_QUADS);
 		for (std::vector<IObject *>::iterator it = objects.begin(); it != objects.end(); ++it) {
 			(*it)->draw();
@@ -145,23 +149,19 @@ void		X11Win::loop(std::vector<IObject *> &objects) {
 		}
 		XNextEvent(_d, &_e);
 		switch(_e.xkey.keycode) {
-			case 8: ;
+			case 21: cam.zoom(-0.05);
+					break ;
+			case 8: cam.rotateAround(0.05);
+					break ;
+			case 9: cam.zoom(0.05);
+					break ;
+			case 10: cam.rotateAround(-0.05);
 					break ;
 			case 61: return ;
 		}
 	}
 }
 
-void	X11Win::setView(void) {
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(60.0, 1.0, 1.0, 1500.0);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt(800.0, 700.0, 600.0,
-				50.0, 50.0, 0.0,
-				0.0, 0.0, 1.0);
-}
 /*
 GL_NO_ERROR
 GL_INVALID_ENUM

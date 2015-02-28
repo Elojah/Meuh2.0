@@ -6,7 +6,7 @@
 # define Z_MAX 7000
 # define WIDTH_MAP 500
 # define HEIGHT_MAP 500
-# define Z_MULT 500
+# define Z_MULT 400
 
 # include "IObject.hpp"
 # include <string>
@@ -29,10 +29,14 @@ private:
 
 	void						assignValue(char *);
 	void						smoothMap(void);
+	float						magicFunction(float n);
 	void						smoothPoint(t_point const&, t_point const&);
+
 	void						clearMap(void);
+	void						useMap(void);
 	void						printMap(void) const;
-	void						findClosestPoint(t_point const&, t_point&);
+	void						findClosestPoint(t_point const&, t_point&) const;
+	void						drawPoint(unsigned int const x, unsigned int const y) const;
 
 	float						_map[WIDTH_MAP + 1][HEIGHT_MAP + 1];
 	std::vector<t_point>		_immovablePoints;

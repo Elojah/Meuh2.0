@@ -4,7 +4,7 @@
 
 int		main(int ac, char **av) {
 	X11Win		win(800, 600);
-	Landscape	land("./test/demo4.mod1");
+	Landscape	land("./test/demo5.mod1");
 	std::vector<IObject *>	objs;
 
 	objs.push_back(&land);
