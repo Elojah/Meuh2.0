@@ -58,6 +58,6 @@ int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_itoa(int n);
 char			*ft_strjoin(char const *s1, char const *s2);
 void			ft_display_grid(t_data *d);
-void			ft_play(t_data *data, char input);
+int				ft_play(t_data *data, char input);
 
 #endif
