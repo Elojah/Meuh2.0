@@ -68,12 +68,12 @@ static void		pop_new(t_data *data)
 }
 
 static int		ft_move_case(t_data *data, int index[2]
-	, int inc[2], int prev[2])
+	, int dir[2], int prev[2])
 {
 	int			next_index[2];
 
-	next_index[0] = index[0] + inc[0];
-	next_index[1] = index[1] + inc[1];
+	next_index[0] = index[0] + dir[0];
+	next_index[1] = index[1] + dir[1];
 	if (data->grid[INDEX] != N_0
 		&& next_index[0] >= 0 && next_index[0] < data->size
 		&& next_index[1] >= 0 && next_index[1] < data->size)
@@ -91,13 +91,12 @@ static int		ft_move_case(t_data *data, int index[2]
 			data->grid[INDEX] = N_0;
 			prev[0] = next_index[0];
 			prev[1] = next_index[1];
-			return (1);
 		}
 	}
 	return (1);
 }
 
-static void		ft_move(t_data *data, int inc[2])
+static void		ft_move(t_data *data, int dir[2])
 {
 	int					i;
 	int					j;
@@ -106,7 +105,7 @@ static void		ft_move(t_data *data, int inc[2])
 	int					save_index;
 
 	i = -1;
-	save_index = (inc[0] == 1 || inc[1] == 1) ? data->size - 1 : 0;
+	save_index = (dir[0] == 1 || dir[1] == 1) ? data->size - 1 : 0;
 	save_inc = (!save_index) ? 1 : -1;
 	while (++i < data->size)
 	{
@@ -115,10 +114,10 @@ static void		ft_move(t_data *data, int inc[2])
 		prev[1] = -1;
 		while (j < data->size && j >= 0)
 		{
-			if (!inc[0])
-				j += (save_inc * ft_move_case(data, (int[2]){i, j}, inc, prev));
+			if (!dir[0])
+				j += (save_inc * ft_move_case(data, (int[2]){i, j}, dir, prev));
 			else
-				j += (save_inc * ft_move_case(data, (int[2]){j, i}, inc, prev));
+				j += (save_inc * ft_move_case(data, (int[2]){j, i}, dir, prev));
 		}
 	}
 }
