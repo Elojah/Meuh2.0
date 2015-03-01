@@ -23,6 +23,7 @@ private:
 	typedef GLXContext(*glXCreateContextAttribsARBProc)(Display*, GLXFBConfig, GLXContext, Bool, const int*);
 						X11Win(void);
 	void				assignBestFBC(void);
+	void				loopObjects(int const, std::vector<IObject *>&);
 /*
 **X11
 */

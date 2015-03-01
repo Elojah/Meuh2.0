@@ -152,7 +152,7 @@ void		X11Win::loop(std::vector<IObject *> &objects) {
 			std::cout << "Rendering... ERROR" << std::endl;
 		}
 		XNextEvent(_d, &_e);
-		switch(_e.xkey.keycode) {
+		switch (_e.xkey.keycode) {
 			case 21: cam.zoom(-0.05);
 					break ;
 			case 8: cam.rotateAround(0.05);
@@ -162,10 +162,19 @@ void		X11Win::loop(std::vector<IObject *> &objects) {
 			case 10: cam.rotateAround(-0.05);
 					break ;
 			case 61: return ;
+			default: loopObjects(_e.xkey.keycode, objects);
+					break ;
 		}
 	}
 }
 
+void	X11Win::loopObjects(int const key, std::vector<IObject *> &objects) {
+	for (std::vector<IObject *>::iterator it = objects.begin(); it != objects.end(); ++it) {
+		if ((*it)->loop(key)) {
+			break ;
+		}
+	}
+}
 /*
 GL_NO_ERROR
 GL_INVALID_ENUM

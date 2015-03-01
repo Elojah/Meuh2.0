@@ -18,6 +18,8 @@ public:
 								Landscape(std::string const&);
 								~Landscape(void);
 	void						draw(void);
+	void						raiseWater(float const);
+	bool						loop(int const);
 protected:
 private:
 								Landscape(void);
@@ -39,6 +41,7 @@ private:
 
 	float						_map[WIDTH_MAP + 1][HEIGHT_MAP + 1];
 	std::vector<t_point>		_immovablePoints;
+	float						_waterDiff;
 };
 
 #endif
