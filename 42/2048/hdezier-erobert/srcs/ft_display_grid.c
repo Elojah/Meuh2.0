@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 16:46:13 by erobert           #+#    #+#             */
-/*   Updated: 2015/03/01 17:14:08 by erobert          ###   ########.fr       */
+/*   Updated: 2015/03/01 17:20:35 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ static void	ft_display_number(t_data *d, int line, int column, int h)
 	column *= size[0];
 	tmp = h * (TPL_WIDTH + 1);
 	str[tmp + TPL_WIDTH] = '\0';
+	line += size[1] / 2;
+	line -= TPL_HEIGHT / 2;
+	column += size[0] / 2;
+	column -= TPL_WIDTH / 2;
 	mvwprintw(stdscr, line + h, column, str + tmp);
 }
 
