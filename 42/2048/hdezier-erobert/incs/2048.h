@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:14:09 by erobert           #+#    #+#             */
-/*   Updated: 2015/02/28 21:01:47 by erobert          ###   ########.fr       */
+/*   Updated: 2015/03/01 15:05:57 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 typedef enum	e_const
 {
-	WIN_VALUE = 2048
+	WIN_VALUE = 32
 }				t_const;
 
 typedef enum	e_numbers
@@ -51,6 +51,8 @@ typedef enum	e_numbers
 
 typedef struct	s_data
 {
+	WINDOW		*w_ptr;
+	int			w_size[2];
 	char		tpls[NB][TPL_SIZE];
 	int			size;
 	int			grid[5][5];
@@ -62,5 +64,6 @@ char			*ft_strjoin(char const *s1, char const *s2);
 void			ft_signal(int i);
 void			ft_display_grid(t_data *d);
 int				ft_play(t_data *data, char input);
+int				ft_game_loop(t_data *d, char *input, int *score);
 
 #endif
