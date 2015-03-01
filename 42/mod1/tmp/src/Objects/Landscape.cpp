@@ -190,13 +190,13 @@ void	Landscape::drawPoint(unsigned int const x, unsigned int const y) const {
 	static float		z;
 
 	z = _map[x][y];
-	if (z < 0.1) {
-		glColor3f(0., 0., 0.9 + z);
-	} else if (z < 0.105) {
+	if (z < 0.15) {
+		glColor3f(z, z, 0.7 + z);
+	} else if (z < 0.155) {
 		glColor3f(1., 1., 1 - z);
 	} else if (z < 0.4) {
 		glColor3f(0.2, z, 0.2);
-	} else if (z < 0.6) {
+	} else if (z < 0.7) {
 		glColor3f(0.1 + z, z, 0.1);
 	} else {
 		glColor3f(0.9, 0.8, 0.7);
