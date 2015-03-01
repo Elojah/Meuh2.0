@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 16:46:13 by erobert           #+#    #+#             */
-/*   Updated: 2015/03/01 17:02:05 by erobert          ###   ########.fr       */
+/*   Updated: 2015/03/01 17:14:08 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,15 @@ static void	ft_display_cell(t_data *d, int line, int column)
 	}
 }
 
-static void	ft_display_number(t_data *d, int line, int column, char *str, int h)
+static void	ft_display_number(t_data *d, int line, int column, int h)
 {
 	int		tmp;
+	char	*str;
 	int		size[2];
 
 	size[0] = d->w_size[0] / d->size;
 	size[1] = d->w_size[1] / d->size;
+	str = d->tpls[d->grid[line][column]];
 	line *= size[1];
 	column *= size[0];
 	tmp = h * (TPL_WIDTH + 1);
@@ -57,7 +59,7 @@ static void	ft_number_loop(t_data *d, int i)
 		while (++j < d->size)
 		{
 			attron(COLOR_PAIR(d->grid[i][j]));
-			ft_display_number(d, i, j, d->tpls[d->grid[i][j]], h);
+			ft_display_number(d, i, j, h);
 			attroff(COLOR_PAIR(d->grid[i][j]));
 		}
 	}
