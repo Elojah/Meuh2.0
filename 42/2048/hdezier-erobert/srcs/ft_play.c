@@ -68,43 +68,45 @@ static void		pop_new(t_data *data)
 }
 
 static int		ft_move_case(t_data *data, int index[2]
-	, int dir[2], int prev[2])
+	, int dir[2], int prev[3])
 {
-	int			next_index[2];
+	int			nxi[2];
 
-	next_index[0] = index[0] + dir[0];
-	next_index[1] = index[1] + dir[1];
-	if (data->grid[INDEX] != N_0
-		&& next_index[0] >= 0 && next_index[0] < data->size
-		&& next_index[1] >= 0 && next_index[1] < data->size)
+	nxi[0] = index[0] + dir[0];
+	nxi[1] = index[1] + dir[1];
+	if (data->grid[INDEX] != N_0 && nxi[0] >= 0 && nxi[0] < data->size
+		&& nxi[1] >= 0 && nxi[1] < data->size)
 	{
 		if (data->grid[NEXT] == N_0)
 		{
 			data->grid[NEXT] = data->grid[INDEX];
 			data->grid[INDEX] = N_0;
+			prev[2] = 1;
 			return (-1);
 		}
-		else if ((next_index[0] != prev[0] || next_index[1] != prev[1])
+		else if ((nxi[0] != prev[0] || nxi[1] != prev[1])
 			&& data->grid[INDEX] == data->grid[NEXT])
 		{
 			data->grid[NEXT]++;
 			data->grid[INDEX] = N_0;
-			prev[0] = next_index[0];
-			prev[1] = next_index[1];
+			prev[0] = nxi[0];
+			prev[1] = nxi[1];
+			prev[2] = 1;
 		}
 	}
 	return (1);
 }
 
-static void		ft_move(t_data *data, int dir[2])
+static int		ft_move(t_data *data, int dir[2])
 {
 	int					i;
 	int					j;
-	int					prev[2];
+	int					prev[3];
 	int					save_inc;
 	int					save_index;
 
 	i = -1;
+	prev[2] = 0;
 	save_index = (dir[0] == 1 || dir[1] == 1) ? data->size - 1 : 0;
 	save_inc = (!save_index) ? 1 : -1;
 	while (++i < data->size)
@@ -120,20 +122,26 @@ static void		ft_move(t_data *data, int dir[2])
 				j += (save_inc * ft_move_case(data, (int[2]){j, i}, dir, prev));
 		}
 	}
+	return (prev[2]);
 }
 
 int				ft_play(t_data *data, char input)
 {
+	int			moved;
+
 	if (input == 'w')
-		ft_move(data, (int[2]){-1, 0});
+		moved = ft_move(data, (int[2]){-1, 0});
 	else if (input == 'a')
-		ft_move(data, (int[2]){0, -1});
+		moved = ft_move(data, (int[2]){0, -1});
 	else if (input == 's')
-		ft_move(data, (int[2]){1, 0});
+		moved = ft_move(data, (int[2]){1, 0});
 	else if (input == 'd')
-		ft_move(data, (int[2]){0, 1});
+		moved = ft_move(data, (int[2]){0, 1});
 	else
 		return (0);
-	pop_new(data);
+	if (moved)
+		pop_new(data);
+	else
+		return (0);
 	return (check_score(data));
 }

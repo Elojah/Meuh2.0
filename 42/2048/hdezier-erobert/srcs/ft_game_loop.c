@@ -17,19 +17,20 @@ int			ft_game_loop(t_data *d, char *input, int *score)
 	int		tmp;
 
 	tmp = ft_play(d, *input);
+	clear();
+	ft_display_grid(d);
 	if (tmp < 0)
 	{
 		mvwprintw(stdscr, 0, 0, "You lost !\n Final score: %d", *score);
+		refresh();
 		return (0);
 	}
 	*score += (1 << tmp);
-	clear();
-	ft_display_grid(d);
 	if ((1 << tmp) == WIN_VALUE)
 		mvwprintw(stdscr, 0, 0, "You won !\n Final score: %d", *score);
 	else if (tmp > 0)
 		mvwprintw(stdscr, 0, 0, "score: %d", *score);
-	refresh();
 	*input = getch();
+	refresh();
 	return (1);
 }
