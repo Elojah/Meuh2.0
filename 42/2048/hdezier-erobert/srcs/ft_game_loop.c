@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/01 14:26:48 by erobert           #+#    #+#             */
-/*   Updated: 2015/03/01 16:33:27 by erobert          ###   ########.fr       */
+/*   Updated: 2015/03/01 18:33:18 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int			ft_game_loop(t_data *d, char *input, int *score)
 		refresh();
 		return (0);
 	}
-	*score += (1 << tmp);
+	*score += (tmp > 0 ? (1 << tmp) : 0);
 	if ((1 << tmp) == WIN_VALUE)
 		mvwprintw(stdscr, 0, 0, "You won !\n Final score: %d", *score);
-	else if (tmp > 0)
+	else
 		mvwprintw(stdscr, 0, 0, "score: %d", *score);
 	*input = getch();
 	refresh();

@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:17:48 by erobert           #+#    #+#             */
-/*   Updated: 2015/03/01 17:59:44 by erobert          ###   ########.fr       */
+/*   Updated: 2015/03/01 18:30:52 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int			main(int ac, char **av)
 	ft_get_tpls(&d);
 	d.w_ptr = initscr();
 	noecho();
+	keypad(d.w_ptr, 1);
 	curs_set(0);
 	ft_init_data(&d, ac, av);
 	ft_display_grid(&d);
