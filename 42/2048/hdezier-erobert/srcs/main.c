@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:17:48 by erobert           #+#    #+#             */
-/*   Updated: 2015/03/01 14:10:48 by erobert          ###   ########.fr       */
+/*   Updated: 2015/03/01 15:26:03 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static void	ft_init_data(t_data *d, int ac, char **av)
 		d->size = 5;
 	else
 		d->size = 4;
+	getmaxyx(d->w_ptr, d->w_size[0], d->w_size[1]);
 	ft_init_grid(d);
 	start_color();
 	init_pair(N_0, COLOR_BLACK, COLOR_WHITE);
@@ -95,27 +96,24 @@ int			main(int ac, char **av)
 	t_data	d;
 	char	input;
 	int		score;
+	int		result;
 
 	signal(SIGINT, &ft_signal);
 	signal(SIGQUIT, &ft_signal);
 	ft_get_tpls(&d);
-	initscr();
+	d.w_ptr = initscr();
 	noecho();
 	curs_set(0);
 	ft_init_data(&d, ac, av);
 	ft_display_grid(&d);
 	input = getch();
+	score = 0;
 	while (input != KEY_ESC)
 	{
-		score = ft_play(&d, input);
-		clear();
-		ft_display_grid(&d);
-		if (score > 0)
-			mvwprintw(stdscr, 0, 0, "score: %d", score);
-		else if (score < 0)
-			mvwprintw(stdscr, 0, 0, "You lost !\n Final score: %d", -score);
-		refresh();
-		input = getch();
+		if (result)
+			result = ft_game_loop(&d, &input, &score);
+		else
+			input = getch();
 	}
 	endwin();
 	return (0);
