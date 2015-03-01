@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:17:48 by erobert           #+#    #+#             */
-/*   Updated: 2015/03/01 18:30:52 by erobert          ###   ########.fr       */
+/*   Updated: 2015/03/01 19:06:00 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static int	ft_get_tpl(t_data *d, int i, char *name)
 static int	ft_get_tpls(t_data *d)
 {
 	int		i;
+	int		x;
 
 	ft_get_tpl(d, 0, ft_itoa(0));
 	i = 0;
@@ -44,7 +45,10 @@ static int	ft_get_tpls(t_data *d)
 		if (ft_get_tpl(d, i, ft_itoa(1 << i)))
 			return (1);
 	}
-	return (0);
+	x = WIN_VALUE;
+	while (!(x % 2) && x > 1)
+		x /= 2;
+	return (x != 1);
 }
 
 static void	ft_init_grid(t_data *d)
@@ -86,6 +90,7 @@ static void	ft_init_data(t_data *d, int ac, char **av)
 	init_pair(N_2048, COLOR_BLACK, COLOR_RED);
 	init_pair(N_4096, COLOR_BLACK, COLOR_RED);
 	init_pair(N_8192, COLOR_BLACK, COLOR_RED);
+	ft_display_grid(d);
 }
 
 int			main(int ac, char **av)
@@ -97,13 +102,13 @@ int			main(int ac, char **av)
 
 	signal(SIGINT, &ft_signal);
 	signal(SIGQUIT, &ft_signal);
-	ft_get_tpls(&d);
+	if (ft_get_tpls(&d))
+		return (1);
 	d.w_ptr = initscr();
 	noecho();
 	keypad(d.w_ptr, 1);
 	curs_set(0);
 	ft_init_data(&d, ac, av);
-	ft_display_grid(&d);
 	input = getch();
 	score = 0;
 	while (input != KEY_ESC)
