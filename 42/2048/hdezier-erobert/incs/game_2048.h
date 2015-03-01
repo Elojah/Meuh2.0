@@ -24,7 +24,7 @@
 # define TPL_HEIGHT 6
 # define TPL_SIZE 150
 # define TPL_FOLDER "tpls2/"
-# define NEXT next_index[0]][next_index[1]
+# define NEXT nxi[0]][nxi[1]
 # define INDEX index[0]][index[1]
 
 typedef enum	e_const

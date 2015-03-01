@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:17:48 by erobert           #+#    #+#             */
-/*   Updated: 2015/03/01 17:59:44 by erobert          ###   ########.fr       */
+/*   Updated: 2015/03/01 18:30:52 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,8 @@ static void	ft_init_grid(t_data *d)
 		while (++j < d->size)
 			d->grid[i][j] = N_0;
 	}
-	d->grid[0][0] = N_8;
-	d->grid[0][1] = N_4;
-	d->grid[0][2] = N_4;
-	d->grid[0][3] = N_0;
+	d->grid[0][0] = N_2;
+	d->grid[2][2] = N_2;
 }
 
 static void	ft_init_data(t_data *d, int ac, char **av)
@@ -102,6 +100,7 @@ int			main(int ac, char **av)
 	ft_get_tpls(&d);
 	d.w_ptr = initscr();
 	noecho();
+	keypad(d.w_ptr, 1);
 	curs_set(0);
 	ft_init_data(&d, ac, av);
 	ft_display_grid(&d);
