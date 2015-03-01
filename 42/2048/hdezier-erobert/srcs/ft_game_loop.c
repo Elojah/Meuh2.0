@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "2048.h"
+#include "game_2048.h"
 
 int			ft_game_loop(t_data *d, char *input, int *score)
 {

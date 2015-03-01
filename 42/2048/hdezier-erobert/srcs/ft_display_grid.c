@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "2048.h"
+#include "game_2048.h"
 
 static void	ft_display_cell(t_data *d, int line, int column)
 {

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   2048.h                                             :+:      :+:    :+:   */
+/*   game_2048.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:14:09 by erobert           #+#    #+#             */
 /*   Updated: 2015/03/01 15:05:57 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _2048_H_
-# define _2048_H_
+#ifndef GAME_2048_H
+# define GAME_2048_H
 
 # include <fcntl.h>
 # include <ncurses.h>
@@ -24,6 +24,8 @@
 # define TPL_HEIGHT 3
 # define TPL_SIZE 24
 # define TPL_FOLDER "tpls/"
+# define NEXT next_index[0]][next_index[1]
+# define INDEX index[0]][index[1]
 
 typedef enum	e_const
 {
