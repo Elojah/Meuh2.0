@@ -29,7 +29,6 @@ private:
 
 	void						assignValue(char *);
 	void						smoothMap(void);
-	float						magicFunction(float n);
 	void						smoothPoint(t_point const&, t_point const&);
 
 	void						clearMap(void);

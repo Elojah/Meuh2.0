@@ -79,13 +79,6 @@ void	Landscape::smoothMap(void) {
 	}
 }
 
-float	Landscape::magicFunction(float n) {
-	/*
-	**0. > n >= 1.
-	*/
-	return ((asin(n) * 0.66));
-}
-
 void	Landscape::smoothPoint(t_point const &originPoint, t_point const &closestPoint) {
 	unsigned int	i;
 	unsigned int	j;
@@ -107,11 +100,14 @@ void	Landscape::smoothPoint(t_point const &originPoint, t_point const &closestPo
 				z = ((sin((M_PI / 2) + sqrt(dist / maxDist) * M_PI) + 1.) / 2.) * (originPoint.z);
 				if (_map[i][j] == -1.) {
 					_map[i][j] = z;
-				} else if (_map[i][j] < z) {
-					_map[i][j] = z + magicFunction(_map[i][j]);
-				} else if (_map[i][j] > z) {
-					_map[i][j] = _map[i][j] + magicFunction(z);
+				} else {
+					_map[i][j] += z;
 				}
+				// } else if (_map[i][j] <= z) {
+				// 	_map[i][j] = z + magicFunction(_map[i][j]);
+				// } else if (_map[i][j] > z) {
+				// 	_map[i][j] = _map[i][j] + magicFunction(z);
+				// }
 			}
 		}
 	}
