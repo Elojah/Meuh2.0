@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:14:09 by erobert           #+#    #+#             */
-/*   Updated: 2015/03/01 15:05:57 by erobert          ###   ########.fr       */
+/*   Updated: 2015/03/01 18:07:04 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 # include <unistd.h>
 
 # define KEY_ESC 27
-# define TPL_WIDTH 7
-# define TPL_HEIGHT 3
-# define TPL_SIZE 24
-# define TPL_FOLDER "tpls/"
+# define TPL_WIDTH 24
+# define TPL_HEIGHT 6
+# define TPL_SIZE 150
+# define TPL_FOLDER "tpls2/"
 # define NEXT next_index[0]][next_index[1]
 # define INDEX index[0]][index[1]
 
 typedef enum	e_const
 {
-	WIN_VALUE = 32
+	WIN_VALUE = 2048
 }				t_const;
 
 typedef enum	e_numbers

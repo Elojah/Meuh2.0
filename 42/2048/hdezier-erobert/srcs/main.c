@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:17:48 by erobert           #+#    #+#             */
-/*   Updated: 2015/03/01 15:26:03 by erobert          ###   ########.fr       */
+/*   Updated: 2015/03/01 17:59:44 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ static int	ft_get_tpl(t_data *d, int i, char *name)
 	free(name);
 	if (fd == -1)
 		return (1);
-	if (!read(fd, d->tpls[i], 24))
+	if (!read(fd, d->tpls[i], TPL_SIZE))
 		return (1);
-	d->tpls[i][TPL_SIZE - 1] = '\0';
 	if (close(fd) == -1)
 		return (1);
 	return (0);
