@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:17:48 by erobert           #+#    #+#             */
-/*   Updated: 2015/03/01 15:05:42 by erobert          ###   ########.fr       */
+/*   Updated: 2015/03/01 15:26:03 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static void	ft_init_data(t_data *d, int ac, char **av)
 		d->size = 5;
 	else
 		d->size = 4;
+	getmaxyx(d->w_ptr, d->w_size[0], d->w_size[1]);
 	ft_init_grid(d);
 	start_color();
 	init_pair(N_0, COLOR_BLACK, COLOR_WHITE);

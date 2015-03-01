@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/01 14:26:48 by erobert           #+#    #+#             */
-/*   Updated: 2015/03/01 15:07:46 by erobert          ###   ########.fr       */
+/*   Updated: 2015/03/01 16:33:27 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int			ft_game_loop(t_data *d, char *input, int *score)
 {
 	int		tmp;
 
-	getmaxyx(d->w_ptr, d->w_size[0], d->w_size[1]);
 	tmp = ft_play(d, *input);
 	if (tmp < 0)
 	{
