@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/2048.h"
+#include "game_2048.h"
 
 static void	ft_display_cell(int line, int column, int h, char *str)
 {

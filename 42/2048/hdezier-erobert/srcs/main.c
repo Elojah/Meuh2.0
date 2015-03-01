@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "2048.h"
+#include "game_2048.h"
 
 static int	ft_get_tpl(t_data *d, int i, char *name)
 {
