@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 15:17:48 by erobert           #+#    #+#             */
-/*   Updated: 2015/02/28 21:10:08 by erobert          ###   ########.fr       */
+/*   Updated: 2015/03/01 14:10:48 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,20 +71,20 @@ static void	ft_init_data(t_data *d, int ac, char **av)
 		d->size = 4;
 	ft_init_grid(d);
 	start_color();
-	init_pair(N_0, COLOR_WHITE, COLOR_BLACK);
-	init_pair(N_2, COLOR_CYAN, COLOR_BLACK);
-	init_pair(N_4, COLOR_CYAN, COLOR_BLACK);
-	init_pair(N_8, COLOR_CYAN, COLOR_BLACK);
-	init_pair(N_16, COLOR_BLUE, COLOR_BLACK);
-	init_pair(N_32, COLOR_BLUE, COLOR_BLACK);
-	init_pair(N_64, COLOR_BLUE, COLOR_BLACK);
-	init_pair(N_128, COLOR_MAGENTA, COLOR_BLACK);
-	init_pair(N_256, COLOR_MAGENTA, COLOR_BLACK);
-	init_pair(N_512, COLOR_MAGENTA, COLOR_BLACK);
-	init_pair(N_1024, COLOR_RED, COLOR_BLACK);
-	init_pair(N_2048, COLOR_RED, COLOR_BLACK);
-	init_pair(N_4096, COLOR_RED, COLOR_BLACK);
-	init_pair(N_8192, COLOR_RED, COLOR_BLACK);
+	init_pair(N_0, COLOR_BLACK, COLOR_WHITE);
+	init_pair(N_2, COLOR_BLACK, COLOR_CYAN);
+	init_pair(N_4, COLOR_BLACK, COLOR_CYAN);
+	init_pair(N_8, COLOR_BLACK, COLOR_CYAN);
+	init_pair(N_16, COLOR_BLACK, COLOR_BLUE);
+	init_pair(N_32, COLOR_BLACK, COLOR_BLUE);
+	init_pair(N_64, COLOR_BLACK, COLOR_BLUE);
+	init_pair(N_128, COLOR_BLACK, COLOR_MAGENTA);
+	init_pair(N_256, COLOR_BLACK, COLOR_MAGENTA);
+	init_pair(N_512, COLOR_BLACK, COLOR_MAGENTA);
+	init_pair(N_1024, COLOR_BLACK, COLOR_RED);
+	init_pair(N_2048, COLOR_BLACK, COLOR_RED);
+	init_pair(N_4096, COLOR_BLACK, COLOR_RED);
+	init_pair(N_8192, COLOR_BLACK, COLOR_RED);
 }
 
 int			main(int ac, char **av)
