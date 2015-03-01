@@ -72,9 +72,8 @@ void	Landscape::smoothMap(void) {
 
 	for (std::vector<t_point>::iterator it = _immovablePoints.begin(); it != _immovablePoints.end(); ++it) {
 		findClosestPoint((*it), closestPoint);
-		std::cout << "Closest point from: " << it->x << ", " << it->y <<std::endl
-		<< "found at: \t" << closestPoint.x << ", " << closestPoint.y << std::endl;
-		std::cout << "Fill map for point (" << it->x << ", " << it->y << ") ..." << std::endl;
+		std::cout << "Closest point from:\t" << it->x << ", " << it->y << ", " << it->z << std::endl
+		<< "found at:\t\t" << closestPoint.x << ", " << closestPoint.y << ", " << closestPoint.z << std::endl;
 		smoothPoint(*it, closestPoint);
 		std::cout << "Fill map: DONE" << std::endl;
 	}
@@ -94,6 +93,9 @@ void	Landscape::smoothPoint(t_point const &originPoint, t_point const &closestPo
 	float			dist;
 	float			maxDist;
 
+	if (originPoint.z == 0.) {
+		return ;
+	}
 	maxDist = (pow(originPoint.x > closestPoint.x ? originPoint.x - closestPoint.x : closestPoint.x - originPoint.x, 2)
 			+ pow(originPoint.y > closestPoint.y ? originPoint.y - closestPoint.y : closestPoint.y - originPoint.y, 2));
 	std::cout << "Dist: " << (maxDist) << std::endl;
@@ -102,7 +104,7 @@ void	Landscape::smoothPoint(t_point const &originPoint, t_point const &closestPo
 			dist = pow(originPoint.x > i ? originPoint.x - i : i - originPoint.x, 2)
 					+ pow(originPoint.y > j ? originPoint.y - j : j - originPoint.y, 2);
 			if (dist != 0. && dist < maxDist) {
-				z = ((sin((M_PI / 2) + sqrt(dist / maxDist) * M_PI) + 1.) / 2.) * originPoint.z;
+				z = ((sin((M_PI / 2) + sqrt(dist / maxDist) * M_PI) + 1.) / 2.) * (originPoint.z);
 				if (_map[i][j] == -1.) {
 					_map[i][j] = z;
 				} else if (_map[i][j] < z) {
@@ -158,6 +160,8 @@ void	Landscape::findClosestPoint(t_point const &origin, t_point &closest) const 
 	unsigned int	yDist;
 	unsigned int	xTmp;
 	unsigned int	yTmp;
+	unsigned int	dist;
+
 
 	xDist = origin.x > WIDTH_MAP / 2 ? WIDTH_MAP - origin.x : origin.x;
 	yDist = origin.y > HEIGHT_MAP / 2 ? HEIGHT_MAP - origin.y : origin.y;
@@ -172,15 +176,16 @@ void	Landscape::findClosestPoint(t_point const &origin, t_point &closest) const 
 	}
 	closest.z = 0;
 
+	dist = xDist * xDist + yDist * yDist;
 	for (std::vector<t_point>::const_iterator it = _immovablePoints.begin(); it != _immovablePoints.end(); ++it) {
 		xTmp = it->x > origin.x ? it->x - origin.x : origin.x - it->x;
 		yTmp = it->y > origin.y ? it->y - origin.y : origin.y - it->y;
 		if ((xTmp != 0 || yTmp != 0)
-			&& xTmp * xTmp + yTmp * yTmp < xDist * xDist + yDist * yDist) {
+			&& xTmp * xTmp + yTmp * yTmp < dist) {
 			closest.x = it->x;
 			closest.y = it->y;
 			closest.z = it->z;
-			break ;
+			dist = xTmp * xTmp + yTmp * yTmp;
 		}
 	}
 }

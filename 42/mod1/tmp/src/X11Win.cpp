@@ -24,6 +24,10 @@ X11Win::~X11Win(void) {
 	glXDestroyContext(_d, _ctx);
 	XFreeColormap(_d, _cmap);
 	XCloseDisplay(_d);
+	std::cout << "Credits:" << std::endl
+	<< "\terobert" << std::endl
+	<< "\thdezier" << std::endl
+	<< "@42SchoolProject" << std::endl;
 }
 
 void		X11Win::init(void) {
@@ -143,7 +147,7 @@ void		X11Win::loop(std::vector<IObject *> &objects) {
 		glXSwapBuffers(_d, _glxWin);
 
 		if (glGetError() == GL_NO_ERROR) {
-			std::cout << "Rendering... OK" << std::endl;
+			// std::cout << "Rendering... OK" << std::endl;
 		} else {
 			std::cout << "Rendering... ERROR" << std::endl;
 		}
