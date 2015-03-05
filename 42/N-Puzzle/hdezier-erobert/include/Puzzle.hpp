@@ -6,27 +6,29 @@
 # define EMPTY _empty[0]][_empty[1]
 # define INC inc[0]][inc[1]
 
-# include <vector>
+# include <fstream> 
 # include <iostream>
+# include <sstream>
+# include <string>
+# include <vector>
 
 class IHeuristic;
 
 class Puzzle
 {
 public:
-	Puzzle(std::istream &is);
-	~Puzzle(void);
-protected:
-private:
 	Puzzle(void);
+	~Puzzle(void);
 
+	void						parseFile(std::ifstream &ifs);
+	void						printPuzzle(void) const;
+private:
 	struct sCase
 	{
 		unsigned int			value;
 		unsigned int			dist;
 		unsigned int			result;
 	};
-
 	enum eMove	
 	{
 		UP = 0,
@@ -35,7 +37,10 @@ private:
 		RIGHT
 	};
 
-	void						parseFile(std::ifstream &ifs);
+	Puzzle						&operator=(Puzzle const &p);
+
+	int							parseSize(char *line);
+	void						parsePuzzle(char *line, unsigned int i);
 	void						move(char);
 	void						resolve(void);
 
@@ -43,7 +48,6 @@ private:
 	unsigned int				_empty[2];
 	unsigned int				_size;
 	std::vector<IHeuristic *>	_h;
-	Puzzle						&operator=(Puzzle const &p);
 };
 
 #endif

@@ -1,24 +1,69 @@
 #include "Puzzle.hpp"
 
-Puzzle::Puzzle(std::istream &is)
-{
-	(void)is;
-}
+Puzzle::Puzzle(void):
+	_size(0)
+{}
 
 Puzzle::~Puzzle(void) {}
 
-void			Puzzle::parseFile(std::ifstream &ifs)
+int						Puzzle::parseSize(char *line)
 {
-	char		buf[BUF_SIZE];
+	std::stringstream	ss;
 
-//	ifs.getline(buf)
-	(void)ifs;
+	line = strtok(line, "#");
+	ss << line;
+	ss >> _size;
+	if (!_size)
+		return (-1);
+	return (0);
 }
 
-void			Puzzle::move(char dir)
+void					Puzzle::parsePuzzle(char *line, unsigned int i)
 {
-	sCase			tmp;
-	int				inc[2];
+	std::stringstream	ss;
+	unsigned int		j(0);
+
+	line = strtok(line, "#");
+	ss << line;
+	while (j < _size)
+		ss >> _map[i][j++].value;
+}
+
+void					Puzzle::parseFile(std::ifstream &ifs)
+{
+	char				buf[BUF_SIZE];
+	unsigned int		i(0);
+
+	buf[0] = '#';
+	while (!ifs.eof() && buf[0] == '#')
+		ifs.getline(buf, BUF_SIZE);
+	if (ifs.eof() || parseSize(buf))
+		return ;
+	while (!ifs.eof())
+	{
+		ifs.getline(buf, BUF_SIZE);
+		parsePuzzle(buf, i++);
+	}
+}
+
+void					Puzzle::printPuzzle(void) const
+{
+	unsigned int		i(-1);
+	unsigned int		j;
+
+	while (++i < _size)
+	{
+		j = -1;
+		while (++j < _size)
+			std::cout << _map[i][j].value << " ";
+		std::cout << std::endl;
+	}
+}
+
+void					Puzzle::move(char dir)
+{
+	sCase				tmp;
+	int					inc[2];
 
 	inc[0] = dir < 2 ? 0 : 1;
 	inc[1] = dir < 2 ? 1 : 0;

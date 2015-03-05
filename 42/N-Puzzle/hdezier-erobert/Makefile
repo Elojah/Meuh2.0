@@ -15,6 +15,7 @@ RM = rm -rf
 CLASS = \
 		Heuristic/Manhattan\
 		Puzzle\
+		main\
 
 #List interfaces here
 INTERFACE = \
