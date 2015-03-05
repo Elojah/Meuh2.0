@@ -27,7 +27,7 @@ private:
 		unsigned int			result;
 	};
 
-	enum eMove	
+	enum eMove
 	{
 		UP = 0,
 		DOWN,
@@ -36,8 +36,9 @@ private:
 	};
 
 	void						parseFile(std::ifstream &ifs);
-	void						move(char);
+	void						move(char const);
 	void						resolve(void);
+	unsigned int				heuristicManhattan(unsigned int const, unsigned int const) const;
 
 	sCase						_map[MAX_SIZE][MAX_SIZE];
 	unsigned int				_empty[2];

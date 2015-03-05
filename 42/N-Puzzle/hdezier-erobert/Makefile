@@ -13,6 +13,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = \
+		mainTest\
 		Heuristic/Manhattan\
 		Puzzle\
 
