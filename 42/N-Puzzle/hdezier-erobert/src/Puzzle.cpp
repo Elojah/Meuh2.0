@@ -5,14 +5,21 @@ Puzzle::Puzzle(std::istream &is)
 	unsigned int	i;
 	unsigned int	j;
 
-	_size = 4;
 	(void)is;
+	/*Remove*/
+	_size = 4;
 	for (i = 0; i < _size; ++i) {
 		for (j = 0; j < _size; ++j) {
-			_map[i][j].value = i % _size + j;
-			_map[i][j].result = i % _size + j + 1;
+			_initMap[i][j] = i % _size + j;
 		}
 	}
+	/*!Remove*/
+	for (i = 0; i < _size; ++i) {
+		for (j = 0; j < _size; ++j) {
+			_finalMap[i][j] = i % _size + j + 1;
+		}
+	}
+	_finalMap[_size - 1][_size - 1] = 0;
 }
 
 Puzzle::~Puzzle(void) {}
@@ -24,25 +31,6 @@ void			Puzzle::parseFile(std::ifstream &ifs)
 //	ifs.getline(buf)
 	(void)ifs;
 	(void)buf;
-}
-
-void			Puzzle::move(char const dir)
-{
-	sCase			tmp;
-	int				inc[2];
-
-	inc[0] = dir < 2 ? 0 : 1;
-	inc[1] = dir < 2 ? 1 : 0;
-	inc[0] *= dir % 2 ? 1 : -1;
-	inc[1] *= dir % 2 ? 1 : -1;
-	inc[0] += _empty[0];
-	inc[1] += _empty[1];
-	if (inc[0] >= 0 && inc[0] < static_cast<int>(_size)
-		&& inc[1] >= 0 && inc[1] < static_cast<int>(_size)) {
-		tmp = _map[EMPTY];
-		_map[EMPTY] = _map[INC];
-		_map[INC] = tmp;
-	}
 }
 
 /*
@@ -89,26 +77,51 @@ function reconstruct_path(came_from,current)
 */
 
 unsigned int	Puzzle::heuristicManhattan(unsigned int const x, unsigned int const y) const{
-	unsigned int		i;
-	unsigned int		j;
-	unsigned int		count(0);
+	(void)x;
+	(void)y;
+	// unsigned int		i;
+	// unsigned int		j;
+	// unsigned int		count(0);
 
-	for (i = 0; i < _size; ++i) {
-		for (j = 0; j < _size; ++j) {
-			if (_map[x][y].value == _map[i][j].result) {
-				return (count);
-			}
-			count++;
-		}
-	}
+	// for (i = 0; i < _size; ++i) {
+	// 	for (j = 0; j < _size; ++j) {
+	// 		if (_map[x][y] == _map[i][j]) {
+	// 			return (count);
+	// 		}
+	// 		count++;
+	// 	}
+	// }
+	return (0);
+}
+
+bool			Puzzle::isResolved(void) {
+	// unsigned int		i;
+	// unsigned int		j;
+
+	// for (i = 0; i < _size; ++i) {
+	// 	for (j = 0; j < _size; ++j) {
+	// 		if (_map[i][j] != _map[i][j]) {
+	// 			return (false);
+	// 		}
+	// 	}
+	// }
+	return (true);
 }
 
 void			Puzzle::resolve(void) {
-	std::vector<unsigned int>	openset;
-	std::vector<unsigned int>	closedset;
+	// std::vector<unsigned int[][]>	openset;
+	// std::vector<unsigned int>		closedset;
+	// bool						succes(true);
 
-	openset.reserve(_size * _size);
-	closedset.reserve(_size * _size);
+	// openset.reserve(_size * _size);
+	// closedset.reserve(_size * _size);
+	// while (openset.size() > 0 && succes) {
+	// 	dobestmove();
+	// 	if (isResolved()) {
+	// 		return ;
+	// 	}
+	// 	;
+	// }
 }
 
 /*

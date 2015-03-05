@@ -7,6 +7,7 @@
 # define INC inc[0]][inc[1]
 
 # include <vector>
+# include <array>
 # include <iostream>
 
 class IHeuristic;
@@ -20,12 +21,7 @@ protected:
 private:
 	Puzzle(void);
 
-	struct sCase
-	{
-		unsigned int			value;
-		unsigned int			dist;
-		unsigned int			result;
-	};
+	typedef						int		state[MAX_SIZE][MAX_SIZE];
 
 	enum eMove
 	{
@@ -36,11 +32,13 @@ private:
 	};
 
 	void						parseFile(std::ifstream &ifs);
-	void						move(char const);
+	void						move(int **, char const);
 	void						resolve(void);
 	unsigned int				heuristicManhattan(unsigned int const, unsigned int const) const;
+	bool						isResolved(void);
 
-	sCase						_map[MAX_SIZE][MAX_SIZE];
+	state						_initMap;
+	state						_finalMap;
 	unsigned int				_empty[2];
 	unsigned int				_size;
 	std::vector<IHeuristic *>	_h;
