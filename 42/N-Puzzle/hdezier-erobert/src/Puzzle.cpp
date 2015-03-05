@@ -1,21 +1,23 @@
 #include "Puzzle.hpp"
 
-Puzzle::Puzzle(void) {
-}
-
-Puzzle::Puzzle(std::istream &is) {
+Puzzle::Puzzle(std::istream &is)
+{
 	(void)is;
 }
 
-Puzzle::~Puzzle(void) {
+Puzzle::~Puzzle(void) {}
+
+void			Puzzle::parseFile(std::ifstream &ifs)
+{
+	char		buf[BUF_SIZE];
+
+//	ifs.getline(buf)
+	(void)ifs;
 }
 
-void			Puzzle::parse(std::istream &is) {
-	(void)is;
-}
-
-void			Puzzle::move(char dir) {
-	tCase			tmp;
+void			Puzzle::move(char dir)
+{
+	sCase			tmp;
 	int				inc[2];
 
 	inc[0] = dir < 2 ? 0 : 1;
