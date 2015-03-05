@@ -6,7 +6,7 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/17 17:24:53 by erobert           #+#    #+#              #
-#    Updated: 2015/03/01 14:27:28 by erobert          ###   ########.fr        #
+#    Updated: 2015/03/01 18:48:39 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -17,7 +17,7 @@ OBJS = $(SRCS:srcs/%.c=objs/%.o)
 TMPS = $(SRCS:.c=.c~) Makefile~ incs/2048.h~
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-LFLAGS = -L./libft/ -lft -lcurses -ltermcap
+LFLAGS = -L./libft/ -lft -lncurses -ltermcap
 
 .PHONY: all clean objs_dir fclean re
 
