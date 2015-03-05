@@ -6,7 +6,12 @@
 # define EMPTY _empty[0]][_empty[1]
 # define INC inc[0]][inc[1]
 
+<<<<<<< HEAD
 # include <fstream> 
+=======
+# include <vector>
+# include <array>
+>>>>>>> 035880079f5d85aade86ac559b06452036b89343
 # include <iostream>
 # include <sstream>
 # include <string>
@@ -20,6 +25,7 @@ public:
 	Puzzle(void);
 	~Puzzle(void);
 
+<<<<<<< HEAD
 	void						parseFile(std::ifstream &ifs);
 	void						printPuzzle(void) const;
 private:
@@ -30,6 +36,11 @@ private:
 		unsigned int			result;
 	};
 	enum eMove	
+=======
+	typedef						int		state[MAX_SIZE][MAX_SIZE];
+
+	enum eMove
+>>>>>>> 035880079f5d85aade86ac559b06452036b89343
 	{
 		UP = 0,
 		DOWN,
@@ -37,14 +48,22 @@ private:
 		RIGHT
 	};
 
+<<<<<<< HEAD
 	Puzzle						&operator=(Puzzle const &p);
 
 	int							parseSize(char *line);
 	void						parsePuzzle(char *line, unsigned int i);
 	void						move(char);
+=======
+	void						parseFile(std::ifstream &ifs);
+	void						move(int **, char const);
+>>>>>>> 035880079f5d85aade86ac559b06452036b89343
 	void						resolve(void);
+	unsigned int				heuristicManhattan(unsigned int const, unsigned int const) const;
+	bool						isResolved(void);
 
-	sCase						_map[MAX_SIZE][MAX_SIZE];
+	state						_initMap;
+	state						_finalMap;
 	unsigned int				_empty[2];
 	unsigned int				_size;
 	std::vector<IHeuristic *>	_h;
