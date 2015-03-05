@@ -6,20 +6,6 @@ Puzzle::Puzzle(std::istream &is)
 	unsigned int	j;
 
 	(void)is;
-	/*Remove*/
-	_size = 4;
-	for (i = 0; i < _size; ++i) {
-		for (j = 0; j < _size; ++j) {
-			_initMap[i][j] = i % _size + j;
-		}
-	}
-	/*!Remove*/
-	for (i = 0; i < _size; ++i) {
-		for (j = 0; j < _size; ++j) {
-			_finalMap[i][j] = i % _size + j + 1;
-		}
-	}
-	_finalMap[_size - 1][_size - 1] = 0;
 }
 
 Puzzle::~Puzzle(void) {}
@@ -92,20 +78,6 @@ unsigned int	Puzzle::heuristicManhattan(unsigned int const x, unsigned int const
 	// 	}
 	// }
 	return (0);
-}
-
-bool			Puzzle::isResolved(void) {
-	// unsigned int		i;
-	// unsigned int		j;
-
-	// for (i = 0; i < _size; ++i) {
-	// 	for (j = 0; j < _size; ++j) {
-	// 		if (_map[i][j] != _map[i][j]) {
-	// 			return (false);
-	// 		}
-	// 	}
-	// }
-	return (true);
 }
 
 void			Puzzle::resolve(void) {
