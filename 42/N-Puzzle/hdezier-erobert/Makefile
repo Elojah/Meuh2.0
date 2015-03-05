@@ -13,6 +13,10 @@ RM = rm -rf
 
 #List classes here
 CLASS = \
+		State\
+		ParserLexer/Lexer\
+		ParserLexer/Parser\
+		mainTest\
 		Heuristic/Manhattan\
 		Puzzle\
 
