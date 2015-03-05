@@ -11,12 +11,15 @@
 # include <iostream>
 
 class IHeuristic;
+class State;
 
 class Puzzle
 {
 public:
-	Puzzle(std::istream &is);
+	Puzzle(unsigned int);
 	~Puzzle(void);
+	bool						resolve(void);
+	void						showStates(void);
 protected:
 private:
 	Puzzle(void);
@@ -29,11 +32,11 @@ private:
 		RIGHT
 	};
 
-	void						parseFile(std::ifstream &ifs);
-	void						resolve(void);
+	bool						containState(State const *s);
 
-	state						_initMap;
-	state						_finalMap;
+	std::vector<State *>		_openset;
+	std::vector<State *>		_closedset;
+	State						*_finalState;
 	unsigned int				_size;
 	std::vector<IHeuristic *>	_h;
 	Puzzle						&operator=(Puzzle const &p);

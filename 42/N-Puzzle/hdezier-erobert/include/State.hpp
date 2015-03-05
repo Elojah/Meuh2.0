@@ -1,22 +1,43 @@
 #ifndef STATE_H
 # define STATE_H
 
+# define EMPTY_VALUE 0
 # define MAX_SIZE 4
+# define MAX_CASE 16
 # define EMPTY _empty[0]][_empty[1]
 # define INC inc[0]][inc[1]
+
+#include <array>
 
 class State
 {
 public:
-	State(unsigned int);
+	State(unsigned int size, std::array<int, MAX_CASE> const &map);
+	State(State const&, char dir);
 	~State(void);
-	void						move(char const);
+	void													display(void);
+	void													move(char const dir);
+	std::array<State *, 4>									expand(void);
+	std::array<std::array<int, MAX_SIZE>, MAX_SIZE>			getMap(void) const;
+	void													finalFillArray(void);
 protected:
 private:
+	typedef std::array<std::array<int, MAX_SIZE>, MAX_SIZE>	mapArray;
+
+	enum eMove
+	{
+		UP = 0,
+		DOWN,
+		LEFT,
+		RIGHT
+	};
+
 	State(void);
-	int							_map[MAX_SIZE][MAX_SIZE];
-	unsigned int				_size;
-	unsigned int				_empty[2];
+
+	mapArray												_map;
+	unsigned int											_size;
+	unsigned int											_empty[2];
+	bool													operator==(State const &s) const;
 };
 
 #endif
