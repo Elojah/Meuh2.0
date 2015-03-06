@@ -1,110 +1,22 @@
+#include <array>
 #include "Puzzle.hpp"
+#include "State.hpp"
 
-Puzzle::Puzzle(void):
-	_size(0)
-{}
+Puzzle::Puzzle(unsigned int size) : _size(size)
+{
+	State	s(_size, std::array<int, 16>{{
+		1, 5, 2, 4,
+		7, 8, 9, 3,
+		6, 5, 0, 10,
+		11, 12, 13, 14
+		}});
+
+	_finalState = new State(4, std::array<int, 16>{{}});
+	_finalState->finalFillArray();
+	_openset.push_back(&s);
+}
 
 Puzzle::~Puzzle(void) {}
-
-int						Puzzle::parseSize(char *line)
-{
-<<<<<<< HEAD
-	std::stringstream	ss;
-
-	line = strtok(line, "#");
-	ss << line;
-	ss >> _size;
-	if (!_size)
-		return (-1);
-	return (0);
-=======
-	unsigned int	i;
-	unsigned int	j;
-
-	(void)is;
-	/*Remove*/
-	std::stringstream   ss;	_size = 4;
-	for (i = 0; i < _size; ++i) {
-		for (j = 0; j < _size; ++j) {
-			_initMap[i][j] = i % _size + j;
-		}
-	}
-	/*!Remove*/
-	for (i = 0; i < _size; ++i) {
-		for (j = 0; j < _size; ++j) {
-			_finalMap[i][j] = i % _size + j + 1;
-		}
-	}
-	_finalMap[_size - 1][_size - 1] = 0;
->>>>>>> 035880079f5d85aade86ac559b06452036b89343
-}
-
-void					Puzzle::parsePuzzle(char *line, unsigned int i)
-{
-	std::stringstream	ss;
-	unsigned int		j(0);
-
-	line = strtok(line, "#");
-	ss << line;
-	while (j < _size)
-		ss >> _map[i][j++].value;
-}
-
-void					Puzzle::parseFile(std::ifstream &ifs)
-{
-	char				buf[BUF_SIZE];
-	unsigned int		i(0);
-
-	buf[0] = '#';
-	while (!ifs.eof() && buf[0] == '#')
-		ifs.getline(buf, BUF_SIZE);
-	if (ifs.eof() || parseSize(buf))
-		return ;
-	while (!ifs.eof())
-	{
-		ifs.getline(buf, BUF_SIZE);
-		parsePuzzle(buf, i++);
-	}
-}
-
-<<<<<<< HEAD
-void					Puzzle::printPuzzle(void) const
-{
-	unsigned int		i(-1);
-	unsigned int		j;
-
-	while (++i < _size)
-	{
-		j = -1;
-		while (++j < _size)
-			std::cout << _map[i][j].value << " ";
-		std::cout << std::endl;
-	}
-}
-
-void					Puzzle::move(char dir)
-{
-	sCase				tmp;
-	int					inc[2];
-
-	inc[0] = dir < 2 ? 0 : 1;
-	inc[1] = dir < 2 ? 1 : 0;
-	inc[0] *= dir % 2 ? 1 : -1;
-	inc[1] *= dir % 2 ? 1 : -1;
-	inc[0] += _empty[0];
-	inc[1] += _empty[1];
-	if (inc[0] >= 0 && inc[0] < static_cast<int>(_size)
-		&& inc[1] >= 0 && inc[1] < static_cast<int>(_size)) {
-		tmp = _map[EMPTY];
-		_map[EMPTY] = _map[INC];
-		_map[INC] = tmp;
-	}
-=======
-//	ifs.getline(buf)
-	(void)ifs;
-	(void)buf;
->>>>>>> 035880079f5d85aade86ac559b06452036b89343
-}
 
 /*
 **
@@ -149,54 +61,55 @@ function reconstruct_path(came_from,current)
 	return total_path
 */
 
-unsigned int	Puzzle::heuristicManhattan(unsigned int const x, unsigned int const y) const{
-	(void)x;
-	(void)y;
-	// unsigned int		i;
-	// unsigned int		j;
-	// unsigned int		count(0);
-
-	// for (i = 0; i < _size; ++i) {
-	// 	for (j = 0; j < _size; ++j) {
-	// 		if (_map[x][y] == _map[i][j]) {
-	// 			return (count);
-	// 		}
-	// 		count++;
-	// 	}
-	// }
-	return (0);
+bool			Puzzle::containState(State const *s) {
+	for (std::vector<State *>::iterator oit = _openset.begin(); oit != _openset.end(); ++oit) {
+		if (s == *oit) {
+			return (true);
+		}
+	}
+	for (std::vector<State *>::iterator cit = _closedset.begin(); cit != _closedset.end(); ++cit) {
+		if (s == *cit) {
+			return (true);
+		}
+	}
+	return (false);
 }
 
-bool			Puzzle::isResolved(void) {
-	// unsigned int		i;
-	// unsigned int		j;
+bool			Puzzle::resolve(void) {
+	bool							succes(true);
+	unsigned int					i;
+	std::vector<State *>::iterator	e;
+	std::array<State *, MAX_SIZE>	s;
 
-	// for (i = 0; i < _size; ++i) {
-	// 	for (j = 0; j < _size; ++j) {
-	// 		if (_map[i][j] != _map[i][j]) {
-	// 			return (false);
-	// 		}
-	// 	}
-	// }
+	while (_openset.size() > 0 && succes) {
+		e = _openset.begin();
+		(*e)->display();
+		if (*e == _finalState) {
+			return (true);
+		}
+		_closedset.push_back(*e);
+		_openset.erase(e);
+		s = (*e)->expand();
+		for (i = 0; i < _size; ++i) {
+			if (!containState(s[i])) {
+				_openset.push_back(s[i]);
+			} else {
+				;
+			}
+		}
+		succes = false;
+	}
 	return (true);
 }
 
-void			Puzzle::resolve(void) {
-	// std::vector<unsigned int[][]>	openset;
-	// std::vector<unsigned int>		closedset;
-	// bool						succes(true);
-
-	// openset.reserve(_size * _size);
-	// closedset.reserve(_size * _size);
-	// while (openset.size() > 0 && succes) {
-	// 	dobestmove();
-	// 	if (isResolved()) {
-	// 		return ;
-	// 	}
-	// 	;
-	// }
+void		Puzzle::showStates(void) {
+	for (std::vector<State *>::iterator oit = _openset.begin(); oit != _openset.end(); ++oit) {
+		(*oit)->display();
+	}
+	for (std::vector<State *>::iterator cit = _closedset.begin(); cit != _closedset.end(); ++cit) {
+		(*cit)->display();
+	}
 }
-
 /*
 ◦ Total number of states ever selected in the "opened" set (complexity in time)
 ◦ Maximum number of states ever represented in memory at the same time

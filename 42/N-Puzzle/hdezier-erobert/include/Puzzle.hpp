@@ -6,41 +6,25 @@
 # define EMPTY _empty[0]][_empty[1]
 # define INC inc[0]][inc[1]
 
-<<<<<<< HEAD
-# include <fstream> 
-=======
 # include <vector>
 # include <array>
->>>>>>> 035880079f5d85aade86ac559b06452036b89343
 # include <iostream>
-# include <sstream>
-# include <string>
-# include <vector>
 
 class IHeuristic;
+class State;
 
 class Puzzle
 {
 public:
-	Puzzle(void);
+	Puzzle(unsigned int);
 	~Puzzle(void);
-
-<<<<<<< HEAD
-	void						parseFile(std::ifstream &ifs);
-	void						printPuzzle(void) const;
+	bool						resolve(void);
+	void						showStates(void);
+protected:
 private:
-	struct sCase
-	{
-		unsigned int			value;
-		unsigned int			dist;
-		unsigned int			result;
-	};
-	enum eMove	
-=======
-	typedef						int		state[MAX_SIZE][MAX_SIZE];
+	Puzzle(void);
 
 	enum eMove
->>>>>>> 035880079f5d85aade86ac559b06452036b89343
 	{
 		UP = 0,
 		DOWN,
@@ -48,25 +32,14 @@ private:
 		RIGHT
 	};
 
-<<<<<<< HEAD
-	Puzzle						&operator=(Puzzle const &p);
+	bool						containState(State const *s);
 
-	int							parseSize(char *line);
-	void						parsePuzzle(char *line, unsigned int i);
-	void						move(char);
-=======
-	void						parseFile(std::ifstream &ifs);
-	void						move(int **, char const);
->>>>>>> 035880079f5d85aade86ac559b06452036b89343
-	void						resolve(void);
-	unsigned int				heuristicManhattan(unsigned int const, unsigned int const) const;
-	bool						isResolved(void);
-
-	state						_initMap;
-	state						_finalMap;
-	unsigned int				_empty[2];
+	std::vector<State *>		_openset;
+	std::vector<State *>		_closedset;
+	State						*_finalState;
 	unsigned int				_size;
 	std::vector<IHeuristic *>	_h;
+	Puzzle						&operator=(Puzzle const &p);
 };
 
 #endif
