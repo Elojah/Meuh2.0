@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/05 14:18:52 by erobert           #+#    #+#             //
-//   Updated: 2015/03/05 20:59:58 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/06 16:35:20 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -34,6 +34,7 @@ static void						exec_puzzle(std::ifstream &ifs)
 		std::cout << ie->first << " " << ie->second << std::endl;
 	vector = p.parse(tokens);
 	std::cout << vector.size() << std::endl;
+	std::cout << p.getSize() << std::endl;
 	while (i < vector.size())
 	{
 		std::cout << vector[i] << "|";

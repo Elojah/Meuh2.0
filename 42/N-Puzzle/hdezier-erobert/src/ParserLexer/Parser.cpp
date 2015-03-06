@@ -6,46 +6,84 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/05 19:19:53 by erobert           #+#    #+#             //
-//   Updated: 2015/03/05 21:04:52 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/06 17:41:33 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #include "Parser.hpp"
 
-Parser::Parser(void) {}
+Parser::Parser(void):
+	_good(true),
+	_size(0)
+{}
 Parser::~Parser(void) {}
 
-unsigned int				Parser::getSize(void) const
+size_t						Parser::getSize(void) const
 {
 	return (_size);
 }
 
-int							Parser::checkSize(tToken &token)
+void						Parser::error(size_t line)
+{
+	_good = false;
+	std::cerr << "Parser: error line " << line;
+}
+void						Parser::checkValue(std::string &value, size_t line)
+{
+	std::string::iterator	it(value.begin());
+	std::string::iterator	ie(value.end());
+
+	while (it != ie)
+	{
+		if (*it < '0' || *it > '9')
+		{
+			error(line);
+			std::cerr << ": bad value" << std::endl;
+			return ;
+		}
+		it++;
+	}
+}
+void						Parser::size(tToken &token, size_t line)
 {
 	std::stringstream		ss;
 
+	checkValue(token.second, line);
 	ss << token.second;
 	ss >> _size;
 	if (!_size)
-		return (-1);
-	return (0);
+	{
+		error(line);
+		std::cerr << ": size null" << std::endl;
+		_good = false;
+	}
 }
-Parser::tTI					Parser::checkValues(tTI it, tTI ie)
+void						Parser::values(tTI &it, tTI ie, size_t line)
 {
 	std::stringstream		ss;
 	int						tmp(0);
-	unsigned int			count(0);
+	size_t					count(0);
 
 	while (it != ie)
 	{
 		if (it->first == Lexer::END || it->first == Lexer::COMMENT)
 		{
-			if (count < _size)
-				return (ie);
-			return (it);
+			if (count != _size)
+			{
+				error(line);
+				if (count < _size)
+					std::cerr << ": not enough columns" << std::endl;
+				else
+					std::cerr << ": too much columns" << std::endl;
+			}
+			return ;
 		}
 		else if (it->first != Lexer::VALUE)
-			return (ie);
+		{
+			error(line);
+			std::cerr << ": bad instruction" << std::endl;
+		}
+		checkValue(it->second, line);
 		ss << it->second;
 		ss >> tmp;
 		ss.clear();
@@ -53,33 +91,46 @@ Parser::tTI					Parser::checkValues(tTI it, tTI ie)
 		count++;
 		it++;
 	}
-	return (it);
 }
 
 std::vector<int>			&Parser::parse(std::list<tToken> &tokens)
 {
 	tTI						it(tokens.begin());
 	tTI						ie(tokens.end());
-	unsigned int			count(0);
+	size_t					line(0);
+	size_t					count(0);
 
 	while (it != ie && (it->first == Lexer::COMMENT || it->first == Lexer::END))
+	{
+		if (it->first == Lexer::END)
+			line++;
 		it++;
-	checkSize(*it);
-	while (++it != ie)
+	}
+	line++;
+	size(*it, line);
+	it++;
+	while (it != ie)
 	{
 		if (it->first == Lexer::VALUE)
 		{
-			it = checkValues(it, ie);
-			if (it == ie)
-				std::cerr << "Parser: error" << std::endl;
-			else
-				count++;
+			values(it, ie, ++line);
+			count++;
 		}
 		else if (it->first != Lexer::COMMENT && it->first != Lexer::END)
-		{
-			std::cout << it->first << " " << it->second << std::endl;
-			std::cerr << "Parser: error" << std::endl;
-		}
+			error(line);
+		it++;
+	}
+	if (count != _size)
+	{
+		error(line);
+		if (count < _size)
+			std::cerr << ": not enough lines" << std::endl;
+		else if (count > _size)
+			std::cerr << ": too much lines" << std::endl;
 	}
 	return (_vector);
+}
+bool						Parser::isGood(void) const
+{
+	return (_good);
 }
