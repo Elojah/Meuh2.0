@@ -22,6 +22,7 @@ State::State(State const &s, char dir) {
 	mapArray		map;
 
 	map = s.getMap();
+	_size = s.getSize();
 	for (i = 0; i < _size; ++i) {
 		for (j = 0; j < _size; ++j) {
 			_map[i][j] = map[i][j];
@@ -31,7 +32,9 @@ State::State(State const &s, char dir) {
 			}
 		}
 	}
-	move(dir);
+	if (dir >= 0) {
+		move(dir);
+	}
 }
 
 State::~State(void) {
@@ -53,6 +56,9 @@ void											State::finalFillArray(void) {
 
 std::array<std::array<int, MAX_SIZE>, MAX_SIZE>	State::getMap(void) const {
 	return (_map);
+}
+unsigned int									State::getSize(void) const {
+	return (_size);
 }
 
 /*
@@ -80,18 +86,19 @@ std::array<State *, 4>							State::expand(void) {
 	std::array<State *, 4>					result;
 	unsigned int							current(0);
 
-	if (_empty[0] > 0) {
+	if (_empty[1] > 0) {
 		result[current++] = new State(*this, LEFT);
 	}
-	if (_empty[0] < _size - 1) {
+	if (_empty[1] < _size - 1) {
 		result[current++] = new State(*this, RIGHT);
 	}
-	if (_empty[1] > 0) {
-		result[current++] = new State(*this, DOWN);
-	}
-	if (_empty[1] < _size - 1) {
+	if (_empty[0] > 0) {
 		result[current++] = new State(*this, UP);
 	}
+	if (_empty[0] < _size - 1) {
+		result[current++] = new State(*this, DOWN);
+	}
+	result[current] = NULL;
 	return (result);
 }
 
@@ -115,10 +122,17 @@ void									State::display(void) {
 	unsigned int	i;
 	unsigned int	j;
 
+	std::cout << "_________________________________" << std::endl;
 	for (i = 0; i < _size; ++i) {
+		std::cout << '|';
 		for (j = 0; j < _size; ++j) {
-			std::cout << _map[i][j] << '\t';
+			if (_map[i][j] != 0) {
+				std::cout << _map[i][j] << '\t';
+			} else {
+				std::cout << " \t";
+			}
 		}
-		std::cout << '\n';
+		std::cout << '|' << std::endl;
 	}
+	std::cout << "_________________________________" << std::endl;
 }

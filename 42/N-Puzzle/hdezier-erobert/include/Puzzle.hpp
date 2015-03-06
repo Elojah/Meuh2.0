@@ -19,20 +19,13 @@ public:
 	Puzzle(unsigned int);
 	~Puzzle(void);
 	bool						resolve(void);
-	void						showStates(void);
 protected:
 private:
 	Puzzle(void);
 
-	enum eMove
-	{
-		UP = 0,
-		DOWN,
-		LEFT,
-		RIGHT
-	};
-
-	bool						containState(State const *s);
+	bool							containState(State const *s);
+	std::vector<State *>::iterator	bestEval(void);
+	int								eval(State const *s);
 
 	std::vector<State *>		_openset;
 	std::vector<State *>		_closedset;

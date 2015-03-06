@@ -15,21 +15,22 @@ public:
 	State(unsigned int size, std::array<int, MAX_CASE> const &map);
 	State(State const&, char dir);
 	~State(void);
+	void													finalFillArray(void);
+	std::array<std::array<int, MAX_SIZE>, MAX_SIZE>			getMap(void) const;
+	unsigned int											getSize(void) const;
 	void													display(void);
 	void													move(char const dir);
 	std::array<State *, 4>									expand(void);
-	std::array<std::array<int, MAX_SIZE>, MAX_SIZE>			getMap(void) const;
-	void													finalFillArray(void);
 protected:
 private:
 	typedef std::array<std::array<int, MAX_SIZE>, MAX_SIZE>	mapArray;
 
 	enum eMove
 	{
-		UP = 0,
+		LEFT = 0,
+		RIGHT,
+		UP,
 		DOWN,
-		LEFT,
-		RIGHT
 	};
 
 	State(void);

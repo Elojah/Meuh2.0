@@ -1,19 +1,28 @@
 #include <array>
 #include "Puzzle.hpp"
 #include "State.hpp"
+#include "Manhattan.hpp"
 
 Puzzle::Puzzle(unsigned int size) : _size(size)
 {
-	State	s(_size, std::array<int, 16>{{
-		1, 5, 2, 4,
+	/*Init State*/
+	State	*s;
+
+	s = new State(_size, std::array<int, 16>{{
+		11, 5, 2, 4,
 		7, 8, 9, 3,
-		6, 5, 0, 10,
-		11, 12, 13, 14
-		}});
+		6, 5, 1, 10,
+		14, 12, 13, 0
+	}});
+	_openset.push_back(s);
+	/*!Init State*/
 
 	_finalState = new State(4, std::array<int, 16>{{}});
 	_finalState->finalFillArray();
-	_openset.push_back(&s);
+
+	/*Add heuristics here*/
+	_h.push_back(new Manhattan(_finalState));
+	/*!Add heuristics here*/
 }
 
 Puzzle::~Puzzle(void) {}
@@ -61,6 +70,26 @@ function reconstruct_path(came_from,current)
 	return total_path
 */
 
+int				Puzzle::eval(State const *s) {
+	int			result(0);
+	for (std::vector<IHeuristic *>::iterator it = _h.begin(); it != _h.end(); ++it) {
+		result += (*it)->eval(s);
+	}
+	return (result);
+}
+
+std::vector<State *>::iterator	Puzzle::bestEval(void) {
+	std::vector<State *>::iterator					min;
+
+	min = _openset.begin();
+	for (std::vector<State *>::iterator it = _openset.begin() + 1; it != _openset.end(); ++it) {
+		if (eval(*it) < eval(*min)) {
+			min = it;
+		}
+	}
+	return (min);
+}
+
 bool			Puzzle::containState(State const *s) {
 	for (std::vector<State *>::iterator oit = _openset.begin(); oit != _openset.end(); ++oit) {
 		if (s == *oit) {
@@ -77,39 +106,32 @@ bool			Puzzle::containState(State const *s) {
 
 bool			Puzzle::resolve(void) {
 	bool							succes(true);
-	unsigned int					i;
-	std::vector<State *>::iterator	e;
-	std::array<State *, MAX_SIZE>	s;
+	std::vector<State *>::iterator			e;
+	std::array<State *, MAX_SIZE>			s;
+	std::array<State *, MAX_SIZE>::iterator	is;
 
 	while (_openset.size() > 0 && succes) {
-		e = _openset.begin();
-		(*e)->display();
+		e = bestEval();/*Choose good one heuristic*/
 		if (*e == _finalState) {
 			return (true);
 		}
 		_closedset.push_back(*e);
 		_openset.erase(e);
 		s = (*e)->expand();
-		for (i = 0; i < _size; ++i) {
-			if (!containState(s[i])) {
-				_openset.push_back(s[i]);
-			} else {
+		(*e)->display();
+		std::cout << "Expand to :" << std::endl;
+		for (is = s.begin(); *is != NULL && is != s.end(); ++is) {
+			(*is)->display();
+			if (!containState(*is)) {
+				_openset.push_back(*is);
+			} else if (eval(*is) > eval(*e)) {
 				;
 			}
 		}
-		succes = false;
 	}
 	return (true);
 }
 
-void		Puzzle::showStates(void) {
-	for (std::vector<State *>::iterator oit = _openset.begin(); oit != _openset.end(); ++oit) {
-		(*oit)->display();
-	}
-	for (std::vector<State *>::iterator cit = _closedset.begin(); cit != _closedset.end(); ++cit) {
-		(*cit)->display();
-	}
-}
 /*
 ◦ Total number of states ever selected in the "opened" set (complexity in time)
 ◦ Maximum number of states ever represented in memory at the same time
