@@ -3,6 +3,8 @@
 
 # define BUF_SIZE 1024
 # define MAX_SIZE 4
+# define MAX_CASE 16
+# define MAX_DEPTH 5
 # define EMPTY _empty[0]][_empty[1]
 # define INC inc[0]][inc[1]
 
@@ -23,7 +25,7 @@ protected:
 private:
 	Puzzle(void);
 
-	bool							containState(State const *s);
+	static std::vector<State *>::iterator	containState(State const *s, std::vector<State *> &v);
 	std::vector<State *>::iterator	bestEval(void);
 	int								eval(State const *s);
 

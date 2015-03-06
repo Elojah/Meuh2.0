@@ -21,6 +21,7 @@ public:
 	void													display(void);
 	void													move(char const dir);
 	std::array<State *, 4>									expand(void);
+	bool													operator==(State const &s) const;
 protected:
 private:
 	typedef std::array<std::array<int, MAX_SIZE>, MAX_SIZE>	mapArray;
@@ -38,7 +39,6 @@ private:
 	mapArray												_map;
 	unsigned int											_size;
 	unsigned int											_empty[2];
-	bool													operator==(State const &s) const;
 };
 
 #endif

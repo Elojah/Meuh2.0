@@ -1,6 +1,10 @@
 #ifndef I_HEURISTIC_H
 # define I_HEURISTIC_H
 
+# define MAX_SIZE 4
+
+# include <array>
+
 class State;
 
 class IHeuristic

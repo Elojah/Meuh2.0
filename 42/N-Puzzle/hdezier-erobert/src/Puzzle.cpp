@@ -9,15 +9,15 @@ Puzzle::Puzzle(unsigned int size) : _size(size)
 	State	*s;
 
 	s = new State(_size, std::array<int, 16>{{
-		11, 5, 2, 4,
-		7, 8, 9, 3,
-		6, 5, 1, 10,
-		14, 12, 13, 0
+		1, 7, 3, 4,
+		5, 2, 0, 8,
+		9, 6, 11, 12,
+		13, 10, 14, 15
 	}});
 	_openset.push_back(s);
 	/*!Init State*/
 
-	_finalState = new State(4, std::array<int, 16>{{}});
+	_finalState = new State(_size, std::array<int, MAX_CASE>{{}});
 	_finalState->finalFillArray();
 
 	/*Add heuristics here*/
@@ -72,6 +72,7 @@ function reconstruct_path(came_from,current)
 
 int				Puzzle::eval(State const *s) {
 	int			result(0);
+
 	for (std::vector<IHeuristic *>::iterator it = _h.begin(); it != _h.end(); ++it) {
 		result += (*it)->eval(s);
 	}
@@ -90,43 +91,57 @@ std::vector<State *>::iterator	Puzzle::bestEval(void) {
 	return (min);
 }
 
-bool			Puzzle::containState(State const *s) {
-	for (std::vector<State *>::iterator oit = _openset.begin(); oit != _openset.end(); ++oit) {
-		if (s == *oit) {
-			return (true);
+std::vector<State *>::iterator			Puzzle::containState(State const *s, std::vector<State *> &v) {
+	for (std::vector<State *>::iterator oit = v.begin(); oit != v.end(); ++oit) {
+		if (*s == **oit) {
+			return (oit);
 		}
 	}
-	for (std::vector<State *>::iterator cit = _closedset.begin(); cit != _closedset.end(); ++cit) {
-		if (s == *cit) {
-			return (true);
-		}
-	}
-	return (false);
+	return (v.end());
 }
 
 bool			Puzzle::resolve(void) {
-	bool							succes(true);
+	bool									succes(true);
+	static unsigned int						depth(0);
+	std::vector<State *>::iterator			inOpen;
+	std::vector<State *>::iterator			inClosed;
 	std::vector<State *>::iterator			e;
 	std::array<State *, MAX_SIZE>			s;
 	std::array<State *, MAX_SIZE>::iterator	is;
 
 	while (_openset.size() > 0 && succes) {
-		e = bestEval();/*Choose good one heuristic*/
-		if (*e == _finalState) {
+		e = bestEval();
+		if (**e == *_finalState) {
+			(*e)->display();
 			return (true);
 		}
+
 		_closedset.push_back(*e);
 		_openset.erase(e);
+		e = _closedset.end() - 1;
 		s = (*e)->expand();
+
+		// std::cout << "Expand to :" << std::endl;
 		(*e)->display();
-		std::cout << "Expand to :" << std::endl;
+		std::cout << "Evaluated to: " << eval(*e) << std::endl;
 		for (is = s.begin(); *is != NULL && is != s.end(); ++is) {
-			(*is)->display();
-			if (!containState(*is)) {
+			// (*is)->display();
+			inOpen = Puzzle::containState(*is, _openset);
+			inClosed = Puzzle::containState(*is, _closedset);
+			// std::cout << "Evaluated expand to: " << eval(*is) << std::endl;
+			if (inClosed == _closedset.end() && inOpen == _openset.end()) {
 				_openset.push_back(*is);
-			} else if (eval(*is) > eval(*e)) {
-				;
+			} else if (inOpen != _openset.end() && eval(*is) >= eval(*e)) {
+				// _openset.erase(inOpen);
+				// _closedset.push_back(*inOpen);
 			}
+		}
+		std::cout << "Open sets: " << _openset.size() << std::endl;
+		std::cout << "Closed sets: " << _closedset.size() << std::endl;
+		std::cout << "Depth : " << depth << std::endl;
+		depth++;
+		if (depth > 5500) {
+			break ;
 		}
 	}
 	return (true);
