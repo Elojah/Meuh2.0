@@ -9,8 +9,8 @@ Puzzle::Puzzle(unsigned int size) : _size(size)
 	State	*s;
 
 	s = new State(_size, std::array<int, 16>{{
-		1, 7, 3, 4,
-		5, 2, 0, 8,
+		1, 0, 3, 4,
+		5, 2, 7, 8,
 		9, 6, 11, 12,
 		13, 10, 14, 15
 	}});
@@ -70,12 +70,17 @@ function reconstruct_path(came_from,current)
 	return total_path
 */
 
-int				Puzzle::eval(State const *s) {
-	int			result(0);
+int				Puzzle::eval(State *s) {
+	int			result;
 
+	if ((result = s->getValue()) != NONE_SET) {
+		return (result);
+	}
+	result = 0;
 	for (std::vector<IHeuristic *>::iterator it = _h.begin(); it != _h.end(); ++it) {
 		result += (*it)->eval(s);
 	}
+	s->setValue(result);
 	return (result);
 }
 

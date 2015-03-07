@@ -5,6 +5,7 @@ State::State(unsigned int size, std::array<int, MAX_CASE> const &map) : _size(si
 	unsigned int	i;
 	unsigned int	j;
 
+	_value = NONE_SET;
 	for (i = 0; i < _size; ++i) {
 		for (j = 0; j < _size; ++j) {
 			_map[i][j] = map[i * _size + j];
@@ -23,6 +24,7 @@ State::State(State const &s, char dir) {
 
 	map = s.getMap();
 	_size = s.getSize();
+	_value = NONE_SET;
 	for (i = 0; i < _size; ++i) {
 		for (j = 0; j < _size; ++j) {
 			_map[i][j] = map[i][j];
@@ -59,6 +61,12 @@ std::array<std::array<int, MAX_SIZE>, MAX_SIZE>	State::getMap(void) const {
 }
 unsigned int									State::getSize(void) const {
 	return (_size);
+}
+void											State::setValue(int val) {
+	_value = val;
+}
+int												State::getValue(void) const {
+	return(_value);
 }
 
 /*
