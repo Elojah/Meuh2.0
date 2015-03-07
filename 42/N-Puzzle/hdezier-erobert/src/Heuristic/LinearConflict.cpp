@@ -1,4 +1,5 @@
 #include "LinearConflict.hpp"
+#include "State.hpp"
 
 LinearConflict::LinearConflict(State const *s) {
 	_finalState = new State(*s, -1);
@@ -8,26 +9,40 @@ LinearConflict::LinearConflict(State const *s) {
 LinearConflict::~LinearConflict(void) {
 }
 
+int				LinearConflict::isInLine(std::array<int, MAX_SIZE> line, int n) {
+	unsigned int	i;
+
+	for (i = 0; i < _size; ++i) {
+		if (n == line[i]) {
+			return (i);
+		}
+	}
+	return (-1);
+}
+
 int				LinearConflict::eval(State const *s) {
 	unsigned int	i;
 	unsigned int	j;
-	unsigned int	x;
 	unsigned int	y;
+	int				foundJ;
+	int				foundY;
 	mapArray		map;
 	mapArray		finalMap;
-	int				result(0);
 
 	map = s->getMap();
 	finalMap = _finalState->getMap();
 	for (i = 0; i < _size; ++i) {
 		for (j = 0; j < _size; ++j) {
-
-			for (y = 0; y < _size; ++y) {
-				if (map[i][j] == finalMap[i][y]) {
+			if ((foundJ = isInLine(finalMap[i], map[i][j])) >= 0) {
+				for (y = 0; y < _size; ++y) {
+					if (j != y
+						&& (foundY = isInLine(finalMap[i], map[i][y])) >= 0
+						&& ((j > y && foundJ < foundY) || (y > j && foundY > foundJ))) {
+							return (2);
+					}
 				}
 			}
-
 		}
 	}
-	return (result);
+	return (0);
 }

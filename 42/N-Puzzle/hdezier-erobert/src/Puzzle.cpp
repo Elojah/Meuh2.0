@@ -10,8 +10,8 @@ Puzzle::Puzzle(unsigned int size) : _size(size)
 	State	*s;
 
 	s = new State(_size, std::array<int, 16>{{
-		1, 0, 3, 4,
-		5, 2, 7, 8,
+		1, 7, 3, 4,
+		5, 2, 0, 8,
 		9, 6, 11, 12,
 		13, 10, 14, 15
 	}});

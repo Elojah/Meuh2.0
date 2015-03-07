@@ -13,6 +13,8 @@ public:
 protected:
 private:
 	LinearConflict(void);
+	int				isInLine(std::array<int, MAX_SIZE> line, int n);
+
 	State			*_finalState;
 	unsigned int	_size;
 };
