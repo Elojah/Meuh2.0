@@ -13,6 +13,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = \
+		Heuristic/LinearConflict\
 		State\
 		ParserLexer/Lexer\
 		ParserLexer/Parser\

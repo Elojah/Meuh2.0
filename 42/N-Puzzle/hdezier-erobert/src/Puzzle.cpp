@@ -2,6 +2,7 @@
 #include "Puzzle.hpp"
 #include "State.hpp"
 #include "Manhattan.hpp"
+#include "LinearConflict.hpp"
 
 Puzzle::Puzzle(unsigned int size) : _size(size)
 {
@@ -22,6 +23,7 @@ Puzzle::Puzzle(unsigned int size) : _size(size)
 
 	/*Add heuristics here*/
 	_h.push_back(new Manhattan(_finalState));
+	_h.push_back(new LinearConflict(_finalState));
 	/*!Add heuristics here*/
 }
 
