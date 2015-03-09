@@ -1,7 +1,7 @@
 #ifndef STATE_H
 # define STATE_H
 
-# define EMPTY_VALUE 0
+# define EMPTY_VALUE -1
 # define MAX_SIZE 256
 # define MAX_CASE 65536
 # define NONE_SET -1

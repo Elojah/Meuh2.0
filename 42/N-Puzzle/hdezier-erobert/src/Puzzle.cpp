@@ -134,8 +134,8 @@ bool			Puzzle::resolve(void) {
 		e = _closedset.end() - 1;
 		s = (*e)->expand();
 
-		// (*e)->display();
-		// std::cout << "Evaluated to: " << eval(*e) << std::endl;
+		(*e)->display();
+		std::cout << "Evaluated to: " << eval(*e) << std::endl;
 		// std::cout << "Expand to :" << std::endl;
 		for (is = s.begin(); *is != NULL && is != s.end(); ++is) {
 			// (*is)->display();
@@ -152,7 +152,7 @@ bool			Puzzle::resolve(void) {
 		}
 		// std::cout << "Open sets: " << _openset.size() << std::endl;
 		// std::cout << "Closed sets: " << _closedset.size() << std::endl;
-		// std::cout << "Depth : " << depth << std::endl;
+		std::cout << "Depth : " << depth << std::endl;
 		depth++;
 		if (depth > 5000) {
 			break ;
