@@ -53,6 +53,7 @@ void											State::finalFillArray(void) {
 			_map[i][j] = (i * _size) + j + 1;
 		}
 	}
+
 	_map[_size - 1][_size - 1] = 0;
 	_empty[0] = _size - 1;
 	_empty[1] = _size - 1;
