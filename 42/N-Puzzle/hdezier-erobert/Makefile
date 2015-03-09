@@ -17,11 +17,10 @@ CLASS = \
 		Heuristic/MaxSwap\
 		Heuristic/Hamming\
 		Heuristic/LinearConflict\
-		State\
+		Heuristic/Manhattan\
 		ParserLexer/Lexer\
 		ParserLexer/Parser\
-		mainTest\
-		Heuristic/Manhattan\
+		State\
 		Puzzle\
 		main\
 

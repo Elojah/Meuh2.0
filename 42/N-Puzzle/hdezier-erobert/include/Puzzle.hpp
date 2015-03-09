@@ -17,7 +17,7 @@ class State;
 class Puzzle
 {
 public:
-	Puzzle(unsigned int);
+	Puzzle(std::vector<int> &v, size_t size);
 	~Puzzle(void);
 	bool						resolve(void);
 protected:
