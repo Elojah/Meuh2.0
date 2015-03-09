@@ -1,7 +1,8 @@
 #ifndef I_HEURISTIC_H
 # define I_HEURISTIC_H
 
-# define MAX_SIZE 4
+# define MAX_SIZE 256
+# define MAX_CASE 65536
 
 # include <array>
 

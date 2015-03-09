@@ -6,6 +6,7 @@ State::State(unsigned int size, std::array<int, MAX_CASE> const &map) : _size(si
 	unsigned int	j;
 
 	_value = NONE_SET;
+	_previous = NULL;
 	for (i = 0; i < _size; ++i) {
 		for (j = 0; j < _size; ++j) {
 			_map[i][j] = map[i * _size + j];
@@ -25,6 +26,7 @@ State::State(State const &s, char dir) {
 	map = s.getMap();
 	_size = s.getSize();
 	_value = NONE_SET;
+	_previous = NULL;
 	for (i = 0; i < _size; ++i) {
 		for (j = 0; j < _size; ++j) {
 			_map[i][j] = map[i][j];
@@ -56,18 +58,15 @@ void											State::finalFillArray(void) {
 	_empty[1] = _size - 1;
 }
 
-std::array<std::array<int, MAX_SIZE>, MAX_SIZE>	State::getMap(void) const {
-	return (_map);
-}
-unsigned int									State::getSize(void) const {
-	return (_size);
-}
-void											State::setValue(int val) {
-	_value = val;
-}
-int												State::getValue(void) const {
-	return(_value);
-}
+/*
+**GET/SET
+*/
+void													State::setPrevious(State *s) {_previous = s;}
+State													*State::getPrevious(void) const {return (_previous);}
+std::array<std::array<int, MAX_SIZE>, MAX_SIZE>			State::getMap(void) const {return (_map);}
+unsigned int											State::getSize(void) const {return (_size);}
+void													State::setValue(int val) {_value = val;}
+int														State::getValue(void) const {return(_value);}
 
 /*
 **NOT SAFE !!!

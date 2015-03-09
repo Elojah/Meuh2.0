@@ -26,6 +26,7 @@ int				LinearConflict::eval(State const *s) {
 	unsigned int	y;
 	int				foundJ;
 	int				foundY;
+	int				result(0);
 	mapArray		map;
 	mapArray		finalMap;
 
@@ -37,12 +38,12 @@ int				LinearConflict::eval(State const *s) {
 				for (y = 0; y < _size; ++y) {
 					if (j != y
 						&& (foundY = isInLine(finalMap[i], map[i][y])) >= 0
-						&& ((j > y && foundJ < foundY) || (y > j && foundY > foundJ))) {
-							return (2);
+						&& ((j > y && foundJ < foundY) || (y > j && foundY < foundJ))) {
+							result += 2;
 					}
 				}
 			}
 		}
 	}
-	return (0);
+	return (result);
 }

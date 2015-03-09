@@ -2,7 +2,7 @@
 #include "Puzzle.hpp"
 
 int		main(void) {
-	Puzzle		p(4);
+	Puzzle		p(3);
 
 	p.resolve();
 	// p.showStates();

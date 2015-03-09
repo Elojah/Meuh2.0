@@ -3,18 +3,26 @@
 #include "State.hpp"
 #include "Manhattan.hpp"
 #include "LinearConflict.hpp"
+#include "Hamming.hpp"
+#include "MaxSwap.hpp"
+#include "NTiles.hpp"
 
 Puzzle::Puzzle(unsigned int size) : _size(size)
 {
 	/*Init State*/
 	State	*s;
 
-	s = new State(_size, std::array<int, 16>{{
-		1, 7, 3, 4,
-		5, 2, 0, 8,
-		9, 6, 11, 12,
-		13, 10, 14, 15
+	s = new State(_size, std::array<int, MAX_CASE>{{
+		1, 2, 3,
+		8, 0, 4,
+		6, 7, 5
 	}});
+	// s = new State(_size, std::array<int, 16>{{
+	// 	1, 5, 3, 4,
+	// 	0, 2, 7, 8,
+	// 	9, 6, 11, 12,
+	// 	13, 10, 14, 15
+	// }});
 	_openset.push_back(s);
 	/*!Init State*/
 
@@ -24,6 +32,9 @@ Puzzle::Puzzle(unsigned int size) : _size(size)
 	/*Add heuristics here*/
 	_h.push_back(new Manhattan(_finalState));
 	_h.push_back(new LinearConflict(_finalState));
+	_h.push_back(new Hamming(_finalState));
+	_h.push_back(new MaxSwap(_finalState));
+	_h.push_back(new NTiles(_finalState));
 	/*!Add heuristics here*/
 }
 
@@ -113,13 +124,14 @@ bool			Puzzle::resolve(void) {
 	std::vector<State *>::iterator			inOpen;
 	std::vector<State *>::iterator			inClosed;
 	std::vector<State *>::iterator			e;
-	std::array<State *, MAX_SIZE>			s;
-	std::array<State *, MAX_SIZE>::iterator	is;
+	std::array<State *, 4>					s;
+	std::array<State *, 4>::iterator		is;
 
 	while (_openset.size() > 0 && succes) {
 		e = bestEval();
 		if (**e == *_finalState) {
 			(*e)->display();
+			std::cout << "Success !" << std::endl;
 			return (true);
 		}
 
@@ -128,40 +140,46 @@ bool			Puzzle::resolve(void) {
 		e = _closedset.end() - 1;
 		s = (*e)->expand();
 
+		// (*e)->display();
+		// std::cout << "Evaluated to: " << eval(*e) << std::endl;
 		// std::cout << "Expand to :" << std::endl;
-		(*e)->display();
-		std::cout << "Evaluated to: " << eval(*e) << std::endl;
 		for (is = s.begin(); *is != NULL && is != s.end(); ++is) {
 			// (*is)->display();
 			inOpen = Puzzle::containState(*is, _openset);
 			inClosed = Puzzle::containState(*is, _closedset);
 			// std::cout << "Evaluated expand to: " << eval(*is) << std::endl;
 			if (inClosed == _closedset.end() && inOpen == _openset.end()) {
+				(*is)->setPrevious(*e);
 				_openset.push_back(*is);
 			} else if (inOpen != _openset.end() && eval(*is) >= eval(*e)) {
 				// _openset.erase(inOpen);
 				// _closedset.push_back(*inOpen);
 			}
 		}
-		std::cout << "Open sets: " << _openset.size() << std::endl;
-		std::cout << "Closed sets: " << _closedset.size() << std::endl;
-		std::cout << "Depth : " << depth << std::endl;
+		// std::cout << "Open sets: " << _openset.size() << std::endl;
+		// std::cout << "Closed sets: " << _closedset.size() << std::endl;
+		// std::cout << "Depth : " << depth << std::endl;
 		depth++;
-		if (depth > 5500) {
+		if (depth > 5000) {
 			break ;
 		}
 	}
-	return (true);
+	return (false);
 }
 
 /*
 ◦ Total number of states ever selected in the "opened" set (complexity in time)
+= Add a max value ?
 ◦ Maximum number of states ever represented in memory at the same time
 during the search (complexity in size)
+= Max value on both vecs
 ◦ Number of moves required to transition from the initial state to the final state,
 according to the search
+= Count previous value
 ◦ The ordered sequence of states that make up the solution, according to the
 search
+= previous
 ◦ The puzzle may be unsolvable, in which case you have to inform the user and
 exit
+= TODO !!!!
 */
