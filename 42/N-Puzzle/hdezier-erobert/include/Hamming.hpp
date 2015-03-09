@@ -1,18 +1,19 @@
-#ifndef MANHATTAN_H
-# define MANHATTAN_H
+#ifndef HAMMING_H
+# define HAMMING_H
 
 # include "IHeuristic.hpp"
 class State;
 
-class Manhattan : public IHeuristic
+class Hamming : public IHeuristic
 {
 public:
-	Manhattan(State const *s);
-	~Manhattan(void);
+	Hamming(State const *s);
+	~Hamming(void);
 	int		eval(State const *s);
 protected:
 private:
-	Manhattan(void);
+	Hamming(void);
+
 	State			*_finalState;
 	unsigned int	_size;
 };

@@ -1,18 +1,18 @@
-#ifndef MANHATTAN_H
-# define MANHATTAN_H
+#ifndef N_TILES_H
+# define N_TILES_H
 
 # include "IHeuristic.hpp"
 class State;
 
-class Manhattan : public IHeuristic
+class NTiles : public IHeuristic
 {
 public:
-	Manhattan(State const *s);
-	~Manhattan(void);
+	NTiles(State const *s);
+	~NTiles(void);
 	int		eval(State const *s);
 protected:
 private:
-	Manhattan(void);
+	NTiles(void);
 	State			*_finalState;
 	unsigned int	_size;
 };
