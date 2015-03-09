@@ -13,6 +13,10 @@ RM = rm -rf
 
 #List classes here
 CLASS = \
+		Heuristic/NTiles\
+		Heuristic/MaxSwap\
+		Heuristic/Hamming\
+		Heuristic/LinearConflict\
 		State\
 		ParserLexer/Lexer\
 		ParserLexer/Parser\
