@@ -23,6 +23,7 @@ CLASS = \
 		mainTest\
 		Heuristic/Manhattan\
 		Puzzle\
+		main\
 
 #List interfaces here
 INTERFACE = \
