@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/05 17:13:57 by erobert           #+#    #+#             //
-//   Updated: 2015/03/05 19:48:10 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/09 19:45:00 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -73,14 +73,18 @@ void						Lexer::getValues(std::ifstream &ifs, char c)
 			return (getComment(ifs));
 		else if (c == ' ')
 		{
+			while (c == ' ')
+				ifs.get(c);
 			value.first = VALUE;
 			value.second = str;
 			_tokens.push_back(value);
 			str.clear();
 		}
 		else
+		{
 			str.push_back(c);
-		ifs.get(c);
+			ifs.get(c);
+		}
 	}
 }
 
