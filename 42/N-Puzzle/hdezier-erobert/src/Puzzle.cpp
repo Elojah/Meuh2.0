@@ -12,17 +12,19 @@ Puzzle::Puzzle(unsigned int size) : _size(size)
 	/*Init State*/
 	State	*s;
 
-	s = new State(_size, std::array<int, MAX_CASE>{{
-		1, 2, 3,
-		8, 0, 4,
-		6, 7, 5
-	}});
-	// s = new State(_size, std::array<int, 16>{{
-	// 	1, 5, 3, 4,
-	// 	0, 2, 7, 8,
-	// 	9, 6, 11, 12,
-	// 	13, 10, 14, 15
+	// s = new State(_size, std::array<int, MAX_CASE>{{
+	// 	16, 6, 5, 20, 9,
+	// 	1, 2, 7, 10, 23,
+	// 	17, 16, 3, 0, 8,
+	// 	11, 18, 22, 24, 14,
+	// 	21, 4, 19, 17, 12
 	// }});
+	s = new State(_size, std::array<int, MAX_CASE>{{
+		1, 2, 7, 3,
+		15, 6, 13, 0,
+		11, 5, 10, 4,
+		9, 8, 14, 12
+	}});
 	_openset.push_back(s);
 	/*!Init State*/
 
@@ -140,8 +142,8 @@ bool			Puzzle::resolve(void) {
 		e = _closedset.end() - 1;
 		s = (*e)->expand();
 
-		// (*e)->display();
-		// std::cout << "Evaluated to: " << eval(*e) << std::endl;
+		(*e)->display();
+		std::cout << "Evaluated to: " << eval(*e) << std::endl;
 		// std::cout << "Expand to :" << std::endl;
 		for (is = s.begin(); *is != NULL && is != s.end(); ++is) {
 			// (*is)->display();
@@ -158,7 +160,7 @@ bool			Puzzle::resolve(void) {
 		}
 		// std::cout << "Open sets: " << _openset.size() << std::endl;
 		// std::cout << "Closed sets: " << _closedset.size() << std::endl;
-		// std::cout << "Depth : " << depth << std::endl;
+		std::cout << "Depth : " << depth << std::endl;
 		depth++;
 		if (depth > 5000) {
 			break ;
