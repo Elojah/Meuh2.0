@@ -10,14 +10,21 @@
 //                                                                            //
 // ************************************************************************** //
 
-#include <fstream> 
+#include <fstream>
 #include <iostream>
 #include <list>
 #include <vector>
 #include "Lexer.hpp"
 #include "Parser.hpp"
+#include "Puzzle.hpp"
 
-static void						exec_puzzle(std::ifstream &ifs)
+static void						exec_puzzle(std::vector<int> &v, size_t size) {
+	Puzzle						p(v, size);
+
+	p.resolve();
+}
+
+static void						parse_puzzle(std::ifstream &ifs)
 {
 	Lexer								l;
 	Parser								p;
@@ -42,6 +49,9 @@ static void						exec_puzzle(std::ifstream &ifs)
 			std::cout << std::endl;
 	}
 	ifs.close();
+	if (p.isGood()) {
+		exec_puzzle(vector, p.getSize());
+	}
 }
 
 int								main(int ac, char **av)
@@ -54,7 +64,7 @@ int								main(int ac, char **av)
 	{
 		ifs.open(av[1]);
 		if (ifs.good())
-			exec_puzzle(ifs);
+			parse_puzzle(ifs);
 	}
 	return (0);
 }
