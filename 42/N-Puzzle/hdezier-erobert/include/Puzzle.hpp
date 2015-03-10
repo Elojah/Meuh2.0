@@ -4,7 +4,7 @@
 # define BUF_SIZE 1024
 # define MAX_SIZE 256
 # define MAX_CASE 65536
-# define MAX_DEPTH 5
+# define MAX_DEPTH_SEARCH 5000
 # define NONE_SET -1
 
 # include <list>
@@ -20,7 +20,7 @@ class Puzzle
 public:
 	Puzzle(std::vector<int> &v, size_t size);
 	~Puzzle(void);
-	bool						resolve(void);
+	bool						solve(void);
 protected:
 private:
 	Puzzle(void);

@@ -38,14 +38,14 @@ int										Puzzle::eval(State *s) {
 	int			result;
 
 	if ((result = s->getValue()) != NONE_SET) {
-		return (result);
+		return (result + s->getDepth());
 	}
 	result = 0;
 	for (std::vector<IHeuristic *>::iterator it = _h.begin(); it != _h.end(); ++it) {
 		result += (*it)->eval(s);
 	}
 	s->setValue(result);
-	return (result);
+	return (result + s->getDepth());
 }
 
 std::list<State *>::iterator			Puzzle::bestEval(void) {
@@ -69,7 +69,7 @@ std::list<State *>::iterator			Puzzle::containState(State const *s, std::list<St
 	return (v.end());
 }
 
-bool			Puzzle::resolve(void) {
+bool			Puzzle::solve(void) {
 	bool									succes(true);
 	static unsigned int						depth(0);
 	std::list<State *>::iterator			inOpen;
@@ -94,6 +94,7 @@ bool			Puzzle::resolve(void) {
 
 		(*e)->display();
 		std::cout << "Evaluated to: " << eval(*e) << std::endl;
+		// std::cout << "Depth to: " << (*e)->getDepth() << std::endl;
 		// std::cout << "Expand to :" << std::endl;
 		for (is = s.begin(); *is != NULL && is != s.end(); ++is) {
 			// (*is)->display();
@@ -103,16 +104,25 @@ bool			Puzzle::resolve(void) {
 			if (inClosed == _closedset.end() && inOpen == _openset.end()) {
 				(*is)->setPrevious(*e);
 				_openset.push_back(*is);
-			} else if (inOpen != _openset.end() && eval(*is) >= eval(*e)) {
-				// _openset.erase(inOpen);
-				// _closedset.push_back(*inOpen);
+			} else if (eval(*is) > eval(inClosed != _closedset.end() ? *inClosed : *inOpen)) {
+				if (inClosed != _closedset.end()) {
+					(*inClosed)->setPrevious(*e);
+					_openset.push_back(*inClosed);
+					_closedset.erase(inClosed);
+				} else {
+					(*inOpen)->setPrevious(*e);
+				}
 			}
+			//  else if (inOpen != _openset.end()) {
+			// 	_openset.erase(inOpen);
+			// 	_closedset.push_back(*inOpen);
+			// }
 		}
 		// std::cout << "Open sets: " << _openset.size() << std::endl;
 		// std::cout << "Closed sets: " << _closedset.size() << std::endl;
-		std::cout << "Depth : " << depth << std::endl;
+		// std::cout << "Depth : " << depth << std::endl;
 		depth++;
-		if (depth > 5000) {
+		if (depth > 10) {
 			break ;
 		}
 	}

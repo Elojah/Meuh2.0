@@ -17,12 +17,16 @@ public:
 	State(State const&, char dir);
 	~State(void);
 	void													finalFillArray(void);
+
 	std::array<std::array<int, MAX_SIZE>, MAX_SIZE>			getMap(void) const;
+	unsigned int											getDepth(void) const;
+	void													setDepth(unsigned int depth);
 	unsigned int											getSize(void) const;
-	void													setValue(int);
 	int														getValue(void) const;
-	void													setPrevious(State*);
+	void													setValue(int);
 	State													*getPrevious(void) const;
+	void													setPrevious(State*);
+
 	void													display(void);
 	void													move(char const dir);
 	std::array<State *, 4>									expand(void);
@@ -45,6 +49,7 @@ private:
 	unsigned int											_size;
 	unsigned int											_empty[2];
 	int														_value;
+	unsigned int											_depth;
 	State													*_previous;
 };
 
