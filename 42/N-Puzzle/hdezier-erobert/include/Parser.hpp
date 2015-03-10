@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/05 19:20:26 by erobert           #+#    #+#             //
-//   Updated: 2015/03/06 17:41:05 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/10 14:29:19 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -29,10 +29,11 @@ public:
 	Parser(void);
 	~Parser(void);
 
-	size_t						getSize(void) const;
+	size_t						getSize(void);
+	std::vector<int>			&getVector(void);
 
-	std::vector<int>			&parse(std::list<tToken> &tokens);
-	bool						isGood(void) const;
+	void						parse(std::list<tToken> &tokens);
+	bool						good(void) const;
 private:
 	bool						_good;
 	std::vector<int>			_vector;
@@ -44,6 +45,7 @@ private:
 
 	void						error(size_t line);
 	void						checkValue(std::string &value, size_t line);
+	void						checkVector(void);
 	void						size(tToken &token, size_t line);
 	void						values(tTI &it, tTI ie, size_t line);
 };

@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/05 19:19:53 by erobert           #+#    #+#             //
-//   Updated: 2015/03/06 17:41:33 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/10 14:37:04 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -18,9 +18,13 @@ Parser::Parser(void):
 {}
 Parser::~Parser(void) {}
 
-size_t						Parser::getSize(void) const
+size_t						Parser::getSize(void)
 {
 	return (_size);
+}
+std::vector<int>			&Parser::getVector(void)
+{
+	return (_vector);
 }
 
 void						Parser::error(size_t line)
@@ -42,6 +46,22 @@ void						Parser::checkValue(std::string &value, size_t line)
 			return ;
 		}
 		it++;
+	}
+}
+void						Parser::checkVector(void)
+{
+	std::vector<int>		tmp(_vector);
+	size_t					i(-1);
+
+	std::sort(tmp.begin(), tmp.end());
+	while (++i < _vector.size())
+	{
+		if (static_cast<int>(i) != tmp[i])
+		{
+			_good = false;
+			std::cerr << "Parser: wrong values" << std::endl;
+			return ;
+		}
 	}
 }
 void						Parser::size(tToken &token, size_t line)
@@ -93,7 +113,7 @@ void						Parser::values(tTI &it, tTI ie, size_t line)
 	}
 }
 
-std::vector<int>			&Parser::parse(std::list<tToken> &tokens)
+void						Parser::parse(std::list<tToken> &tokens)
 {
 	tTI						it(tokens.begin());
 	tTI						ie(tokens.end());
@@ -128,9 +148,9 @@ std::vector<int>			&Parser::parse(std::list<tToken> &tokens)
 		else if (count > _size)
 			std::cerr << ": too much lines" << std::endl;
 	}
-	return (_vector);
+	checkVector();
 }
-bool						Parser::isGood(void) const
+bool						Parser::good(void) const
 {
 	return (_good);
 }
