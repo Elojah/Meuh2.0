@@ -34,50 +34,7 @@ Puzzle::Puzzle(std::vector<int> &v, size_t size) : _size(size) {
 
 Puzzle::~Puzzle(void) {}
 
-/*
-**
-**Wikipedia A*
-**http://en.wikipedia.org/wiki/A*_search_algorithm
-**
-function A*(start,goal)
-	closedset := the empty set  	// The set of nodes already evaluated.
-	openset := {start}  	// The set of tentative nodes to be evaluated, initially containing the start node
-	came_from := the empty map  	// The map of navigated nodes.
-
-	g_score[start] := 0 	// Cost from start along best known path.
-	// Estimated total cost from start to goal through y.
-	f_score[start] := g_score[start] + heuristic_cost_estimate(start, goal)
-
-	while openset is not empty
-	current := the node in openset having the lowest f_score[] value
-		if current = goal
-			return reconstruct_path(came_from, goal)
-
-		remove current from openset
-		add current to closedset
-		for each neighbor in neighbor_nodes(current)
-			if neighbor in closedset
-				continue
-			tentative_g_score := g_score[current] + dist_between(current,neighbor)
-
-			if neighbor not in openset or tentative_g_score < g_score[neighbor]
-				came_from[neighbor] := current
-				g_score[neighbor] := tentative_g_score
-				f_score[neighbor] := g_score[neighbor] + heuristic_cost_estimate(neighbor, goal)
-				if neighbor not in openset
-					add neighbor to openset
-
-	return failure
-
-function reconstruct_path(came_from,current)
-	total_path := [current]
-	while current in came_from:
-		current := came_from[current]
-		total_path.append(current)
-	return total_path
-*/
-
-int				Puzzle::eval(State *s) {
+int										Puzzle::eval(State *s) {
 	int			result;
 
 	if ((result = s->getValue()) != NONE_SET) {
@@ -91,11 +48,11 @@ int				Puzzle::eval(State *s) {
 	return (result);
 }
 
-std::vector<State *>::iterator	Puzzle::bestEval(void) {
-	std::vector<State *>::iterator					min;
+std::list<State *>::iterator			Puzzle::bestEval(void) {
+	std::list<State *>::iterator					min;
 
 	min = _openset.begin();
-	for (std::vector<State *>::iterator it = _openset.begin() + 1; it != _openset.end(); ++it) {
+	for (std::list<State *>::iterator it = _openset.begin(); it != _openset.end(); ++it) {
 		if (eval(*it) < eval(*min)) {
 			min = it;
 		}
@@ -103,8 +60,8 @@ std::vector<State *>::iterator	Puzzle::bestEval(void) {
 	return (min);
 }
 
-std::vector<State *>::iterator			Puzzle::containState(State const *s, std::vector<State *> &v) {
-	for (std::vector<State *>::iterator oit = v.begin(); oit != v.end(); ++oit) {
+std::list<State *>::iterator			Puzzle::containState(State const *s, std::list<State *> &v) {
+	for (std::list<State *>::iterator oit = v.begin(); oit != v.end(); ++oit) {
 		if (*s == **oit) {
 			return (oit);
 		}
@@ -115,9 +72,9 @@ std::vector<State *>::iterator			Puzzle::containState(State const *s, std::vecto
 bool			Puzzle::resolve(void) {
 	bool									succes(true);
 	static unsigned int						depth(0);
-	std::vector<State *>::iterator			inOpen;
-	std::vector<State *>::iterator			inClosed;
-	std::vector<State *>::iterator			e;
+	std::list<State *>::iterator			inOpen;
+	std::list<State *>::iterator			inClosed;
+	std::list<State *>::iterator			e;
 	std::array<State *, 4>					s;
 	std::array<State *, 4>::iterator		is;
 
@@ -131,7 +88,8 @@ bool			Puzzle::resolve(void) {
 
 		_closedset.push_back(*e);
 		_openset.erase(e);
-		e = _closedset.end() - 1;
+		e = _closedset.end();
+		e--;
 		s = (*e)->expand();
 
 		(*e)->display();
