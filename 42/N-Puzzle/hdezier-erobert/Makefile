@@ -13,6 +13,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = \
+		Exec\
 		lexer_parser/Lexer\
 		lexer_parser/Parser\
 		Heuristic/NTiles\
