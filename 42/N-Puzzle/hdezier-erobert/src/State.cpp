@@ -16,6 +16,7 @@ State::State(unsigned int size, std::array<int, MAX_CASE> const &map) : _size(si
 			}
 		}
 	}
+	_depth = 0;
 }
 
 State::State(State const &s, char dir) {
@@ -36,6 +37,7 @@ State::State(State const &s, char dir) {
 			}
 		}
 	}
+	_depth = s.getDepth() + 1;
 	if (dir >= 0) {
 		move(dir);
 	}
@@ -54,13 +56,13 @@ void											State::finalFillArray(void) {
 	}
 	i = 0;
 	while (n < _size * _size) {
-		while (j < static_cast<int>(_size - 1)) {
+		while (j < static_cast<int>(_size)) {
 			if (_map[i][j + 1] != EMPTY_VALUE) {
 				break ;
 			}
 			_map[i][++j] = n++;
 		}
-		while (i < _size - 1) {
+		while (i < _size) {
 			if (_map[i + 1][j] != EMPTY_VALUE) {
 				break ;
 			}
@@ -92,13 +94,18 @@ void											State::finalFillArray(void) {
 /*
 **GET/SET
 */
-void													State::setPrevious(State *s) {_previous = s;}
-State													*State::getPrevious(void) const {return (_previous);}
-std::array<std::array<int, MAX_SIZE>, MAX_SIZE>			State::getMap(void) const {return (_map);}
-unsigned int											State::getSize(void) const {return (_size);}
-void													State::setValue(int val) {_value = val;}
-int														State::getValue(void) const {return(_value);}
+unsigned int											State::getDepth(void) const {return(_depth);}
+void													State::setDepth(unsigned int depth) {_depth = depth;}
 
+std::array<std::array<int, MAX_SIZE>, MAX_SIZE>			State::getMap(void) const {return (_map);}
+
+unsigned int											State::getSize(void) const {return (_size);}
+
+State													*State::getPrevious(void) const {return (_previous);}
+void													State::setPrevious(State *s) {_previous = s;}
+
+int														State::getValue(void) const {return(_value);}
+void													State::setValue(int val) {_value = val;}
 /*
 **NOT SAFE !!!
 */
