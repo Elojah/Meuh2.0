@@ -9,7 +9,7 @@ Manhattan::Manhattan(State const *s) {
 Manhattan::~Manhattan(void) {
 }
 
-int				Manhattan::eval(State const *s) {
+int				Manhattan::eval(State const *s) const {
 	unsigned int	i;
 	unsigned int	j;
 	unsigned int	x;

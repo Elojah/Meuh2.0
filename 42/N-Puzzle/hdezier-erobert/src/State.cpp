@@ -56,13 +56,13 @@ void											State::finalFillArray(void) {
 	}
 	i = 0;
 	while (n < _size * _size) {
-		while (j < static_cast<int>(_size)) {
+		while (j < static_cast<int>(_size - 1)) {
 			if (_map[i][j + 1] != EMPTY_VALUE) {
 				break ;
 			}
 			_map[i][++j] = n++;
 		}
-		while (i < _size) {
+		while (i < _size - 1) {
 			if (_map[i + 1][j] != EMPTY_VALUE) {
 				break ;
 			}
@@ -81,11 +81,15 @@ void											State::finalFillArray(void) {
 			_map[--i][j] = n++;
 		}
 	}
+	if (_size == 2) {
+		_map[1][0] = EMPTY_VALUE;
+	}
 	for (i = 0; i < _size; ++i) {
 		for (n = 0; n < _size; ++n) {
 			if (_map[i][n] == EMPTY_VALUE) {
 				_empty[0] = i;
 				_empty[1] = n;
+				return ;
 			}
 		}
 	}
@@ -106,6 +110,8 @@ void													State::setPrevious(State *s) {_previous = s;}
 
 int														State::getValue(void) const {return(_value);}
 void													State::setValue(int val) {_value = val;}
+std::array<unsigned int, 2>								State::getEmptyPos(void) const {return(std::array<unsigned int, 2>({{_empty[0], _empty[1]}}));}
+
 /*
 **NOT SAFE !!!
 */

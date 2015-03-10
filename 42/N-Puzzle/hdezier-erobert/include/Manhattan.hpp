@@ -9,7 +9,7 @@ class Manhattan : public IHeuristic
 public:
 	Manhattan(State const *s);
 	~Manhattan(void);
-	int		eval(State const *s);
+	int		eval(State const *s) const;
 protected:
 private:
 	Manhattan(void);

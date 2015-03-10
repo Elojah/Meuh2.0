@@ -22,7 +22,11 @@ static void						exec_puzzle(std::vector<int> &v, size_t size) {
 	Puzzle						p(v, size);
 
 	std::cout << "Exec puzzle..." << std::endl;
-	p.solve();
+	if (p.isSolvable()) {
+		p.solve();
+	} else {
+		std::cout << "Puzzle is not solvable" << std::endl;
+	}
 }
 
 static void						parse_puzzle(std::ifstream &ifs)

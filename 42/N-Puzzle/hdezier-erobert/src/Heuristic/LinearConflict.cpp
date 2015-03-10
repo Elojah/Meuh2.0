@@ -9,7 +9,7 @@ LinearConflict::LinearConflict(State const *s) {
 LinearConflict::~LinearConflict(void) {
 }
 
-int				LinearConflict::isInLine(std::array<int, MAX_SIZE> line, int n) {
+int				LinearConflict::isInLine(std::array<int, MAX_SIZE> line, int n) const {
 	unsigned int	i;
 
 	for (i = 0; i < _size; ++i) {
@@ -20,7 +20,7 @@ int				LinearConflict::isInLine(std::array<int, MAX_SIZE> line, int n) {
 	return (-1);
 }
 
-int				LinearConflict::eval(State const *s) {
+int				LinearConflict::eval(State const *s) const {
 	unsigned int	i;
 	unsigned int	j;
 	unsigned int	y;
