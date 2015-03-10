@@ -13,13 +13,13 @@ RM = rm -rf
 
 #List classes here
 CLASS = \
+		lexer_parser/Lexer\
+		lexer_parser/Parser\
 		Heuristic/NTiles\
 		Heuristic/MaxSwap\
 		Heuristic/Hamming\
 		Heuristic/LinearConflict\
 		Heuristic/Manhattan\
-		ParserLexer/Lexer\
-		ParserLexer/Parser\
 		State\
 		Puzzle\
 		main\

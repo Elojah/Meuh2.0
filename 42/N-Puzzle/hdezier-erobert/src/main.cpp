@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/05 14:18:52 by erobert           #+#    #+#             //
-//   Updated: 2015/03/06 16:35:20 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/10 14:37:27 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -29,30 +29,10 @@ static void						parse_puzzle(std::ifstream &ifs)
 {
 	Lexer								l;
 	Parser								p;
-	std::list<Lexer::tToken>			tokens;
-	std::list<Lexer::tToken>::iterator	ib;
-	std::list<Lexer::tToken>::iterator	ie;
-	std::vector<int>					vector;
-	unsigned int						i(0);
 
-	tokens = l.tokenize(ifs);
-	ib = tokens.begin();
-	ie = tokens.end();
-	while (ib != ie--)
-		std::cout << ie->first << " " << ie->second << std::endl;
-	vector = p.parse(tokens);
-	std::cout << vector.size() << std::endl;
-	std::cout << p.getSize() << std::endl;
-	while (i < vector.size())
-	{
-		std::cout << vector[i] << "|";
-		if (!(++i % p.getSize()))
-			std::cout << std::endl;
-	}
-	ifs.close();
-	if (p.isGood()) {
-		exec_puzzle(vector, p.getSize());
-	}
+	p.parse(l.tokenize(ifs));
+	if (p.good())
+		exec_puzzle(p.getVector(), p.getSize());
 }
 
 int								main(int ac, char **av)
@@ -65,7 +45,10 @@ int								main(int ac, char **av)
 	{
 		ifs.open(av[1]);
 		if (ifs.good())
+		{
 			parse_puzzle(ifs);
+			ifs.close();
+		}
 	}
 	return (0);
 }
