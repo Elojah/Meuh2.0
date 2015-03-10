@@ -25,10 +25,10 @@ Puzzle::Puzzle(std::vector<int> &v, size_t size) : _size(size) {
 
 	/*Add heuristics here*/
 	_h.push_back(new Manhattan(_finalState));
-	_h.push_back(new LinearConflict(_finalState));
-	_h.push_back(new Hamming(_finalState));
-	_h.push_back(new MaxSwap(_finalState));
 	_h.push_back(new NTiles(_finalState));
+	// _h.push_back(new Hamming(_finalState));
+	// _h.push_back(new LinearConflict(_finalState));
+	// _h.push_back(new MaxSwap(_finalState));
 	/*!Add heuristics here*/
 }
 
