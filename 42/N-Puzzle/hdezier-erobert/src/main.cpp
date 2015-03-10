@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/05 14:18:52 by erobert           #+#    #+#             //
-//   Updated: 2015/03/10 14:37:27 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/10 16:36:38 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -49,6 +49,9 @@ int								main(int ac, char **av)
 			parse_puzzle(ifs);
 			ifs.close();
 		}
+		else
+			std::cerr << av[0] << ": " 
+					  << av[1] << ": no such file" << std::endl;
 	}
 	return (0);
 }
