@@ -21,6 +21,7 @@
 static void						exec_puzzle(std::vector<int> &v, size_t size) {
 	Puzzle						p(v, size);
 
+	std::cout << "Exec puzzle..." << std::endl;
 	p.resolve();
 }
 

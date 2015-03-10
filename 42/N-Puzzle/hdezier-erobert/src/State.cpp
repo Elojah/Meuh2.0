@@ -46,17 +46,47 @@ State::~State(void) {
 
 void											State::finalFillArray(void) {
 	unsigned int	i;
-	unsigned int	j;
+	int				j(-1);
+	unsigned int	n(1);
 
 	for (i = 0; i < _size; ++i) {
-		for (j = 0; j < _size; ++j) {
-			_map[i][j] = (i * _size) + j + 1;
+		_map[i].fill(EMPTY_VALUE);
+	}
+	i = 0;
+	while (n < _size * _size) {
+		while (j < static_cast<int>(_size - 1)) {
+			if (_map[i][j + 1] != EMPTY_VALUE) {
+				break ;
+			}
+			_map[i][++j] = n++;
+		}
+		while (i < _size - 1) {
+			if (_map[i + 1][j] != EMPTY_VALUE) {
+				break ;
+			}
+			_map[++i][j] = n++;
+		}
+		while (j > 0) {
+			if (_map[i][j - 1] != EMPTY_VALUE) {
+				break ;
+			}
+			_map[i][--j] = n++;
+		}
+		while (i > 0) {
+			if (_map[i - 1][j] != EMPTY_VALUE) {
+				break ;
+			}
+			_map[--i][j] = n++;
 		}
 	}
-
-	_map[_size - 1][_size - 1] = 0;
-	_empty[0] = _size - 1;
-	_empty[1] = _size - 1;
+	for (i = 0; i < _size; ++i) {
+		for (n = 0; n < _size; ++n) {
+			if (_map[i][n] == EMPTY_VALUE) {
+				_empty[0] = i;
+				_empty[1] = n;
+			}
+		}
+	}
 }
 
 /*
