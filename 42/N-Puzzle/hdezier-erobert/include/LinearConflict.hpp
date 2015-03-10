@@ -9,11 +9,11 @@ class LinearConflict : public IHeuristic
 public:
 	LinearConflict(State const *s);
 	~LinearConflict(void);
-	int		eval(State const *s);
+	int		eval(State const *s) const;
 protected:
 private:
 	LinearConflict(void);
-	int				isInLine(std::array<int, MAX_SIZE> line, int n);
+	int				isInLine(std::array<int, MAX_SIZE> line, int n) const;
 
 	State			*_finalState;
 	unsigned int	_size;

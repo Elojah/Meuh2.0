@@ -9,7 +9,7 @@ NTiles::NTiles(State const *s) {
 NTiles::~NTiles(void) {
 }
 
-int				NTiles::eval(State const *s) {
+int				NTiles::eval(State const *s) const {
 	unsigned int	i;
 	unsigned int	j;
 	unsigned int	x;

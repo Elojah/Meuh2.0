@@ -2,7 +2,7 @@
 #include "State.hpp"
 
 MaxSwap::MaxSwap(State const *s) {
-	_finalVec = transformToArray(s);
+	_finalVec = MaxSwap::transformToArray(s);
 	_size = s->getSize();
 	_size *= _size;
 }
@@ -28,14 +28,14 @@ std::array<int, MAX_CASE>			MaxSwap::transformToArray(State const *s) {
 	return(result);
 }
 
-int								MaxSwap::eval(State const *s) {
+int								MaxSwap::eval(State const *s) const {
 	unsigned int				i;
 	unsigned int				j;
 	int							tmp;
 	int							result(0);
 	std::array<int, MAX_CASE>	vec;
 
-	vec = transformToArray(s);
+	vec = MaxSwap::transformToArray(s);
 	for (i = 0; i < _size; ++i) {
 		if (vec[i] != _finalVec[i]) {
 			for (j = 0; j < _size; ++j) {

@@ -9,7 +9,7 @@ class Hamming : public IHeuristic
 public:
 	Hamming(State const *s);
 	~Hamming(void);
-	int		eval(State const *s);
+	int		eval(State const *s) const;
 protected:
 private:
 	Hamming(void);

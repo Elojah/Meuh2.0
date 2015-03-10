@@ -21,13 +21,14 @@ public:
 	Puzzle(std::vector<int> &v, size_t size);
 	~Puzzle(void);
 	bool						solve(void);
+	bool						isSolvable(void) const;
 protected:
 private:
 	Puzzle(void);
 
 	static std::list<State *>::iterator		containState(State const *s, std::list<State *> &v);
-	std::list<State *>::iterator			bestEval(void);
-	int										eval(State *s);
+	std::list<State *>::const_iterator			bestEval(void) const;
+	int										eval(State *s) const;
 
 	std::list<State *>			_openset;
 	std::list<State *>			_closedset;

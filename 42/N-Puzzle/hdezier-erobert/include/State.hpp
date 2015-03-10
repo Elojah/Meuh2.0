@@ -26,6 +26,7 @@ public:
 	void													setValue(int);
 	State													*getPrevious(void) const;
 	void													setPrevious(State*);
+	std::array<unsigned int, 2>								getEmptyPos(void) const;
 
 	void													display(void);
 	void													move(char const dir);

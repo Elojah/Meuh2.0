@@ -9,7 +9,7 @@ Hamming::Hamming(State const *s) {
 Hamming::~Hamming(void) {
 }
 
-int				Hamming::eval(State const *s) {
+int				Hamming::eval(State const *s) const {
 	unsigned int	i;
 	unsigned int	j;
 	mapArray		map;

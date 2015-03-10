@@ -32,27 +32,56 @@ Puzzle::Puzzle(std::vector<int> &v, size_t size) : _size(size) {
 	/*!Add heuristics here*/
 }
 
-Puzzle::~Puzzle(void) {}
+Puzzle::~Puzzle(void) {
+	for (std::list<State *>::iterator it = _openset.begin(); it != _openset.end(); ++it) {
+		delete (*it);
+	}
+	for (std::list<State *>::iterator it = _closedset.begin(); it != _closedset.end(); ++it) {
+		delete (*it);
+	}
+	for (std::vector<IHeuristic *>::iterator it = _h.begin(); it != _h.end(); ++it) {
+		delete (*it);
+	}
+}
 
-int										Puzzle::eval(State *s) {
+bool									Puzzle::isSolvable(void) const {
+	MaxSwap									valid(_finalState);
+	unsigned int							emptyPermutations;
+	unsigned int							allPermutations;
+	std::array<unsigned int, 2>				startEmptyPos;
+	std::array<unsigned int, 2>				finalEmptyPos;
+
+	startEmptyPos = (_openset.front())->getEmptyPos();
+	finalEmptyPos = _finalState->getEmptyPos();
+	emptyPermutations = (startEmptyPos[0] > finalEmptyPos[0] ? startEmptyPos[0] - finalEmptyPos[0] : finalEmptyPos[0] - startEmptyPos[0])
+					+ (startEmptyPos[1] > finalEmptyPos[1] ? startEmptyPos[1] - finalEmptyPos[1] : finalEmptyPos[1] - startEmptyPos[1]);
+	allPermutations = valid.eval(_openset.front());
+	if (emptyPermutations % 2 == allPermutations % 2) {
+		return (_size % 2 == 1);
+	}
+	return (_size % 2 == 0);
+}
+
+
+int										Puzzle::eval(State *s) const {
 	int			result;
 
 	if ((result = s->getValue()) != NONE_SET) {
-		return (result + s->getDepth());
+		return (result);
 	}
 	result = 0;
-	for (std::vector<IHeuristic *>::iterator it = _h.begin(); it != _h.end(); ++it) {
+	for (std::vector<IHeuristic *>::const_iterator it = _h.begin(); it != _h.end(); ++it) {
 		result += (*it)->eval(s);
 	}
 	s->setValue(result);
-	return (result + s->getDepth());
+	return (result);
 }
 
-std::list<State *>::iterator			Puzzle::bestEval(void) {
-	std::list<State *>::iterator					min;
+std::list<State *>::const_iterator			Puzzle::bestEval(void) const {
+	std::list<State *>::const_iterator					min;
 
 	min = _openset.begin();
-	for (std::list<State *>::iterator it = _openset.begin(); it != _openset.end(); ++it) {
+	for (std::list<State *>::const_iterator it = _openset.begin(); it != _openset.end(); ++it) {
 		if (eval(*it) < eval(*min)) {
 			min = it;
 		}
@@ -71,10 +100,11 @@ std::list<State *>::iterator			Puzzle::containState(State const *s, std::list<St
 
 bool			Puzzle::solve(void) {
 	bool									succes(true);
-	static unsigned int						depth(0);
+	static unsigned int						nbStateTested(0);
 	std::list<State *>::iterator			inOpen;
 	std::list<State *>::iterator			inClosed;
-	std::list<State *>::iterator			e;
+	std::list<State *>::iterator			inSet;
+	std::list<State *>::const_iterator		e;
 	std::array<State *, 4>					s;
 	std::array<State *, 4>::iterator		is;
 
@@ -94,23 +124,23 @@ bool			Puzzle::solve(void) {
 
 		(*e)->display();
 		std::cout << "Evaluated to: " << eval(*e) << std::endl;
-		// std::cout << "Depth to: " << (*e)->getDepth() << std::endl;
+		std::cout << "Depth to: " << (*e)->getDepth() << std::endl;
 		// std::cout << "Expand to :" << std::endl;
 		for (is = s.begin(); *is != NULL && is != s.end(); ++is) {
 			// (*is)->display();
+			// std::cout << "Evaluated expand to: " << eval(*is) << std::endl;
 			inOpen = Puzzle::containState(*is, _openset);
 			inClosed = Puzzle::containState(*is, _closedset);
-			// std::cout << "Evaluated expand to: " << eval(*is) << std::endl;
+			inSet = inClosed != _closedset.end() ? inClosed : inOpen;
 			if (inClosed == _closedset.end() && inOpen == _openset.end()) {
 				(*is)->setPrevious(*e);
 				_openset.push_back(*is);
-			} else if (eval(*is) > eval(inClosed != _closedset.end() ? *inClosed : *inOpen)) {
+			} else if ((*is)->getDepth() < (*inSet)->getDepth()) {
+				delete (*inSet);
+				(*inSet) = (*is);
 				if (inClosed != _closedset.end()) {
-					(*inClosed)->setPrevious(*e);
 					_openset.push_back(*inClosed);
 					_closedset.erase(inClosed);
-				} else {
-					(*inOpen)->setPrevious(*e);
 				}
 			}
 			//  else if (inOpen != _openset.end()) {
@@ -120,9 +150,9 @@ bool			Puzzle::solve(void) {
 		}
 		// std::cout << "Open sets: " << _openset.size() << std::endl;
 		// std::cout << "Closed sets: " << _closedset.size() << std::endl;
-		// std::cout << "Depth : " << depth << std::endl;
-		depth++;
-		if (depth > 10) {
+		std::cout << "States Tested : " << nbStateTested << std::endl;
+		nbStateTested++;
+		if (nbStateTested > 2000) {
 			break ;
 		}
 	}
