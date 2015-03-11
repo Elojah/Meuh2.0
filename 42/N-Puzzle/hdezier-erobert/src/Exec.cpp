@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/11 13:57:46 by erobert           #+#    #+#             //
-//   Updated: 2015/03/11 14:29:36 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/11 17:27:15 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -19,18 +19,19 @@ Exec::Exec(void):
 {
 	_arg[0] = "-f";
 	_arg[1] = "-h";
+	_arg[2] = "-s";
 }
 Exec::~Exec(void) {}
 
-void				Exec::errorAv(void)
+void					Exec::errorAv(void)
 {
 	std::cerr << _name << ": [-f file_name] [-h heuristic]" << std::endl;
 }
-void				Exec::parsePuzzle(char *file)
+void					Exec::parsePuzzle(char *file)
 {
-	std::ifstream	ifs(file);
-	Lexer			l;
-	Parser			p;
+	std::ifstream		ifs(file);
+	Lexer				l;
+	Parser				p;
 
 	if (ifs.good())
 	{
@@ -50,38 +51,59 @@ void				Exec::parsePuzzle(char *file)
 		_good = false;
 	}
 }
-void				Exec::parseHeuristic(char *heuristic)
+void					Exec::parseHeuristic(char *heuristic)
 {
 	(void)heuristic;
 }
-
-void				Exec::parseAv(int ac, char **av)
+void					Exec::parseSize(char *size)
 {
-	int				i(0);
+	std::stringstream	ss;
+	size_t				i(0);
+	std::random_device	rd;
+	std::mt19937		g(rd());
 
-	_name = av[0];
-	while (++i < ac)
+	ss << size;
+	ss >> _size;
+	if (_size < 3 || _size > MAX_SIZE)
 	{
-		if (_arg[0].compare(av[i]) && i + 1 < ac)
-			parsePuzzle(av[++i]);
-		else if (_arg[1].compare(av[i]) && i + 1 < ac)
-			parseHeuristic(av[++i]);
-		else
-			_good = false;
+		_size = 0;
+		return ;
 	}
+	while (i < _size * _size)
+		_vector.push_back(i++);
+	std::shuffle(_vector.begin(), _vector.end(), g);
 }
 
-void				Exec::solvePuzzle(void)
+void					Exec::parseAv(int ac, char **av)
 {
-	Puzzle			*p;
+	int					i(1);
+
+	_name = av[0];
+	while (i < ac)
+	{
+		if (!_arg[0].compare(av[i]) && i + 1 < ac && !_size)
+			parsePuzzle(av[++i]);
+		else if (!_arg[1].compare(av[i]) && i + 1 < ac)
+			parseHeuristic(av[++i]);
+		else if (!_arg[2].compare(av[i]) && i + 1 < ac && !_size)
+			parseSize(av[++i]);
+		else
+			_good = false;
+		i++;
+	}
+	if (_size < 3)
+		_good = false;
+}
+
+void					Exec::solvePuzzle(void)
+{
+	Puzzle				p(_vector, _size);
 
 	if (!_good)
 		return (errorAv());
-	p = new Puzzle(_vector, _size);
 	std::cout << "Exec puzzle..." << std::endl;
-	if (p->isSolvable())
-		p->solve();
+	if (p.isSolvable())
+		p.solve();
 	else
 		std::cout << "Puzzle is not solvable" << std::endl;
-	delete p;
 }

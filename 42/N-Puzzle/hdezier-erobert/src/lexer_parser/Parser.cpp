@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/05 19:19:53 by erobert           #+#    #+#             //
-//   Updated: 2015/03/10 14:37:04 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/11 14:43:23 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -71,10 +71,10 @@ void						Parser::size(tToken &token, size_t line)
 	checkValue(token.second, line);
 	ss << token.second;
 	ss >> _size;
-	if (!_size)
+	if (_size < 3)
 	{
 		error(line);
-		std::cerr << ": size null" << std::endl;
+		std::cerr << ": size inferior to 3" << std::endl;
 		_good = false;
 	}
 }
