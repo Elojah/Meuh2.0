@@ -26,17 +26,17 @@ Puzzle::Puzzle(std::vector<int> &v, size_t size) : _size(size) {
 	/*Add heuristics here*/
 	_h.push_back(new Manhattan(_finalState));
 	_h.push_back(new NTiles(_finalState));
-	// _h.push_back(new Hamming(_finalState));
-	// _h.push_back(new LinearConflict(_finalState));
+	_h.push_back(new Hamming(_finalState));
+	_h.push_back(new LinearConflict(_finalState));
 	// _h.push_back(new MaxSwap(_finalState));
 	/*!Add heuristics here*/
 }
 
 Puzzle::~Puzzle(void) {
-	for (std::list<State *>::iterator it = _openset.begin(); it != _openset.end(); ++it) {
+	for (std::vector<State *>::iterator it = _openset.begin(); it != _openset.end(); ++it) {
 		delete (*it);
 	}
-	for (std::list<State *>::iterator it = _closedset.begin(); it != _closedset.end(); ++it) {
+	for (std::vector<State *>::iterator it = _closedset.begin(); it != _closedset.end(); ++it) {
 		delete (*it);
 	}
 	for (std::vector<IHeuristic *>::iterator it = _h.begin(); it != _h.end(); ++it) {
@@ -51,6 +51,7 @@ bool									Puzzle::isSolvable(void) const {
 	std::array<unsigned int, 2>				startEmptyPos;
 	std::array<unsigned int, 2>				finalEmptyPos;
 
+	return (true);
 	startEmptyPos = (_openset.front())->getEmptyPos();
 	finalEmptyPos = _finalState->getEmptyPos();
 	emptyPermutations = (startEmptyPos[0] > finalEmptyPos[0] ? startEmptyPos[0] - finalEmptyPos[0] : finalEmptyPos[0] - startEmptyPos[0])
@@ -77,11 +78,11 @@ int										Puzzle::eval(State *s) const {
 	return (result);
 }
 
-std::list<State *>::const_iterator			Puzzle::bestEval(void) const {
-	std::list<State *>::const_iterator					min;
+std::vector<State *>::const_iterator			Puzzle::bestEval(void) const {
+	std::vector<State *>::const_iterator					min;
 
 	min = _openset.begin();
-	for (std::list<State *>::const_iterator it = _openset.begin(); it != _openset.end(); ++it) {
+	for (std::vector<State *>::const_iterator it = _openset.begin(); it != _openset.end(); ++it) {
 		if (eval(*it) < eval(*min)) {
 			min = it;
 		}
@@ -89,8 +90,8 @@ std::list<State *>::const_iterator			Puzzle::bestEval(void) const {
 	return (min);
 }
 
-std::list<State *>::iterator			Puzzle::containState(State const *s, std::list<State *> &v) {
-	for (std::list<State *>::iterator oit = v.begin(); oit != v.end(); ++oit) {
+std::vector<State *>::iterator			Puzzle::containState(State const *s, std::vector<State *> &v) {
+	for (std::vector<State *>::iterator oit = v.begin(); oit != v.end(); ++oit) {
 		if (*s == **oit) {
 			return (oit);
 		}
@@ -101,10 +102,10 @@ std::list<State *>::iterator			Puzzle::containState(State const *s, std::list<St
 bool			Puzzle::solve(void) {
 	bool									succes(true);
 	static unsigned int						nbStateTested(0);
-	std::list<State *>::iterator			inOpen;
-	std::list<State *>::iterator			inClosed;
-	std::list<State *>::iterator			inSet;
-	std::list<State *>::const_iterator		e;
+	std::vector<State *>::iterator			inOpen;
+	std::vector<State *>::iterator			inClosed;
+	std::vector<State *>::iterator			inSet;
+	std::vector<State *>::const_iterator	e;
 	std::array<State *, 4>					s;
 	std::array<State *, 4>::iterator		is;
 
@@ -152,7 +153,7 @@ bool			Puzzle::solve(void) {
 		// std::cout << "Closed sets: " << _closedset.size() << std::endl;
 		std::cout << "States Tested : " << nbStateTested << std::endl;
 		nbStateTested++;
-		if (nbStateTested > 2000) {
+		if (nbStateTested > 600) {
 			break ;
 		}
 	}
