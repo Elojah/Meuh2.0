@@ -81,8 +81,8 @@ void											State::finalFillArray(void) {
 			_map[--i][j] = n++;
 		}
 	}
-	if (_size == 2) {
-		_map[1][0] = EMPTY_VALUE;
+	if (_size % 2 == 0) {
+		_map[_size / 2][(_size / 2) - 1] = EMPTY_VALUE;
 	}
 	for (i = 0; i < _size; ++i) {
 		for (n = 0; n < _size; ++n) {

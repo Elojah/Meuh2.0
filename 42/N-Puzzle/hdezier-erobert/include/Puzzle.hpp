@@ -7,7 +7,6 @@
 # define MAX_DEPTH_SEARCH 5000
 # define NONE_SET -1
 
-# include <list>
 # include <vector>
 # include <array>
 # include <iostream>
@@ -26,12 +25,12 @@ protected:
 private:
 	Puzzle(void);
 
-	static std::list<State *>::iterator		containState(State const *s, std::list<State *> &v);
-	std::list<State *>::const_iterator			bestEval(void) const;
-	int										eval(State *s) const;
+	static std::vector<State *>::iterator		containState(State const *s, std::vector<State *> &v);
+	std::vector<State *>::const_iterator		bestEval(void) const;
+	int											eval(State *s) const;
 
-	std::list<State *>			_openset;
-	std::list<State *>			_closedset;
+	std::vector<State *>			_openset;
+	std::vector<State *>			_closedset;
 	State						*_finalState;
 	unsigned int				_size;
 	std::vector<IHeuristic *>	_h;
