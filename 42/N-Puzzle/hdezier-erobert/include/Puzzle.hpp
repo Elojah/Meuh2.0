@@ -2,8 +2,6 @@
 # define PUZZLE_H
 
 # define BUF_SIZE 1024
-# define MAX_SIZE 256
-# define MAX_CASE 65536
 # define MAX_DEPTH_SEARCH 5000
 # define NONE_SET -1
 
@@ -12,6 +10,7 @@
 # include <iostream>
 
 class IHeuristic;
+# include "State.hpp"
 class State;
 
 class Puzzle
