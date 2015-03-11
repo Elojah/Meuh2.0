@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/11 13:57:46 by erobert           #+#    #+#             //
-//   Updated: 2015/03/11 17:27:15 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/11 17:42:04 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -67,6 +67,7 @@ void					Exec::parseSize(char *size)
 	if (_size < 3 || _size > MAX_SIZE)
 	{
 		_size = 0;
+		_good = false;
 		return ;
 	}
 	while (i < _size * _size)
@@ -97,13 +98,15 @@ void					Exec::parseAv(int ac, char **av)
 
 void					Exec::solvePuzzle(void)
 {
-	Puzzle				p(_vector, _size);
+	Puzzle				*p;
 
 	if (!_good)
 		return (errorAv());
+	p = new Puzzle(_vector, _size);
 	std::cout << "Exec puzzle..." << std::endl;
-	if (p.isSolvable())
-		p.solve();
+	if (p->isSolvable())
+		p->solve();
 	else
 		std::cout << "Puzzle is not solvable" << std::endl;
+	delete p;
 }
