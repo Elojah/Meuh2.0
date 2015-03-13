@@ -169,14 +169,6 @@ bool										State::operator==(State const &s) const {
 	return (true);
 }
 
-bool										State::operator>(State const &s) const {
-	return (_value > s.getValue());
-}
-
-bool										State::operator<(State const &s) const {
-	return (_value < s.getValue());
-}
-
 void									State::display(void) {
 	unsigned int	i;
 	unsigned int	j;
