@@ -84,8 +84,7 @@ int										Puzzle::eval(State *s) const {
 std::vector<State *>::const_iterator			Puzzle::bestEval(void) const {
 	// std::vector<State *>::const_iterator					min;
 
-	std::sort(_openset.begin(), _openset.end(),
-		[] (State const *a, State const *b) {return (a->getValue() < b->getValue());});
+	std::sort(_openset.begin(), _openset.end(), _sortObject);
 
 	// min = _openset.begin();
 	// for (std::vector<State *>::const_iterator it = _openset.begin(); it != _openset.end(); ++it) {
