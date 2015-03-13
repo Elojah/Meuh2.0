@@ -8,12 +8,15 @@
 #include "MaxSwap.hpp"
 #include "NTiles.hpp"
 
-Puzzle::Puzzle(std::vector<int> &v, size_t size) : _size(size) {
+Puzzle::Puzzle(std::vector<int> &v, size_t size, int mask) : _size(size) {
 	/*Init State*/
 	State						*s;
 	std::array<int, MAX_CASE>	tmp;
 	unsigned int				n(0);
 
+	_maxStates = 0;
+	_maxStatesOpen = 1;
+	_solution = NULL;
 	for (std::vector<int>::iterator it = v.begin(); it != v.end(); ++it) {
 		tmp[n++] = (*it);
 	}
@@ -30,8 +33,8 @@ Puzzle::Puzzle(std::vector<int> &v, size_t size) : _size(size) {
 	_finalState->display();
 	assignHeuristics();
 	std::cout << "Nb available heuristics:\t" << _heuristics.size() << std::endl;
-	setHeuristics(15);
-	std::cout << "Nb heuristics:\t" << _h.size() << std::endl;
+	setHeuristics(mask);
+	std::cout << "Nb heuristics specified:\t" << _h.size() << std::endl;
 }
 
 Puzzle::~Puzzle(void) {
@@ -75,8 +78,6 @@ bool									Puzzle::isSolvable(void) const {
 	allPermutations = valid.eval(_openset.front());
 	emptyPermutations = (startEmptyPos[0] > finalEmptyPos[0] ? startEmptyPos[0] - finalEmptyPos[0] : finalEmptyPos[0] - startEmptyPos[0])
 			+ (startEmptyPos[1] > finalEmptyPos[1] ? startEmptyPos[1] - finalEmptyPos[1] : finalEmptyPos[1] - startEmptyPos[1]);
-	std::cout << "Nb Permutations:\t" << allPermutations << std::endl;
-	std::cout << "Empty position moves:\t" << emptyPermutations << std::endl;
 	return ((_size % 2 && (emptyPermutations % 2) == (allPermutations % 2))
 		|| (_size % 2 == 0 && (allPermutations % 2 == 0)));
 }
@@ -114,8 +115,6 @@ std::vector<State *>::iterator			Puzzle::containState(State const *s, std::vecto
 }
 
 bool			Puzzle::solve(void) {
-	bool									succes(true);
-	static unsigned int						nbStateTested(0);
 	std::vector<State *>::iterator			inOpen;
 	std::vector<State *>::iterator			inClosed;
 	std::vector<State *>::iterator			inSet;
@@ -125,13 +124,13 @@ bool			Puzzle::solve(void) {
 
 	std::cout << "Solving puzzle ... Please wait for few seconds ..." << std::endl;
 	eval(_openset.front());
-	while (_openset.size() > 0 && succes) {
+	while (_openset.size() > 0) {
+		if (_openset.size() > _maxStatesOpen) {
+			_maxStatesOpen = _openset.size();
+		}
 		e = bestEval();
-		(*e)->display();
-		std::cout << "Value:\t" << (*e)->getValue() << std::endl;
 		if (**e == *_finalState) {
-			(*e)->display();
-			std::cout << "Depth:\t" << (*e)->getDepth() << std::endl;
+			_solution = *e;
 			std::cout << "Success !" << std::endl;
 			return (true);
 		}
@@ -147,21 +146,20 @@ bool			Puzzle::solve(void) {
 			inClosed = Puzzle::containState(*is, _closedset);
 			inSet = inClosed != _closedset.end() ? inClosed : inOpen;
 			if (inClosed == _closedset.end() && inOpen == _openset.end()) {
-				(*is)->setPrevious(*e);
 				eval(*is);
+				(*is)->setPrevious(*e);
 				_openset.push_back(*is);
 			} else if ((*is)->getDepth() < (*inSet)->getDepth()) {
 				delete (*inSet);
 				(*inSet) = (*is);
 				if (inClosed != _closedset.end()) {
-					eval(*inClosed);
 					_openset.push_back(*inClosed);
 					_closedset.erase(inClosed);
 				}
 			}
 		}
-		nbStateTested++;
-		if (nbStateTested > MAX_DEPTH_SEARCH) {
+		_maxStates++;
+		if (_maxStates > MAX_DEPTH_SEARCH) {
 			break ;
 		}
 	}
@@ -180,7 +178,20 @@ according to the search
 ◦ The ordered sequence of states that make up the solution, according to the
 search
 = previous
-◦ The puzzle may be unsolvable, in which case you have to inform the user and
-exit
-= TODO !!!!
 */
+void				Puzzle::printResult(void) const {
+	std::vector<State *>	path;
+	State					*tmp;
+
+	std::cout << "◦ Total number of states ever selected in the opened set:\t\t\t\t" << _maxStatesOpen << std::endl;
+	std::cout << "◦ Maximum number of states ever represented in memory at the same time:\t\t\t" << _maxStatesOpen + _closedset.size() << std::endl;
+	std::cout << "◦ Number of moves required to transition from the initial state to the final state:\t" << _solution->getDepth() << std::endl;
+	tmp = _solution;
+	while (tmp != NULL) {
+		path.insert(path.begin(), tmp);
+		tmp = tmp->getPrevious();
+	}
+	for (std::vector<State *>::iterator it = path.begin(); it != path.end(); ++it) {
+		(*it)->display();
+	}
+}
