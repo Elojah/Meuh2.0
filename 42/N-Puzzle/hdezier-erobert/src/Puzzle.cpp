@@ -180,6 +180,7 @@ search
 = previous
 */
 void				Puzzle::printResult(void) const {
+	char					input[256];
 	std::vector<State *>	path;
 	State					*tmp;
 
@@ -191,6 +192,10 @@ void				Puzzle::printResult(void) const {
 		path.insert(path.begin(), tmp);
 		tmp = tmp->getPrevious();
 	}
+	std::cout << "Print result ? y/n" << std::endl;
+	std::cin.get(input, 256);
+	if (input[0] != 'y')
+		return ;
 	for (std::vector<State *>::iterator it = path.begin(); it != path.end(); ++it) {
 		(*it)->display();
 	}
