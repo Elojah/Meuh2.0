@@ -82,7 +82,12 @@ int										Puzzle::eval(State *s) const {
 }
 
 std::vector<State *>::const_iterator			Puzzle::bestEval(void) {
-	std::sort(_openset.begin(), _openset.end(), cmpState());
+	if (_openset.size() < 5) {
+		std::sort(_openset.begin(), _openset.end(), cmpState());
+	} else {
+		std::sort(_openset.end() - 4, _openset.end(), cmpState());
+		std::inplace_merge(_openset.begin(), _openset.end() - 4, _openset.end(), cmpState());
+	}
 	return (_openset.begin());
 }
 
@@ -120,13 +125,7 @@ bool			Puzzle::solve(void) {
 		e--;
 		s = (*e)->expand();
 
-		// (*e)->display();
-		// std::cout << "Evaluated to:\t" << eval(*e) << std::endl;
-		// std::cout << "Depth to:\t" << (*e)->getDepth() << std::endl;
-		// std::cout << "Expand to :" << std::endl;
 		for (is = s.begin(); *is != NULL && is != s.end(); ++is) {
-			// (*is)->display();
-			// std::cout << "Evaluated expand to: " << eval(*is) << std::endl;
 			inOpen = Puzzle::containState(*is, _openset);
 			inClosed = Puzzle::containState(*is, _closedset);
 			inSet = inClosed != _closedset.end() ? inClosed : inOpen;
@@ -144,9 +143,6 @@ bool			Puzzle::solve(void) {
 				}
 			}
 		}
-		std::cout << "Open sets: " << _openset.size() << std::endl;
-		std::cout << "Closed sets: " << _closedset.size() << std::endl;
-		std::cout << "States Tested:\t" << nbStateTested << std::endl;
 		nbStateTested++;
 		if (nbStateTested > 5000) {
 			break ;
