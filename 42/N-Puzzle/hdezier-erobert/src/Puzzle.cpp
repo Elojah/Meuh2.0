@@ -81,29 +81,17 @@ int										Puzzle::eval(State *s) const {
 	return (result);
 }
 
-std::vector<State *>::const_iterator			Puzzle::bestEval(void) const {
-	// std::vector<State *>::const_iterator					min;
-
-	std::sort(_openset.begin(), _openset.end(), _sortObject);
-
-	// min = _openset.begin();
-	// for (std::vector<State *>::const_iterator it = _openset.begin(); it != _openset.end(); ++it) {
-	// 	if (eval(*it) < eval(*min)) {
-	// 		min = it;
-	// 	}
-	// }
+std::vector<State *>::const_iterator			Puzzle::bestEval(void) {
+	std::sort(_openset.begin(), _openset.end(), cmpState());
 	return (_openset.begin());
 }
 
 std::vector<State *>::iterator			Puzzle::containState(State const *s, std::vector<State *> &v) {
-	// for (std::vector<State *>::iterator oit = v.begin(); oit != v.end(); ++oit) {
-	// 	if (*s == **oit) {
-	// 		return (oit);
-	// 	}
-	// }
-	return (std::find_if(v.begin(), v.end(), [&](const State *i) {
+	return (std::find_if(v.begin(), v.end(),
+		[&](const State *i) {
 			return (*s == *i);
-	}));
+		}
+	));
 }
 
 bool			Puzzle::solve(void) {

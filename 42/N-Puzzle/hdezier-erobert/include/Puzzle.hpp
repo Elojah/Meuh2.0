@@ -24,14 +24,14 @@ protected:
 private:
 												Puzzle(void);
 
-	struct sortClass {
+	struct cmpState {
 		bool operator() (State const *a, State const *b) {
 			return (a->getValue() < b->getValue());
 		}
-	} _sortObject;
+	};
 
 	static std::vector<State *>::iterator		containState(State const *s, std::vector<State *> &v);
-	std::vector<State *>::const_iterator		bestEval(void) const;
+	std::vector<State *>::const_iterator		bestEval(void);
 	int											eval(State *s) const;
 
 	std::vector<State *>						_openset;
