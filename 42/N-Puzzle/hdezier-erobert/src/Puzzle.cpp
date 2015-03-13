@@ -1,4 +1,5 @@
 #include <array>
+#include <algorithm>
 #include "Puzzle.hpp"
 #include "State.hpp"
 #include "Manhattan.hpp"
@@ -81,24 +82,28 @@ int										Puzzle::eval(State *s) const {
 }
 
 std::vector<State *>::const_iterator			Puzzle::bestEval(void) const {
-	std::vector<State *>::const_iterator					min;
+	// std::vector<State *>::const_iterator					min;
 
-	min = _openset.begin();
-	for (std::vector<State *>::const_iterator it = _openset.begin(); it != _openset.end(); ++it) {
-		if (eval(*it) < eval(*min)) {
-			min = it;
-		}
-	}
-	return (min);
+	std::sort(_openset.begin(), _openset.end(), _sortObject);
+
+	// min = _openset.begin();
+	// for (std::vector<State *>::const_iterator it = _openset.begin(); it != _openset.end(); ++it) {
+	// 	if (eval(*it) < eval(*min)) {
+	// 		min = it;
+	// 	}
+	// }
+	return (_openset.begin());
 }
 
 std::vector<State *>::iterator			Puzzle::containState(State const *s, std::vector<State *> &v) {
-	for (std::vector<State *>::iterator oit = v.begin(); oit != v.end(); ++oit) {
-		if (*s == **oit) {
-			return (oit);
-		}
-	}
-	return (v.end());
+	// for (std::vector<State *>::iterator oit = v.begin(); oit != v.end(); ++oit) {
+	// 	if (*s == **oit) {
+	// 		return (oit);
+	// 	}
+	// }
+	return (std::find_if(v.begin(), v.end(), [&](const State *i) {
+			return (*s == *i);
+	}));
 }
 
 bool			Puzzle::solve(void) {
@@ -111,6 +116,7 @@ bool			Puzzle::solve(void) {
 	std::array<State *, 4>					s;
 	std::array<State *, 4>::iterator		is;
 
+	eval(_openset.front());
 	while (_openset.size() > 0 && succes) {
 		e = bestEval();
 		if (**e == *_finalState) {
@@ -126,9 +132,9 @@ bool			Puzzle::solve(void) {
 		e--;
 		s = (*e)->expand();
 
-		(*e)->display();
-		std::cout << "Evaluated to:\t" << eval(*e) << std::endl;
-		std::cout << "Depth to:\t" << (*e)->getDepth() << std::endl;
+		// (*e)->display();
+		// std::cout << "Evaluated to:\t" << eval(*e) << std::endl;
+		// std::cout << "Depth to:\t" << (*e)->getDepth() << std::endl;
 		// std::cout << "Expand to :" << std::endl;
 		for (is = s.begin(); *is != NULL && is != s.end(); ++is) {
 			// (*is)->display();
@@ -138,21 +144,23 @@ bool			Puzzle::solve(void) {
 			inSet = inClosed != _closedset.end() ? inClosed : inOpen;
 			if (inClosed == _closedset.end() && inOpen == _openset.end()) {
 				(*is)->setPrevious(*e);
+				eval(*is);
 				_openset.push_back(*is);
 			} else if ((*is)->getDepth() < (*inSet)->getDepth()) {
 				delete (*inSet);
 				(*inSet) = (*is);
 				if (inClosed != _closedset.end()) {
+					eval(*inClosed);
 					_openset.push_back(*inClosed);
 					_closedset.erase(inClosed);
 				}
 			}
 		}
-		// std::cout << "Open sets: " << _openset.size() << std::endl;
-		// std::cout << "Closed sets: " << _closedset.size() << std::endl;
+		std::cout << "Open sets: " << _openset.size() << std::endl;
+		std::cout << "Closed sets: " << _closedset.size() << std::endl;
 		std::cout << "States Tested:\t" << nbStateTested << std::endl;
 		nbStateTested++;
-		if (nbStateTested > 600) {
+		if (nbStateTested > 5000) {
 			break ;
 		}
 	}
