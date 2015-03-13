@@ -30,6 +30,8 @@ private:
 		}
 	};
 
+	void										assignHeuristics(void);
+	void										setHeuristics(int mask);
 	static std::vector<State *>::iterator		containState(State const *s, std::vector<State *> &v);
 	std::vector<State *>::const_iterator		bestEval(void);
 	int											eval(State *s) const;
@@ -40,6 +42,8 @@ private:
 	unsigned int								_size;
 	std::vector<IHeuristic *>					_h;
 	Puzzle										&operator=(Puzzle const &p);
+
+	std::vector<IHeuristic *>					_heuristics;
 };
 
 #endif
