@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/11 13:57:46 by erobert           #+#    #+#             //
-//   Updated: 2015/03/11 17:42:04 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/13 20:16:21 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -15,7 +15,8 @@
 Exec::Exec(void):
 	_good(true),
 	_name(""),
-	_size(0)
+	_size(0),
+	_heuristic(15)
 {
 	_arg[0] = "-f";
 	_arg[1] = "-h";
@@ -25,7 +26,13 @@ Exec::~Exec(void) {}
 
 void					Exec::errorAv(void)
 {
-	std::cerr << _name << ": [-f file_name] [-h heuristic]" << std::endl;
+	std::cerr << _name
+			  << ": [-f file_name | -s size] [-h heuristic]" << std::endl
+			  << "heuristic (binary mask):" << std::endl 
+			  << "1 Manhatan" << std::endl
+			  << "2 NTiles" << std::endl
+			  << "4 Hamming" << std::endl
+			  << "8 LinearConflict" << std::endl;
 }
 void					Exec::parsePuzzle(char *file)
 {
@@ -53,7 +60,21 @@ void					Exec::parsePuzzle(char *file)
 }
 void					Exec::parseHeuristic(char *heuristic)
 {
-	(void)heuristic;
+	std::stringstream	ss;
+	size_t				i(0);
+	
+	ss << heuristic;
+	while (i < strlen(heuristic))
+	{
+		if (!isdigit(heuristic[i++])) 
+		{
+			_good = false;
+			return ;
+		}
+	}
+	ss >> _heuristic;
+	if (_heuristic < 1 || _heuristic > 15)
+		_good = false;
 }
 void					Exec::parseSize(char *size)
 {
