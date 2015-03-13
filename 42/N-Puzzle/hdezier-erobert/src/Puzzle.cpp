@@ -60,7 +60,10 @@ bool									Puzzle::isSolvable(void) const {
 	allPermutations = valid.eval(_openset.front());
 	emptyPermutations = (startEmptyPos[0] > finalEmptyPos[0] ? startEmptyPos[0] - finalEmptyPos[0] : finalEmptyPos[0] - startEmptyPos[0])
 			+ (startEmptyPos[1] > finalEmptyPos[1] ? startEmptyPos[1] - finalEmptyPos[1] : finalEmptyPos[1] - startEmptyPos[1]);
-	return (( _size % 2 && (emptyPermutations % 2) == (allPermutations % 2)) || 0);
+	std::cout << "Nb Permutations:\t" << allPermutations << std::endl;
+	std::cout << "Empty position moves:\t" << emptyPermutations << std::endl;
+	return ((_size % 2 && (emptyPermutations % 2) == (allPermutations % 2))
+		|| (_size % 2 == 0 && (allPermutations % 2 == 0)));
 }
 
 int										Puzzle::eval(State *s) const {
@@ -112,6 +115,7 @@ bool			Puzzle::solve(void) {
 		e = bestEval();
 		if (**e == *_finalState) {
 			(*e)->display();
+			std::cout << "Depth:\t" << (*e)->getDepth() << std::endl;
 			std::cout << "Success !" << std::endl;
 			return (true);
 		}
@@ -123,8 +127,8 @@ bool			Puzzle::solve(void) {
 		s = (*e)->expand();
 
 		(*e)->display();
-		std::cout << "Evaluated to: " << eval(*e) << std::endl;
-		std::cout << "Depth to: " << (*e)->getDepth() << std::endl;
+		std::cout << "Evaluated to:\t" << eval(*e) << std::endl;
+		std::cout << "Depth to:\t" << (*e)->getDepth() << std::endl;
 		// std::cout << "Expand to :" << std::endl;
 		for (is = s.begin(); *is != NULL && is != s.end(); ++is) {
 			// (*is)->display();
@@ -146,7 +150,7 @@ bool			Puzzle::solve(void) {
 		}
 		// std::cout << "Open sets: " << _openset.size() << std::endl;
 		// std::cout << "Closed sets: " << _closedset.size() << std::endl;
-		std::cout << "States Tested : " << nbStateTested << std::endl;
+		std::cout << "States Tested:\t" << nbStateTested << std::endl;
 		nbStateTested++;
 		if (nbStateTested > 600) {
 			break ;
