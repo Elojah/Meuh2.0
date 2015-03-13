@@ -185,7 +185,9 @@ void							State::display(void)
 	size_t						i;
 	size_t						j;
 
-	std::cout << "_________________________________" << std::endl;
+	for (i = 0; i < _size; ++i)
+		std::cout << "_________";
+	std::cout << std::endl;
 	for (i = 0; i < _size; ++i)
 	{
 		std::cout << '|';
@@ -198,5 +200,6 @@ void							State::display(void)
 		}
 		std::cout << '|' << std::endl;
 	}
-	std::cout << "_________________________________" << std::endl;
+	for (i = 0; i < _size; ++i)
+		std::cout << "_________";
 }
