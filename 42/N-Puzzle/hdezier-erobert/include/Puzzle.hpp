@@ -9,31 +9,37 @@
 # include <array>
 # include <iostream>
 
-class IHeuristic;
 # include "State.hpp"
 class State;
+class IHeuristic;
 
 class Puzzle
 {
 public:
-	Puzzle(std::vector<int> &v, size_t size);
-	~Puzzle(void);
-	bool						solve(void);
-	bool						isSolvable(void) const;
+												Puzzle(std::vector<int> &v, size_t size);
+												~Puzzle(void);
+	bool										solve(void);
+	bool										isSolvable(void) const;
 protected:
 private:
-	Puzzle(void);
+												Puzzle(void);
+
+	struct cmpState {
+		bool operator() (State const *a, State const *b) {
+			return (a->getValue() < b->getValue());
+		}
+	};
 
 	static std::vector<State *>::iterator		containState(State const *s, std::vector<State *> &v);
-	std::vector<State *>::const_iterator		bestEval(void) const;
+	std::vector<State *>::const_iterator		bestEval(void);
 	int											eval(State *s) const;
 
-	std::vector<State *>			_openset;
-	std::vector<State *>			_closedset;
-	State						*_finalState;
-	unsigned int				_size;
-	std::vector<IHeuristic *>	_h;
-	Puzzle						&operator=(Puzzle const &p);
+	std::vector<State *>						_openset;
+	std::vector<State *>						_closedset;
+	State										*_finalState;
+	unsigned int								_size;
+	std::vector<IHeuristic *>					_h;
+	Puzzle										&operator=(Puzzle const &p);
 };
 
 #endif
