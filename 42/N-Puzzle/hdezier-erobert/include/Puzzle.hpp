@@ -16,7 +16,7 @@ class IHeuristic;
 class Puzzle
 {
 public:
-												Puzzle(std::vector<int> &v, size_t size);
+												Puzzle(std::vector<int> &v, size_t size, int mask);
 												~Puzzle(void);
 	bool										solve(void);
 	bool										isSolvable(void) const;

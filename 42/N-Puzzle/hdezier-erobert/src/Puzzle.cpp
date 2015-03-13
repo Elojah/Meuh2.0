@@ -8,7 +8,7 @@
 #include "MaxSwap.hpp"
 #include "NTiles.hpp"
 
-Puzzle::Puzzle(std::vector<int> &v, size_t size) : _size(size) {
+Puzzle::Puzzle(std::vector<int> &v, size_t size, int mask) : _size(size) {
 	/*Init State*/
 	State						*s;
 	std::array<int, MAX_CASE>	tmp;
@@ -30,7 +30,7 @@ Puzzle::Puzzle(std::vector<int> &v, size_t size) : _size(size) {
 	_finalState->display();
 	assignHeuristics();
 	std::cout << "Nb available heuristics:\t" << _heuristics.size() << std::endl;
-	setHeuristics(15);
+	setHeuristics(mask);
 	std::cout << "Nb heuristics:\t" << _h.size() << std::endl;
 }
 

@@ -102,7 +102,7 @@ void					Exec::solvePuzzle(void)
 
 	if (!_good)
 		return (errorAv());
-	p = new Puzzle(_vector, _size);
+	p = new Puzzle(_vector, _size, 15);/*Change value in heuristic mask*/
 	if (p->isSolvable())
 		p->solve();
 	else
