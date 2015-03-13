@@ -28,13 +28,10 @@ Puzzle::Puzzle(std::vector<int> &v, size_t size) : _size(size) {
 	s->display();
 	std::cout << "to final state: " << std::endl;
 	_finalState->display();
-	/*Add heuristics here*/
-	_h.push_back(new Manhattan(_finalState));
-	_h.push_back(new NTiles(_finalState));
-	_h.push_back(new Hamming(_finalState));
-	_h.push_back(new LinearConflict(_finalState));
-	// _h.push_back(new MaxSwap(_finalState));
-	/*!Add heuristics here*/
+	assignHeuristics();
+	std::cout << "Nb available heuristics:\t" << _heuristics.size() << std::endl;
+	setHeuristics(15);
+	std::cout << "Nb heuristics:\t" << _h.size() << std::endl;
 }
 
 Puzzle::~Puzzle(void) {
@@ -44,8 +41,25 @@ Puzzle::~Puzzle(void) {
 	for (std::vector<State *>::iterator it = _closedset.begin(); it != _closedset.end(); ++it) {
 		delete (*it);
 	}
-	for (std::vector<IHeuristic *>::iterator it = _h.begin(); it != _h.end(); ++it) {
+	for (std::vector<IHeuristic *>::const_iterator it = _heuristics.begin(); it != _heuristics.end(); ++it) {
 		delete (*it);
+	}
+}
+
+void					Puzzle::assignHeuristics(void) {
+	_heuristics.push_back(new Manhattan(_finalState));
+	_heuristics.push_back(new NTiles(_finalState));
+	_heuristics.push_back(new Hamming(_finalState));
+	_heuristics.push_back(new LinearConflict(_finalState));
+	_heuristics.push_back(new MaxSwap(_finalState));
+}
+
+void									Puzzle::setHeuristics(int mask) {
+	size_t								i;
+	for (i = 0; i < _heuristics.size(); ++i) {
+		if (mask & (1 << i)) {
+			_h.push_back(_heuristics[i]);
+		}
 	}
 }
 
@@ -109,9 +123,12 @@ bool			Puzzle::solve(void) {
 	std::array<State *, 4>					s;
 	std::array<State *, 4>::iterator		is;
 
+	std::cout << "Solving puzzle ... Please wait for few seconds ..." << std::endl;
 	eval(_openset.front());
 	while (_openset.size() > 0 && succes) {
 		e = bestEval();
+		(*e)->display();
+		std::cout << "Value:\t" << (*e)->getValue() << std::endl;
 		if (**e == *_finalState) {
 			(*e)->display();
 			std::cout << "Depth:\t" << (*e)->getDepth() << std::endl;
@@ -144,7 +161,7 @@ bool			Puzzle::solve(void) {
 			}
 		}
 		nbStateTested++;
-		if (nbStateTested > 5000) {
+		if (nbStateTested > MAX_DEPTH_SEARCH) {
 			break ;
 		}
 	}

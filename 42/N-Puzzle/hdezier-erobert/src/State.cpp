@@ -191,4 +191,5 @@ void									State::display(void) {
 	for (i = 0; i < _size; ++i) {
 		std::cout << "_________";
 	}
+	std::cout << std::endl;
 }
