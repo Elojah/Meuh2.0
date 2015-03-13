@@ -31,7 +31,7 @@ Puzzle::Puzzle(std::vector<int> &v, size_t size) : _size(size) {
 	_h.push_back(new Manhattan(_finalState));
 	_h.push_back(new NTiles(_finalState));
 	_h.push_back(new Hamming(_finalState));
-	// _h.push_back(new LinearConflict(_finalState));
+	_h.push_back(new LinearConflict(_finalState));
 	// _h.push_back(new MaxSwap(_finalState));
 	/*!Add heuristics here*/
 }
@@ -51,12 +51,16 @@ Puzzle::~Puzzle(void) {
 bool									Puzzle::isSolvable(void) const {
 	MaxSwap									valid(_finalState);
 	unsigned int							allPermutations;
+	unsigned int							emptyPermutations;
 	std::array<unsigned int, 2>				startEmptyPos;
+	std::array<unsigned int, 2>				finalEmptyPos;
 
 	startEmptyPos = (_openset.front())->getEmptyPos();
+	finalEmptyPos = _finalState->getEmptyPos();
 	allPermutations = valid.eval(_openset.front());
-
-	return ((_size % 2 && !(allPermutations % 2)) || (!(_size % 2) && (!(startEmptyPos[0] % 2) == !(allPermutations % 2))));
+	emptyPermutations = (startEmptyPos[0] > finalEmptyPos[0] ? startEmptyPos[0] - finalEmptyPos[0] : finalEmptyPos[0] - startEmptyPos[0])
+			+ (startEmptyPos[1] > finalEmptyPos[1] ? startEmptyPos[1] - finalEmptyPos[1] : finalEmptyPos[1] - startEmptyPos[1]);
+	return (( _size % 2 && (emptyPermutations % 2) == (allPermutations % 2)) || 0);
 }
 
 int										Puzzle::eval(State *s) const {
@@ -139,10 +143,6 @@ bool			Puzzle::solve(void) {
 					_closedset.erase(inClosed);
 				}
 			}
-			//  else if (inOpen != _openset.end()) {
-			// 	_openset.erase(inOpen);
-			// 	_closedset.push_back(*inOpen);
-			// }
 		}
 		// std::cout << "Open sets: " << _openset.size() << std::endl;
 		// std::cout << "Closed sets: " << _closedset.size() << std::endl;
