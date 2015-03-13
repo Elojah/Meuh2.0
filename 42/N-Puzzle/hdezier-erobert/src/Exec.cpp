@@ -104,7 +104,10 @@ void					Exec::solvePuzzle(void)
 		return (errorAv());
 	p = new Puzzle(_vector, _size, 15);/*Change value in heuristic mask*/
 	if (p->isSolvable())
-		p->solve();
+	{
+		if (p->solve())
+			p->printResult();
+	}
 	else
 		std::cout << "Puzzle is not solvable." << std::endl;
 	delete p;

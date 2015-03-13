@@ -1,3 +1,4 @@
+
 #ifndef STATE_H
 # define STATE_H
 
@@ -8,34 +9,35 @@
 # define EMPTY _empty[0]][_empty[1]
 # define INC inc[0]][inc[1]
 
-#include <array>
+# include <array>
 
 class State
 {
 public:
-	State(unsigned int size, std::array<int, MAX_CASE> const &map);
-	State(State const&, char dir);
+	typedef std::array<int, MAX_SIZE>		tArray;
+	typedef std::array<tArray, MAX_SIZE>	tMapArray;
+
+	State(size_t size, std::array<int, MAX_CASE> const &map);
+	State(State const &s, char dir);
 	~State(void);
-	void													finalFillArray(void);
 
-	std::array<std::array<int, MAX_SIZE>, MAX_SIZE>			getMap(void) const;
-	unsigned int											getDepth(void) const;
-	void													setDepth(unsigned int depth);
-	unsigned int											getSize(void) const;
-	int														getValue(void) const;
-	void													setValue(int);
-	State													*getPrevious(void) const;
-	void													setPrevious(State*);
-	std::array<unsigned int, 2>								getEmptyPos(void) const;
+	bool									operator==(State const &s) const;
 
-	void													display(void);
-	void													move(char const dir);
-	std::array<State *, 4>									expand(void);
-	bool													operator==(State const &s) const;
-protected:
+	tMapArray								getMap(void) const;
+	size_t									getDepth(void) const;
+	void									setDepth(unsigned int depth);
+	size_t									getSize(void) const;
+	int										getValue(void) const;
+	void									setValue(int);
+	State									*getPrevious(void) const;
+	void									setPrevious(State*);
+	std::array<size_t, 2>					getEmptyPos(void) const;
+
+	void									display(void);
+	void									move(char const dir);
+	std::array<State *, 4>					expand(void);
+	void									finalFillArray(void);
 private:
-	typedef std::array<std::array<int, MAX_SIZE>, MAX_SIZE>	mapArray;
-
 	enum eMove
 	{
 		LEFT = 0,
@@ -45,13 +47,16 @@ private:
 	};
 
 	State(void);
+	State(State const &s);
 
-	mapArray												_map;
-	unsigned int											_size;
-	unsigned int											_empty[2];
-	int														_value;
-	unsigned int											_depth;
-	State													*_previous;
+	State									&operator=(State const &s);
+
+	tMapArray								_map;
+	size_t									_size;
+	size_t									_empty[2];
+	int										_value;
+	size_t									_depth;
+	State									*_previous;
 };
 
 #endif
