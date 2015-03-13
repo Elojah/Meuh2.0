@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/11 13:57:37 by erobert           #+#    #+#             //
-//   Updated: 2015/03/11 17:26:36 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/13 19:54:55 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -37,6 +37,7 @@ private:
 	std::string			_arg[3];
 	std::vector<int>	_vector;
 	size_t				_size;
+	int					_heuristic;
 
 	Exec(Exec const &e);
 
