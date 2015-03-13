@@ -169,11 +169,22 @@ bool										State::operator==(State const &s) const {
 	return (true);
 }
 
+bool										State::operator>(State const &s) const {
+	return (_value > s.getValue());
+}
+
+bool										State::operator<(State const &s) const {
+	return (_value < s.getValue());
+}
+
 void									State::display(void) {
 	unsigned int	i;
 	unsigned int	j;
 
-	std::cout << "_________________________________" << std::endl;
+	for (i = 0; i < _size; ++i) {
+		std::cout << "_________";
+	}
+	std::cout << std::endl;
 	for (i = 0; i < _size; ++i) {
 		std::cout << '|';
 		for (j = 0; j < _size; ++j) {
@@ -185,5 +196,7 @@ void									State::display(void) {
 		}
 		std::cout << '|' << std::endl;
 	}
-	std::cout << "_________________________________" << std::endl;
+	for (i = 0; i < _size; ++i) {
+		std::cout << "_________";
+	}
 }
