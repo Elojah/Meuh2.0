@@ -103,10 +103,10 @@ void					Exec::solvePuzzle(void)
 	if (!_good)
 		return (errorAv());
 	p = new Puzzle(_vector, _size);
-	std::cout << "Exec puzzle..." << std::endl;
+	std::cout << "Solving puzzle ... Please wait for few seconds ..." << std::endl;
 	if (p->isSolvable())
 		p->solve();
 	else
-		std::cout << "Puzzle is not solvable" << std::endl;
+		std::cout << "Puzzle is not solvable." << std::endl;
 	delete p;
 }
