@@ -64,11 +64,11 @@ void									Puzzle::setHeuristics(int mask) {
 }
 
 bool									Puzzle::isSolvable(void) const {
-	MaxSwap									valid(_finalState);
-	unsigned int							allPermutations;
-	unsigned int							emptyPermutations;
-	std::array<unsigned int, 2>				startEmptyPos;
-	std::array<unsigned int, 2>				finalEmptyPos;
+	MaxSwap								valid(_finalState);
+	size_t								allPermutations;
+	size_t								emptyPermutations;
+	std::array<size_t, 2>				startEmptyPos;
+	std::array<size_t, 2>				finalEmptyPos;
 
 	startEmptyPos = (_openset.front())->getEmptyPos();
 	finalEmptyPos = _finalState->getEmptyPos();
