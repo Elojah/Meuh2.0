@@ -113,6 +113,7 @@ State							*State::getPrevious(void) const
 void							State::setPrevious(State *s)
 {
 	_previous = s;
+	_depth = s->getDepth() + 1;
 }
 int								State::getValue(void) const
 {
