@@ -26,11 +26,13 @@ int				NTiles::eval(State const *s) const {
 			for (x = 0; x < _size; ++x) {
 				if (finalMap[x][j] == map[i][j]) {
 					result--;
+					break ;
 				}
 			}
 			for (y = 0; y < _size; ++y) {
 				if (finalMap[i][y] == map[i][j]) {
 					result--;
+					break ;
 				}
 			}
 		}

@@ -14,6 +14,7 @@ int				Manhattan::eval(State const *s) const {
 	unsigned int	j;
 	unsigned int	x;
 	unsigned int	y;
+	bool			flag(false);
 	int				result(0);
 	mapArray		map;
 	mapArray		finalMap;
@@ -22,11 +23,17 @@ int				Manhattan::eval(State const *s) const {
 	finalMap = _finalState->getMap();
 	for (i = 0; i < _size; ++i) {
 		for (j = 0; j < _size; ++j) {
+			flag = false;
 			for (x = 0; x < _size; ++x) {
 				for (y = 0; y < _size; ++y) {
 					if (map[i][j] == finalMap[x][y]) {
 						result += (((i > x) ? i - x : x - i) + ((j > y) ? j - y : y - j));
+						flag = true;
+						break ;
 					}
+				}
+				if (flag) {
+					break ;
 				}
 			}
 		}

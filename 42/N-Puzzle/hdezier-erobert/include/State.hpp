@@ -15,7 +15,7 @@ class State
 {
 public:
 	typedef std::array<int, MAX_SIZE>		tArray;
-	typedef std::array<tArray, MAX_SIZE>	tMapArray;
+	typedef int								**tMapArray;
 
 	State(size_t size, std::array<int, MAX_CASE> const &map);
 	State(State const &s, char dir);
@@ -35,7 +35,7 @@ public:
 
 	void									display(void);
 	void									move(char const dir);
-	std::array<State *, 4>					expand(void);
+	std::array<State *, 5>					expand(void);
 	void									finalFillArray(void);
 private:
 	enum eMove

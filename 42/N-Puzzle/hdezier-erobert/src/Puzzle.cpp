@@ -121,7 +121,7 @@ bool			Puzzle::solve(void) {
 	std::vector<State *>::iterator			inSet;
 	std::array<State *, 4>::iterator		is;
 	std::vector<State *>::const_iterator	e;
-	std::array<State *, 4>					s;
+	std::array<State *, 5>					s;
 	char									input[256];
 
 	std::cout << "Solving puzzle ... Please wait for few seconds ..." << std::endl;
@@ -136,7 +136,6 @@ bool			Puzzle::solve(void) {
 			std::cout << "Success !" << std::endl;
 			return (true);
 		}
-
 		tmp = (*e);
 		_openset.erase(e);
 		_closedset.push_back(tmp);
@@ -153,6 +152,7 @@ bool			Puzzle::solve(void) {
 				delete (*inSet);
 				(*inSet) = (*is);
 				if (inClosed != _closedset.end()) {
+					eval(*inSet);
 					_openset.push_back(*inSet);
 					_closedset.erase(inSet);
 				}
