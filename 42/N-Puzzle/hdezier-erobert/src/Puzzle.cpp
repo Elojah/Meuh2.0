@@ -54,7 +54,7 @@ void					Puzzle::assignHeuristics(void) {
 	_heuristics.push_back(new NTiles(_finalState));
 	_heuristics.push_back(new Hamming(_finalState));
 	_heuristics.push_back(new LinearConflict(_finalState));
-	_heuristics.push_back(new MaxSwap(_finalState));
+	// _heuristics.push_back(new MaxSwap(_finalState));
 }
 
 void									Puzzle::setHeuristics(int mask) {
@@ -115,12 +115,14 @@ std::vector<State *>::iterator			Puzzle::containState(State const *s, std::vecto
 }
 
 bool			Puzzle::solve(void) {
+	State									*tmp;
 	std::vector<State *>::iterator			inOpen;
 	std::vector<State *>::iterator			inClosed;
 	std::vector<State *>::iterator			inSet;
+	std::array<State *, 4>::iterator		is;
 	std::vector<State *>::const_iterator	e;
 	std::array<State *, 4>					s;
-	std::array<State *, 4>::iterator		is;
+	char									input[256];
 
 	std::cout << "Solving puzzle ... Please wait for few seconds ..." << std::endl;
 	eval(_openset.front());
@@ -135,57 +137,46 @@ bool			Puzzle::solve(void) {
 			return (true);
 		}
 
-		_closedset.push_back(*e);
+		tmp = (*e);
 		_openset.erase(e);
-		e = _closedset.end();
-		e--;
-		s = (*e)->expand();
-
+		_closedset.push_back(tmp);
+		s = tmp->expand();
 		for (is = s.begin(); *is != NULL && is != s.end(); ++is) {
 			inOpen = Puzzle::containState(*is, _openset);
 			inClosed = Puzzle::containState(*is, _closedset);
-			inSet = inClosed != _closedset.end() ? inClosed : inOpen;
-			if (inClosed == _closedset.end() && inOpen == _openset.end()) {
+			inSet = (inClosed != _closedset.end() ? inClosed : inOpen);
+			if (inSet == _openset.end()) {
 				eval(*is);
-				(*is)->setPrevious(*e);
+				(*is)->setPrevious(tmp);
 				_openset.push_back(*is);
 			} else if ((*is)->getDepth() < (*inSet)->getDepth()) {
 				delete (*inSet);
 				(*inSet) = (*is);
 				if (inClosed != _closedset.end()) {
-					_openset.push_back(*inClosed);
-					_closedset.erase(inClosed);
+					_openset.push_back(*inSet);
+					_closedset.erase(inSet);
 				}
 			}
 		}
 		_maxStates++;
-		if (_maxStates > MAX_DEPTH_SEARCH) {
-			break ;
+		if (_maxStates == MAX_DEPTH_SEARCH) {
+			std::cout << MAX_DEPTH_SEARCH << " states have been tested, do you want to continue ? y/n" << std::endl;
+			std::cin.get(input, 256);
+			if (input[0] != 'y') {
+				break ;
+			}
 		}
 	}
 	return (false);
 }
 
-/*
-◦ Total number of states ever selected in the "opened" set (complexity in time)
-= Add a max value ?
-◦ Maximum number of states ever represented in memory at the same time
-during the search (complexity in size)
-= Max value on both vecs
-◦ Number of moves required to transition from the initial state to the final state,
-according to the search
-= Count previous value
-◦ The ordered sequence of states that make up the solution, according to the
-search
-= previous
-*/
 void				Puzzle::printResult(void) const {
 	char					input[256];
 	std::vector<State *>	path;
 	State					*tmp;
 
 	std::cout << "◦ Total number of states ever selected in the opened set:\t\t\t\t" << _maxStatesOpen << std::endl;
-	std::cout << "◦ Maximum number of states ever represented in memory at the same time:\t\t\t" << _maxStatesOpen + _closedset.size() << std::endl;
+	std::cout << "◦ Maximum number of states ever represented in memory at the same time:\t\t\t" << _openset.size() + _closedset.size() << std::endl;
 	std::cout << "◦ Number of moves required to transition from the initial state to the final state:\t" << _solution->getDepth() << std::endl;
 	tmp = _solution;
 	while (tmp != NULL) {
