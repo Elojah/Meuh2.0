@@ -28,7 +28,7 @@ void					Exec::errorAv(void)
 {
 	std::cerr << _name
 			  << ": [-f file_name | -s size] [-h heuristic]" << std::endl
-			  << "heuristic (binary mask):" << std::endl 
+			  << "heuristic (binary mask):" << std::endl
 			  << "1 Manhatan" << std::endl
 			  << "2 NTiles" << std::endl
 			  << "4 Hamming" << std::endl
@@ -62,11 +62,11 @@ void					Exec::parseHeuristic(char *heuristic)
 {
 	std::stringstream	ss;
 	size_t				i(0);
-	
+
 	ss << heuristic;
 	while (i < strlen(heuristic))
 	{
-		if (!isdigit(heuristic[i++])) 
+		if (!isdigit(heuristic[i++]))
 		{
 			_good = false;
 			return ;
@@ -123,9 +123,12 @@ void					Exec::solvePuzzle(void)
 
 	if (!_good)
 		return (errorAv());
-	p = new Puzzle(_vector, _size);
+	p = new Puzzle(_vector, _size, _heuristic);
 	if (p->isSolvable())
-		p->solve();
+	{
+		if (p->solve())
+			p->printResult();
+	}
 	else
 		std::cout << "Puzzle is not solvable." << std::endl;
 	delete p;

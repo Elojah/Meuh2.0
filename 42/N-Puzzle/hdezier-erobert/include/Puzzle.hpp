@@ -16,10 +16,11 @@ class IHeuristic;
 class Puzzle
 {
 public:
-												Puzzle(std::vector<int> &v, size_t size);
+												Puzzle(std::vector<int> &v, size_t size, int mask);
 												~Puzzle(void);
 	bool										solve(void);
 	bool										isSolvable(void) const;
+	void										printResult(void) const;
 protected:
 private:
 												Puzzle(void);
@@ -38,12 +39,16 @@ private:
 
 	std::vector<State *>						_openset;
 	std::vector<State *>						_closedset;
+	size_t										_maxStatesOpen;
+	size_t										_maxStates;
 	State										*_finalState;
 	unsigned int								_size;
 	std::vector<IHeuristic *>					_h;
-	Puzzle										&operator=(Puzzle const &p);
-
 	std::vector<IHeuristic *>					_heuristics;
+
+	State										*_solution;
+
+	Puzzle										&operator=(Puzzle const &p);
 };
 
 #endif
