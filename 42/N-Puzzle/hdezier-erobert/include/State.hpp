@@ -6,16 +6,13 @@
 # define MAX_SIZE 256
 # define MAX_CASE 65536
 # define NONE_SET -1
-# define EMPTY _empty[0]][_empty[1]
-# define INC inc[0]][inc[1]
 
 # include <array>
 
 class State
 {
 public:
-	typedef std::array<int, MAX_SIZE>		tArray;
-	typedef std::array<tArray, MAX_SIZE>	tMapArray;
+	typedef std::array<int, MAX_CASE>		tArray;
 
 	State(size_t size, std::array<int, MAX_CASE> const &map);
 	State(State const &s, char dir);
@@ -23,7 +20,7 @@ public:
 
 	bool									operator==(State const &s) const;
 
-	tMapArray								getMap(void) const;
+	tArray									getMap(void) const;
 	size_t									getDepth(void) const;
 	void									setDepth(unsigned int depth);
 	size_t									getSize(void) const;
@@ -31,11 +28,11 @@ public:
 	void									setValue(int);
 	State									*getPrevious(void) const;
 	void									setPrevious(State*);
-	std::array<size_t, 2>					getEmptyPos(void) const;
+	size_t									getEmptyPos(void) const;
 
 	void									display(void);
 	void									move(char const dir);
-	std::array<State *, 4>					expand(void);
+	std::array<State *, 5>					expand(void);
 	void									finalFillArray(void);
 private:
 	enum eMove
@@ -51,9 +48,9 @@ private:
 
 	State									&operator=(State const &s);
 
-	tMapArray								_map;
+	tArray									_map;
 	size_t									_size;
-	size_t									_empty[2];
+	size_t									_empty;
 	int										_value;
 	size_t									_depth;
 	State									*_previous;

@@ -14,9 +14,7 @@ protected:
 private:
 	MaxSwap(void);
 
-	static std::array<int, MAX_CASE>	transformToArray(State const *s);
-
-	std::array<int, MAX_CASE>	_finalVec;
+	tArray						_finalMap;
 	unsigned int				_size;
 };
 

@@ -14,7 +14,7 @@ protected:
 private:
 	Hamming(void);
 
-	State			*_finalState;
+	tArray			_finalMap;
 	unsigned int	_size;
 };
 

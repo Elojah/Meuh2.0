@@ -2,36 +2,32 @@
 #include "State.hpp"
 
 NTiles::NTiles(State const *s) {
-	_finalState = new State(*s, -1);
-	_size = _finalState->getSize();
+	_size = s->getSize();
+	_finalMap = s->getMap();
 }
 
 NTiles::~NTiles(void) {
 }
 
 int				NTiles::eval(State const *s) const {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	x;
-	unsigned int	y;
+	size_t			i;
+	size_t			x;
 	int				result(0);
-	mapArray		map;
-	mapArray		finalMap;
+	tArray			map;
 
 	map = s->getMap();
-	finalMap = _finalState->getMap();
-	for (i = 0; i < _size; ++i) {
-		for (j = 0; j < _size; ++j) {
-			result += 2;
-			for (x = 0; x < _size; ++x) {
-				if (finalMap[x][j] == map[i][j]) {
-					result--;
-				}
+	for (i = 0; i < _size * _size; ++i) {
+		result += 2;
+		for (x = 0; x < _size; ++x) {
+			if (_finalMap[i / _size + x] == map[i]) {
+				result--;
+				break ;
 			}
-			for (y = 0; y < _size; ++y) {
-				if (finalMap[i][y] == map[i][j]) {
-					result--;
-				}
+		}
+		for (x = 0; x < _size; ++x) {
+			if (_finalMap[x * _size + i % _size] == map[i]) {
+				result--;
+				break ;
 			}
 		}
 	}
