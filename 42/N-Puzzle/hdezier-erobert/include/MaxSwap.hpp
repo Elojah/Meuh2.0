@@ -4,20 +4,21 @@
 # include "IHeuristic.hpp"
 class State;
 
-class MaxSwap : public IHeuristic
+class MaxSwap: public IHeuristic
 {
 public:
 	MaxSwap(State const *s);
-	~MaxSwap(void);
-	int		eval(State const *s) const;
-protected:
+	virtual ~MaxSwap(void);
+
+	virtual int		eval(State const *s) const;
 private:
+	tArray			_finalMap;
+	unsigned int	_size;
+
 	MaxSwap(void);
+	MaxSwap(MaxSwap const &mS);
 
-	static std::array<int, MAX_CASE>	transformToArray(State const *s);
-
-	std::array<int, MAX_CASE>	_finalVec;
-	unsigned int				_size;
+	MaxSwap			&operator=(MaxSwap const &mS);
 };
 
 #endif

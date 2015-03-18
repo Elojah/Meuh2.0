@@ -4,17 +4,21 @@
 # include "IHeuristic.hpp"
 class State;
 
-class Manhattan : public IHeuristic
+class Manhattan: public IHeuristic
 {
 public:
 	Manhattan(State const *s);
 	~Manhattan(void);
-	int		eval(State const *s) const;
-protected:
+
+	virtual int		eval(State const *s) const;
 private:
-	Manhattan(void);
-	State			*_finalState;
 	unsigned int	_size;
+	tArray			_finalMap;
+
+	Manhattan(void);
+	Manhattan(Manhattan const &m);
+
+	Manhattan		&operator=(Manhattan const &m);
 };
 
 #endif

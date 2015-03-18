@@ -2,27 +2,22 @@
 #include "State.hpp"
 
 Hamming::Hamming(State const *s) {
-	_finalState = new State(*s, -1);
-	_size = _finalState->getSize();
+	_size = s->getSize();
+	_finalMap = s->getMap();
 }
 
 Hamming::~Hamming(void) {
 }
 
 int				Hamming::eval(State const *s) const {
-	unsigned int	i;
-	unsigned int	j;
-	mapArray		map;
-	mapArray		finalMap;
+	size_t			i;
+	tArray			map;
 	int				result(0);
 
 	map = s->getMap();
-	finalMap = _finalState->getMap();
-	for (i = 0; i < _size; ++i) {
-		for (j = 0; j < _size; ++j) {
-			if (map[i][j] != finalMap[i][j]) {
-				result++;
-			}
+	for (i = 0; i < _size * _size; ++i) {
+		if (map[i] != _finalMap[i]) {
+			result++;
 		}
 	}
 	return (result);
