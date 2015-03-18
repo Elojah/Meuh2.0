@@ -7,10 +7,10 @@ class State;
 class MaxSwap: public IHeuristic
 {
 public:
-	MaxSwap(State const *s);
+	MaxSwap(State const &s);
 	virtual ~MaxSwap(void);
 
-	virtual int		eval(State const *s) const;
+	virtual int		eval(State const &s) const;
 private:
 	tArray			_finalMap;
 	unsigned int	_size;

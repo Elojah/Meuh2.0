@@ -7,10 +7,10 @@ class State;
 class LinearConflict: public IHeuristic
 {
 public:
-	LinearConflict(State const *s);
+	LinearConflict(State const &s);
 	virtual ~LinearConflict(void);
 
-	virtual int		eval(State const *s) const;
+	virtual int		eval(State const &s) const;
 private:
 	unsigned int	_size;
 	tArray			_finalMap;

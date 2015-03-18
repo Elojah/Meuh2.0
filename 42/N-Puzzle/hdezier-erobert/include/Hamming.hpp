@@ -7,10 +7,10 @@ class State;
 class Hamming: public IHeuristic
 {
 public:
-	Hamming(State const *s);
+	Hamming(State const &s);
 	virtual ~Hamming(void);
 
-	virtual int		eval(State const *s) const;
+	virtual int		eval(State const &s) const;
 private:
 	tArray			_finalMap;
 	unsigned int	_size;

@@ -11,7 +11,7 @@ class IHeuristic
 public:
 	virtual ~IHeuristic(void) {}
 
-	virtual int								eval(State const *s) const = 0;
+	virtual int								eval(State const &s) const = 0;
 protected:
 	typedef std::array<int, MAX_CASE>		tArray;
 };

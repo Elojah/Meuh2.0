@@ -1,9 +1,9 @@
 #include "LinearConflict.hpp"
 #include "State.hpp"
 
-LinearConflict::LinearConflict(State const *s) {
-	_size = s->getSize();
-	_finalMap = s->getMap();
+LinearConflict::LinearConflict(State const &s) {
+	_size = s.getSize();
+	_finalMap = s.getMap();
 }
 
 LinearConflict::~LinearConflict(void) {
@@ -31,7 +31,7 @@ int				LinearConflict::isInColumn(int col, int n) const {
 	return (-1);
 }
 
-int				LinearConflict::eval(State const *s) const {
+int				LinearConflict::eval(State const &s) const {
 	size_t			i;
 	size_t			n;
 	size_t			x;
@@ -40,7 +40,7 @@ int				LinearConflict::eval(State const *s) const {
 	int				result(0);
 	tArray			map;
 
-	map = s->getMap();
+	map = s.getMap();
 	for (i = 0; i < _size * _size; ++i) {
 		if ((foundI = isInLine(i / _size, map[i])) >= 0) {
 			for (n = 0; n < _size; ++n) {
