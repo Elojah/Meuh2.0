@@ -165,10 +165,10 @@ bool			Puzzle::solve(void)
 		for (is = s.begin(); *is != NULL; ++is)
 		{
 			eval(*is);
+			(*is)->setPrevious(tmp);
 			inOpen = containState(*is, _openset);
 			inClosed = containState(*is, _closedset);
 			inSet = (inClosed != _closedset.end() ? inClosed : inOpen);
-			(*is)->setPrevious(tmp);
 			if (inSet == _openset.end())
 				_openset.insert(*is);
 			else if ((*is)->getDepth() < (*inSet)->getDepth())

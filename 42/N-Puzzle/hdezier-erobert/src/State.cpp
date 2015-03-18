@@ -141,13 +141,23 @@ std::array<State *, 5>			State::expand(void)
 
 bool							State::operator==(State const &s) const
 {
-	tArray						sMap(s.getMap());
-	size_t						sEmptyPos(s.getEmptyPos());
+	size_t	i;
+	size_t	sEmptyPos(s.getEmptyPos());
+	int64_t	*a;
+	int64_t	*b;
 
 	if (sEmptyPos != _empty) {
 		return (false);
 	}
-	return (std::equal(sMap.begin(), sMap.end(), _map.begin()));
+	a = reinterpret_cast<int64_t *>(s.getMap().data());
+	b = reinterpret_cast<int64_t *>(getMap().data());
+	for (i = 0; i < (_size * _size); ++i)
+	{
+		if (a[i] != b[i]) {
+			return (false);
+		}
+	}
+	return (s.getMap()[_size * _size - 1] == _map[_size * _size - 1]);
 }
 
 void							State::display(void)

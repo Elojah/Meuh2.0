@@ -2,7 +2,7 @@
 # define PUZZLE_H
 
 # define BUF_SIZE 1024
-# define MAX_DEPTH_SEARCH 1000
+# define MAX_DEPTH_SEARCH 5000
 # define NONE_SET -1
 
 # include <vector>
@@ -18,8 +18,6 @@ class Puzzle
 public:
 	Puzzle(std::vector<int> &v, size_t size, int mask);
 	~Puzzle(void);
-
-	//typedef std::vector<State *>			tStates;
 
 	bool									solve(void);
 	bool									isSolvable(void) const;
