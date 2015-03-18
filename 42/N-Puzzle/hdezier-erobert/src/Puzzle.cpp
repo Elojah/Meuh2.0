@@ -112,12 +112,24 @@ std::vector<State *>::const_iterator			Puzzle::bestEval(void) {
 	return (_openset.begin());
 }
 
-std::vector<State *>::iterator			Puzzle::containState(State const *s, std::vector<State *> &v) {
-	return (std::find_if(v.begin(), v.end(),
+std::vector<State *>::iterator			Puzzle::containStateClosed(State const *s) {
+	return (std::find_if(_closedset.begin(), _closedset.end(),
 		[&](const State *i) {
 			return (*s == *i);
 		}
 	));
+}
+
+std::vector<State *>::iterator			Puzzle::containStateOpen(State const *s) {
+	for (std::vector<State *>::iterator i = _openset.begin(); i != _openset.end(); ++i) {
+		if (*s == **i) {
+			return (i);
+		}
+		if (s->getValue() > (*i)->getValue()) {
+			return (_openset.end());
+		}
+	}
+	return (_openset.end());
 }
 
 bool			Puzzle::solve(void) {
@@ -147,8 +159,8 @@ bool			Puzzle::solve(void) {
 		_closedset.push_back(tmp);
 		s = tmp->expand();
 		for (is = s.begin(); *is != NULL; ++is) {
-			inOpen = Puzzle::containState(*is, _openset);
-			inClosed = Puzzle::containState(*is, _closedset);
+			inOpen = containStateOpen(*is);
+			inClosed = containStateClosed(*is);
 			inSet = (inClosed != _closedset.end() ? inClosed : inOpen);
 			(*is)->setPrevious(tmp);
 			if (inSet == _openset.end()) {
@@ -167,8 +179,8 @@ bool			Puzzle::solve(void) {
 			}
 		}
 		_maxStates++;
-		if (_maxStates == MAX_DEPTH_SEARCH) {
-			std::cout << MAX_DEPTH_SEARCH << " states have been tested, do you want to continue ? y/n" << std::endl;
+		if (_maxStates % MAX_DEPTH_SEARCH == 0 && _maxStates) {
+			std::cout << _maxStates << " states have been tested, do you want to continue ? y/n" << std::endl;
 			std::cin.get(input, 256);
 			if (input[0] != 'y') {
 				break ;

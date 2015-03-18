@@ -2,7 +2,7 @@
 # define PUZZLE_H
 
 # define BUF_SIZE 1024
-# define MAX_DEPTH_SEARCH 5000
+# define MAX_DEPTH_SEARCH 1000
 # define NONE_SET -1
 
 # include <vector>
@@ -33,7 +33,8 @@ private:
 
 	void										assignHeuristics(void);
 	void										setHeuristics(int mask);
-	static std::vector<State *>::iterator		containState(State const *s, std::vector<State *> &v);
+	std::vector<State *>::iterator				containStateClosed(State const *s);
+	std::vector<State *>::iterator				containStateOpen(State const *s);
 	std::vector<State *>::const_iterator		bestEval(void);
 	int											eval(State *s) const;
 
