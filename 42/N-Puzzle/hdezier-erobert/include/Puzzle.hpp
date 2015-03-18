@@ -26,27 +26,27 @@ private:
 
 	struct sCmpState
 	{
-		bool operator() (State const *a, State const *b)
+		bool operator() (State const &a, State const &b)
 		{
-			int		aV(a->getValue());
-			int		bV(b->getValue());
+			int		aV(a.getValue());
+			int		bV(b.getValue());
 
 			if (aV == bV)
-				return (!(*a == *b));
+				return (!(a == b));
 			return (aV < bV);
 		}
 	};
-	typedef std::set<State *, sCmpState>	tStates;
+	typedef std::set<State, sCmpState>	tStates;
 
 	tStates									_openset;
 	tStates									_closedset;
 	size_t									_maxStates;
 	size_t									_maxStatesOpen;
-	State									*_finalState;
+	State									_finalState;
 	unsigned int							_size;
 	std::vector<IHeuristic *>				_h;
 	std::vector<IHeuristic *>				_heuristics;
-	State									*_solution;
+	State									_solution;
 
 	Puzzle(void);
 	Puzzle(Puzzle const &p);
@@ -55,8 +55,8 @@ private:
 
 	void									assignHeuristics(void);
 	void									setHeuristics(int mask);
-	tStates::iterator						containState(State const *s, tStates &tS);
-	int										eval(State *s) const;
+	tStates::iterator						containState(State const &s, tStates &tS);
+	int										eval(State &s) const;
 
 };
 

@@ -11,11 +11,9 @@
 Puzzle::Puzzle(std::vector<int> &v, size_t size, int mask) :
 	_maxStates(0),
 	_maxStatesOpen(1),
-	_size(size),
-	_solution(NULL)
+	_size(size)
 {
-	/*Init State*/
-	State						*s;
+	State						s;
 	std::array<int, MAX_CASE>	tmp;
 	size_t						n(0);
 
@@ -23,29 +21,28 @@ Puzzle::Puzzle(std::vector<int> &v, size_t size, int mask) :
 	{
 		tmp[n++] = (*it);
 	}
-	s = new State(_size, tmp);
-	_openset.insert(s);
-	/*!Init State*/
 
-	_finalState = new State(_size, std::array<int, MAX_CASE>{{}});
-	_finalState->finalFillArray();
+	_finalState = State(_size, std::array<int, MAX_CASE>{{}});
+	_finalState.finalFillArray();
 
-	std::cout << "Initial state: " << std::endl;
-	s->display();
-	std::cout << "to final state: " << std::endl;
-	_finalState->display();
 	assignHeuristics();
 	std::cout << "Nb available heuristics:\t" << _heuristics.size() << std::endl;
 	setHeuristics(mask);
 	std::cout << "Nb heuristics specified:\t" << _h.size() << std::endl;
+
+	s = State(_size, tmp);
+	s.setPrevious(0);
+	eval(s);
+	_openset.insert(s);
+
+	std::cout << "Initial state: " << std::endl;
+	s.display();
+	std::cout << "to final state: " << std::endl;
+	_finalState.display();
 }
 
 Puzzle::~Puzzle(void)
 {
-	for (tStates::iterator it = _openset.begin(); it != _openset.end(); ++it)
-		delete (*it);
-	for (tStates::iterator it = _closedset.begin(); it != _closedset.end(); ++it)
-		delete (*it);
 	for (std::vector<IHeuristic *>::const_iterator it = _heuristics.begin(); it != _heuristics.end(); ++it)
 		delete (*it);
 }
@@ -56,12 +53,13 @@ void					Puzzle::assignHeuristics(void)
 	_heuristics.push_back(new NTiles(_finalState));
 	_heuristics.push_back(new Hamming(_finalState));
 	_heuristics.push_back(new LinearConflict(_finalState));
-	// _heuristics.push_back(new MaxSwap(_finalState));
+	_heuristics.push_back(new MaxSwap(_finalState));
 }
 
 void									Puzzle::setHeuristics(int mask)
 {
 	size_t								i;
+
 	for (i = 0; i < _heuristics.size(); ++i)
 	{
 		if (mask & (1 << i))
@@ -77,8 +75,8 @@ bool									Puzzle::isSolvable(void) const
 	size_t								startEmptyPos;
 	size_t								finalEmptyPos;
 
-	startEmptyPos = (*(_openset.begin()))->getEmptyPos();
-	finalEmptyPos = _finalState->getEmptyPos();
+	startEmptyPos = (*(_openset.begin())).getEmptyPos();
+	finalEmptyPos = _finalState.getEmptyPos();
 	allPermutations = valid.eval(*(_openset.begin()));
 
 	emptyPermutations = ((startEmptyPos > finalEmptyPos) ?
@@ -92,28 +90,28 @@ bool									Puzzle::isSolvable(void) const
 		|| (_size % 2 == 0 && (allPermutations % 2 == 0)));
 }
 
-int										Puzzle::eval(State *s) const
+int										Puzzle::eval(State &s) const
 {
 	int			result;
 
-	if ((result = s->getValue()) != NONE_SET)
+	if ((result = s.getValue()) != NONE_SET)
 		return (result);
 	result = 0;
 	for (std::vector<IHeuristic *>::const_iterator it = _h.begin(); it != _h.end(); ++it)
 		result += (*it)->eval(s);
-	s->setValue(result);
+	s.setValue(result);
 	return (result);
 }
 
-Puzzle::tStates::iterator			Puzzle::containState(State const *s, tStates &tS)
+Puzzle::tStates::iterator			Puzzle::containState(State const &s, tStates &tS)
 {
 	tStates::iterator				first;
 
 	for (tStates::iterator i = tS.begin(); i != tS.end(); ++i)
 	{
-		if ((*i)->getValue() > s->getValue())
+		if (i->getValue() > s.getValue())
 			return (tS.end());
-		if (*s == **i)
+		if (s == *i)
 			return (i);
 	}
 	return (tS.end());
@@ -121,7 +119,8 @@ Puzzle::tStates::iterator			Puzzle::containState(State const *s, tStates &tS)
 
 bool			Puzzle::solve(void)
 {
-	State									*tmp;
+	State									tmp;
+	size_t									previous;
 	tStates::iterator						inOpen;
 	tStates::iterator						inClosed;
 	tStates::iterator						inSet;
@@ -131,7 +130,6 @@ bool			Puzzle::solve(void)
 	char									input[256];
 
 	std::cout << "Solving puzzle ... Please wait for few seconds ..." << std::endl;
-	eval(*(_openset.begin()));
 	while (_openset.size() > 0)
 	{
 		if (_openset.size() > _maxStatesOpen)
@@ -139,46 +137,52 @@ bool			Puzzle::solve(void)
 		e = _openset.begin();
 
 		/*DEBOG*/
-		// (*e)->display();
-		// std::cout << "Value:\t" << (*e)->getValue() << std::endl;
-		// std::cout << "Open size:\t" << _openset.size() << std::endl;
-		// for (tStates::iterator it = _openset.begin(); it != _openset.end(); ++it) {
-		// 	(*it)->display();
-		// }
-		// std::cout << "Closed size:\t" << _closedset.size() << std::endl;
+		// e->display();
+		// std::cout << "e id:\t" << e->getId() << std::endl;
+		// std::cout << "e previous:\t" << e->getPrevious() << std::endl;
+		// std::cout << "e value:\t" << e->getValue() << std::endl;
+		// std::cout << "_openset size:\t" << _openset.size() << std::endl;
+		// std::cout << "_closedset size:\t" << _closedset.size() << std::endl;
 		// for (tStates::iterator it = _closedset.begin(); it != _closedset.end(); ++it) {
-		// 	(*it)->display();
-		// 	std::cout << "Closed value:\t" << (*it)->getValue() << std::endl;
+		// 	it->display();
+		// 	std::cout << "it value:\t" << it->getValue() << std::endl;
 		// }
-		/*DEBOG*/
+		/*!DEBOG*/
 
-		if (**e == *_finalState)
+		if (*e == _finalState)
 		{
 			_solution = *e;
 			std::cout << "Success !" << std::endl;
 			return (true);
 		}
-		tmp = (*e);
+		previous = e->getId();
+		s = e->expand();
+		_closedset.insert(*e);
 		_openset.erase(e);
-		_closedset.insert(tmp);
-		s = tmp->expand();
 		for (is = s.begin(); *is != NULL; ++is)
 		{
-			eval(*is);
-			(*is)->setPrevious(tmp);
-			inOpen = containState(*is, _openset);
-			inClosed = containState(*is, _closedset);
+			eval(**is);
+			inOpen = containState(**is, _openset);
+			inClosed = containState(**is, _closedset);
 			inSet = (inClosed != _closedset.end() ? inClosed : inOpen);
 			if (inSet == _openset.end())
-				_openset.insert(*is);
-			else if ((*is)->getDepth() < (*inSet)->getDepth())
 			{
-				(*inSet)->setPrevious(tmp);
+				_openset.insert(**is);
+			}
+			else if ((*is)->getDepth() < inSet->getDepth())
+			{
 				delete (*is);
+				tmp = *inSet;
+				tmp.setPrevious(previous);
 				if (inClosed != _closedset.end())
 				{
-					_openset.insert(*inSet);
+					_openset.insert(tmp);
 					_closedset.erase(inSet);
+				}
+				else
+				{
+					_openset.insert(inSet, tmp);
+					_openset.erase(inSet);
 				}
 			}
 			else
@@ -187,6 +191,11 @@ bool			Puzzle::solve(void)
 		_maxStates++;
 		if (_maxStates % MAX_DEPTH_SEARCH == 0)
 		{
+			if (_maxStates * 2 == MAX_DEPTH_SEARCH)
+			{
+				std::cout << "You're going damn too far, stop it right now !" << std::endl;
+				break ;
+			}
 			std::cout << _maxStates << " states have been tested, do you want to continue ? y/n" << std::endl;
 			std::cin.get(input, 256);
 			if (input[0] != 'y')
@@ -199,22 +208,29 @@ bool			Puzzle::solve(void)
 void				Puzzle::printResult(void) const
 {
 	char					input[256];
-	std::vector<State *>	path;
-	State					*tmp;
+	std::vector<State>		path;
+	size_t					tmp;
+	tStates::iterator		itState;
 
 	std::cout << "◦ Total number of states ever selected in the opened set:\t\t\t\t" << _maxStatesOpen << std::endl;
 	std::cout << "◦ Maximum number of states ever represented in memory at the same time:\t\t\t" << _openset.size() + _closedset.size() << std::endl;
-	std::cout << "◦ Number of moves required to transition from the initial state to the final state:\t" << _solution->getDepth() << std::endl;
-	tmp = _solution;
-	while (tmp != NULL)
+	std::cout << "◦ Number of moves required to transition from the initial state to the final state:\t" << _solution.getDepth() << std::endl;
+	tmp = _solution.getPrevious();
+	while (tmp != 0)
 	{
-		path.insert(path.begin(), tmp);
-		tmp = tmp->getPrevious();
+		itState = std::find_if(_closedset.begin(), _closedset.end(),
+			[&] (State const &s) {
+				return (s.getId() == tmp);
+			}
+		);
+		path.insert(path.begin(), *itState);
+		tmp = itState->getPrevious();
 	}
 	std::cout << "Print result ? y/n" << std::endl;
 	std::cin.get(input, 256);
 	if (input[0] != 'y')
 		return ;
-	for (std::vector<State *>::iterator it = path.begin(); it != path.end(); ++it)
-		(*it)->display();
+	for (std::vector<State>::iterator it = path.begin(); it != path.end(); ++it)
+		it->display();
+	_solution.display();
 }

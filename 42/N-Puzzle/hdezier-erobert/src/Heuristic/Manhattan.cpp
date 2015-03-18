@@ -2,22 +2,22 @@
 #include "State.hpp"
 #include <iostream>
 
-Manhattan::Manhattan(State const *s) {
-	_size = s->getSize();
-	_finalMap = s->getMap();
+Manhattan::Manhattan(State const &s) {
+	_size = s.getSize();
+	_finalMap = s.getMap();
 }
 
 Manhattan::~Manhattan(void) {
 }
 
-int				Manhattan::eval(State const *s) const {
+int				Manhattan::eval(State const &s) const {
 	size_t			i;
 	size_t			x;
 	bool			modCheck;
 	int				result(0);
 	tArray			map;
 
-	map = s->getMap();
+	map = s.getMap();
 	for (i = 0; i < _size * _size; ++i) {
 		for (x = 0; x < _size * _size; ++x) {
 			if (map[i] == _finalMap[x]) {

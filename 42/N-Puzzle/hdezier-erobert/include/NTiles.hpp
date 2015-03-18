@@ -7,10 +7,10 @@ class State;
 class NTiles: public IHeuristic
 {
 public:
-	NTiles(State const *s);
+	NTiles(State const &s);
 	virtual ~NTiles(void);
 
-	virtual int		eval(State const *s) const;
+	virtual int		eval(State const &s) const;
 private:
 	tArray			_finalMap;
 	unsigned int	_size;

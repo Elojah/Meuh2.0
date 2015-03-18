@@ -2,13 +2,22 @@
 #include <iostream>
 #include <algorithm>
 
+State::State(void)
+{
+	_id = id++;
+}
+State::State(State const &s)
+{
+	(*this) = s;
+}
 State::State(size_t size, std::array<int, MAX_CASE> const &map):
 	_size(size),
 	_value(NONE_SET),
-	_previous(NULL)
+	_previous(0)
 {
 	size_t						i;
 
+	_id = id++;
 	for (i = 0; i < _size * _size; ++i)
 	{
 		_map[i] = map[i];
@@ -19,23 +28,18 @@ State::State(size_t size, std::array<int, MAX_CASE> const &map):
 }
 State::State(State const &s, char dir)
 {
-	size_t						i;
-	tArray						map;
-
-	map = s.getMap();
+	_id = id++;
+	_map = s.getMap();
 	_value = NONE_SET;
 	_size = s.getSize();
 	_empty = s.getEmptyPos();
 	_depth = s.getDepth() + 1;
-	_previous = NULL;
-	for (i = 0; i < _size * _size; ++i)
-		_map[i] = map[i];
+	_previous = s.getId();
 	if (dir >= 0)
 		move(dir);
 }
 State::~State(void) {}
 
-/*TODO*/
 void							State::finalFillArray(void)
 {
 	size_t		i;
@@ -71,6 +75,10 @@ void							State::finalFillArray(void)
 	}
 }
 
+size_t							State::getId(void) const
+{
+	return(_id);
+}
 size_t							State::getDepth(void) const
 {
 	return(_depth);
@@ -87,14 +95,13 @@ size_t							State::getSize(void) const
 {
 	return (_size);
 }
-State							*State::getPrevious(void) const
+size_t							State::getPrevious(void) const
 {
 	return (_previous);
 }
-void							State::setPrevious(State *s)
+void							State::setPrevious(size_t s)
 {
 	_previous = s;
-	_depth = s->getDepth() + 1;
 }
 int								State::getValue(void) const
 {
@@ -122,7 +129,7 @@ void							State::move(char const dir)
 	_empty += inc;
 }
 
-std::array<State *, 5>			State::expand(void)
+std::array<State *, 5>			State::expand(void) const
 {
 	std::array<State *, 5>		result;
 	unsigned int				current(0);
@@ -137,6 +144,21 @@ std::array<State *, 5>			State::expand(void)
 		result[current++] = new State(*this, DOWN);
 	result[current] = NULL;
 	return (result);
+}
+
+State							&State::operator=(State const &s)
+{
+	if (this != &s)
+	{
+		_id = s.getId();
+		_map = s.getMap();
+		_value = s.getValue();
+		_size = s.getSize();
+		_empty = s.getEmptyPos();
+		_depth = s.getDepth();
+		_previous = s.getPrevious();
+	}
+	return (*this);
 }
 
 bool							State::operator==(State const &s) const
@@ -160,7 +182,7 @@ bool							State::operator==(State const &s) const
 	return (s.getMap()[_size * _size - 1] == _map[_size * _size - 1]);
 }
 
-void							State::display(void)
+void							State::display(void) const
 {
 	size_t						i;
 	size_t						j;
@@ -184,3 +206,5 @@ void							State::display(void)
 		std::cout << "_________";
 	std::cout << std::endl;
 }
+
+size_t							State::id = 1;
