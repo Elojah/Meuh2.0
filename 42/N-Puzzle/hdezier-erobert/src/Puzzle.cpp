@@ -12,7 +12,7 @@ Puzzle::Puzzle(std::vector<int> &v, size_t size, int mask) : _size(size) {
 	/*Init State*/
 	State						*s;
 	std::array<int, MAX_CASE>	tmp;
-	unsigned int				n(0);
+	size_t						n(0);
 
 	_maxStates = 0;
 	_maxStatesOpen = 1;
@@ -70,14 +70,20 @@ bool									Puzzle::isSolvable(void) const {
 	MaxSwap								valid(_finalState);
 	size_t								allPermutations;
 	size_t								emptyPermutations;
-	std::array<size_t, 2>				startEmptyPos;
-	std::array<size_t, 2>				finalEmptyPos;
+	size_t								startEmptyPos;
+	size_t								finalEmptyPos;
 
 	startEmptyPos = (_openset.front())->getEmptyPos();
 	finalEmptyPos = _finalState->getEmptyPos();
 	allPermutations = valid.eval(_openset.front());
-	emptyPermutations = (startEmptyPos[0] > finalEmptyPos[0] ? startEmptyPos[0] - finalEmptyPos[0] : finalEmptyPos[0] - startEmptyPos[0])
-			+ (startEmptyPos[1] > finalEmptyPos[1] ? startEmptyPos[1] - finalEmptyPos[1] : finalEmptyPos[1] - startEmptyPos[1]);
+
+	emptyPermutations = ((startEmptyPos > finalEmptyPos) ?
+					startEmptyPos / _size - finalEmptyPos / _size
+						+ (startEmptyPos % _size > finalEmptyPos % _size ?
+							startEmptyPos % _size - finalEmptyPos % _size : finalEmptyPos % _size - startEmptyPos % _size)
+					: finalEmptyPos / _size - startEmptyPos / _size
+						+ (startEmptyPos % _size > finalEmptyPos % _size ?
+							startEmptyPos % _size - finalEmptyPos % _size : finalEmptyPos % _size - startEmptyPos % _size));
 	return ((_size % 2 && (emptyPermutations % 2) == (allPermutations % 2))
 		|| (_size % 2 == 0 && (allPermutations % 2 == 0)));
 }
@@ -106,12 +112,24 @@ std::vector<State *>::const_iterator			Puzzle::bestEval(void) {
 	return (_openset.begin());
 }
 
-std::vector<State *>::iterator			Puzzle::containState(State const *s, std::vector<State *> &v) {
-	return (std::find_if(v.begin(), v.end(),
+std::vector<State *>::iterator			Puzzle::containStateClosed(State const *s) {
+	return (std::find_if(_closedset.begin(), _closedset.end(),
 		[&](const State *i) {
 			return (*s == *i);
 		}
 	));
+}
+
+std::vector<State *>::iterator			Puzzle::containStateOpen(State const *s) {
+	for (std::vector<State *>::iterator i = _openset.begin(); i != _openset.end(); ++i) {
+		if (*s == **i) {
+			return (i);
+		}
+		if (s->getValue() > (*i)->getValue()) {
+			return (_openset.end());
+		}
+	}
+	return (_openset.end());
 }
 
 bool			Puzzle::solve(void) {
@@ -121,7 +139,7 @@ bool			Puzzle::solve(void) {
 	std::vector<State *>::iterator			inSet;
 	std::array<State *, 4>::iterator		is;
 	std::vector<State *>::const_iterator	e;
-	std::array<State *, 4>					s;
+	std::array<State *, 5>					s;
 	char									input[256];
 
 	std::cout << "Solving puzzle ... Please wait for few seconds ..." << std::endl;
@@ -136,31 +154,33 @@ bool			Puzzle::solve(void) {
 			std::cout << "Success !" << std::endl;
 			return (true);
 		}
-
 		tmp = (*e);
 		_openset.erase(e);
 		_closedset.push_back(tmp);
 		s = tmp->expand();
-		for (is = s.begin(); *is != NULL && is != s.end(); ++is) {
-			inOpen = Puzzle::containState(*is, _openset);
-			inClosed = Puzzle::containState(*is, _closedset);
+		for (is = s.begin(); *is != NULL; ++is) {
+			inOpen = containStateOpen(*is);
+			inClosed = containStateClosed(*is);
 			inSet = (inClosed != _closedset.end() ? inClosed : inOpen);
+			(*is)->setPrevious(tmp);
 			if (inSet == _openset.end()) {
 				eval(*is);
-				(*is)->setPrevious(tmp);
 				_openset.push_back(*is);
 			} else if ((*is)->getDepth() < (*inSet)->getDepth()) {
+				(*is)->setValue((*inSet)->getValue());
 				delete (*inSet);
 				(*inSet) = (*is);
 				if (inClosed != _closedset.end()) {
 					_openset.push_back(*inSet);
 					_closedset.erase(inSet);
 				}
+			} else {
+				delete (*is);
 			}
 		}
 		_maxStates++;
-		if (_maxStates == MAX_DEPTH_SEARCH) {
-			std::cout << MAX_DEPTH_SEARCH << " states have been tested, do you want to continue ? y/n" << std::endl;
+		if (_maxStates % MAX_DEPTH_SEARCH == 0 && _maxStates) {
+			std::cout << _maxStates << " states have been tested, do you want to continue ? y/n" << std::endl;
 			std::cin.get(input, 256);
 			if (input[0] != 'y') {
 				break ;

@@ -13,7 +13,7 @@ public:
 protected:
 private:
 	NTiles(void);
-	State			*_finalState;
+	tArray			_finalMap;
 	unsigned int	_size;
 };
 

@@ -2,30 +2,11 @@
 #include "State.hpp"
 
 MaxSwap::MaxSwap(State const *s) {
-	_finalVec = MaxSwap::transformToArray(s);
 	_size = s->getSize();
-	_size *= _size;
+	_finalMap = s->getMap();
 }
 
 MaxSwap::~MaxSwap(void) {
-}
-
-std::array<int, MAX_CASE>			MaxSwap::transformToArray(State const *s) {
-	unsigned int				i;
-	unsigned int				j;
-	unsigned int				n(0);
-	unsigned int				currentSize;
-	mapArray					map;
-	std::array<int, MAX_CASE>	result;
-
-	map = s->getMap();
-	currentSize = s->getSize();
-	for (i = 0; i < currentSize; ++i) {
-		for (j = 0; j < currentSize; ++j) {
-			result[n++] = map[i][j];
-		}
-	}
-	return(result);
 }
 
 int								MaxSwap::eval(State const *s) const {
@@ -33,17 +14,16 @@ int								MaxSwap::eval(State const *s) const {
 	unsigned int				j;
 	int							tmp;
 	int							result(0);
-	std::array<int, MAX_CASE>	vec;
+	tArray						map(s->getMap());
 
-	vec = MaxSwap::transformToArray(s);
-	for (i = 0; i < _size; ++i) {
-		if (vec[i] != _finalVec[i]) {
-			for (j = 0; j < _size; ++j) {
-				if (vec[j] == _finalVec[i]) {
-					tmp = vec[i];
-					vec[i] = vec[j];
-					vec[j] = tmp;
-					result++;
+	for (i = 0; i < _size * _size; ++i) {
+		if (map[i] != _finalMap[i]) {
+			result++;
+			for (j = 0; j < _size * _size; ++j) {
+				if (map[j] == _finalMap[i]) {
+					tmp = map[i];
+					map[i] = map[j];
+					map[j] = tmp;
 					break ;
 				}
 			}

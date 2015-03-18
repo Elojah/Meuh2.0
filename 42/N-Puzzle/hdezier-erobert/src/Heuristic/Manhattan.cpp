@@ -1,33 +1,31 @@
 #include "Manhattan.hpp"
 #include "State.hpp"
+#include <iostream>
 
 Manhattan::Manhattan(State const *s) {
-	_finalState = new State(*s, -1);
-	_size = _finalState->getSize();
+	_size = s->getSize();
+	_finalMap = s->getMap();
 }
 
 Manhattan::~Manhattan(void) {
 }
 
 int				Manhattan::eval(State const *s) const {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	x;
-	unsigned int	y;
+	size_t			i;
+	size_t			x;
+	bool			modCheck;
 	int				result(0);
-	mapArray		map;
-	mapArray		finalMap;
+	tArray			map;
 
 	map = s->getMap();
-	finalMap = _finalState->getMap();
-	for (i = 0; i < _size; ++i) {
-		for (j = 0; j < _size; ++j) {
-			for (x = 0; x < _size; ++x) {
-				for (y = 0; y < _size; ++y) {
-					if (map[i][j] == finalMap[x][y]) {
-						result += (((i > x) ? i - x : x - i) + ((j > y) ? j - y : y - j));
-					}
-				}
+	for (i = 0; i < _size * _size; ++i) {
+		for (x = 0; x < _size * _size; ++x) {
+			if (map[i] == _finalMap[x]) {
+				modCheck = i % _size > x % _size;
+				result += (((i > x) ?
+					i / _size - x / _size + (modCheck ? i % _size - x % _size : x % _size - i % _size)
+					: x / _size - i / _size + (modCheck ? i % _size - x % _size : x % _size - i % _size)));
+				break ;
 			}
 		}
 	}

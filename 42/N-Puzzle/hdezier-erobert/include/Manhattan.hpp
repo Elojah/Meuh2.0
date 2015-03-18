@@ -13,8 +13,8 @@ public:
 protected:
 private:
 	Manhattan(void);
-	State			*_finalState;
 	unsigned int	_size;
+	tArray			_finalMap;
 };
 
 #endif
