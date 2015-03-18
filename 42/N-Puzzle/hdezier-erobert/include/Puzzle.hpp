@@ -6,6 +6,7 @@
 # define NONE_SET -1
 
 # include <vector>
+# include <set>
 # include <array>
 # include <iostream>
 # include "State.hpp"
@@ -18,22 +19,31 @@ public:
 	Puzzle(std::vector<int> &v, size_t size, int mask);
 	~Puzzle(void);
 
+	//typedef std::vector<State *>			tStates;
+
 	bool									solve(void);
 	bool									isSolvable(void) const;
 	void									printResult(void) const;
 private:
+
 	struct sCmpState
 	{
 		bool operator() (State const *a, State const *b)
 		{
-			return (a->getValue() < b->getValue());
+			int		aV(a->getValue());
+			int		bV(b->getValue());
+
+			if (aV == bV)
+				return (!(*a == *b));
+			return (aV < bV);
 		}
 	};
+	typedef std::set<State *, sCmpState>	tStates;
 
-	std::vector<State *>					_openset;
-	std::vector<State *>					_closedset;
-	size_t									_maxStatesOpen;
+	tStates									_openset;
+	tStates									_closedset;
 	size_t									_maxStates;
+	size_t									_maxStatesOpen;
 	State									*_finalState;
 	unsigned int							_size;
 	std::vector<IHeuristic *>				_h;
@@ -47,9 +57,7 @@ private:
 
 	void									assignHeuristics(void);
 	void									setHeuristics(int mask);
-	std::vector<State *>::iterator			containStateClosed(State const *s);
-	std::vector<State *>::iterator			containStateOpen(State const *s);
-	std::vector<State *>::const_iterator	bestEval(void);
+	tStates::iterator						containState(State const *s, tStates &tS);
 	int										eval(State *s) const;
 
 };

@@ -1,6 +1,6 @@
-
 #include "State.hpp"
 #include <iostream>
+#include <algorithm>
 
 State::State(size_t size, std::array<int, MAX_CASE> const &map):
 	_size(size),
@@ -141,20 +141,13 @@ std::array<State *, 5>			State::expand(void)
 
 bool							State::operator==(State const &s) const
 {
-	size_t						i;
 	tArray						sMap(s.getMap());
 	size_t						sEmptyPos(s.getEmptyPos());
 
 	if (sEmptyPos != _empty) {
 		return (false);
 	}
-	for (i = 0; i < _size * _size; ++i)
-	{
-		if (_map[i] != sMap[i]) {
-			return (false);
-		}
-	}
-	return (true);
+	return (std::equal(sMap.begin(), sMap.end(), _map.begin()));
 }
 
 void							State::display(void)
