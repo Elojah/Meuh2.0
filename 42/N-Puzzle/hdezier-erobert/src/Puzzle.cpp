@@ -104,10 +104,10 @@ int										Puzzle::eval(State *s) const {
 
 std::vector<State *>::const_iterator			Puzzle::bestEval(void) {
 	if (_openset.size() < 5) {
-		std::sort(_openset.begin(), _openset.end(), cmpState());
+		std::sort(_openset.begin(), _openset.end(), sCmpState());
 	} else {
-		std::sort(_openset.end() - 4, _openset.end(), cmpState());
-		std::inplace_merge(_openset.begin(), _openset.end() - 4, _openset.end(), cmpState());
+		std::sort(_openset.end() - 4, _openset.end(), sCmpState());
+		std::inplace_merge(_openset.begin(), _openset.end() - 4, _openset.end(), sCmpState());
 	}
 	return (_openset.begin());
 }

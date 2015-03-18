@@ -4,18 +4,21 @@
 # include "IHeuristic.hpp"
 class State;
 
-class MaxSwap : public IHeuristic
+class MaxSwap: public IHeuristic
 {
 public:
 	MaxSwap(State const *s);
-	~MaxSwap(void);
-	int		eval(State const *s) const;
-protected:
-private:
-	MaxSwap(void);
+	virtual ~MaxSwap(void);
 
-	tArray						_finalMap;
-	unsigned int				_size;
+	virtual int		eval(State const *s) const;
+private:
+	tArray			_finalMap;
+	unsigned int	_size;
+
+	MaxSwap(void);
+	MaxSwap(MaxSwap const &mS);
+
+	MaxSwap			&operator=(MaxSwap const &mS);
 };
 
 #endif

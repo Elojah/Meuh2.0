@@ -4,18 +4,21 @@
 # include "IHeuristic.hpp"
 class State;
 
-class Hamming : public IHeuristic
+class Hamming: public IHeuristic
 {
 public:
 	Hamming(State const *s);
-	~Hamming(void);
-	int		eval(State const *s) const;
-protected:
-private:
-	Hamming(void);
+	virtual ~Hamming(void);
 
+	virtual int		eval(State const *s) const;
+private:
 	tArray			_finalMap;
 	unsigned int	_size;
+
+	Hamming(void);
+	Hamming(Hamming const &h);
+
+	Hamming			&operator=(Hamming const &h);
 };
 
 #endif

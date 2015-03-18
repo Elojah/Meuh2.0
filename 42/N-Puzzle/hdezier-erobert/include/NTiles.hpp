@@ -4,17 +4,21 @@
 # include "IHeuristic.hpp"
 class State;
 
-class NTiles : public IHeuristic
+class NTiles: public IHeuristic
 {
 public:
 	NTiles(State const *s);
-	~NTiles(void);
-	int		eval(State const *s) const;
-protected:
+	virtual ~NTiles(void);
+
+	virtual int		eval(State const *s) const;
 private:
-	NTiles(void);
 	tArray			_finalMap;
 	unsigned int	_size;
+
+	NTiles(void);
+	NTiles(NTiles const &nT);
+
+	NTiles			&operator=(NTiles const &nT);
 };
 
 #endif
