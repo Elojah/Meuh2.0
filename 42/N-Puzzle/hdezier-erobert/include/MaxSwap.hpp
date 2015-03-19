@@ -13,7 +13,7 @@ public:
 	virtual int		eval(State const &s) const;
 private:
 	tArray			_finalMap;
-	unsigned int	_size;
+	size_t			_size;
 
 	MaxSwap(void);
 	MaxSwap(MaxSwap const &mS);

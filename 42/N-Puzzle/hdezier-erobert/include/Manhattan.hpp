@@ -1,6 +1,8 @@
 #ifndef MANHATTAN_H
 # define MANHATTAN_H
 
+# define DIST(a, b) (((a) > (b)) ? (a) - (b) : (b) - (a))
+
 # include "IHeuristic.hpp"
 class State;
 
@@ -12,8 +14,8 @@ public:
 
 	virtual int		eval(State const &s) const;
 private:
-	unsigned int	_size;
 	tArray			_finalMap;
+	size_t			_size;
 
 	Manhattan(void);
 	Manhattan(Manhattan const &m);

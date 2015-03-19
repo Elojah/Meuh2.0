@@ -12,8 +12,8 @@ public:
 
 	virtual int		eval(State const &s) const;
 private:
-	unsigned int	_size;
 	tArray			_finalMap;
+	size_t			_size;
 
 	LinearConflict(void);
 	LinearConflict(LinearConflict const &lC);
