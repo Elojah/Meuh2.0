@@ -120,8 +120,9 @@ Puzzle::tStates::iterator			Puzzle::containState(State const &s, tStates &tS)
 bool			Puzzle::solve(void)
 {
 	State									tmp;
+	bool									isInClosed;
 	size_t									previous;
-	tStates::iterator						inOpen;
+	std::pair<tStates::iterator, bool>		inOpen;
 	tStates::iterator						inClosed;
 	tStates::iterator						inSet;
 	tStates::const_iterator					e;
@@ -135,20 +136,6 @@ bool			Puzzle::solve(void)
 		if (_openset.size() > _maxStatesOpen)
 			_maxStatesOpen = _openset.size();
 		e = _openset.begin();
-
-		/*DEBOG*/
-		// e->display();
-		// std::cout << "e id:\t" << e->getId() << std::endl;
-		// std::cout << "e previous:\t" << e->getPrevious() << std::endl;
-		// std::cout << "e value:\t" << e->getValue() << std::endl;
-		// std::cout << "_openset size:\t" << _openset.size() << std::endl;
-		// std::cout << "_closedset size:\t" << _closedset.size() << std::endl;
-		// for (tStates::iterator it = _closedset.begin(); it != _closedset.end(); ++it) {
-		// 	it->display();
-		// 	std::cout << "it value:\t" << it->getValue() << std::endl;
-		// }
-		/*!DEBOG*/
-
 		if (*e == _finalState)
 		{
 			_solution = *e;
@@ -162,33 +149,39 @@ bool			Puzzle::solve(void)
 		for (is = s.begin(); *is != NULL; ++is)
 		{
 			eval(**is);
-			inOpen = containState(**is, _openset);
 			inClosed = containState(**is, _closedset);
-			inSet = (inClosed != _closedset.end() ? inClosed : inOpen);
-			if (inSet == _openset.end())
+			isInClosed = inClosed == _closedset.end();
+			if (isInClosed)
 			{
-				_openset.insert(**is);
+				inOpen = _openset.insert(**is);
+				if (inOpen.second == true)
+					continue ;
+				inSet = inOpen.first;
 			}
-			else if ((*is)->getDepth() < inSet->getDepth())
+			else
+				inSet = inClosed;
+			if ((*is)->getDepth() < inSet->getDepth())
 			{
 				delete (*is);
 				tmp = *inSet;
 				tmp.setPrevious(previous);
-				if (inClosed != _closedset.end())
+				if (isInClosed)
 				{
-					_openset.insert(tmp);
-					_closedset.erase(inSet);
+					_openset.insert(inSet, tmp);
+					_openset.erase(inSet);
 				}
 				else
 				{
 					_openset.insert(inSet, tmp);
-					_openset.erase(inSet);
+					_closedset.erase(inSet);
 				}
 			}
 			else
 				delete (*is);
 		}
 		_maxStates++;
+		if (_maxStates % 1000 == 0)
+			std::cout << _maxStates << " states tested." << std::endl;
 		if (_maxStates % MAX_DEPTH_SEARCH == 0)
 		{
 			if (_maxStates * 2 == MAX_DEPTH_SEARCH)
@@ -215,7 +208,11 @@ void				Puzzle::printResult(void) const
 	std::cout << "◦ Total number of states ever selected in the opened set:\t\t\t\t" << _maxStatesOpen << std::endl;
 	std::cout << "◦ Maximum number of states ever represented in memory at the same time:\t\t\t" << _openset.size() + _closedset.size() << std::endl;
 	std::cout << "◦ Number of moves required to transition from the initial state to the final state:\t" << _solution.getDepth() << std::endl;
+	std::cout << "Print result ? y/n" << std::endl;
+	std::cin.get(input, 256);
 	tmp = _solution.getPrevious();
+	if (input[0] != 'y')
+		return ;
 	while (tmp != 0)
 	{
 		itState = std::find_if(_closedset.begin(), _closedset.end(),
@@ -226,10 +223,6 @@ void				Puzzle::printResult(void) const
 		path.insert(path.begin(), *itState);
 		tmp = itState->getPrevious();
 	}
-	std::cout << "Print result ? y/n" << std::endl;
-	std::cin.get(input, 256);
-	if (input[0] != 'y')
-		return ;
 	for (std::vector<State>::iterator it = path.begin(); it != path.end(); ++it)
 		it->display();
 	_solution.display();
