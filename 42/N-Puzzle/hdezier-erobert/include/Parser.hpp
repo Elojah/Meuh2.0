@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/05 19:20:26 by erobert           #+#    #+#             //
-//   Updated: 2015/03/10 14:29:19 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/19 14:16:47 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -24,7 +24,6 @@ class Parser
 public:
 	typedef Lexer::tToken				tToken;
 	typedef std::list<tToken>::iterator	tTI;
-
 
 	Parser(void);
 	~Parser(void);

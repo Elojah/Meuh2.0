@@ -47,7 +47,7 @@ Puzzle::~Puzzle(void)
 		delete (*it);
 }
 
-void					Puzzle::assignHeuristics(void)
+void							Puzzle::assignHeuristics(void)
 {
 	_heuristics.push_back(new Manhattan(_finalState));
 	_heuristics.push_back(new NTiles(_finalState));
@@ -56,9 +56,9 @@ void					Puzzle::assignHeuristics(void)
 	_heuristics.push_back(new MaxSwap(_finalState));
 }
 
-void									Puzzle::setHeuristics(int mask)
+void							Puzzle::setHeuristics(int mask)
 {
-	size_t								i;
+	size_t						i;
 
 	for (i = 0; i < _heuristics.size(); ++i)
 	{
@@ -67,32 +67,31 @@ void									Puzzle::setHeuristics(int mask)
 	}
 }
 
-bool									Puzzle::isSolvable(void) const
+bool							Puzzle::isSolvable(void) const
 {
-	MaxSwap								valid(_finalState);
-	size_t								allPermutations;
-	size_t								emptyPermutations;
-	size_t								startEmptyPos;
-	size_t								finalEmptyPos;
+	MaxSwap						valid(_finalState);
+	size_t						allPermutations;
+	size_t						emptyPermutations;
+	size_t						startEmpty;
+	size_t						finalEmpty;
+	size_t						x;
+	size_t						y;
 
-	startEmptyPos = (*(_openset.begin())).getEmptyPos();
-	finalEmptyPos = _finalState.getEmptyPos();
+	startEmpty = (*(_openset.begin())).getEmpty();
+	finalEmpty = _finalState.getEmpty();
 	allPermutations = valid.eval(*(_openset.begin()));
-
-	emptyPermutations = ((startEmptyPos > finalEmptyPos) ?
-					startEmptyPos / _size - finalEmptyPos / _size
-						+ (startEmptyPos % _size > finalEmptyPos % _size ?
-							startEmptyPos % _size - finalEmptyPos % _size : finalEmptyPos % _size - startEmptyPos % _size)
-					: finalEmptyPos / _size - startEmptyPos / _size
-						+ (startEmptyPos % _size > finalEmptyPos % _size ?
-							startEmptyPos % _size - finalEmptyPos % _size : finalEmptyPos % _size - startEmptyPos % _size));
+	x = startEmpty % _size;
+	y = finalEmpty % _size;
+	emptyPermutations = (startEmpty > finalEmpty ?
+						 startEmpty / _size - finalEmpty / _size + DIST(x, y)
+						 : finalEmpty / _size - startEmpty / _size + DIST(x, y));
 	return ((_size % 2 && (emptyPermutations % 2) == (allPermutations % 2))
 		|| (_size % 2 == 0 && (allPermutations % 2 == 0)));
 }
 
-int										Puzzle::eval(State &s) const
+int								Puzzle::eval(State &s) const
 {
-	int			result;
+	int							result;
 
 	if ((result = s.getValue()) != NONE_SET)
 		return (result);
@@ -103,9 +102,9 @@ int										Puzzle::eval(State &s) const
 	return (result);
 }
 
-Puzzle::tStates::iterator			Puzzle::containState(State const &s, tStates &tS)
+Puzzle::tStates::iterator		Puzzle::containState(State const &s, tStates &tS)
 {
-	tStates::iterator				first;
+	tStates::iterator			first;
 
 	for (tStates::iterator i = tS.begin(); i != tS.end(); ++i)
 	{
@@ -205,7 +204,7 @@ bool			Puzzle::solve(void)
 	return (false);
 }
 
-void				Puzzle::printResult(void) const
+void						Puzzle::printResult(void) const
 {
 	char					input[256];
 	std::vector<State>		path;
