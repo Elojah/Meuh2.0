@@ -1,34 +1,42 @@
 #include "NTiles.hpp"
 #include "State.hpp"
 
-NTiles::NTiles(State const &s) {
+NTiles::NTiles(State const &s)
+{
 	_size = s.getSize();
 	_finalMap = s.getMap();
 }
+NTiles::~NTiles(void) {}
 
-NTiles::~NTiles(void) {
-}
+int			NTiles::eval(State const &s) const
+{
+	size_t	i;
+	size_t	j;
+	int		result(0);
+	tArray	map(s.getMap());
 
-int				NTiles::eval(State const &s) const {
-	size_t			i;
-	size_t			x;
-	int				result(0);
-	tArray			map;
-
-	map = s.getMap();
-	for (i = 0; i < _size * _size; ++i) {
+	for (i = 0; i < _size * _size; ++i)
+	{
 		result += 2;
-		for (x = 0; x < _size; ++x) {
-			if (_finalMap[i / _size + x] == map[i]) {
+		j = 0;
+		while (j < _size)
+		{
+			if (_finalMap[i / _size + j] == map[i])
+			{
 				result--;
 				break ;
 			}
+			j++;
 		}
-		for (x = 0; x < _size; ++x) {
-			if (_finalMap[x * _size + i % _size] == map[i]) {
+		j = 0;
+		while (j < _size)
+		{
+			if (_finalMap[j * _size + i % _size] == map[i])
+			{
 				result--;
 				break ;
 			}
+			j++;
 		}
 	}
 	return (result);

@@ -32,7 +32,7 @@ State::State(State const &s, char dir)
 	_map = s.getMap();
 	_value = NONE_SET;
 	_size = s.getSize();
-	_empty = s.getEmptyPos();
+	_empty = s.getEmpty();
 	_depth = s.getDepth() + 1;
 	_previous = s.getId();
 	if (dir >= 0)
@@ -42,36 +42,36 @@ State::~State(void) {}
 
 void							State::finalFillArray(void)
 {
-	size_t		i;
-	int			j(-1);
-	size_t		n(1);
+	size_t						i;
+	size_t						j(0);
+	size_t						n(2);
 
 	for (i = 0; i < _size * _size; ++i)
-			_map[i] = EMPTY_VALUE;
+		_map[i] = EMPTY_VALUE;
 	i = 0;
+	_map[0] = 1;
 	while (n < _size * _size)
 	{
-			while (j < static_cast<int>(_size - 1) && _map[i * _size + j + 1] == EMPTY_VALUE)
-					_map[i * _size + ++j] = n++;
-			while (i < _size - 1 && _map[(i + 1) * _size + j] == EMPTY_VALUE)
-					_map[++i * _size + j] = n++;
-			while (j > 0 && _map[i * _size + j - 1] == EMPTY_VALUE)
-					_map[i * _size + --j] = n++;
-			while (i > 0 && _map[(i - 1) * _size + j] == EMPTY_VALUE)
-					_map[--i * _size + j] = n++;
+		while (j < _size - 1 && _map[i * _size + j + 1] == EMPTY_VALUE)
+			_map[i * _size + ++j] = n++;
+		while (i < _size - 1 && _map[(i + 1) * _size + j] == EMPTY_VALUE)
+			_map[++i * _size + j] = n++;
+		while (j > 0 && _map[i * _size + j - 1] == EMPTY_VALUE)
+			_map[i * _size + --j] = n++;
+		while (i > 0 && _map[(i - 1) * _size + j] == EMPTY_VALUE)
+			_map[--i * _size + j] = n++;
 	}
 	if (_size % 2 == 0)
-			_map[_size / 2 * _size + _size / 2 - 1] = EMPTY_VALUE;
-	i = -1;
-	while (++i < _size * _size)
+		_map[_size / 2 * _size + _size / 2 - 1] = EMPTY_VALUE;
+	i = 0;
+	while (i < _size * _size)
 	{
+		if (_map[i] == EMPTY_VALUE)
 		{
-			if (_map[i] == EMPTY_VALUE)
-			{
-				_empty = i;
-				return ;
-			}
+			_empty = i;
+			return ;
 		}
+		i++;
 	}
 }
 
@@ -111,7 +111,7 @@ void							State::setValue(int val)
 {
 	_value = val;
 }
-size_t							State::getEmptyPos(void) const
+size_t							State::getEmpty(void) const
 {
 	return (_empty);
 }
@@ -154,7 +154,7 @@ State							&State::operator=(State const &s)
 		_map = s.getMap();
 		_value = s.getValue();
 		_size = s.getSize();
-		_empty = s.getEmptyPos();
+		_empty = s.getEmpty();
 		_depth = s.getDepth();
 		_previous = s.getPrevious();
 	}
@@ -164,20 +164,18 @@ State							&State::operator=(State const &s)
 bool							State::operator==(State const &s) const
 {
 	size_t	i;
-	size_t	sEmptyPos(s.getEmptyPos());
+	size_t	sEmpty(s.getEmpty());
 	int64_t	*a;
 	int64_t	*b;
 
-	if (sEmptyPos != _empty) {
+	if (sEmpty != _empty)
 		return (false);
-	}
 	a = reinterpret_cast<int64_t *>(s.getMap().data());
 	b = reinterpret_cast<int64_t *>(getMap().data());
 	for (i = 0; i < (_size * _size); ++i)
 	{
-		if (a[i] != b[i]) {
+		if (a[i] != b[i])
 			return (false);
-		}
 	}
 	return (s.getMap()[_size * _size - 1] == _map[_size * _size - 1]);
 }
