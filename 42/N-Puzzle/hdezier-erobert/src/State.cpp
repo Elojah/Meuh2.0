@@ -32,7 +32,7 @@ State::State(State const &s, char dir)
 	_map = s.getMap();
 	_value = NONE_SET;
 	_size = s.getSize();
-	_empty = s.getEmptyPos();
+	_empty = s.getEmpty();
 	_depth = s.getDepth() + 1;
 	_previous = s.getId();
 	if (dir >= 0)
@@ -47,7 +47,7 @@ void							State::finalFillArray(void)
 	size_t						n(2);
 
 	for (i = 0; i < _size * _size; ++i)
-			_map[i] = EMPTY_VALUE;
+		_map[i] = EMPTY_VALUE;
 	i = 0;
 	_map[0] = 1;
 	while (n < _size * _size)
@@ -111,7 +111,7 @@ void							State::setValue(int val)
 {
 	_value = val;
 }
-size_t							State::getEmptyPos(void) const
+size_t							State::getEmpty(void) const
 {
 	return (_empty);
 }
@@ -154,7 +154,7 @@ State							&State::operator=(State const &s)
 		_map = s.getMap();
 		_value = s.getValue();
 		_size = s.getSize();
-		_empty = s.getEmptyPos();
+		_empty = s.getEmpty();
 		_depth = s.getDepth();
 		_previous = s.getPrevious();
 	}
@@ -164,11 +164,11 @@ State							&State::operator=(State const &s)
 bool							State::operator==(State const &s) const
 {
 	size_t	i;
-	size_t	sEmptyPos(s.getEmptyPos());
+	size_t	sEmpty(s.getEmpty());
 	int64_t	*a;
 	int64_t	*b;
 
-	if (sEmptyPos != _empty)
+	if (sEmpty != _empty)
 		return (false);
 	a = reinterpret_cast<int64_t *>(s.getMap().data());
 	b = reinterpret_cast<int64_t *>(getMap().data());

@@ -32,7 +32,7 @@ public:
 	void									setValue(int);
 	size_t									getPrevious(void) const;
 	void									setPrevious(size_t);
-	size_t									getEmptyPos(void) const;
+	size_t									getEmpty(void) const;
 
 	void									display(void) const;
 	void									move(char const dir);
