@@ -16,14 +16,13 @@ int				Manhattan::eval(State const &s) const
 	size_t		x;
 	size_t		y;
 	int			result(0);
-	tArray		map(s.getMap());
 
 	for (i = 0; i < _size * _size; ++i)
 	{
 		j = 0;
 		while (j < _size * _size)
 		{
-			if (map[i] == _finalMap[j])
+			if (s.getMap()[i] == _finalMap[j])
 			{
 				x = i % _size;
 				y = j % _size;

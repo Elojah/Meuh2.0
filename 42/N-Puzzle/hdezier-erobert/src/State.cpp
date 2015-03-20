@@ -1,6 +1,16 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   State.cpp                                          :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/03/20 11:41:37 by erobert           #+#    #+#             //
+//   Updated: 2015/03/20 12:03:24 by erobert          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
+
 #include "State.hpp"
-#include <iostream>
-#include <algorithm>
 
 State::State(void)
 {
@@ -87,7 +97,7 @@ void							State::setDepth(unsigned int depth)
 {
 	_depth = depth;
 }
-State::tArray					State::getMap(void) const
+State::tArray const				&State::getMap(void) const
 {
 	return (_map);
 }
@@ -170,9 +180,9 @@ bool							State::operator==(State const &s) const
 
 	if (sEmpty != _empty)
 		return (false);
-	a = reinterpret_cast<int64_t *>(s.getMap().data());
-	b = reinterpret_cast<int64_t *>(getMap().data());
-	for (i = 0; i < (_size * _size); ++i)
+	a = (int64_t *)(s.getMap().data());
+	b = (int64_t *)(_map.data());
+	for (i = 0; i < _size * _size / 2; i++)
 	{
 		if (a[i] != b[i])
 			return (false);

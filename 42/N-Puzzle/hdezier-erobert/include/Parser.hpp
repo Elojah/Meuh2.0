@@ -6,13 +6,14 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/05 19:20:26 by erobert           #+#    #+#             //
-//   Updated: 2015/03/19 14:16:47 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/20 11:38:03 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #ifndef PARSER_H
 # define PARSER_H
 
+# include <algorithm>
 # include <iostream>
 # include <list>
 # include <sstream>
