@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/20 11:48:18 by erobert           #+#    #+#             //
-//   Updated: 2015/03/20 12:01:27 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/20 13:34:23 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -49,7 +49,6 @@ public:
 
 	void									display(void) const;
 	void									move(char const dir);
-	std::array<State *, 5>					expand(void) const;
 	void									finalFillArray(void);
 private:
 	enum eMove
