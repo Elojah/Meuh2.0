@@ -1,47 +1,84 @@
-#******************************************************************************#
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/01/05 09:31:53 by erobert           #+#    #+#              #
-#    Updated: 2015/02/08 14:11:45 by erobert          ###   ########.fr        #
-#                                                                              #
-#******************************************************************************#
+TARGET = bin/runner
 
-NAME = mod1
-FILES = Landscape.cpp UserInterface.cpp ft_parse.cpp Parser.cpp
-SRCS = $(addprefix srcs/, $(FILES))
-OBJS = $(SRCS:srcs/%.cpp=objs/%.o)
-TMPS = $(SRCS:.cpp=.cpp~) $(SRCS:.cpp=.hpp~) Makefile~
+#Directories
+SRC_DIR = src
+INC_DIR = include
+BUILD_DIR = build
+LIB_DIR = lib
+
+#Options
 CC = g++
-CFLAGS = -Wall -Werror -Wextra
-LFLAGS = -L/usr/X11R6/lib -lX11 -lXext -lGL -lGLU
-IFLAGS = -Iinclude/ -I/usr/X11R6/include
+SRC_EXT = .cpp
+RM = rm -rf
+
+#List classes here
+CLASS = \
+		Camera\
+		Objects/Landscape\
+		main\
+		X11Win\
+
+#List interfaces here
+INTERFACE = \
+		IObject\
+
+#Auto var
+SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
+OBJ = $(addsuffix .o, $(addprefix $(BUILD_DIR)/, $(CLASS)))
+DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
+LIBS = $(addprefix -L,$(LIB_DIR))
+
+#Flags
+CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++98
+LFLAGS =
+
+#Libs
+LIB_LOCAL = \
+			/usr/X11R6\
+
+LIB_GLOBAL = \
+			X11\
+			Xext\
+			GL\
+			GLU\
+
+LIB_OTHER = \
+
+LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
+LIBS += $(addprefix -l,$(LIB_GLOBAL))
+LIBS += $(LIB_OTHER)
+
+#Includes
+INC += $(addprefix -I,$(INC_DIR))
+INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
+
+#RULES
+all : dirbin $(TARGET)
+
+clean :
+	$(RM) $(BUILD_DIR)
+
+fclean :
+	$(RM) $(BUILD_DIR) $(TARGET)
+
+re : fclean all
+
+dirbin:
+	mkdir -p bin
 
 .PHONY: all clean fclean re
 
-.SILENT: objs_dir
+.SILENT: dirbuild dirbin
 
-all: objs_dir $(NAME)
+#Build rule
+$(TARGET) : $(OBJ)
+	@echo "\n\033[1;4;34mLNK:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
-all: objs_dir $(NAME)
+#Compilation rule
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)
+	@mkdir -p $(dir $@)
+	@echo "\n\033[1;4;34mCMP:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"
+	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LFLAGS)
-
-objs/%.o : srcs/%.cpp
-	$(CC) $(CFLAGS) $(IFLAGS) -o $@ -c $^
-
-objs_dir:
-	mkdir -p objs
-
-clean:
-	/bin/rm -f $(OBJS) $(TMPS)
-	/bin/rm -rf objs
-
-fclean: clean
-	/bin/rm -f $(NAME)
-
-re: fclean all
+-include $(DEP)
