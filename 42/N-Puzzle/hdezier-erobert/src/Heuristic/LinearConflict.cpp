@@ -40,16 +40,17 @@ int				LinearConflict::eval(State const &s) const
 	int			foundI;
 	int			foundX;
 	int			result(0);
+	tArray const	&map(s.getMap());
 
 	for (i = 0; i < _size * _size; ++i)
 	{
-		foundI = isInLine(i / _size, s.getMap()[i]);
+		foundI = isInLine(i / _size, map[i]);
 		if (foundI > -1)
 		{
 			for (n = 0; n < _size; ++n)
 			{
 				x = (i / _size) * _size + n;
-				foundX = isInLine(x / _size, s.getMap()[x]);
+				foundX = isInLine(x / _size, map[x]);
 				if (foundX > -1 && ((i > x && foundI < foundX)
 									|| (x > i && foundX < foundI)))
 				{
@@ -57,13 +58,13 @@ int				LinearConflict::eval(State const &s) const
 				}
 			}
 		}
-		foundI = isInColumn(i % _size, s.getMap()[i]);
+		foundI = isInColumn(i % _size, map[i]);
 		if (foundI > -1)
 		{
 			for (n = 0; n < _size; ++n)
 			{
 				x = n * _size + i % _size;
-				foundX = isInColumn(x % _size, s.getMap()[x]);
+				foundX = isInColumn(x % _size, map[x]);
 				if (foundX > -1	&& ((i > x && foundI < foundX)
 									|| (x > i && foundX < foundI)))
 				{
