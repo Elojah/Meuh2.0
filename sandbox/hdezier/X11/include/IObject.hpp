@@ -8,10 +8,8 @@
 class IObject
 {
 public:
-	virtual ~IObject(void){}
-	virtual void	draw(void){}
-	virtual void	loop(void){
-
+	virtual ~IObject(void) {}
+	virtual void	draw(void) const {
 		glBindVertexArray(_vertexArrayID);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glBindVertexArray(0);

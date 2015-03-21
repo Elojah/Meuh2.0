@@ -10,9 +10,10 @@ public:
 	SimpleTriangle(void);
 	~SimpleTriangle(void);
 	void	init(void);
-	void	draw(void);
+	void	draw(void) const;
 protected:
 private:
+
 };
 
 #endif
