@@ -36,7 +36,7 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS = -MMD -Wall -Wextra -Werror -O3 -g -std=c++11
+CFLAGS = -MMD -Wall -Wextra -Werror -O3 -std=c++11
 LFLAGS =
 
 #Libs
