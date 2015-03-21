@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/11 13:57:37 by erobert           #+#    #+#             //
-//   Updated: 2015/03/13 19:54:55 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/20 11:36:36 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -18,6 +18,7 @@
 # include <iostream>
 # include <random>
 # include <string>
+# include <string.h>
 # include <vector>
 # include "Lexer.hpp"
 # include "Parser.hpp"

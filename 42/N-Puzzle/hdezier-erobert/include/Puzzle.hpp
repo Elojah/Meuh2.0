@@ -8,7 +8,7 @@
 # include "State.hpp"
 
 # define BUF_SIZE 1024
-# define MAX_DEPTH_SEARCH 5000
+# define MAX_DEPTH_SEARCH 10000
 # define NONE_SET -1
 # define DIST(a, b) (((a) > (b)) ? (a) - (b) : (b) - (a))
 
@@ -24,6 +24,13 @@ public:
 	bool								isSolvable(void) const;
 	void								printResult(void) const;
 private:
+	enum eMove
+	{
+		LEFT = 0,
+		RIGHT,
+		UP,
+		DOWN,
+	};
 	struct sCmpState
 	{
 		bool operator() (State const &a, State const &b)
@@ -47,6 +54,7 @@ private:
 	std::vector<IHeuristic *>			_h;
 	std::vector<IHeuristic *>			_heuristics;
 	State								_solution;
+	std::array<State, 5>				_expand;
 
 	Puzzle(void);
 	Puzzle(Puzzle const &p);
@@ -55,9 +63,9 @@ private:
 
 	void							assignHeuristics(void);
 	void							setHeuristics(int mask);
-	tStates::iterator				containState(State const &s, tStates &tS);
+	tStates::iterator				containState(State const &s);
 	int								eval(State &s) const;
-
+	void							expand(State const &s);
 };
 
 #endif
