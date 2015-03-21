@@ -27,7 +27,7 @@ void	SimpleTriangle::init(void) {
 	_progID = LoadShaders("./src/shaders/SimpleTriangleVert.glsl", "./src/shaders/SimpleTriangleFrag.glsl");
 }
 
-void	SimpleTriangle::draw(void) {
+void	SimpleTriangle::draw(void) const {
 
 	std::cout << "Draw simple triangle ..." << std::endl;
 	glUseProgram(_progID);

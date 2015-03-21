@@ -110,12 +110,12 @@ void		X11Win::init(void) {
 	long pad[24];
 }						XEvent;
 */
-void		X11Win::loop(std::vector<IObject> &objects) {
+void		X11Win::loop(std::vector<IObject *> const &objects) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	while (true) {
 
-		for (std::vector<IObject>::iterator it = objects.begin(); it != objects.end(); ++it) {
-			it->draw();
+		for (std::vector<IObject *>::const_iterator it = objects.begin(); it != objects.end(); ++it) {
+			(*it)->draw();
 		}
 		if (glGetError() == GL_NO_ERROR) {
 			std::cout << "Rendering ok" << std::endl;

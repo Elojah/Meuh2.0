@@ -17,7 +17,7 @@ public:
 						X11Win(std::size_t, std::size_t);
 						~X11Win(void);
 	void				init(void);
-	void				loop(std::vector<IObject>&);
+	void				loop(const std::vector<IObject *>&);
 protected:
 private:
 	typedef GLXContext(*glXCreateContextAttribsARBProc)(Display*, GLXFBConfig, GLXContext, Bool, const int*);
