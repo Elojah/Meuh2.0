@@ -8,8 +8,8 @@
 class IObject
 {
 public:
-	virtual ~IObject(void){}
-	virtual void	draw(void){}
+	virtual ~IObject(void) = 0;
+	virtual void	draw(void) = 0;
 	virtual void	loop(void){
 
 		glBindVertexArray(_vertexArrayID);

@@ -16,6 +16,7 @@ X11Win::X11Win(std::size_t width, std::size_t height) :
 }
 
 X11Win::~X11Win(void) {
+	glXDestroyWindow(_d, _glxWin);
 	glXMakeCurrent(_d, 0, 0);
 	glXDestroyContext(_d, _ctx);
 	XDestroyWindow(_d, _w);
@@ -24,10 +25,10 @@ X11Win::~X11Win(void) {
 }
 
 void		X11Win::init(void) {
-	glXCreateContextAttribsARBProc	glXCreateContextAttribsARB;
 	XSetWindowAttributes				swa;
 	XVisualInfo							*vi;
 
+	glXCreateContextAttribsARBProc	glXCreateContextAttribsARB;
 	static int				context_attribs[] = {
 		GLX_CONTEXT_MAJOR_VERSION_ARB, 3,
 		GLX_CONTEXT_MINOR_VERSION_ARB, 0,
@@ -59,14 +60,16 @@ void		X11Win::init(void) {
 							, CWBackPixel|CWBackPixmap|CWBorderPixel|CWColormap|CWEventMask
 							, &swa);
 	_glxWin = glXCreateWindow(_d, _fbc, _w, NULL);
-	XFree(vi);
 	XStoreName(_d, _w, "GL Window");
 	XMapWindow(_d, _w);
 
 	glXCreateContextAttribsARB = (glXCreateContextAttribsARBProc)glXGetProcAddressARB(
 		(const GLubyte *)"glXCreateContextAttribsARB");
 	_ctx = glXCreateContextAttribsARB(_d, _fbc, 0, True, context_attribs);
-	XSync(_d, False);
+	_ctx = glXCreateContext(_d, vi, NULL, GL_TRUE);
+	XFree(vi);
+
+	XSync(_d, True);
 	glXMakeCurrent(_d, _glxWin, _ctx);
 	glClearColor(0, 0.5, 1, 1);
 }
@@ -114,13 +117,12 @@ void		X11Win::loop(std::vector<IObject> &objects) {
 		for (std::vector<IObject>::iterator it = objects.begin(); it != objects.end(); ++it) {
 			it->draw();
 		}
-
 		if (glGetError() == GL_NO_ERROR) {
 			std::cout << "Rendering ok" << std::endl;
 		}
-
+		glXSwapBuffers(_d, _glxWin);
 		XNextEvent(_d, &_e);
-		if (_e.xkey.keycode == 24) {/*A*/
+		if (_e.xkey.keycode == 24) {/*E*/
 			glXSwapBuffers(_d, _glxWin);
 		}
 		else if (_e.xkey.keycode == 9) {/*ESC*/

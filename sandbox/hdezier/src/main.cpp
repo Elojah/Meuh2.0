@@ -15,11 +15,8 @@ int main(void) {
 	SimpleTriangle			t;
 	std::vector<IObject>	objects;
 
-
 	win.init();
 	t.init();
-
-	t.draw();
 
 	objects.push_back(t);
 

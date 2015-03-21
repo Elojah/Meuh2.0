@@ -1,10 +1,14 @@
 #include "SimpleTriangle.hpp"
 #include "LoadShaders.h"
+#include <iostream>
 
 SimpleTriangle::SimpleTriangle(void) {
 }
 
 SimpleTriangle::~SimpleTriangle(void) {
+	glDeleteBuffers(1, &_vertexBuffer);
+	glDeleteVertexArrays(1, &_vertexArrayID);
+	glDeleteProgram(_progID);
 }
 
 void	SimpleTriangle::init(void) {
@@ -21,12 +25,14 @@ void	SimpleTriangle::init(void) {
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 	_progID = LoadShaders("./src/shaders/SimpleTriangleVert.glsl", "./src/shaders/SimpleTriangleFrag.glsl");
-	glUseProgram(_progID);
 }
 
 void	SimpleTriangle::draw(void) {
 
+	std::cout << "Draw simple triangle ..." << std::endl;
+	glUseProgram(_progID);
 	glBindVertexArray(_vertexArrayID);
+	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(
 		0,// attribut 0. Aucune raison particulière pour 0, mais cela doit correspondre au « layout » dans le shader
