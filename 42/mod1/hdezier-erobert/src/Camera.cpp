@@ -1,6 +1,6 @@
 #include "Camera.hpp"
 #include <math.h>
-#include <GL/glu.h>
+// #include <GL/glu.h>
 
 Camera::Camera(void) {
 	_position.x = 800.;
@@ -15,14 +15,14 @@ Camera::~Camera(void) {
 }
 
 void	Camera::setView(void) const {
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(60.0, 1.0, 0.1, 10000.0);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt(_position.x, _position.y, _position.z,
-				_viewAt.x, _viewAt.y, _viewAt.z,
-				0.0, 0.0, 1.0);
+	// glMatrixMode(GL_PROJECTION);
+	// glLoadIdentity();
+	// gluPerspective(60.0, 1.0, 0.1, 10000.0);
+	// glMatrixMode(GL_MODELVIEW);
+	// glLoadIdentity();
+	// gluLookAt(_position.x, _position.y, _position.z,
+	// 			_viewAt.x, _viewAt.y, _viewAt.z,
+	// 			0.0, 0.0, 1.0);
 }
 
 void	Camera::rotateAround(float const pad) {

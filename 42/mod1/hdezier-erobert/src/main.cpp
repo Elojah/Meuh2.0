@@ -1,10 +1,10 @@
-#include "X11Win.hpp"
+#include "CocoaWin.hpp"
 #include "Landscape.hpp"
 #include "IObject.hpp"
 #include <iostream>
 
 int		main(int ac, char **av) {
-	X11Win		*win;
+	CocoaWin		*win;
 	Landscape	*land;
 	std::vector<IObject *>	objs;
 
@@ -12,7 +12,7 @@ int		main(int ac, char **av) {
 		std::cout << "Usage ./mod1 filename" << std::endl;
 		return (0);
 	}
-	win = new X11Win(800, 600);
+	win = new CocoaWin(800, 600);
 	land = new Landscape(std::string(av[1]));
 	objs.push_back(land);
 	win->loop(objs);

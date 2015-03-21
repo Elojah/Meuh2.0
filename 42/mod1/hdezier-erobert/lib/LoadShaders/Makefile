@@ -1,4 +1,4 @@
-TARGET = bin/runner
+TARGET = lib/libLoadShaders.a
 
 #Directories
 SRC_DIR = src
@@ -12,38 +12,24 @@ SRC_EXT = .cpp
 RM = rm -rf
 
 #List classes here
-CLASS = \
-		Camera\
-		Objects/Landscape\
-		Objects/SimpleTriangle\
-		main\
-		CocoaWin\
+CLASS = LoadShaders\
 
 #List interfaces here
 INTERFACE = \
-		IObject\
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
 OBJ = $(addsuffix .o, $(addprefix $(BUILD_DIR)/, $(CLASS)))
-DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++98
+CFLAGS = -MMD -Wall -Wextra -Werror -O3 -g -std=c++98
 LFLAGS =
 
 #Libs
-LIB_LOCAL = \
-			lib/LoadShaders\
-
-LIB_GLOBAL = \
-			LoadShaders\
-
-LIB_OTHER = \
-			-framework OpenGL\
-			-framework Cocoa\
-
+LIB_LOCAL =
+LIB_GLOBAL = GL
+LIB_OTHER =
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
 LIBS += $(LIB_OTHER)
@@ -52,11 +38,8 @@ LIBS += $(LIB_OTHER)
 INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 
-#Others
-SRC += src/CocoaWin.mm
-
 #RULES
-all : dirbin $(TARGET)
+all : dirbuild $(TARGET)
 
 clean :
 	$(RM) $(BUILD_DIR)
@@ -66,6 +49,9 @@ fclean :
 
 re : fclean all
 
+dirbuild:
+	mkdir -p build
+
 dirbin:
 	mkdir -p bin
 
@@ -73,15 +59,11 @@ dirbin:
 
 .SILENT: dirbuild dirbin
 
-#Build rule
+#Build rules
 $(TARGET) : $(OBJ)
-	@echo "\n\033[1;4;34mLNK:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+	@echo "\n\033[1;4;34mDEP:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
+	ar -rcs $@ $^
 
-#Compilation rule
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)
-	@mkdir -p $(dir $@)
-	@echo "\n\033[1;4;34mCMP:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"
+	@echo "\n\033[1;4;34mSRC:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
-
--include $(DEP)

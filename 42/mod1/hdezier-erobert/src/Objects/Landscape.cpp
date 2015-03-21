@@ -1,8 +1,6 @@
 #include "Landscape.hpp"
 #include <fstream>
 #include <iostream>
-#include <GL/gl.h>
-#include <GL/glu.h>
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
@@ -207,17 +205,17 @@ void	Landscape::drawPoint(unsigned int const x, unsigned int const y) const {
 		z = 1.;
 	}
 	if (z < 0.15) {
-		glColor3f(z / 4, z * 2, 0.6 + z);
+		// glColor3f(z / 4, z * 2, 0.6 + z);
 	} else if (z < 0.155) {
-		glColor3f(1., 1., 1 - z);
+		// glColor3f(1., 1., 1 - z);
 	} else if (z < 0.4) {
-		glColor3f(0.2, z, 0.2);
+		// glColor3f(0.2, z, 0.2);
 	} else if (z < 0.7) {
-		glColor3f(0.1 + z, z, 0.1);
+		// glColor3f(0.1 + z, z, 0.1);
 	} else {
-		glColor3f(0.9, 0.8, 0.7);
+		// glColor3f(0.9, 0.8, 0.7);
 	}
-	glVertex3f(x, y, z * Z_MULT);
+	// glVertex3f(x, y, z * Z_MULT);
 }
 
 void	Landscape::draw(void) {
