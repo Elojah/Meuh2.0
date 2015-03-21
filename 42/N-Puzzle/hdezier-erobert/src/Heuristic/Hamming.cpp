@@ -12,10 +12,11 @@ int			Hamming::eval(State const &s) const
 {
 	size_t	i;
 	int		result(0);
+	tArray const	&map(s.getMap());
 
 	for (i = 0; i < _size * _size; ++i)
 	{
-		if (s.getMap()[i] != _finalMap[i])
+		if (map[i] != _finalMap[i])
 			result++;
 	}
 	return (result);
