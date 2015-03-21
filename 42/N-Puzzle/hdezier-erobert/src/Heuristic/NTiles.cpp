@@ -13,7 +13,6 @@ int			NTiles::eval(State const &s) const
 	size_t	i;
 	size_t	j;
 	int		result(0);
-	tArray	map(s.getMap());
 
 	for (i = 0; i < _size * _size; ++i)
 	{
@@ -21,7 +20,7 @@ int			NTiles::eval(State const &s) const
 		j = 0;
 		while (j < _size)
 		{
-			if (_finalMap[i / _size + j] == map[i])
+			if (_finalMap[i / _size + j] == s.getMap()[i])
 			{
 				result--;
 				break ;
@@ -31,7 +30,7 @@ int			NTiles::eval(State const &s) const
 		j = 0;
 		while (j < _size)
 		{
-			if (_finalMap[j * _size + i % _size] == map[i])
+			if (_finalMap[j * _size + i % _size] == s.getMap()[i])
 			{
 				result--;
 				break ;

@@ -1,6 +1,16 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   State.cpp                                          :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/03/20 11:41:37 by erobert           #+#    #+#             //
+//   Updated: 2015/03/20 13:34:19 by erobert          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
+
 #include "State.hpp"
-#include <iostream>
-#include <algorithm>
 
 State::State(void)
 {
@@ -87,7 +97,7 @@ void							State::setDepth(unsigned int depth)
 {
 	_depth = depth;
 }
-State::tArray					State::getMap(void) const
+State::tArray const				&State::getMap(void) const
 {
 	return (_map);
 }
@@ -129,23 +139,6 @@ void							State::move(char const dir)
 	_empty += inc;
 }
 
-std::array<State *, 5>			State::expand(void) const
-{
-	std::array<State *, 5>		result;
-	unsigned int				current(0);
-
-	if (_empty % _size > 0)
-		result[current++] = new State(*this, LEFT);
-	if (_empty % _size < _size - 1)
-		result[current++] = new State(*this, RIGHT);
-	if (_empty /_size > 0)
-		result[current++] = new State(*this, UP);
-	if (_empty / _size < _size - 1)
-		result[current++] = new State(*this, DOWN);
-	result[current] = NULL;
-	return (result);
-}
-
 State							&State::operator=(State const &s)
 {
 	if (this != &s)
@@ -160,19 +153,18 @@ State							&State::operator=(State const &s)
 	}
 	return (*this);
 }
-
 bool							State::operator==(State const &s) const
 {
-	size_t	i;
-	size_t	sEmpty(s.getEmpty());
-	int64_t	*a;
-	int64_t	*b;
+	size_t						i;
+	size_t						sEmpty(s.getEmpty());
+	int64_t const				*a;
+	int64_t const				*b;
 
 	if (sEmpty != _empty)
 		return (false);
-	a = reinterpret_cast<int64_t *>(s.getMap().data());
-	b = reinterpret_cast<int64_t *>(getMap().data());
-	for (i = 0; i < (_size * _size); ++i)
+	a = reinterpret_cast<int64_t const *>(s.getMap().data());
+	b = reinterpret_cast<int64_t const *>(_map.data());
+	for (i = 0; i < _size * _size / 2; i++)
 	{
 		if (a[i] != b[i])
 			return (false);
