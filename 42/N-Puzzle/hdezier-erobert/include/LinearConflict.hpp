@@ -4,19 +4,24 @@
 # include "IHeuristic.hpp"
 class State;
 
-class LinearConflict : public IHeuristic
+class LinearConflict: public IHeuristic
 {
 public:
-	LinearConflict(State const *s);
-	~LinearConflict(void);
-	int		eval(State const *s);
-protected:
-private:
-	LinearConflict(void);
-	int				isInLine(std::array<int, MAX_SIZE> line, int n);
+	LinearConflict(State const &s);
+	virtual ~LinearConflict(void);
 
-	State			*_finalState;
-	unsigned int	_size;
+	virtual int		eval(State const &s) const;
+private:
+	tArray			_finalMap;
+	size_t			_size;
+
+	LinearConflict(void);
+	LinearConflict(LinearConflict const &lC);
+
+	LinearConflict	*operator=(LinearConflict const &lC);
+
+	int				isInLine(int line, int n) const;
+	int				isInColumn(int col, int n) const;
 };
 
 #endif

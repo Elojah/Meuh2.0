@@ -1,48 +1,77 @@
 #include "LinearConflict.hpp"
 #include "State.hpp"
 
-LinearConflict::LinearConflict(State const *s) {
-	_finalState = new State(*s, -1);
-	_size = _finalState->getSize();
+LinearConflict::LinearConflict(State const &s)
+{
+	_size = s.getSize();
+	_finalMap = s.getMap();
 }
+LinearConflict::~LinearConflict(void) {}
 
-LinearConflict::~LinearConflict(void) {
-}
+int				LinearConflict::isInLine(int line, int n) const
+{
+	size_t		i;
 
-int				LinearConflict::isInLine(std::array<int, MAX_SIZE> line, int n) {
-	unsigned int	i;
-
-	for (i = 0; i < _size; ++i) {
-		if (n == line[i]) {
+	for (i = 0; i < _size; ++i)
+	{
+		if (n == _finalMap[line * _size + i])
 			return (i);
-		}
 	}
 	return (-1);
 }
 
-int				LinearConflict::eval(State const *s) {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	y;
-	int				foundJ;
-	int				foundY;
-	mapArray		map;
-	mapArray		finalMap;
+int				LinearConflict::isInColumn(int col, int n) const
+{
+	size_t		i;
 
-	map = s->getMap();
-	finalMap = _finalState->getMap();
-	for (i = 0; i < _size; ++i) {
-		for (j = 0; j < _size; ++j) {
-			if ((foundJ = isInLine(finalMap[i], map[i][j])) >= 0) {
-				for (y = 0; y < _size; ++y) {
-					if (j != y
-						&& (foundY = isInLine(finalMap[i], map[i][y])) >= 0
-						&& ((j > y && foundJ < foundY) || (y > j && foundY > foundJ))) {
-							return (2);
-					}
+	for (i = 0; i < _size; ++i)
+	{
+		if (n == _finalMap[i * _size + col])
+			return (i);
+	}
+	return (-1);
+}
+
+int				LinearConflict::eval(State const &s) const
+{
+	size_t		i;
+	size_t		n;
+	size_t		x;
+	int			foundI;
+	int			foundX;
+	int			result(0);
+	tArray		map(s.getMap());
+
+	for (i = 0; i < _size * _size; ++i)
+	{
+		foundI = isInLine(i / _size, map[i]);
+		if (foundI > -1)
+		{
+			for (n = 0; n < _size; ++n)
+			{
+				x = (i / _size) * _size + n;
+				foundX = isInLine(x / _size, map[x]);
+				if (foundX > -1 && ((i > x && foundI < foundX)
+									|| (x > i && foundX < foundI)))
+				{
+						result += 2;
+				}
+			}
+		}
+		foundI = isInColumn(i % _size, map[i]);
+		if (foundI > -1)
+		{
+			for (n = 0; n < _size; ++n)
+			{
+				x = n * _size + i % _size;
+				foundX = isInColumn(x % _size, map[x]);
+				if (foundX > -1	&& ((i > x && foundI < foundX)
+									|| (x > i && foundX < foundI)))
+				{
+						result += 2;
 				}
 			}
 		}
 	}
-	return (0);
+	return (result);
 }

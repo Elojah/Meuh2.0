@@ -1,167 +1,223 @@
 #include <array>
+#include <algorithm>
 #include "Puzzle.hpp"
 #include "State.hpp"
 #include "Manhattan.hpp"
 #include "LinearConflict.hpp"
+#include "Hamming.hpp"
+#include "MaxSwap.hpp"
+#include "NTiles.hpp"
 
-Puzzle::Puzzle(unsigned int size) : _size(size)
+Puzzle::Puzzle(std::vector<int> &v, size_t size, int mask) :
+	_maxStates(0),
+	_maxStatesOpen(1),
+	_size(size)
 {
-	/*Init State*/
-	State	*s;
+	State						s;
+	std::array<int, MAX_CASE>	tmp;
+	size_t						n(0);
 
-	s = new State(_size, std::array<int, 16>{{
-		1, 7, 3, 4,
-		5, 2, 0, 8,
-		9, 6, 11, 12,
-		13, 10, 14, 15
-	}});
-	_openset.push_back(s);
-	/*!Init State*/
+	for (std::vector<int>::iterator it = v.begin(); it != v.end(); ++it)
+	{
+		tmp[n++] = (*it);
+	}
 
-	_finalState = new State(_size, std::array<int, MAX_CASE>{{}});
-	_finalState->finalFillArray();
+	_finalState = State(_size, std::array<int, MAX_CASE>{{}});
+	_finalState.finalFillArray();
 
-	/*Add heuristics here*/
-	_h.push_back(new Manhattan(_finalState));
-	_h.push_back(new LinearConflict(_finalState));
-	/*!Add heuristics here*/
+	assignHeuristics();
+	std::cout << "Nb available heuristics:\t" << _heuristics.size() << std::endl;
+	setHeuristics(mask);
+	std::cout << "Nb heuristics specified:\t" << _h.size() << std::endl;
+
+	s = State(_size, tmp);
+	s.setPrevious(0);
+	eval(s);
+	_openset.insert(s);
+
+	std::cout << "Initial state: " << std::endl;
+	s.display();
+	std::cout << "to final state: " << std::endl;
+	_finalState.display();
 }
 
-Puzzle::~Puzzle(void) {}
+Puzzle::~Puzzle(void)
+{
+	for (std::vector<IHeuristic *>::const_iterator it = _heuristics.begin(); it != _heuristics.end(); ++it)
+		delete (*it);
+}
 
-/*
-**
-**Wikipedia A*
-**http://en.wikipedia.org/wiki/A*_search_algorithm
-**
-function A*(start,goal)
-	closedset := the empty set  	// The set of nodes already evaluated.
-	openset := {start}  	// The set of tentative nodes to be evaluated, initially containing the start node
-	came_from := the empty map  	// The map of navigated nodes.
+void							Puzzle::assignHeuristics(void)
+{
+	_heuristics.push_back(new Manhattan(_finalState));
+	_heuristics.push_back(new NTiles(_finalState));
+	_heuristics.push_back(new Hamming(_finalState));
+	_heuristics.push_back(new LinearConflict(_finalState));
+	_heuristics.push_back(new MaxSwap(_finalState));
+}
 
-	g_score[start] := 0 	// Cost from start along best known path.
-	// Estimated total cost from start to goal through y.
-	f_score[start] := g_score[start] + heuristic_cost_estimate(start, goal)
+void							Puzzle::setHeuristics(int mask)
+{
+	size_t						i;
 
-	while openset is not empty
-	current := the node in openset having the lowest f_score[] value
-		if current = goal
-			return reconstruct_path(came_from, goal)
+	for (i = 0; i < _heuristics.size(); ++i)
+	{
+		if (mask & (1 << i))
+			_h.push_back(_heuristics[i]);
+	}
+}
 
-		remove current from openset
-		add current to closedset
-		for each neighbor in neighbor_nodes(current)
-			if neighbor in closedset
-				continue
-			tentative_g_score := g_score[current] + dist_between(current,neighbor)
+bool							Puzzle::isSolvable(void) const
+{
+	MaxSwap						valid(_finalState);
+	size_t						allPermutations;
+	size_t						emptyPermutations;
+	size_t						startEmpty;
+	size_t						finalEmpty;
+	size_t						x;
+	size_t						y;
 
-			if neighbor not in openset or tentative_g_score < g_score[neighbor]
-				came_from[neighbor] := current
-				g_score[neighbor] := tentative_g_score
-				f_score[neighbor] := g_score[neighbor] + heuristic_cost_estimate(neighbor, goal)
-				if neighbor not in openset
-					add neighbor to openset
+	startEmpty = (*(_openset.begin())).getEmpty();
+	finalEmpty = _finalState.getEmpty();
+	allPermutations = valid.eval(*(_openset.begin()));
+	x = startEmpty % _size;
+	y = finalEmpty % _size;
+	emptyPermutations = (startEmpty > finalEmpty ?
+						 startEmpty / _size - finalEmpty / _size + DIST(x, y)
+						 : finalEmpty / _size - startEmpty / _size + DIST(x, y));
+	return ((_size % 2 && (emptyPermutations % 2) == (allPermutations % 2))
+		|| (_size % 2 == 0 && (allPermutations % 2 == 0)));
+}
 
-	return failure
+int								Puzzle::eval(State &s) const
+{
+	int							result;
 
-function reconstruct_path(came_from,current)
-	total_path := [current]
-	while current in came_from:
-		current := came_from[current]
-		total_path.append(current)
-	return total_path
-*/
-
-int				Puzzle::eval(State *s) {
-	int			result;
-
-	if ((result = s->getValue()) != NONE_SET) {
+	if ((result = s.getValue()) != NONE_SET)
 		return (result);
-	}
 	result = 0;
-	for (std::vector<IHeuristic *>::iterator it = _h.begin(); it != _h.end(); ++it) {
+	for (std::vector<IHeuristic *>::const_iterator it = _h.begin(); it != _h.end(); ++it)
 		result += (*it)->eval(s);
-	}
-	s->setValue(result);
+	s.setValue(result);
 	return (result);
 }
 
-std::vector<State *>::iterator	Puzzle::bestEval(void) {
-	std::vector<State *>::iterator					min;
+Puzzle::tStates::iterator		Puzzle::containState(State const &s, tStates &tS)
+{
+	tStates::iterator			first;
 
-	min = _openset.begin();
-	for (std::vector<State *>::iterator it = _openset.begin() + 1; it != _openset.end(); ++it) {
-		if (eval(*it) < eval(*min)) {
-			min = it;
-		}
+	for (tStates::iterator i = tS.begin(); i != tS.end(); ++i)
+	{
+		if (i->getValue() > s.getValue())
+			return (tS.end());
+		if (s == *i)
+			return (i);
 	}
-	return (min);
+	return (tS.end());
 }
 
-std::vector<State *>::iterator			Puzzle::containState(State const *s, std::vector<State *> &v) {
-	for (std::vector<State *>::iterator oit = v.begin(); oit != v.end(); ++oit) {
-		if (*s == **oit) {
-			return (oit);
-		}
-	}
-	return (v.end());
-}
+bool			Puzzle::solve(void)
+{
+	State									tmp;
+	bool									isInClosed;
+	size_t									previous;
+	std::pair<tStates::iterator, bool>		inOpen;
+	tStates::iterator						inClosed;
+	tStates::iterator						inSet;
+	tStates::const_iterator					e;
+	std::array<State *, 4>::iterator		is;
+	std::array<State *, 5>					s;
+	char									input[256];
 
-bool			Puzzle::resolve(void) {
-	bool									succes(true);
-	static unsigned int						depth(0);
-	std::vector<State *>::iterator			inOpen;
-	std::vector<State *>::iterator			inClosed;
-	std::vector<State *>::iterator			e;
-	std::array<State *, MAX_SIZE>			s;
-	std::array<State *, MAX_SIZE>::iterator	is;
-
-	while (_openset.size() > 0 && succes) {
-		e = bestEval();
-		if (**e == *_finalState) {
-			(*e)->display();
+	std::cout << "Solving puzzle ... Please wait for few seconds ..." << std::endl;
+	while (_openset.size() > 0)
+	{
+		if (_openset.size() > _maxStatesOpen)
+			_maxStatesOpen = _openset.size();
+		e = _openset.begin();
+		if (*e == _finalState)
+		{
+			_solution = *e;
+			std::cout << "Success !" << std::endl;
 			return (true);
 		}
-
-		_closedset.push_back(*e);
+		previous = e->getId();
+		s = e->expand();
+		_closedset.insert(*e);
 		_openset.erase(e);
-		e = _closedset.end() - 1;
-		s = (*e)->expand();
-
-		// std::cout << "Expand to :" << std::endl;
-		(*e)->display();
-		std::cout << "Evaluated to: " << eval(*e) << std::endl;
-		for (is = s.begin(); *is != NULL && is != s.end(); ++is) {
-			// (*is)->display();
-			inOpen = Puzzle::containState(*is, _openset);
-			inClosed = Puzzle::containState(*is, _closedset);
-			// std::cout << "Evaluated expand to: " << eval(*is) << std::endl;
-			if (inClosed == _closedset.end() && inOpen == _openset.end()) {
-				_openset.push_back(*is);
-			} else if (inOpen != _openset.end() && eval(*is) >= eval(*e)) {
-				// _openset.erase(inOpen);
-				// _closedset.push_back(*inOpen);
+		for (is = s.begin(); *is != NULL; ++is)
+		{
+			eval(**is);
+			inClosed = containState(**is, _closedset);
+			isInClosed = (inClosed == _closedset.end());
+			if (isInClosed)
+			{
+				inOpen = _openset.insert(**is);
+				if (inOpen.second == true)
+					continue ;
+				inSet = inOpen.first;
 			}
+			else
+				inSet = inClosed;
+			if ((*is)->getDepth() < inSet->getDepth())
+			{
+				delete (*is);
+				tmp = *inSet;
+				tmp.setPrevious(previous);
+				_openset.insert(inSet, tmp);
+				if (isInClosed)
+					_openset.erase(inSet);
+				else
+					_closedset.erase(inSet);
+			}
+			else
+				delete (*is);
 		}
-		std::cout << "Open sets: " << _openset.size() << std::endl;
-		std::cout << "Closed sets: " << _closedset.size() << std::endl;
-		std::cout << "Depth : " << depth << std::endl;
-		depth++;
-		if (depth > 5500) {
-			break ;
+		_maxStates++;
+		if (_maxStates % 1000 == 0)
+			std::cout << _maxStates << " states tested." << std::endl;
+		if (_maxStates % MAX_DEPTH_SEARCH == 0)
+		{
+			if (_maxStates == MAX_DEPTH_SEARCH * 2)
+			{
+				std::cout << "You're going damn too far, stop it right now !" << std::endl;
+				break ;
+			}
+			std::cout << _maxStates << " states have been tested, do you want to continue ? y/n" << std::endl;
+			std::cin.get(input, 256);
+			if (input[0] != 'y')
+				break ;
 		}
 	}
-	return (true);
+	return (false);
 }
 
-/*
-◦ Total number of states ever selected in the "opened" set (complexity in time)
-◦ Maximum number of states ever represented in memory at the same time
-during the search (complexity in size)
-◦ Number of moves required to transition from the initial state to the final state,
-according to the search
-◦ The ordered sequence of states that make up the solution, according to the
-search
-◦ The puzzle may be unsolvable, in which case you have to inform the user and
-exit
-*/
+void						Puzzle::printResult(void) const
+{
+	char					input[256];
+	std::vector<State>		path;
+	size_t					tmp;
+	tStates::iterator		itState;
+
+	std::cout << "◦ Total number of states ever selected in the opened set:\t\t\t\t" << _maxStatesOpen << std::endl;
+	std::cout << "◦ Maximum number of states ever represented in memory at the same time:\t\t\t" << _openset.size() + _closedset.size() << std::endl;
+	std::cout << "◦ Number of moves required to transition from the initial state to the final state:\t" << _solution.getDepth() << std::endl;
+	std::cout << "Print result ? y/n" << std::endl;
+	std::cin.get(input, 256);
+	tmp = _solution.getPrevious();
+	if (input[0] != 'y')
+		return ;
+	while (tmp != 0)
+	{
+		itState = std::find_if(_closedset.begin(), _closedset.end(),
+			[&] (State const &s) {
+				return (s.getId() == tmp);
+			}
+		);
+		path.insert(path.begin(), *itState);
+		tmp = itState->getPrevious();
+	}
+	for (std::vector<State>::iterator it = path.begin(); it != path.end(); ++it)
+		it->display();
+	_solution.display();
+}

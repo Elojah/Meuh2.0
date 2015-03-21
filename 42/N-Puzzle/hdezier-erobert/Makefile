@@ -13,13 +13,17 @@ RM = rm -rf
 
 #List classes here
 CLASS = \
+		Exec\
+		lexer_parser/Lexer\
+		lexer_parser/Parser\
+		Heuristic/NTiles\
+		Heuristic/MaxSwap\
+		Heuristic/Hamming\
 		Heuristic/LinearConflict\
-		State\
-		ParserLexer/Lexer\
-		ParserLexer/Parser\
-		mainTest\
 		Heuristic/Manhattan\
+		State\
 		Puzzle\
+		main\
 
 #List interfaces here
 INTERFACE = \
