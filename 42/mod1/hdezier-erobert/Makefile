@@ -30,12 +30,13 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++98
+CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++98 -x objective-c++
 LFLAGS =
 
 #Libs
 LIB_LOCAL = \
 			lib/LoadShaders\
+			lib/glfw\
 
 LIB_GLOBAL = \
 			LoadShaders\
@@ -51,9 +52,6 @@ LIBS += $(LIB_OTHER)
 #Includes
 INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
-
-#Others
-SRC += src/CocoaWin.mm
 
 #RULES
 all : dirbin $(TARGET)

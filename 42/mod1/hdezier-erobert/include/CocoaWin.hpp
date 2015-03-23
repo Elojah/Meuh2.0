@@ -1,10 +1,9 @@
 #ifndef COCOA_WIN_H
 # define COCOA_WIN_H
-# define GL_GLEXT_PROTOTYPES
+// # define GLFW_INCLUDE_GLCOREARB
 
 # include <vector>
 # include <string>
-# include <OpenGL/OpenGL.h>
 # include <OpenGL/gl3.h>
 
 class IObject;

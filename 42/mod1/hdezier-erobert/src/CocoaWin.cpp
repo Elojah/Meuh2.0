@@ -1,6 +1,7 @@
 #include "CocoaWin.hpp"
 #include "IObject.hpp"
 #include "Camera.hpp"
+#include <GLFW/glfw3.h>
 #include <iostream>
 
 CocoaWin::CocoaWin(void) {
