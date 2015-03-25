@@ -13,15 +13,12 @@
 int main(void) {
 	X11Win					win(800, 600);
 	SimpleTriangle			t;
-	std::vector<IObject>	objects;
-
+	std::vector<IObject *>	objects;
 
 	win.init();
 	t.init();
 
-	t.draw();
-
-	objects.push_back(t);
+	objects.push_back(&t);
 
 	win.loop(objects);
 	return (0);
