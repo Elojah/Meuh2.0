@@ -13,7 +13,6 @@ public:
 	void	draw(void) const;
 protected:
 private:
-
 };
 
 #endif
