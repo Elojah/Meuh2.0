@@ -13,6 +13,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
+		Camera\
 			X11Win\
 			Objects/SimpleTriangle\
 
