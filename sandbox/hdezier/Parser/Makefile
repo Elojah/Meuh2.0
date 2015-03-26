@@ -12,13 +12,18 @@ SRC_EXT = .cpp
 RM = rm -rf
 
 #List classes here
-CLASS = main\
-		Camera\
-			X11Win\
-			Objects/SimpleTriangle\
+CLASS = \
+		Token/Equal\
+		Token/Comment\
+		Token/Gate\
+		main\
+		Lexer\
+		Parser\
+		Token/Entity\
 
 #List interfaces here
-INTERFACE = IObject\
+INTERFACE = \
+		IToken\
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
@@ -31,9 +36,12 @@ CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++98
 LFLAGS =
 
 #Libs
-LIB_LOCAL = lib/LoadShaders
-LIB_GLOBAL = X11 GL LoadShaders
-LIB_OTHER =
+LIB_LOCAL = \
+
+LIB_GLOBAL = \
+
+LIB_OTHER = \
+
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
 LIBS += $(LIB_OTHER)
