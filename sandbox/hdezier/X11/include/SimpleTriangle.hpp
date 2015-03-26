@@ -4,13 +4,15 @@
 
 # include "IObject.hpp"
 
+class Camera;
+
 class SimpleTriangle : public IObject
 {
 public:
 	SimpleTriangle(void);
 	~SimpleTriangle(void);
-	void	init(void);
 	void	draw(void) const;
+void		init(Camera const &cam);
 protected:
 private:
 };

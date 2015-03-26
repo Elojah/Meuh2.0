@@ -9,6 +9,8 @@
 # include <GL/gl.h>
 # include <GL/glx.h>
 
+# include "Camera.hpp"
+class Camera;
 class IObject;
 
 class X11Win
@@ -29,7 +31,6 @@ private:
 	Display				*_d;
 	Window			_w;
 	Colormap			_cmap;
-	int					_screen;
 	std::size_t			_width;
 	std::size_t			_height;
 /*
