@@ -9,12 +9,12 @@ class Camera;
 class SimpleTriangle : public IObject
 {
 public:
-	SimpleTriangle(Camera const &cam);
+	SimpleTriangle(void);
 	~SimpleTriangle(void);
 	void	draw(void) const;
+void		init(Camera const &cam);
 protected:
 private:
-	SimpleTriangle(void);
 };
 
 #endif

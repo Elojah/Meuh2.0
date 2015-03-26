@@ -13,10 +13,11 @@
 int main(void) {
 	X11Win					win(800, 600);
 	Camera					cam;
-	SimpleTriangle			t(cam);
+	SimpleTriangle			t;
 	std::vector<IObject *>	objects;
 
 	win.init();
+	t.init(cam);
 
 	objects.push_back(&t);
 

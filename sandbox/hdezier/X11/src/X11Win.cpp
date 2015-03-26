@@ -32,7 +32,7 @@ void		X11Win::init(void) {
 	static int				context_attribs[] = {
 		GLX_CONTEXT_MAJOR_VERSION_ARB, 3,
 		GLX_CONTEXT_MINOR_VERSION_ARB, 0,
-		//GLX_CONTEXT_FLAGS_ARB, GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB,
+		// GLX_CONTEXT_FLAGS_ARB, GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB,
 		None
 	};
 
@@ -66,7 +66,6 @@ void		X11Win::init(void) {
 	glXCreateContextAttribsARB = (glXCreateContextAttribsARBProc)glXGetProcAddressARB(
 		(const GLubyte *)"glXCreateContextAttribsARB");
 	_ctx = glXCreateContextAttribsARB(_d, _fbc, 0, True, context_attribs);
-	_ctx = glXCreateContext(_d, vi, NULL, GL_TRUE);
 	XFree(vi);
 
 	XSync(_d, True);
@@ -113,9 +112,11 @@ void		X11Win::init(void) {
 void		X11Win::loop(std::vector<IObject *> const &objects) {
 	static int		err;
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
 	while (true) {
 
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		for (std::vector<IObject *>::const_iterator it = objects.begin(); it != objects.end(); ++it) {
 			(*it)->draw();
 		}
