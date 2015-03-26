@@ -36,7 +36,7 @@ void		Boot::createItems(void)
 		tmp = strdup(line.c_str());
 		itemNames[0].push_back(std::string(basename(tmp)));
 		free(tmp);
-		items[new_item(itemNames[0].back().c_str(), itemNames[1].back().c_str())]
+		items[new_item(strdup(itemNames[0].back().c_str()), strdup(itemNames[1].back().c_str()))]
 			= static_cast<Callback>(&Boot::openProject);
 	}
 	addItem("New project", static_cast<Callback>(&Boot::newProject));

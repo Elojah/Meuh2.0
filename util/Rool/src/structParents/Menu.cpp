@@ -37,7 +37,7 @@ void				Menu::addItem(const std::string &str, void (Menu::*call)(ITEM *)) {
 	ITEM			*tmp;
 
 	itemNames[0].push_back(str);
-	if ((tmp = new_item(itemNames[0].back().c_str(), ""))) {
+	if ((tmp = new_item(strdup(itemNames[0].back().c_str()), ""))) {
 		items[tmp] = call;
 	}
 }
