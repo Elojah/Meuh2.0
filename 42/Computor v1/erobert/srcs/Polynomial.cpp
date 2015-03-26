@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/25 14:58:23 by erobert           #+#    #+#             //
-//   Updated: 2015/03/25 19:19:39 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/26 18:41:21 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -52,11 +52,17 @@ void								Polynomial::displayReducedForm(void)
 	if (!_vector[2] && !_vector[1] && !_vector[0])
 		std::cout << YELLOW << " 0";
 	std::cout << " = " << YELLOW << "0" << END << std::endl;
+	std::cout << "The degree is: " << GREEN << _degree << END << std::endl;
 }
 void								Polynomial::displayDelta(void)
 {
-	std::cout << "The delta is: "
-			  << BLUE << _delta << END
+	if (_delta > 0)
+		std::cout << "The delta is strictly positive: ";
+	else if (_delta < 0)
+		std::cout << "The delta is strictly negatif: ";
+	else
+		std::cout << "The delta is null: ";
+	std::cout << BLUE << _delta << END
 			  << std::endl;
 }
 void								Polynomial::displaySolution(void)
@@ -76,7 +82,7 @@ void								Polynomial::displaySolution(void)
 				  << GREEN << _solution[1] << END
 				  << " and "
 				  << GREEN << _solution[0] << END
-				  << " + "
+				  << " - "
 				  << BLUE << "i"
 				  << GREEN << _solution[1] << END << std::endl;
 	else
@@ -85,22 +91,13 @@ void								Polynomial::displaySolution(void)
 }
 void								Polynomial::solve(std::vector<float> p)
 {
-	std::vector<float>::iterator	ib;
-	std::vector<float>::iterator	it;
-
 	_vector = p;
+	getDegree();
 	displayReducedForm();
-	ib = _vector.begin();
-	it = _vector.end();
-	ib++;
-	ib++;
-	while (--it != ib)
+	if (_degree > 2)
 	{
-		if (*it)
-		{
-			std::cout << "Can't solve degree superior to 3." << std::endl;
-			return ;
-		}
+		std::cout << "Can't solve degree superior to 2." << std::endl;
+		return ;
 	}
 	if (!_vector[2])
 	{
@@ -126,6 +123,19 @@ void								Polynomial::solve(std::vector<float> p)
 	displaySolution();
 }
 
+void								Polynomial::getDegree(void)
+{
+	std::vector<float>::iterator	ib(_vector.begin());
+	std::vector<float>::iterator	it(_vector.end());
+
+	_degree = _vector.size();
+	while (--it != ib)
+	{
+		_degree--;
+		if (*it)
+			return ;
+	}
+}
 float								Polynomial::sqrt(float x)
 {
 	int								i(0);

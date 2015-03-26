@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/25 14:52:51 by erobert           #+#    #+#             //
-//   Updated: 2015/03/25 18:33:25 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/26 14:03:20 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -34,6 +34,7 @@ public:
 	void				solve(std::vector<float> p);
 private:
 	std::vector<float>	_vector;
+	size_t				_degree;
 	double				_delta;
 	double				_solution[4];
 
@@ -41,6 +42,7 @@ private:
 
 	Polynomial			&operator=(Polynomial const &p);
 
+	void				getDegree(void);
 	float				sqrt(float x);
 };
 

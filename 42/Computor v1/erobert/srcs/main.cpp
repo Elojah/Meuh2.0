@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/21 19:42:24 by erobert           #+#    #+#             //
-//   Updated: 2015/03/25 19:02:36 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/26 14:10:54 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -29,6 +29,8 @@ int				main(int ac, char **av)
 		p.parse(l.tokens());
 		if (p.good())
 			poly.solve(p.vector());
+		else
+			std::cerr << av[0] << " equation" << std::endl;
 	}
 	return (0);
 }

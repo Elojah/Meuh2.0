@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/05 19:19:53 by erobert           #+#    #+#             //
-//   Updated: 2015/03/25 19:08:24 by erobert          ###   ########.fr       //
+//   Updated: 2015/03/26 13:56:44 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -83,7 +83,7 @@ size_t						Parser::getDegree(tTI &it, tTI &ie)
 void						Parser::checkItem(tTI &it, tTI &ie,
 											  bool right, bool first)
 {
-	float					value;
+	float					value(0);
 	size_t					degree;
 
 	if (it->first != Lexer::OPERATOR && !first)
@@ -112,6 +112,8 @@ void						Parser::checkItem(tTI &it, tTI &ie,
 		if (right)
 			value *= -1;
 	}
+	if (it == ie)
+		return ;
 	it++;
 	degree = getDegree(it, ie);
 	if (degree < MAX_DEGREE)
@@ -127,7 +129,7 @@ void						Parser::parse(std::list<tToken> const &tokens)
 	while (it != ie && it->first != Lexer::EQUAL)
 	{
 		checkItem(it, ie, right, first);
-		if (it->first != Lexer::OPERATOR)
+		if (it != ie && it->first != Lexer::OPERATOR)
 			it++;
 		first = false;
 	}
@@ -142,7 +144,7 @@ void						Parser::parse(std::list<tToken> const &tokens)
 	while (it != ie)
 	{
 		checkItem(it, ie, right, first);
-		if (it->first != Lexer::OPERATOR)
+		if (it != ie && it->first != Lexer::OPERATOR)
 			it++;
 		first = false;
 	}
