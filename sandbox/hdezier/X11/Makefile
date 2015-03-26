@@ -7,7 +7,7 @@ BUILD_DIR = build
 LIB_DIR = lib
 
 #Options
-CC = g++
+CC = clang++-3.6
 SRC_EXT = .cpp
 RM = rm -rf
 
@@ -32,7 +32,7 @@ LFLAGS =
 
 #Libs
 LIB_LOCAL = lib/LoadShaders
-LIB_GLOBAL = X11 GL LoadShaders
+LIB_GLOBAL = X11 GL LoadShaders m
 LIB_OTHER =
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))

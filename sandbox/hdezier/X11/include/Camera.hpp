@@ -1,21 +1,20 @@
 #ifndef CAMERA_H
 # define CAMERA_H
+# define GL_GLEXT_PROTOTYPES
 
 # include <GL/gl.h>
-# include "glm/glm.hpp"
+# include <glm/glm.hpp>
 
 class Camera
 {
 public:
 	Camera(void);
 	~Camera(void);
-	void	setView(float scale);
+	const glm::mat4	getViewProj(void) const;
 protected:
 private:
-	GLuint			_progID;
-	glm::mat4		_projection;
 	glm::mat4		_view;
-	glm::mat4		_model;
+	glm::mat4		_projection;
 };
 
 #endif

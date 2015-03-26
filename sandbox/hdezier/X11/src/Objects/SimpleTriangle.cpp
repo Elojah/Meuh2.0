@@ -1,18 +1,9 @@
 #include "SimpleTriangle.hpp"
 #include "LoadShaders.h"
+#include "Camera.hpp"
+#include <iostream>
 
-SimpleTriangle::SimpleTriangle(void) {
-}
-
-SimpleTriangle::~SimpleTriangle(void) {
-	glDeleteBuffers(1, &_vertexBuffer);
-	glDeleteBuffers(1, &_colorBuffer);
-	glDeleteVertexArrays(1, &_vertexArrayID);
-	glDeleteProgram(_progID);
-}
-
-void	SimpleTriangle::init(void) {
-
+SimpleTriangle::SimpleTriangle(Camera const &cam) {
 	static const GLfloat g_color_buffer_data[] = {
 		0.583f, 0.771f, 0.014f,
 		0.609f, 0.115f, 0.436f,
@@ -91,32 +82,47 @@ void	SimpleTriangle::init(void) {
 		1.0f,-1.0f, 1.0f
 	};
 
+
 	glGenVertexArrays(1, &_vertexArrayID);
 	glBindVertexArray(_vertexArrayID);
+
+	_progID = LoadShaders("./src/shaders/SimpleTriangle.vert", "./src/shaders/SimpleTriangle.frag");
+	(void)cam;
+	// std::cout << "Prog id:\t" << _progID << std::endl;
+	// mvp = cam.getViewProj() * glm::mat4(1.0f);
+	// _matrixID = glGetUniformLocation(_progID, "mvp");
 
 	glGenBuffers(1, &_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
 	glGenBuffers(1, &_colorBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, _colorBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
-	_progID = LoadShaders("./src/shaders/SimpleTriangleVert.glsl", "./src/shaders/SimpleTriangleFrag.glsl");
+}
+
+SimpleTriangle::~SimpleTriangle(void) {
+	glDeleteBuffers(1, &_vertexBuffer);
+	glDeleteBuffers(1, &_colorBuffer);
+	glDeleteVertexArrays(1, &_vertexArrayID);
+	glDeleteProgram(_progID);
 }
 
 void	SimpleTriangle::draw(void) const {
 
 	glUseProgram(_progID);
+	// glUniformMatrix4fv(_matrixID, 1, GL_FALSE, &mvp[0][0]);
 	glBindVertexArray(_vertexArrayID);
 
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glDisableVertexAttribArray(0);
 
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, _colorBuffer);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glDisableVertexAttribArray(1);
 
 	glDrawArrays(GL_TRIANGLES, 0, 12 * 3);
-	glDisableVertexAttribArray(0);
-	glBindVertexArray(0);
 }
