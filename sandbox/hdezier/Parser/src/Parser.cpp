@@ -42,24 +42,21 @@ void			Parser::exec(std::ifstream &ifs) {
 				continue ;
 			}
 			response = _globalTokens[n]->detect(c);
-			std::cout << "Char:\t" << c << std::endl;
-			std::cout << "Response:\t" << response << std::endl;
-			std::cout << "Mask:\t" << tokenMask << std::endl;
 			if (response == FOUND) {
 				continue ;
 			} else if (response == COMPLETE) {
 				_readTokens.push_back(_globalTokens[n]->getAsRead());
 				resetGlobalTokens();
 				tokenMask = (1L << _globalTokens.size()) - 1;
+				n = 0;
 			} else if (response == MASTER) {
 				tokenMask = (1L << n);
 			} else if (response == NONE) {
 				tokenMask &= ~(1L << n);
-				std::cout << "tokmas:\t" << tokenMask << std::endl;
 				if (tokenMask == 0) {
 					if (c != ' ' && c != '\t' && c != '\n') {
 						std::cout << "Parsing error on char:\t" << c << std::endl;
-						return ;
+						// return ;
 					}
 					resetGlobalTokens();
 					tokenMask = (1L << _globalTokens.size()) - 1;

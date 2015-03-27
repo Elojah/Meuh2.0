@@ -8,10 +8,9 @@ Gate::~Gate(void) {
 }
 
 int		Gate::detect(const char &c) {
-	bool		emptyWord(_read.word.empty());
 	size_t		len(_read.word.size());
 
-	if ((emptyWord && (c == '&' || c == '|'))
+	if ((_read.word.empty() && (c == '&' || c == '|'))
 		|| (len == 1 && c == _read.word[0])) {
 		_read.word.push_back(c);
 		return (FOUND);
