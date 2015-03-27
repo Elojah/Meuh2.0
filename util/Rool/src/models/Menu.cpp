@@ -1,5 +1,6 @@
 #include "Menu.hpp"
 #include "SortItems.hpp"
+#include <string.h>
 #include <algorithm>
 
 Menu::Menu(void) : Window(),
@@ -36,8 +37,7 @@ Menu::~Menu(void) {
 void				Menu::addItem(const std::string &str, void (Menu::*call)(ITEM *)) {
 	ITEM			*tmp;
 
-	itemNames[0].push_back(str);
-	if ((tmp = new_item(strdup(itemNames[0].back().c_str()), ""))) {
+	if ((tmp = new_item(strdup(str.c_str()), ""))) {
 		items[tmp] = call;
 	}
 }
@@ -101,8 +101,6 @@ void		Menu::reset(void) {
 		free_item(menuItems[i]);
 	}
 	items.clear();
-	itemNames[0].clear();
-	itemNames[1].clear();
 	if (menu) {
 		unpost_menu(menu);
 		free_menu(menu);
