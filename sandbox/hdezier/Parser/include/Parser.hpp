@@ -23,6 +23,8 @@ private:
 
 	void									initGlobalTokens(void);
 	void									resetGlobalTokens(void);
+	void									exec(std::ifstream &ifs);
+
 	tSetTokens								_globalTokens;
 	tTokens									_readTokens;
 };

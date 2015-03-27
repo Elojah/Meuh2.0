@@ -1,4 +1,4 @@
-A && B => C
+Ased && B => C
 E && B => G#testcom
  P && F => C
  #that comment
