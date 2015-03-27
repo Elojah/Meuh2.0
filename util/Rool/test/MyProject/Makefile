@@ -1,5 +1,6 @@
 TARGET = bin/runner
-
+		A\
+		B\
 #Directories
 SRC_DIR = src
 INC_DIR = include
@@ -12,25 +13,10 @@ SRC_EXT = .cpp
 RM = rm -rf
 
 #List classes here
-CLASS = main\
-		patterns/UsualClass\
-		patterns/UsualInterface\
-		patterns/ReplaceClassName\
-		models/Menu\
-		models/Window\
-		menus/Boot\
-		menus/ClassList\
-		menus/MemberList\
-		GUI\
-		Project\
-		SortItems\
-		ClassTemplate\
-		MemberTemplate\
-		ModuleFactory\
+CLASS = \
 
 #List interfaces here
-INTERFACE = IModule\
-			ITemplate\
+INTERFACE = \
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
@@ -43,8 +29,8 @@ CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++98
 LFLAGS =
 
 #Libs
-LIB_LOCAL = lib/parseStr lib/fileManip
-LIB_GLOBAL = ncurses menu parseStr fileManip
+LIB_LOCAL =
+LIB_GLOBAL =
 LIB_OTHER =
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
