@@ -23,6 +23,10 @@ private:
 
 	void									initGlobalTokens(void);
 	void									resetGlobalTokens(void);
+	void									exec(std::ifstream &ifs);
+	bool									tokenizing(void) const;
+	static bool								isSeparator(char const &c);
+
 	tSetTokens								_globalTokens;
 	tTokens									_readTokens;
 };

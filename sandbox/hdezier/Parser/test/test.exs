@@ -1,10 +1,10 @@
-A && B => C
-E && B => G#testcom
- P && F => C
- #that comment
+Asdqdqs&& B =>C
+E&& B=> G#testcom
+ P &&F=> C
+ #thatcomment
 L && B => V
 # && = 1256otherthat comment
-=>> S ==< <=<
-A <=> J
+=> S <= <=
+A<=>J
 K <= LO
-Ert == G
+Ert G
