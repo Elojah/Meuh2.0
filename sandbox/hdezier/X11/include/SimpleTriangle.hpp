@@ -12,7 +12,7 @@ public:
 	SimpleTriangle(void);
 	~SimpleTriangle(void);
 	void	draw(void) const;
-void		init(Camera const &cam);
+	void		init(void);
 protected:
 private:
 };

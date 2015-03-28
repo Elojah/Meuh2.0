@@ -11,7 +11,7 @@ SimpleTriangle::~SimpleTriangle(void) {
 	glDeleteProgram(_progID);
 }
 
-void	SimpleTriangle::init(Camera const &cam) {
+void	SimpleTriangle::init(void) {
 	static const GLfloat g_color_buffer_data[] = {
 		0.583f, 0.771f, 0.014f,
 		0.609f, 0.115f, 0.436f,
@@ -95,7 +95,6 @@ void	SimpleTriangle::init(Camera const &cam) {
 	glBindVertexArray(_vertexArrayID);
 
 	_progID = LoadShaders("./src/shaders/SimpleTriangle.vert", "./src/shaders/SimpleTriangle.frag");
-	refresh(cam);
 
 	glGenBuffers(1, &_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);

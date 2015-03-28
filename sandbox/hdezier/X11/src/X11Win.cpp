@@ -1,5 +1,5 @@
 #include "X11Win.hpp"
-#include "IObject.hpp"
+#include "Map.hpp"
 #include <iostream>
 
 X11Win::X11Win(void) {
@@ -109,27 +109,36 @@ void		X11Win::init(void) {
 	long pad[24];
 }						XEvent;
 */
-void		X11Win::loop(std::vector<IObject *> const &objects) {
+void		X11Win::loop(Map const &map, Camera &cam) {
 	static int		err;
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
+	map.refresh(cam);
 	while (true) {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		for (std::vector<IObject *>::const_iterator it = objects.begin(); it != objects.end(); ++it) {
-			(*it)->draw();
-		}
+		map.draw();
 		if ((err = glGetError()) == GL_NO_ERROR) {
 			std::cout << "Rendering ok" << std::endl;
 		} else {
 			std::cout << "Rendering error:\t" << err << std::endl;
 		}
 		glXSwapBuffers(_d, _glxWin);
-		XNextEvent(_d, &_e);
-		if (_e.xkey.keycode == 24) {/*E*/
-			glXSwapBuffers(_d, _glxWin);
-			refresh();
+		XNextEvent(_d, &_e);/*HERE WE TEMP*/
+		std::cout << "Xkey:\t" << _e.xkey.keycode << std::endl;
+		if (_e.xkey.keycode == 26) {/*A*/
+			cam.rotate(LEFT);
+			map.refresh(cam);
+		} else if (_e.xkey.keycode == 24) {/*E*/
+			cam.rotate(RIGHT);
+			map.refresh(cam);
+		} else if (_e.xkey.keycode == 25) {/*E*/
+			cam.translate(UP);
+			map.refresh(cam);
+		} else if (_e.xkey.keycode == 39) {/*E*/
+			cam.translate(DOWN);
+			map.refresh(cam);
 		}
 		else if (_e.xkey.keycode == 9) {/*ESC*/
 			break ;

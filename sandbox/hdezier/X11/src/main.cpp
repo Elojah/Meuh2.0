@@ -7,20 +7,19 @@
 
 #include <vector>
 #include "X11Win.hpp"
-#include "IObject.hpp"
+#include "Map.hpp"
 #include "SimpleTriangle.hpp"
 
 int main(void) {
 	X11Win					win(800, 600);
 	Camera					cam;
+	Map					m;
 	SimpleTriangle			t;
-	std::vector<IObject *>	objects;
 
 	win.init();
-	t.init(cam);
+	t.init();
+	m.addObject(&t);
 
-	objects.push_back(&t);
-
-	win.loop(objects);
+	win.loop(m, cam);
 	return (0);
 }

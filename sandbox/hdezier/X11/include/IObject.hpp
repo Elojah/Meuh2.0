@@ -1,5 +1,6 @@
 #ifndef I_OBJECT_H
 # define I_OBJECT_H
+# define GL_GLEXT_PROTOTYPES
 
 # include <GL/gl.h>
 # include <glm/glm.hpp>
@@ -10,6 +11,7 @@ class IObject
 {
 public:
 	virtual ~IObject(void) {}
+	virtual void	init(void) = 0;
 	virtual void	draw(void) const {
 		glBindVertexArray(_vertexArrayID);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
