@@ -129,6 +129,7 @@ void		X11Win::loop(std::vector<IObject *> const &objects) {
 		XNextEvent(_d, &_e);
 		if (_e.xkey.keycode == 24) {/*E*/
 			glXSwapBuffers(_d, _glxWin);
+			refresh();
 		}
 		else if (_e.xkey.keycode == 9) {/*ESC*/
 			break ;

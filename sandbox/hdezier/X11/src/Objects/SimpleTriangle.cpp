@@ -1,6 +1,5 @@
 #include "SimpleTriangle.hpp"
 #include "LoadShaders.h"
-#include "Camera.hpp"
 
 SimpleTriangle::SimpleTriangle(void) {
 }
@@ -96,8 +95,7 @@ void	SimpleTriangle::init(Camera const &cam) {
 	glBindVertexArray(_vertexArrayID);
 
 	_progID = LoadShaders("./src/shaders/SimpleTriangle.vert", "./src/shaders/SimpleTriangle.frag");
-	mvp = cam.getViewProj() * glm::mat4(1.0f);
-	_matrixID = glGetUniformLocation(_progID, "mvp");
+	refresh(cam);
 
 	glGenBuffers(1, &_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);

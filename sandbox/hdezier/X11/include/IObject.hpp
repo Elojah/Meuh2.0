@@ -3,6 +3,8 @@
 
 # include <GL/gl.h>
 # include <glm/glm.hpp>
+# include "Camera.hpp"
+class Camera;
 
 class IObject
 {
@@ -13,8 +15,12 @@ public:
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glBindVertexArray(0);
 	}
-	glm::mat4		mvp;
+	virtual void	refresh(Camera const &cam) {
+		mvp = cam.getViewProj() * glm::mat4(1.0f);
+		_matrixID = glGetUniformLocation(_progID, "mvp");
+	}
 protected:
+	glm::mat4		mvp;
 	GLuint			_vertexBuffer;
 	GLuint			_colorBuffer;
 	GLuint			_vertexArrayID;

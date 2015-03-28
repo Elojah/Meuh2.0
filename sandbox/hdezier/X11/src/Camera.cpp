@@ -9,11 +9,12 @@ Camera::Camera(void) {
 		glm::vec3(0, 0, 0),
 		glm::vec3(0, 1, 0)
 	);
+	_vp = _projection * _view;
 }
 
 Camera::~Camera(void) {
 }
 
 const glm::mat4	Camera::getViewProj(void) const {
-	return (_projection * _view);
+	return (_vp);
 }
