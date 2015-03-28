@@ -4,6 +4,7 @@
 # include <string>
 # include <set>
 # include <ctype.h>
+# include <iostream>
 
 struct sReadToken{
 	std::string		word;
@@ -40,6 +41,12 @@ public:
 	}
 	virtual sReadToken		getAsRead(void) const {
 		return (_read);
+	}
+	virtual bool				isEmptyWord(void) const {
+		return (_read.word.empty());
+	}
+	virtual void				display(void) const {
+		std::cout << _read.word << std::endl;
 	}
 protected:
 	sReadToken			_read;
