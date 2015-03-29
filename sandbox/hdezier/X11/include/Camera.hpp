@@ -6,7 +6,7 @@
 # include <glm/glm.hpp>
 
 enum eDirection {
-	NONE = 0,
+	CONSTANT = 0,
 	RIGHT = 1,
 	LEFT = 2,
 	UP = 3,

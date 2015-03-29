@@ -4,13 +4,6 @@
 SimpleTriangle::SimpleTriangle(void) {
 }
 
-SimpleTriangle::~SimpleTriangle(void) {
-	glDeleteBuffers(1, &_vertexBuffer);
-	glDeleteBuffers(1, &_colorBuffer);
-	glDeleteVertexArrays(1, &_vertexArrayID);
-	glDeleteProgram(_progID);
-}
-
 void	SimpleTriangle::init(void) {
 	static const GLfloat g_color_buffer_data[] = {
 		0.583f, 0.771f, 0.014f,

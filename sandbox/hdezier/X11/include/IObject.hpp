@@ -10,7 +10,12 @@ class Camera;
 class IObject
 {
 public:
-	virtual ~IObject(void) {}
+	virtual ~IObject(void) {
+		glDeleteBuffers(1, &_vertexBuffer);
+		glDeleteBuffers(1, &_colorBuffer);
+		glDeleteVertexArrays(1, &_vertexArrayID);
+		glDeleteProgram(_progID);
+	}
 	virtual void	init(void) = 0;
 	virtual void	draw(void) const {
 		glBindVertexArray(_vertexArrayID);

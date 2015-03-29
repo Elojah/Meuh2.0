@@ -10,9 +10,8 @@ class SimpleTriangle : public IObject
 {
 public:
 	SimpleTriangle(void);
-	~SimpleTriangle(void);
-	void	draw(void) const;
 	void		init(void);
+	void		draw(void) const;
 protected:
 private:
 };

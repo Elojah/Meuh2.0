@@ -13,10 +13,15 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		Map\
+		Parser/Tokens/Scope\
+		Parser/Tokens/Comment\
+		Parser/Tokens/Number\
+		Parser/Parser\
+		Objects/Landscape\
+		Objects/SimpleTriangle\
 		Camera\
-			X11Win\
-			Objects/SimpleTriangle\
+		Map\
+		X11Win\
 
 #List interfaces here
 INTERFACE = IObject\
@@ -33,7 +38,7 @@ LFLAGS =
 
 #Libs
 LIB_LOCAL = lib/LoadShaders
-LIB_GLOBAL = X11 GL LoadShaders m
+LIB_GLOBAL = X11 GL LoadShaders
 LIB_OTHER =
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
