@@ -8,17 +8,20 @@
 #include <vector>
 #include "X11Win.hpp"
 #include "Map.hpp"
+#include "SimpleTriangle.hpp"
 #include "Landscape.hpp"
 
 int main(void) {
 	X11Win					win(800, 600);
 	Camera					cam;
 	Map					m;
-	Landscape				l("./test/demo1.mod1");
+	SimpleTriangle			t;
+	// Landscape				l("./test/demo1.mod1");
 
 	win.init();
-	l.init();
-	m.addObject(&l);
+	t.init();
+	// m.addObject(&l);
+	m.addObject(&t);
 
 	win.loop(m, cam);
 	return (0);

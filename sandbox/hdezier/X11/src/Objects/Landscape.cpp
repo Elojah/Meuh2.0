@@ -10,6 +10,14 @@
 Landscape::Landscape(void) {
 }
 
+Landscape::~Landscape(void) {
+	glDeleteBuffers(1, &_vertexBuffer);
+	glDeleteBuffers(1, &_colorBuffer);
+	glDeleteBuffers(1, &_indexBuffer);
+	glDeleteVertexArrays(1, &_vertexArrayID);
+	glDeleteProgram(_progID);
+}
+
 Landscape::Landscape(std::string const &filename) :
 	_filename(filename) {
 }
@@ -28,20 +36,19 @@ void			Landscape::init(void) {
 }
 
 void	Landscape::initBuffers(void) {
+	static GLuint	g_index_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 * 3 + 1];
 	static GLfloat	g_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 + 1];
 	static GLfloat	g_color_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 + 1];
-	static GLuint	g_index_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 * 3 + 1];
 	size_t			i;
 
 	/*Vertex Buffer*/
 	for (i = 0; i < WIDTH_MAP * HEIGHT_MAP * 3; i += 3) {
 		g_vertex_buffer_data[i] = (i / WIDTH_MAP) * 0.1f;
-		g_index_buffer_data[i] = i;
-	}
-	for (i = 2; i < WIDTH_MAP * HEIGHT_MAP * 3; i += 3) {
-		g_vertex_buffer_data[i] = (i % WIDTH_MAP) * 0.1f;
 	}
 	for (i = 1; i < WIDTH_MAP * HEIGHT_MAP * 3; i += 3) {
+		g_vertex_buffer_data[i] = (i % WIDTH_MAP) * 0.1f;
+	}
+	for (i = 2; i < WIDTH_MAP * HEIGHT_MAP * 3; i += 3) {
 		g_vertex_buffer_data[i] = _map[(i / 3) / WIDTH_MAP][(i / 3) % WIDTH_MAP] * Z_MULT;
 	}
 	/*Color Buffer*/
@@ -49,10 +56,10 @@ void	Landscape::initBuffers(void) {
 		g_color_buffer_data[i] = i * 0.0001f;
 	}
 	/*Index Buffer*/
-	for (i = 0; i < WIDTH_MAP * HEIGHT_MAP * 3; ++i) {
+	for (i = 0; i < WIDTH_MAP * HEIGHT_MAP * 3 - 1; ++i) {
 		g_index_buffer_data[i * 3] = i;
-		g_index_buffer_data[i * 3 + 1] = i;// + WIDTH_MAP;
-		g_index_buffer_data[i * 3 + 2] = i;// + 1;
+		g_index_buffer_data[i * 3 + 1] = i + WIDTH_MAP;
+		g_index_buffer_data[i * 3 + 2] = i + 1;
 	}
 
 	glGenVertexArrays(1, &_vertexArrayID);
@@ -107,8 +114,8 @@ void	Landscape::lexer(const Parser &p) {
 		z = fmod((z / Z_DIVIDE), Z_MAX);
 
 		std::cout << "Assign value: " << z << " at point (" << x << ", " << y << ")" << std::endl;
-		_immovablePoints.push_back((t_point){static_cast<unsigned int>(x), static_cast<unsigned int>(y), z});
-		_map[static_cast<unsigned int>(x)][static_cast<unsigned int>(y)] = z;
+		_immovablePoints.push_back((t_point){static_cast<size_t>(x), static_cast<size_t>(y), z});
+		_map[static_cast<size_t>(x)][static_cast<size_t>(y)] = z;
 		i += 5;
 	}
 
@@ -127,8 +134,8 @@ void	Landscape::smoothMap(void) {
 }
 
 void	Landscape::smoothPoint(t_point const &originPoint, t_point const &closestPoint) {
-	unsigned int	i;
-	unsigned int	j;
+	size_t			i;
+	size_t			j;
 	float			z;
 	float			dist;
 	float			maxDist;
@@ -156,11 +163,11 @@ void	Landscape::smoothPoint(t_point const &originPoint, t_point const &closestPo
 }
 
 void	Landscape::findClosestPoint(t_point const &origin, t_point &closest) const {
-	unsigned int	xDist;
-	unsigned int	yDist;
-	unsigned int	xTmp;
-	unsigned int	yTmp;
-	unsigned int	dist;
+	size_t			xDist;
+	size_t			yDist;
+	size_t			xTmp;
+	size_t			yTmp;
+	size_t			dist;
 
 
 	xDist = origin.x > WIDTH_MAP / 2 ? WIDTH_MAP - origin.x : origin.x;
@@ -191,8 +198,8 @@ void	Landscape::findClosestPoint(t_point const &origin, t_point &closest) const 
 }
 
 void		Landscape::printMap(void) const {
-	unsigned int	i;
-	unsigned int	j;
+	size_t			i;
+	size_t			j;
 
 	for (i = 0; i < WIDTH_MAP; ++i) {
 		for (j = 0; j < HEIGHT_MAP; ++j) {
@@ -205,8 +212,8 @@ void		Landscape::printMap(void) const {
 }
 
 void		Landscape::clearMap(void) {
-	unsigned int	i;
-	unsigned int	j;
+	size_t			i;
+	size_t			j;
 
 	for (i = 0; i < WIDTH_MAP; ++i) {
 		for (j = 0; j < HEIGHT_MAP; ++j) {
@@ -216,8 +223,8 @@ void		Landscape::clearMap(void) {
 }
 
 void		Landscape::useMap(void) {
-	unsigned int	i;
-	unsigned int	j;
+	size_t			i;
+	size_t			j;
 
 	for (i = 0; i < WIDTH_MAP; ++i) {
 		for (j = 0; j < HEIGHT_MAP; ++j) {
@@ -243,15 +250,16 @@ void	Landscape::draw(void) const {
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, _colorBuffer);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
+/*
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vertexBuffer);
 	glDrawElements(
-		GL_TRIANGLES,
-		WIDTH_MAP * HEIGHT_MAP * 3 * 3,
+		GL_TRIANGLE_STRIP,
+		WIDTH_MAP * HEIGHT_MAP * 3,
 		GL_UNSIGNED_INT,
-		(void*)0
+		(char *)NULL
 	);
-	// glDrawArrays(GL_POLYGON, 0, WIDTH_MAP * HEIGHT_MAP);
+*/
+	glDrawArrays(GL_POLYGON, 0, WIDTH_MAP * HEIGHT_MAP);
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 }

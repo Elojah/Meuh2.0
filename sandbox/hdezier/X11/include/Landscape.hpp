@@ -17,6 +17,7 @@ class Landscape : public IObject
 {
 public:
 								Landscape(std::string const&);
+								~Landscape(void);
 	void						init(void);
 	void						draw(void) const;
 	void						raiseWater(float const);
@@ -45,7 +46,6 @@ private:
 	std::string					_filename;
 
 	float						_map[WIDTH_MAP + 1][HEIGHT_MAP + 1];
-	GLuint						_indexBuffer;
 	std::vector<t_point>		_immovablePoints;
 	float						_waterDiff;
 };
