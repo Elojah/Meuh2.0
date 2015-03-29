@@ -24,26 +24,35 @@ void			Landscape::init(void) {
 	std::cout << "Lexing: DONE" << std::endl;
 	smoothMap();
 	useMap();
-	// printMap();
 	initBuffers();
 }
 
 void	Landscape::initBuffers(void) {
-	static GLfloat	g_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3];
-	static GLfloat	g_color_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3];
+	static GLfloat	g_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 + 1];
+	static GLfloat	g_color_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 + 1];
+	static GLuint	g_index_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 * 3 + 1];
 	size_t			i;
 
+	/*Vertex Buffer*/
 	for (i = 0; i < WIDTH_MAP * HEIGHT_MAP * 3; i += 3) {
-		g_vertex_buffer_data[i] = i / WIDTH_MAP * 0.01f;
-	}
-	for (i = 1; i < WIDTH_MAP * HEIGHT_MAP * 3; i += 3) {
-		g_vertex_buffer_data[i] = i % WIDTH_MAP * 0.01f;
+		g_vertex_buffer_data[i] = (i / WIDTH_MAP) * 0.1f;
+		g_index_buffer_data[i] = i;
 	}
 	for (i = 2; i < WIDTH_MAP * HEIGHT_MAP * 3; i += 3) {
-		g_vertex_buffer_data[i] = _map[(i / 3) / WIDTH_MAP][(i / 3) % WIDTH_MAP];
+		g_vertex_buffer_data[i] = (i % WIDTH_MAP) * 0.1f;
 	}
+	for (i = 1; i < WIDTH_MAP * HEIGHT_MAP * 3; i += 3) {
+		g_vertex_buffer_data[i] = _map[(i / 3) / WIDTH_MAP][(i / 3) % WIDTH_MAP] * Z_MULT;
+	}
+	/*Color Buffer*/
 	for (i = 0; i < WIDTH_MAP * HEIGHT_MAP * 3; ++i) {
-		g_color_buffer_data[i] = 0.5f;
+		g_color_buffer_data[i] = i * 0.0001f;
+	}
+	/*Index Buffer*/
+	for (i = 0; i < WIDTH_MAP * HEIGHT_MAP * 3; ++i) {
+		g_index_buffer_data[i * 3] = i;
+		g_index_buffer_data[i * 3 + 1] = i;// + WIDTH_MAP;
+		g_index_buffer_data[i * 3 + 2] = i;// + 1;
 	}
 
 	glGenVertexArrays(1, &_vertexArrayID);
@@ -58,6 +67,10 @@ void	Landscape::initBuffers(void) {
 	glGenBuffers(1, &_colorBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, _colorBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
+
+	glGenBuffers(1, &_indexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(g_index_buffer_data), g_index_buffer_data, GL_STATIC_DRAW);
 }
 
 bool	Landscape::loop(int const key) {
@@ -231,7 +244,14 @@ void	Landscape::draw(void) const {
 	glBindBuffer(GL_ARRAY_BUFFER, _colorBuffer);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-	glDrawArrays(GL_TRIANGLES, 0, WIDTH_MAP * HEIGHT_MAP);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vertexBuffer);
+	glDrawElements(
+		GL_TRIANGLES,
+		WIDTH_MAP * HEIGHT_MAP * 3 * 3,
+		GL_UNSIGNED_INT,
+		(void*)0
+	);
+	// glDrawArrays(GL_POLYGON, 0, WIDTH_MAP * HEIGHT_MAP);
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 }

@@ -5,8 +5,8 @@
 Camera::Camera(void) {
 	_projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
 	_view = glm::lookAt(
-		glm::vec3(4.0f, 3.0f, 3.0f),
-		glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(30.0f, 30.0f, 50.0f),
+		glm::vec3(25.0f, 25.0f, 0.0f),
 		glm::vec3(0.0f, 1.0f, 0.0f)
 	);
 	_vp = _projection * _view;
