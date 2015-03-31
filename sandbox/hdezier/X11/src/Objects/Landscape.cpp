@@ -36,7 +36,7 @@ void			Landscape::init(void) {
 }
 
 void	Landscape::initBuffers(void) {
-	static GLuint	g_index_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 * 3 + 1];
+	static GLuint	g_index_buffer_data[WIDTH_MAP * HEIGHT_MAP * 6 + 1];
 	static GLfloat	g_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 + 1];
 	static GLfloat	g_color_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 + 1];
 	size_t			i;
@@ -45,10 +45,10 @@ void	Landscape::initBuffers(void) {
 	for (i = 0; i < WIDTH_MAP * HEIGHT_MAP * 3; i += 3) {
 		g_vertex_buffer_data[i] = (i / WIDTH_MAP) * 0.1f;
 	}
-	for (i = 1; i < WIDTH_MAP * HEIGHT_MAP * 3; i += 3) {
-		g_vertex_buffer_data[i] = (i % WIDTH_MAP) * 0.1f;
-	}
 	for (i = 2; i < WIDTH_MAP * HEIGHT_MAP * 3; i += 3) {
+		g_vertex_buffer_data[i] = (i % (WIDTH_MAP * 3)) * 0.1f;
+	}
+	for (i = 1; i < WIDTH_MAP * HEIGHT_MAP * 3; i += 3) {
 		g_vertex_buffer_data[i] = _map[(i / 3) / WIDTH_MAP][(i / 3) % WIDTH_MAP] * Z_MULT;
 	}
 	/*Color Buffer*/
@@ -56,10 +56,13 @@ void	Landscape::initBuffers(void) {
 		g_color_buffer_data[i] = i * 0.0001f;
 	}
 	/*Index Buffer*/
-	for (i = 0; i < WIDTH_MAP * HEIGHT_MAP * 3 - 1; ++i) {
-		g_index_buffer_data[i * 3] = i;
-		g_index_buffer_data[i * 3 + 1] = i + WIDTH_MAP;
-		g_index_buffer_data[i * 3 + 2] = i + 1;
+	for (i = 0; i < WIDTH_MAP * HEIGHT_MAP * 6; i += 6) {
+		g_index_buffer_data[i] = i;
+		g_index_buffer_data[i + 1] = i + WIDTH_MAP;
+		g_index_buffer_data[i + 2] = i + 1;
+		g_index_buffer_data[i + 3] = i + WIDTH_MAP + 1;
+		g_index_buffer_data[i + 4] = i + WIDTH_MAP;
+		g_index_buffer_data[i + 5] = i + 1;
 	}
 
 	glGenVertexArrays(1, &_vertexArrayID);
@@ -104,11 +107,12 @@ void	Landscape::lexer(const Parser &p) {
 		if (reads[i].type != SCOPE
 			|| reads[i + 1].type != NUMBER || reads[i + 2].type != NUMBER || reads[i + 3].type != NUMBER
 			|| reads[i + 4].type != SCOPE) {
+			std::cout << "Tokens are not ordered:\t" << reads[i].buffer << std::endl;
 			return ;
 		}
-		x = strtof(reads[i + 1].word.c_str(), NULL);
-		y = strtof(reads[i + 2].word.c_str(), NULL);
-		z = strtof(reads[i + 3].word.c_str(), NULL);
+		x = strtof(reads[i + 1].buffer.c_str(), NULL);
+		y = strtof(reads[i + 2].buffer.c_str(), NULL);
+		z = strtof(reads[i + 3].buffer.c_str(), NULL);
 		x = fmod((x / WIDTH_DIVIDE), WIDTH_MAP);
 		y = fmod((y / HEIGHT_DIVIDE), HEIGHT_MAP);
 		z = fmod((z / Z_DIVIDE), Z_MAX);
@@ -250,16 +254,16 @@ void	Landscape::draw(void) const {
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, _colorBuffer);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-/*
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vertexBuffer);
 	glDrawElements(
-		GL_TRIANGLE_STRIP,
-		WIDTH_MAP * HEIGHT_MAP * 3,
+		GL_TRIANGLES,
+		WIDTH_MAP * HEIGHT_MAP * 3 * 3,
 		GL_UNSIGNED_INT,
 		(char *)NULL
 	);
-*/
-	glDrawArrays(GL_POLYGON, 0, WIDTH_MAP * HEIGHT_MAP);
+
+	// glDrawArrays(GL_POLYGON, 0, WIDTH_MAP * HEIGHT_MAP);
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 }
