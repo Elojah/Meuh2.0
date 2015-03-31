@@ -39,36 +39,41 @@ void	Landscape::initBuffers(void) {
 	static GLuint	g_index_buffer_data[WIDTH_MAP * HEIGHT_MAP * 6 + 1];
 	static GLfloat	g_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 + 1];
 	static GLfloat	g_color_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 + 1];
-	size_t			i;
+	size_t			i(0);
+	size_t			n;
 
 	/*Vertex Buffer*/
-	for (i = 0; i < WIDTH_MAP * HEIGHT_MAP * 3; i += 3) {
-		g_vertex_buffer_data[i] = (i / WIDTH_MAP) * 0.1f;
-	}
-	for (i = 2; i < WIDTH_MAP * HEIGHT_MAP * 3; i += 3) {
-		g_vertex_buffer_data[i] = (i % (WIDTH_MAP * 3)) * 0.1f;
-	}
-	for (i = 1; i < WIDTH_MAP * HEIGHT_MAP * 3; i += 3) {
+	while (i < WIDTH_MAP * HEIGHT_MAP * 3) {
+		g_vertex_buffer_data[i] = ((i / 3) / WIDTH_MAP);
+		i++;
+		g_vertex_buffer_data[i] = (i / 3) % WIDTH_MAP;
+		i++;
 		g_vertex_buffer_data[i] = _map[(i / 3) / WIDTH_MAP][(i / 3) % WIDTH_MAP] * Z_MULT;
+		i++;
 	}
 	/*Color Buffer*/
 	for (i = 0; i < WIDTH_MAP * HEIGHT_MAP * 3; ++i) {
-		g_color_buffer_data[i] = i * 0.0001f;
+		g_color_buffer_data[i] = i / 3 * 0.0001f;
 	}
 	/*Index Buffer*/
-	for (i = 0; i < WIDTH_MAP * HEIGHT_MAP * 6; i += 6) {
-		g_index_buffer_data[i] = i;
-		g_index_buffer_data[i + 1] = i + WIDTH_MAP;
-		g_index_buffer_data[i + 2] = i + 1;
-		g_index_buffer_data[i + 3] = i + WIDTH_MAP + 1;
-		g_index_buffer_data[i + 4] = i + WIDTH_MAP;
-		g_index_buffer_data[i + 5] = i + 1;
+	for (i = 0; i < (WIDTH_MAP - 1) * HEIGHT_MAP; ++i) {
+		n = i * 6;
+		g_index_buffer_data[n] = i;
+		g_index_buffer_data[n + 1] = i + 1;
+		g_index_buffer_data[n + 2] = i + WIDTH_MAP;
+		g_index_buffer_data[n + 3] = i + WIDTH_MAP + 1;
+		g_index_buffer_data[n + 4] = i + 1;
+		g_index_buffer_data[n + 5] = i + WIDTH_MAP;
 	}
 
-	glGenVertexArrays(1, &_vertexArrayID);
-	glBindVertexArray(_vertexArrayID);
 
-	_progID = LoadShaders("./src/shaders/SimpleTriangle.vert", "./src/shaders/SimpleTriangle.frag");
+	// for (i = 0; i < WIDTH_MAP * HEIGHT_MAP * 6; i += 6) {
+	// 	std::cout << g_index_buffer_data[i] << "\t"
+	// 	<< g_index_buffer_data[i + 1] << "\t"
+	// 	<< g_index_buffer_data[i + 2] << "\t" << std::endl;
+	// }
+
+	_progID = LoadShaders("./src/shaders/MVP.vert", "./src/shaders/MVP.frag");
 
 	glGenBuffers(1, &_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
@@ -257,8 +262,10 @@ void	Landscape::draw(void) const {
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vertexBuffer);
 	glDrawElements(
-		GL_TRIANGLES,
-		WIDTH_MAP * HEIGHT_MAP * 3 * 3,
+		// GL_POINTS,
+		GL_TRIANGLE_STRIP,
+		// GL_TRIANGLE_FAN,
+		WIDTH_MAP * HEIGHT_MAP * 3 * sizeof(size_t),
 		GL_UNSIGNED_INT,
 		(char *)NULL
 	);

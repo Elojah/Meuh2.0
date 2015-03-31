@@ -102,7 +102,7 @@ void	SimpleTriangle::draw(void) const {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vertexBuffer);
 	glDrawElements(
 		GL_TRIANGLES,
-		12,
+		12 * 3,
 		GL_UNSIGNED_INT,
 		(char *)NULL
 	);
