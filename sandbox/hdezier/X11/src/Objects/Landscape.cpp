@@ -38,7 +38,6 @@ void			Landscape::init(void) {
 void	Landscape::initBuffers(void) {
 	static GLuint	g_index_buffer_data[WIDTH_MAP * HEIGHT_MAP * 6 + 1];
 	static GLfloat	g_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 + 1];
-	static GLfloat	g_color_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 + 1];
 	size_t			i(0);
 	size_t			n;
 
@@ -51,10 +50,6 @@ void	Landscape::initBuffers(void) {
 		g_vertex_buffer_data[i] = _map[(i / 3) / WIDTH_MAP][(i / 3) % WIDTH_MAP] * Z_MULT;
 		i++;
 	}
-	/*Color Buffer*/
-	for (i = 0; i < WIDTH_MAP * HEIGHT_MAP * 3; ++i) {
-		g_color_buffer_data[i] = i / 3 * 0.0001f;
-	}
 	/*Index Buffer*/
 	for (i = 0; i < (WIDTH_MAP - 1) * HEIGHT_MAP; ++i) {
 		n = i * 6;
@@ -66,22 +61,11 @@ void	Landscape::initBuffers(void) {
 		g_index_buffer_data[n + 5] = i + WIDTH_MAP;
 	}
 
-
-	// for (i = 0; i < WIDTH_MAP * HEIGHT_MAP * 6; i += 6) {
-	// 	std::cout << g_index_buffer_data[i] << "\t"
-	// 	<< g_index_buffer_data[i + 1] << "\t"
-	// 	<< g_index_buffer_data[i + 2] << "\t" << std::endl;
-	// }
-
 	_progID = LoadShaders("./src/shaders/MVP.vert", "./src/shaders/MVP.frag");
 
 	glGenBuffers(1, &_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-
-	glGenBuffers(1, &_colorBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, _colorBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
 
 	glGenBuffers(1, &_indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
@@ -255,10 +239,6 @@ void	Landscape::draw(void) const {
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
-	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, _colorBuffer);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vertexBuffer);
 	glDrawElements(
