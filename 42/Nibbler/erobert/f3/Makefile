@@ -6,29 +6,29 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 09:31:53 by erobert           #+#    #+#              #
-#    Updated: 2015/04/02 18:46:01 by erobert          ###   ########.fr        #
+#    Updated: 2015/04/02 18:45:49 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME = nibbler
-FILES = Game.cpp main.cpp
+NAME = f3.so
+FILES = GUINCurses.cpp
 SRCS = $(addprefix srcs/, $(FILES))
 OBJS = $(SRCS:srcs/%.cpp=objs/%.o)
-INCS = $(SRCS:srcs/%.cpp=incs/%.hpp) incs/IGUINibbler.hpp
+INCS = $(SRCS:srcs/%.cpp=incs/%.hpp)
 TMPS = $(SRCS:.cpp=.cpp~) $(INCS:.hpp=.hpp~) Makefile~
 CC = g++
 CFLAGS = -Wall -Wextra -Werror
-IFLAGS = -Iincs/
-LFLAGS = 
+IFLAGS = -Iincs/ -I../incs/
+LFLAGS = -lncurses -ltermcap
 
-.PHONY: all clean objs_dir child fclean re
+.PHONY: all clean objs_dir fclean re
 
-.SILENT: objs_dir child
+.SILENT: objs_dir
 
-all: objs_dir child $(NAME)
+all: objs_dir $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LFLAGS)
+	$(CC) $(CFLAGS) -shared -fPIC -o $(NAME) $(OBJS) $(LFLAGS)
 
 objs/%.o : srcs/%.cpp
 	$(CC) $(CFLAGS) -Iinc $(IFLAGS) -o $@ -c $^
@@ -36,18 +36,11 @@ objs/%.o : srcs/%.cpp
 objs_dir:
 	mkdir -p objs
 
-child:
-	make -C f1/
-	make -C f2/
-	make -C f3/
-
 clean:
-	make -C f1/ clean
 	/bin/rm -f $(OBJS) $(TMPS)
 	/bin/rm -rf objs
 
 fclean: clean
-	make -C f1/ fclean
 	/bin/rm -f $(NAME)
 
 re: fclean all

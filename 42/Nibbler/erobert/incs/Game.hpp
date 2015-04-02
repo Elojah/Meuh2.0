@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/30 13:22:57 by erobert           #+#    #+#             //
-//   Updated: 2015/04/02 16:12:34 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/02 19:05:25 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -77,17 +77,23 @@ private:
 	std::vector<int>	_map;
 	tNibbler			_nibbler;
 	void				*_dlHandle[3];
-	tGUICreator			_gC;
-	tGUIDestructor		_gD;
+	IGUINibbler         *_gN[3];
 
 	Game(Game const &g);
 
 	Game				&operator=(Game const &g);
 
 	void				initNibbler(void);
+	int					initDL(void);
+	void				closeDL(void);
+	void				createGUIs(void);
+	void				destroyGUIs(void);
+
 	int					newApple(void);
+	void				moveNibbler(eInput input);
 	bool				eatApple(int apple);
 	bool				isDead(void);
+
 	bool				printError(void) const;
 	void				printMap(void) const;
 };

@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/27 18:40:55 by erobert           #+#    #+#             //
-//   Updated: 2015/04/02 16:33:18 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/02 19:27:37 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -51,34 +51,24 @@ void					Game::gameLoop(void)
 {
 	int					exit(false);
 	int					apple;
-	sNibbler			head;
+	int					i(0);
+	eInput				input(E_INPUT);
 
-	_dlHandle[0] = dlopen("f1/f1.so", RTLD_LAZY | RTLD_LOCAL);
-	if (!_dlHandle[0])
-	{
-		std::cerr << "Error: " << dlerror() << "." << std::endl;
+	if (initDL())
 		return ;
-	}
-	_gC = reinterpret_cast<tGUICreator>((dlsym(_dlHandle[0], "createGUI")));
-	IGUINibbler	*gN(_gC());
-	gN->buildMap(_map, _height, _width);
 	initNibbler();
+	createGUIs();
 	std::srand(clock());
 	apple = newApple();
-	_map[apple] = APPLE;
 	while (!exit)
 	{
-		gN->updateDisplay(_nibbler, apple);
-		head = _nibbler.front();
-		if (gN->eventHandler() == ESC)
+		_gN[i]->updateDisplay(_nibbler, apple);
+		input = _gN[i]->eventHandler();
+		if (input == ESC)
 			exit = true;
-		head.y++;
-		_nibbler.push_front(head);
+		moveNibbler(input);
 		if (eatApple(apple))
-		{
-			_map[apple] = HEAD;
 			apple = newApple();
-		}
 		else if (isDead())
 			exit = true;
 		else
@@ -86,11 +76,11 @@ void					Game::gameLoop(void)
 			_map[_nibbler.back().x + _nibbler.back().y * _width] = EMPTY;
 			_nibbler.pop_back();
 		}
-		usleep(500000);
+		_map[_nibbler.front().x + _nibbler.front().y * _width] = HEAD;
+		usleep(100000);
 	}
-	_gD = reinterpret_cast<tGUIDestructor>((dlsym(_dlHandle[0], "deleteGUI")));
-	_gD(gN);
-	dlclose(_dlHandle[0]);
+	destroyGUIs();
+	closeDL();
 }
 
 void					Game::initNibbler(void)
@@ -110,6 +100,65 @@ void					Game::initNibbler(void)
 	_map[nibbler.x + nibbler.y * _width] = HEAD;
 	_nibbler.push_front(nibbler);
 }
+int						Game::initDL(void)
+{
+	int					i(0);
+	int					j(0);
+
+	_dlHandle[0] = dlopen("f1/f1.so", RTLD_LAZY | RTLD_LOCAL);
+	if (_dlHandle[0])
+	{
+		_dlHandle[1] = dlopen("f2/f2.so", RTLD_LAZY | RTLD_LOCAL);
+		if (_dlHandle[1])
+			_dlHandle[2] = dlopen("f3/f3.so", RTLD_LAZY | RTLD_LOCAL);
+	}
+	while (i < 3)
+	{
+		if (!_dlHandle[i])
+		{
+			std::cerr << "Error: " << dlerror() << "." << std::endl;
+			while (j < i)
+				dlclose(_dlHandle[j++]);
+			return (-1);
+		}
+		i++;
+	}
+	return (0);
+}
+void					Game::closeDL(void)
+{
+	dlclose(_dlHandle[0]);
+	dlclose(_dlHandle[1]);
+	dlclose(_dlHandle[2]);
+}
+void					Game::createGUIs(void)
+{
+	int					i(0);
+	tGUICreator			gC;
+
+	while (i < 3)
+	{
+		gC = reinterpret_cast<tGUICreator>((dlsym(_dlHandle[i],
+												  "createGUI")));
+		_gN[i] = gC();
+		_gN[i]->buildMap(_map, _height, _width);
+		i++;
+	}
+}
+void					Game::destroyGUIs(void)
+{
+	int					i(0);
+	tGUIDestructor		gD;
+
+	while (i < 3)
+	{
+		gD = reinterpret_cast<tGUIDestructor>((dlsym(_dlHandle[0],
+													 "deleteGUI")));
+		gD(_gN[i]);
+		i++;
+	}
+}
+
 int						Game::newApple(void)
 {
 	int					apple;
@@ -118,6 +167,30 @@ int						Game::newApple(void)
 	while (_map[apple] != EMPTY)
 		apple = std::rand() % (_height * _width);
 	return (apple);
+}
+void					Game::moveNibbler(eInput input)
+{
+	sNibbler			head(_nibbler.front());
+
+	_map[head.x + head.y * _width] = BODY;
+	if (input == UP && head.dir != DOWN)
+		head.dir = UP;
+	else if (input == LEFT && head.dir != RIGHT)
+		head.dir = LEFT;
+	else if (input == DOWN && head.dir != UP)
+		head.dir = DOWN;
+	else if (input == RIGHT && head.dir != LEFT)
+		head.dir = RIGHT;
+	if (head.dir == UP)
+		head.y--;
+	else if (head.dir == LEFT)
+		head.x--;
+	else if (head.dir == DOWN)
+		head.y++;
+	else if (head.dir == RIGHT)
+		head.x++;
+	_nibbler.push_front(head);
+
 }
 bool					Game::eatApple(int apple)
 {
@@ -138,6 +211,7 @@ bool					Game::isDead(void)
 	}
 	return (false);
 }
+
 bool					Game::printError(void) const
 {
 	std::cerr << "Size must be between "
