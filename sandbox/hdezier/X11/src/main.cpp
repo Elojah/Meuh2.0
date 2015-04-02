@@ -6,21 +6,32 @@
 */
 
 #include <vector>
+#include <iostream>
 #include "X11Win.hpp"
-#include "IObject.hpp"
+#include "Map.hpp"
 #include "SimpleTriangle.hpp"
+#include "Landscape.hpp"
 
-int main(void) {
+void	exec(char *filename) {
 	X11Win					win(800, 600);
 	Camera					cam;
-	SimpleTriangle			t;
-	std::vector<IObject *>	objects;
+	Map					m;
+	// SimpleTriangle			t;
+	Landscape				l(filename);
 
 	win.init();
-	t.init(cam);
+	l.init();
+	m.addObject(&l);
+	// m.addObject(&t);
 
-	objects.push_back(&t);
+	win.loop(m, cam);
+}
 
-	win.loop(objects);
+int main(int ac, char **av) {
+	if (ac != 2) {
+		std::cout << "Enter a filename:\t" << std::endl;
+	} else {
+		exec(av[1]);
+	}
 	return (0);
 }

@@ -12,6 +12,7 @@
 # include "Camera.hpp"
 class Camera;
 class IObject;
+class Map;
 
 class X11Win
 {
@@ -19,7 +20,7 @@ public:
 						X11Win(std::size_t, std::size_t);
 						~X11Win(void);
 	void				init(void);
-	void				loop(const std::vector<IObject *>&);
+	void				loop(Map const &map, Camera &cam);
 protected:
 private:
 	typedef GLXContext(*glXCreateContextAttribsARBProc)(Display*, GLXFBConfig, GLXContext, Bool, const int*);
