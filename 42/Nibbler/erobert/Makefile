@@ -6,7 +6,7 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 09:31:53 by erobert           #+#    #+#              #
-#    Updated: 2015/03/31 14:33:11 by erobert          ###   ########.fr        #
+#    Updated: 2015/04/01 17:10:02 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -21,13 +21,11 @@ CFLAGS = -Wall -Wextra -Werror
 IFLAGS = -Iincs/
 LFLAGS = 
 
-.PHONY: all clean fclean re
+.PHONY: all clean objs_dir child fclean re
 
-.SILENT: objs_dir
+.SILENT: objs_dir child
 
-all: objs_dir $(NAME)
-
-all: objs_dir $(NAME)
+all: objs_dir child $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LFLAGS)
@@ -38,11 +36,16 @@ objs/%.o : srcs/%.cpp
 objs_dir:
 	mkdir -p objs
 
+child:
+	make -C f1/
+
 clean:
+	make -C f1/ clean
 	/bin/rm -f $(OBJS) $(TMPS)
 	/bin/rm -rf objs
 
 fclean: clean
+	make -C f1/ fclean
 	/bin/rm -f $(NAME)
 
 re: fclean all

@@ -6,7 +6,7 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 09:31:53 by erobert           #+#    #+#              #
-#    Updated: 2015/03/31 14:34:47 by erobert          ###   ########.fr        #
+#    Updated: 2015/04/01 17:06:18 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -21,11 +21,9 @@ CFLAGS = -Wall -Wextra -Werror
 IFLAGS = -Iincs/ -I../incs/
 LFLAGS = -lncurses -ltermcap
 
-.PHONY: all clean fclean re
+.PHONY: all clean objs_dir fclean re
 
 .SILENT: objs_dir
-
-all: objs_dir $(NAME)
 
 all: objs_dir $(NAME)
 

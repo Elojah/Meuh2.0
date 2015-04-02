@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/30 18:56:56 by erobert           #+#    #+#             //
-//   Updated: 2015/03/31 15:04:31 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/02 15:40:34 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -24,7 +24,8 @@ public:
 
 	virtual ~IGUINibbler(void) {};
 
-	virtual void			buildMap(std::vector<int> const &map) = 0;
+	virtual void			buildMap(std::vector<int> const &map,
+									 int height, int width) = 0;
 	virtual void			updateDisplay(tNibbler const &tN, int apple) = 0;
 	virtual Game::eInput	eventHandler(void) = 0;
 };
