@@ -1,13 +1,13 @@
 #ifndef COCOA_WIN_H
 # define COCOA_WIN_H
 # define GL_GLEXT_PROTOTYPES
-# define GLFW_INCLUDE_GLU
 
 # include <vector>
 # include <string>
 # include <OpenGL/gl3.h>
 # define __gl_h_
 # include <GLFW/glfw3.h>
+# define GLFW_INCLUDE_GLCOREARB
 
 # include "Camera.hpp"
 class Camera;

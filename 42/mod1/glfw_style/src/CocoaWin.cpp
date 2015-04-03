@@ -14,13 +14,20 @@ CocoaWin::CocoaWin(std::size_t width, std::size_t height) :
 }
 
 CocoaWin::~CocoaWin(void) {
+	glfwDestroyWindow(_window);
 	glfwTerminate();
 }
 
 void		CocoaWin::init(void) {
 
-	_window = glfwCreateWindow(_width, _height, "mod1", NULL, NULL);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
+	_window = glfwCreateWindow(_width, _height, "mod1", NULL, NULL);
+	glfwMakeContextCurrent(_window);
+	glfwSwapInterval(1);
 	// glClearColor(0, 0.5, 1, 1);
 }
 
@@ -32,8 +39,10 @@ void		CocoaWin::loop(Map const &map, Camera &cam) {
 	// map.refresh(cam);
 	(void)map;
 	(void)cam;
-	while (true) {
-
+	while (!glfwWindowShouldClose(_window)) {
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glfwSwapBuffers(_window);
+        glfwPollEvents();//Needed, or you will get a spinning beach ball
 		// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		// map.draw();
 		// if ((err = glGetError()) == GL_NO_ERROR) {
