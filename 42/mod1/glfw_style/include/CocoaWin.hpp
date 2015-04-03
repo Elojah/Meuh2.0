@@ -27,6 +27,7 @@ private:
 /*
 **X11
 */
+	GLFWwindow			*_window;
 	std::size_t			_width;
 	std::size_t			_height;
 /*

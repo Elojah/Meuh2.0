@@ -61,7 +61,7 @@ void	Landscape::initBuffers(void) {
 		g_index_buffer_data[n + 5] = i + WIDTH_MAP;
 	}
 
-	_progID = LoadShaders("./src/shaders/MVP.vert", "./src/shaders/MVP.frag");
+	// _progID = LoadShaders("./src/shaders/MVP.vert", "./src/shaders/MVP.frag");
 
 	glGenBuffers(1, &_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);

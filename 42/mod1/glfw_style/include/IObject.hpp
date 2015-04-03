@@ -3,6 +3,7 @@
 # define GL_GLEXT_PROTOTYPES
 
 # include <OpenGL/gl3.h>
+# define __gl_h_
 # include <glm.hpp>
 # include "Camera.hpp"
 class Camera;

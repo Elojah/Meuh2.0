@@ -14,24 +14,27 @@ CocoaWin::CocoaWin(std::size_t width, std::size_t height) :
 }
 
 CocoaWin::~CocoaWin(void) {
+	glfwTerminate();
 }
 
 void		CocoaWin::init(void) {
 
-	(void)_width;
-	(void)_height;
-	glClearColor(0, 0.5, 1, 1);
+	_window = glfwCreateWindow(_width, _height, "mod1", NULL, NULL);
+
+	// glClearColor(0, 0.5, 1, 1);
 }
 
 void		CocoaWin::loop(Map const &map, Camera &cam) {
 	// static int		err;
 
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LESS);
-	map.refresh(cam);
+	// glEnable(GL_DEPTH_TEST);
+	// glDepthFunc(GL_LESS);
+	// map.refresh(cam);
+	(void)map;
+	(void)cam;
 	while (true) {
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		// map.draw();
 		// if ((err = glGetError()) == GL_NO_ERROR) {
 		// 	std::cout << "Rendering ok" << std::endl;
