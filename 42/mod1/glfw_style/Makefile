@@ -18,7 +18,6 @@ CLASS = main\
 		Parser/Tokens/Number\
 		Parser/Parser\
 		Objects/Landscape\
-		Objects/SimpleTriangle\
 		Camera\
 		Map\
 		CocoaWin\

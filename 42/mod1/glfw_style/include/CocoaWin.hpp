@@ -21,15 +21,22 @@ public:
 						~CocoaWin(void);
 	void				init(void);
 	void				loop(Map const &map, Camera &cam);
+	const Map			*getMap(void) const;
+	Camera				*getCam(void) const;
+
 protected:
 private:
 						CocoaWin(void);
+static void				key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
 /*
-**X11
+**Window
 */
 	GLFWwindow			*_window;
 	std::size_t			_width;
 	std::size_t			_height;
+	const Map			*_map;
+	Camera				*_cam;
 /*
 **Event
 */

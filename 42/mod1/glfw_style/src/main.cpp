@@ -9,20 +9,17 @@
 #include <iostream>
 #include "CocoaWin.hpp"
 #include "Map.hpp"
-#include "SimpleTriangle.hpp"
 #include "Landscape.hpp"
 
 void	exec(char *filename) {
-	CocoaWin			win(800, 600);
+	CocoaWin			win(1600, 1200);
 	Camera				cam;
 	Map					m;
-	// SimpleTriangle			t;
 	Landscape				l(filename);
 
 	win.init();
 	l.init();
 	m.addObject(&l);
-	// m.addObject(&t);
 
 	win.loop(m, cam);
 }

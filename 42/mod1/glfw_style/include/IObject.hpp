@@ -13,7 +13,7 @@ class IObject
 public:
 	virtual ~IObject(void) {
 		glDeleteBuffers(1, &_vertexBuffer);
-		glDeleteBuffers(1, &_colorBuffer);
+		glDeleteBuffers(1, &_indexBuffer);
 		glDeleteVertexArrays(1, &_vertexArrayID);
 		glDeleteProgram(_progID);
 	}
@@ -30,7 +30,6 @@ public:
 protected:
 	glm::mat4		mvp;
 	GLuint			_vertexBuffer;
-	GLuint			_colorBuffer;
 	GLuint			_indexBuffer;
 	GLuint			_vertexArrayID;
 	GLuint			_progID;

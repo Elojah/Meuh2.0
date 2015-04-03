@@ -12,7 +12,6 @@ Landscape::Landscape(void) {
 
 Landscape::~Landscape(void) {
 	glDeleteBuffers(1, &_vertexBuffer);
-	glDeleteBuffers(1, &_colorBuffer);
 	glDeleteBuffers(1, &_indexBuffer);
 	glDeleteVertexArrays(1, &_vertexArrayID);
 	glDeleteProgram(_progID);
@@ -25,11 +24,11 @@ Landscape::Landscape(std::string const &filename) :
 void			Landscape::init(void) {
 	Parser									p(_filename);
 
-	std::cout << "Parsing: DONE" << std::endl;
+	std::cout << "Parsing:\tDONE" << std::endl;
 	_waterDiff = 0;
 	clearMap();
 	lexer(p);
-	std::cout << "Lexing: DONE" << std::endl;
+	std::cout << "Lexing:\t\tDONE" << std::endl;
 	smoothMap();
 	useMap();
 	initBuffers();
@@ -51,7 +50,7 @@ void	Landscape::initBuffers(void) {
 		i++;
 	}
 	/*Index Buffer*/
-	for (i = 0; i < (WIDTH_MAP - 1) * HEIGHT_MAP; ++i) {
+	for (i = 0; i < (WIDTH_MAP - 1) * HEIGHT_MAP + 1; ++i) {
 		n = i * 6;
 		g_index_buffer_data[n] = i;
 		g_index_buffer_data[n + 1] = i + 1;
@@ -61,7 +60,25 @@ void	Landscape::initBuffers(void) {
 		g_index_buffer_data[n + 5] = i + WIDTH_MAP;
 	}
 
-	// _progID = LoadShaders("./src/shaders/MVP.vert", "./src/shaders/MVP.frag");
+	g_index_buffer_data[0] = 0;
+	g_index_buffer_data[1] = 1;
+	g_index_buffer_data[2] = WIDTH_MAP + 1;
+	// for (i = 0; i < (WIDTH_MAP - 1) * HEIGHT_MAP; ++i)
+	// {
+	// 	n = i * 6;
+	// 	std::cout << "\t" << g_index_buffer_data[n + 1]
+	// 		<< "\t" << g_index_buffer_data[n + 2]
+	// 		<< "\t" << g_index_buffer_data[n + 3]
+	// 		<< "\t" << g_index_buffer_data[n + 4]
+	// 		<< "\t" << g_index_buffer_data[n + 5]
+	// 		<< "\t" << g_index_buffer_data[n + 6]
+	// 		<< std::endl;
+	// }
+
+	glGenVertexArrays(1, &_vertexArrayID);
+	glBindVertexArray(_vertexArrayID);
+
+	_progID = LoadShaders("./src/shaders/MVP.vert", "./src/shaders/MVP.frag");
 
 	glGenBuffers(1, &_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
@@ -84,7 +101,7 @@ bool	Landscape::loop(int const key) {
 }
 
 void	Landscape::lexer(const Parser &p) {
-	const std::vector<sReadToken>		reads(p.getRead());
+	const std::vector<sReadToken>			reads(p.getRead());
 	float									x;
 	float									y;
 	float									z;
@@ -122,7 +139,7 @@ void	Landscape::smoothMap(void) {
 		std::cout << "Closest point from:\t" << it->x << ", " << it->y << ", " << it->z << std::endl
 		<< "found at:\t\t" << closestPoint.x << ", " << closestPoint.y << ", " << closestPoint.z << std::endl;
 		smoothPoint(*it, closestPoint);
-		std::cout << "Fill map: DONE" << std::endl;
+		std::cout << "Fill map:\tDONE" << std::endl;
 	}
 }
 
@@ -243,12 +260,13 @@ void	Landscape::draw(void) const {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vertexBuffer);
 	glDrawElements(
 		GL_TRIANGLE_STRIP,
-		WIDTH_MAP * HEIGHT_MAP * 3 * sizeof(size_t),
+		3,
+		// (WIDTH_MAP - 1) * HEIGHT_MAP * 2 * sizeof(GLuint),
 		GL_UNSIGNED_INT,
-		(char *)NULL
+		(char *)0
 	);
 
-	// glDrawArrays(GL_POLYGON, 0, WIDTH_MAP * HEIGHT_MAP);
+	glDrawArrays(GL_POINTS, 0, WIDTH_MAP * HEIGHT_MAP);
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 }
