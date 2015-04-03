@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include <stdio.h>
 
+#define MAX_WORDS 256
+
 static int		pow(int n, int p)
 {
 	if (p < 0)
@@ -43,18 +45,6 @@ static char		*uitoa(int n)
 	return (result);
 }
 
-static char	*substr(int a, int b, char *str)
-{
-	char	*result;
-	int		i;
-
-	i = 0;
-	result = (char *)malloc((b - a + 1) * sizeof(char));
-	while (a < b)
-		result[i++] = str[a++];
-	return (result);
-}
-
 static int		strlen(char *s)
 {
 	int		result;
@@ -62,6 +52,21 @@ static int		strlen(char *s)
 	result = 0;
 	while (s[result])
 		result++;
+	return (result);
+}
+
+static char	*substr(int a, int b, char *str)
+{
+	char	*result;
+	int		i;
+
+	i = 0;
+	if (b < a || a >= strlen(str) || b > strlen(str))
+		return ((char *)0);
+	result = (char *)malloc((b - a + 1) * sizeof(char));
+	while (a < b)
+		result[i++] = str[a++];
+	result[i] = '\0';
 	return (result);
 }
 
@@ -109,14 +114,24 @@ char			*SumCharsAndDigits(const char* str)
 	return (char_res);
 }
 
+/*
+**Methode bourrin, un strsplit => tri serait plus censé
+*/
 void		PrintWordsSorted(char *str)
 {
 	char	*sub;
+	char	*save_str[MAX_WORDS];
+	char	*save_int[MAX_WORDS];
 	int		i;
+	int		j;
 	int		a;
 	int		b;
+	int		n;
 
 	i = -1;
+	n = 0;
+	if (!str)
+		return ;
 	while (str[++i])
 	{
 		a = i;
@@ -130,22 +145,41 @@ void		PrintWordsSorted(char *str)
 			i++;
 		b = i;
 		sub = substr(a, b, str);
-		if (sub[0] == '\0')
+		if (!sub || sub[0] == '\0' || sub[0] == 0 || a == b)
 			continue ;
-		write(1, SumCharsAndDigits(sub), 2);
-		write(1, ": ", 2);
-		write(1, sub, strlen(sub));
-		write(1, "\n", 1);
+		save_str[n] = sub;
+		save_int[n] = SumCharsAndDigits(sub);
+		n++;
+		if (n > MAX_WORDS - 1)
+			break ;
+	}
+	i = -1;
+	while (++i < 10)
+	{
+		j = -1;
+		while (++j < n)
+		{
+			if (save_int[j][0] != i + '0')
+				continue ;
+			write(1, save_int[j], 2);
+			write(1, ": ", 2);
+			write(1, save_str[j], strlen(save_str[j]));
+			write(1, "\n", 1);
+		}
 	}
 }
 
+
 int			main(int ac, char **av)
 {
-	// printf("%s  /  %s\n", SumCharsAndDigits("Abc"), "Abc");
-	// printf("%s  /  %s\n", SumCharsAndDigits(""), "");
-	// printf("%s  /  %s\n", SumCharsAndDigits("100153454043543 4 384t=*--*#&"), "100153454043543 4 384t=*--*#&");
-	// printf("%s  /  %s\n", SumCharsAndDigits("0"), "0");
-	// printf("%s  /  %s\n", SumCharsAndDigits("000000"), "000000");
-	PrintWordsSorted("           Abc 45   40   e   0         ");
+	printf("%s  /  %s\n", SumCharsAndDigits("Abc"), "Abc");
+	printf("%s  /  %s\n", SumCharsAndDigits(""), "");
+	printf("%s  /  %s\n", SumCharsAndDigits("100153454043543 4 384t=*--*#&"), "100153454043543 4 384t=*--*#&");
+	printf("%s  /  %s\n", SumCharsAndDigits("0"), "0");
+	printf("%s  /  %s\n", SumCharsAndDigits("000000"), "000000");
+	// PrintWordsSorted((char *)"           Abc 45   40   e   0       0 gt4584th. 258h47th 8578h =9575 /y75/-4 y0657/- 6y /-657  0      /9 + y7 /96+");
+	PrintWordsSorted((char *)"mon code est cool !");
+	PrintWordsSorted((char *)"");
+	PrintWordsSorted((char *)0);
 	return (0);
 }
