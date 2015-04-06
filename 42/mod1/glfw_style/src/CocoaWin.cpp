@@ -41,6 +41,7 @@ void		CocoaWin::init(void) {
 	glfwSetWindowUserPointer(_window, this);
 	glfwSwapInterval(1);
 	glfwSetKeyCallback(_window, key_callback);
+	glfwSetCursorPosCallback(_window, cursor_position_callback);
 	glClearColor(0, 0.5, 1, 1);
 }
 
@@ -48,6 +49,7 @@ void		CocoaWin::loop(Map const &map, Camera &cam) {
 
 	_map = &map;
 	_cam = &cam;
+	_cam->setSize(_width, _height);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	_map->refresh(*_cam);
@@ -56,6 +58,7 @@ void		CocoaWin::loop(Map const &map, Camera &cam) {
 		_map->draw();
 		glfwSwapBuffers(_window);
         glfwWaitEvents();//Needed, or you will get a spinning beach ball
+		_map->refresh(*_cam);
 	}
 }
 /*
@@ -71,13 +74,25 @@ GL_STACK_OVERFLOW
 void		CocoaWin::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	static CocoaWin		*win = static_cast<CocoaWin *>(glfwGetWindowUserPointer(window));
-	static int		xpos;
-	static int		ypos;
 
 	(void)scancode;
 	(void)mods;
-	glfwGetMousePos(&xpos, &ypos);
-	glfwSetMousePos(_width / 2, _height / 2);
+
+	if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
+		win->getCam()->moveForward();
+	} else if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
+		win->getCam()->moveBackward();
+	} else if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
+		win->getCam()->strafeRight();
+	} else if (key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
+		win->getCam()->strafeLeft();
+	} else if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+		glfwSetWindowShouldClose(window, GL_TRUE);
+	}
+}
+
+void		CocoaWin::cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
+	static CocoaWin		*win = static_cast<CocoaWin *>(glfwGetWindowUserPointer(window));
 
 	win->getCam()->moveEye(xpos, ypos);
 }
