@@ -15,7 +15,7 @@ void	exec(char *filename) {
 	CocoaWin			win(1600, 1200);
 	Camera				cam;
 	Map					m;
-	Landscape				l(filename);
+	Landscape			l(filename);
 
 	win.init();
 	l.init();

@@ -71,36 +71,13 @@ GL_STACK_OVERFLOW
 void		CocoaWin::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	static CocoaWin		*win = static_cast<CocoaWin *>(glfwGetWindowUserPointer(window));
+	static int		xpos;
+	static int		ypos;
 
 	(void)scancode;
 	(void)mods;
-	if (key == GLFW_KEY_E && action == GLFW_PRESS) {
-		win->getCam()->rotate(LEFT);
-		(win->getMap())->refresh(*(win->getCam()));
-	} else if (key == GLFW_KEY_Q && action == GLFW_PRESS) {
-		win->getCam()->rotate(RIGHT);
-		(win->getMap())->refresh(*(win->getCam()));
-	} else if (key == GLFW_KEY_Z && action == GLFW_PRESS) {
-		win->getCam()->translate(UP);
-		(win->getMap())->refresh(*(win->getCam()));
-	} else if (key == GLFW_KEY_S && action == GLFW_PRESS) {
-		win->getCam()->translate(DOWN);
-		(win->getMap())->refresh(*(win->getCam()));
-	} else if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-		glfwSetWindowShouldClose(window, GL_TRUE);
-	}
-		// if (_e.xkey.keycode == 26) {/*A*/
-		// } else if (_e.xkey.keycode == 24) {/*E*/
-		// 	cam.rotate(RIGHT);
-		// 	map.refresh(cam);
-		// } else if (_e.xkey.keycode == 25) {/*Z*/
-		// 	cam.translate(UP);
-		// 	map.refresh(cam);
-		// } else if (_e.xkey.keycode == 39) {/*S*/
-		// 	cam.translate(DOWN);
-		// 	map.refresh(cam);
-		// }
-		// else if (_e.xkey.keycode == 9) {/*ESC*/
-		// 	break ;
-		// }
+	glfwGetMousePos(&xpos, &ypos);
+	glfwSetMousePos(_width / 2, _height / 2);
+
+	win->getCam()->moveEye(xpos, ypos);
 }

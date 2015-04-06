@@ -1,7 +1,7 @@
 #ifndef I_OBJECT_H
 # define I_OBJECT_H
 # define GL_GLEXT_PROTOTYPES
-
+# define BUFFER_OFFSET(i) ((char *)NULL + (i))
 # include <OpenGL/gl3.h>
 # define __gl_h_
 # include <glm.hpp>

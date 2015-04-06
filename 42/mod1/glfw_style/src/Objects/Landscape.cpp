@@ -34,61 +34,6 @@ void			Landscape::init(void) {
 	initBuffers();
 }
 
-void	Landscape::initBuffers(void) {
-	static GLuint	g_index_buffer_data[WIDTH_MAP * HEIGHT_MAP * 6 + 1];
-	static GLfloat	g_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 + 1];
-	size_t			i(0);
-	size_t			n;
-
-	/*Vertex Buffer*/
-	while (i < WIDTH_MAP * HEIGHT_MAP * 3) {
-		g_vertex_buffer_data[i] = ((i / 3) / WIDTH_MAP);
-		i++;
-		g_vertex_buffer_data[i] = (i / 3) % WIDTH_MAP;
-		i++;
-		g_vertex_buffer_data[i] = _map[(i / 3) / WIDTH_MAP][(i / 3) % WIDTH_MAP] * Z_MULT;
-		i++;
-	}
-	/*Index Buffer*/
-	for (i = 0; i < (WIDTH_MAP - 1) * HEIGHT_MAP + 1; ++i) {
-		n = i * 6;
-		g_index_buffer_data[n] = i;
-		g_index_buffer_data[n + 1] = i + 1;
-		g_index_buffer_data[n + 2] = i + WIDTH_MAP;
-		g_index_buffer_data[n + 3] = i + WIDTH_MAP + 1;
-		g_index_buffer_data[n + 4] = i + 1;
-		g_index_buffer_data[n + 5] = i + WIDTH_MAP;
-	}
-
-	g_index_buffer_data[0] = 0;
-	g_index_buffer_data[1] = 1;
-	g_index_buffer_data[2] = WIDTH_MAP + 1;
-	// for (i = 0; i < (WIDTH_MAP - 1) * HEIGHT_MAP; ++i)
-	// {
-	// 	n = i * 6;
-	// 	std::cout << "\t" << g_index_buffer_data[n + 1]
-	// 		<< "\t" << g_index_buffer_data[n + 2]
-	// 		<< "\t" << g_index_buffer_data[n + 3]
-	// 		<< "\t" << g_index_buffer_data[n + 4]
-	// 		<< "\t" << g_index_buffer_data[n + 5]
-	// 		<< "\t" << g_index_buffer_data[n + 6]
-	// 		<< std::endl;
-	// }
-
-	glGenVertexArrays(1, &_vertexArrayID);
-	glBindVertexArray(_vertexArrayID);
-
-	_progID = LoadShaders("./src/shaders/MVP.vert", "./src/shaders/MVP.frag");
-
-	glGenBuffers(1, &_vertexBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-
-	glGenBuffers(1, &_indexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(g_index_buffer_data), g_index_buffer_data, GL_STATIC_DRAW);
-}
-
 bool	Landscape::loop(int const key) {
 	switch (key) {
 		case 22: raiseWater(0.01f);
@@ -249,24 +194,77 @@ void	Landscape::raiseWater(float const n) {
 	_waterDiff += n;
 }
 
+void	Landscape::initBuffers(void) {
+	static GLuint	g_index_buffer_data[WIDTH_MAP * HEIGHT_MAP * 6 + 1];
+	static GLfloat	g_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 + 1];
+	size_t			i(0);
+	size_t			n;
+
+	/*Vertex Buffer*/
+	while (i < WIDTH_MAP * HEIGHT_MAP * 3) {
+		g_vertex_buffer_data[i] = ((i / 3) / WIDTH_MAP);
+		i++;
+		g_vertex_buffer_data[i] = (i / 3) % WIDTH_MAP;
+		i++;
+		g_vertex_buffer_data[i] = _map[(i / 3) / WIDTH_MAP][(i / 3) % WIDTH_MAP] * Z_MULT;
+		i++;
+	}
+	/*Index Buffer*/
+	for (i = 0; i < (WIDTH_MAP - 1) * HEIGHT_MAP + 1; ++i) {
+		n = i * 6;
+		g_index_buffer_data[n] = i;
+		g_index_buffer_data[n + 1] = i + 1;
+		g_index_buffer_data[n + 2] = i + WIDTH_MAP;
+		g_index_buffer_data[n + 3] = i + WIDTH_MAP + 1;
+		g_index_buffer_data[n + 4] = i + 1;
+		g_index_buffer_data[n + 5] = i + WIDTH_MAP;
+	}
+
+	g_index_buffer_data[0] = 0;
+	g_index_buffer_data[1] = 1;
+	g_index_buffer_data[2] = WIDTH_MAP + 1;
+	for (i = 0; i < (WIDTH_MAP - 1) * HEIGHT_MAP; ++i)
+	{
+		n = i * 6;
+		std::cout << "\t" << g_index_buffer_data[n + 1]
+			<< "\t" << g_index_buffer_data[n + 2]
+			<< "\t" << g_index_buffer_data[n + 3]
+			<< "\t" << g_index_buffer_data[n + 4]
+			<< "\t" << g_index_buffer_data[n + 5]
+			<< "\t" << g_index_buffer_data[n + 6]
+			<< std::endl;
+	}
+
+	glGenVertexArrays(1, &_vertexArrayID);
+	glBindVertexArray(_vertexArrayID);
+
+	_progID = LoadShaders("./src/shaders/MVP.vert", "./src/shaders/MVP.frag");
+
+	glGenBuffers(1, &_vertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+	glGenBuffers(1, &_indexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(g_index_buffer_data), g_index_buffer_data, GL_STATIC_DRAW);
+}
+
 void	Landscape::draw(void) const {
 	glUseProgram(_progID);
 	glUniformMatrix4fv(_matrixID, 1, GL_FALSE, &mvp[0][0]);
 
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vertexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
 	glDrawElements(
 		GL_TRIANGLE_STRIP,
-		3,
-		// (WIDTH_MAP - 1) * HEIGHT_MAP * 2 * sizeof(GLuint),
+		(WIDTH_MAP - 1) * HEIGHT_MAP * 6,
 		GL_UNSIGNED_INT,
-		(char *)0
+		BUFFER_OFFSET(0)
 	);
 
 	glDrawArrays(GL_POINTS, 0, WIDTH_MAP * HEIGHT_MAP);
 	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(1);
 }
