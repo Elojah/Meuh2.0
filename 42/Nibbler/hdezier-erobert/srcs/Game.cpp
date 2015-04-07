@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/27 18:40:55 by erobert           #+#    #+#             //
-//   Updated: 2015/04/02 19:27:37 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/07 19:32:34 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -42,51 +42,76 @@ bool					Game::buildMap(char *height, char *width)
 			_map[i] = WALL;
 		i++;
 	}
-	std::cout << "Map " << _height << "x" << _width 
-			  << " build." << std::endl;
 	return (true);
 }
 
 void					Game::gameLoop(void)
 {
-	int					exit(false);
+	bool				pause(false);
+	bool				alive(true);
 	int					apple;
-	int					i(0);
+	int					gui(0);
 	eInput				input(E_INPUT);
 
 	if (initDL())
 		return ;
 	initNibbler();
-	createGUIs();
+	createGUI(gui);
 	std::srand(clock());
 	apple = newApple();
-	while (!exit)
+	while (input != EXIT)
 	{
-		_gN[i]->updateDisplay(_nibbler, apple);
-		input = _gN[i]->eventHandler();
-		if (input == ESC)
-			exit = true;
-		moveNibbler(input);
-		if (eatApple(apple))
-			apple = newApple();
-		else if (isDead())
-			exit = true;
-		else
+		input = _gN[gui]->eventHandler();
+		if (input == PAUSE)
+			pause = !pause;
+		else if (input >= F1 && input <= F3)
 		{
-			_map[_nibbler.back().x + _nibbler.back().y * _width] = EMPTY;
-			_nibbler.pop_back();
+			_gN[gui]->updateDisplay(_nibbler, apple);
+			destroyGUI(gui);
+			pause = true;
+			gui = input;
+			createGUI(gui);
+			_gN[gui]->updateDisplay(_nibbler, apple);
 		}
-		_map[_nibbler.front().x + _nibbler.front().y * _width] = HEAD;
+		else if (input == RESTART)
+		{
+			alive = true;
+			initNibbler();
+			_gN[gui]->buildMap(_map, _height, _width);
+		}
+		if (alive && !pause)
+		{
+			_gN[gui]->updateDisplay(_nibbler, apple);
+			moveNibbler(input);
+			if (eatApple(apple))
+				apple = newApple();
+			else if (isDead())
+				alive = false;
+			else
+			{
+				_map[_nibbler.back().x + _nibbler.back().y * _width] = EMPTY;
+				_nibbler.pop_back();
+			}
+			_map[_nibbler.front().x + _nibbler.front().y * _width] = HEAD;
+		}
 		usleep(100000);
 	}
-	destroyGUIs();
+	destroyGUI(gui);
 	closeDL();
 }
 
 void					Game::initNibbler(void)
 {
 	sNibbler			nibbler;
+	tNibbler::iterator	it(_nibbler.begin());
+	tNibbler::iterator	ie(_nibbler.end());
 
+	while (it != ie)
+	{
+		_map[it->x + it->y * _width] = EMPTY;
+		it++;
+	}
+	_nibbler.clear();
 	nibbler.state = ALIVE;
 	nibbler.dir = DOWN;
 	nibbler.x = _width / 2;
@@ -96,7 +121,10 @@ void					Game::initNibbler(void)
 	nibbler.y--;
 	_map[nibbler.x + nibbler.y * _width] = BODY;
 	_nibbler.push_back(nibbler);
-	nibbler.y += 2;
+	nibbler.y--;
+	_map[nibbler.x + nibbler.y * _width] = BODY;
+	_nibbler.push_back(nibbler);
+	nibbler.y += 3;
 	_map[nibbler.x + nibbler.y * _width] = HEAD;
 	_nibbler.push_front(nibbler);
 }
@@ -131,32 +159,22 @@ void					Game::closeDL(void)
 	dlclose(_dlHandle[1]);
 	dlclose(_dlHandle[2]);
 }
-void					Game::createGUIs(void)
+void					Game::createGUI(int gui)
 {
-	int					i(0);
 	tGUICreator			gC;
 
-	while (i < 3)
-	{
-		gC = reinterpret_cast<tGUICreator>((dlsym(_dlHandle[i],
-												  "createGUI")));
-		_gN[i] = gC();
-		_gN[i]->buildMap(_map, _height, _width);
-		i++;
-	}
+	gC = reinterpret_cast<tGUICreator>((dlsym(_dlHandle[gui],
+											  "createGUI")));
+	_gN[gui] = gC();
+	_gN[gui]->buildMap(_map, _height, _width);
 }
-void					Game::destroyGUIs(void)
+void					Game::destroyGUI(int gui)
 {
-	int					i(0);
 	tGUIDestructor		gD;
 
-	while (i < 3)
-	{
-		gD = reinterpret_cast<tGUIDestructor>((dlsym(_dlHandle[0],
-													 "deleteGUI")));
-		gD(_gN[i]);
-		i++;
-	}
+	gD = reinterpret_cast<tGUIDestructor>((dlsym(_dlHandle[gui],
+												 "deleteGUI")));
+	gD(_gN[gui]);
 }
 
 int						Game::newApple(void)
@@ -189,6 +207,8 @@ void					Game::moveNibbler(eInput input)
 		head.y++;
 	else if (head.dir == RIGHT)
 		head.x++;
+	head.x = (head.x > -1 ? head.x % _width : _width - 1);
+	head.y = (head.y > -1 ? head.y % _height : _height - 1);
 	_nibbler.push_front(head);
 
 }

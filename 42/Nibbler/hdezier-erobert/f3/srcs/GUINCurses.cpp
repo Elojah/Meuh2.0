@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/31 14:44:53 by erobert           #+#    #+#             //
-//   Updated: 2015/04/02 18:49:04 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/03 17:15:18 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -19,7 +19,7 @@ GUINCurses::GUINCurses(void):
 	keypad(_w, 1);
 	curs_set(0);
 	start_color();
-	_input[Game::ESC] = 'q';
+	_input[Game::EXIT] = 'q';
 	_input[Game::UP] = 'w';
 	_input[Game::LEFT] = 'a';
 	_input[Game::DOWN] = 's';

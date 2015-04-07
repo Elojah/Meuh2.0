@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/30 13:22:57 by erobert           #+#    #+#             //
-//   Updated: 2015/04/02 19:05:25 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/07 18:53:18 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -30,21 +30,22 @@ class Game
 public:
 	enum eInput
 	{
-		ESC = 0,
+		F1 = 0,
+		F2,
+		F3,
+		PAUSE,
+		RESTART,
+		EXIT,
 		UP,
 		LEFT,
 		DOWN,
 		RIGHT,
-		F1,
-		F2,
-		F3,
 		E_INPUT
 	};
 	enum eState
 	{
 		ALIVE,
-		DEAD,
-		PAUSE
+		DEAD
 	};
 	enum eObject
 	{
@@ -86,8 +87,8 @@ private:
 	void				initNibbler(void);
 	int					initDL(void);
 	void				closeDL(void);
-	void				createGUIs(void);
-	void				destroyGUIs(void);
+	void				createGUI(int gui);
+	void				destroyGUI(int gui);
 
 	int					newApple(void);
 	void				moveNibbler(eInput input);

@@ -6,7 +6,7 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 09:31:53 by erobert           #+#    #+#              #
-#    Updated: 2015/04/02 18:46:01 by erobert          ###   ########.fr        #
+#    Updated: 2015/04/07 13:51:29 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -19,7 +19,7 @@ TMPS = $(SRCS:.cpp=.cpp~) $(INCS:.hpp=.hpp~) Makefile~
 CC = g++
 CFLAGS = -Wall -Wextra -Werror
 IFLAGS = -Iincs/
-LFLAGS = 
+LFLAGS =
 
 .PHONY: all clean objs_dir child fclean re
 
@@ -43,11 +43,15 @@ child:
 
 clean:
 	make -C f1/ clean
+	make -C f2/ clean
+	make -C f3/ clean
 	/bin/rm -f $(OBJS) $(TMPS)
 	/bin/rm -rf objs
 
 fclean: clean
 	make -C f1/ fclean
+	make -C f2/ fclean
+	make -C f3/ fclean
 	/bin/rm -f $(NAME)
 
 re: fclean all
