@@ -1,0 +1,29 @@
+In file included from /usr/local/include/c++/4.9.0/ios:42:0,
+                 from /usr/local/include/c++/4.9.0/ostream:38,
+                 from /usr/local/include/c++/4.9.0/iostream:39,
+                 from main.cpp:13:
+/usr/local/include/c++/4.9.0/bits/ios_base.h: In copy constructor ‘std::basic_ios<char>::basic_ios(const std::basic_ios<char>&)’:
+/usr/local/include/c++/4.9.0/bits/ios_base.h:786:5: error: ‘std::ios_base::ios_base(const std::ios_base&)’ is private
+     ios_base(const ios_base&);
+     ^
+In file included from /usr/local/include/c++/4.9.0/ios:44:0,
+                 from /usr/local/include/c++/4.9.0/ostream:38,
+                 from /usr/local/include/c++/4.9.0/iostream:39,
+                 from main.cpp:13:
+/usr/local/include/c++/4.9.0/bits/basic_ios.h:66:11: error: within this context
+     class basic_ios : public ios_base
+           ^
+In file included from /usr/local/include/c++/4.9.0/iostream:39:0,
+                 from main.cpp:13:
+/usr/local/include/c++/4.9.0/ostream: In copy constructor ‘std::basic_ostream<char>::basic_ostream(const std::basic_ostream<char>&)’:
+/usr/local/include/c++/4.9.0/ostream:58:11: note: synthesized method ‘std::basic_ios<char>::basic_ios(const std::basic_ios<char>&)’ first required here 
+     class basic_ostream : virtual public basic_ios<_CharT, _Traits>
+           ^
+main.cpp: In function ‘int main()’:
+main.cpp:54:16: note: synthesized method ‘std::basic_ostream<char>::basic_ostream(const std::basic_ostream<char>&)’ first required here 
+  std::cout << *zaz;
+                ^
+In file included from main.cpp:20:0:
+Character.hpp:45:15: error:   initializing argument 1 of ‘std::ostream& operator<<(std::ostream, const Character&)’
+ std::ostream &operator<<(std::ostream os, Character const &c);
+               ^
