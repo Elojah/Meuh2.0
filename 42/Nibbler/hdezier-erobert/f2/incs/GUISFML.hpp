@@ -1,38 +1,38 @@
 // ************************************************************************** //
 //                                                                            //
 //                                                        :::      ::::::::   //
-//   GUINCurses.hpp                                     :+:      :+:    :+:   //
+//   GUISFML.hpp                                        :+:      :+:    :+:   //
 //                                                    +:+ +:+         +:+     //
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
-//   Created: 2015/03/31 14:35:05 by erobert           #+#    #+#             //
-//   Updated: 2015/04/07 19:08:43 by erobert          ###   ########.fr       //
+//   Created: 2015/04/08 13:04:34 by erobert           #+#    #+#             //
+//   Updated: 2015/04/08 13:06:18 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
-#ifndef GUI_NCURSES_HPP
-# define GUI_NCURSES_HPP
+#ifndef GUI_SFML_HPP
+# define GUI_SFML_HPP
 
 # include <ncurses.h>
 # include "SFML/Graphics.hpp"
 # include "IGUINibbler.hpp"
 
-class GUINCurses: public IGUINibbler
+class GUISFML: public IGUINibbler
 {
 public:
-	GUINCurses(void);
-	~GUINCurses(void);
+	GUISFML(void);
+	~GUISFML(void);
 
-	virtual void			buildMap(std::vector<int> const &tMap,
-									 int height, int width);
+	virtual void			initMap(std::vector<int> const &tMap,
+									int height, int width);
 	virtual void			updateDisplay(tNibbler const &tN, int apple);
-	virtual Game::eInput	eventHandler(void);
+	virtual Game::eEvent	getEvent(void);
 private:
 	int						_cellSize;
 	std::vector<int>		_map;
 	int						_height;
 	int						_width;
-	int						_input[Game::E_INPUT];
+	int						_input[Game::E_EVENT];
 	sf::RenderWindow		_window;
 	sf::Event				_event;
 	sf::Texture				_tGrass;
@@ -43,15 +43,15 @@ private:
 	sf::CircleShape			_h;
 	sf::RectangleShape		_b;
 
-	GUINCurses(GUINCurses const &gN);
+	GUISFML(GUISFML const &gN);
 
-	GUINCurses				&operator=(GUINCurses const &gN);
+	GUISFML					&operator=(GUISFML const &gN);
 };
 
 extern "C"
 {
-	GUINCurses				*createGUI(void);
-	void					deleteGUI(GUINCurses *gN);
+	GUISFML					*createGUI(void);
+	void					deleteGUI(GUISFML *gN);
 }
 
 #endif

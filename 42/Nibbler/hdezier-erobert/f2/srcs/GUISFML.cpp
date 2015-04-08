@@ -6,13 +6,13 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/31 14:44:53 by erobert           #+#    #+#             //
-//   Updated: 2015/04/07 19:43:42 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/08 14:10:17 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
-#include "GUINCurses.hpp"
+#include "GUISFML.hpp"
 
-GUINCurses::GUINCurses(void):
+GUISFML::GUISFML(void):
 	_cellSize(10),
 	_v(_cellSize, _cellSize),
 	_w(_v),
@@ -31,15 +31,15 @@ GUINCurses::GUINCurses(void):
 	_input[Game::F2] = '2';
 	_input[Game::F3] = '3';
 }
-GUINCurses::~GUINCurses(void)
+GUISFML::~GUISFML(void)
 {
 	_window.close();
 }
 
-void				GUINCurses::buildMap(std::vector<int> const &map,
-										 int height, int width)
+void							GUISFML::initMap(std::vector<int> const &map,
+												 int height, int width)
 {
-	_tGrass.loadFromFile("f2/jpeg/grass.jpg");
+	_tGrass.loadFromFile("f2/jpeg/metal.jpg");
 	_tGrass.setRepeated(true);
 	_map = map;
 	_height = height;
@@ -58,8 +58,8 @@ void				GUINCurses::buildMap(std::vector<int> const &map,
 	_b.setOutlineColor(sf::Color::Black);
 	_b.setOutlineThickness(1);
 }
-void							GUINCurses::updateDisplay(tNibbler const &tN,
-														  int apple)
+void							GUISFML::updateDisplay(tNibbler const &tN,
+													   int apple)
 {
 	tNibbler::const_iterator	it(tN.begin());
 	tNibbler::const_iterator	ie(tN.end());
@@ -94,7 +94,7 @@ void							GUINCurses::updateDisplay(tNibbler const &tN,
 	_window.draw(_h);
 	_window.display();
 }
-Game::eInput					GUINCurses::eventHandler(void)
+Game::eEvent					GUISFML::getEvent(void)
 {	
 	int							i;
 
@@ -105,22 +105,22 @@ Game::eInput					GUINCurses::eventHandler(void)
 		else
 		{
 			i = 0;
-			while (i < Game::E_INPUT)
+			while (i < Game::E_EVENT)
 			{
 				if (_input[i] == _event.key.code)
-					return (static_cast<Game::eInput>(i));
+					return (static_cast<Game::eEvent>(i));
 				i++;
 			}
 		}
 	}
-	return (Game::E_INPUT);
+	return (Game::E_EVENT);
 }
 
-GUINCurses			*createGUI(void)
+GUISFML							*createGUI(void)
 {
-	return (new GUINCurses);
+	return (new GUISFML);
 }
-void				deleteGUI(GUINCurses *gN)
+void							deleteGUI(GUISFML *gN)
 {
 	delete gN;
 }

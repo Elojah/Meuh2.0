@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/31 14:35:05 by erobert           #+#    #+#             //
-//   Updated: 2015/04/02 16:29:59 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/08 13:13:51 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -22,16 +22,16 @@ public:
 	GUINCurses(void);
 	~GUINCurses(void);
 
-	virtual void			buildMap(std::vector<int> const &tMap,
-									 int height, int width);
+	virtual void			initMap(std::vector<int> const &tMap,
+									int height, int width);
 	virtual void			updateDisplay(tNibbler const &tN, int apple);
-	virtual Game::eInput	eventHandler(void);
+	virtual Game::eEvent	getEvent(void);
 private:
 	WINDOW					*_w;
 	std::vector<int>		_map;
 	int						_height;
 	int						_width;
-	int						_input[Game::E_INPUT];
+	int						_input[Game::E_EVENT];
 
 	GUINCurses(GUINCurses const &gN);
 

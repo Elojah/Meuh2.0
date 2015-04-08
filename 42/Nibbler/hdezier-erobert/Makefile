@@ -6,12 +6,12 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 09:31:53 by erobert           #+#    #+#              #
-#    Updated: 2015/04/07 13:51:29 by erobert          ###   ########.fr        #
+#    Updated: 2015/04/08 13:29:56 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = nibbler
-FILES = Game.cpp main.cpp
+FILES = Game.cpp Time.cpp main.cpp
 SRCS = $(addprefix srcs/, $(FILES))
 OBJS = $(SRCS:srcs/%.cpp=objs/%.o)
 INCS = $(SRCS:srcs/%.cpp=incs/%.hpp) incs/IGUINibbler.hpp

@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/31 14:44:53 by erobert           #+#    #+#             //
-//   Updated: 2015/04/03 17:15:18 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/08 13:15:45 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -19,24 +19,29 @@ GUINCurses::GUINCurses(void):
 	keypad(_w, 1);
 	curs_set(0);
 	start_color();
+	init_pair(Game::APPLE, COLOR_RED, COLOR_BLACK);
+	init_pair(Game::HEAD, COLOR_BLUE, COLOR_BLACK);
+	init_pair(Game::BODY, COLOR_GREEN, COLOR_BLACK);
+	_input[Game::F1] = '1';
+	_input[Game::F2] = '2';
+	_input[Game::F3] = '3';
+	_input[Game::PAUSE] = 'e';
+	_input[Game::RESTART] = 'r';
 	_input[Game::EXIT] = 'q';
 	_input[Game::UP] = 'w';
 	_input[Game::LEFT] = 'a';
 	_input[Game::DOWN] = 's';
 	_input[Game::RIGHT] = 'd';
-	_input[Game::F1] = '1';
-	_input[Game::F2] = '2';
-	_input[Game::F3] = '3';
 }
 GUINCurses::~GUINCurses(void)
 {
 	endwin();
 }
 
-void				GUINCurses::buildMap(std::vector<int> const &map,
-										 int height, int width)
+void							GUINCurses::initMap(std::vector<int> const &map,
+													int height, int width)
 {
-	int				i(0);
+	int							i(0);
 
 	_map = map;
 	_height = height;
@@ -45,6 +50,8 @@ void				GUINCurses::buildMap(std::vector<int> const &map,
 	{
 		if (_map[i])
 			mvaddch(i / _width, i % _width, 'X');
+		else
+			mvaddch(i / _width, i % _width, ' ');
 		i++;
 	}
 	wrefresh(stdscr);
@@ -58,28 +65,40 @@ void							GUINCurses::updateDisplay(tNibbler const &tN,
 
 	while (i < _height * _width)
 	{
-		if (_map[i] == 3)
+		if (_map[i] == Game::BODY || _map[i] == Game::HEAD)
 			mvaddch(i / _width, i % _width, ' ');
 		i++;
 	}
+	attron(COLOR_PAIR(Game::APPLE));
 	mvaddch(apple / _width, apple % _width, '*');
+	attroff(COLOR_PAIR(Game::APPLE));
+	attron(COLOR_PAIR(Game::HEAD));
 	if (it != ie)
-		mvaddch(it->y, it->x, 'O');
+	{
+		if (_map[it->x + it->y * _width] != Game::WALL)
+		{
+			_map[it->x + it->y * _width] = Game::HEAD;
+			mvaddch(it->y, it->x, 'O');
+		}
+	}
 	it++;
+	attroff(COLOR_PAIR(Game::HEAD));
+	attron(COLOR_PAIR(Game::BODY));
 	while (it != ie)
 	{
-		_map[it->x + it->y * _width] = 3;
+		_map[it->x + it->y * _width] = Game::BODY;
 		mvaddch(it->y, it->x, 'o');
 		it++;
 	}
+	attroff(COLOR_PAIR(Game::BODY));
 	wrefresh(stdscr);
 }
-Game::eInput		GUINCurses::eventHandler(void)
+Game::eEvent					GUINCurses::getEvent(void)
 {
-	struct timeval	tv;
-	fd_set			fds;
-	int				input;
-	int				i(0);
+	struct timeval				tv;
+	fd_set						fds;
+	int							input;
+	int							i(0);
 
 	tv.tv_sec = 0;
 	tv.tv_usec = 0;
@@ -89,21 +108,21 @@ Game::eInput		GUINCurses::eventHandler(void)
 	if (FD_ISSET(STDIN_FILENO, &fds))
 	{
 		input = getch();
-		while (i < Game::E_INPUT)
+		while (i < Game::E_EVENT)
 		{
 			if (_input[i] == input)
-				return (static_cast<Game::eInput>(i));
+				return (static_cast<Game::eEvent>(i));
 			i++;
 		}
 	}
-	return (Game::E_INPUT);
+	return (Game::E_EVENT);
 }
 
-GUINCurses			*createGUI(void)
+GUINCurses						*createGUI(void)
 {
 	return (new GUINCurses);
 }
-void				deleteGUI(GUINCurses *gN)
+void							deleteGUI(GUINCurses *gN)
 {
 	delete gN;
 }

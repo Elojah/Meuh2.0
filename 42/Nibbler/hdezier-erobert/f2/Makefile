@@ -6,12 +6,12 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 09:31:53 by erobert           #+#    #+#              #
-#    Updated: 2015/04/07 16:00:46 by erobert          ###   ########.fr        #
+#    Updated: 2015/04/08 13:13:06 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = f2.so
-FILES = GUINCurses.cpp
+FILES = GUISFML.cpp
 SRCS = $(addprefix srcs/, $(FILES))
 OBJS = $(SRCS:srcs/%.cpp=objs/%.o)
 INCS = $(SRCS:srcs/%.cpp=incs/%.hpp)

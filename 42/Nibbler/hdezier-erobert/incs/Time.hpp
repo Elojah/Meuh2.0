@@ -1,33 +1,37 @@
 // ************************************************************************** //
 //                                                                            //
 //                                                        :::      ::::::::   //
-//   IGUINibbler.hpp                                    :+:      :+:    :+:   //
+//   Time.hpp                                           :+:      :+:    :+:   //
 //                                                    +:+ +:+         +:+     //
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
-//   Created: 2015/03/30 18:56:56 by erobert           #+#    #+#             //
-//   Updated: 2015/04/08 13:29:23 by erobert          ###   ########.fr       //
+//   Created: 2015/04/08 13:26:20 by erobert           #+#    #+#             //
+//   Updated: 2015/04/08 13:27:48 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
-#ifndef I_GUI_NIBBLER_HPP
-# define I_GUI_NIBBLER_HPP
+#ifndef TIME_HPP
+# define TIME_HPP
 
-# include <list>
-# include <vector>
-# include "Game.hpp"
+# include <sys/time.h>
 
-class IGUINibbler
+class Time
 {
 public:
-	typedef std::list<Game::sNibbler>	tNibbler;
+	Time(void);
+	~Time(void);
 
-	virtual ~IGUINibbler(void) {};
+	int				msSinceLastTime(void);
+	void			setCurrentTime(void);
+	void			setLastTime(struct timeval value);
+	struct timeval	getCurrentTime(void);
+private:
+	Time(const Time &t);
 
-	virtual void			initMap(std::vector<int> const &map,
-									int height, int width) = 0;
-	virtual void			updateDisplay(tNibbler const &tN, int apple) = 0;
-	virtual Game::eEvent	getEvent(void) = 0;
+	Time			&operator=(const Time &t);
+
+	struct timeval	_currentTime;
+	struct timeval	_lastTime;
 };
 
 #endif
