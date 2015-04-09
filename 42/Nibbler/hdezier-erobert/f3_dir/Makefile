@@ -6,12 +6,12 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 09:31:53 by erobert           #+#    #+#              #
-#    Updated: 2015/04/08 17:19:35 by erobert          ###   ########.fr        #
+#    Updated: 2015/04/09 18:27:34 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME = e1.so
-FILES = AudioSFML.cpp
+NAME = f3.so
+FILES = GUISFML.cpp
 SRCS = $(addprefix srcs/, $(FILES))
 OBJS = $(SRCS:srcs/%.cpp=objs/%.o)
 INCS = $(SRCS:srcs/%.cpp=incs/%.hpp)
@@ -21,8 +21,8 @@ ASFML = SFML-2.2-osx-clang-universal
 DSFML = SFML
 CC = g++
 CFLAGS = -Wall -Wextra -Werror
-IFLAGS = -Iincs/ -I../incs/ -I$(DSFML)/include/
-LFLAGS = -LSFML/lib -lsfml-audio
+IFLAGS = -Iincs/ -I../nibbler_dir/incs/ -I$(DSFML)/include/
+LFLAGS = -LSFML/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 .PHONY: all clean objs_dir fclean re
 

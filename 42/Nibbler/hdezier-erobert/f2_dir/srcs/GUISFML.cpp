@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/31 14:44:53 by erobert           #+#    #+#             //
-//   Updated: 2015/04/08 17:08:41 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/09 21:36:02 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -20,6 +20,11 @@ GUISFML::GUISFML(void):
 	_h(_cellSize / 2 + 2, 4),
 	_b(_v)
 {
+	_f.loadFromFile("f2_dir/data/open_sans_light");
+	_t.setFont(_f);
+	_t.setCharacterSize(12);
+	_t.setColor(sf::Color::White);
+	_t.setPosition(_cellSize, _cellSize);
 	_input[Game::PAUSE] = 'e';
 	_input[Game::RESTART] = 'r';
 	_input[Game::EXIT] = 'q';
@@ -39,7 +44,7 @@ GUISFML::~GUISFML(void)
 void							GUISFML::initMap(std::vector<int> const &map,
 												 int height, int width)
 {
-	_tGrass.loadFromFile("f2/jpgs/metal.jpg");
+	_tGrass.loadFromFile("f2_dir/data/metal");
 	_tGrass.setRepeated(true);
 	_map = map;
 	_height = height;
@@ -59,11 +64,12 @@ void							GUISFML::initMap(std::vector<int> const &map,
 	_b.setOutlineThickness(1);
 }
 void							GUISFML::updateDisplay(tNibbler const &tN,
-													   int apple)
+													   int apple, int score)
 {
 	tNibbler::const_iterator	it(tN.begin());
 	tNibbler::const_iterator	ie(tN.end());
 	int							i(0);
+	std::ostringstream			ss;
 
 	_sGrass.setTextureRect(sf::IntRect(0, 0, _width * _cellSize,
 									   _height * _cellSize));
@@ -92,6 +98,12 @@ void							GUISFML::updateDisplay(tNibbler const &tN,
 		it++;
 	}
 	_window.draw(_h);
+	if (tN.front().state == Game::DEAD)
+	{
+		ss << "Nibbler scoring: " << score;
+		_t.setString(ss.str());
+		_window.draw(_t);
+	}
 	_window.display();
 }
 Game::eEvent					GUISFML::getEvent(void)

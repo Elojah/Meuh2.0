@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/27 18:40:55 by erobert           #+#    #+#             //
-//   Updated: 2015/04/08 16:43:28 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/09 18:48:19 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -20,7 +20,8 @@ Game::Game(void):
 	_map(MAX_SIZE * MAX_SIZE),
 	_alive(true),
 	_pause(true),
-	_speed(DEFAULT_SPEED)
+	_speed(DEFAULT_SPEED),
+	_score(0)
 {}
 Game::~Game(void) {}
 
@@ -68,7 +69,7 @@ void					Game::gameLoop(void)
 	_aN->playMusic();
 	std::srand(clock());
 	apple = newApple();
-	_gN[gui]->updateDisplay(_nibbler, apple);
+	_gN[gui]->updateDisplay(_nibbler, apple, _score);
 	while (event != EXIT)
 	{
 		refresh.setCurrentTime();
@@ -85,7 +86,7 @@ void					Game::gameLoop(void)
 					_alive = false;
 				_map[_nibbler.front().x + _nibbler.front().y * _width] = HEAD;
 			}
-			_gN[gui]->updateDisplay(_nibbler, apple);
+			_gN[gui]->updateDisplay(_nibbler, apple, _score);
 			refresh.setLastTime(refresh.getCurrentTime());
 		}
 	}
@@ -123,21 +124,22 @@ void					Game::initNibbler(void)
 	nibbler.y += 3;
 	_map[nibbler.x + nibbler.y * _width] = HEAD;
 	_nibbler.push_front(nibbler);
+	_score = 0;
 }
 int						Game::initDL(void)
 {
 	int					i(0);
 	int					j(0);
 
-	_dlHandle[0] = dlopen("f1/f1.so", RTLD_LAZY | RTLD_LOCAL);
+	_dlHandle[0] = dlopen("f1.so", RTLD_LAZY | RTLD_LOCAL);
 	if (_dlHandle[0])
 	{
-		_dlHandle[1] = dlopen("f2/f2.so", RTLD_LAZY | RTLD_LOCAL);
+		_dlHandle[1] = dlopen("f2.so", RTLD_LAZY | RTLD_LOCAL);
 		if (_dlHandle[1])
 		{
-			_dlHandle[2] = dlopen("f3/f3.so", RTLD_LAZY | RTLD_LOCAL);
+			_dlHandle[2] = dlopen("f3.so", RTLD_LAZY | RTLD_LOCAL);
 			if (_dlHandle[2])
-				_dlHandle[3] = dlopen("e1/e1.so", RTLD_LAZY | RTLD_LOCAL);
+				_dlHandle[3] = dlopen("e1.so", RTLD_LAZY | RTLD_LOCAL);
 		}
 	}
 	while (i < 4)
@@ -241,6 +243,7 @@ bool					Game::eatApple(int apple)
 	if (apple == head.x + head.y * _width)
 	{
 		_aN->playEatSound();
+		++_score;
 		if (_speed > MAX_SPEED)
 			_speed -= ACCELERATION;
 		return (true);

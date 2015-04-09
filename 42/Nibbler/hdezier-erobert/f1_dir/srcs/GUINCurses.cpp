@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/31 14:44:53 by erobert           #+#    #+#             //
-//   Updated: 2015/04/08 13:15:45 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/09 18:44:54 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -49,28 +49,29 @@ void							GUINCurses::initMap(std::vector<int> const &map,
 	while (i < _height * _width)
 	{
 		if (_map[i])
-			mvaddch(i / _width, i % _width, 'X');
+			mvaddch(i / _width + 1, i % _width, 'X');
 		else
-			mvaddch(i / _width, i % _width, ' ');
+			mvaddch(i / _width + 1, i % _width, ' ');
 		i++;
 	}
 	wrefresh(stdscr);
 }
 void							GUINCurses::updateDisplay(tNibbler const &tN,
-														  int apple)
+														  int apple, int score)
 {
 	tNibbler::const_iterator	it(tN.begin());
 	tNibbler::const_iterator	ie(tN.end());
 	int							i(0);
 
+	mvwprintw(stdscr, 0, 0, "Nibbler, fat bastard score: %d", score);
 	while (i < _height * _width)
 	{
 		if (_map[i] == Game::BODY || _map[i] == Game::HEAD)
-			mvaddch(i / _width, i % _width, ' ');
+			mvaddch(i / _width + 1, i % _width, ' ');
 		i++;
 	}
 	attron(COLOR_PAIR(Game::APPLE));
-	mvaddch(apple / _width, apple % _width, '*');
+	mvaddch(apple / _width + 1, apple % _width, '*');
 	attroff(COLOR_PAIR(Game::APPLE));
 	attron(COLOR_PAIR(Game::HEAD));
 	if (it != ie)
@@ -78,7 +79,7 @@ void							GUINCurses::updateDisplay(tNibbler const &tN,
 		if (_map[it->x + it->y * _width] != Game::WALL)
 		{
 			_map[it->x + it->y * _width] = Game::HEAD;
-			mvaddch(it->y, it->x, 'O');
+			mvaddch(it->y + 1, it->x, 'O');
 		}
 	}
 	it++;
@@ -87,7 +88,7 @@ void							GUINCurses::updateDisplay(tNibbler const &tN,
 	while (it != ie)
 	{
 		_map[it->x + it->y * _width] = Game::BODY;
-		mvaddch(it->y, it->x, 'o');
+		mvaddch(it->y + 1, it->x, 'o');
 		it++;
 	}
 	attroff(COLOR_PAIR(Game::BODY));

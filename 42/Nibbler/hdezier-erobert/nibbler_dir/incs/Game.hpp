@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/30 13:22:57 by erobert           #+#    #+#             //
-//   Updated: 2015/04/08 16:34:19 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/09 18:47:44 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -87,6 +87,7 @@ private:
 	bool				_alive;
 	bool				_pause;
 	int					_speed;
+	int					_score;
 	void				*_dlHandle[4];
 	IGUINibbler         *_gN[3];
 	IAudioNibbler		*_aN;

@@ -6,40 +6,41 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 09:31:53 by erobert           #+#    #+#              #
-#    Updated: 2015/04/09 21:24:43 by erobert          ###   ########.fr        #
+#    Updated: 2015/04/09 18:06:20 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-TMPS = Makefile~
-FILES = e1.so f1.so f2.so f3.so nibbler
-.PHONY: all clean fclean re
+NAME = nibbler
+FILES = Game.cpp Time.cpp main.cpp
+SRCS = $(addprefix srcs/, $(FILES))
+OBJS = $(SRCS:srcs/%.cpp=objs/%.o)
+INCS = $(SRCS:srcs/%.cpp=incs/%.hpp) incs/IGUINibbler.hpp
+TMPS = $(SRCS:.cpp=.cpp~) $(INCS:.hpp=.hpp~) Makefile~
+CC = g++
+CFLAGS = -Wall -Wextra -Werror
+IFLAGS = -Iincs/
+LFLAGS =
 
-all:
-	@make -C e1_dir/
-	@ln -sf e1_dir/e1.so
-	@make -C f1_dir/
-	@ln -sf f1_dir/f1.so
-	@make -C f2_dir/
-	@ln -sf f2_dir/f2.so
-	@make -C f3_dir/
-	@ln -sf f3_dir/f3.so
-	@make -C nibbler_dir/
-	@ln -sf nibbler_dir/nibbler
+.PHONY: all clean objs_dir child fclean re
+
+.SILENT: objs_dir
+
+all: objs_dir $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LFLAGS)
+
+objs/%.o : srcs/%.cpp
+	$(CC) $(CFLAGS) -Iinc $(IFLAGS) -o $@ -c $^
+
+objs_dir:
+	mkdir -p objs
 
 clean:
-	@make -C e1_dir/ clean
-	@make -C f1_dir/ clean
-	@make -C f2_dir/ clean
-	@make -C f3_dir/ clean
-	@make -C nibbler_dir/ clean
-	/bin/rm -f $(TMPS)
+	/bin/rm -f $(OBJS) $(TMPS)
+	/bin/rm -rf objs
 
 fclean: clean
-	@make -C e1_dir/ fclean
-	@make -C f1_dir/ fclean
-	@make -C f2_dir/ fclean
-	@make -C f3_dir/ fclean
-	@make -C nibbler_dir/ fclean
-	/bin/rm -f $(FILES) $(TMPS)
+	/bin/rm -f $(NAME)
 
 re: fclean all

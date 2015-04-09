@@ -6,7 +6,7 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 09:31:53 by erobert           #+#    #+#              #
-#    Updated: 2015/04/01 17:06:18 by erobert          ###   ########.fr        #
+#    Updated: 2015/04/09 18:18:08 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -18,7 +18,7 @@ INCS = $(SRCS:srcs/%.cpp=incs/%.hpp)
 TMPS = $(SRCS:.cpp=.cpp~) $(INCS:.hpp=.hpp~) Makefile~
 CC = g++
 CFLAGS = -Wall -Wextra -Werror
-IFLAGS = -Iincs/ -I../incs/
+IFLAGS = -Iincs/ -I../nibbler_dir/incs/
 LFLAGS = -lncurses -ltermcap
 
 .PHONY: all clean objs_dir fclean re

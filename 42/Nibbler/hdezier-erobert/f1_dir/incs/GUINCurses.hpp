@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/31 14:35:05 by erobert           #+#    #+#             //
-//   Updated: 2015/04/08 13:13:51 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/09 18:36:47 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -24,7 +24,8 @@ public:
 
 	virtual void			initMap(std::vector<int> const &tMap,
 									int height, int width);
-	virtual void			updateDisplay(tNibbler const &tN, int apple);
+	virtual void			updateDisplay(tNibbler const &tN, int apple,
+										  int score);
 	virtual Game::eEvent	getEvent(void);
 private:
 	WINDOW					*_w;
