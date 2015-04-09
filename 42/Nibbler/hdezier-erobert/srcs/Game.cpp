@@ -6,17 +6,21 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/27 18:40:55 by erobert           #+#    #+#             //
-//   Updated: 2015/04/07 19:32:34 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/08 16:43:28 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #include "Game.hpp"
 #include "IGUINibbler.hpp"
+#include "IAudioNibbler.hpp"
 
 Game::Game(void):
 	_height(MAX_SIZE),
 	_width(MAX_SIZE),
-	_map(MAX_SIZE * MAX_SIZE)
+	_map(MAX_SIZE * MAX_SIZE),
+	_alive(true),
+	_pause(true),
+	_speed(DEFAULT_SPEED)
 {}
 Game::~Game(void) {}
 
@@ -47,56 +51,48 @@ bool					Game::buildMap(char *height, char *width)
 
 void					Game::gameLoop(void)
 {
-	bool				pause(false);
-	bool				alive(true);
 	int					apple;
 	int					gui(0);
-	eInput				input(E_INPUT);
+	Time				refresh;
+	eEvent				event(E_EVENT);
+	tAudioCreator		aC;
+	tAudioDestructor	aD;
 
 	if (initDL())
 		return ;
 	initNibbler();
 	createGUI(gui);
+	aC = reinterpret_cast<tAudioCreator>((dlsym(_dlHandle[3],
+												"createAudio")));
+	_aN = aC();
+	_aN->playMusic();
 	std::srand(clock());
 	apple = newApple();
-	while (input != EXIT)
+	_gN[gui]->updateDisplay(_nibbler, apple);
+	while (event != EXIT)
 	{
-		input = _gN[gui]->eventHandler();
-		if (input == PAUSE)
-			pause = !pause;
-		else if (input >= F1 && input <= F3)
+		refresh.setCurrentTime();
+		if (refresh.msSinceLastTime() > _speed)
 		{
-			_gN[gui]->updateDisplay(_nibbler, apple);
-			destroyGUI(gui);
-			pause = true;
-			gui = input;
-			createGUI(gui);
-			_gN[gui]->updateDisplay(_nibbler, apple);
-		}
-		else if (input == RESTART)
-		{
-			alive = true;
-			initNibbler();
-			_gN[gui]->buildMap(_map, _height, _width);
-		}
-		if (alive && !pause)
-		{
-			_gN[gui]->updateDisplay(_nibbler, apple);
-			moveNibbler(input);
-			if (eatApple(apple))
-				apple = newApple();
-			else if (isDead())
-				alive = false;
-			else
+			event = _gN[gui]->getEvent();
+			gui = eventHandler(event, gui);
+			if (_alive && !_pause)
 			{
-				_map[_nibbler.back().x + _nibbler.back().y * _width] = EMPTY;
-				_nibbler.pop_back();
+				moveNibbler(event);
+				if (eatApple(apple))
+					apple = newApple();
+				else if (isDead())
+					_alive = false;
+				_map[_nibbler.front().x + _nibbler.front().y * _width] = HEAD;
 			}
-			_map[_nibbler.front().x + _nibbler.front().y * _width] = HEAD;
+			_gN[gui]->updateDisplay(_nibbler, apple);
+			refresh.setLastTime(refresh.getCurrentTime());
 		}
-		usleep(100000);
 	}
 	destroyGUI(gui);
+	aD = reinterpret_cast<tAudioDestructor>((dlsym(_dlHandle[3],
+												   "deleteAudio")));
+	aD(_aN);
 	closeDL();
 }
 
@@ -138,9 +134,13 @@ int						Game::initDL(void)
 	{
 		_dlHandle[1] = dlopen("f2/f2.so", RTLD_LAZY | RTLD_LOCAL);
 		if (_dlHandle[1])
+		{
 			_dlHandle[2] = dlopen("f3/f3.so", RTLD_LAZY | RTLD_LOCAL);
+			if (_dlHandle[2])
+				_dlHandle[3] = dlopen("e1/e1.so", RTLD_LAZY | RTLD_LOCAL);
+		}
 	}
-	while (i < 3)
+	while (i < 4)
 	{
 		if (!_dlHandle[i])
 		{
@@ -158,6 +158,7 @@ void					Game::closeDL(void)
 	dlclose(_dlHandle[0]);
 	dlclose(_dlHandle[1]);
 	dlclose(_dlHandle[2]);
+	dlclose(_dlHandle[3]);
 }
 void					Game::createGUI(int gui)
 {
@@ -166,7 +167,7 @@ void					Game::createGUI(int gui)
 	gC = reinterpret_cast<tGUICreator>((dlsym(_dlHandle[gui],
 											  "createGUI")));
 	_gN[gui] = gC();
-	_gN[gui]->buildMap(_map, _height, _width);
+	_gN[gui]->initMap(_map, _height, _width);
 }
 void					Game::destroyGUI(int gui)
 {
@@ -177,6 +178,27 @@ void					Game::destroyGUI(int gui)
 	gD(_gN[gui]);
 }
 
+int						Game::eventHandler(eEvent event, int gui)
+{
+	if (event == PAUSE)
+		_pause = !_pause;
+	else if (event >= F1 && event <= F3)
+	{
+		_pause = true;
+		destroyGUI(gui);
+		gui = event;
+		createGUI(gui);
+	}
+	else if (event == RESTART)
+	{
+		_alive = true;
+		_pause = true;
+		_speed = DEFAULT_SPEED;
+		initNibbler();
+		_gN[gui]->initMap(_map, _height, _width);
+	}
+	return (gui);
+}
 int						Game::newApple(void)
 {
 	int					apple;
@@ -186,18 +208,18 @@ int						Game::newApple(void)
 		apple = std::rand() % (_height * _width);
 	return (apple);
 }
-void					Game::moveNibbler(eInput input)
+void					Game::moveNibbler(eEvent event)
 {
 	sNibbler			head(_nibbler.front());
 
 	_map[head.x + head.y * _width] = BODY;
-	if (input == UP && head.dir != DOWN)
+	if (event == UP && head.dir != DOWN)
 		head.dir = UP;
-	else if (input == LEFT && head.dir != RIGHT)
+	else if (event == LEFT && head.dir != RIGHT)
 		head.dir = LEFT;
-	else if (input == DOWN && head.dir != UP)
+	else if (event == DOWN && head.dir != UP)
 		head.dir = DOWN;
-	else if (input == RIGHT && head.dir != LEFT)
+	else if (event == RIGHT && head.dir != LEFT)
 		head.dir = RIGHT;
 	if (head.dir == UP)
 		head.y--;
@@ -217,7 +239,14 @@ bool					Game::eatApple(int apple)
 	sNibbler			&head(_nibbler.front());
 
 	if (apple == head.x + head.y * _width)
+	{
+		_aN->playEatSound();
+		if (_speed > MAX_SPEED)
+			_speed -= ACCELERATION;
 		return (true);
+	}
+	_map[_nibbler.back().x + _nibbler.back().y * _width] = EMPTY;
+	_nibbler.pop_back();
 	return (false);
 }
 bool					Game::isDead(void)
@@ -226,6 +255,7 @@ bool					Game::isDead(void)
 
 	if (_map[head.x + head.y * _width] != EMPTY)
 	{
+		_aN->playDeathSound();
 		head.state = DEAD;
 		return (true);
 	}

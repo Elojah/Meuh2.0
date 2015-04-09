@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/31 14:44:53 by erobert           #+#    #+#             //
-//   Updated: 2015/04/03 19:21:56 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/08 13:15:45 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -38,10 +38,10 @@ GUINCurses::~GUINCurses(void)
 	endwin();
 }
 
-void				GUINCurses::buildMap(std::vector<int> const &map,
-										 int height, int width)
+void							GUINCurses::initMap(std::vector<int> const &map,
+													int height, int width)
 {
-	int				i(0);
+	int							i(0);
 
 	_map = map;
 	_height = height;
@@ -93,12 +93,12 @@ void							GUINCurses::updateDisplay(tNibbler const &tN,
 	attroff(COLOR_PAIR(Game::BODY));
 	wrefresh(stdscr);
 }
-Game::eInput		GUINCurses::eventHandler(void)
+Game::eEvent					GUINCurses::getEvent(void)
 {
-	struct timeval	tv;
-	fd_set			fds;
-	int				input;
-	int				i(0);
+	struct timeval				tv;
+	fd_set						fds;
+	int							input;
+	int							i(0);
 
 	tv.tv_sec = 0;
 	tv.tv_usec = 0;
@@ -108,21 +108,21 @@ Game::eInput		GUINCurses::eventHandler(void)
 	if (FD_ISSET(STDIN_FILENO, &fds))
 	{
 		input = getch();
-		while (i < Game::E_INPUT)
+		while (i < Game::E_EVENT)
 		{
 			if (_input[i] == input)
-				return (static_cast<Game::eInput>(i));
+				return (static_cast<Game::eEvent>(i));
 			i++;
 		}
 	}
-	return (Game::E_INPUT);
+	return (Game::E_EVENT);
 }
 
-GUINCurses			*createGUI(void)
+GUINCurses						*createGUI(void)
 {
 	return (new GUINCurses);
 }
-void				deleteGUI(GUINCurses *gN)
+void							deleteGUI(GUINCurses *gN)
 {
 	delete gN;
 }
