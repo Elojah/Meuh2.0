@@ -6,7 +6,7 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 09:31:53 by erobert           #+#    #+#              #
-#    Updated: 2015/04/08 13:29:56 by erobert          ###   ########.fr        #
+#    Updated: 2015/04/08 16:24:46 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -37,11 +37,13 @@ objs_dir:
 	mkdir -p objs
 
 child:
+	make -C e1/
 	make -C f1/
 	make -C f2/
 	make -C f3/
 
 clean:
+	make -C e1/ clean
 	make -C f1/ clean
 	make -C f2/ clean
 	make -C f3/ clean
@@ -49,6 +51,7 @@ clean:
 	/bin/rm -rf objs
 
 fclean: clean
+	make -C e1/ fclean
 	make -C f1/ fclean
 	make -C f2/ fclean
 	make -C f3/ fclean

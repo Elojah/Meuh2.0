@@ -6,12 +6,13 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/27 18:40:55 by erobert           #+#    #+#             //
-//   Updated: 2015/04/08 14:28:29 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/08 16:43:28 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #include "Game.hpp"
 #include "IGUINibbler.hpp"
+#include "IAudioNibbler.hpp"
 
 Game::Game(void):
 	_height(MAX_SIZE),
@@ -54,11 +55,17 @@ void					Game::gameLoop(void)
 	int					gui(0);
 	Time				refresh;
 	eEvent				event(E_EVENT);
+	tAudioCreator		aC;
+	tAudioDestructor	aD;
 
 	if (initDL())
 		return ;
 	initNibbler();
 	createGUI(gui);
+	aC = reinterpret_cast<tAudioCreator>((dlsym(_dlHandle[3],
+												"createAudio")));
+	_aN = aC();
+	_aN->playMusic();
 	std::srand(clock());
 	apple = newApple();
 	_gN[gui]->updateDisplay(_nibbler, apple);
@@ -83,6 +90,9 @@ void					Game::gameLoop(void)
 		}
 	}
 	destroyGUI(gui);
+	aD = reinterpret_cast<tAudioDestructor>((dlsym(_dlHandle[3],
+												   "deleteAudio")));
+	aD(_aN);
 	closeDL();
 }
 
@@ -124,9 +134,13 @@ int						Game::initDL(void)
 	{
 		_dlHandle[1] = dlopen("f2/f2.so", RTLD_LAZY | RTLD_LOCAL);
 		if (_dlHandle[1])
+		{
 			_dlHandle[2] = dlopen("f3/f3.so", RTLD_LAZY | RTLD_LOCAL);
+			if (_dlHandle[2])
+				_dlHandle[3] = dlopen("e1/e1.so", RTLD_LAZY | RTLD_LOCAL);
+		}
 	}
-	while (i < 3)
+	while (i < 4)
 	{
 		if (!_dlHandle[i])
 		{
@@ -144,6 +158,7 @@ void					Game::closeDL(void)
 	dlclose(_dlHandle[0]);
 	dlclose(_dlHandle[1]);
 	dlclose(_dlHandle[2]);
+	dlclose(_dlHandle[3]);
 }
 void					Game::createGUI(int gui)
 {
@@ -225,8 +240,9 @@ bool					Game::eatApple(int apple)
 
 	if (apple == head.x + head.y * _width)
 	{
-		if (_speed > 10)
-			_speed -= 5;
+		_aN->playEatSound();
+		if (_speed > MAX_SPEED)
+			_speed -= ACCELERATION;
 		return (true);
 	}
 	_map[_nibbler.back().x + _nibbler.back().y * _width] = EMPTY;
@@ -239,6 +255,7 @@ bool					Game::isDead(void)
 
 	if (_map[head.x + head.y * _width] != EMPTY)
 	{
+		_aN->playDeathSound();
 		head.state = DEAD;
 		return (true);
 	}

@@ -6,14 +6,13 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/08 13:04:34 by erobert           #+#    #+#             //
-//   Updated: 2015/04/08 13:06:18 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/08 16:22:12 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #ifndef GUI_SFML_HPP
 # define GUI_SFML_HPP
 
-# include <ncurses.h>
 # include "SFML/Graphics.hpp"
 # include "IGUINibbler.hpp"
 

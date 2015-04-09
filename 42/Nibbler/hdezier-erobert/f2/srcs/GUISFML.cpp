@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/31 14:44:53 by erobert           #+#    #+#             //
-//   Updated: 2015/04/08 14:10:17 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/08 17:08:41 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -39,7 +39,7 @@ GUISFML::~GUISFML(void)
 void							GUISFML::initMap(std::vector<int> const &map,
 												 int height, int width)
 {
-	_tGrass.loadFromFile("f2/jpeg/metal.jpg");
+	_tGrass.loadFromFile("f2/jpgs/metal.jpg");
 	_tGrass.setRepeated(true);
 	_map = map;
 	_height = height;
