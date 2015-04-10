@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/27 18:40:55 by erobert           #+#    #+#             //
-//   Updated: 2015/04/09 18:48:19 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/10 14:57:17 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -49,7 +49,10 @@ bool					Game::buildMap(char *height, char *width)
 	}
 	return (true);
 }
-
+void					Game::setMap(std::vector<int> const &map)
+{
+	_map = map;
+}
 void					Game::gameLoop(void)
 {
 	int					apple;
@@ -131,15 +134,15 @@ int						Game::initDL(void)
 	int					i(0);
 	int					j(0);
 
-	_dlHandle[0] = dlopen("f1.so", RTLD_LAZY | RTLD_LOCAL);
+	_dlHandle[0] = dlopen("gui-ncurses.so", RTLD_LAZY | RTLD_LOCAL);
 	if (_dlHandle[0])
 	{
-		_dlHandle[1] = dlopen("f2.so", RTLD_LAZY | RTLD_LOCAL);
+		_dlHandle[1] = dlopen("gui-sfml.so", RTLD_LAZY | RTLD_LOCAL);
 		if (_dlHandle[1])
 		{
 			_dlHandle[2] = dlopen("f3.so", RTLD_LAZY | RTLD_LOCAL);
 			if (_dlHandle[2])
-				_dlHandle[3] = dlopen("e1.so", RTLD_LAZY | RTLD_LOCAL);
+				_dlHandle[3] = dlopen("audio-sfml.so", RTLD_LAZY | RTLD_LOCAL);
 		}
 	}
 	while (i < 4)

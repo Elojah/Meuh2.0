@@ -6,23 +6,23 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 09:31:53 by erobert           #+#    #+#              #
-#    Updated: 2015/04/09 18:18:00 by erobert          ###   ########.fr        #
+#    Updated: 2015/04/10 14:30:05 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME = f2.so
-FILES = GUISFML.cpp
+NAME = audio-sfml.so
+FILES = AudioSFML.cpp
 SRCS = $(addprefix srcs/, $(FILES))
 OBJS = $(SRCS:srcs/%.cpp=objs/%.o)
 INCS = $(SRCS:srcs/%.cpp=incs/%.hpp)
 TMPS = $(SRCS:.cpp=.cpp~) $(INCS:.hpp=.hpp~) Makefile~
 PWD = $(shell pwd)
 ASFML = SFML-2.2-osx-clang-universal
-DSFML = SFML
+DSFML = ../SFML
 CC = g++
 CFLAGS = -Wall -Wextra -Werror
-IFLAGS = -Iincs/ -I../nibbler_dir/incs/ -I$(DSFML)/include/
-LFLAGS = -LSFML/lib -lsfml-graphics -lsfml-window -lsfml-system
+IFLAGS = -Iincs/ -I../game/incs/ -I$(DSFML)/include/
+LFLAGS = -L$(DSFML)/lib -lsfml-audio
 
 .PHONY: all clean objs_dir fclean re
 
@@ -31,7 +31,8 @@ LFLAGS = -LSFML/lib -lsfml-graphics -lsfml-window -lsfml-system
 all: objs_dir $(DSFML) $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -dynamiclib -rpath $(PWD)/SFML/lib/ -o $(NAME) $(OBJS) $(LFLAGS)
+	$(CC) $(CFLAGS) -dynamiclib -rpath $(PWD)/$(DSFML)/lib/ -o $(NAME) $(OBJS) \
+	$(LFLAGS)
 
 objs/%.o : srcs/%.cpp
 	$(CC) $(CFLAGS) -Iinc $(IFLAGS) -o $@ -c $^

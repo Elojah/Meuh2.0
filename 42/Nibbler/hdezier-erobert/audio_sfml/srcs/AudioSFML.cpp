@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/08 16:22:27 by erobert           #+#    #+#             //
-//   Updated: 2015/04/09 18:34:48 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/10 14:25:10 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -14,11 +14,11 @@
 
 AudioSFML::AudioSFML(void)
 {
-	_music.openFromFile("e1_dir/data/hymne_a_la_kro");
+	_music.openFromFile("data/hymne_a_la_kro");
 	_music.setLoop(true);
-	_eatBuffer.loadFromFile("e1_dir/data/chewbacca");
+	_eatBuffer.loadFromFile("data/chewbacca");
 	_eatSound.setBuffer(_eatBuffer);
-	_deathBuffer.loadFromFile("e1_dir/data/bladerunner_lesbian");
+	_deathBuffer.loadFromFile("data/bladerunner_lesbian");
 	_deathSound.setBuffer(_deathBuffer);
 }
 AudioSFML::~AudioSFML(void) {}

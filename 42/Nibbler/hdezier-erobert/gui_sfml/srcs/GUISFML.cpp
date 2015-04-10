@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/31 14:44:53 by erobert           #+#    #+#             //
-//   Updated: 2015/04/09 21:36:02 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/10 14:32:56 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -20,7 +20,7 @@ GUISFML::GUISFML(void):
 	_h(_cellSize / 2 + 2, 4),
 	_b(_v)
 {
-	_f.loadFromFile("f2_dir/data/open_sans_light");
+	_f.loadFromFile("data/open_sans_light");
 	_t.setFont(_f);
 	_t.setCharacterSize(12);
 	_t.setColor(sf::Color::White);
@@ -44,7 +44,7 @@ GUISFML::~GUISFML(void)
 void							GUISFML::initMap(std::vector<int> const &map,
 												 int height, int width)
 {
-	_tGrass.loadFromFile("f2_dir/data/metal");
+	_tGrass.loadFromFile("data/metal");
 	_tGrass.setRepeated(true);
 	_map = map;
 	_height = height;
