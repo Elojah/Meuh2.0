@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/27 18:40:55 by erobert           #+#    #+#             //
-//   Updated: 2015/04/10 14:57:17 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/11 17:10:31 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -90,7 +90,7 @@ void					Game::gameLoop(void)
 				_map[_nibbler.front().x + _nibbler.front().y * _width] = HEAD;
 			}
 			_gN[gui]->updateDisplay(_nibbler, apple, _score);
-			refresh.setLastTime(refresh.getCurrentTime());
+			refresh.setLastTime(refresh.currentTime());
 		}
 	}
 	destroyGUI(gui);
