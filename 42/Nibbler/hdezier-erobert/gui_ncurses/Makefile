@@ -6,40 +6,41 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 09:31:53 by erobert           #+#    #+#              #
-#    Updated: 2015/04/10 14:36:46 by erobert          ###   ########.fr        #
+#    Updated: 2015/04/10 14:30:29 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-TMPS = Makefile~
-FILES = audio-sfml.so gui-ncurses.so gui-sfml.so f3.so nibbler
-.PHONY: all clean fclean re
+NAME = gui-ncurses.so
+FILES = GUINCurses.cpp
+SRCS = $(addprefix srcs/, $(FILES))
+OBJS = $(SRCS:srcs/%.cpp=objs/%.o)
+INCS = $(SRCS:srcs/%.cpp=incs/%.hpp)
+TMPS = $(SRCS:.cpp=.cpp~) $(INCS:.hpp=.hpp~) Makefile~
+CC = g++
+CFLAGS = -Wall -Wextra -Werror
+IFLAGS = -Iincs/ -I../game/incs/
+LFLAGS = -lncurses -ltermcap
 
-all:
-	@make -C audio_sfml/
-	@ln -sf audio_sfml/audio-sfml.so
-	@make -C gui_ncurses/
-	@ln -sf gui_ncurses/gui-ncurses.so
-	@make -C gui_sfml/
-	@ln -sf gui_sfml/gui-sfml.so
-	@make -C f3_dir/
-	@ln -sf f3_dir/f3.so
-	@make -C game/
-	@ln -sf game/nibbler
+.PHONY: all clean objs_dir fclean re
+
+.SILENT: objs_dir
+
+all: objs_dir $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -shared -fPIC -o $(NAME) $(OBJS) $(LFLAGS)
+
+objs/%.o : srcs/%.cpp
+	$(CC) $(CFLAGS) -Iinc $(IFLAGS) -o $@ -c $^
+
+objs_dir:
+	mkdir -p objs
 
 clean:
-	@make -C audio_sfml/ clean
-	@make -C gui_ncurses/ clean
-	@make -C gui_sfml/ clean
-	@make -C f3_dir/ clean
-	@make -C game/ clean
-	/bin/rm -f $(TMPS)
+	/bin/rm -f $(OBJS) $(TMPS)
+	/bin/rm -rf objs
 
 fclean: clean
-	@make -C audio_sfml/ fclean
-	@make -C gui_ncurses/ fclean
-	@make -C gui_sfml/ fclean
-	@make -C f3_dir/ fclean
-	@make -C game/ fclean
-	/bin/rm -f $(FILES) $(TMPS)
+	/bin/rm -f $(NAME)
 
 re: fclean all
