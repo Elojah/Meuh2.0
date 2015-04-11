@@ -7,6 +7,8 @@ class ${CLASS_NAME}$[parent_include_trueName]
 public:
 	${CLASS_NAME}(void);
 	~${CLASS_NAME}(void);
+	${CLASS_NAME}(${CLASS_NAME} const &src);
+	${CLASS_NAME}&	operator=(${CLASS_NAME} const &rhs);
 protected:
 private:
 };
