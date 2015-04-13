@@ -4,10 +4,10 @@ TARGET = lib/lib${NAME}.a
 SRC_DIR = src
 INC_DIR = include
 BUILD_DIR = build
-LIB_DIR = lib
+LIB_DIR =
 
 #Options
-CC = g++
+CC = clang++
 SRC_EXT = .cpp
 RM = rm -rf
 

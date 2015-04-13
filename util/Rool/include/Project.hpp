@@ -9,7 +9,7 @@ class Project : public Window
 {
 public:
 					Project(const std::string&);
-					~Project(void);
+					virtual ~Project(void);
 protected:
 private:
 	typedef IModule		*(ModuleFactory::*makeFn)(int, int, int, int);

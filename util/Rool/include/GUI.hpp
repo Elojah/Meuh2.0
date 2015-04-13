@@ -5,7 +5,7 @@ class GUI
 {
 public:
 	GUI(void);
-	~GUI(void);
+	virtual ~GUI(void);
 protected:
 private:
 };

@@ -7,7 +7,7 @@ class UsualClass : public TemplateBehavior
 {
 public:
 	UsualClass(void);
-	~UsualClass(void);
+	virtual ~UsualClass(void);
 	void																		init(const std::string&, const std::string&);
 	bool		isBehavior(std::string const&);
 	std::string	makeBehavior(void);
