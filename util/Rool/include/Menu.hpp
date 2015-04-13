@@ -18,7 +18,7 @@ public:
 
 	Menu(void);
 	Menu(int, int, int, int);
-	~Menu(void);
+	virtual ~Menu(void);
 
 	void			waitUser(void);
 

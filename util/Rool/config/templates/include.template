@@ -13,4 +13,6 @@ protected:
 private:
 };
 
+std::ostream&	operator<<(std::ostream& stream, ${CLASS_NAME} const &s);
+
 #endif

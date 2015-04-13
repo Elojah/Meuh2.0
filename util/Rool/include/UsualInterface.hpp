@@ -7,7 +7,7 @@ class UsualInterface : public TemplateBehavior
 {
 public:
 	UsualInterface(void);
-	~UsualInterface(void);
+	virtual ~UsualInterface(void);
 	bool		isBehavior(std::string const&);
 	std::string	makeBehavior(void);
 protected:

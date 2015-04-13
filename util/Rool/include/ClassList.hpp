@@ -9,7 +9,7 @@ class ClassList : public IModule, public Menu
 {
 public:
 	ClassList(int, int, int, int);
-	~ClassList(void);
+	virtual ~ClassList(void);
 	void		init(const std::string&, const std::string&);
 protected:
 	void		sortMenu(size_t length);
