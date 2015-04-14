@@ -13,7 +13,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		Programs\
+		Process\
 		jsoncpp\
 		UI/UINcurses\
 		Master\

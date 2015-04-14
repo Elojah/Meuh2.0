@@ -1,11 +1,16 @@
-Prog 0
+Init UINcurses ... 
+Init UINcurses ... DONE
+Read config file ./config/programs.conf
+File syntax:	OK
+Setting process params...
+Setting process params...
 cmd:	/usr/local/bin/nginx -c /etc/nginx/test.conf
 numprocs:	1
 umask:	18
 workingdir:	/tmp
 autostart:	1
 autorestart:	unexpected
-exitcodes:	1003520864
+exitcodes:	0
 startretries:	3
 starttime:	5
 stopsignal:	TERM
@@ -15,8 +20,6 @@ stderr:	/tmp/nginx.stderr
 env:	
 STARTED_BY:	taskmaster
 ANSWER:	42
-
-Prog 1
 cmd:	/usr/local/bin/vogsphere-worker --no-prefork
 numprocs:	8
 umask:	63
@@ -33,4 +36,3 @@ stderr:	/tmp/vgsworker.stderr
 env:	
 STARTED_BY:	
 ANSWER:	
-

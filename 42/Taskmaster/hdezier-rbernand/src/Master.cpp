@@ -1,32 +1,44 @@
 #include "Master.hpp"
 #include <iostream>
-#include <fstream>
 #include <json/json.h>
 
+const char	Master::log[15] = "./util/log.txt";
+
 Master::Master(void) {
+	_log.open(Master::log);
+	if (_log.fail()) {
+		_log.close();
+		_log.open("/dev/null");
+	}
+	_log << "Init UINcurses ... " << std::endl;
 	_ui.init();
 	_ui.setTitle("Master window");
+	_log << "Init UINcurses ... DONE" << std::endl;
 }
 
 bool			Master::readConfig(std::string const &filename) {
 	Json::Value		root;
-	Json::Value		programs;
+	Json::Value		processes;
 	std::ifstream	configDoc(filename.c_str(), std::ifstream::binary);
 	int				i(0);
 
+	_log << "Read config file " << filename << std::endl;
 	try {
 		configDoc >> root;
 	} catch (std::exception &e) {
 		configDoc.close();
+		_log << "Error reading config file !" << filename << std::endl;
 		_ui.notifyUser("Config file is not valid.");
 		return (false);
 	}
+	_log << "File syntax:\tOK" << std::endl;
 	configDoc.close();
-	programs = root["programs"];
-	_nProgs = programs.size();
-	_progs = new Programs[_nProgs]();
-	for (Json::ValueIterator ijson = programs.begin(); ijson != programs.end() && i < _nProgs; ++ijson) {
-		_progs[i++].setParams(*ijson);
+	processes = root["programs"];
+	_nProcs = processes.size();
+	_procs = new Process[_nProcs]();
+	for (Json::ValueIterator ijson = processes.begin(); ijson != processes.end() && i < _nProcs; ++ijson) {
+		_procs[i].setLog(&_log);
+		_procs[i++].setParams(*ijson);
 	}
 	return (true);
 }
@@ -38,15 +50,14 @@ Master::Master(Master const &src) {
 }
 
 Master::~Master(void) {
-	delete [] _progs;
+	delete [] _procs;
+	_log.close();
 }
 
 void			Master::loop(void) {
-	std::ofstream ofs("util/log.txt");
-	for (int i = 0; i < _nProgs; ++i) {
-		ofs << "Prog " << i << std::endl << _progs[i] << std::endl;
+	for (int i = 0; i < _nProcs; ++i) {
+		_log << _procs[i];
 	}
-	ofs.close();
 	_ui.notifyUser("TEST");
 }
 

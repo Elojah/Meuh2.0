@@ -2,11 +2,12 @@
 # define MASTER_H
 
 # include <string>
+# include <fstream>
 
 # include "UINcurses.hpp"
 class UINcurses;
-# include "Programs.hpp"
-class Programs;
+# include "Process.hpp"
+class Process;
 
 class Master
 {
@@ -19,12 +20,14 @@ public:
 	bool			readConfig(std::string const &filename);
 	void			loop(void);
 
+	static const char	log[15];
 protected:
 private:
 
 	UINcurses					_ui;
-	Programs					*_progs;
-	int							_nProgs;
+	Process						*_procs;
+	int							_nProcs;
+	std::ofstream				_log;
 
 };
 

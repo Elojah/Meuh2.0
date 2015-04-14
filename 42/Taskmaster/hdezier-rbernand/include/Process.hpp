@@ -1,17 +1,20 @@
-#ifndef PROGRAMS_H
-# define PROGRAMS_H
+#ifndef PROCESS_H
+# define PROCESS_H
 
-#include <json/json.h>
+# include <fstream>
+# include <json/json.h>
 
-class Programs
+class Process
 {
 public:
-	Programs(void);
-	~Programs(void);
-	Programs(Programs const &src);
-	Programs&	operator=(Programs const &rhs);
+	Process(void);
+	~Process(void);
+	Process(Process const &src);
+	Process&	operator=(Process const &rhs);
 
 	void		setParams(Json::Value &);
+	void		setLog(std::ofstream *log);
+
 	void		serialize(std::ostream &stream) const;
 
 protected:
@@ -37,10 +40,11 @@ private:
 	};
 
 	sParams						_params;
+	std::ofstream				*_log;
 
 	static const std::string	_paramsName[19];
 };
 
-std::ostream&	operator<<(std::ostream& stream, Programs const &s);
+std::ostream&	operator<<(std::ostream& stream, Process const &s);
 
 #endif

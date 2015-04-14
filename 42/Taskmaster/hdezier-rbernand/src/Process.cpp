@@ -1,6 +1,6 @@
-#include "Programs.hpp"
+#include "Process.hpp"
 
-const std::string	Programs::_paramsName[19] = {
+const std::string	Process::_paramsName[19] = {
 	"cmd",
 	"numprocs",
 	"umask",
@@ -19,23 +19,28 @@ const std::string	Programs::_paramsName[19] = {
 	"ANSWER"
 };
 
-Programs::Programs(void) {
+Process::Process(void) {
 }
 
-Programs::Programs(Programs const &src) {
+Process::Process(Process const &src) {
 	if (this != &src)
 		*this = src;
 }
 
-Programs::~Programs(void) {
+Process::~Process(void) {
 }
 
-void			Programs::setParams(Json::Value &params) {
+void		Process::setLog(std::ofstream *log) {
+	_log = log;
+}
+
+void			Process::setParams(Json::Value &params) {
 	Json::Value							value;
 	std::map<std::string, std::string>	tmp;
 
+	*_log << "Setting process params..." << std::endl;
 	for (int i = 0; i < 19; ++i) {
-		value = params.get(Programs::_paramsName[i], "");
+		value = params.get(Process::_paramsName[i], "");
 		if (value.isArray()) {
 			for (Json::ValueIterator j = value.begin(); j != value.end(); ++j) {
 				if (!(j->isArray())) {
@@ -47,15 +52,21 @@ void			Programs::setParams(Json::Value &params) {
 		}
 	}
 	_params.cmd = tmp["cmd"];
+	_params.workingdir = tmp["workingdir"];
+	_params.autostart = (tmp["autostart"] == "true");
+	_params.autorestart = tmp["autorestart"];
+	_params.stopsignal = tmp["stopsignal"];
+	_params.stdout = tmp["stdout"];
+	_params.stderr = tmp["stderr"];
+	_params.env = tmp["env"];
+	_params.STARTED_BY = tmp["STARTED_BY"];
+	_params.ANSWER = tmp["ANSWER"];
 	if (tmp.find("numprocs") != tmp.end()) {
 		_params.numprocs = std::stoi(tmp["numprocs"]);
 	}
 	if (tmp.find("umask") != tmp.end()) {
 		_params.umask = std::stoi(tmp["umask"]);
 	}
-	_params.workingdir = tmp["workingdir"];
-	_params.autostart = (tmp["autostart"] == "true");
-	_params.autorestart = tmp["autorestart"];
 	if (tmp.find("exitcodes") != tmp.end()) {
 		_params.exitcodes = std::stoi(tmp["exitcodes"]);
 	}
@@ -65,25 +76,19 @@ void			Programs::setParams(Json::Value &params) {
 	if (tmp.find("starttime") != tmp.end()) {
 		_params.starttime = std::stoi(tmp["starttime"]);
 	}
-	_params.stopsignal = tmp["stopsignal"];
 	if (tmp.find("stoptime") != tmp.end()) {
 		_params.stoptime = std::stoi(tmp["stoptime"]);
 	}
-	_params.stdout = tmp["stdout"];
-	_params.stderr = tmp["stderr"];
-	_params.env = tmp["env"];
-	_params.STARTED_BY = tmp["STARTED_BY"];
-	_params.ANSWER = tmp["ANSWER"];
 }
 
-Programs		&Programs::operator=(Programs const &rhs) {
+Process		&Process::operator=(Process const &rhs) {
 	if (this != &rhs) {
 		;
 	}
 	return (*this);
 }
 
-void		Programs::serialize(std::ostream &stream) const {
+void		Process::serialize(std::ostream &stream) const {
 	stream  << "cmd:\t" << _params.cmd << std::endl
 			<< "numprocs:\t" << _params.numprocs << std::endl
 			<< "umask:\t" << _params.umask << std::endl
@@ -102,7 +107,7 @@ void		Programs::serialize(std::ostream &stream) const {
 			<< "ANSWER:\t" << _params.ANSWER << std::endl;
 }
 
-std::ostream&	operator<<(std::ostream& stream, Programs const &s) {
+std::ostream&	operator<<(std::ostream& stream, Process const &s) {
 	s.serialize(stream);
 	return (stream);
 }
