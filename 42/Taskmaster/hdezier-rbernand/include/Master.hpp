@@ -5,21 +5,27 @@
 
 # include "UINcurses.hpp"
 class UINcurses;
+# include "Programs.hpp"
+class Programs;
 
 class Master
 {
 public:
-	Master(std::string const &filename);
+	Master(void);
 	virtual ~Master(void);
 	Master(Master const &src);
 	Master&	operator=(Master const &rhs);
 
+	bool			readConfig(std::string const &filename);
 	void			loop(void);
+
 protected:
 private:
-	Master(void);
 
-	UINcurses		_ui;
+	UINcurses					_ui;
+	Programs					*_progs;
+	int							_nProgs;
+
 };
 
 std::ostream&	operator<<(std::ostream& stream, Master const &s);

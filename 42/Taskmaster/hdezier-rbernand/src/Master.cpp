@@ -1,31 +1,36 @@
 #include "Master.hpp"
-#include <json/json.h>
 #include <iostream>
 #include <fstream>
+#include <json/json.h>
 
-Master::Master(std::string const &filename) {
-	Json::Value		root;
-	std::ifstream	config_doc(filename.c_str(), std::ifstream::binary);
-
+Master::Master(void) {
 	_ui.init();
 	_ui.setTitle("Master window");
-	try {
-		config_doc >> root;
-	} catch (std::exception &e) {
-		_ui.notifyUser("Config file is not valid.");
-		return ;
-	}
-	// std::ifstream		ifs(filename);
-	// std::string			line;
-
-	// if (ifs.fail()) {
-	// 	return ;
-	// }
-	// while (std::getline(ifs, line)) {
-	// 	std::cout << ":\t" << line << std::endl;
-	// }
-	// ifs.close();
 }
+
+bool			Master::readConfig(std::string const &filename) {
+	Json::Value		root;
+	Json::Value		programs;
+	std::ifstream	configDoc(filename.c_str(), std::ifstream::binary);
+	int				i(0);
+
+	try {
+		configDoc >> root;
+	} catch (std::exception &e) {
+		configDoc.close();
+		_ui.notifyUser("Config file is not valid.");
+		return (false);
+	}
+	configDoc.close();
+	programs = root["programs"];
+	_nProgs = programs.size();
+	_progs = new Programs[_nProgs]();
+	for (Json::ValueIterator ijson = programs.begin(); ijson != programs.end() && i < _nProgs; ++ijson) {
+		_progs[i++].setParams(*ijson);
+	}
+	return (true);
+}
+
 
 Master::Master(Master const &src) {
 	if (this != &src)
@@ -33,11 +38,16 @@ Master::Master(Master const &src) {
 }
 
 Master::~Master(void) {
+	delete [] _progs;
 }
 
 void			Master::loop(void) {
-	// _ui.readUser();
-	_ui.notifyUser("Test");
+	std::ofstream ofs("util/log.txt");
+	for (int i = 0; i < _nProgs; ++i) {
+		ofs << "Prog " << i << std::endl << _progs[i] << std::endl;
+	}
+	ofs.close();
+	_ui.notifyUser("TEST");
 }
 
 Master		&Master::operator=(Master const &rhs) {

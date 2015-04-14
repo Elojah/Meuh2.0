@@ -3,8 +3,9 @@
 #include <fstream>
 
 static void		exec(void) {
-	Master		m("./config/programs.conf");
+	Master		m;
 
+	m.readConfig("./config/programs.conf");
 	m.loop();
 }
 
@@ -15,7 +16,6 @@ int			main(void) {
 	noecho();
 	cbreak();
 	raw();
-	cbreak();
 	keypad(stdscr, TRUE);
 	curs_set(0);
 
