@@ -1,0 +1,14 @@
+
+ID:		0x7fe60a407a70
+Title:		Unnamed
+Height:		42
+Width:		227
+XOrigin:	0
+YOrigin:	0
+UINcurses window:
+ID:		0x7fe60a407eb0
+Title:		Unnamed
+Height:		42
+Width:		227
+XOrigin:	0
+YOrigin:	0
