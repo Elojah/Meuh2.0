@@ -1,5 +1,4 @@
-#include "AWindow.hpp"
-#include "UINcurses.hpp"
+#include "Master.hpp"
 #include <iostream>
 #include <fstream>
 

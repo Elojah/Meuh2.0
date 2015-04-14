@@ -4,7 +4,7 @@ TARGET = bin/runner
 SRC_DIR = src
 INC_DIR = include
 BUILD_DIR = build
-LIB_DIR = lib
+LIB_DIR =
 
 #Options
 CC = clang++
@@ -13,6 +13,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
+		jsoncpp\
 		UI/UINcurses\
 		Master\
 		UI/AWindow\
@@ -38,7 +39,7 @@ LIB_GLOBAL = \
 
 LIB_OTHER = \
 
-LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
+LIBS += $(addsuffix /build, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
 LIBS += $(LIB_OTHER)
 

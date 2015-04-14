@@ -1,18 +1,30 @@
 #include "Master.hpp"
+#include <json/json.h>
 #include <iostream>
 #include <fstream>
 
 Master::Master(std::string const &filename) {
-	std::ifstream		ifs(filename);
-	std::string			line;
+	Json::Value		root;
+	std::ifstream	config_doc(filename.c_str(), std::ifstream::binary);
 
-	if (ifs.fail()) {
+	_ui.init();
+	_ui.setTitle("Master window");
+	try {
+		config_doc >> root;
+	} catch (std::exception &e) {
+		_ui.notifyUser("Config file is not valid.");
 		return ;
 	}
-	while (std::getline(ifs, line)) {
-		;
-	}
-	ifs.close();
+	// std::ifstream		ifs(filename);
+	// std::string			line;
+
+	// if (ifs.fail()) {
+	// 	return ;
+	// }
+	// while (std::getline(ifs, line)) {
+	// 	std::cout << ":\t" << line << std::endl;
+	// }
+	// ifs.close();
 }
 
 Master::Master(Master const &src) {
@@ -24,7 +36,8 @@ Master::~Master(void) {
 }
 
 void			Master::loop(void) {
-	;
+	// _ui.readUser();
+	_ui.notifyUser("Test");
 }
 
 Master		&Master::operator=(Master const &rhs) {

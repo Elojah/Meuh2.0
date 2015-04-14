@@ -3,7 +3,7 @@
 
 # include <string>
 
-# include "UINcurses"
+# include "UINcurses.hpp"
 class UINcurses;
 
 class Master
