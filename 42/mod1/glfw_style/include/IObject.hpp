@@ -4,7 +4,7 @@
 # define BUFFER_OFFSET(i) ((char *)NULL + (i))
 # include <OpenGL/gl3.h>
 # define __gl_h_
-# include <glm.hpp>
+# include <glm/glm.hpp>
 # include "Camera.hpp"
 class Camera;
 

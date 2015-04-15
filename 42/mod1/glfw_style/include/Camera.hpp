@@ -11,7 +11,7 @@
 # define DTIME 0.01666f
 
 # include <OpenGL/gl3.h>
-# include <glm.hpp>
+# include <glm/glm.hpp>
 
 enum eDirection {
 	CONSTANT = 0,
