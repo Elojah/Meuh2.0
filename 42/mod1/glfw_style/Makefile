@@ -69,6 +69,8 @@ clean :
 
 fclean :
 	$(RM) $(BUILD_DIR) $(TARGET)
+	$(RM) lib/glfw
+	$(RM) lib/glm
 
 re : fclean all
 
