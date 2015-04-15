@@ -1,14 +1,38 @@
-
-ID:		0x7fe60a407a70
-Title:		Unnamed
-Height:		42
-Width:		227
-XOrigin:	0
-YOrigin:	0
-UINcurses window:
-ID:		0x7fe60a407eb0
-Title:		Unnamed
-Height:		42
-Width:		227
-XOrigin:	0
-YOrigin:	0
+Init UINcurses ... 
+Init UINcurses ... DONE
+Read config file ./config/programs.conf
+File syntax:	OK
+Setting process params...
+Setting process params...
+cmd:	/usr/local/bin/nginx -c /etc/nginx/test.conf
+numprocs:	1
+umask:	18
+workingdir:	/tmp
+autostart:	1
+autorestart:	unexpected
+exitcodes:	0
+startretries:	3
+starttime:	5
+stopsignal:	TERM
+stoptime:	10
+stdout:	/tmp/nginx.stdout
+stderr:	/tmp/nginx.stderr
+env:	
+STARTED_BY:	taskmaster
+ANSWER:	42
+cmd:	/usr/local/bin/vogsphere-worker --no-prefork
+numprocs:	8
+umask:	63
+workingdir:	/tmp
+autostart:	1
+autorestart:	unexpected
+exitcodes:	0
+startretries:	3
+starttime:	5
+stopsignal:	USR1
+stoptime:	10
+stdout:	/tmp/vgsworker.stdout
+stderr:	/tmp/vgsworker.stderr
+env:	
+STARTED_BY:	
+ANSWER:	

@@ -223,17 +223,6 @@ void	Landscape::initBuffers(void) {
 	g_index_buffer_data[0] = 0;
 	g_index_buffer_data[1] = 1;
 	g_index_buffer_data[2] = WIDTH_MAP + 1;
-	for (i = 0; i < (WIDTH_MAP - 1) * HEIGHT_MAP; ++i)
-	{
-		n = i * 6;
-		std::cout << "\t" << g_index_buffer_data[n + 1]
-			<< "\t" << g_index_buffer_data[n + 2]
-			<< "\t" << g_index_buffer_data[n + 3]
-			<< "\t" << g_index_buffer_data[n + 4]
-			<< "\t" << g_index_buffer_data[n + 5]
-			<< "\t" << g_index_buffer_data[n + 6]
-			<< std::endl;
-	}
 
 	glGenVertexArrays(1, &_vertexArrayID);
 	glBindVertexArray(_vertexArrayID);

@@ -21,9 +21,11 @@ public:
 	// int					getW(void) const;
 	// int					getX(void) const;
 	// int					getY(void) const;
+	virtual void				serialize(std::ostream &stream) const;
 
-	virtual void		serialize(std::ostream &stream) const;
-
+	virtual std::string			readUser(void) const;
+	virtual void				notifyUser(const std::string&) const;
+	virtual void				setTitle(const std::string&);
 protected:
 	WINDOW				*_wwin;
 	WINDOW				*_wuser;
@@ -33,9 +35,6 @@ protected:
 	int					_wx;
 	std::string			_wtitle;
 
-	std::string			readUser(void) const;
-	void				notifyUser(const std::string&) const;
-	void				setTitle(const std::string&);
 private:
 	void				setDefaultSize(void);
 };

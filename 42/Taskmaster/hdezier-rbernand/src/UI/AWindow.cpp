@@ -16,7 +16,8 @@ AWindow::AWindow(int h, int w, int y, int x) :
 											_wh(h),
 											_ww(w),
 											_wy(y),
-											_wx(x) {
+											_wx(x),
+											_wtitle("Unnamed") {
 }
 
 void		AWindow::init(void) {

@@ -4,7 +4,7 @@ TARGET = bin/runner
 SRC_DIR = src
 INC_DIR = include
 BUILD_DIR = build
-LIB_DIR = lib
+LIB_DIR =
 
 #Options
 CC = clang++
@@ -13,6 +13,8 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
+		Process\
+		jsoncpp\
 		UI/UINcurses\
 		Master\
 		UI/AWindow\
@@ -27,7 +29,7 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++98
+CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++11
 LFLAGS =
 
 #Libs
@@ -38,7 +40,7 @@ LIB_GLOBAL = \
 
 LIB_OTHER = \
 
-LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
+LIBS += $(addsuffix /build, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
 LIBS += $(LIB_OTHER)
 
