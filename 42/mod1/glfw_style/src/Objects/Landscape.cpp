@@ -32,7 +32,15 @@ void			Landscape::init(void) {
 	smoothMap();
 	useMap();
 	initBuffers();
+	_rain.init();
 }
+
+void	Landscape::refresh(Camera const &cam) {
+	this->AObject::refresh(cam);
+	_rain.downParticles(_vertex_buffer_data);
+	_rain.refresh(cam);
+}
+
 
 bool	Landscape::loop(int const key) {
 	switch (key) {
@@ -195,34 +203,33 @@ void	Landscape::raiseWater(float const n) {
 }
 
 void	Landscape::initBuffers(void) {
-	static GLuint	g_index_buffer_data[WIDTH_MAP * HEIGHT_MAP * 6 + 1];
-	static GLfloat	g_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 + 1];
+	static GLuint	index_buffer_data[WIDTH_MAP * HEIGHT_MAP * 6 + 1];
 	size_t			i(0);
 	size_t			n;
 
 	/*Vertex Buffer*/
 	while (i < WIDTH_MAP * HEIGHT_MAP * 3) {
-		g_vertex_buffer_data[i] = ((i / 3) / WIDTH_MAP);
+		_vertex_buffer_data[i] = ((i / 3) / WIDTH_MAP);
 		i++;
-		g_vertex_buffer_data[i] = _map[(i / 3) / WIDTH_MAP][(i / 3) % WIDTH_MAP] * Z_MULT;
+		_vertex_buffer_data[i] = _map[(i / 3) / WIDTH_MAP][(i / 3) % WIDTH_MAP] * Z_MULT;
 		i++;
-		g_vertex_buffer_data[i] = (i / 3) % WIDTH_MAP;
+		_vertex_buffer_data[i] = (i / 3) % WIDTH_MAP;
 		i++;
 	}
 	/*Index Buffer*/
 	for (i = 0; i < (WIDTH_MAP - 1) * HEIGHT_MAP + 1; ++i) {
 		n = i * 6;
-		g_index_buffer_data[n] = i;
-		g_index_buffer_data[n + 1] = i + 1;
-		g_index_buffer_data[n + 2] = i + WIDTH_MAP;
-		g_index_buffer_data[n + 3] = i + WIDTH_MAP + 1;
-		g_index_buffer_data[n + 4] = i + 1;
-		g_index_buffer_data[n + 5] = i + WIDTH_MAP;
+		index_buffer_data[n] = i;
+		index_buffer_data[n + 1] = i + 1;
+		index_buffer_data[n + 2] = i + WIDTH_MAP;
+		index_buffer_data[n + 3] = i + WIDTH_MAP + 1;
+		index_buffer_data[n + 4] = i + 1;
+		index_buffer_data[n + 5] = i + WIDTH_MAP;
 	}
 
-	g_index_buffer_data[0] = 0;
-	g_index_buffer_data[1] = 1;
-	g_index_buffer_data[2] = WIDTH_MAP + 1;
+	index_buffer_data[0] = 0;
+	index_buffer_data[1] = 1;
+	index_buffer_data[2] = WIDTH_MAP + 1;
 
 	glGenVertexArrays(1, &_vertexArrayID);
 	glBindVertexArray(_vertexArrayID);
@@ -231,15 +238,15 @@ void	Landscape::initBuffers(void) {
 
 	glGenBuffers(1, &_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex_buffer_data), _vertex_buffer_data, GL_STATIC_DRAW);
 
 	glGenBuffers(1, &_indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(g_index_buffer_data), g_index_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_buffer_data), index_buffer_data, GL_STATIC_DRAW);
+	glUseProgram(_progID);
 }
 
 void	Landscape::draw(void) const {
-	glUseProgram(_progID);
 	glUniformMatrix4fv(_matrixID, 1, GL_FALSE, &mvp[0][0]);
 
 	glEnableVertexAttribArray(0);
@@ -254,6 +261,6 @@ void	Landscape::draw(void) const {
 		BUFFER_OFFSET(0)
 	);
 
-	glDrawArrays(GL_POINTS, 0, WIDTH_MAP * HEIGHT_MAP);
 	glDisableVertexAttribArray(0);
+	_rain.draw();
 }

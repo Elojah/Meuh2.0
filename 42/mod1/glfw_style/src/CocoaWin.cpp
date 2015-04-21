@@ -43,10 +43,12 @@ void		CocoaWin::init(void) {
 	glfwSwapInterval(1);
 	glfwSetKeyCallback(_window, key_callback);
 	glfwSetCursorPosCallback(_window, cursor_position_callback);
-	glClearColor(0, 0.5, 1, 1);
+	glClearColor(0, 0, 0, 0);
 }
 
 void		CocoaWin::loop(Map const &map, Camera &cam) {
+	double	t;
+	double	prev_t;
 
 	_map = &map;
 	_cam = &cam;
@@ -55,10 +57,14 @@ void		CocoaWin::loop(Map const &map, Camera &cam) {
 	glDepthFunc(GL_LESS);
 	_map->refresh(*_cam);
 	while (!glfwWindowShouldClose(_window)) {
+		if ((t = glfwGetTime()) < prev_t + 0.016) {
+			continue ;
+		}
+		prev_t = t;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		_map->draw();
 		glfwSwapBuffers(_window);
-        glfwWaitEvents();//Needed, or you will get a spinning beach ball
+        glfwPollEvents();//Needed, or you will get a spinning beach ball
 		_map->refresh(*_cam);
 	}
 }

@@ -30,9 +30,9 @@ public:
 	void				moveEye(const int &xpos, const int &ypos);
 	void				moveForward(void);
 	void				moveBackward(void);
+	void				moveUp(void);
 	void				strafeRight(void);
 	void				strafeLeft(void);
-	void				moveUp(void);
 
 protected:
 private:

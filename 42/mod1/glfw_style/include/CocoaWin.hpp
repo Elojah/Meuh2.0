@@ -11,7 +11,7 @@
 
 # include "Camera.hpp"
 class Camera;
-class IObject;
+class AObject;
 class Map;
 
 class CocoaWin
