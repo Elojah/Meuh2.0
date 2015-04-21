@@ -204,9 +204,9 @@ void	Landscape::initBuffers(void) {
 	while (i < WIDTH_MAP * HEIGHT_MAP * 3) {
 		g_vertex_buffer_data[i] = ((i / 3) / WIDTH_MAP);
 		i++;
-		g_vertex_buffer_data[i] = (i / 3) % WIDTH_MAP;
-		i++;
 		g_vertex_buffer_data[i] = _map[(i / 3) / WIDTH_MAP][(i / 3) % WIDTH_MAP] * Z_MULT;
+		i++;
+		g_vertex_buffer_data[i] = (i / 3) % WIDTH_MAP;
 		i++;
 	}
 	/*Index Buffer*/

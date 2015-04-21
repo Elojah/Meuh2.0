@@ -5,5 +5,5 @@ out float zHeight;
 uniform mat4	mvp;
 void main() {
 	gl_Position = mvp * vec4(vertexSpace, 1);
-	zHeight = vertexSpace.z;
+	zHeight = vertexSpace.y;
 }
