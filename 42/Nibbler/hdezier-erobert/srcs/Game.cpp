@@ -28,7 +28,7 @@ bool					Game::buildMap(char *height, char *width)
 {
 	std::stringstream	ss;
 	int					i(0);
-	
+
 	ss << height;
 	ss >> _height;
 	ss.clear();

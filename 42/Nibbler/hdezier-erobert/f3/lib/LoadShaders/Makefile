@@ -1,10 +1,10 @@
-TARGET = f3.so
+TARGET = lib/libLoadShaders.a
 
 #Directories
 SRC_DIR = src
 INC_DIR = include
 BUILD_DIR = build
-LIB_DIR =
+LIB_DIR = lib
 
 #Options
 CC = clang++
@@ -12,8 +12,7 @@ SRC_EXT = .cpp
 RM = rm -rf
 
 #List classes here
-CLASS = \
-		GUIGL\
+CLASS = LoadShaders\
 
 #List interfaces here
 INTERFACE = \
@@ -21,28 +20,16 @@ INTERFACE = \
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
 OBJ = $(addsuffix .o, $(addprefix $(BUILD_DIR)/, $(CLASS)))
-DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS = -MMD -Wall -Wextra -Werror -O3 -std=c++98
+CFLAGS = -MMD -Wall -Wextra -Werror -O3 -g -std=c++98
 LFLAGS =
 
 #Libs
-LIB_LOCAL = \
-			lib/LoadShaders\
-
-LIB_GLOBAL = \
-			LoadShaders\
-			glfw3\
-
-LIB_OTHER = \
-			-framework Cocoa\
-			-framework OpenGL\
-			-framework IOKit\
-			-framework CoreVideo\
-			-Llib/glfw/src\
-
+LIB_LOCAL =
+LIB_GLOBAL = GL
+LIB_OTHER =
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
 LIBS += $(LIB_OTHER)
@@ -50,12 +37,9 @@ LIBS += $(LIB_OTHER)
 #Includes
 INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
-INC += \
-		-I../incs/\
-		-Ilib/glfw/include\
 
 #RULES
-all : installib $(TARGET)
+all : dirbin dirbuild $(TARGET)
 
 clean :
 	$(RM) $(BUILD_DIR)
@@ -65,22 +49,21 @@ fclean :
 
 re : fclean all
 
-installib:
-	sh ./util/install_glfw.sh
+dirbuild:
+	mkdir -p build
+
+dirbin:
+	mkdir -p lib
 
 .PHONY: all clean fclean re
 
 .SILENT: dirbuild dirbin
 
-#Build rule
+#Build rules
 $(TARGET) : $(OBJ)
-	@echo "\n\033[1;4;34mLNK:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
-	$(CC) $(CFLAGS) -dynamiclib $^ -o $@ $(LIBS)
+	@echo "\n\033[1;4;34mDEP:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
+	ar -rcs $@ $^
 
-#Compilation rule
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)
-	@mkdir -p $(dir $@)
-	@echo "\n\033[1;4;34mCMP:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"
+	@echo "\n\033[1;4;34mSRC:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
-
--include $(DEP)

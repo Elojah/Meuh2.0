@@ -77,7 +77,7 @@ void							GUISFML::updateDisplay(tNibbler const &tN,
 			_window.draw(_w);
 		}
 		i++;
-	}	
+	}
 	_a.setPosition(apple % _width * _cellSize, apple / _width * _cellSize);
 	_window.draw(_a);
 	if (it != ie)
@@ -95,7 +95,7 @@ void							GUISFML::updateDisplay(tNibbler const &tN,
 	_window.display();
 }
 Game::eEvent					GUISFML::getEvent(void)
-{	
+{
 	int							i;
 
 	while (_window.pollEvent(_event))
