@@ -38,7 +38,7 @@ Window::~Window(void) {
 
 std::string	Window::readUser(void) const {
 	std::string	result;
-	char		str[64];
+	char		str[256];
 
 	wclear(user);
 	echo();

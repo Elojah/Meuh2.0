@@ -1,4 +1,4 @@
-TARGET = lib/lib${NAME}.a
+TARGET = bin/runner
 
 #Directories
 SRC_DIR = src
@@ -12,7 +12,15 @@ SRC_EXT = .cpp
 RM = rm -rf
 
 #List classes here
-CLASS = ${NAME}\
+CLASS = main\
+		Process\
+		jsoncpp\
+		UI/UINcurses\
+		Master\
+		UI/AWindow\
+
+#List interfaces here
+INTERFACE = \
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
@@ -21,17 +29,18 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++98
+CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++11
 LFLAGS =
 
 #Libs
 LIB_LOCAL = \
 
 LIB_GLOBAL = \
+			ncurses\
 
 LIB_OTHER = \
 
-LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
+LIBS += $(addsuffix /build, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
 LIBS += $(LIB_OTHER)
 
@@ -57,14 +66,15 @@ dirbin:
 
 .SILENT: dirbuild dirbin
 
-#Build rules
+#Build rule
 $(TARGET) : $(OBJ)
-	@echo "\n\033[1;4;34mDEP:\033[0m\n"$^"\n\033[36mCreate lib ...\033[0m\n"
-	ar -rcs $@ $^
+	@echo "\n\033[1;4;34mLNK:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
+#Compilation rule
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)
 	@mkdir -p $(dir $@)
-	@echo "\n\033[1;4;34mSRC:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"
-	$(CC) $(CFLAGS) $(INC) $(LIBS) -o $@ -c $<
+	@echo "\n\033[1;4;34mCMP:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"
+	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
 -include $(DEP)

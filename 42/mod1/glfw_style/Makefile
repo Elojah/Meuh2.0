@@ -44,36 +44,41 @@ LIB_GLOBAL = \
 			glfw3\
 
 LIB_OTHER = \
+			-framework Cocoa\
+			-framework OpenGL\
 			-framework IOKit\
 			-framework CoreVideo\
-			-framework OpenGL\
-			-framework Cocoa\
 			-Llib/glfw/src\
 
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
-LIBS += $(addprefix -l,$(LIB_GLOBAL))
 LIBS += $(LIB_OTHER)
+LIBS += $(addprefix -l,$(LIB_GLOBAL))
 
 #Includes
 INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 INC += \
 		-Ilib/glfw/include\
-		-Ilib/glm/include\
+		-Ilib/glm\
 
 #RULES
-all : dirbin $(TARGET)
+all : dirbin dirlib $(TARGET)
 
 clean :
 	$(RM) $(BUILD_DIR)
 
 fclean :
 	$(RM) $(BUILD_DIR) $(TARGET)
+	$(RM) lib/glfw
+	$(RM) lib/glm
 
 re : fclean all
 
 dirbin:
 	mkdir -p bin
+
+dirlib:
+	sh ./util/install_lib.sh
 
 .PHONY: all clean fclean re
 

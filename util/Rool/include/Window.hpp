@@ -9,7 +9,7 @@ class Window
 public:
 	Window(void);
 	Window(int, int, int, int);
-	~Window(void);
+	virtual ~Window(void);
 	WINDOW			*getWin(void) const;
 
 protected:

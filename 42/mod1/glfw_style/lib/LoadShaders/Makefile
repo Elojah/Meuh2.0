@@ -39,7 +39,7 @@ INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 
 #RULES
-all : dirbuild $(TARGET)
+all : dirbin dirbuild $(TARGET)
 
 clean :
 	$(RM) $(BUILD_DIR)
@@ -53,7 +53,7 @@ dirbuild:
 	mkdir -p build
 
 dirbin:
-	mkdir -p bin
+	mkdir -p lib
 
 .PHONY: all clean fclean re
 

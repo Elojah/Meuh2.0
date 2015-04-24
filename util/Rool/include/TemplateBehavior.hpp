@@ -9,7 +9,7 @@ class TemplateBehavior
 {
 public:
 																			TemplateBehavior(void){};
-																			~TemplateBehavior(void){};
+																			virtual ~TemplateBehavior(void){};
 	virtual bool															isBehavior(std::string const &str){(void)str;return (false);}
 	virtual std::string														makeBehavior(void){return (std::string());}
 	virtual void															init(const std::string &str, const std::string &pathSet) {
