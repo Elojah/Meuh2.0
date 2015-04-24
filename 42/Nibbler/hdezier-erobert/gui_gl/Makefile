@@ -1,10 +1,10 @@
-TARGET = bin/runner
+TARGET = gui-gl.so
 
 #Directories
 SRC_DIR = src
 INC_DIR = include
 BUILD_DIR = build
-LIB_DIR = lib
+LIB_DIR =
 
 #Options
 CC = clang++
@@ -12,20 +12,11 @@ SRC_EXT = .cpp
 RM = rm -rf
 
 #List classes here
-CLASS = main\
-		Objects/Rain\
-		Parser/Tokens/Scope\
-		Parser/Tokens/Comment\
-		Parser/Tokens/Number\
-		Parser/Parser\
-		Objects/Landscape\
-		Camera\
-		Map\
-		CocoaWin\
+CLASS = \
+		GUIGL\
 
 #List interfaces here
-INTERFACES = \
-		AObject\
+INTERFACE = \
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
@@ -34,7 +25,7 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++98
+CFLAGS = -MMD -Wall -Wextra -Werror -O3 -std=c++98
 LFLAGS =
 
 #Libs
@@ -53,34 +44,29 @@ LIB_OTHER = \
 			-Llib/glfw/src\
 
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
-LIBS += $(LIB_OTHER)
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
+LIBS += $(LIB_OTHER)
 
 #Includes
 INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 INC += \
+		-I../game/incs/\
 		-Ilib/glfw/include\
-		-Ilib/glm\
 
 #RULES
-all : dirbin dirlib $(TARGET)
+all : installib $(TARGET)
 
 clean :
 	$(RM) $(BUILD_DIR)
 
 fclean :
 	$(RM) $(BUILD_DIR) $(TARGET)
-	# $(RM) lib/glfw
-	# $(RM) lib/glm
 
 re : fclean all
 
-dirbin:
-	mkdir -p bin
-
-dirlib:
-	sh ./util/install_lib.sh
+installib:
+	sh ./util/install_glfw.sh
 
 .PHONY: all clean fclean re
 
@@ -89,7 +75,7 @@ dirlib:
 #Build rule
 $(TARGET) : $(OBJ)
 	@echo "\n\033[1;4;34mLNK:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+	$(CC) $(CFLAGS) -dynamiclib $^ -o $@ $(LIBS)
 
 #Compilation rule
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)

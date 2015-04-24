@@ -39,13 +39,16 @@ void		CocoaWin::init(void) {
 	_window = glfwCreateWindow(_width, _height, "mod1", NULL, NULL);
 	glfwMakeContextCurrent(_window);
 	glfwSetWindowUserPointer(_window, this);
+	glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSwapInterval(1);
 	glfwSetKeyCallback(_window, key_callback);
 	glfwSetCursorPosCallback(_window, cursor_position_callback);
-	glClearColor(0, 0.5, 1, 1);
+	glClearColor(0, 0, 0, 0);
 }
 
 void		CocoaWin::loop(Map const &map, Camera &cam) {
+	double	t;
+	double	prev_t;
 
 	_map = &map;
 	_cam = &cam;
@@ -54,10 +57,14 @@ void		CocoaWin::loop(Map const &map, Camera &cam) {
 	glDepthFunc(GL_LESS);
 	_map->refresh(*_cam);
 	while (!glfwWindowShouldClose(_window)) {
+		if ((t = glfwGetTime()) < prev_t + 0.016) {
+			continue ;
+		}
+		prev_t = t;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		_map->draw();
 		glfwSwapBuffers(_window);
-        glfwWaitEvents();//Needed, or you will get a spinning beach ball
+        glfwPollEvents();//Needed, or you will get a spinning beach ball
 		_map->refresh(*_cam);
 	}
 }
@@ -73,20 +80,27 @@ GL_STACK_OVERFLOW
 */
 void		CocoaWin::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	static CocoaWin		*win = static_cast<CocoaWin *>(glfwGetWindowUserPointer(window));
+	static CocoaWin		*win = reinterpret_cast<CocoaWin *>(glfwGetWindowUserPointer(window));
+	static bool			keyValid;
 
 	(void)scancode;
 	(void)mods;
 
-	if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
+	keyValid = (action == GLFW_PRESS || action == GLFW_REPEAT);
+	if (!keyValid) {
+		return ;
+	}
+	if (key == GLFW_KEY_UP || key == GLFW_KEY_W) {
 		win->getCam()->moveForward();
-	} else if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
+	} else if (key == GLFW_KEY_DOWN || key == GLFW_KEY_S) {
 		win->getCam()->moveBackward();
-	} else if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
+	} else if (key == GLFW_KEY_RIGHT || key == GLFW_KEY_D) {
 		win->getCam()->strafeRight();
-	} else if (key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
+	} else if (key == GLFW_KEY_LEFT || key == GLFW_KEY_A) {
 		win->getCam()->strafeLeft();
-	} else if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+	} else if (key == GLFW_KEY_SPACE) {
+		win->getCam()->moveUp();
+	} else if (key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q) {
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	}
 }

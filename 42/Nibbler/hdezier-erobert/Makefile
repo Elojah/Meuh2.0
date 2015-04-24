@@ -11,7 +11,7 @@
 #******************************************************************************#
 
 TMPS = Makefile~
-FILES = audio-sfml.so gui-ncurses.so gui-sfml.so f3.so nibbler
+FILES = audio-sfml.so gui-ncurses.so gui-sfml.so gui-gl.so nibbler
 .PHONY: all clean fclean re
 
 all:
@@ -21,8 +21,8 @@ all:
 	@ln -sf gui_ncurses/gui-ncurses.so
 	@make -C gui_sfml/
 	@ln -sf gui_sfml/gui-sfml.so
-	@make -C f3_dir/
-	@ln -sf f3_dir/f3.so
+	@make -C gui_gl/
+	@ln -sf gui_gl/gui-gl.so
 	@make -C game/
 	@ln -sf game/nibbler
 
@@ -30,7 +30,7 @@ clean:
 	@make -C audio_sfml/ clean
 	@make -C gui_ncurses/ clean
 	@make -C gui_sfml/ clean
-	@make -C f3_dir/ clean
+	@make -C gui_gl/ clean
 	@make -C game/ clean
 	/bin/rm -f $(TMPS)
 
@@ -38,7 +38,7 @@ fclean: clean
 	@make -C audio_sfml/ fclean
 	@make -C gui_ncurses/ fclean
 	@make -C gui_sfml/ fclean
-	@make -C f3_dir/ fclean
+	@make -C gui_gl/ fclean
 	@make -C game/ fclean
 	/bin/rm -f $(FILES) $(TMPS)
 

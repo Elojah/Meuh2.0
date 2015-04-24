@@ -2,7 +2,7 @@
 # define MAP_H
 
 # include <vector>
-class IObject;
+class AObject;
 class Camera;
 
 class Map
@@ -10,12 +10,12 @@ class Map
 public:
 	Map(void);
 	~Map(void);
-	void	addObject(IObject *obj);
+	void	addObject(AObject *obj);
 	void	draw(void) const;
 	void	refresh(Camera const &cam) const;
 protected:
 private:
-	std::vector<IObject *>	_objects;
+	std::vector<AObject *>	_objects;
 };
 
 #endif

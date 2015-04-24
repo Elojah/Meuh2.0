@@ -6,9 +6,8 @@
 # define RATIO 4.0f / 3.0f
 # define ZNEAR 0.1f
 # define ZFAR 500.0f
-# define SPEED 30.0f
+# define SPEED 3.0f
 # define M_SPEED 0.005f
-# define DTIME 0.01666f
 
 # include <OpenGL/gl3.h>
 # include <glm/glm.hpp>
@@ -26,11 +25,12 @@ class Camera
 public:
 	Camera(void);
 	~Camera(void);
-	const glm::mat4		getViewProj(void) const;
+	const glm::mat4		&getViewProj(void) const;
 	void				setSize(const size_t &width, const size_t &height);
 	void				moveEye(const int &xpos, const int &ypos);
 	void				moveForward(void);
 	void				moveBackward(void);
+	void				moveUp(void);
 	void				strafeRight(void);
 	void				strafeLeft(void);
 
@@ -44,7 +44,6 @@ private:
 	glm::mat4		_vp;
 	glm::vec3		_direction;
 	glm::vec3		_position;
-	glm::vec3		_right;
 	glm::vec3		_up;
 };
 

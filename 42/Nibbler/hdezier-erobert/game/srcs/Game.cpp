@@ -29,7 +29,7 @@ bool					Game::buildMap(char *height, char *width)
 {
 	std::stringstream	ss;
 	int					i(0);
-	
+
 	ss << height;
 	ss >> _height;
 	ss.clear();
@@ -140,7 +140,7 @@ int						Game::initDL(void)
 		_dlHandle[1] = dlopen("gui-sfml.so", RTLD_LAZY | RTLD_LOCAL);
 		if (_dlHandle[1])
 		{
-			_dlHandle[2] = dlopen("f3.so", RTLD_LAZY | RTLD_LOCAL);
+			_dlHandle[2] = dlopen("gui-gl.so", RTLD_LAZY | RTLD_LOCAL);
 			if (_dlHandle[2])
 				_dlHandle[3] = dlopen("audio-sfml.so", RTLD_LAZY | RTLD_LOCAL);
 		}

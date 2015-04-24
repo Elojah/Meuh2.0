@@ -8,20 +8,25 @@
 # define HEIGHT_MAP 100
 # define Z_MULT 30
 
-# include "IObject.hpp"
+# include "AObject.hpp"
+
 # include <string>
 # include <vector>
+
+# include "Rain.hpp"
+class Rain;
 class Parser;
 
-class Landscape : public IObject
+class Landscape : public AObject
 {
 public:
 								Landscape(std::string const&);
-								~Landscape(void);
-	void						init(void);
-	void						draw(void) const;
+	virtual						~Landscape(void);
+	virtual void				init(void);
+	virtual void				draw(void) const;
+	virtual bool				loop(int const);
+	virtual void				refresh(Camera const &cam);
 	void						raiseWater(float const);
-	bool						loop(int const);
 protected:
 private:
 								Landscape(void);
@@ -45,9 +50,12 @@ private:
 
 	std::string					_filename;
 
+	GLfloat						_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 + 1];
 	float						_map[WIDTH_MAP + 1][HEIGHT_MAP + 1];
 	std::vector<t_point>		_immovablePoints;
 	float						_waterDiff;
+
+	Rain						_rain;
 };
 
 #endif
