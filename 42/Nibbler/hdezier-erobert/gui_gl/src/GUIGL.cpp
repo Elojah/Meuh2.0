@@ -3,11 +3,22 @@
 #include "LoadShaders.h"
 
 GUIGL::GUIGL(void) {
+	_input[Game::PAUSE] = 'e';
+	_input[Game::RESTART] = 'r';
+	_input[Game::EXIT] = 'q';
+	_input[Game::UP] = 'w';
+	_input[Game::LEFT] = 'a';
+	_input[Game::DOWN] = 's';
+	_input[Game::RIGHT] = 'd';
+	_input[Game::F1] = '1';
+	_input[Game::F2] = '2';
+	_input[Game::F3] = '3';
 }
 
 GUIGL::GUIGL(GUIGL const &src) {
-	if (this != &src)
+	if (this != &src) {
 		*this = src;
+	}
 }
 
 GUIGL::~GUIGL(void) {
@@ -22,10 +33,6 @@ GUIGL::~GUIGL(void) {
 
 	glfwDestroyWindow(_window);
 	glfwTerminate();
-	std::cout << "Credits:" << std::endl
-	<< "\thdezier" << std::endl
-	<< "\terobert" << std::endl
-	<< "@42SchoolProject" << std::endl;
 }
 
 GUIGL		&GUIGL::operator=(GUIGL const &rhs) {
@@ -54,8 +61,9 @@ void			GUIGL::initMap(std::vector<int> const &map,
 	_window = glfwCreateWindow(_width * SIZE_CASE, _height * SIZE_CASE, "Nibbler", NULL, NULL);
 	glfwMakeContextCurrent(_window);
 	glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetWindowUserPointer(_window, this);
 	glfwSwapInterval(1);
-	glfwSetKeyCallback(_window, key_callback);
+	glfwSetKeyCallback(_window, keyCallback);
 	glClearColor(0.1, 0.25, 0.66, 0.3);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
@@ -120,12 +128,31 @@ void			GUIGL::updateDisplay(tNibbler const &tN, int apple, int score) {
 }
 
 Game::eEvent	GUIGL::getEvent(void) {
+	int			i;
+
+	if (_key != 0) {
+		i = 0;
+		while (i < Game::E_EVENT)
+		{
+			if (_input[i] == _key) {
+				_key = 0;
+				return (static_cast<Game::eEvent>(i));
+			}
+			i++;
+		}
+	}
 	return (Game::UP);
 }
 
-void		GUIGL::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void		GUIGL::setKey(char c) {
+	_key = c;
+}
+
+
+void		GUIGL::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	static bool			keyValid;
+	static GUIGL		*win = static_cast<GUIGL *>(glfwGetWindowUserPointer(window));
 
 	(void)scancode;
 	(void)mods;
@@ -134,11 +161,7 @@ void		GUIGL::key_callback(GLFWwindow* window, int key, int scancode, int action,
 	if (!keyValid) {
 		return ;
 	}
-	if (false) {
-		;
-	} else if (key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q) {
-		glfwSetWindowShouldClose(window, GL_TRUE);
-	}
+	win->setKey(key);
 }
 
 GUIGL							*createGUI(void) {
