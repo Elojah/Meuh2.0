@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/08 13:26:20 by erobert           #+#    #+#             //
-//   Updated: 2015/04/08 13:27:48 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/11 17:10:46 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -21,10 +21,11 @@ public:
 	Time(void);
 	~Time(void);
 
+	struct timeval	currentTime(void);
+
 	int				msSinceLastTime(void);
 	void			setCurrentTime(void);
 	void			setLastTime(struct timeval value);
-	struct timeval	getCurrentTime(void);
 private:
 	Time(const Time &t);
 
