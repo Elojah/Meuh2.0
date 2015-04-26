@@ -75,15 +75,28 @@ void			GUIGL::initBuffers(void) {
 
 	_vertex_buffer_data = new sPoint[_width * _height + 1];
 	_index_buffer_data = new GLuint[(_width * _height + 1) * 4];
+
+	/*
+	**Vertex
+	*/
 	for (size_t i = 0; i < _width; ++i) {
 		for (size_t j = 0; j < _height; ++j) {
-			_vertex_buffer_data[i].x = static_cast<float>(i) / _width * 2 - 1.0f;
-			_vertex_buffer_data[i].y = static_cast<float>(j) / _height * 2 - 1.0f;
-			_index_buffer_data[n++] = (i * _height) + j;
-			_index_buffer_data[n++] = (i * _height) + j + 1;
-			_index_buffer_data[n++] = (i * _height) + j;
-			_index_buffer_data[n++] = ((i + 1) * _height) + j;
+			_vertex_buffer_data[i].x = (static_cast<float>(i) - (_width / 2)) / _width * 2.0f;
+			_vertex_buffer_data[i].y = (static_cast<float>(j) - (_height / 2)) / _height * 2.0f;
+			std::cout << "Vx:\t" << _vertex_buffer_data[i].x << "\t\t";
+			std::cout << "Vy:\t" << _vertex_buffer_data[i].y << std::endl;
 		}
+	}
+
+	/*
+	**Index
+	*/
+	for (size_t i = 0; i < _width * (_height - 1); ++i) {
+		n = i * 4;
+		_index_buffer_data[n] = i;
+		_index_buffer_data[n + 1] = i + 1;
+		_index_buffer_data[n + 2] = i;
+		_index_buffer_data[n + 3] = i + _width;
 	}
 
 	glGenVertexArrays(1, &_vertexArrayID);
@@ -93,11 +106,11 @@ void			GUIGL::initBuffers(void) {
 
 	glGenBuffers(1, &_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex_buffer_data), _vertex_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, (_width * _height + 1) * 2 * sizeof(GLfloat), _vertex_buffer_data, GL_STATIC_DRAW);
 
 	glGenBuffers(1, &_indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(_index_buffer_data), _index_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, ((_width * _height + 1) * 4) * sizeof(GLuint), _index_buffer_data, GL_STATIC_DRAW);
 	glUseProgram(_progID);
 }
 
