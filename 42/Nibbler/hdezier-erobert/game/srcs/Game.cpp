@@ -69,7 +69,7 @@ void					Game::gameLoop(void)
 	aC = reinterpret_cast<tAudioCreator>((dlsym(_dlHandle[3],
 												"createAudio")));
 	_aN = aC();
-	_aN->playMusic();
+	// _aN->playMusic();
 	std::srand(clock());
 	apple = newApple();
 	_gN[gui]->updateDisplay(_nibbler, apple, _score);

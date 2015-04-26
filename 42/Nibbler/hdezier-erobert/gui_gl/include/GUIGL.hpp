@@ -26,6 +26,7 @@ public:
 									int height, int width);
 	virtual void			updateDisplay(tNibbler const &tN, int apple, int score);
 	virtual Game::eEvent	getEvent(void);
+	void					setKey(char c);
 
 protected:
 private:
@@ -35,7 +36,7 @@ private:
 		GLfloat y;
 	};
 
-	static void				key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+	static void				keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	void					initBuffers(void);
 
 	GLFWwindow				*_window;
@@ -54,6 +55,9 @@ private:
 	sPoint			*_vertex_buffer_data;
 	GLuint			*_index_buffer_data;
 
+	int				_key;
+
+	char			_input[Game::E_EVENT];
 };
 
 extern "C"
