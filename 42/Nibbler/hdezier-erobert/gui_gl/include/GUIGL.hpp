@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/27 14:56:40 by erobert           #+#    #+#             //
-//   Updated: 2015/04/27 16:41:00 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/28 13:46:49 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -21,10 +21,11 @@
 # include <GLFW/glfw3.h>
 # define GLFW_INCLUDE_GLCOREARB
 # include <iostream>
+# include <LoadShaders.h>
 # include "IGUINibbler.hpp"
 
 # define BUFFER_OFFSET(i) ((char *)NULL + (i))
-# define SIZE_CASE 40
+# define CELL_SIZE 40
 
 class GUIGL : public IGUINibbler
 {
@@ -66,6 +67,7 @@ private:
 	static void				keyCallback(GLFWwindow* window, int key,
 										int scancode, int action, int mods);
 	void					initBuffers(void);
+	void					object(int x, int y, Game::eObject object);
 };
 
 extern "C"
