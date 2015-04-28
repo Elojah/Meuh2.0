@@ -31,6 +31,7 @@ public:
 	void				moveForward(void);
 	void				moveBackward(void);
 	void				moveUp(void);
+	void				moveDown(void);
 	void				strafeRight(void);
 	void				strafeLeft(void);
 

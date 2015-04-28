@@ -67,7 +67,10 @@ void				Camera::moveUp(void) {
 	_position += _up * SPEED;
 	calculus();
 }
-
+void				Camera::moveDown(void) {
+	_position -= _up * SPEED;
+	calculus();
+}
 
 void				Camera::strafeRight(void) {
 	_position += glm::normalize(glm::cross(_direction, _up)) * SPEED;

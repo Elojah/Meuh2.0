@@ -1,12 +1,14 @@
 #ifndef A_OBJECT_H
 # define A_OBJECT_H
 # define GL_GLEXT_PROTOTYPES
-# define BUFFER_OFFSET(i) ((char *)NULL + (i))
 # include <OpenGL/gl3.h>
 # define __gl_h_
 # include <glm/glm.hpp>
 # include "Camera.hpp"
 class Camera;
+
+# define MAX_RAIN_PARTICLE 1000
+# define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
 class AObject
 {
@@ -29,6 +31,14 @@ public:
 		_matrixID = glGetUniformLocation(_progID, "mvp");
 	}
 protected:
+
+	struct						sPoint {
+		GLfloat					x;
+		GLfloat					y;
+		GLfloat					z;
+	};
+
+
 	glm::mat4		mvp;
 	GLuint			_vertexBuffer;
 	GLuint			_indexBuffer;

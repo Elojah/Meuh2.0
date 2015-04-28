@@ -22,7 +22,7 @@ Landscape::Landscape(std::string const &filename) :
 }
 
 void			Landscape::init(void) {
-	Parser									p(_filename);
+	Parser					p(_filename);
 
 	std::cout << "Parsing:\tDONE" << std::endl;
 	_waterDiff = 0;
@@ -33,6 +33,9 @@ void			Landscape::init(void) {
 	useMap();
 	initBuffers();
 	_rain.init();
+	for (size_t i = 0; i < MAX_RAIN_PARTICLE; ++i) {
+		_rain.addDrop(_vertex_buffer_data, i, true);
+	}
 }
 
 void	Landscape::refresh(Camera const &cam) {
@@ -77,7 +80,7 @@ void	Landscape::lexer(const Parser &p) {
 		z = fmod((z / Z_DIVIDE), Z_MAX);
 
 		std::cout << "Assign value: " << z << " at point (" << x << ", " << y << ")" << std::endl;
-		_immovablePoints.push_back((t_point){static_cast<size_t>(x), static_cast<size_t>(y), z});
+		_immovablePoints.push_back((sPoint){static_cast<size_t>(x), static_cast<size_t>(y), z});
 		_map[static_cast<size_t>(x)][static_cast<size_t>(y)] = z;
 		i += 5;
 	}
@@ -85,9 +88,9 @@ void	Landscape::lexer(const Parser &p) {
 }
 
 void	Landscape::smoothMap(void) {
-	t_point		closestPoint;
+	sPoint		closestPoint;
 
-	for (std::vector<t_point>::iterator it = _immovablePoints.begin(); it != _immovablePoints.end(); ++it) {
+	for (std::vector<sPoint>::iterator it = _immovablePoints.begin(); it != _immovablePoints.end(); ++it) {
 		findClosestPoint((*it), closestPoint);
 		std::cout << "Closest point from:\t" << it->x << ", " << it->y << ", " << it->z << std::endl
 		<< "found at:\t\t" << closestPoint.x << ", " << closestPoint.y << ", " << closestPoint.z << std::endl;
@@ -96,7 +99,7 @@ void	Landscape::smoothMap(void) {
 	}
 }
 
-void	Landscape::smoothPoint(t_point const &originPoint, t_point const &closestPoint) {
+void	Landscape::smoothPoint(sPoint const &originPoint, sPoint const &closestPoint) {
 	size_t			i;
 	size_t			j;
 	float			z;
@@ -125,7 +128,7 @@ void	Landscape::smoothPoint(t_point const &originPoint, t_point const &closestPo
 	}
 }
 
-void	Landscape::findClosestPoint(t_point const &origin, t_point &closest) const {
+void	Landscape::findClosestPoint(sPoint const &origin, sPoint &closest) const {
 	size_t			xDist;
 	size_t			yDist;
 	size_t			xTmp;
@@ -147,7 +150,7 @@ void	Landscape::findClosestPoint(t_point const &origin, t_point &closest) const 
 	closest.z = 0;
 
 	dist = xDist * xDist + yDist * yDist;
-	for (std::vector<t_point>::const_iterator it = _immovablePoints.begin(); it != _immovablePoints.end(); ++it) {
+	for (std::vector<sPoint>::const_iterator it = _immovablePoints.begin(); it != _immovablePoints.end(); ++it) {
 		xTmp = it->x > origin.x ? it->x - origin.x : origin.x - it->x;
 		yTmp = it->y > origin.y ? it->y - origin.y : origin.y - it->y;
 		if ((xTmp != 0 || yTmp != 0)
@@ -208,13 +211,10 @@ void	Landscape::initBuffers(void) {
 	size_t			n;
 
 	/*Vertex Buffer*/
-	while (i < WIDTH_MAP * HEIGHT_MAP * 3) {
-		_vertex_buffer_data[i] = ((i / 3) / WIDTH_MAP);
-		i++;
-		_vertex_buffer_data[i] = _map[(i / 3) / WIDTH_MAP][(i / 3) % WIDTH_MAP] * Z_MULT;
-		i++;
-		_vertex_buffer_data[i] = (i / 3) % WIDTH_MAP;
-		i++;
+	for (i = 0; i < WIDTH_MAP * HEIGHT_MAP; ++i) {
+		_vertex_buffer_data[i].x = i / WIDTH_MAP;
+		_vertex_buffer_data[i].y = _map[i / WIDTH_MAP][i % WIDTH_MAP] * Z_MULT;
+		_vertex_buffer_data[i].z = i % WIDTH_MAP;
 	}
 	/*Index Buffer*/
 	for (i = 0; i < (WIDTH_MAP - 1) * HEIGHT_MAP + 1; ++i) {
@@ -243,10 +243,10 @@ void	Landscape::initBuffers(void) {
 	glGenBuffers(1, &_indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_buffer_data), index_buffer_data, GL_STATIC_DRAW);
-	glUseProgram(_progID);
 }
 
 void	Landscape::draw(void) const {
+	glUseProgram(_progID);
 	glUniformMatrix4fv(_matrixID, 1, GL_FALSE, &mvp[0][0]);
 
 	glEnableVertexAttribArray(0);
