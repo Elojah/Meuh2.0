@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/27 14:56:40 by erobert           #+#    #+#             //
-//   Updated: 2015/04/28 13:46:49 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/28 19:58:58 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -21,11 +21,12 @@
 # include <GLFW/glfw3.h>
 # define GLFW_INCLUDE_GLCOREARB
 # include <iostream>
+# include <sstream>
 # include <LoadShaders.h>
 # include "IGUINibbler.hpp"
 
 # define BUFFER_OFFSET(i) ((char *)NULL + (i))
-# define CELL_SIZE 40
+# define CELL_SIZE 20
 
 class GUIGL : public IGUINibbler
 {
@@ -45,6 +46,7 @@ private:
 	{
 		GLfloat x;
 		GLfloat y;
+		GLfloat	color;
 	};
 
 	GLFWwindow				*_window;
@@ -52,11 +54,9 @@ private:
 	std::size_t				_height;
 	std::vector<int>		_map;
 	GLuint					_vertexBuffer;
-	GLuint					_indexBuffer;
 	GLuint					_vertexArrayID;
 	GLuint					_progID;
 	sPoint					*_vertexBufferData;
-	GLuint					*_indexBufferData;
 	int						_key;
 	char					_input[Game::E_EVENT];
 
