@@ -14,12 +14,6 @@ Rain::~Rain(void) {
 
 void				Rain::init(void) {
 
-	for (size_t i = 0; i < (MAX_RAIN_PARTICLE + 1) * 3; i += 3) {
-		vertex_buffer_data[i] = rand() % HEIGHT_MAP;
-		vertex_buffer_data[i + 1] = rand() % 50;
-		vertex_buffer_data[i + 2] = rand() % WIDTH_MAP;
-	}
-
 	glGenVertexArrays(1, &_vertexArrayID);
 	glBindVertexArray(_vertexArrayID);
 
@@ -27,10 +21,34 @@ void				Rain::init(void) {
 
 	glGenBuffers(1, &_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data), vertex_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex_buffer_data), _vertex_buffer_data, GL_STATIC_DRAW);
+}
+
+void				Rain::addDrop(sPoint const land[], int index, bool randHeight) {
+	size_t			position;
+
+	position = rand() % (HEIGHT_MAP * WIDTH_MAP);
+	_vertex_buffer_data[index].x = position / WIDTH_MAP;
+	if (!randHeight) {
+		_vertex_buffer_data[index].y = 50;
+	} else {
+		_vertex_buffer_data[index].y = rand() % 50;
+	}
+	_vertex_buffer_data[index].z = position % WIDTH_MAP;
+	// std::cout << "Drop xy:\t" << _vertex_buffer_data[index].x << "\t" << _vertex_buffer_data[index].z << std::endl;
+	// std::cout << "Land0xy:\t" << land[position].x << "\t" << land[position].z << std::endl;
+	// if (position != 0) {
+	// 	std::cout << "Land1xy:\t" << land[position - 1].x << "\t" << land[position - 1].z << std::endl;
+	// }
+	// if (position != WIDTH_MAP * HEIGHT_MAP) {
+	// 	std::cout << "Land2xy:\t" << land[position + 1].x << "\t" << land[position + 1].z << std::endl;
+	// }
+	(void)_obstacleHeight;
+	(void)land;
 }
 
 void				Rain::draw(void) const {
+	glUseProgram(_progID);
 	glUniformMatrix4fv(_matrixID, 1, GL_FALSE, &mvp[0][0]);
 
 	glEnableVertexAttribArray(0);
@@ -46,47 +64,58 @@ bool	Rain::loop(int const key) {
 	return (false);
 }
 
-void	Rain::downParticles(GLfloat const land[]) {
-	// static const int		around[4] = {4, -4, 1 + WIDTH_MAP, -1 - WIDTH_MAP};
-	// static int				min;
+void	Rain::downParticles(sPoint const land[]) {
+	static int				downSpeed = 0;
 	static bool				down = false;
-	// int						next;
-	// size_t					n;
+	static const int		around[4] = {1, -1, WIDTH_MAP, -WIDTH_MAP};
+	static int				min;
+	int						next;
+	size_t					n;
 
-	(void)land;
-	for (size_t i = 0; i < (MAX_RAIN_PARTICLE + 1) * 3; i += 3) {
-	// 	down = false;
-	// 	for (size_t j = 0; j < WIDTH_MAP * HEIGHT_MAP * 3; j += 3) {
-	// 		// std::cout << "LF rain conflict:\t"
-	// 		// 		<< vertex_buffer_data[i] << " =? " << land[j] << std::endl
-	// 		// 		<< vertex_buffer_data[i + 1] << " =? " << land[j + 1] << std::endl
-	// 		// 		<< vertex_buffer_data[i + 2] << " =? " << land[j + 2] << std::endl;
+	if (++downSpeed < 0) {
+		return ;
+	}
+	downSpeed = 0;
+	for (size_t i = 0; i < MAX_RAIN_PARTICLE; ++i) {
+		down = false;
+		--_vertex_buffer_data[i].y;
+		for (size_t j = 0; j < WIDTH_MAP * HEIGHT_MAP; ++j) {
+			if (_vertex_buffer_data[i].x == land[j].x
+				&& _vertex_buffer_data[i].z == land[j].z
+				&& _vertex_buffer_data[i].y < land[j].y) {
 
-	// 		if (vertex_buffer_data[i] == land[j]
-	// 			&& vertex_buffer_data[i + 1] < land[j + 1]
-	// 			&& vertex_buffer_data[i + 2] == land[j + 2]) {
-	// 			min = land[j + 1];
-	// 			next = -1;
-	// 			for (n = 0; n < 4; ++n) {
-	// 				if (land[j + around[n]] < min) {
-	// 					min = land[j] + around[n];
-	// 					next = n;
-	// 				}
-	// 			}
-	// 			if (next != -1) {
-	// 				vertex_buffer_data[i] = land[j + around[next] - 1];
-	// 				vertex_buffer_data[i + 1] = land[j + around[next]];
-	// 				vertex_buffer_data[i + 2] = land[j + around[next] + 1];
-	// 				down = true;
-	// 				break ;
-	// 			}
-	// 		}
-	// 	}
-		if (!down && --vertex_buffer_data[i + 1] < 0) {
-			vertex_buffer_data[i] = rand() % HEIGHT_MAP;
-			vertex_buffer_data[i + 1] = 50.0f;
-			vertex_buffer_data[i + 2] = rand() % WIDTH_MAP;
+				if (_vertex_buffer_data[i].y <= 0.0f) {
+					break ;
+				}
+				min = land[j].y;
+				next = -1;
+				for (n = 0; n < 4; ++n) {
+					if (j + around[n] < WIDTH_MAP * HEIGHT_MAP
+						&& land[j + around[n]].y < min) {
+						min = land[j + around[n]].y;
+						next = n;
+					}
+				}
+				if (next != -1) {
+
+					// std::cout << "LF rain conflict:\t"
+					// 		<< _vertex_buffer_data[i].x << " =? " << land[j].x << std::endl
+					// 		<< _vertex_buffer_data[i].z << " =? " << land[j].z << std::endl
+					// 		<< _vertex_buffer_data[i].y << " <? " << land[j].y << std::endl
+					// 		<< _vertex_buffer_data[i].z << " NEXT Y = " << land[j + around[next]].y + 0.1f << "\t" <<land[j + around[next]].x << "\t" <<land[j + around[next]].z
+					// 		<< std::endl;
+
+					_vertex_buffer_data[i].x = land[j + around[next]].x;
+					_vertex_buffer_data[i].y = land[j + around[next]].y + 0.1f;
+					_vertex_buffer_data[i].z = land[j + around[next]].z;
+				}
+				down = true;
+				break ;
+			}
+		}
+		if (!down && --_vertex_buffer_data[i].y < 0) {
+			addDrop(land, i, false);
 		}
 	}
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data), vertex_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex_buffer_data), _vertex_buffer_data, GL_STATIC_DRAW);
 }

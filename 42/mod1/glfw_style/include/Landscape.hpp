@@ -30,29 +30,24 @@ public:
 protected:
 private:
 								Landscape(void);
-	typedef struct				s_point {
-		unsigned int			x;
-		unsigned int			y;
-		float					z;
-	}							t_point;
 
 	void						lexer(const Parser &p);
 	void						initBuffers(void);
 
 	void						smoothMap(void);
-	void						smoothPoint(t_point const&, t_point const&);
+	void						smoothPoint(sPoint const&, sPoint const&);
 
 	void						clearMap(void);
 	void						useMap(void);
 	void						printMap(void) const;
-	void						findClosestPoint(t_point const&, t_point&) const;
+	void						findClosestPoint(sPoint const&, sPoint&) const;
 	void						drawPoint(unsigned int const x, unsigned int const y) const;
 
 	std::string					_filename;
 
-	GLfloat						_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP * 3 + 1];
+	sPoint						_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP + 1];
 	float						_map[WIDTH_MAP + 1][HEIGHT_MAP + 1];
-	std::vector<t_point>		_immovablePoints;
+	std::vector<sPoint>			_immovablePoints;
 	float						_waterDiff;
 
 	Rain						_rain;

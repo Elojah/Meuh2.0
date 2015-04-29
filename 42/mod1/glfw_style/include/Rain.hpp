@@ -1,7 +1,6 @@
 #ifndef RAIN_H
 # define RAIN_H
 
-# define MAX_RAIN_PARTICLE 1000
 # include "AObject.hpp"
 class AObject;
 
@@ -13,10 +12,12 @@ public:
 	virtual void	init(void);
 	virtual void	draw(void) const;
 	virtual bool	loop(int const);
-	void			downParticles(GLfloat const land[]);
+	void			downParticles(sPoint const land[]);
+	void			addDrop(sPoint const land[], int index, bool randHeight);
 protected:
 private:
-	GLfloat		vertex_buffer_data[(MAX_RAIN_PARTICLE + 1) * 3];
+	sPoint		_vertex_buffer_data[MAX_RAIN_PARTICLE + 1];
+	GLfloat		_obstacleHeight[MAX_RAIN_PARTICLE + 1];
 };
 
 #endif
