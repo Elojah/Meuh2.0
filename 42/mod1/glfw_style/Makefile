@@ -13,6 +13,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
+		Objects/Sea\
 		Objects/Rain\
 		Parser/Tokens/Scope\
 		Parser/Tokens/Comment\
