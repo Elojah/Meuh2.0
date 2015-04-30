@@ -1,5 +1,6 @@
 #include "Sea.hpp"
 #include "LoadShaders.h"
+#include <iostream>
 
 Sea::Sea(void) {
 }
@@ -8,7 +9,7 @@ Sea::~Sea(void) {
 }
 
 void	Sea::init(void) {
-	static const GLshort index_buffer_data[36] = {
+	static const GLubyte index_buffer_data[36] = {
 		0, 1, 2,
 		1, 2, 3,
 		4, 6, 7,
@@ -45,6 +46,7 @@ void	Sea::init(void) {
 
 void	Sea::draw(void) const {
 	glUseProgram(_progID);
+	glUniformMatrix4fv(_matrixID, 1, GL_FALSE, &mvp[0][0]);
 
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
@@ -52,9 +54,9 @@ void	Sea::draw(void) const {
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
 	glDrawElements(
-		GL_TRIANGLE_STRIP,
+		GL_TRIANGLES,
 		36,
-		GL_SHORT,
+		GL_UNSIGNED_BYTE,
 		BUFFER_OFFSET(0)
 	);
 
