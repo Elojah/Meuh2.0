@@ -1,3 +1,15 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   CocoaWin.hpp                                       :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/30 15:46:20 by hdezier           #+#    #+#             //
+//   Updated: 2015/04/30 15:47:42 by erobert          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
+
 #ifndef COCOA_WIN_H
 # define COCOA_WIN_H
 # define GL_GLEXT_PROTOTYPES
@@ -44,6 +56,9 @@ private:
 /*
 **GL
 */
+	CocoaWin(CocoaWin const &rhs);
+
+	CocoaWin			&operator=(CocoaWin const &rhs);
 };
 
 #endif

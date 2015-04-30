@@ -1,3 +1,15 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   Camera.hpp                                         :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/30 15:44:28 by hdezier           #+#    #+#             //
+//   Updated: 2015/04/30 16:08:43 by erobert          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
+
 #ifndef CAMERA_H
 # define CAMERA_H
 # define GL_GLEXT_PROTOTYPES
@@ -12,7 +24,8 @@
 # include <OpenGL/gl3.h>
 # include <glm/glm.hpp>
 
-enum eDirection {
+enum eDirection
+{
 	CONSTANT = 0,
 	RIGHT = 1,
 	LEFT = 2,
@@ -25,6 +38,7 @@ class Camera
 public:
 	Camera(void);
 	~Camera(void);
+
 	const glm::mat4		&getViewProj(void) const;
 	void				setSize(const size_t &width, const size_t &height);
 	void				moveEye(const int &xpos, const int &ypos);
@@ -34,9 +48,11 @@ public:
 	void				moveDown(void);
 	void				strafeRight(void);
 	void				strafeLeft(void);
-
-protected:
 private:
+	Camera(Camera const &rhs);
+
+	Camera			&operator=(Camera const &rhs);
+
 	void			calculus(void);
 	std::size_t		_width;
 	std::size_t		_height;

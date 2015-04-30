@@ -1,9 +1,9 @@
 #ifndef SCOPE_H
 # define SCOPE_H
 
-# include "IToken.hpp"
+# include "AToken.hpp"
 
-class Scope : public IToken
+class Scope: public AToken
 {
 public:
 	Scope(void);

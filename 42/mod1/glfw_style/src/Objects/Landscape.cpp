@@ -1,3 +1,15 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   Landscape.cpp                                      :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/30 15:42:27 by hdezier           #+#    #+#             //
+//   Updated: 2015/04/30 15:43:36 by erobert          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
+
 #include "Landscape.hpp"
 #include "Parser.hpp"
 #include "LoadShaders.h"
@@ -7,15 +19,8 @@
 #include <stdlib.h>
 #include <math.h>
 
-Landscape::Landscape(void) {
-}
-
-Landscape::~Landscape(void) {
-	glDeleteBuffers(1, &_vertexBuffer);
-	glDeleteBuffers(1, &_indexBuffer);
-	glDeleteVertexArrays(1, &_vertexArrayID);
-	glDeleteProgram(_progID);
-}
+Landscape::Landscape(void) {}
+Landscape::~Landscape(void) {}
 
 Landscape::Landscape(std::string const &filename) :
 	_filename(filename) {

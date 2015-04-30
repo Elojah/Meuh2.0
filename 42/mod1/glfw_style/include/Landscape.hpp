@@ -1,5 +1,18 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   Landscape.hpp                                      :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/30 16:05:12 by hdezier           #+#    #+#             //
+//   Updated: 2015/04/30 16:15:28 by erobert          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
+
 #ifndef LANDSCAPE_H
 # define LANDSCAPE_H
+
 # define WIDTH_DIVIDE 200
 # define HEIGHT_DIVIDE 200
 # define Z_DIVIDE 7000
@@ -13,11 +26,12 @@
 
 # include "Rain.hpp"
 # include "Sea.hpp"
+
 class Rain;
 class Sea;
 class Parser;
 
-class Landscape : public AObject
+class Landscape: public AObject
 {
 public:
 								Landscape(std::string const&);
@@ -28,21 +42,22 @@ public:
 	virtual void				refresh(Camera const &cam);
 protected:
 private:
-								Landscape(void);
+	Landscape(void);
+	Landscape(Landscape const &rhs);
 
-	void						lexer(const Parser &p);
-	void						initBuffers(void);
+	Landscape			&operator=(Landscape const &rhs);
 
-	void						smoothMap(void);
-	void						smoothPoint(sPoint const&, sPoint const&);
-
-	void						clearMap(void);
-	void						useMap(void);
-	void						printMap(void) const;
-	void						findClosestPoint(sPoint const&, sPoint&) const;
-	void						drawPoint(unsigned int const x, unsigned int const y) const;
-
-	std::string					_filename;
+	void				lexer(const Parser &p);
+	void				initBuffers(void);
+	void				smoothMap(void);
+	void				smoothPoint(sPoint const&, sPoint const&);
+	void				clearMap(void);
+	void				useMap(void);
+	void				printMap(void) const;
+	void				findClosestPoint(sPoint const&, sPoint&) const;
+	void				drawPoint(unsigned int const x,
+								  unsigned int const y) const;
+	std::string			_filename;
 
 	sPoint						_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP + 1];
 	float						_map[WIDTH_MAP + 1][HEIGHT_MAP + 1];
