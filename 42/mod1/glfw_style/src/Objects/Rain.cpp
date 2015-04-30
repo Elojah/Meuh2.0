@@ -1,5 +1,4 @@
 #include "Rain.hpp"
-#include "Landscape.hpp"
 #include "LoadShaders.h"
 #include <cstdlib>
 #include <time.h>
@@ -64,16 +63,17 @@ bool	Rain::loop(int const key) {
 	return (false);
 }
 
-void	Rain::downParticles(sPoint const land[]) {
+float	Rain::downParticles(sPoint const land[], float const &waterHeight) {
 	static int				downSpeed = 0;
 	static bool				down = false;
 	static const int		around[4] = {1, -1, WIDTH_MAP, -WIDTH_MAP};
-	static int				min;
+	static float			min;
 	int						next;
+	int						result(0);
 	size_t					n;
 
-	if (++downSpeed < 0) {
-		return ;
+	if (++downSpeed < 5) {
+		return (0);
 	}
 	downSpeed = 0;
 	for (size_t i = 0; i < MAX_RAIN_PARTICLE; ++i) {
@@ -84,7 +84,8 @@ void	Rain::downParticles(sPoint const land[]) {
 				&& _vertex_buffer_data[i].z == land[j].z
 				&& _vertex_buffer_data[i].y < land[j].y) {
 
-				if (_vertex_buffer_data[i].y <= 0.0f) {
+				if (_vertex_buffer_data[i].y <= waterHeight) {
+					result++;
 					break ;
 				}
 				min = land[j].y;
@@ -106,7 +107,7 @@ void	Rain::downParticles(sPoint const land[]) {
 					// 		<< std::endl;
 
 					_vertex_buffer_data[i].x = land[j + around[next]].x;
-					_vertex_buffer_data[i].y = land[j + around[next]].y + 0.1f;
+					_vertex_buffer_data[i].y = land[j + around[next]].y;
 					_vertex_buffer_data[i].z = land[j + around[next]].z;
 				}
 				down = true;
@@ -117,5 +118,7 @@ void	Rain::downParticles(sPoint const land[]) {
 			addDrop(land, i, false);
 		}
 	}
+	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex_buffer_data), _vertex_buffer_data, GL_STATIC_DRAW);
+	return (result);
 }

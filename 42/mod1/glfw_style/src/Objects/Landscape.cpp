@@ -25,7 +25,7 @@ void			Landscape::init(void) {
 	Parser					p(_filename);
 
 	std::cout << "Parsing:\tDONE" << std::endl;
-	_waterDiff = 0;
+	_waterHeight = 1.0f;
 	clearMap();
 	lexer(p);
 	std::cout << "Lexing:\t\tDONE" << std::endl;
@@ -33,6 +33,7 @@ void			Landscape::init(void) {
 	useMap();
 	initBuffers();
 	_rain.init();
+	_sea.init();
 	for (size_t i = 0; i < MAX_RAIN_PARTICLE; ++i) {
 		_rain.addDrop(_vertex_buffer_data, i, true);
 	}
@@ -40,20 +41,23 @@ void			Landscape::init(void) {
 
 void	Landscape::refresh(Camera const &cam) {
 	this->AObject::refresh(cam);
-	_rain.downParticles(_vertex_buffer_data);
+	_waterHeight += (_rain.downParticles(_vertex_buffer_data, _waterHeight) / 1000.0f);
 	_rain.refresh(cam);
+	_sea.setHeight(_waterHeight);
+	_sea.refresh(cam);
 }
 
 
 bool	Landscape::loop(int const key) {
-	switch (key) {
-		case 22: raiseWater(0.01f);
-				break ;
-		case 20: raiseWater(-0.01f);
-				break ;
-		default: return (false);
-	}
-	return (true);
+	(void)key;
+	// switch (key) {
+	// 	case 22: raiseWater(0.01f);
+	// 			break ;
+	// 	case 20: raiseWater(-0.01f);
+	// 			break ;
+	// 	default: return (false);
+	// }
+	return (false);
 }
 
 void	Landscape::lexer(const Parser &p) {
@@ -201,10 +205,6 @@ void		Landscape::useMap(void) {
 	}
 }
 
-void	Landscape::raiseWater(float const n) {
-	_waterDiff += n;
-}
-
 void	Landscape::initBuffers(void) {
 	static GLuint	index_buffer_data[WIDTH_MAP * HEIGHT_MAP * 6 + 1];
 	size_t			i(0);
@@ -246,6 +246,7 @@ void	Landscape::initBuffers(void) {
 }
 
 void	Landscape::draw(void) const {
+	_sea.draw();
 	glUseProgram(_progID);
 	glUniformMatrix4fv(_matrixID, 1, GL_FALSE, &mvp[0][0]);
 

@@ -12,7 +12,7 @@ public:
 	virtual void	init(void);
 	virtual void	draw(void) const;
 	virtual bool	loop(int const);
-	void			downParticles(sPoint const land[]);
+	float			downParticles(sPoint const land[], float const &waterHeight);
 	void			addDrop(sPoint const land[], int index, bool randHeight);
 protected:
 private:
