@@ -21,6 +21,8 @@
 
 # define MAX_RAIN_PARTICLE 1000
 # define BUFFER_OFFSET(i) ((char *)NULL + (i))
+# define WIDTH_MAP 100
+# define HEIGHT_MAP 100
 
 class AObject
 {

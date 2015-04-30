@@ -14,6 +14,7 @@ RM = rm -rf
 #List classes here
 CLASS = main\
 		AObject\
+		Objects/Sea\
 		Objects/Rain\
 		Parser/Tokens/AToken\
 		Parser/Tokens/Scope\
@@ -27,7 +28,6 @@ CLASS = main\
 
 #List interfaces here
 INTERFACES = \
-		AObject\
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
@@ -73,8 +73,8 @@ clean :
 
 fclean :
 	$(RM) $(BUILD_DIR) $(TARGET)
-	# $(RM) lib/glfw
-	# $(RM) lib/glm
+	$(RM) lib/glfw
+	$(RM) lib/glm
 
 re : fclean all
 

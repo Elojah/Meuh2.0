@@ -6,16 +6,16 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/30 15:48:21 by hdezier           #+#    #+#             //
-//   Updated: 2015/04/30 15:50:49 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/30 16:16:52 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #ifndef COMMENT_H
 # define COMMENT_H
 
-# include "IToken.hpp"
+# include "AToken.hpp"
 
-class Comment : public IToken
+class Comment: public AToken
 {
 public:
 	Comment(void);
@@ -26,7 +26,7 @@ public:
 private:
 	Comment(Comment const &rhs);
 
-	Comment			operator(Comment const &rhs);
+	Comment			&operator=(Comment const &rhs);
 };
 
 #endif

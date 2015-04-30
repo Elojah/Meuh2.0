@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/30 16:05:12 by hdezier           #+#    #+#             //
-//   Updated: 2015/04/30 16:08:19 by erobert          ###   ########.fr       //
+//   Updated: 2015/04/30 16:15:28 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -17,8 +17,6 @@
 # define HEIGHT_DIVIDE 200
 # define Z_DIVIDE 7000
 # define Z_MAX 7000
-# define WIDTH_MAP 100
-# define HEIGHT_MAP 100
 # define Z_MULT 30
 
 # include "AObject.hpp"
@@ -27,19 +25,21 @@
 # include <vector>
 
 # include "Rain.hpp"
+# include "Sea.hpp"
 
+class Rain;
+class Sea;
 class Parser;
 
 class Landscape: public AObject
 {
 public:
-						Landscape(std::string const&);
-	virtual				~Landscape(void);
-	virtual void		init(void);
-	virtual void		draw(void) const;
-	virtual bool		loop(int const);
-	virtual void		refresh(Camera const &cam);
-	void				raiseWater(float const);
+								Landscape(std::string const&);
+	virtual						~Landscape(void);
+	virtual void				init(void);
+	virtual void				draw(void) const;
+	virtual bool				loop(int const);
+	virtual void				refresh(Camera const &cam);
 protected:
 private:
 	Landscape(void);
@@ -59,11 +59,13 @@ private:
 								  unsigned int const y) const;
 	std::string			_filename;
 
-	sPoint				_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP + 1];
-	float				_map[WIDTH_MAP + 1][HEIGHT_MAP + 1];
-	std::vector<sPoint>	_immovablePoints;
-	float				_waterDiff;
-	Rain				_rain;
+	sPoint						_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP + 1];
+	float						_map[WIDTH_MAP + 1][HEIGHT_MAP + 1];
+	std::vector<sPoint>			_immovablePoints;
+
+	Rain						_rain;
+	Sea							_sea;
+	GLfloat						_waterHeight;
 };
 
 #endif
