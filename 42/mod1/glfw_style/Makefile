@@ -13,7 +13,9 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
+		AObject\
 		Objects/Rain\
+		Parser/Tokens/AToken\
 		Parser/Tokens/Scope\
 		Parser/Tokens/Comment\
 		Parser/Tokens/Number\
