@@ -6,16 +6,11 @@
 
 Camera::Camera(void) {
 	_position = glm::vec3(0.0f, 30.0f, 0.0f);
-	_direction = glm::vec3(0.0f, 0.0f, 1.0f);
+	_direction = glm::vec3(1.0f, 0.0f, 0.0f);
 	_up = glm::vec3(0.0f, 1.0f, 0.0f);
 
 	_projection = glm::perspective(FOV, RATIO, ZNEAR, ZFAR);
-	_view = glm::lookAt(
-		_position,
-		_position + _direction,
-		_up
-	);
-	_vp = _projection * _view;
+	moveEye(0, 0);
 }
 
 Camera::~Camera(void) {
@@ -28,8 +23,8 @@ const glm::mat4	&Camera::getViewProj(void) const {
 void				Camera::moveEye(const int &xpos, const int &ypos) {
 	static float		horizontalAngle = 3.14f;
 	static float		verticalAngle = 0;
-	static int			oldX = xpos;
-	static int			oldY = ypos;
+	static int			oldX = 0;
+	static int			oldY = 0;
 	static glm::vec3	right = glm::vec3(0.0f, 1.0f, 0.0f);
 
 	horizontalAngle += M_SPEED * float(oldX - xpos);

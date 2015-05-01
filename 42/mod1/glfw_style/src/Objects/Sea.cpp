@@ -13,7 +13,7 @@ void	Sea::init(void) {
 		0, 1, 2,
 		1, 2, 3,
 		4, 6, 7,
-		5, 6, 7,
+		4, 5, 7,
 		0, 1, 4,
 		1, 4, 5,
 		1, 3, 5,
@@ -21,7 +21,7 @@ void	Sea::init(void) {
 		0, 2, 4,
 		2, 4, 6,
 		2, 3, 6,
-		5, 6, 7
+		3, 6, 7
 	};
 
 	for (size_t i = 0; i < 8; ++i) {
@@ -29,7 +29,6 @@ void	Sea::init(void) {
 		_vertex_buffer_data[i].y = 0.0f;
 		_vertex_buffer_data[i].z = (i / 2) % 2 ? HEIGHT_MAP : 0.0f;
 	}
-
 	glGenVertexArrays(1, &_vertexArrayID);
 	glBindVertexArray(_vertexArrayID);
 
@@ -37,7 +36,7 @@ void	Sea::init(void) {
 
 	glGenBuffers(1, &_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex_buffer_data), _vertex_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex_buffer_data), _vertex_buffer_data, GL_DYNAMIC_DRAW);
 
 	glGenBuffers(1, &_indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
@@ -64,11 +63,11 @@ void	Sea::draw(void) const {
 }
 
 void			Sea::setHeight(float waterHeight) {
-	for (size_t i = 3; i < 8; ++i) {
+	for (size_t i = 4; i < 8; ++i) {
 		_vertex_buffer_data[i].y = waterHeight;
 	}
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex_buffer_data), _vertex_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex_buffer_data), _vertex_buffer_data, GL_DYNAMIC_DRAW);
 }
 
 bool	Sea::loop(int const key) {

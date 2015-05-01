@@ -1,33 +1,24 @@
-TARGET = bin/mod1
+TARGET = bin/arkanoid
 
 #Directories
 SRC_DIR = src
 INC_DIR = include
 BUILD_DIR = build
-LIB_DIR = lib
+LIB_DIR =
 
 #Options
-CC = clang++
-SRC_EXT = .cpp
+CC = clang
+SRC_EXT = .c
 RM = rm -rf
 
 #List classes here
 CLASS = main\
-		AObject\
-		Objects/Sea\
-		Objects/Rain\
-		Parser/Tokens/AToken\
-		Parser/Tokens/Scope\
-		Parser/Tokens/Comment\
-		Parser/Tokens/Number\
-		Parser/Parser\
-		Objects/Landscape\
-		Camera\
-		Map\
-		CocoaWin\
+		loop\
+		load_map\
+		key_callback\
 
 #List interfaces here
-INTERFACES = \
+INTERFACE = \
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
@@ -36,16 +27,16 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++98
+CFLAGS =-MMD -Wall -Wextra -Werror -O3
 LFLAGS =
 
 #Libs
 LIB_LOCAL = \
-			lib/LoadShaders\
+			lib/libft\
 
 LIB_GLOBAL = \
-			LoadShaders\
 			glfw3\
+			ft\
 
 LIB_OTHER = \
 			-framework Cocoa\
@@ -54,27 +45,26 @@ LIB_OTHER = \
 			-framework CoreVideo\
 			-Llib/glfw/src\
 
-LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
-LIBS += $(LIB_OTHER)
+LIBS += $(addprefix -L, $(LIB_LOCAL))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
+LIBS += $(LIB_OTHER)
 
 #Includes
 INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 INC += \
 		-Ilib/glfw/include\
-		-Ilib/glm\
 
 #RULES
 all : dirbin dirlib $(TARGET)
 
 clean :
+	make clean -C lib/libft
 	$(RM) $(BUILD_DIR)
 
 fclean :
+	make fclean -C lib/libft
 	$(RM) $(BUILD_DIR) $(TARGET)
-	$(RM) lib/glfw
-	$(RM) lib/glm
 
 re : fclean all
 
@@ -82,6 +72,7 @@ dirbin:
 	mkdir -p bin
 
 dirlib:
+	make -C lib/libft
 	sh ./util/install_lib.sh
 
 .PHONY: all clean fclean re
@@ -98,5 +89,3 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)
 	@mkdir -p $(dir $@)
 	@echo "\n\033[1;4;34mCMP:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
-
--include $(DEP)

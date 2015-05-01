@@ -19,10 +19,10 @@
 # include <glm/glm.hpp>
 # include "Camera.hpp"
 
-# define MAX_RAIN_PARTICLE 1000
+# define MAX_RAIN_PARTICLE 500
 # define BUFFER_OFFSET(i) ((char *)NULL + (i))
-# define WIDTH_MAP 100
-# define HEIGHT_MAP 100
+# define WIDTH_MAP 400
+# define HEIGHT_MAP 400
 
 class AObject
 {
@@ -40,6 +40,19 @@ protected:
 		GLfloat					x;
 		GLfloat					y;
 		GLfloat					z;
+		void					nullify(void) {
+				x = 0.0f;
+				y = 0.0f;
+				z = 0.0f;
+		}
+		sPoint					&operator=(sPoint const &rhs) {
+			if (this != &rhs) {
+				x = rhs.x;
+				y = rhs.y;
+				z = rhs.z;
+			}
+			return (*this);
+		}
 	};
 
 	glm::mat4		mvp;
