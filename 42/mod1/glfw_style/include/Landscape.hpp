@@ -13,8 +13,8 @@
 #ifndef LANDSCAPE_H
 # define LANDSCAPE_H
 
-# define WIDTH_DIVIDE 200
-# define HEIGHT_DIVIDE 200
+# define WIDTH_DIVIDE 50
+# define HEIGHT_DIVIDE 50
 # define Z_DIVIDE 7000
 # define Z_MAX 7000
 # define Z_MULT 30
@@ -56,16 +56,16 @@ private:
 	void				printMap(void) const;
 	void				findClosestPoint(sPoint const&, sPoint&) const;
 	void				drawPoint(unsigned int const x,
-								  unsigned int const y) const;
+								unsigned int const y) const;
 	std::string			_filename;
 
-	sPoint						_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP + 1];
-	float						_map[WIDTH_MAP + 1][HEIGHT_MAP + 1];
-	std::vector<sPoint>			_immovablePoints;
+	sPoint				_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP + 1];
+	float				_map[WIDTH_MAP + 1][HEIGHT_MAP + 1];
+	std::vector<sPoint>	_immovablePoints;
 
-	Rain						_rain;
-	Sea							_sea;
-	GLfloat						_waterHeight;
+	Rain				_rain;
+	Sea					_sea;
+	GLfloat				_waterHeight;
 };
 
 #endif

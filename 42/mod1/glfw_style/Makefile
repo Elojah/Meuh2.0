@@ -1,4 +1,4 @@
-TARGET = bin/runner
+TARGET = bin/mod1
 
 #Directories
 SRC_DIR = src

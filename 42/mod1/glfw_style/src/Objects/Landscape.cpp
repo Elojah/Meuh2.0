@@ -46,7 +46,7 @@ void			Landscape::init(void) {
 
 void	Landscape::refresh(Camera const &cam) {
 	this->AObject::refresh(cam);
-	_waterHeight += (_rain.downParticles(_vertex_buffer_data, _waterHeight) / 1000.0f);
+	_waterHeight += (_rain.downParticles(_vertex_buffer_data, _waterHeight) / 4000.0f);
 	_rain.refresh(cam);
 	_sea.setHeight(_waterHeight);
 	_sea.refresh(cam);
@@ -251,6 +251,7 @@ void	Landscape::initBuffers(void) {
 }
 
 void	Landscape::draw(void) const {
+	_rain.draw();
 	_sea.draw();
 	glUseProgram(_progID);
 	glUniformMatrix4fv(_matrixID, 1, GL_FALSE, &mvp[0][0]);
@@ -268,5 +269,4 @@ void	Landscape::draw(void) const {
 	);
 
 	glDisableVertexAttribArray(0);
-	_rain.draw();
 }
