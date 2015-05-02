@@ -14,6 +14,8 @@
 # define MAX_LENGTH_SHADERS 1024
 # define GRID w->display.vertex_buffer_data
 # define PLAYER_Y 3
+# define BALL_PRECISION 20
+# define SPEED 500
 
 typedef enum		e_move
 {
@@ -36,20 +38,29 @@ typedef struct		s_point
 	float			y;
 }					t_point;
 
-typedef struct		s_gl
+typedef struct		s_brick
 {
 	GLuint			vertex_array_ID;
 	GLuint			prog_ID;
 	GLuint			vertex_buffer;
 	t_point			vertex_buffer_data[HEIGHT_MAP * WIDTH_MAP * 6 + 1];
-}					t_gl;
+}					t_brick;
+
+typedef struct		s_ball
+{
+	GLuint			prog_ID;
+	GLuint			vertex_buffer;
+	t_point			vertex_buffer_data[BALL_PRECISION + 3];
+	float			direction;
+}					t_ball;
 
 typedef struct		s_window
 {
 	GLFWwindow		*window;
 	GLuint			map_ID;
 	GLint			map[HEIGHT_MAP * WIDTH_MAP * 6 + 1];
-	t_gl			display;
+	t_brick			display;
+	t_ball			ball;
 	int				player_x;
 	unsigned int	current_level;
 }					t_window;

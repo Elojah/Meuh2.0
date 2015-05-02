@@ -32,10 +32,16 @@ static void		init_buffer(t_window *w)
 static void		init_gl(t_window *w)
 {
 	init_buffer(w);
-	glGenVertexArrays(2, &w->display.vertex_array_ID);
+	glGenVertexArrays(3, &w->display.vertex_array_ID);
 	glBindVertexArray(w->display.vertex_array_ID);
 	w->display.prog_ID = load_shaders("./src/shaders/Grid.vert"
 									, "./src/shaders/Grid.frag");
+	w->ball.prog_ID = load_shaders("./src/shaders/Ball.vert"
+									, "./src/shaders/Ball.frag");
+	glGenBuffers(1, &w->ball.vertex_buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, w->ball.vertex_buffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(w->ball.vertex_buffer_data)
+		, w->ball.vertex_buffer_data, GL_STATIC_DRAW);
 	glGenBuffers(1, &w->map_ID);
 	glBindBuffer(GL_ARRAY_BUFFER, w->map_ID);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(w->map), w->map, GL_STATIC_DRAW);
@@ -65,6 +71,7 @@ static void		init_window(t_window *w)
 static void		destroy_window(t_window *w)
 {
 	glDeleteBuffers(1, &w->display.vertex_buffer);
+	glDeleteBuffers(1, &w->ball.prog_ID);
 	glDeleteBuffers(1, &w->map_ID);
 	glDeleteVertexArrays(1, &w->display.vertex_array_ID);
 	glDeleteProgram(w->display.prog_ID);

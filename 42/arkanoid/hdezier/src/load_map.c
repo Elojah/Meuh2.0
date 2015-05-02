@@ -3,10 +3,33 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <math.h>
 
 static int			is_unit(int x)
 {
 	return (x > -2 && x < 4);
+}
+
+static void			add_ball(t_window *w)
+{
+	unsigned int	i;
+	float			n;
+
+	i = 0;
+	w->ball.vertex_buffer_data[0].x = 0.5f;
+	w->ball.vertex_buffer_data[0].y = 0.1f;
+	while (++i < BALL_PRECISION + 1)
+	{
+		n = (i) * 2 * M_PI;
+		n /= (BALL_PRECISION - 1);
+		w->ball.vertex_buffer_data[i].x = w->ball.vertex_buffer_data[0].x
+			+ (cosf(n) / (SIZE_CASE * 4));
+		w->ball.vertex_buffer_data[i].y = w->ball.vertex_buffer_data[0].y
+			+ (sinf(n) / (SIZE_CASE * 4));
+	}
+	w->ball.vertex_buffer_data[i].x = w->ball.vertex_buffer_data[0].x - 1.0;
+	w->ball.vertex_buffer_data[i].y = w->ball.vertex_buffer_data[0].y;
+	w->ball.direction = 2 * M_PI / 3;
 }
 
 static void			add_player(t_window *w)
@@ -49,4 +72,5 @@ void				load_map(t_window *w, char *filename)
 		add_unit(w, n % WIDTH_MAP, HEIGHT_MAP - 4 - (n / WIDTH_MAP)
 			, EMPTY);
 	add_player(w);
+	add_ball(w);
 }

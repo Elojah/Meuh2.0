@@ -41,6 +41,7 @@ LIB_LOCAL = \
 LIB_GLOBAL = \
 			glfw3\
 			ft\
+			m\
 
 LIB_OTHER = \
 			-framework Cocoa\
