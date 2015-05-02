@@ -24,14 +24,15 @@ void				load_map(t_window *w, char *filename)
 		while (line[i] && n < HEIGHT_MAP * WIDTH_MAP)
 		{
 			if (is_unit(line[i] - '0'))
-				w->map[n++] = line[i] - '0';
+				add_unit(w, n / WIDTH_MAP, n % WIDTH_MAP, line[i] - '0');
 			else
-				w->map[n++] = EMPTY;
-			i++;
+				add_unit(w, n / WIDTH_MAP, n % WIDTH_MAP, EMPTY);
+			++n;
+			++i;
 		}
 		free(line);
 	}
 	close(fd);
-	while (n < HEIGHT_MAP * WIDTH_MAP)
-		w->map[n++] = EMPTY;
+	while (++n < HEIGHT_MAP * WIDTH_MAP)
+		add_unit(w, n / WIDTH_MAP, n % WIDTH_MAP, EMPTY);
 }

@@ -1,0 +1,8 @@
+Compiling shader:	./src/shaders/Grid.vert
+Compiling shader:	./src/shaders/Grid.frag
+Linking program
+
+Credits:
+	hdezier
+	drabahi
+@42SchoolProject

@@ -18,6 +18,7 @@ CLASS = main\
 		load_map\
 		key_callback\
 		load_shaders\
+		add_unit\
 
 #List interfaces here
 INTERFACE = \

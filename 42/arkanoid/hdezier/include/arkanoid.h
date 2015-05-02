@@ -10,9 +10,10 @@
 # define REFRESH_TIME 0.016
 # define HEIGHT_MAP 50
 # define WIDTH_MAP 50
-# define SIZE_CASE 10
+# define SIZE_CASE 20
 # define BUFFER_OFFSET(i) ((char *)NULL + (i))
 # define MAX_LENGTH_SHADERS 1024
+# define GRID w->display.vertex_buffer_data
 
 typedef enum		e_unit
 {
@@ -34,16 +35,14 @@ typedef struct		s_gl
 	GLuint			vertex_array_ID;
 	GLuint			prog_ID;
 	GLuint			vertex_buffer;
-	t_point			vertex_buffer_data[HEIGHT_MAP * WIDTH_MAP + 1];
-	GLuint			index_buffer;
-	GLuint			index_buffer_data[HEIGHT_MAP * WIDTH_MAP * 6 + 1];
+	t_point			vertex_buffer_data[HEIGHT_MAP * WIDTH_MAP * 6 + 1];
 }					t_gl;
 
 typedef struct		s_window
 {
 	GLFWwindow		*window;
 	GLuint			map_ID;
-	t_unit			map[HEIGHT_MAP * WIDTH_MAP + 1];
+	GLint			map[HEIGHT_MAP * WIDTH_MAP * 6 + 1];
 	t_gl			display;
 	float			player_x;
 	unsigned int	current_level;
@@ -72,9 +71,14 @@ void				key_callback(GLFWwindow *window, int key, int scancode
 	, int action, int mods);
 
 /*
-**
+**Load shaders
 */
 GLuint				load_shaders(const char *vertex_file_path
 	, const char *fragment_file_path);
+
+/*
+**CRE unit
+*/
+void				add_unit(t_window *w, int x, int y, t_unit type);
 
 #endif
