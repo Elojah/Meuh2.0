@@ -6,32 +6,46 @@
 # define __gl_h_
 # include <GLFW/glfw3.h>
 # define GLFW_INCLUDE_GLCOREARB
-# define HEIGHT 50
-# define WIDTH 50
-# define SIZE_CASE 10
 
-enum				e_unit
+# define REFRESH_TIME 0.016
+# define HEIGHT_MAP 50
+# define WIDTH_MAP 50
+# define SIZE_CASE 10
+# define BUFFER_OFFSET(i) ((char *)NULL + (i))
+# define MAX_LENGTH_SHADERS 1024
+
+typedef enum		e_unit
 {
-	EMPTY = 0,
-	PLAYER,
-	ONE_PIECE,
-	THREE_PIECE,
-	NONE_PIECE
-};
+					PLAYER = -1,
+					EMPTY = 0,
+					ONE_PIECE,
+					THREE_PIECE,
+					NONE_PIECE
+}					t_unit;
 
 typedef struct		s_point
 {
 	float			x;
 	float			y;
-	float			z;
 }					t_point;
+
+typedef struct		s_gl
+{
+	GLuint			vertex_array_ID;
+	GLuint			prog_ID;
+	GLuint			vertex_buffer;
+	t_point			vertex_buffer_data[HEIGHT_MAP * WIDTH_MAP + 1];
+	GLuint			index_buffer;
+	GLuint			index_buffer_data[HEIGHT_MAP * WIDTH_MAP * 6 + 1];
+}					t_gl;
 
 typedef struct		s_window
 {
 	GLFWwindow		*window;
-	int				map[HEIGHT * WIDTH + 1];
+	GLuint			map_ID;
+	t_unit			map[HEIGHT_MAP * WIDTH_MAP + 1];
+	t_gl			display;
 	float			player_x;
-	t_point			buffer[HEIGHT * WIDTH * 3 + 1];
 	unsigned int	current_level;
 }					t_window;
 
@@ -41,13 +55,26 @@ typedef struct		s_window
 void				loop(t_window *w);
 
 /*
-**Key callback
+**Rendering
 */
-void				key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+void				render(t_window *w);
 
 /*
-**Error Handling
+**Load map
 */
-void				ft_exit(int condition, char *message);
+void				load_map(t_window *w, char *filename);
+
+
+/*
+**Key callback
+*/
+void				key_callback(GLFWwindow* window, int key, int scancode
+	, int action, int mods);
+
+/*
+**
+*/
+GLuint				load_shaders(const char *vertex_file_path
+	, const char *fragment_file_path);
 
 #endif

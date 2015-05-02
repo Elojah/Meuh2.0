@@ -1,6 +1,7 @@
 #include "arkanoid.h"
 
-void		key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void		key_callback(GLFWwindow* window, int key, int scancode
+	, int action, int mods)
 {
 	static t_window		*win = 0x0;
 	static int			keyValid;

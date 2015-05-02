@@ -22,32 +22,33 @@ FILES = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 		ft_strjoin.c ft_strtrim.c ft_strsplit.c ft_itoa.c ft_putchar.c \
 		ft_putstr.c ft_putendl.c ft_putnbr.c ft_putchar_fd.c ft_putstr_fd.c \
 		ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
-		ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_lstlen.c ft_exit.c get_next_line.c\
+		ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_lstlen.c ft_exit.c\
+		get_next_line.c\
 
 SRCS = $(addprefix , $(FILES))
-OBJS = $(SRCS:%.c=objs/%.o)
+OBJS = $(SRCS:%.c=build/%.o)
 TMPS = $(SRCS:.c=.c~) Makefile~ libft.h~
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -Iinclude
 
-.PHONY: all clean objs_dir fclean re
+.PHONY:
 
-.SILENT: objs_dir
+.SILENT: all clean objs_dir fclean re
 
 all: objs_dir $(NAME)
 
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 
-objs/%.o : %.c
-	$(CC) $(CFLAGS) -I./libft -o $@ -c $^
+build/%.o : %.c
+	@$(CC) $(CFLAGS) -I./libft -o $@ -c $^
 
 objs_dir:
-	mkdir -p objs
+	mkdir -p build
 
 clean:
 	/bin/rm -f $(OBJS) $(TMPS)
-	/bin/rm -rf objs
+	/bin/rm -rf build
 
 fclean: clean
 	/bin/rm -f $(NAME)

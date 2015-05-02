@@ -14,8 +14,10 @@ RM = rm -rf
 #List classes here
 CLASS = main\
 		loop\
+		render\
 		load_map\
 		key_callback\
+		load_shaders\
 
 #List interfaces here
 INTERFACE = \
@@ -77,7 +79,7 @@ dirlib:
 
 .PHONY: all clean fclean re
 
-.SILENT: dirbuild dirbin
+.SILENT: dirbuild dirbin dirlib
 
 #Build rule
 $(TARGET) : $(OBJ)
