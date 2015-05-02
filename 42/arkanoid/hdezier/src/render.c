@@ -11,7 +11,7 @@ void				render(t_window *w)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, w->display.index_buffer);
 	glDrawElements(
 		GL_TRIANGLE_STRIP,
-		WIDTH_MAP * HEIGHT_MAP * 6,
+		WIDTH_MAP * HEIGHT_MAP * 6 + 1,
 		GL_UNSIGNED_INT,
 		BUFFER_OFFSET(0)
 	);

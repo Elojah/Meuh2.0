@@ -65,6 +65,12 @@ static void		init_window(t_window *w)
 
 static void		destroy_window(t_window *w)
 {
+	glDeleteBuffers(1, &w->display.vertex_buffer);
+	glDeleteBuffers(1, &w->display.index_buffer);
+	glDeleteBuffers(1, &w->map_ID);
+	glDeleteVertexArrays(1, &w->display.vertex_array_ID);
+	glDeleteProgram(w->display.prog_ID);
+
 	glfwDestroyWindow(w->window);
 	glfwTerminate();
 	write(1, "Credits:\n\thdezier\n\tdrabahi\n@42SchoolProject\n", 44);

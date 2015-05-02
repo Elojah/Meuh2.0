@@ -68,7 +68,7 @@ void				load_map(t_window *w, char *filename);
 /*
 **Key callback
 */
-void				key_callback(GLFWwindow* window, int key, int scancode
+void				key_callback(GLFWwindow *window, int key, int scancode
 	, int action, int mods);
 
 /*
