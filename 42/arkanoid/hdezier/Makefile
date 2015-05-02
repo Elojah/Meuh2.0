@@ -19,6 +19,7 @@ CLASS = main\
 		key_callback\
 		load_shaders\
 		add_unit\
+		move_player\
 
 #List interfaces here
 INTERFACE = \

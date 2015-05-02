@@ -2,7 +2,7 @@
 
 static void		refresh_buffers(t_window *w)
 {
-	(void)w;
+	glBufferData(GL_ARRAY_BUFFER, sizeof(w->map), w->map, GL_STATIC_DRAW);
 }
 
 void		loop(t_window *w)
@@ -19,9 +19,9 @@ void		loop(t_window *w)
 		}
 		prev_t = t;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		refresh_buffers(w);
 		render(w);
 		glfwSwapBuffers(w->window);
         glfwPollEvents();
+		refresh_buffers(w);
 	}
 }

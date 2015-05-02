@@ -16,5 +16,9 @@ void		key_callback(GLFWwindow *window, int key, int scancode
 	}
 	if (key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q) {
 		glfwSetWindowShouldClose(window, GL_TRUE);
+	} else if (key == GLFW_KEY_A) {
+		move_player(win, LEFT);
+	} else if (key == GLFW_KEY_D) {
+		move_player(win, RIGHT);
 	}
 }

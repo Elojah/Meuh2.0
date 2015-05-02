@@ -4,7 +4,9 @@ out vec3 color;
 void main() {
 	if (unit == 0)
 		color = vec3(0.2, 0.2, 0.2);
-	else if (unit > 100000000)
+	else if (unit == -1)
+		color = vec3(0.0, 0.1, 0.0);
+	else if (unit == 1)
 		color = vec3(0.7, 0.1, 0.7);
 	else if (unit == 2)
 		color = vec3(0.5, 0.2, 0.5);

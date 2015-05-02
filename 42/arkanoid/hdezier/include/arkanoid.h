@@ -6,7 +6,6 @@
 # define __gl_h_
 # include <GLFW/glfw3.h>
 # define GLFW_INCLUDE_GLCOREARB
-
 # define REFRESH_TIME 0.016
 # define HEIGHT_MAP 50
 # define WIDTH_MAP 50
@@ -14,6 +13,13 @@
 # define BUFFER_OFFSET(i) ((char *)NULL + (i))
 # define MAX_LENGTH_SHADERS 1024
 # define GRID w->display.vertex_buffer_data
+# define PLAYER_Y HEIGHT_MAP - 3
+
+typedef enum		e_move
+{
+	LEFT = -1,
+	RIGHT = 1,
+}					t_move;
 
 typedef enum		e_unit
 {
@@ -44,7 +50,7 @@ typedef struct		s_window
 	GLuint			map_ID;
 	GLint			map[HEIGHT_MAP * WIDTH_MAP * 6 + 1];
 	t_gl			display;
-	float			player_x;
+	int				player_x;
 	unsigned int	current_level;
 }					t_window;
 
@@ -80,5 +86,10 @@ GLuint				load_shaders(const char *vertex_file_path
 **CRE unit
 */
 void				add_unit(t_window *w, int x, int y, t_unit type);
+
+/*
+**Move player
+*/
+void				move_player(t_window *w, t_move t);
 
 #endif

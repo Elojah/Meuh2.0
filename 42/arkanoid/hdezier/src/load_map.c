@@ -9,6 +9,16 @@ static int			is_unit(int x)
 	return (x > -2 && x < 4);
 }
 
+static void			add_player(t_window *w)
+{
+	add_unit(w, PLAYER_Y, WIDTH_MAP / 2, PLAYER);
+	add_unit(w, PLAYER_Y, WIDTH_MAP / 2 + 1, PLAYER);
+	add_unit(w, PLAYER_Y, WIDTH_MAP / 2 - 1, PLAYER);
+	add_unit(w, PLAYER_Y, WIDTH_MAP / 2 + 2, PLAYER);
+	add_unit(w, PLAYER_Y, WIDTH_MAP / 2 - 2, PLAYER);
+	w->player_x = WIDTH_MAP / 2;
+}
+
 void				load_map(t_window *w, char *filename)
 {
 	int				fd;
@@ -35,4 +45,5 @@ void				load_map(t_window *w, char *filename)
 	close(fd);
 	while (++n < HEIGHT_MAP * WIDTH_MAP)
 		add_unit(w, n / WIDTH_MAP, n % WIDTH_MAP, EMPTY);
+	add_player(w);
 }
