@@ -13,7 +13,7 @@
 # define BUFFER_OFFSET(i) ((char *)NULL + (i))
 # define MAX_LENGTH_SHADERS 1024
 # define GRID w->display.vertex_buffer_data
-# define PLAYER_Y HEIGHT_MAP - 3
+# define PLAYER_Y 3
 
 typedef enum		e_move
 {

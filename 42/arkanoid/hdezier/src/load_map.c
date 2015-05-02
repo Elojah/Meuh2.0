@@ -11,11 +11,11 @@ static int			is_unit(int x)
 
 static void			add_player(t_window *w)
 {
-	add_unit(w, PLAYER_Y, WIDTH_MAP / 2, PLAYER);
-	add_unit(w, PLAYER_Y, WIDTH_MAP / 2 + 1, PLAYER);
-	add_unit(w, PLAYER_Y, WIDTH_MAP / 2 - 1, PLAYER);
-	add_unit(w, PLAYER_Y, WIDTH_MAP / 2 + 2, PLAYER);
-	add_unit(w, PLAYER_Y, WIDTH_MAP / 2 - 2, PLAYER);
+	add_unit(w, WIDTH_MAP / 2, PLAYER_Y, PLAYER);
+	add_unit(w, WIDTH_MAP / 2 + 1, PLAYER_Y, PLAYER);
+	add_unit(w, WIDTH_MAP / 2 - 1, PLAYER_Y, PLAYER);
+	add_unit(w, WIDTH_MAP / 2 + 2, PLAYER_Y, PLAYER);
+	add_unit(w, WIDTH_MAP / 2 - 2, PLAYER_Y, PLAYER);
 	w->player_x = WIDTH_MAP / 2;
 }
 
@@ -34,9 +34,11 @@ void				load_map(t_window *w, char *filename)
 		while (line[i] && n < HEIGHT_MAP * WIDTH_MAP)
 		{
 			if (is_unit(line[i] - '0'))
-				add_unit(w, n / WIDTH_MAP, n % WIDTH_MAP, line[i] - '0');
+				add_unit(w, n % WIDTH_MAP, HEIGHT_MAP - 4 - (n / WIDTH_MAP)
+					, line[i] - '0');
 			else
-				add_unit(w, n / WIDTH_MAP, n % WIDTH_MAP, EMPTY);
+				add_unit(w, n % WIDTH_MAP, HEIGHT_MAP - 4 - (n / WIDTH_MAP)
+					, EMPTY);
 			++n;
 			++i;
 		}
@@ -44,6 +46,7 @@ void				load_map(t_window *w, char *filename)
 	}
 	close(fd);
 	while (++n < HEIGHT_MAP * WIDTH_MAP)
-		add_unit(w, n / WIDTH_MAP, n % WIDTH_MAP, EMPTY);
+		add_unit(w, n % WIDTH_MAP, HEIGHT_MAP - 4 - (n / WIDTH_MAP)
+			, EMPTY);
 	add_player(w);
 }

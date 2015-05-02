@@ -14,18 +14,18 @@ static void		init_buffer(t_window *w)
 		if ((i + 1) % WIDTH_MAP == 0)
 			continue ;
 		n = i * 6;
-		GRID[n].x = (float)(i / WIDTH_MAP) / WIDTH_MAP;
-		GRID[n].y = (float)(i % WIDTH_MAP) / WIDTH_MAP;
-		GRID[n + 1].x = (float)((i + 1) / WIDTH_MAP) / WIDTH_MAP;
-		GRID[n + 1].y = (float)((i + 1) % WIDTH_MAP) / WIDTH_MAP;
-		GRID[n + 2].x = (float)((i + WIDTH_MAP) / WIDTH_MAP) / WIDTH_MAP;
-		GRID[n + 2].y = (float)((i + WIDTH_MAP) % WIDTH_MAP) / WIDTH_MAP;
-		GRID[n + 3].x = (float)((i + 1) / WIDTH_MAP) / WIDTH_MAP;
-		GRID[n + 3].y = (float)((i + 1) % WIDTH_MAP) / WIDTH_MAP;
-		GRID[n + 4].x = (float)((i + WIDTH_MAP) / WIDTH_MAP) / WIDTH_MAP;
-		GRID[n + 4].y = (float)((i + WIDTH_MAP) % WIDTH_MAP) / WIDTH_MAP;
-		GRID[n + 5].x = (float)((i + WIDTH_MAP + 1) / WIDTH_MAP) / WIDTH_MAP;
-		GRID[n + 5].y = (float)((i + WIDTH_MAP + 1) % WIDTH_MAP) / WIDTH_MAP;
+		GRID[n].x = (float)(i % WIDTH_MAP) / WIDTH_MAP;
+		GRID[n].y = (float)(i / WIDTH_MAP) / HEIGHT_MAP;
+		GRID[n + 1].x = (float)((i + 1) % WIDTH_MAP) / WIDTH_MAP;
+		GRID[n + 1].y = (float)((i + 1) / WIDTH_MAP) / HEIGHT_MAP;
+		GRID[n + 2].x = (float)((i + WIDTH_MAP) % WIDTH_MAP) / WIDTH_MAP;
+		GRID[n + 2].y = (float)((i + WIDTH_MAP) / WIDTH_MAP) / HEIGHT_MAP;
+		GRID[n + 3].x = (float)((i + 1) % WIDTH_MAP) / WIDTH_MAP;
+		GRID[n + 3].y = (float)((i + 1) / WIDTH_MAP) / HEIGHT_MAP;
+		GRID[n + 4].x = (float)((i + WIDTH_MAP) % WIDTH_MAP) / WIDTH_MAP;
+		GRID[n + 4].y = (float)((i + WIDTH_MAP) / WIDTH_MAP) / HEIGHT_MAP;
+		GRID[n + 5].x = (float)((i + WIDTH_MAP + 1) % WIDTH_MAP) / WIDTH_MAP;
+		GRID[n + 5].y = (float)((i + WIDTH_MAP + 1) / WIDTH_MAP) / HEIGHT_MAP;
 	}
 }
 
