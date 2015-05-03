@@ -29,7 +29,8 @@ static void			add_ball(t_window *w)
 	}
 	w->ball.vertex_buffer_data[i].x = w->ball.vertex_buffer_data[0].x - 1.0;
 	w->ball.vertex_buffer_data[i].y = w->ball.vertex_buffer_data[0].y;
-	w->ball.direction = 2 * M_PI / 3;
+	w->ball.dx = 1.0;
+	w->ball.dy = 0.5;
 }
 
 static void			add_player(t_window *w)

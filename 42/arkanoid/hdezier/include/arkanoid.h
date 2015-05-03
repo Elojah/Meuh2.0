@@ -13,9 +13,14 @@
 # define BUFFER_OFFSET(i) ((char *)NULL + (i))
 # define MAX_LENGTH_SHADERS 1024
 # define GRID w->display.vertex_buffer_data
+# define BALL w->ball.vertex_buffer_data
 # define PLAYER_Y 3
 # define BALL_PRECISION 20
-# define SPEED 500
+# define SPEED 100
+# define MIN(a, b) (((a) > (b) ? (b) : (a)))
+# define ABS(a) (((a) > 0) ? (a) : (-a))
+# define M_PI 3.14159265359
+# define SQ(n) ((n) * (n))
 
 typedef enum		e_move
 {
@@ -51,7 +56,8 @@ typedef struct		s_ball
 	GLuint			prog_ID;
 	GLuint			vertex_buffer;
 	t_point			vertex_buffer_data[BALL_PRECISION + 3];
-	float			direction;
+	float			dx;
+	float			dy;
 }					t_ball;
 
 typedef struct		s_window
