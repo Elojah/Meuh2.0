@@ -31,10 +31,7 @@ class IToken
 public:
 	virtual ~IToken(void) {};
 
-	typedef std::set<std::string>		tSymbols;
-
 	virtual int				detect(const char &c) = 0;
-	virtual int				apply(std::string const &s) = 0;
 	virtual int				getPriority(void) const = 0;
 	virtual void				reset(void) {
 		_read.word.clear();
@@ -48,9 +45,11 @@ public:
 	virtual void				display(void) const {
 		std::cout << _read.word << std::endl;
 	}
+	virtual int				detectLib(const char &c) {
+		static size_t			mask;
+	}
 protected:
 	sReadToken			_read;
-	tSymbols				_sym;
 private:
 };
 

@@ -138,8 +138,13 @@ void		X11Win::loop(Map const &map, Camera &cam) {
 		} else if (_e.xkey.keycode == 39) {/*S*/
 			cam.translate(DOWN);
 			map.refresh(cam);
-		}
-		else if (_e.xkey.keycode == 9) {/*ESC*/
+		} else if (_e.xkey.keycode == 40) {/*Q*/
+			cam.translate(LEFT);
+			map.refresh(cam);
+		} else if (_e.xkey.keycode == 38) {/*D*/
+			cam.translate(RIGHT);
+			map.refresh(cam);
+		} else if (_e.xkey.keycode == 9) {/*ESC*/
 			break ;
 		}
 	}

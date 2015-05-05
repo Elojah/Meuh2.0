@@ -35,11 +35,6 @@ int		Equal::detect(const char &c) {
 	return (NONE);
 }
 
-int		Equal::apply(std::string const &s) {
-	(void)s;
-	return (0);
-}
-
 int		Equal::getPriority(void) const {
 	return (1);
 }

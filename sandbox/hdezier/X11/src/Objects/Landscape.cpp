@@ -12,7 +12,6 @@ Landscape::Landscape(void) {
 
 Landscape::~Landscape(void) {
 	glDeleteBuffers(1, &_vertexBuffer);
-	glDeleteBuffers(1, &_colorBuffer);
 	glDeleteBuffers(1, &_indexBuffer);
 	glDeleteVertexArrays(1, &_vertexArrayID);
 	glDeleteProgram(_progID);
@@ -52,6 +51,9 @@ void	Landscape::initBuffers(void) {
 	}
 	/*Index Buffer*/
 	for (i = 0; i < (WIDTH_MAP - 1) * HEIGHT_MAP; ++i) {
+		if (i % WIDTH_MAP == 0) {
+			continue ;
+		}
 		n = i * 6;
 		g_index_buffer_data[n] = i;
 		g_index_buffer_data[n + 1] = i + 1;
@@ -229,6 +231,7 @@ void		Landscape::useMap(void) {
 }
 
 void	Landscape::raiseWater(float const n) {
+
 	_waterDiff += n;
 }
 
@@ -243,12 +246,11 @@ void	Landscape::draw(void) const {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vertexBuffer);
 	glDrawElements(
 		GL_TRIANGLE_STRIP,
-		WIDTH_MAP * HEIGHT_MAP * 3 * sizeof(size_t),
+		((WIDTH_MAP) * HEIGHT_MAP) * 3 * sizeof(GLuint),
 		GL_UNSIGNED_INT,
 		(char *)NULL
 	);
 
-	// glDrawArrays(GL_POLYGON, 0, WIDTH_MAP * HEIGHT_MAP);
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 }
