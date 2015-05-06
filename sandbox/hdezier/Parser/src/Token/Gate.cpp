@@ -21,11 +21,6 @@ int		Gate::detect(const char &c) {
 	return (NONE);
 }
 
-int		Gate::apply(std::string const &s) {
-	(void)s;
-	return (0);
-}
-
 int		Gate::getPriority(void) const {
 	return (1);
 }

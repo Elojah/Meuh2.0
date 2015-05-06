@@ -28,47 +28,55 @@ Parser::Parser(const std::string &filename) {
 }
 
 void			Parser::exec(std::ifstream &ifs) {
-	char				c;
+	std::string			line;
 	int					n;
 	int					nbToken;
-	size_t				tokenMask;
 	int					response;
-	std::string			line;
+	size_t				mask;
+	size_t				numline(0);
+	size_t				i;
+	size_t				len;
 
 	nbToken = _globalTokens.size();
-	tokenMask = (1L << _globalTokens.size()) - 1;
-	while (ifs.get(c)) {
-		for (n = 0; n < nbToken; ++n) {
-			if (!((tokenMask >> n) & 1)) {
-				continue ;
-			}
-			response = _globalTokens[n]->detect(c);
-			if (response == FOUND) {
-				continue ;
-			} else if (response == COMPLETE) {
-				_readTokens.push_back(_globalTokens[n]->getAsRead());
-				resetGlobalTokens();
-				tokenMask = (1L << _globalTokens.size()) - 1;
-				n = -1;
-			} else if (response == MASTER) {
-				tokenMask = (1L << n);
-			} else if (response == NONE) {
-				tokenMask &= ~(1L << n);
-				if (tokenMask == 0) {
-					if (!isSeparator(c)) {
-						std::cout << "\033[1;31mParsing error on char\033[0m:\t" << c << std::endl;
-						std::cout << "Unrecognized symbol." << std::endl;
-						return ;
-					} else if (tokenizing()) {
-						std::cout << "\033[1;31mParsing error on char\033[0m:\t" << c << std::endl;
-						std::cout << "Unfinished expression." << std::endl;
-						return ;
-					}
+	mask = (1L << _globalTokens.size()) - 1;
+	while (std::getline(ifs, line)) {
+		line.push_back('\n');
+		len = line.size();
+		for (i = 0; i < len; ++i) {
+			for (n = 0; n < nbToken; ++n) {
+				if (!((mask >> n) & 1)) {
+					continue ;
+				}
+				response = _globalTokens[n]->detect(line[i]);
+				if (response == FOUND) {
+					continue ;
+				} else if (response == COMPLETE) {
+					_readTokens.push_back(_globalTokens[n]->getAsRead());
 					resetGlobalTokens();
-					tokenMask = (1L << _globalTokens.size()) - 1;
+					mask = (1L << _globalTokens.size()) - 1;
+					n = -1;
+				} else if (response == MASTER) {
+					mask = (1L << n);
+				} else if (response == NONE) {
+					mask &= ~(1L << n);
+					if (mask == 0) {
+						if (!isSeparator(line[i])) {
+							std::cout << "\033[1;31mParsing error on\033[0m:\t" << line[i] << std::endl
+										<< "Line:\t" << numline << std::endl
+										<< line << std::endl << i << "th char" << std::endl
+										<< "Unrecognized symbol." << std::endl;
+						} else if (tokenizing()) {
+							std::cout << "\033[1;31mParsing error on\033[0m:\t" << line[i] << std::endl
+										<< line << std::endl << i << "th char" << std::endl
+										<< "Unfinished expression." << std::endl;
+						}
+						resetGlobalTokens();
+						mask = (1L << _globalTokens.size()) - 1;
+					}
 				}
 			}
 		}
+		numline++;
 	}
 }
 

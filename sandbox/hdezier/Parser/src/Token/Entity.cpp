@@ -20,11 +20,6 @@ int		Entity::detect(const char &c) {
 	return (NONE);
 }
 
-int		Entity::apply(std::string const &s) {
-	(void)s;
-	return (0);
-}
-
 int		Entity::getPriority(void) const {
 	return (1);
 }

@@ -14,8 +14,12 @@ RM = rm -rf
 #List classes here
 CLASS = main\
 		loop\
+		render\
 		load_map\
 		key_callback\
+		load_shaders\
+		add_unit\
+		move_player\
 
 #List interfaces here
 INTERFACE = \
@@ -37,6 +41,7 @@ LIB_LOCAL = \
 LIB_GLOBAL = \
 			glfw3\
 			ft\
+			m\
 
 LIB_OTHER = \
 			-framework Cocoa\
@@ -77,7 +82,7 @@ dirlib:
 
 .PHONY: all clean fclean re
 
-.SILENT: dirbuild dirbin
+.SILENT: dirbuild dirbin dirlib
 
 #Build rule
 $(TARGET) : $(OBJ)
