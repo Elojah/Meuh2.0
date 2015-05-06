@@ -8,7 +8,7 @@ class Boot : public Menu
 {
 public:
 	Boot(void);
-	~Boot(void);
+	virtual ~Boot(void);
 protected:
 private:
 	void		createItems(void);

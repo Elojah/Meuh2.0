@@ -8,7 +8,7 @@ class ReplaceClassName : public TemplateBehavior
 {
 public:
 	ReplaceClassName(void);
-	~ReplaceClassName(void);
+	virtual ~ReplaceClassName(void);
 	bool		isBehavior(std::string const&);
 	std::string	makeBehavior(void);
 protected:

@@ -1,0 +1,62 @@
+[CREATED] Ressource #0: Mineral deposit in 10/10 with 15 unit remaining.
+[CREATED] Ressource #1: Mineral deposit in 11/9 with 5000 unit remaining.
+[CREATED] Ressource #2: Vespen gas deposit in 14/11 with 5000 unit remaining.
+[CREATED] Building #0: Command Center in 12/13 with 1500/1500HP.
+[CREATED] Unit #0: SCV T-280 in 12/13 with 60/60HP damaging at 5.
+Unit #0: SCV good to go, sir.
+[CREATED] Unit #1: SCV T-280 in 12/13 with 60/60HP damaging at 5.
+Unit #1: SCV good to go, sir.
+[CREATED] Unit #2: SCV T-280 in 12/13 with 60/60HP damaging at 5.
+Unit #2: SCV good to go, sir.
+Unit #0 (SCV T-280) is moving from 12/13 to 10/10.
+Unit #0 (SCV T-280) gathered 8 minerals.
+Unit #1 (SCV T-280) is moving from 12/13 to 11/9.
+Unit #1 (SCV T-280) gathered 8 minerals.
+Unit #2 (SCV T-280) is moving from 12/13 to 14/11.
+Unit #2 (SCV T-280) gathered 8 gas.
+Unit #0 (SCV T-280) is moving from 10/10 to 12/13.
+Unit #0 (SCV T-280) returned 8 minerals.
+Unit #1 (SCV T-280) is moving from 11/9 to 12/13.
+Unit #1 (SCV T-280) returned 8 minerals.
+Unit #2 (SCV T-280) is moving from 14/11 to 12/13.
+Unit #2 (SCV T-280) returned 8 gas.
+Unit #0 (SCV T-280) is moving from 12/13 to 10/10.
+Unit #0 (SCV T-280) gathered 7 minerals.
+Unit #1 (SCV T-280) is moving from 12/13 to 11/9.
+Unit #1 (SCV T-280) gathered 8 minerals.
+Unit #2 (SCV T-280) is moving from 12/13 to 14/11.
+Unit #2 (SCV T-280) gathered 8 gas.
+Unit #0 (SCV T-280) is moving from 10/10 to 12/13.
+Unit #0 (SCV T-280) returned 7 minerals.
+Unit #1 (SCV T-280) is moving from 11/9 to 12/13.
+Unit #1 (SCV T-280) returned 8 minerals.
+Unit #2 (SCV T-280) is moving from 14/11 to 12/13.
+Unit #2 (SCV T-280) returned 8 gas.
+Unit #0 (SCV T-280) is moving from 12/13 to 8/17.
+Unit #0: Affirmative.
+Unit #0: Barrack finished, sir.
+[CREATED] Building #1: Barracks in 8/17 with 1000/1000HP.
+[CREATED] Unit #3: Marine in 8/17 with 40/40HP damaging at 6.
+Unit #3: You want a piece of me, boy ?
+[CREATED] Unit #4: Marine in 8/17 with 40/40HP damaging at 6.
+Unit #4: You want a piece of me, boy ?
+Unit #1 (SCV T-280) is moving from 12/13 to 16/11.
+Unit #1: Affirmative.
+Unit #1: Supply depot finished, sir.
+[CREATED] Building #2: SupplyDepot in 16/11 with 500/500HP.
+Unit #2 (SCV T-280) is moving from 12/13 to 16/19.
+Unit #2: Affirmative.
+Unit #2: Bunker finished, sir.
+[CREATED] Building #3: Bunker in 16/19 with 350/350HP.
+[DESTRUCTED] Building #3: Bunker in 16/19 with 350/350HP.
+[DESTRUCTED] Building #2: SupplyDepot in 16/11 with 500/500HP.
+[DESTRUCTED] Building #1: Barracks in 8/17 with 1000/1000HP.
+[DESTRUCTED] Unit #3: Marine in 8/17 with 40/40HP damaging at 6.
+[DESTRUCTED] Unit #4: Marine in 8/17 with 40/40HP damaging at 6.
+[DESTRUCTED] Unit #0: SCV T-280 in 8/17 with 60/60HP damaging at 5.
+[DESTRUCTED] Unit #1: SCV T-280 in 16/11 with 60/60HP damaging at 5.
+[DESTRUCTED] Unit #2: SCV T-280 in 16/19 with 60/60HP damaging at 5.
+[DESTRUCTED] Ressource #0: Mineral deposit in 10/10 with 0 unit remaining.
+[DESTRUCTED] Ressource #1: Mineral deposit in 11/9 with 4984 unit remaining.
+[DESTRUCTED] Ressource #2: Vespen gas deposit in 14/11 with 4984 unit remaining.
+[DESTRUCTED] Building #0: Command Center in 12/13 with 1500/1500HP.

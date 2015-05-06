@@ -4,7 +4,7 @@ TARGET = lib/libparseStr.a
 SRC_DIR = src
 INC_DIR = include
 BUILD_DIR = build
-LIB_DIR = lib
+LIB_DIR =
 
 #Options
 CC = g++

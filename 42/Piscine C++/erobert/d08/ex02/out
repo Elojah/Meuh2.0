@@ -1,0 +1,210 @@
+main.cpp: In function ‘int main()’:
+main.cpp:33:41: error: ‘class MutantStack<int>’ has no member named ‘begin’
+  MutantStack<int>::iterator it = mstack.begin();
+                                         ^
+main.cpp:34:42: error: ‘class MutantStack<int>’ has no member named ‘end’
+  MutantStack<int>::iterator ite = mstack.end();
+                                          ^
+main.cpp:38:2: error: no match for ‘operator++’ (operand type is ‘MutantStack<int>::iterator’)
+  ++it;
+  ^
+main.cpp:39:2: error: no match for ‘operator--’ (operand type is ‘MutantStack<int>::iterator’)
+  --it;
+  ^
+main.cpp:40:12: error: no match for ‘operator!=’ (operand types are ‘MutantStack<int>::iterator’ and ‘MutantStack<int>::iterator’)
+  while (it != ite) {
+            ^
+main.cpp:40:12: note: candidates are:
+In file included from /usr/local/include/c++/4.9.0/stack:61:0,
+                 from MutantStack.hpp:18,
+                 from main.cpp:15:
+/usr/local/include/c++/4.9.0/bits/stl_stack.h:267:5: note: template<class _Tp, class _Seq> bool std::operator!=(const std::stack<_Tp, _Seq>&, const std::stack<_Tp, _Seq>&)
+     operator!=(const stack<_Tp, _Seq>& __x, const stack<_Tp, _Seq>& __y)
+     ^
+/usr/local/include/c++/4.9.0/bits/stl_stack.h:267:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::stack<_Tp, _Seq>’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/deque:64:0,
+                 from /usr/local/include/c++/4.9.0/stack:60,
+                 from MutantStack.hpp:18,
+                 from main.cpp:15:
+/usr/local/include/c++/4.9.0/bits/stl_deque.h:2049:5: note: template<class _Tp, class _Alloc> bool std::operator!=(const std::deque<_Tp, _Alloc>&, const std::deque<_Tp, _Alloc>&)
+     operator!=(const deque<_Tp, _Alloc>& __x,
+     ^
+/usr/local/include/c++/4.9.0/bits/stl_deque.h:2049:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::deque<_Tp, _Alloc>’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/deque:64:0,
+                 from /usr/local/include/c++/4.9.0/stack:60,
+                 from MutantStack.hpp:18,
+                 from main.cpp:15:
+/usr/local/include/c++/4.9.0/bits/stl_deque.h:271:5: note: template<class _Tp, class _RefL, class _PtrL, class _RefR, class _PtrR> bool std::operator!=(const std::_Deque_iterator<_Tp, _Ref, _Ptr>&, const std::_Deque_iterator<_Tp, _RefR, _PtrR>&)
+     operator!=(const _Deque_iterator<_Tp, _RefL, _PtrL>& __x,
+     ^
+/usr/local/include/c++/4.9.0/bits/stl_deque.h:271:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::_Deque_iterator<_Tp, _Ref, _Ptr>’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/deque:64:0,
+                 from /usr/local/include/c++/4.9.0/stack:60,
+                 from MutantStack.hpp:18,
+                 from main.cpp:15:
+/usr/local/include/c++/4.9.0/bits/stl_deque.h:264:5: note: template<class _Tp, class _Ref, class _Ptr> bool std::operator!=(const std::_Deque_iterator<_Tp, _Ref, _Ptr>&, const std::_Deque_iterator<_Tp, _Ref, _Ptr>&)
+     operator!=(const _Deque_iterator<_Tp, _Ref, _Ptr>& __x,
+     ^
+/usr/local/include/c++/4.9.0/bits/stl_deque.h:264:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::_Deque_iterator<_Tp, _Ref, _Ptr>’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/iterator:66:0,
+                 from MutantStack.hpp:16,
+                 from main.cpp:15:
+/usr/local/include/c++/4.9.0/bits/stream_iterator.h:137:5: note: template<class _Tp, class _CharT, class _Traits, class _Dist> bool std::operator!=(const std::istream_iterator<_Tp, _CharT, _Traits, _Dist>&, const std::istream_iterator<_Tp, _CharT, _Traits, _Dist>&)
+     operator!=(const istream_iterator<_Tp, _CharT, _Traits, _Dist>& __x,
+     ^
+/usr/local/include/c++/4.9.0/bits/stream_iterator.h:137:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::istream_iterator<_Tp, _CharT, _Traits, _Dist>’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/bits/locale_facets.h:48:0,
+                 from /usr/local/include/c++/4.9.0/bits/basic_ios.h:37,
+                 from /usr/local/include/c++/4.9.0/ios:44,
+                 from /usr/local/include/c++/4.9.0/ostream:38,
+                 from /usr/local/include/c++/4.9.0/iostream:39,
+                 from main.cpp:14:
+/usr/local/include/c++/4.9.0/bits/streambuf_iterator.h:210:5: note: template<class _CharT, class _Traits> bool std::operator!=(const std::istreambuf_iterator<_CharT, _Traits>&, const std::istreambuf_iterator<_CharT, _Traits>&)
+     operator!=(const istreambuf_iterator<_CharT, _Traits>& __a,
+     ^
+/usr/local/include/c++/4.9.0/bits/streambuf_iterator.h:210:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::istreambuf_iterator<_CharT, _Traits>’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/string:52:0,
+                 from /usr/local/include/c++/4.9.0/bits/locale_classes.h:40,
+                 from /usr/local/include/c++/4.9.0/bits/ios_base.h:41,
+                 from /usr/local/include/c++/4.9.0/ios:42,
+                 from /usr/local/include/c++/4.9.0/ostream:38,
+                 from /usr/local/include/c++/4.9.0/iostream:39,
+                 from main.cpp:14:
+/usr/local/include/c++/4.9.0/bits/basic_string.h:2575:5: note: template<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const std::basic_string<_CharT, _Traits, _Alloc>&, const _CharT*)
+     operator!=(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+     ^
+/usr/local/include/c++/4.9.0/bits/basic_string.h:2575:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::basic_string<_CharT, _Traits, _Alloc>’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/string:52:0,
+                 from /usr/local/include/c++/4.9.0/bits/locale_classes.h:40,
+                 from /usr/local/include/c++/4.9.0/bits/ios_base.h:41,
+                 from /usr/local/include/c++/4.9.0/ios:42,
+                 from /usr/local/include/c++/4.9.0/ostream:38,
+                 from /usr/local/include/c++/4.9.0/iostream:39,
+                 from main.cpp:14:
+/usr/local/include/c++/4.9.0/bits/basic_string.h:2563:5: note: template<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const _CharT*, const std::basic_string<_CharT, _Traits, _Alloc>&)
+     operator!=(const _CharT* __lhs,
+     ^
+/usr/local/include/c++/4.9.0/bits/basic_string.h:2563:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   mismatched types ‘const _CharT*’ and ‘MutantStack<int>::iterator’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/string:52:0,
+                 from /usr/local/include/c++/4.9.0/bits/locale_classes.h:40,
+                 from /usr/local/include/c++/4.9.0/bits/ios_base.h:41,
+                 from /usr/local/include/c++/4.9.0/ios:42,
+                 from /usr/local/include/c++/4.9.0/ostream:38,
+                 from /usr/local/include/c++/4.9.0/iostream:39,
+                 from main.cpp:14:
+/usr/local/include/c++/4.9.0/bits/basic_string.h:2551:5: note: template<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const std::basic_string<_CharT, _Traits, _Alloc>&, const std::basic_string<_CharT, _Traits, _Alloc>&)
+     operator!=(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+     ^
+/usr/local/include/c++/4.9.0/bits/basic_string.h:2551:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::basic_string<_CharT, _Traits, _Alloc>’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/iosfwd:40:0,
+                 from /usr/local/include/c++/4.9.0/ios:38,
+                 from /usr/local/include/c++/4.9.0/ostream:38,
+                 from /usr/local/include/c++/4.9.0/iostream:39,
+                 from main.cpp:14:
+/usr/local/include/c++/4.9.0/bits/postypes.h:221:5: note: template<class _StateT> bool std::operator!=(const std::fpos<_StateT>&, const std::fpos<_StateT>&)
+     operator!=(const fpos<_StateT>& __lhs, const fpos<_StateT>& __rhs)
+     ^
+/usr/local/include/c++/4.9.0/bits/postypes.h:221:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::fpos<_StateT>’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/list:63:0,
+                 from main.cpp:13:
+/usr/local/include/c++/4.9.0/bits/stl_list.h:1755:5: note: template<class _Tp, class _Alloc> bool std::operator!=(const std::list<_Tp, _Alloc>&, const std::list<_Tp, _Alloc>&)
+     operator!=(const list<_Tp, _Alloc>& __x, const list<_Tp, _Alloc>& __y)
+     ^
+/usr/local/include/c++/4.9.0/bits/stl_list.h:1755:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::list<_Tp, _Alloc>’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/list:63:0,
+                 from main.cpp:13:
+/usr/local/include/c++/4.9.0/bits/stl_list.h:291:5: note: template<class _Val> bool std::operator!=(const std::_List_iterator<_Tp>&, const std::_List_const_iterator<_Val>&)
+     operator!=(const _List_iterator<_Val>& __x,
+     ^
+/usr/local/include/c++/4.9.0/bits/stl_list.h:291:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::_List_iterator<_Tp>’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/list:61:0,
+                 from main.cpp:13:
+/usr/local/include/c++/4.9.0/bits/allocator.h:143:5: note: template<class _Tp> bool std::operator!=(const std::allocator<_Tp1>&, const std::allocator<_Tp1>&)
+     operator!=(const allocator<_Tp>&, const allocator<_Tp>&)
+     ^
+/usr/local/include/c++/4.9.0/bits/allocator.h:143:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::allocator<_Tp1>’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/list:61:0,
+                 from main.cpp:13:
+/usr/local/include/c++/4.9.0/bits/allocator.h:138:5: note: template<class _T1, class _T2> bool std::operator!=(const std::allocator<_Tp1>&, const std::allocator<_T2>&)
+     operator!=(const allocator<_T1>&, const allocator<_T2>&)
+     ^
+/usr/local/include/c++/4.9.0/bits/allocator.h:138:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::allocator<_Tp1>’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/bits/stl_algobase.h:67:0,
+                 from /usr/local/include/c++/4.9.0/list:60,
+                 from main.cpp:13:
+/usr/local/include/c++/4.9.0/bits/stl_iterator.h:354:5: note: template<class _IteratorL, class _IteratorR> bool std::operator!=(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)
+     operator!=(const reverse_iterator<_IteratorL>& __x,
+     ^
+/usr/local/include/c++/4.9.0/bits/stl_iterator.h:354:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/bits/stl_algobase.h:67:0,
+                 from /usr/local/include/c++/4.9.0/list:60,
+                 from main.cpp:13:
+/usr/local/include/c++/4.9.0/bits/stl_iterator.h:304:5: note: template<class _Iterator> bool std::operator!=(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)
+     operator!=(const reverse_iterator<_Iterator>& __x,
+     ^
+/usr/local/include/c++/4.9.0/bits/stl_iterator.h:304:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+  while (it != ite) {
+               ^
+In file included from /usr/local/include/c++/4.9.0/bits/stl_algobase.h:64:0,
+                 from /usr/local/include/c++/4.9.0/list:60,
+                 from main.cpp:13:
+/usr/local/include/c++/4.9.0/bits/stl_pair.h:227:5: note: template<class _T1, class _T2> bool std::operator!=(const std::pair<_T1, _T2>&, const std::pair<_T1, _T2>&)
+     operator!=(const pair<_T1, _T2>& __x, const pair<_T1, _T2>& __y)
+     ^
+/usr/local/include/c++/4.9.0/bits/stl_pair.h:227:5: note:   template argument deduction/substitution failed:
+main.cpp:40:15: note:   ‘MutantStack<int>::iterator’ is not derived from ‘const std::pair<_T1, _T2>’
+  while (it != ite) {
+               ^
+main.cpp:41:16: error: no match for ‘operator*’ (operand type is ‘MutantStack<int>::iterator’)
+   std::cout << *it << std::endl;
+                ^
+main.cpp:42:3: error: no match for ‘operator++’ (operand type is ‘MutantStack<int>::iterator’)
+   ++it; }
+   ^
+make: *** [main.o] Error 1
