@@ -6,32 +6,68 @@
 # define __gl_h_
 # include <GLFW/glfw3.h>
 # define GLFW_INCLUDE_GLCOREARB
-# define HEIGHT 50
-# define WIDTH 50
-# define SIZE_CASE 10
+# define REFRESH_TIME 0.016
+# define HEIGHT_MAP 50
+# define WIDTH_MAP 50
+# define SIZE_CASE 20
+# define BUFFER_OFFSET(i) ((char *)NULL + (i))
+# define MAX_LENGTH_SHADERS 1024
+# define GRID w->display.vertex_buffer_data
+# define BALL w->ball.vertex_buffer_data
+# define PLAYER_Y 3
+# define BALL_PRECISION 20
+# define SPEED 100
+# define MIN(a, b) (((a) > (b) ? (b) : (a)))
+# define ABS(a) (((a) > 0) ? (a) : (-a))
+# define M_PI 3.14159265359
+# define SQ(n) ((n) * (n))
 
-enum				e_unit
+typedef enum		e_move
 {
-	EMPTY = 0,
-	PLAYER,
-	ONE_PIECE,
-	THREE_PIECE,
-	NONE_PIECE
-};
+	LEFT = -1,
+	RIGHT = 1,
+}					t_move;
+
+typedef enum		e_unit
+{
+					PLAYER = -1,
+					EMPTY = 0,
+					ONE_PIECE,
+					THREE_PIECE,
+					NONE_PIECE
+}					t_unit;
 
 typedef struct		s_point
 {
 	float			x;
 	float			y;
-	float			z;
 }					t_point;
+
+typedef struct		s_brick
+{
+	GLuint			vertex_array_ID;
+	GLuint			prog_ID;
+	GLuint			vertex_buffer;
+	t_point			vertex_buffer_data[HEIGHT_MAP * WIDTH_MAP * 6 + 1];
+}					t_brick;
+
+typedef struct		s_ball
+{
+	GLuint			prog_ID;
+	GLuint			vertex_buffer;
+	t_point			vertex_buffer_data[BALL_PRECISION + 3];
+	float			dx;
+	float			dy;
+}					t_ball;
 
 typedef struct		s_window
 {
 	GLFWwindow		*window;
-	int				map[HEIGHT * WIDTH + 1];
-	float			player_x;
-	t_point			buffer[HEIGHT * WIDTH * 3 + 1];
+	GLuint			map_ID;
+	GLint			map[HEIGHT_MAP * WIDTH_MAP * 6 + 1];
+	t_brick			display;
+	t_ball			ball;
+	int				player_x;
 	unsigned int	current_level;
 }					t_window;
 
@@ -41,13 +77,36 @@ typedef struct		s_window
 void				loop(t_window *w);
 
 /*
-**Key callback
+**Rendering
 */
-void				key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+void				render(t_window *w);
 
 /*
-**Error Handling
+**Load map
 */
-void				ft_exit(int condition, char *message);
+void				load_map(t_window *w, char *filename);
+
+
+/*
+**Key callback
+*/
+void				key_callback(GLFWwindow *window, int key, int scancode
+	, int action, int mods);
+
+/*
+**Load shaders
+*/
+GLuint				load_shaders(const char *vertex_file_path
+	, const char *fragment_file_path);
+
+/*
+**CRE unit
+*/
+void				add_unit(t_window *w, int x, int y, t_unit type);
+
+/*
+**Move player
+*/
+void				move_player(t_window *w, t_move t);
 
 #endif
