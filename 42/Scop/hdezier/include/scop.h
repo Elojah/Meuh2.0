@@ -2,7 +2,7 @@
 # define SCOP_H
 
 # define GL_GLEXT_PROTOTYPES
-# ifdef __MAC__
+# ifdef __APPLE__
 #  include <OpenGL/gl3.h>
 # else
 #  include <GL/gl.h>
@@ -10,9 +10,15 @@
 # define __gl_h_
 # include <GLFW/glfw3.h>
 # define GLFW_INCLUDE_GLCOREARB
+
 # define REFRESH_TIME 0.016
 # define BUFFER_OFFSET(i) ((char *)NULL + (i))
+
 # define MAX_LENGTH_SHADERS 1024
+# define MAX_VERTEX 256
+# define MAX_INDEX 1024
+# define MAX_NORMAL 1024
+# define MAX_TEX 1024
 
 # define W_WIDTH 1200
 # define W_HEIGHT 800
@@ -28,6 +34,12 @@ typedef enum		e_move
 	RIGHT = 1,
 }					t_move;
 
+typedef struct		s_coord
+{
+	GLfloat			u;
+	GLfloat			v;
+}					t_coord;
+
 typedef struct		s_point
 {
 	GLfloat			x;
@@ -37,17 +49,29 @@ typedef struct		s_point
 
 typedef struct		s_object
 {
+	unsigned char	name[64];
 	GLuint			vertex_array_id;
 	GLuint			prog_id;
-	GLuint			vertex_buffer;
-	t_point			*vertex_buffer_data;
-	unsigned int	vertex_buffer_size;
-	GLuint			index_buffer;
-	GLuint			*index_buffer_data;
+
+	GLuint			ve_index_buffer;
+	GLuint			ve_index_buffer_data[(MAX_INDEX + 1) * 3];
+	GLuint			te_index_buffer;
+	GLuint			te_index_buffer_data[(MAX_INDEX + 1) * 3];
+	GLuint			no_index_buffer;
+	GLuint			no_index_buffer_data[(MAX_INDEX + 1) * 3];
 	unsigned int	index_buffer_size;
-	t_point			*normal_data;
-	t_point			*tex_data;
-	unsigned char	name[64];
+
+	GLuint			vertex_buffer;
+	t_point			vertex_buffer_data[MAX_VERTEX + 1];
+	unsigned int	vertex_buffer_size;
+
+	GLuint			normal_buffer;
+	t_point			normal_buffer_data[MAX_NORMAL + 1];
+	unsigned int	normal_buffer_size;
+
+	GLuint			tex_buffer;
+	t_coord			tex_buffer_data[MAX_TEX + 1];
+	unsigned int	tex_buffer_size;
 }					t_object;
 
 typedef struct		s_window

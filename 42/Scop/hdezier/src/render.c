@@ -8,7 +8,7 @@ static void			render_obj(t_object *obj)
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, obj->vertex_buffer);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, obj->index_buffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, obj->ve_index_buffer);
 	glVertexAttribPointer(1, 3, GL_UNSIGNED_INT, GL_TRUE, 0, BUFFER_OFFSET(0));
 	// glDrawElements();
 	glDisableVertexAttribArray(0);

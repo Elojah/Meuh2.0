@@ -30,7 +30,7 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3
+CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g
 LFLAGS =
 
 #Libs

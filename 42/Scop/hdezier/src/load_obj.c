@@ -4,9 +4,66 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-static void			load_vertex(t_object *obj)
+static void			load_vertex(t_object *obj, const char *line)
 {
-	;
+	if (obj->vertex_buffer_size >= MAX_VERTEX)
+		return ;
+	line = ft_goto_next(line, ' ');
+	obj->vertex_buffer_data[obj->vertex_buffer_size].x = ft_atof(line);
+	line = ft_goto_next(line, ' ');
+	obj->vertex_buffer_data[obj->vertex_buffer_size].y = ft_atof(line);
+	line = ft_goto_next(line, ' ');
+	obj->vertex_buffer_data[obj->vertex_buffer_size].z = ft_atof(line);
+	++obj->vertex_buffer_size;
+}
+
+static void			load_normal(t_object *obj, const char *line)
+{
+	if (obj->normal_buffer_size >= MAX_NORMAL)
+		return ;
+	line = ft_goto_next(line, ' ');
+	obj->normal_buffer_data[obj->normal_buffer_size].x = ft_atof(line);
+	line = ft_goto_next(line, ' ');
+	obj->normal_buffer_data[obj->normal_buffer_size].y = ft_atof(line);
+	line = ft_goto_next(line, ' ');
+	obj->normal_buffer_data[obj->normal_buffer_size].z = ft_atof(line);
+	++obj->normal_buffer_size;
+}
+
+static void			load_tex(t_object *obj, const char *line)
+{
+	if (obj->tex_buffer_size >= MAX_TEX * 2)
+		return ;
+	line = ft_goto_next(line, ' ');
+	obj->tex_buffer_data[obj->tex_buffer_size].u = ft_atof(line);
+	line = ft_goto_next(line, ' ');
+	obj->tex_buffer_data[obj->tex_buffer_size].v = ft_atof(line);
+	++obj->tex_buffer_size;
+}
+
+static void			load_index(t_object *obj, const char *line)
+{
+	if (obj->index_buffer_size >= MAX_INDEX)
+		return ;
+	line = ft_goto_next(line, ' ');
+	obj->ve_index_buffer_data[obj->index_buffer_size * 3] = ft_uatoi(line);
+	line = ft_goto_next(line + 1, '/');
+	obj->te_index_buffer_data[obj->index_buffer_size * 3] = ft_uatoi(line);
+	line = ft_goto_next(line + 1, '/');
+	obj->no_index_buffer_data[obj->index_buffer_size * 3] = ft_uatoi(line);
+	line = ft_goto_next(line + 1, ' ');
+	obj->ve_index_buffer_data[obj->index_buffer_size * 3 + 1] = ft_uatoi(line);
+	line = ft_goto_next(line + 1, '/');
+	obj->te_index_buffer_data[obj->index_buffer_size * 3 + 1] = ft_uatoi(line);
+	line = ft_goto_next(line + 1, '/');
+	obj->no_index_buffer_data[obj->index_buffer_size * 3 + 1] = ft_uatoi(line);
+	line = ft_goto_next(line + 1, ' ');
+	obj->ve_index_buffer_data[obj->index_buffer_size * 3 + 2] = ft_uatoi(line);
+	line = ft_goto_next(line + 1, '/');
+	obj->te_index_buffer_data[obj->index_buffer_size * 3 + 2] = ft_uatoi(line);
+	line = ft_goto_next(line + 1, '/');
+	obj->no_index_buffer_data[obj->index_buffer_size * 3 + 2] = ft_uatoi(line);
+	++obj->index_buffer_size;
 }
 
 void				load_obj(t_object *obj, char *filename)
@@ -15,19 +72,22 @@ void				load_obj(t_object *obj, char *filename)
 	char			*line;
 
 	ft_exit((fd = open(filename, O_RDONLY)) < 0, "Can't read file");
-	obj->vertex_buffer_size = 0;
-	obj->index_buffer_size = 0;
-	line = NULL;
-	while (get_next_line(fd, &line) >= 0)
+	obj->vertex_buffer_size = obj->index_buffer_size = obj->normal_buffer_size
+	= obj->tex_buffer_size = 0;
+	while (get_next_line(fd, &line) > 0)
 	{
-		if (line[0] == '#')
-		{
-			ft_memdel((void **)&line);
-			continue ;
-		}
+		if (line[0] == '#' || ft_strlen(line) < 2)
+			;
 		else if (line[0] == 'o')
-			ft_strcpy(obj->name, line + 2);
+			ft_strcpy((char *)obj->name, line + 2);
 		else if (line[0] == 'v' && line[1] == ' ')
+			load_vertex(obj, line + 1);
+		else if (line[0] == 'v' && line[1] == 'n')
+			load_normal(obj, line + 2);
+		else if (line[0] == 'v' && line[1] == 't')
+			load_tex(obj, line + 2);
+		else if (line[0] == 'f' && line[1] == ' ')
+			load_index(obj, line + 1);
 		ft_memdel((void **)&line);
 	}
 	close(fd);
