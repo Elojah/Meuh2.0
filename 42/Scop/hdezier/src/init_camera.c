@@ -24,16 +24,10 @@ static void	init_projection(t_camera *cam)
 	cam->proj[2][2] = -VIEW_FAR * VIEW_NEAR * depth;
 }
 
-static void	init_view(t_camera *cam)
-{
-	(void)cam;
-}
-
 void		init_camera(t_camera *cam)
 {
 	cam->pos = (t_point){10.0f, 10.0f, 20.0f};
-	cam->dir = (t_point){1.0f, 0.0f, 0.0f};
+	cam->eye = (t_point){1.0f, 0.0f, 0.0f};
 	cam->up = (t_point){0.0f, 1.0f, 0.0f};
 	init_projection(cam);
-	init_view(cam);
 }

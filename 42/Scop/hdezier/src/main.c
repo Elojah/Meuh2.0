@@ -5,7 +5,7 @@
 
 static void		init_gl(t_window *w)
 {
-	w->obj.prog_id = load_shaders("./src/shaders/Obj.vert"
+	w->prog_id = load_shaders("./src/shaders/Obj.vert"
 									, "./src/shaders/Obj.frag");
 	glGenVertexArrays(6, &w->obj.vertex_array_id);
 	glBindVertexArray(w->obj.vertex_array_id);
@@ -40,7 +40,6 @@ static void		init_gl(t_window *w)
 
 static void		destroy_obj(t_object *obj)
 {
-	glDeleteProgram(obj->prog_id);
 	glDeleteBuffers(1, &obj->vertex_buffer);
 	glDeleteBuffers(1, &obj->normal_buffer);
 	glDeleteBuffers(1, &obj->tex_buffer);
@@ -68,6 +67,7 @@ static void		init_window(t_window *w)
 
 static void		destroy_window(t_window *w)
 {
+	glDeleteProgram(w->prog_id);
 	glfwDestroyWindow(w->window);
 	glfwTerminate();
 	write(1, "Credits:\n\thdezier\n@42SchoolProject\n", 35);

@@ -56,18 +56,18 @@ typedef struct		s_point
 typedef struct		s_camera
 {
 	t_point			pos;
-	t_point			dir;
+	t_point			eye;
 	t_point			up;
 	GLfloat			view[4][4];
 	GLfloat			proj[4][4];
 	GLfloat			vp[4][4];
+	GLuint			mvp_id;
 }					t_camera;
 
 typedef struct		s_object
 {
 	unsigned char	name[64];
 	GLuint			vertex_array_id;
-	GLuint			prog_id;
 
 	GLuint			ve_index_buffer;
 	GLuint			ve_index_buffer_data[(MAX_INDEX + 1) * 3];
@@ -93,6 +93,7 @@ typedef struct		s_object
 typedef struct		s_window
 {
 	GLFWwindow		*window;
+	GLuint			prog_id;
 	t_object		obj;
 	t_camera		cam;
 }					t_window;
