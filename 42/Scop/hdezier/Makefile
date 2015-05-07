@@ -18,6 +18,7 @@ CLASS = main\
 		load_obj\
 		key_callback\
 		load_shaders\
+		init_camera\
 		move_camera\
 
 #List interfaces here

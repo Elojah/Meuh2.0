@@ -23,6 +23,12 @@
 # define W_WIDTH 1200
 # define W_HEIGHT 800
 
+# define VIEW_NEAR 0.1f
+# define VIEW_FAR 100.0f
+# define VIEW_FOV 45.0f
+# define VIEW_ASPECT (4.0f / 3.0f)
+# define TAN_MI_FOV 0.55785173935
+
 # define M_PI 3.14159265359
 # define MIN(a, b) (((a) > (b) ? (b) : (a)))
 # define ABS(a) (((a) > 0) ? (a) : (-a))
@@ -31,7 +37,7 @@
 typedef enum		e_move
 {
 	LEFT = -1,
-	RIGHT = 1,
+	RIGHT = 1
 }					t_move;
 
 typedef struct		s_coord
@@ -46,6 +52,16 @@ typedef struct		s_point
 	GLfloat			y;
 	GLfloat			z;
 }					t_point;
+
+typedef struct		s_camera
+{
+	t_point			pos;
+	t_point			dir;
+	t_point			up;
+	GLfloat			view[4][4];
+	GLfloat			proj[4][4];
+	GLfloat			vp[4][4];
+}					t_camera;
 
 typedef struct		s_object
 {
@@ -78,6 +94,7 @@ typedef struct		s_window
 {
 	GLFWwindow		*window;
 	t_object		obj;
+	t_camera		cam;
 }					t_window;
 
 /*
@@ -94,6 +111,11 @@ void				render(t_window *w);
 **Load map
 */
 void				load_obj(t_object *obj, char *filename);
+
+/*
+**Init Camera
+*/
+void				init_camera(t_camera *cam);
 
 /*
 **Key callback

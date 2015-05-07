@@ -5,33 +5,36 @@
 
 static void		init_gl(t_window *w)
 {
-	glGenVertexArrays(6, &w->obj.vertex_array_id);
-	glBindVertexArray(w->obj.vertex_array_id);
 	w->obj.prog_id = load_shaders("./src/shaders/Obj.vert"
 									, "./src/shaders/Obj.frag");
+	glGenVertexArrays(6, &w->obj.vertex_array_id);
+	glBindVertexArray(w->obj.vertex_array_id);
 	glGenBuffers(1, &w->obj.vertex_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, w->obj.vertex_buffer);
-	glBufferData(GL_ARRAY_BUFFER, w->obj.vertex_buffer_size
+	glBufferData(GL_ARRAY_BUFFER, w->obj.vertex_buffer_size * sizeof(t_point)
 		, w->obj.vertex_buffer_data, GL_STATIC_DRAW);
 	glGenBuffers(1, &w->obj.normal_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, w->obj.normal_buffer);
-	glBufferData(GL_ARRAY_BUFFER, w->obj.normal_buffer_size
+	glBufferData(GL_ARRAY_BUFFER, w->obj.normal_buffer_size * sizeof(t_point)
 		, w->obj.normal_buffer_data, GL_STATIC_DRAW);
 	glGenBuffers(1, &w->obj.tex_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, w->obj.tex_buffer);
-	glBufferData(GL_ARRAY_BUFFER, w->obj.tex_buffer_size
+	glBufferData(GL_ARRAY_BUFFER, w->obj.tex_buffer_size * sizeof(t_coord)
 		, w->obj.tex_buffer_data, GL_STATIC_DRAW);
 	glGenBuffers(1, &w->obj.ve_index_buffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, w->obj.ve_index_buffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, w->obj.index_buffer_size * 3
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER
+		, w->obj.index_buffer_size * 3 * sizeof(GLuint)
 		, w->obj.ve_index_buffer_data, GL_STATIC_DRAW);
 	glGenBuffers(1, &w->obj.no_index_buffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, w->obj.no_index_buffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, w->obj.index_buffer_size * 3
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER
+		, w->obj.index_buffer_size * 3 * sizeof(GLuint)
 		, w->obj.no_index_buffer_data, GL_STATIC_DRAW);
 	glGenBuffers(1, &w->obj.te_index_buffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, w->obj.te_index_buffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, w->obj.index_buffer_size * 3
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER
+		, w->obj.index_buffer_size * 3 * sizeof(GLuint)
 		, w->obj.te_index_buffer_data, GL_STATIC_DRAW);
 }
 
@@ -76,8 +79,9 @@ int			main(int ac, char **av)
 
 	ft_exit(ac != 2, "Usage:\t./scop [filename]");
 	load_obj(&(w.obj), av[1]);
-	init_gl(&w);
 	init_window(&w);
+	init_gl(&w);
+	init_camera(&(w.cam));
 	loop(&w);
 	destroy_obj(&(w.obj));
 	destroy_window(&w);

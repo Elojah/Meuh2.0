@@ -32,7 +32,7 @@ static void			load_normal(t_object *obj, const char *line)
 
 static void			load_tex(t_object *obj, const char *line)
 {
-	if (obj->tex_buffer_size >= MAX_TEX * 2)
+	if (obj->tex_buffer_size >= MAX_TEX)
 		return ;
 	line = ft_goto_next(line, ' ');
 	obj->tex_buffer_data[obj->tex_buffer_size].u = ft_atof(line);
@@ -76,7 +76,7 @@ void				load_obj(t_object *obj, char *filename)
 	= obj->tex_buffer_size = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (line[0] == '#' || ft_strlen(line) < 2)
+		if (ft_strlen(line) < 3 || line[0] == '#')
 			;
 		else if (line[0] == 'o')
 			ft_strcpy((char *)obj->name, line + 2);

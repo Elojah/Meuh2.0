@@ -1,7 +1,7 @@
 #include "scop.h"
 
 #include <stdio.h>
-static void		print_obj(t_object *obj)
+void		print_obj(t_object *obj)
 {
 	printf("---------OBJ NAME\t: %s\n", obj->name);
 	printf("Vertex:\n");
@@ -42,7 +42,6 @@ static void		print_obj(t_object *obj)
 			, obj->ve_index_buffer_data[i + 2]
 			, obj->te_index_buffer_data[i + 2]
 			, obj->no_index_buffer_data[i + 2]);
-
 	}
 }
 
@@ -51,15 +50,15 @@ void		loop(t_window *w)
 	double	t;
 	double	prev_t;
 
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glDepthFunc(GL_LESS);
 	print_obj(&(w->obj));
+	// glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+	render(w);
 	while (!glfwWindowShouldClose(w->window))
 	{
-		if ((t = glfwGetTime()) < prev_t + REFRESH_TIME) {
+		if ((t = glfwGetTime()) < prev_t + REFRESH_TIME)
 			continue ;
-		}
 		prev_t = t;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		// refresh_buffers(w);
