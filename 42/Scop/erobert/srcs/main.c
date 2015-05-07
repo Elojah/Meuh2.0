@@ -6,19 +6,65 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/04 09:50:41 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/04 15:24:24 by erobert          ###   ########.fr       */
+/*   Updated: 2015/05/07 14:12:31 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include <stdio.h>
-# define BUFFER_OFFSET(i) ((char *)NULL + (i))
+
+static int		ft_expose_hook(t_env *e)
+{
+	(void)e;
+	return (0);
+}
+
 static int		ft_key_hook(int key, t_env *e)
 {
 	(void)e;
 	printf("key: %d\n", key);
 	if (key == K_ESC)
 		exit(1);
+	unsigned int	i = 0;
+	while (i <  e->buffer_size * sizeof(t_vertex))
+	{
+		e->vertices[i].x /= 1.5;
+		e->vertices[i].y /= 1.5;
+		e->vertices[i].z /= 1.5;
+		i++;
+	}
+
+	const char* vertex_shader =
+		"#version 400\n"
+		"in vec3 vp;"
+		"out vec3 color_vertex;"
+		"void main () {"
+		"float PI = 3.14159265358979323846264;"
+		"float angle = 140.;"
+		"float rad_angle = angle * PI / 180.0;"
+		"vec4 a = vec4(vp, 1.0);"
+		"vec4 b = a;"
+		"b.x = a.x * cos(rad_angle) - a.z * sin(rad_angle);"
+		"b.z = a.z * cos(rad_angle) + a.x * sin(rad_angle);"
+		"b.x /= 3;"
+		"b.y /= 3;"
+		"b.z /= 3;"
+		"gl_Position = b;"
+		"color_vertex = vp;"
+		"}";
+	e->vertex_shader = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(e->vertex_shader, 1, &vertex_shader, NULL);
+	glCompileShader(e->vertex_shader);
+	e->shader_programme = glCreateProgram();
+	glAttachShader(e->shader_programme, e->fragment_shader);
+	
+	glAttachShader(e->shader_programme, e->vertex_shader);
+	glLinkProgram(e->shader_programme);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glUseProgram(e->shader_programme);
+	glBindVertexArray(e->vertex_array);
+	glDrawArrays(GL_TRIANGLES, 0, e->buffer_size * 3);
+	mlx_opengl_swap_buffers(e->win_ptr);
 	return (0);
 }
 
@@ -27,11 +73,10 @@ int				main(int ac, char **av)
 	t_env		e;
 	t_vertex	vbd[8092];
 	GLuint		ibd[8092];
-	t_vertex	vertex[8092];
 
 	if (ac != 2)
 		return (ft_error("scop obj", 0));
-	ft_get_obj(vbd, ibd, av[1]);
+	ft_get_obj(&e, vbd, ibd, av[1]);
 	e.size[0] = 1024;
 	e.size[1] = 768;
 	e.mlx_ptr = mlx_init();
@@ -44,96 +89,61 @@ int				main(int ac, char **av)
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	int i = 0;
-	while (i < 8092 && ibd[i] != 0)
-	{
-		vertex[i] = vbd[ibd[i] - 1];
-		i++;
-	}
 
-	i = 0;
-	while (i < 64)
-	{
-		printf("%f | %f | %f\n", vertex[i].x, vertex[i].y, vertex[i].z);
-		i++;
-	}
-	i = 0;
-	while (i < 64)
-	{
-		printf("v %f %f %f\n", vbd[i].x, vbd[i].y, vbd[i].z);
-		i++;
-	}
-	i = 0;
-	while (i < 64)
-	{
-		printf("f %d %d %d %d\n", ibd[i], ibd[i + 1], ibd[i + 2], ibd[i + 3]);
-		i += 4;
-	}
+	glGenBuffers(1, &e.vertex_buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, e.vertex_buffer);
+	glBufferData(GL_ARRAY_BUFFER, e.buffer_size * sizeof(t_vertex), e.vertices, GL_DYNAMIC_DRAW);
 
-	GLuint vbo = 0;
-	glGenBuffers (1, &vbo);
-	glBindBuffer (GL_ARRAY_BUFFER, vbo);
-	glBufferData (GL_ARRAY_BUFFER, 8092 * sizeof (t_vertex), vertex, GL_STATIC_DRAW);
-
-	GLuint	vbi = 0;
-	glGenBuffers(1, &vbi);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbi);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ibd), ibd, GL_STATIC_DRAW);
-
-	GLuint vao = 0;
-	glGenVertexArrays (1, &vao);
-	glBindVertexArray (vao);
+	glGenVertexArrays (1, &e.vertex_array);
+	glBindVertexArray (e.vertex_array);
 	glEnableVertexAttribArray (0);
-	glBindBuffer (GL_ARRAY_BUFFER, vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, e.vertex_buffer);
 	glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
-	GLuint	vai = 0;
-	glGenVertexArrays(1, &vai);
-	glBindVertexArray(vai);
 
-const char* vertex_shader =
-"#version 400\n"
-"in vec3 vp;"
-"void main () {"
-"  gl_Position = vec4 (vp, 1.0);"
-	"}";
-const char* fragment_shader =
-"#version 400\n"
-"out vec4 frag_colour;"
-"void main () {"
-"  frag_colour = vec4 (0.5, 0.0, 0.5, 1.0);"
-	"}";
-	GLuint vs = glCreateShader (GL_VERTEX_SHADER);
-	glShaderSource (vs, 1, &vertex_shader, NULL);
-	glCompileShader (vs);
-	GLuint fs = glCreateShader (GL_FRAGMENT_SHADER);
-	glShaderSource (fs, 1, &fragment_shader, NULL);
-	glCompileShader (fs);
+	const char* vertex_shader =
+		"#version 400\n"
+		"in vec3 vp;"
+		"out vec3 color_vertex;"
+		"void main () {"
+		"float PI = 3.14159265358979323846264;"
+		"float angle = 45.;"
+		"float rad_angle = angle * PI / 180.0;"
+		"vec4 a = vec4(vp, 1.0);"
+		"vec4 b = a;"
+//		"b.x = a.x * cos(rad_angle) - a.y * sin(rad_angle);"
+//		"b.y = a.y * cos(rad_angle) + a.x * sin(rad_angle);"
+		"gl_Position = b;"
+		"color_vertex = vp;"
+		"}";
+	const char* fragment_shader =
+		"#version 400\n"
+		"out vec4 frag_colour;"
+		"in vec3 color_vertex;"
+		"void main () {"
+		"  frag_colour = vec4 (color_vertex, 1.);"
+		"}";
 
-	GLuint shader_programme = glCreateProgram ();
-	glAttachShader (shader_programme, fs);
-	glAttachShader (shader_programme, vs);
-	glLinkProgram (shader_programme);
+	e.vertex_shader = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(e.vertex_shader, 1, &vertex_shader, NULL);
+	glCompileShader(e.vertex_shader);
+	e.fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(e.fragment_shader, 1, &fragment_shader, NULL);
+	glCompileShader(e.fragment_shader);
+
+	e.shader_programme = glCreateProgram();
+	glAttachShader(e.shader_programme, e.fragment_shader);
+	glAttachShader(e.shader_programme, e.vertex_shader);
+	glLinkProgram(e.shader_programme);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glUseProgram(shader_programme);
-	glBindVertexArray (vao);
-	glDrawArrays(GL_LINES, 0, 8092);
-
-/*	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, vbi);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo);
-	glGenVertexArrays(1, &vai);  glDrawElements(
-		GL_TRIANGLE_STRIP,
-		1024,
-		GL_UNSIGNED_INT,
-		BUFFER_OFFSET(0)
-		);
-	glDisableVertexAttribArray(0);*/
+	glUseProgram(e.shader_programme);
+	glBindVertexArray(e.vertex_array);
+	glDrawArrays(GL_TRIANGLES, 0, e.buffer_size * 3);
 
 	mlx_opengl_swap_buffers(e.win_ptr);
 	mlx_hook(e.win_ptr, 2, 3, ft_key_hook, &e);
+	mlx_expose_hook(e.win_ptr, ft_expose_hook, &e);
 	mlx_loop(e.mlx_ptr);
 	return (0);
 }

@@ -24,11 +24,6 @@ int		Comment::detect(const char &c) {
 	return (NONE);
 }
 
-int		Comment::apply(std::string const &s) {
-	(void)s;
-	return (0);
-}
-
 int		Comment::getPriority(void) const {
 	return (1);
 }

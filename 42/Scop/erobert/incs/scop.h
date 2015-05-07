@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/04 10:17:36 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/04 14:25:33 by erobert          ###   ########.fr       */
+/*   Updated: 2015/05/07 14:01:42 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,15 @@ typedef struct	s_env
 	void		*mlx_ptr;
 	void		*win_ptr;
 	int			size[2];
+	t_vertex	vertices[8092];
+	GLsizeiptr	buffer_size;
+	GLuint		vertex_buffer;
+	GLuint		vertex_array;
+	GLuint		vertex_shader;
+	GLuint		fragment_shader;	
+	GLuint		shader_programme;
 }				t_env;
 
-int				ft_get_obj(t_vertex *vbd, GLuint *ibd, char *file);
+int				ft_get_obj(t_env *e, t_vertex *vbd, GLuint *ibd, char *file);
 
 #endif
