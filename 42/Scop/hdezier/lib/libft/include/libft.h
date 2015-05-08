@@ -92,5 +92,8 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 size_t				ft_lstlen(t_list *lst);
 void				ft_exit(int test, char *error_msg);
 int					get_next_line(const int fd, char **line);
+float				ft_atof(const char *str);
+char				*ft_goto_next(const char *line, char c);
+unsigned int		ft_uatoi(const char *str);
 
 #endif
