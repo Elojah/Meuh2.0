@@ -14,6 +14,7 @@ RM = rm -rf
 #List classes here
 CLASS = main\
 		loop\
+		refresh\
 		render\
 		load_obj\
 		key_callback\

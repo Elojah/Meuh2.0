@@ -99,24 +99,18 @@ typedef struct		s_window
 }					t_window;
 
 /*
-**Loop
+**INIT FCT
 */
+void				load_obj(t_object *obj, char *filename);
+void				init_camera(t_camera *cam);
 void				loop(t_window *w);
 
 /*
-**Rendering
+**RUNNING FCT
 */
+void				refresh(t_window *w);
 void				render(t_window *w);
-
-/*
-**Load map
-*/
-void				load_obj(t_object *obj, char *filename);
-
-/*
-**Init Camera
-*/
-void				init_camera(t_camera *cam);
+void				move_camera(t_window *w, t_move t);
 
 /*
 **Key callback
@@ -129,10 +123,5 @@ void				key_callback(GLFWwindow *window, int key, int scancode
 */
 GLuint				load_shaders(const char *vertex_file_path
 	, const char *fragment_file_path);
-
-/*
-**Move player
-*/
-void				move_camera(t_window *w, t_move t);
 
 #endif
