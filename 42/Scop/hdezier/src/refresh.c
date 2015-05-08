@@ -65,9 +65,12 @@ static void	refresh_view(t_camera *cam)
 	cam->view[0][0] = (f.y * cam->up.z) - (f.z * cam->up.y);
 	cam->view[0][1] = (f.z * cam->up.x) - (f.x * cam->up.z);
 	cam->view[0][2] = (f.x * cam->up.y) - (f.y * cam->up.x);
-	cam->view[1][0] = cam->up.x = (cam->view[0][1] * f.z) - (cam->view[0][2] * f.y);
-	cam->view[1][1] = cam->up.y = (cam->view[0][2] * f.x) - (cam->view[0][0] * f.z);
-	cam->view[1][2] = cam->up.z = (cam->view[0][0] * f.y) - (cam->view[0][1] * f.x);
+	cam->view[1][0] = cam->up.x =
+		(cam->view[0][1] * f.z) - (cam->view[0][2] * f.y);
+	cam->view[1][1] = cam->up.y =
+		(cam->view[0][2] * f.x) - (cam->view[0][0] * f.z);
+	cam->view[1][2] = cam->up.z =
+		(cam->view[0][0] * f.y) - (cam->view[0][1] * f.x);
 	cam->view[2][0] = -f.x;
 	cam->view[2][1] = -f.y;
 	cam->view[2][2] = -f.z;
