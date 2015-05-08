@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_loop_hook.c                                     :+:      :+:    :+:   */
+/*   ft_cross_product.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/07 18:59:45 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/08 17:06:22 by erobert          ###   ########.fr       */
+/*   Created: 2014/02/24 17:54:55 by erobert           #+#    #+#             */
+/*   Updated: 2015/05/08 17:09:58 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-int					ft_loop_hook(t_env *e)
+void	ft_cross_product(float *result, float *u, float *v)
 {
-	static float	angle = 0.;
-
-	angle += .05;
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glUniform1f(glGetUniformLocation(e->shader_program, "angle"), angle);
-	glBindVertexArray(e->vertex_array);
-	glDrawArrays(GL_TRIANGLES, 0, e->buffer_size * 3);
-	mlx_opengl_swap_buffers(e->win_ptr);
-	return (0);
+	result[0] = u[1] * v[2] - u[2] * v[1];
+	result[1] = u[2] * v[0] - u[0] * v[2];
+	result[2] = u[0] * v[1] - u[1] * v[0];
 }
