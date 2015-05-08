@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/04 10:17:36 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/08 17:01:48 by erobert          ###   ########.fr       */
+/*   Updated: 2015/05/08 18:51:13 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "mlx.h"
 # include "mlx_opengl.h"
 
-# define MAX_SIZE 10240
+# define MAX_SIZE 30720
 # define READ_SIZE 2048
 # define K_ESC 53
 # define K_LEFT 123
@@ -58,6 +58,10 @@ typedef struct	s_env
 
 int				ft_load_obj(t_env *e, t_vertex *vbd, GLuint *ibd, char *file);
 int				ft_load_shader(t_env *e);
+void			ft_cross_product(float *result, float *u, float *v);
+void			ft_addsub_vect(float *result, float *u, float *v, char opp);
+void			ft_projection_matrix(t_env *e, int fov, float near, float far);
+void			ft_lookat(t_env *e, float *eye, float *at);
 int				ft_loop_hook(t_env *e);
 int				ft_key_hook(int key, t_env *e);
 
