@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_loop_hook.c                                     :+:      :+:    :+:   */
+/*   ft_lookat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/07 18:59:45 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/08 17:06:22 by erobert          ###   ########.fr       */
+/*   Created: 2015/05/08 17:02:06 by erobert           #+#    #+#             */
+/*   Updated: 2015/05/08 17:03:54 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop.h"
+#include <scop.h>
 
-int					ft_loop_hook(t_env *e)
+void		ft_lookat(t_env *e, float *eye, float *at)
 {
-	static float	angle = 0.;
-
-	angle += .05;
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glUniform1f(glGetUniformLocation(e->shader_program, "angle"), angle);
-	glBindVertexArray(e->vertex_array);
-	glDrawArrays(GL_TRIANGLES, 0, e->buffer_size * 3);
-	mlx_opengl_swap_buffers(e->win_ptr);
-	return (0);
+	
 }
