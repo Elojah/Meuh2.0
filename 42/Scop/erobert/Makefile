@@ -6,12 +6,12 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/17 17:24:53 by erobert           #+#    #+#              #
-#    Updated: 2015/05/04 12:25:23 by erobert          ###   ########.fr        #
+#    Updated: 2015/05/07 18:57:57 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = scop
-FILES = ft_get_obj.c main.c
+FILES = ft_load_obj.c ft_load_shader.c ft_key_hook.c ft_loop_hook.c main.c
 SRCS = $(addprefix srcs/, $(FILES))
 OBJS = $(SRCS:srcs/%.c=objs/%.o)
 TMPS = $(SRCS:.c=.c~) Makefile~ incs/scop.h~

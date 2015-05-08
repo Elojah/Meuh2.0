@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_obj.c                                       :+:      :+:    :+:   */
+/*   ft_load_obj.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/04 12:26:02 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/07 14:01:40 by erobert          ###   ########.fr       */
+/*   Created: 2015/05/07 14:44:27 by erobert           #+#    #+#             */
+/*   Updated: 2015/05/07 18:54:42 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void		ft_get_vertex(t_vertex *vbd, char *line)
 static int		ft_get_index(GLuint *ibd, char *line)
 {
 	int			i;
+	int			j;
 
 	i = 0;
 	while (*line)
@@ -41,12 +42,16 @@ static int		ft_get_index(GLuint *ibd, char *line)
 			line++;
 		while (*line == ' ')
 			line++;
-		ibd[i++] = ft_atoi(line) - 1;
+		j = ft_atoi(line) - 1;
+		if (j < MAX_SIZE)
+			ibd[i++] = j;
+		else
+			ibd[i++] = 0;
 	}
 	return (i - 1);
 }
-#include <stdio.h>
-int				ft_get_obj(t_env *e, t_vertex *vbd, GLuint *ibd, char *file)
+
+int				ft_load_obj(t_env *e, t_vertex *vbd, GLuint *ibd, char *file)
 {
 	int			fd;
 	char		*line;
@@ -62,23 +67,20 @@ int				ft_get_obj(t_env *e, t_vertex *vbd, GLuint *ibd, char *file)
 	{
 		if (!line)
 			return (close(fd));
-		if (*line == 'v' && line[1] == ' ')
+		if (*line == 'v' && line[1] == ' ' && i < MAX_SIZE)
 			ft_get_vertex(vbd + i++, line + 1);
-		else if (*line == 'f' && line[1] == ' ')
+		else if (*line == 'f' && line[1] == ' ' && e->buffer_size < MAX_SIZE - 6)
 		{
 			j = ft_get_index(ibd, line);
-			printf("%d %d %d", ibd[0], ibd[1], ibd[2]);
 			e->vertices[e->buffer_size++] = vbd[ibd[0]];
 			e->vertices[e->buffer_size++] = vbd[ibd[1]];
 			e->vertices[e->buffer_size++] = vbd[ibd[2]];
 			if (j == 4)
 			{
-				printf(" %d %d %d", ibd[2], ibd[3], ibd[0]);
 				e->vertices[e->buffer_size++] = vbd[ibd[2]];
 				e->vertices[e->buffer_size++] = vbd[ibd[3]];
 				e->vertices[e->buffer_size++] = vbd[ibd[0]];
 			}
-			printf(" %lu\n", e->buffer_size);
 			ibd += j;
 		}
 		free(line);
