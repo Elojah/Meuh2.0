@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/04 09:50:41 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/07 19:07:11 by erobert          ###   ########.fr       */
+/*   Updated: 2015/05/08 18:49:36 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ static void			ft_init_gl(t_env *e)
 	e->fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(e->fragment_shader, 1, &fragment_shader, NULL);
 	glCompileShader(e->fragment_shader);
-	e->shader_programme = glCreateProgram();
-	glAttachShader(e->shader_programme, e->fragment_shader);
-	glAttachShader(e->shader_programme, e->vertex_shader);
-	glLinkProgram(e->shader_programme);
+	e->shader_program = glCreateProgram();
+	glAttachShader(e->shader_program, e->fragment_shader);
+	glAttachShader(e->shader_program, e->vertex_shader);
+	glLinkProgram(e->shader_program);
 }
 
 int					main(int ac, char **av)
@@ -62,11 +62,22 @@ int					main(int ac, char **av)
 		return (ft_error("win init error", -1));
 	ft_init_gl(&e);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glUseProgram(e.shader_programme);
-	glUniform1f(glGetUniformLocation(e.shader_programme, "x"), 0.);
-	glUniform1f(glGetUniformLocation(e.shader_programme, "y"), 0.);
-	glUniform1f(glGetUniformLocation(e.shader_programme, "z"), 0.);
-	glUniform1f(glGetUniformLocation(e.shader_programme, "zoom"), .3);
+	
+	float eye[3] = {0,0,-10};
+	float at[3] = {0,0,1};
+
+	ft_lookat(&e, eye, at);
+	ft_projection_matrix(&e, 60, 1., 30.);
+	glUseProgram(e.shader_program);
+	glUniform1f(glGetUniformLocation(e.shader_program, "x"), 0.);
+	glUniform1f(glGetUniformLocation(e.shader_program, "y"), 0.);
+	glUniform1f(glGetUniformLocation(e.shader_program, "z"), 0.);
+	glUniform1f(glGetUniformLocation(e.shader_program, "zoom"), 1);
+
+
+	glUniformMatrix4fv(glGetUniformLocation(e.shader_program, "projection"), 1, 0, e.projection);
+	glUniformMatrix4fv(glGetUniformLocation(e.shader_program, "view"), 1, 0, e.view);
+
 	glBindVertexArray(e.vertex_array);
 	glDrawArrays(GL_TRIANGLES, 0, e.buffer_size * 3);
 	mlx_opengl_swap_buffers(e.win_ptr);
