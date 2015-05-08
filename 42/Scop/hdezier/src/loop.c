@@ -50,7 +50,7 @@ void		loop(t_window *w)
 	double	t;
 	double	prev_t;
 
-	// glEnable(GL_CULL_FACE);
+	glDisable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	refresh(w);

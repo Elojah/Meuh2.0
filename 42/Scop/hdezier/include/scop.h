@@ -21,15 +21,15 @@
 # define MAX_TEX 1024
 
 # define W_WIDTH 1200
-# define W_HEIGHT 800
+# define W_HEIGHT 900
 
 # define VIEW_NEAR 0.1f
 # define VIEW_FAR 100.0f
 # define VIEW_FOV 45.0f
 # define VIEW_ASPECT (4.0f / 3.0f)
-# define TAN_MI_FOV 0.55785173935
 
 # define M_PI 3.14159265359
+# define RAD(n) ((n) * M_PI / 180.0f)
 # define MIN(a, b) (((a) > (b) ? (b) : (a)))
 # define ABS(a) (((a) > 0) ? (a) : (-a))
 # define SQ(n) ((n) * (n))
