@@ -48,9 +48,12 @@ static void	refresh_vp(t_window *w)
 		printf("\n");
 }
 
-static void	refresh_eye(float row[4], t_point *eye)
+static void	refresh_eye(t_camera *cam)
 {
-	row[3] = -row[0] * eye->x - row[1] * eye->y - row[2] * eye->z + 1;
+	cam->view[3][0] = -cam->view[0][0] * cam->eye.x - cam->view[1][0] * cam->eye.y - cam->view[2][0] * cam->eye.z + 1;
+	cam->view[3][1] = -cam->view[0][1] * cam->eye.x - cam->view[1][1] * cam->eye.y - cam->view[2][1] * cam->eye.z + 1;
+	cam->view[3][2] = -cam->view[0][2] * cam->eye.x - cam->view[1][2] * cam->eye.y - cam->view[2][2] * cam->eye.z + 1;
+	// row[3] = -row[0] * eye->x - row[1] * eye->y - row[2] * eye->z + 1;
 }
 
 static void	refresh_view(t_camera *cam)
@@ -63,25 +66,23 @@ static void	refresh_view(t_camera *cam)
 	normalize(&f);
 	normalize(&(cam->up));
 	cam->view[0][0] = (f.y * cam->up.z) - (f.z * cam->up.y);
-	cam->view[0][1] = (f.z * cam->up.x) - (f.x * cam->up.z);
-	cam->view[0][2] = (f.x * cam->up.y) - (f.y * cam->up.x);
-	cam->view[1][0] = cam->up.x =
-		(cam->view[0][1] * f.z) - (cam->view[0][2] * f.y);
+	cam->view[1][0] = (f.z * cam->up.x) - (f.x * cam->up.z);
+	cam->view[2][0] = (f.x * cam->up.y) - (f.y * cam->up.x);
+	cam->view[0][1] = cam->up.x =
+		(cam->view[1][0] * f.z) - (cam->view[2][0] * f.y);
 	cam->view[1][1] = cam->up.y =
-		(cam->view[0][2] * f.x) - (cam->view[0][0] * f.z);
-	cam->view[1][2] = cam->up.z =
-		(cam->view[0][0] * f.y) - (cam->view[0][1] * f.x);
-	cam->view[2][0] = -f.x;
-	cam->view[2][1] = -f.y;
+		(cam->view[2][0] * f.x) - (cam->view[0][0] * f.z);
+	cam->view[2][1] = cam->up.z =
+		(cam->view[0][0] * f.y) - (cam->view[1][0] * f.x);
+	cam->view[0][2] = -f.x;
+	cam->view[1][2] = -f.y;
 	cam->view[2][2] = -f.z;
 }
 
 static void	refresh_cam(t_camera *cam)
 {
 	refresh_view(cam);
-	refresh_eye(cam->view[0], &(cam->eye));
-	refresh_eye(cam->view[1], &(cam->eye));
-	refresh_eye(cam->view[2], &(cam->eye));
+	refresh_eye(cam);
 }
 
 void	refresh(t_window *w)
