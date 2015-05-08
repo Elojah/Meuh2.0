@@ -46,7 +46,7 @@ static void	refresh_vp(t_window *w)
 
 static void	refresh_eye(float row[4], t_point *eye)
 {
-	row[3] = -row[0] * eye->x - row[1] * eye->y - row[2] * eye->z + 1;
+	row[3] = -(row[0] * eye->x + row[1] * eye->y + row[2] * eye->z + 1);
 }
 
 static void	refresh_view(t_camera *cam)

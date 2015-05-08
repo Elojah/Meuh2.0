@@ -23,7 +23,7 @@
 # define W_WIDTH 1200
 # define W_HEIGHT 900
 
-# define VIEW_NEAR 0.1f
+# define VIEW_NEAR 0.001f
 # define VIEW_FAR 100.0f
 # define VIEW_FOV 45.0f
 # define VIEW_ASPECT (4.0f / 3.0f)
