@@ -14,10 +14,12 @@ RM = rm -rf
 #List classes here
 CLASS = main\
 		loop\
+		refresh\
 		render\
 		load_obj\
 		key_callback\
 		load_shaders\
+		init_camera\
 		move_camera\
 
 #List interfaces here
@@ -30,7 +32,7 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3
+CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g
 LFLAGS =
 
 #Libs
