@@ -14,11 +14,15 @@ void		key_callback(GLFWwindow *window, int key, int scancode
 	if (!keyValid) {
 		return ;
 	}
-	if (key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q) {
+	if (key == GLFW_KEY_ESCAPE) {
 		glfwSetWindowShouldClose(window, GL_TRUE);
-	} else if (key == GLFW_KEY_Q) {
+	} else if (key == GLFW_KEY_A) {
 		move_camera(win, LEFT);
 	} else if (key == GLFW_KEY_D) {
 		move_camera(win, RIGHT);
+	} else if (key == GLFW_KEY_W) {
+		move_camera(win, UP);
+	} else if (key == GLFW_KEY_S) {
+		move_camera(win, DOWN);
 	}
 }

@@ -19,5 +19,6 @@ static void			render_obj(t_object *obj)
 void				render(t_window *w)
 {
 	glUseProgram(w->prog_id);
+	glUniformMatrix4fv(w->cam.mvp_id, 1, GL_FALSE, (float *)(w->cam.vp));
 	render_obj(&(w->obj));
 }

@@ -24,7 +24,7 @@
 # define W_HEIGHT 900
 
 # define VIEW_NEAR 0.001f
-# define VIEW_FAR 100.0f
+# define VIEW_FAR 500.0f
 # define VIEW_FOV 45.0f
 # define VIEW_ASPECT (4.0f / 3.0f)
 
@@ -36,8 +36,10 @@
 
 typedef enum		e_move
 {
-	LEFT = -1,
-	RIGHT = 1
+	LEFT = 0,
+	RIGHT,
+	UP,
+	DOWN
 }					t_move;
 
 typedef struct		s_coord
@@ -55,12 +57,12 @@ typedef struct		s_point
 
 typedef struct		s_camera
 {
-	t_point			pos;
+	t_point			center;
 	t_point			eye;
 	t_point			up;
 	GLfloat			view[4][4];
 	GLfloat			proj[4][4];
-	GLfloat			vp[4][4];
+	GLfloat			***vp;
 	GLuint			mvp_id;
 }					t_camera;
 

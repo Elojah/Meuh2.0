@@ -22,6 +22,11 @@ static void	refresh_vp(t_window *w)
 	short			n;
 
 	i = -1;
+	if (w->cam.vp == 0x0)
+	{
+		w->cam.vp = ((float ***)&vp);
+		w->cam.mvp_id = glGetUniformLocation(w->prog_id, "vp");
+	}
 	while (++i < 4)
 	{
 		j = -1;
@@ -41,25 +46,22 @@ static void	refresh_vp(t_window *w)
 		printf("\n");
 	}
 		printf("\n");
-	w->cam.mvp_id = glGetUniformLocation(w->prog_id, "vp");
 }
 
 static void	refresh_eye(float row[4], t_point *eye)
 {
-	row[3] = -(row[0] * eye->x + row[1] * eye->y + row[2] * eye->z + 1);
+	row[3] = -row[0] * eye->x - row[1] * eye->y - row[2] * eye->z + 1;
 }
 
 static void	refresh_view(t_camera *cam)
 {
 	t_point		f;
 
-	f.x = cam->pos.x - cam->eye.x;
-	f.y = cam->pos.y - cam->eye.y;
-	f.z = cam->pos.z - cam->eye.z;
+	f.x = cam->center.x - cam->eye.x;
+	f.y = cam->center.y - cam->eye.y;
+	f.z = cam->center.z - cam->eye.z;
 	normalize(&f);
 	normalize(&(cam->up));
-	cam->view[3][0] = cam->view[3][1] = cam->view[3][2] = 0.0f;
-	cam->view[3][3] = 1.0f;
 	cam->view[0][0] = (f.y * cam->up.z) - (f.z * cam->up.y);
 	cam->view[0][1] = (f.z * cam->up.x) - (f.x * cam->up.z);
 	cam->view[0][2] = (f.x * cam->up.y) - (f.y * cam->up.x);

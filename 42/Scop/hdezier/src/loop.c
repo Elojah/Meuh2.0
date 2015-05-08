@@ -62,7 +62,6 @@ void		loop(t_window *w)
 			continue ;
 		prev_t = t;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		refresh(w);
 		render(w);
 		glfwSwapBuffers(w->window);
 		glfwPollEvents();
