@@ -5,7 +5,6 @@ static void			render_obj(t_object *obj)
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, obj->vertex_buffer);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-	glDisableVertexAttribArray(0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, obj->ve_index_buffer);
 	glDrawElements(
 		GL_TRIANGLE_STRIP,
@@ -13,6 +12,7 @@ static void			render_obj(t_object *obj)
 		GL_UNSIGNED_INT,
 		BUFFER_OFFSET(0)
 	);
+	glDisableVertexAttribArray(0);
 }
 
 void				render(t_window *w)

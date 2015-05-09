@@ -4,12 +4,12 @@
 static void	set_fps_view(t_camera *cam
 	, const float angle_x, const float angle_y)
 {
-	(void)cam;
-	(void)angle_x;
-	(void)angle_y;
-	// cam->center.x = sin(angle_x) * cos(angle_y) + cam->eye.x;
-	// cam->center.y = sin(angle_y) + cam->eye.y;
-	// cam->center.z = cos(angle_x) * cos(angle_y) + cam->eye.z;
+	cam->center.x = sin(angle_x) * cos(angle_y) + cam->eye.x;
+	cam->center.y = sin(angle_y) + cam->eye.y;
+	cam->center.z = cos(angle_x) * cos(angle_y) + cam->eye.z;
+	cam->up.x = cos(angle_y - M_PI / 2.0f);
+	cam->up.y = sin(angle_y - M_PI / 2.0f);
+	cam->up.z = 0.0f;
 }
 
 void		mouse_callback(GLFWwindow* window, double xpos, double ypos)
@@ -22,8 +22,8 @@ void		mouse_callback(GLFWwindow* window, double xpos, double ypos)
 
 	if (!win)
 		win = (t_window *)glfwGetWindowUserPointer(window);
-	angle_x = MOUSE_SPEED * (prev_x - xpos);
-	angle_y = MOUSE_SPEED * (prev_y - ypos);
+	angle_x += MOUSE_SPEED * (prev_x - xpos);
+	angle_y += MOUSE_SPEED * (prev_y - ypos);
 	prev_x = xpos;
 	prev_y = ypos;
 	set_fps_view(&(win->cam), angle_x, angle_y);
