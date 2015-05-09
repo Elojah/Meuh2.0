@@ -2,14 +2,9 @@
 
 static void	move_point(t_point *p, t_point *dir, float n)
 {
-	print_point(dir);
-	printf("*");
-	print_point(p);
 	p->x += dir->x * n * MOVE_SPEED;
 	p->y += dir->y * n * MOVE_SPEED;
 	p->z += dir->z * n * MOVE_SPEED;
-	printf("\n = ");
-	print_point(p);
 }
 
 void		move_camera(t_window *w, t_move t)
