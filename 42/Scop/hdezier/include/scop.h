@@ -35,6 +35,7 @@
 # define SQ(n) ((n) * (n))
 
 # define MOVE_SPEED 0.05
+# define MOUSE_SPEED 0.001
 
 typedef enum		e_move
 {
@@ -123,13 +124,14 @@ void				loop(t_window *w);
 */
 void				refresh(t_window *w);
 void				render(t_window *w);
-void				move_camera(t_window *w, t_move t);
 
 /*
-**Key callback
+**Callbacks
 */
 void				key_callback(GLFWwindow *window, int key, int scancode
 	, int action, int mods);
+void				mouse_callback(GLFWwindow* window
+	, double xpos, double ypos);
 
 /*
 **Load shaders

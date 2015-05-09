@@ -24,9 +24,9 @@ static void	init_projection(t_camera *cam)
 
 void		init_camera(t_camera *cam)
 {
-	cam->center = (t_point){1.0f, 2.0f, 10.0f};
-	cam->eye = (t_point){3.0f, 1.0f, -5.0f};
-	cam->up = (t_point){1.0f, 1.0f, 0.0f};
+	cam->center = (t_point){10.0f, 0.0f, 10.0f};
+	cam->eye = (t_point){0.0f, 0.0f, 0.0f};
+	cam->up = (t_point){-10.0f, 0.0f, 10.0f};
 	init_projection(cam);
 	cam->view[3][0] = cam->view[3][1] = cam->view[3][2] = 0.0f;
 	cam->view[3][3] = 1.0f;

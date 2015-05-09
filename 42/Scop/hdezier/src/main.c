@@ -62,6 +62,7 @@ static void		init_window(t_window *w)
 	glfwSetInputMode(w->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSwapInterval(1);
 	glfwSetKeyCallback(w->window, key_callback);
+	glfwSetCursorPosCallback(w->window, mouse_callback);
 	glClearColor(0.2, 0.2, 0.2, 0.2);
 }
 
