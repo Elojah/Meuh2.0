@@ -34,12 +34,16 @@
 # define ABS(a) (((a) > 0) ? (a) : (-a))
 # define SQ(n) ((n) * (n))
 
+# define MOVE_SPEED 0.05
+
 typedef enum		e_move
 {
 	LEFT = 0,
 	RIGHT,
 	UP,
-	DOWN
+	DOWN,
+	FORWARD,
+	BACK
 }					t_move;
 
 typedef struct		s_coord
@@ -60,6 +64,8 @@ typedef struct		s_camera
 	t_point			center;
 	t_point			eye;
 	t_point			up;
+	t_point			forward;
+	t_point			right;
 	GLfloat			view[4][4];
 	GLfloat			proj[4][4];
 	GLfloat			***vp;
@@ -99,6 +105,11 @@ typedef struct		s_window
 	t_object		obj;
 	t_camera		cam;
 }					t_window;
+
+
+#include <stdio.h>
+void		print_obj(t_object *obj);
+
 
 /*
 **INIT FCT

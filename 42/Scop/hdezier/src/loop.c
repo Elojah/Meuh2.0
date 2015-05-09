@@ -1,6 +1,5 @@
 #include "scop.h"
 
-#include <stdio.h>
 void		print_obj(t_object *obj)
 {
 	printf("---------OBJ NAME\t: %s\n", obj->name);
@@ -55,7 +54,6 @@ void		loop(t_window *w)
 	glDepthFunc(GL_LESS);
 	refresh(w);
 	render(w);
-	print_obj(&(w->obj));
 	while (!glfwWindowShouldClose(w->window))
 	{
 		if ((t = glfwGetTime()) < prev_t + REFRESH_TIME)

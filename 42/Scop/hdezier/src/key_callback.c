@@ -21,8 +21,12 @@ void		key_callback(GLFWwindow *window, int key, int scancode
 	} else if (key == GLFW_KEY_D) {
 		move_camera(win, RIGHT);
 	} else if (key == GLFW_KEY_W) {
-		move_camera(win, UP);
+		move_camera(win, FORWARD);
 	} else if (key == GLFW_KEY_S) {
+		move_camera(win, BACK);
+	} else if (key == GLFW_KEY_SPACE) {
+		move_camera(win, UP);
+	} else if (key == GLFW_KEY_C) {
 		move_camera(win, DOWN);
 	}
 }

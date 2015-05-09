@@ -43,26 +43,29 @@ static void			load_tex(t_object *obj, const char *line)
 
 static void			load_index(t_object *obj, const char *line)
 {
+	unsigned int	n;
+
 	if (obj->index_buffer_size >= MAX_INDEX)
 		return ;
 	line = ft_goto_next(line, ' ');
-	obj->ve_index_buffer_data[obj->index_buffer_size * 3] = ft_uatoi(line);
+	n = obj->index_buffer_size * 3;
+	obj->ve_index_buffer_data[n] = ft_uatoi(line) - 1;
 	line = ft_goto_next(line + 1, '/');
-	obj->te_index_buffer_data[obj->index_buffer_size * 3] = ft_uatoi(line);
+	obj->te_index_buffer_data[n] = ft_uatoi(line) - 1;
 	line = ft_goto_next(line + 1, '/');
-	obj->no_index_buffer_data[obj->index_buffer_size * 3] = ft_uatoi(line);
+	obj->no_index_buffer_data[n] = ft_uatoi(line) - 1;
 	line = ft_goto_next(line + 1, ' ');
-	obj->ve_index_buffer_data[obj->index_buffer_size * 3 + 1] = ft_uatoi(line);
+	obj->ve_index_buffer_data[n + 1] = ft_uatoi(line) - 1;
 	line = ft_goto_next(line + 1, '/');
-	obj->te_index_buffer_data[obj->index_buffer_size * 3 + 1] = ft_uatoi(line);
+	obj->te_index_buffer_data[n + 1] = ft_uatoi(line) - 1;
 	line = ft_goto_next(line + 1, '/');
-	obj->no_index_buffer_data[obj->index_buffer_size * 3 + 1] = ft_uatoi(line);
+	obj->no_index_buffer_data[n + 1] = ft_uatoi(line) - 1;
 	line = ft_goto_next(line + 1, ' ');
-	obj->ve_index_buffer_data[obj->index_buffer_size * 3 + 2] = ft_uatoi(line);
+	obj->ve_index_buffer_data[n + 2] = ft_uatoi(line) - 1;
 	line = ft_goto_next(line + 1, '/');
-	obj->te_index_buffer_data[obj->index_buffer_size * 3 + 2] = ft_uatoi(line);
+	obj->te_index_buffer_data[n + 2] = ft_uatoi(line) - 1;
 	line = ft_goto_next(line + 1, '/');
-	obj->no_index_buffer_data[obj->index_buffer_size * 3 + 2] = ft_uatoi(line);
+	obj->no_index_buffer_data[n + 2] = ft_uatoi(line) - 1;
 	++obj->index_buffer_size;
 }
 

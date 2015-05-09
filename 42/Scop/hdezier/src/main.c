@@ -7,7 +7,7 @@ static void		init_gl(t_window *w)
 {
 	w->prog_id = load_shaders("./src/shaders/Obj.vert"
 									, "./src/shaders/Obj.frag");
-	glGenVertexArrays(6, &w->obj.vertex_array_id);
+	glGenVertexArrays(1, &w->obj.vertex_array_id);
 	glBindVertexArray(w->obj.vertex_array_id);
 	glGenBuffers(1, &w->obj.vertex_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, w->obj.vertex_buffer);
@@ -46,7 +46,7 @@ static void		destroy_obj(t_object *obj)
 	glDeleteBuffers(1, &obj->ve_index_buffer);
 	glDeleteBuffers(1, &obj->no_index_buffer);
 	glDeleteBuffers(1, &obj->te_index_buffer);
-	glDeleteVertexArrays(6, &obj->vertex_array_id);
+	glDeleteVertexArrays(1, &obj->vertex_array_id);
 }
 
 static void		init_window(t_window *w)
@@ -62,7 +62,7 @@ static void		init_window(t_window *w)
 	glfwSetInputMode(w->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSwapInterval(1);
 	glfwSetKeyCallback(w->window, key_callback);
-	glClearColor(0, 0, 0, 0);
+	glClearColor(0.2, 0.2, 0.2, 0.2);
 }
 
 static void		destroy_window(t_window *w)
