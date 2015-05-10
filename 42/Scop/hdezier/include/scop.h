@@ -31,11 +31,12 @@
 # define M_PI 3.14159265359
 # define RAD(n) ((n) * M_PI / 180.0f)
 # define MIN(a, b) (((a) > (b) ? (b) : (a)))
-# define ABS(a) (((a) > 0) ? (a) : (-a))
+# define ABS(a) (((a) > 0) ? (a) : -(a))
 # define SQ(n) ((n) * (n))
 
-# define MOVE_SPEED 0.05
+# define MOVE_SPEED 0.5
 # define MOUSE_SPEED 0.001
+# define ROTATE_DIST 20
 
 typedef enum		e_move
 {
@@ -77,6 +78,7 @@ typedef struct		s_object
 {
 	unsigned char	name[64];
 	GLuint			vertex_array_id;
+	t_point			center;
 
 	GLuint			ve_index_buffer;
 	GLuint			ve_index_buffer_data[(MAX_INDEX + 1) * 3];
