@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/04 09:50:41 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/11 14:14:59 by erobert          ###   ########.fr       */
+/*   Updated: 2015/05/11 15:28:18 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,24 @@ static void			ft_init_buffer(t_env *e)
 	glLinkProgram(e->shader_program);
 }
 
-void				ft_main_loop(t_env *e)
+static void			ft_init_texture(t_env *e)
+{
+	GLuint			texture;
+	GLint			location;
+
+	ft_load_bmp(e, "data/texture_0.bmp");
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 256, 256, 0, GL_BGR, \
+					GL_UNSIGNED_BYTE, e->texture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	location = glGetUniformLocation(e->shader_program, "texture_on");
+	e->texture_on = 0;
+	glUniform1i(location, e->texture_on);
+}
+
+static void			ft_main_loop(t_env *e)
 {
 	GLint			location;
 
@@ -49,6 +66,7 @@ void				ft_main_loop(t_env *e)
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	ft_init_buffer(e);
+	ft_init_texture(e);
 	ft_lookat(e, e->eye, e->at);
 	ft_projection_matrix(e, 60, 1., 30.);
 	glUseProgram(e->shader_program);

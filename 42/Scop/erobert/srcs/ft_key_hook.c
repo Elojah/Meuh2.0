@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/07 18:59:58 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/11 12:14:21 by erobert          ###   ########.fr       */
+/*   Updated: 2015/05/11 15:19:13 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,19 @@ static void	ft_move_camera(int key, t_env *e)
 
 int			ft_key_hook(int key, t_env *e)
 {
+	GLint	location;
+
 	if (key == K_ESC)
 		exit(1);
 	if ((key >= K_A && key <= K_D) || key == K_W || key == K_Q || key == K_E)
 		ft_move_camera(key, e);
 	else if ((key <= K_UP && key >= K_LEFT) || key == K_PLUS || key == K_MINUS)
 		ft_move_object(key, e);
+	else if (key == K_T)
+	{
+		e->texture_on = !e->texture_on;
+		location = glGetUniformLocation(e->shader_program, "texture_on");
+		glUniform1i(location, e->texture_on);
+	}
 	return (0);
 }
