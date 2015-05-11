@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/08 17:02:06 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/08 18:36:06 by erobert          ###   ########.fr       */
+/*   Updated: 2015/05/08 19:43:03 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,56 +43,12 @@ static void	ft_setview(float *view, float *dir, float *right, float *up)
 	view[15] = 1.;
 }
 
-static void	ft_translation_matrix(float *a, float *v)
-{
-	int		i;
-	int		j;
-
-	i = -1;
-	while (++i < 4)
-	{
-		j = -1;
-		while (++j < 4)
-		{
-			if (i == j)
-				a[i + j * 4] = 1.;
-			else
-				a[i + j * 4] = 0.;
-		}
-	}
-	a[12] = -v[0];
-	a[13] = -v[1];
-	a[14] = -v[2];
-}
-
-static void	ft_multmatrix(float *a, float *b)
-{
-	float	result[16];
-	int		i;
-	int		j;
-	int		k;
-
-	i = -1;
-	while (++i < 4)
-	{
-		j = -1;
-		while (++j < 4)
-		{
-			result[i + j * 4] = 0.;
-			k = -1;
-			while (++k < 4)
-				result[i + j * 4] += a[i + k * 4] * b[k + j * 4];
-		}
-	}
-	ft_memcpy(a, result, 16 * sizeof(float));
-}
-
 void		ft_lookat(t_env *e, float *eye, float *at)
 {
 	float	dir[3];
 	float	right[3];
 	float	up[3];
-	float	tmp[16];
+	float	tmp[32];
 
 	up[0] = 0.;
 	up[1] = 1.;
@@ -104,6 +60,7 @@ void		ft_lookat(t_env *e, float *eye, float *at)
 	ft_cross_product(up, right, dir);
 	ft_normalize(up);
 	ft_setview(e->view, dir, right, up);
-	ft_translation_matrix(tmp, eye);
-	ft_multmatrix(e->view, tmp);
+	ft_translation_matrix(tmp, -eye[0], -eye[1], -eye[2]);
+	ft_multmatrix(tmp + 16, e->view, tmp);
+	ft_memcpy(e->view, tmp + 16, sizeof(float) * 16);
 }

@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_addsub_vect.c                                   :+:      :+:    :+:   */
+/*   ft_multmatrix.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/01/31 15:23:43 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/08 17:27:04 by erobert          ###   ########.fr       */
+/*   Created: 2015/05/08 19:31:19 by erobert           #+#    #+#             */
+/*   Updated: 2015/05/08 19:35:52 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	ft_addsub_vect(float *result, float *u, float *v, char opp)
+void	ft_multmatrix(float *result, float *a, float *b)
 {
-	if (opp == '+')
+	int	i;
+	int	j;
+	int	k;
+
+	i = -1;
+	while (++i < 4)
 	{
-		result[0] = u[0] + v[0];
-		result[1] = u[1] + v[1];
-		result[2] = u[2] + v[2];
-	}
-	else
-	{
-		result[0] = u[0] - v[0];
-		result[1] = u[1] - v[1];
-		result[2] = u[2] - v[2];
+		j = -1;
+		while (++j < 4)
+		{
+			result[i + j * 4] = 0.;
+			k = -1;
+			while (++k < 4)
+				result[i + j * 4] += a[i + k * 4] * b[k + j * 4];
+		}
 	}
 }
