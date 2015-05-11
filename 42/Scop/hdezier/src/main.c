@@ -78,8 +78,9 @@ int			main(int ac, char **av)
 {
 	t_window	w;
 
-	ft_exit(ac != 2, "Usage:\t./scop [filename]");
+	ft_exit(ac != 3, "Usage:\t./scop [OBJ] [BMP]");
 	load_obj(&(w.obj), av[1]);
+	load_bmp(&(w.obj), av[2]);
 	init_window(&w);
 	init_gl(&w);
 	init_camera(&(w.cam));

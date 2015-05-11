@@ -13,34 +13,6 @@ static void	normalize(t_point *p)
 	p->z /= norm;
 }
 
-void	display_mat(float vp[4][4])
-{
-	int i, j;
-	printf("\n");
-	for (i = 0; i < 4; ++i)
-	{
-		for (j = 0; j < 4; ++j)
-			printf("%f\t", vp[i][j]);
-		printf("\n");
-	}
-	printf("\n");
-}
-
-void	revert_mat(float m[4][4])
-{
-	int					i;
-	int					j;
-	float tmp;
-
-	for (i = 0; i < 4; ++i) {
-		for (j = i; j < 4; ++j) {
-			tmp = m[i][j];
-			m[i][j] = m[j][i];
-			m[j][i] = tmp;
-		}
-	}
-}
-
 static void	refresh_vp(t_window *w)
 {
 	static float	vp[4][4];

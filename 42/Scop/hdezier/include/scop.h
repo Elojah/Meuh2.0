@@ -14,6 +14,7 @@
 # define REFRESH_TIME 0.016
 # define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
+# define MAX_SIZE_BMP 65537
 # define MAX_LENGTH_SHADERS 1024
 # define MAX_VERTEX 256
 # define MAX_INDEX 1024
@@ -61,6 +62,15 @@ typedef struct		s_point
 	GLfloat			z;
 }					t_point;
 
+typedef struct		s_bmp
+{
+	unsigned int	data_pos;
+	unsigned int	width;
+	unsigned int	height;
+	unsigned int	size;
+	unsigned char	data[MAX_SIZE_BMP];
+}					t_bmp;
+
 typedef struct		s_camera
 {
 	t_point			center;
@@ -79,6 +89,7 @@ typedef struct		s_object
 	unsigned char	name[64];
 	GLuint			vertex_array_id;
 	t_point			center;
+	t_bmp			bmp;
 
 	GLuint			ve_index_buffer;
 	GLuint			ve_index_buffer_data[(MAX_INDEX + 1) * 3];
@@ -96,6 +107,7 @@ typedef struct		s_object
 	t_point			normal_buffer_data[MAX_NORMAL + 1];
 	unsigned int	normal_buffer_size;
 
+	GLuint			tex_id;
 	GLuint			tex_buffer;
 	t_coord			tex_buffer_data[MAX_TEX + 1];
 	unsigned int	tex_buffer_size;
@@ -109,15 +121,11 @@ typedef struct		s_window
 	t_camera		cam;
 }					t_window;
 
-
-#include <stdio.h>
-void		print_obj(t_object *obj);
-
-
 /*
 **INIT FCT
 */
 void				load_obj(t_object *obj, char *filename);
+void				load_bmp(t_object *obj, char *filename);
 void				init_camera(t_camera *cam);
 void				loop(t_window *w);
 

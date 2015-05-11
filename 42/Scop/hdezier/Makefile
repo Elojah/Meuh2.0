@@ -17,6 +17,7 @@ CLASS = main\
 		refresh\
 		render\
 		load_obj\
+		load_bmp\
 		key_callback\
 		mouse_callback\
 		load_shaders\

@@ -1,6 +1,7 @@
 #version 330 core
-out vec4 color;
-void main()
-{
-	color = vec4(0.8, 0.3, 0.8, 1.0);
+in vec2				UV;
+out vec3			color;
+uniform sampler2D	text_sampler;
+void main() {
+	color = texture(text_sampler, UV).rgb;
 }
