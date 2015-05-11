@@ -12,10 +12,10 @@ static void		read_bmp_file(t_object *obj, char *filename)
 	ft_exit((fd = open(filename, O_RDONLY)) < 0, "Can't read BMP file");
 	ft_exit(read(fd, header, 54) < 0, "BMP file not valid");
 	ft_exit(header[0] != 'B' || header[1] != 'M', "BMP file not valid");
-	obj->bmp.data_pos = *(int *)&(header[0x0A]);
-	obj->bmp.size = *(int *)&(header[0x22]);
-	obj->bmp.width = *(int *)&(header[0x12]);
-	obj->bmp.height = *(int *)&(header[0x16]);
+	obj->bmp.data_pos = *(unsigned int *)&(header[0x0A]);
+	obj->bmp.size = *(unsigned int *)&(header[0x22]);
+	obj->bmp.width = *(unsigned int *)&(header[0x12]);
+	obj->bmp.height = *(unsigned int *)&(header[0x16]);
 	if (!obj->bmp.size)
 		obj->bmp.size = obj->bmp.width * obj->bmp.height * 3;
 	if (!obj->bmp.data_pos)
