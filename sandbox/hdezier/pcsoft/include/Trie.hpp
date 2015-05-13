@@ -121,7 +121,7 @@ private:
 					files = new sList;
 					files->create(value);
 				}
-			} else {/*Check here for valid chars (unsigned, etc.)*/
+			} else if (*s > 0) {/*Check here for valid chars (unsigned, etc.)*/
 				c = static_cast<int>(*s);
 				if ((bmaskNext.checkByte(c)) == 0 || children[c].children == NULL) {
 					children[c].create();
