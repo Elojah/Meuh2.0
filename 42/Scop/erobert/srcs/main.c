@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/04 09:50:41 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/11 15:28:18 by erobert          ###   ########.fr       */
+/*   Updated: 2015/05/13 19:39:24 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void			ft_init_texture(t_env *e)
 	GLuint			texture;
 	GLint			location;
 
+	glEnable(GL_CULL_FACE);
 	ft_load_bmp(e, "data/texture_0.bmp");
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -61,6 +62,7 @@ static void			ft_init_texture(t_env *e)
 static void			ft_main_loop(t_env *e)
 {
 	GLint			location;
+	GLfloat			mvp[16];
 
 	glClearColor(0.1, 0.25, 0.66, 0.3);
 	glEnable(GL_DEPTH_TEST);
@@ -70,10 +72,9 @@ static void			ft_main_loop(t_env *e)
 	ft_lookat(e, e->eye, e->at);
 	ft_projection_matrix(e, 60, 1., 30.);
 	glUseProgram(e->shader_program);
-	location = glGetUniformLocation(e->shader_program, "projection");
-	glUniformMatrix4fv(location, 1, 0, e->projection);
-	location = glGetUniformLocation(e->shader_program, "view");
-	glUniformMatrix4fv(location, 1, 0, e->view);
+	ft_multmatrix(mvp, e->projection, e->view);
+	location = glGetUniformLocation(e->shader_program, "mvp");
+	glUniformMatrix4fv(location, 1, 0, mvp);
 	glBindVertexArray(e->vertex_array);
 	glDrawArrays(GL_TRIANGLES, 0, e->buffer_size * sizeof(t_vertex));
 	mlx_opengl_swap_buffers(e->win_ptr);
@@ -85,14 +86,8 @@ static void			ft_main_loop(t_env *e)
 int					main(int ac, char **av)
 {
 	t_env			e;
-	GLuint			ibd[MAX_SIZE];
 
-	if (ac != 2)
-		return (ft_error("scop obj", 0));
-	if (ft_load_obj(&e, ibd, av[1]))
-		return (ft_error("obj load error", -1));
-	if (ft_load_shader(&e))
-		return (ft_error("shader load error", -1));
+	e.buffer_size = 0;
 	e.size[0] = 1024;
 	e.size[1] = 768;
 	e.eye[0] = 0.;
@@ -101,6 +96,12 @@ int					main(int ac, char **av)
 	e.at[0] = 0.;
 	e.at[1] = 0.;
 	e.at[2] = 1.;
+	if (ac != 2)
+		return (ft_error("scop obj", 0));
+	if (ft_load_obj(&e, av[1]))
+		return (ft_error("obj load error", -1));
+	if (ft_load_shader(&e))
+		return (ft_error("shader load error", -1));
 	e.mlx_ptr = mlx_init();
 	if (!e.mlx_ptr)
 		return (ft_error("mlx init error", -1));

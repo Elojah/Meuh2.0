@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/04 10:17:36 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/11 15:25:19 by erobert          ###   ########.fr       */
+/*   Updated: 2015/05/12 21:03:53 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "mlx.h"
 # include "mlx_opengl.h"
 
-# define MAX_SIZE 40960
+# define MAX_SIZE 80920
 # define READ_SIZE 2048
 # define K_ESC 53
 # define K_LEFT 123
@@ -38,6 +38,12 @@
 # define K_E 14
 # define K_T 17
 
+typedef union	u_color
+{
+	GLuint		color;
+	GLchar		rgba[4];
+}				t_color;
+
 typedef struct	s_vertex
 {
 	GLfloat		x;
@@ -45,6 +51,16 @@ typedef struct	s_vertex
 	GLfloat		z;
 	GLfloat		c;
 }				t_vertex;
+
+typedef struct	s_index
+{
+	t_vertex	vp[MAX_SIZE];
+	GLuint		ip[4];
+	t_vertex	vn[MAX_SIZE];
+	GLuint		in[4];
+	t_vertex	vt[MAX_SIZE];
+	GLuint		it[4];
+}				t_index;
 
 typedef struct	s_env
 {
@@ -56,6 +72,8 @@ typedef struct	s_env
 	GLfloat		view[16];
 	GLfloat		projection[16];
 	t_vertex	vertices[MAX_SIZE];
+	t_vertex	color_map[MAX_SIZE];
+	t_vertex	normals[MAX_SIZE];
 	GLsizeiptr	buffer_size;
 	GLuint		vertex_buffer;
 	GLchar		f_shader[READ_SIZE];
@@ -68,7 +86,8 @@ typedef struct	s_env
 	int			texture_on;
 }				t_env;
 
-int				ft_load_obj(t_env *e, GLuint *ibd, char *file);
+void			ft_get_vertex(t_vertex *vbd, char *line);
+int				ft_load_obj(t_env *e, char *file);
 int				ft_load_bmp(t_env *e, char *file);
 int				ft_load_shader(t_env *e);
 void			ft_addsub_vect(float *result, float *u, float *v, char opp);

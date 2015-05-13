@@ -6,12 +6,13 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/17 17:24:53 by erobert           #+#    #+#              #
-#    Updated: 2015/05/11 14:41:14 by erobert          ###   ########.fr        #
+#    Updated: 2015/05/12 16:33:37 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = scop
-FILES = ft_load_obj.c ft_load_bmp.c ft_load_shader.c \
+FILES = ft_get_vertex.c \
+		ft_load_obj.c ft_load_bmp.c ft_load_shader.c \
 		ft_addsub_vect.c ft_cross_product.c \
 		ft_multmatrix.c ft_translation_matrix.c\
 		ft_projection_matrix.c ft_lookat.c \

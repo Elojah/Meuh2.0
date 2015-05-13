@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/07 18:59:58 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/11 15:19:13 by erobert          ###   ########.fr       */
+/*   Updated: 2015/05/13 19:38:10 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,16 @@ static void	ft_move_object(int key, t_env *e)
 		ft_translation_matrix(tmp, 0., -.1, 0.);
 	ft_multmatrix(tmp + 16, e->projection, tmp);
 	ft_memcpy(e->projection, tmp + 16, sizeof(float) * 16);
-	location = glGetUniformLocation(e->shader_program, "projection");
-	glUniformMatrix4fv(location, 1, 0, e->projection);
+	ft_multmatrix(tmp, e->projection, e->view);
+	location = glGetUniformLocation(e->shader_program, "mvp");
+	glUniformMatrix4fv(location, 1, 0, tmp);
 }
 
 static void	ft_move_camera(int key, t_env *e)
 {
 	float	move[3];
 	GLint	location;
+	GLfloat	mvp[16];
 
 	move[0] = 0.;
 	move[1] = 0.;
@@ -56,8 +58,9 @@ static void	ft_move_camera(int key, t_env *e)
 	e->at[0] += move[0];
 	e->at[2] += move[2];
 	ft_lookat(e, e->eye, e->at);
-	location = glGetUniformLocation(e->shader_program, "view");
-	glUniformMatrix4fv(location, 1, 0, e->view);
+	ft_multmatrix(mvp, e->projection, e->view);
+	location = glGetUniformLocation(e->shader_program, "mvp");
+	glUniformMatrix4fv(location, 1, 0, mvp);
 }
 
 int			ft_key_hook(int key, t_env *e)

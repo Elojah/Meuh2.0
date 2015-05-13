@@ -6,10 +6,11 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/07 18:59:45 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/11 16:17:18 by erobert          ###   ########.fr       */
+/*   Updated: 2015/05/13 19:43:57 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "scop.h"
 
 int					ft_loop_hook(t_env *e)
@@ -32,7 +33,9 @@ int					ft_loop_hook(t_env *e)
 	}
 	angle += .05;
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glUniform1f(glGetUniformLocation(e->shader_program, "angle"), angle);
+	glUniform1f(glGetUniformLocation(e->shader_program, "sinus"), sin(angle));
+	glBindVertexArray(e->vertex_array);
+	glUniform1f(glGetUniformLocation(e->shader_program, "cosinus"), cos(angle));
 	glBindVertexArray(e->vertex_array);
 	glDrawArrays(GL_TRIANGLES, 0, e->buffer_size * sizeof(t_vertex));
 	mlx_opengl_swap_buffers(e->win_ptr);
