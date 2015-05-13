@@ -1,4 +1,5 @@
 #include "Trie.hpp"
+#include <iostream>/*DEBOG*/
 
 Trie::Trie(void) {
 	_root.create();
@@ -19,6 +20,18 @@ Trie		&Trie::operator=(Trie const &rhs) {
 	return (*this);
 }
 
-// void	Trie::addValue(std::string const &value, char *filename) {
-// 	;
-// }
+/*May be done with CHAR * instead of STD::STRING*/
+void	Trie::addValue(std::string const &s, char *filename) {
+	_root.addValue(s.c_str(), filename);
+}
+
+void	Trie::searchValue(std::string &s) {
+	sNode	*node;
+
+	if ((node = _root.getNode(&(s[0]))) != NULL
+		&& node->files != NULL) {
+		node->files->display();
+	} else {
+		std::cout << "No results found" << std::endl;
+	}
+}

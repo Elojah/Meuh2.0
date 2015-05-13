@@ -42,7 +42,7 @@ bool			FileScanner::isScannableFile(char const *name) {
 	return (true);
 }
 
-void			FileScanner::scanChildren(char const *path) {
+void			FileScanner::scanChildren(char *path) {
 	DIR				*dir;
 	struct dirent	*ent;
 
@@ -55,15 +55,17 @@ void			FileScanner::scanChildren(char const *path) {
 			if (!strcmp(ent->d_name, ".") || !strcmp(ent->d_name, "..")) {
 				continue ;
 			}
-			scan((std::string(path) + '/' + ent->d_name).c_str());
+			scan(&((std::string(path) + '/' + ent->d_name)[0]));/*LEAKS*/
 		}
 	}
 	closedir(dir);
 }
 
-void			FileScanner::scanFile(char const *filename) {
-	std::string		line;
-	std::ifstream	ifs;
+void			FileScanner::scanFile(char *filename) {
+	static const char	separators[] = " \t";
+	std::string			line;
+	std::ifstream		ifs;
+	char				*pch;
 
 	std::cout << "Scannable File" << std::endl;
 	ifs.open(filename);
@@ -71,12 +73,16 @@ void			FileScanner::scanFile(char const *filename) {
 		return ;
 	}
 	while (std::getline(ifs, line)) {
-		// std::cout << line << std::endl;
+		pch = strtok(&(line[0]), separators);
+		while (pch != NULL) {
+			_t.addValue(std::string(pch), filename);
+			pch = strtok (NULL, separators);
+		}
 	}
 	ifs.close();
 }
 
-void			FileScanner::scan(char const *path) {
+void			FileScanner::scan(char *path) {
 	struct stat		pathStat;
 
 	if (!path) {
@@ -100,13 +106,18 @@ void			FileScanner::scan(char const *path) {
 void			FileScanner::ask(void) {
 	std::string	input;
 
-	while (strcmp(input.c_str(), "q")) {
+	while (true) {
 		std::cout << "Search(q for quit): ";
 		std::cin >> input;
 		if (std::cin.eof() == 1) {
 			std::cin.clear();
 			std::cin.ignore();
 			continue;
+		}
+		if (strcmp(input.c_str(), "q") == 0) {
+			break ;
+		} else {
+			_t.searchValue(input);
 		}
 	}
 }
