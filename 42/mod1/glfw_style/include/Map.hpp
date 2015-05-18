@@ -13,6 +13,7 @@ public:
 	void	addObject(AObject *obj);
 	void	draw(void) const;
 	void	refresh(Camera const &cam) const;
+	void	loop(int const key) const;
 protected:
 private:
 	std::vector<AObject *>	_objects;

@@ -104,6 +104,8 @@ void		CocoaWin::key_callback(GLFWwindow* window, int key, int scancode, int acti
 		win->getCam()->moveDown();
 	} else if (key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q) {
 		glfwSetWindowShouldClose(window, GL_TRUE);
+	} else {
+		win->_map->loop(key);
 	}
 }
 

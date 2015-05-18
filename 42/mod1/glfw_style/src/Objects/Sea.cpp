@@ -26,7 +26,7 @@ void	Sea::init(void) {
 
 	for (size_t i = 0; i < 8; ++i) {
 		_vertex_buffer_data[i].x = i % 2 ? WIDTH_MAP : 0.0f;
-		_vertex_buffer_data[i].y = 0.0f;
+		_vertex_buffer_data[i].y = -0.01f;
 		_vertex_buffer_data[i].z = (i / 2) % 2 ? HEIGHT_MAP : 0.0f;
 	}
 	glGenVertexArrays(1, &_vertexArrayID);
@@ -36,11 +36,13 @@ void	Sea::init(void) {
 
 	glGenBuffers(1, &_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex_buffer_data), _vertex_buffer_data, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex_buffer_data)
+		, _vertex_buffer_data, GL_DYNAMIC_DRAW);
 
 	glGenBuffers(1, &_indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_buffer_data), index_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_buffer_data)
+		, index_buffer_data, GL_STATIC_DRAW);
 }
 
 void	Sea::draw(void) const {
@@ -58,8 +60,26 @@ void	Sea::draw(void) const {
 		GL_UNSIGNED_BYTE,
 		BUFFER_OFFSET(0)
 	);
-
 	glDisableVertexAttribArray(0);
+}
+
+void			Sea::wave(void) {
+	static float	tumult = 0.0f;
+	static float	derivedTumult = TUMULT_DER;
+
+	for (size_t i = 4; i < 8; ++i) {
+		_vertex_buffer_data[i].y += (tumult * (i % 2 ? 1 : -1));
+		if (_vertex_buffer_data[i].y <= 0.0f) {
+			_vertex_buffer_data[i].y = 0.01f;
+		}
+	}
+	tumult += derivedTumult;
+	if (tumult <= -TUMULT_VAL || tumult >= TUMULT_VAL) {
+		derivedTumult *= -1;
+	}
+	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex_buffer_data)
+		, _vertex_buffer_data, GL_DYNAMIC_DRAW);
 }
 
 void			Sea::setHeight(float waterHeight) {
@@ -67,7 +87,8 @@ void			Sea::setHeight(float waterHeight) {
 		_vertex_buffer_data[i].y = waterHeight;
 	}
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex_buffer_data), _vertex_buffer_data, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex_buffer_data)
+		, _vertex_buffer_data, GL_DYNAMIC_DRAW);
 }
 
 bool	Sea::loop(int const key) {

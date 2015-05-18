@@ -23,7 +23,8 @@ Landscape::Landscape(void) {}
 Landscape::~Landscape(void) {}
 
 Landscape::Landscape(std::string const &filename) :
-	_filename(filename) {
+	_filename(filename),
+	_scenario(0) {
 }
 
 void			Landscape::init(void) {
@@ -42,27 +43,38 @@ void			Landscape::init(void) {
 	for (size_t i = 0; i < MAX_RAIN_PARTICLE; ++i) {
 		_rain.addDrop(_vertex_buffer_data, i, true);
 	}
+	_sea.setHeight(_waterHeight);
 }
 
 void	Landscape::refresh(Camera const &cam) {
 	this->AObject::refresh(cam);
 	_waterHeight += (_rain.downParticles(_vertex_buffer_data, _waterHeight) / 4000.0f);
-	_rain.refresh(cam);
-	_sea.setHeight(_waterHeight);
+	if (_scenario & (1 << 1)) {
+		_rain.refresh(cam);
+	}
+	if (_scenario & (1 << 2)) {
+		_sea.setHeight(_waterHeight);
+	}
+	if (_scenario & (1 << 3)) {
+		_sea.wave();
+	}
 	_sea.refresh(cam);
 }
 
 
 bool	Landscape::loop(int const key) {
-	(void)key;
-	// switch (key) {
-	// 	case 22: raiseWater(0.01f);
-	// 			break ;
-	// 	case 20: raiseWater(-0.01f);
-	// 			break ;
-	// 	default: return (false);
-	// }
-	return (false);
+	switch (key) {
+		case 69: _scenario = _scenario | (1 << 1);
+				break ;
+		case 82: _scenario = _scenario | (1 << 2);
+				break ;
+		case 84: _scenario = _scenario | (1 << 3);
+				break ;
+		case 90: _scenario = 0;
+				break ;
+		default: return (false);
+	}
+	return (true);
 }
 
 void	Landscape::lexer(const Parser &p) {
@@ -251,7 +263,9 @@ void	Landscape::initBuffers(void) {
 }
 
 void	Landscape::draw(void) const {
-	_rain.draw();
+	if (_scenario & (1 << 1)) {
+		_rain.draw();
+	}
 	_sea.draw();
 	glUseProgram(_progID);
 	glUniformMatrix4fv(_matrixID, 1, GL_FALSE, &mvp[0][0]);

@@ -66,6 +66,8 @@ private:
 	Rain				_rain;
 	Sea					_sea;
 	GLfloat				_waterHeight;
+
+	short				_scenario;
 };
 
 #endif
