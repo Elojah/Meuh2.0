@@ -1,4 +1,4 @@
-TARGET = bin/scop
+TARGET = bin/runner
 
 #Directories
 SRC_DIR = src
@@ -7,21 +7,14 @@ BUILD_DIR = build
 LIB_DIR =
 
 #Options
-CC = clang-3.6
-SRC_EXT = .c
+CC = clang++
+SRC_EXT = .cpp
 RM = rm -rf
 
 #List classes here
 CLASS = main\
-		loop\
-		refresh\
-		render\
-		load_obj\
-		load_bmp\
-		key_callback\
-		mouse_callback\
-		load_shaders\
-		init_camera\
+		Trie\
+		FileScanner\
 
 #List interfaces here
 INTERFACE = \
@@ -33,48 +26,31 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g
+CFLAGS =-MMD -Wall -Wextra -Werror -O3 -std=c++98
 LFLAGS =
 
 #Libs
 LIB_LOCAL = \
-			lib/libft\
-			lib/glfw\
 
 LIB_GLOBAL = \
-			pthread\
-			Xxf86vm\
-			Xinerama\
-			Xcursor\
-			Xi\
-			Xrandr\
-			X11\
-			GL\
-			glfw3\
-			ft\
-			m\
 
 LIB_OTHER = \
-			-Llib/glfw/src\
 
 LIBS += $(LIB_OTHER)
 LIBS += $(addprefix -L, $(LIB_LOCAL))
-LIBS += $(addprefix -l,$(LIB_GLOBAL))
+LIBS += $(addprefix -l, $(LIB_GLOBAL))
 
 #Includes
 INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
-INC += \
 
 #RULES
-all : dirbin dirlib $(TARGET)
+all : dirbin $(TARGET)
 
 clean :
-	make clean -C lib/libft
 	$(RM) $(BUILD_DIR)
 
 fclean :
-	make fclean -C lib/libft
 	$(RM) $(BUILD_DIR) $(TARGET)
 
 re : fclean all
@@ -82,13 +58,9 @@ re : fclean all
 dirbin:
 	mkdir -p bin
 
-dirlib:
-	make -C lib/libft
-	sh ./util/install_lib.sh
-
 .PHONY: all clean fclean re
 
-.SILENT: dirbuild dirbin dirlib
+.SILENT: dirbuild dirbin
 
 #Build rule
 $(TARGET) : $(OBJ)
@@ -100,3 +72,5 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)
 	@mkdir -p $(dir $@)
 	@echo "\n\033[1;4;34mCMP:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
+
+-include $(DEP)

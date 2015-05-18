@@ -1,6 +1,8 @@
 #ifndef SEA_H
 # define SEA_H
 
+# define TUMULT_VAL 0.5f
+# define TUMULT_DER 0.05f
 # include "AObject.hpp"
 class AObject;
 
@@ -12,6 +14,7 @@ public:
 	virtual void	init(void);
 	virtual void	draw(void) const;
 	virtual bool	loop(int const);
+	void			wave(void);
 	void			setHeight(float waterHeight);
 protected:
 private:

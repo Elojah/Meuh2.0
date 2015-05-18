@@ -23,3 +23,11 @@ void	Map::refresh(Camera const &cam) const {
 		(*it)->refresh(cam);
 	}
 }
+
+void	Map::loop(int const key) const {
+	for (std::vector<AObject *>::const_iterator it = _objects.begin(); it != _objects.end(); ++it) {
+		if ((*it)->loop(key)) {
+			break ;
+		}
+	}
+}

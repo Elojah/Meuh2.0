@@ -13,6 +13,6 @@ if [ ! -d glm ]
 then
 	git clone https://github.com/g-truc/glm.git
 	cd glm
-	mkdir build
-	cmake .
+	cd ..
 fi
+cd ..
