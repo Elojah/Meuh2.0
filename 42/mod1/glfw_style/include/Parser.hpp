@@ -29,6 +29,7 @@ public:
 
 	void								display(void);
 	const std::vector<sReadToken>		getRead(void) const;
+	bool								fail(void) const;
 protected:
 private:
 	typedef std::vector<AToken *>		tSetTokens;
@@ -48,6 +49,7 @@ private:
 
 	tSetTokens							_globalTokens;
 	tTokens								_readTokens;
+	bool								_fail;
 };
 
 #endif
