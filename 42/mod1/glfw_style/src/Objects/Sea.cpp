@@ -26,7 +26,7 @@ void	Sea::init(void) {
 
 	for (size_t i = 0; i < 8; ++i) {
 		_vertex_buffer_data[i].x = i % 2 ? WIDTH_MAP : 0.0f;
-		_vertex_buffer_data[i].y = -0.01f;
+		_vertex_buffer_data[i].y = -0.1f;
 		_vertex_buffer_data[i].z = (i / 2) % 2 ? HEIGHT_MAP : 0.0f;
 	}
 	glGenVertexArrays(1, &_vertexArrayID);
@@ -64,19 +64,15 @@ void	Sea::draw(void) const {
 }
 
 void			Sea::wave(void) {
-	static float	tumult = 0.0f;
-	static float	derivedTumult = TUMULT_DER;
+	static float	flood(START_FLOOD);
 
-	for (size_t i = 4; i < 8; ++i) {
-		_vertex_buffer_data[i].y += (tumult * (i % 2 ? 1 : -1));
-		if (_vertex_buffer_data[i].y <= 0.0f) {
-			_vertex_buffer_data[i].y = 0.01f;
-		}
+	if (flood >= 0.0f) {
+		return ;
 	}
-	tumult += derivedTumult;
-	if (tumult <= -TUMULT_VAL || tumult >= TUMULT_VAL) {
-		derivedTumult *= -1;
+	for (size_t i = 6; i < 8; ++i) {
+		_vertex_buffer_data[i].y += flood;
 	}
+	flood += 0.01f;
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex_buffer_data)
 		, _vertex_buffer_data, GL_DYNAMIC_DRAW);

@@ -1,8 +1,8 @@
 #ifndef SEA_H
 # define SEA_H
 
-# define TUMULT_VAL 0.5f
-# define TUMULT_DER 0.05f
+# define START_FLOOD -5.0f
+
 # include "AObject.hpp"
 class AObject;
 
