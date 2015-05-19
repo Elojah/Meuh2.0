@@ -35,7 +35,7 @@ bool			Landscape::fail(void) const {
 void			Landscape::init(void) {
 	Parser					p(_filename);
 
-	_waterHeight = 1.0f;
+	_waterHeight = 0.01f;
 	clearMap();
 	if (p.fail()) {
 		std::cout << "Parsing:\tERROR" << std::endl;
@@ -64,9 +64,9 @@ void	Landscape::refresh(Camera const &cam) {
 	}
 	if (_scenario & (1 << 2)) {
 		_sea.setHeight(_waterHeight);
-	}
-	if (_scenario & (1 << 3)) {
-		_sea.wave();
+		if (_scenario & (1 << 3)) {
+			_sea.wave();
+		}
 	}
 	_sea.refresh(cam);
 }
