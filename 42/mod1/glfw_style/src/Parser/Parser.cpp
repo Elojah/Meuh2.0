@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <sys/stat.h>
+#include <unistd.h>
 
 Parser::Parser(void) {
 }
@@ -15,15 +17,23 @@ Parser::~Parser(void) {
 	}
 }
 
-Parser::Parser(const std::string &filename) {
+Parser::Parser(const std::string &filename) :
+	_fail(false) {
 	std::ifstream		ifs(filename.c_str());
+	struct stat			pathStat;
 
 	initGlobalTokens();
-	if (ifs.fail()) {
+	lstat(filename.c_str(), &pathStat);
+	if (ifs.fail() || S_ISDIR(pathStat.st_mode)) {
 		std::cout << "File is not valid" << std::endl;
+		_fail = true;
 		return ;
 	}
 	exec(ifs);
+}
+
+bool			Parser::fail(void) const {
+	return (_fail);
 }
 
 void			Parser::exec(std::ifstream &ifs) {
@@ -57,9 +67,11 @@ void			Parser::exec(std::ifstream &ifs) {
 					if (!isSeparator(c)) {
 						std::cout << "\033[1;31mParsing error on char\033[0m:\t" << c << std::endl;
 						std::cout << "Unrecognized symbol." << std::endl;
+						_fail = true;
 					} else if (tokenizing()) {
 						std::cout << "\033[1;31mParsing error on char\033[0m:\t" << c << std::endl;
 						std::cout << "Unfinished expression." << std::endl;
+						_fail = true;
 					}
 					resetGlobalTokens();
 					tokenMask = (1L << _globalTokens.size()) - 1;

@@ -24,15 +24,25 @@ Landscape::~Landscape(void) {}
 
 Landscape::Landscape(std::string const &filename) :
 	_filename(filename),
-	_scenario(0) {
+	_scenario(0),
+	_fail(false) {
+}
+
+bool			Landscape::fail(void) const {
+	return (_fail);
 }
 
 void			Landscape::init(void) {
 	Parser					p(_filename);
 
-	std::cout << "Parsing:\tDONE" << std::endl;
 	_waterHeight = 1.0f;
 	clearMap();
+	if (p.fail()) {
+		std::cout << "Parsing:\tERROR" << std::endl;
+		_fail = true;
+		return ;
+	}
+	std::cout << "Parsing:\tDONE" << std::endl;
 	lexer(p);
 	std::cout << "Lexing:\t\tDONE" << std::endl;
 	smoothMap();
@@ -91,6 +101,7 @@ void	Landscape::lexer(const Parser &p) {
 			|| reads[i + 1].type != NUMBER || reads[i + 2].type != NUMBER || reads[i + 3].type != NUMBER
 			|| reads[i + 4].type != SCOPE) {
 			std::cout << "Tokens are not ordered:\t" << reads[i].buffer << std::endl;
+			_fail = true;
 			return ;
 		}
 		x = strtof(reads[i + 1].buffer.c_str(), NULL);

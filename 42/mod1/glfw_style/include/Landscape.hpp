@@ -40,6 +40,7 @@ public:
 	virtual void				draw(void) const;
 	virtual bool				loop(int const);
 	virtual void				refresh(Camera const &cam);
+	bool						fail(void) const;
 protected:
 private:
 	Landscape(void);
@@ -68,6 +69,8 @@ private:
 	GLfloat				_waterHeight;
 
 	short				_scenario;
+
+	bool				_fail;
 };
 
 #endif

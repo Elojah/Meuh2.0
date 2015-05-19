@@ -19,8 +19,10 @@ void	exec(char *filename) {
 
 	win.init();
 	l.init();
+	if (l.fail()) {
+		return ;
+	}
 	m.addObject(&l);
-
 	win.loop(m, cam);
 }
 
