@@ -1,9 +1,14 @@
-/*
-* @Author: Latias
-* @Date:   2015-02-13 10:41:52
-* @Last Modified by:   Latias
-* @Last Modified time: 2015-02-13 10:50:54
-*/
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   main.cpp                                           :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/05/21 17:01:21 by hdezier           #+#    #+#             //
+//   Updated: 2015/05/21 17:02:18 by erobert          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <vector>
 #include <iostream>
@@ -11,26 +16,26 @@
 #include "Map.hpp"
 #include "Landscape.hpp"
 
-void	exec(char *filename) {
-	CocoaWin			win(1600, 1200);
-	Camera				cam;
-	Map					m;
-	Landscape			l(filename);
+void			exec(char *filename)
+{
+	CocoaWin	win(1920, 1280);
+	Camera		cam;
+	Map			m;
+	Landscape	l(filename);
 
 	win.init();
 	l.init();
-	if (l.fail()) {
+	if (l.fail())
 		return ;
-	}
 	m.addObject(&l);
 	win.loop(m, cam);
 }
 
-int main(int ac, char **av) {
-	if (ac != 2) {
+int				main(int ac, char **av)
+{
+	if (ac != 2)
 		std::cout << "Enter a filename:\t" << std::endl;
-	} else {
+	else
 		exec(av[1]);
-	}
 	return (0);
 }
