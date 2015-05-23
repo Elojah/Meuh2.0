@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/30 15:44:28 by hdezier           #+#    #+#             //
-//   Updated: 2015/04/30 16:08:43 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/21 17:25:17 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -39,7 +39,7 @@ public:
 	Camera(void);
 	~Camera(void);
 
-	const glm::mat4		&getViewProj(void) const;
+	glm::mat4 const		&getViewProj(void) const;
 	void				setSize(const size_t &width, const size_t &height);
 	void				moveEye(const int &xpos, const int &ypos);
 	void				moveForward(void);

@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/30 15:46:20 by hdezier           #+#    #+#             //
-//   Updated: 2015/04/30 15:47:42 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/21 17:22:14 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -29,36 +29,29 @@ class Map;
 class CocoaWin
 {
 public:
-						CocoaWin(std::size_t, std::size_t);
-						~CocoaWin(void);
+	CocoaWin(std::size_t, std::size_t);
+	~CocoaWin(void);
+
 	void				init(void);
 	void				loop(Map const &map, Camera &cam);
-	const Map			*getMap(void) const;
+	Map const			*getMap(void) const;
 	Camera				*getCam(void) const;
-
-protected:
 private:
-						CocoaWin(void);
-	static void			key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-	static void			cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
-
-/*
-**Window
-*/
 	GLFWwindow			*_window;
 	std::size_t			_width;
 	std::size_t			_height;
 	const Map			*_map;
 	Camera				*_cam;
-/*
-**Event
-*/
-/*
-**GL
-*/
+
+	CocoaWin(void);
 	CocoaWin(CocoaWin const &rhs);
 
 	CocoaWin			&operator=(CocoaWin const &rhs);
+
+	static void	keyCallback(GLFWwindow* window, int key, int scancode, 
+							int action, int mods);
+	static void	cursorPositionCallback(GLFWwindow* window, double xpos, 
+									   double ypos);
 };
 
 #endif

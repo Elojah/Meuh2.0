@@ -6,7 +6,7 @@
 /*   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/20 10:01:58 by erobert           #+#    #+#             */
-/*   Updated: 2015/05/04 12:28:52 by erobert          ###   ########.fr       */
+/*   Updated: 2015/05/12 16:55:13 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 # include <unistd.h>
 
-# define BUFF_SIZE 1023
+# define BUFF_SIZE 1
 
 typedef struct		s_list
 {

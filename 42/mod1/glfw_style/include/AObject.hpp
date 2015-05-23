@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/30 15:32:09 by hdezier           #+#    #+#             //
-//   Updated: 2015/04/30 15:48:08 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/22 20:43:37 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -40,19 +40,6 @@ protected:
 		GLfloat					x;
 		GLfloat					y;
 		GLfloat					z;
-		void					nullify(void) {
-				x = 0.0f;
-				y = 0.0f;
-				z = 0.0f;
-		}
-		sPoint					&operator=(sPoint const &rhs) {
-			if (this != &rhs) {
-				x = rhs.x;
-				y = rhs.y;
-				z = rhs.z;
-			}
-			return (*this);
-		}
 	};
 
 	glm::mat4		mvp;

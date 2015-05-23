@@ -1,17 +1,24 @@
 #version 400
 
-uniform float angle;
-uniform mat4 view;
-uniform mat4 projection;
+uniform float sinus;
+uniform float cosinus;
+uniform mat4 mvp;
+
 in vec4 vertex;
-out float color;
+
+out sData
+{
+	float color;
+	vec2 uv;
+};
 
 void		main(void)
 {
-	gl_Position.x = vertex.x * cos(angle) - vertex.z * sin(angle);
+	gl_Position.x = vertex.x * cosinus - vertex.z * sinus;
 	gl_Position.y = vertex.y;
-	gl_Position.z = vertex.z * cos(angle) + vertex.x * sin(angle);
+	gl_Position.z = vertex.z * cosinus + vertex.x * sinus;
 	gl_Position.w = 1.;
-	gl_Position = projection * view * gl_Position;
+	gl_Position = mvp * gl_Position;
 	color = vertex.w;
+	uv.xy = vertex.yz;
 }

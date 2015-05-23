@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/30 16:05:12 by hdezier           #+#    #+#             //
-//   Updated: 2015/04/30 16:15:28 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/22 20:26:27 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -41,8 +41,15 @@ public:
 	virtual bool				loop(int const);
 	virtual void				refresh(Camera const &cam);
 	bool						fail(void) const;
-protected:
 private:
+	enum eScenario
+	{
+		RAIN = 0,
+		FLOOD,
+		WAVE,
+		E_SCENARIO
+	};
+
 	Landscape(void);
 	Landscape(Landscape const &rhs);
 
@@ -58,18 +65,16 @@ private:
 	void				findClosestPoint(sPoint const&, sPoint&) const;
 	void				drawPoint(unsigned int const x,
 								unsigned int const y) const;
+
 	std::string			_filename;
-
-	sPoint				_vertex_buffer_data[WIDTH_MAP * HEIGHT_MAP + 1];
-	float				_map[WIDTH_MAP + 1][HEIGHT_MAP + 1];
+	sPoint				_vBufferData[WIDTH_MAP * HEIGHT_MAP];
+	GLuint				_iBufferData[(WIDTH_MAP - 1) * (HEIGHT_MAP - 1) * 6];
+	float				_map[WIDTH_MAP][HEIGHT_MAP];
 	std::vector<sPoint>	_immovablePoints;
-
 	Rain				_rain;
 	Sea					_sea;
 	GLfloat				_waterHeight;
-
-	short				_scenario;
-
+	bool				_scenario[E_SCENARIO];
 	bool				_fail;
 };
 
