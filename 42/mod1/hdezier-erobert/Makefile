@@ -1,4 +1,4 @@
-TARGET = bin/runner
+TARGET = bin/mod1
 
 #Directories
 SRC_DIR = src
@@ -7,21 +7,27 @@ BUILD_DIR = build
 LIB_DIR = lib
 
 #Options
-CC = g++
+CC = clang++
 SRC_EXT = .cpp
 RM = rm -rf
 
 #List classes here
-CLASS = \
-		Camera\
+CLASS = main\
+		AObject\
+		Objects/Sea\
+		Objects/Rain\
+		Parser/Tokens/AToken\
+		Parser/Tokens/Scope\
+		Parser/Tokens/Comment\
+		Parser/Tokens/Number\
+		Parser/Parser\
 		Objects/Landscape\
-		Objects/SimpleTriangle\
-		main\
+		Camera\
+		Map\
 		CocoaWin\
 
 #List interfaces here
-INTERFACE = \
-		IObject\
+INTERFACES = \
 
 #Auto var
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
@@ -30,42 +36,53 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++98 -x objective-c++
+CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++98
 LFLAGS =
 
 #Libs
 LIB_LOCAL = \
 			lib/LoadShaders\
-			lib/glfw\
 
 LIB_GLOBAL = \
 			LoadShaders\
+			glfw3\
 
 LIB_OTHER = \
-			-framework OpenGL\
 			-framework Cocoa\
+			-framework OpenGL\
+			-framework IOKit\
+			-framework CoreVideo\
+			-Llib/glfw/src\
 
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
-LIBS += $(addprefix -l,$(LIB_GLOBAL))
 LIBS += $(LIB_OTHER)
+LIBS += $(addprefix -l,$(LIB_GLOBAL))
 
 #Includes
 INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
+INC += \
+		-Ilib/glfw/include\
+		-Ilib/glm\
 
 #RULES
-all : dirbin $(TARGET)
+all : dirbin dirlib $(TARGET)
 
 clean :
 	$(RM) $(BUILD_DIR)
 
 fclean :
 	$(RM) $(BUILD_DIR) $(TARGET)
+	$(RM) lib/glfw
+	$(RM) lib/glm
 
 re : fclean all
 
 dirbin:
 	mkdir -p bin
+
+dirlib:
+	sh ./util/install_lib.sh
 
 .PHONY: all clean fclean re
 
