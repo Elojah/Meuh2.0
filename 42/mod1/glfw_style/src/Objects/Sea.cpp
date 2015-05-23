@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/21 17:35:03 by hdezier           #+#    #+#             //
-//   Updated: 2015/05/22 21:06:40 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/23 18:17:40 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -36,9 +36,9 @@ void						Sea::init(void)
 
 	for (size_t i = 0; i < 8; ++i)
 	{
-		_vertex_buffer_data[i].x = i % 2 * WIDTH_MAP;
-		_vertex_buffer_data[i].y = -0.1f;
-		_vertex_buffer_data[i].z = (i / 2) % 2 * HEIGHT_MAP;
+		_vertex_buffer_data[i].x = i % 2 * (WIDTH_MAP - 1);
+		_vertex_buffer_data[i].y = -0.05f;
+		_vertex_buffer_data[i].z = (i / 2) % 2 * (HEIGHT_MAP - 1);
 	}
 	glGenVertexArrays(1, &_vertexArrayID);
 	glBindVertexArray(_vertexArrayID);

@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/30 15:42:27 by hdezier           #+#    #+#             //
-//   Updated: 2015/05/22 21:13:10 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/23 18:09:32 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -275,9 +275,9 @@ void				Landscape::initBuffers(void)
 		_vBufferData[i].y = _map[i / WIDTH_MAP][i % WIDTH_MAP] * Z_MULT;
 		_vBufferData[i].z = i % WIDTH_MAP;
 	}
-	for (i = 0; i < WIDTH_MAP * (HEIGHT_MAP - 1); ++i)
+	for (i = 0; i + 1 < WIDTH_MAP * (HEIGHT_MAP - 1); ++i)
 	{
-		if (i % WIDTH_MAP + 1 < WIDTH_MAP)
+		if ((i + 1) % WIDTH_MAP)
 		{
 			_iBufferData[n++] = i + WIDTH_MAP;
 			_iBufferData[n++] = i;
@@ -285,10 +285,6 @@ void				Landscape::initBuffers(void)
 			_iBufferData[n++] = i + 1;
 			_iBufferData[n++] = i + WIDTH_MAP + 1;
 			_iBufferData[n++] = i + WIDTH_MAP;
-			std::cout << (i + WIDTH_MAP + 1) / WIDTH_MAP << " < " 
-					  << HEIGHT_MAP << " ======  "
-					  << (i + WIDTH_MAP + 1) % WIDTH_MAP << " < " 
-					  << WIDTH_MAP << std::endl;
 		}
 	}
 	glGenVertexArrays(1, &_vertexArrayID);
@@ -307,15 +303,14 @@ void				Landscape::draw(void) const
 {
 	if (_scenario[RAIN])
 		_rain.draw();
-	if (_waterHeight > 0.000001f)
-		_sea.draw();
+	_sea.draw();
 	glUseProgram(_progID);
 	glUniformMatrix4fv(_matrixID, 1, GL_FALSE, &mvp[0][0]);
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-	glDrawElements(GL_TRIANGLE_STRIP, (WIDTH_MAP - 1) * (HEIGHT_MAP - 1) * 6, 
+	glDrawElements(GL_TRIANGLES, (WIDTH_MAP - 1) * (HEIGHT_MAP - 1) * 6, 
 				   GL_UNSIGNED_INT, BUFFER_OFFSET(0));
 	glDisableVertexAttribArray(0);
 }
