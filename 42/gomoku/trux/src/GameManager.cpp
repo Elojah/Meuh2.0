@@ -13,49 +13,37 @@
 #include "GameManager.hpp"
 
 GameManager::GameManager(void):
-	_width(1024),
-	_height(1024),
 	_size(19),
 	_exit(false)
-{}
-GameManager::~GameManager(void)
 {
-	if (_window.isOpen())
-		_window.close();
 }
+
+GameManager::~GameManager(void)
+{}
 
 void					GameManager::initBoard(eSize size)
 {
-	sf::Texture			tBoard;
-	sf::Sprite			sBoard;
-
-	tBoard.loadFromFile("data/goban");
-	_width = tBoard.getSize().x;
-	_height = tBoard.getSize().y;
 	if (size != BIG)
-		_size = (size == MEDIUM ? 15 : 9);
-	if (!_window.isOpen())
-		_window.create(sf::VideoMode(_width, _height), "Gomoku");
-	_window.clear(sf::Color(212, 177, 106));
-	sBoard.scale(tBoard.getSize().x / _width, tBoard.getSize().y / _height);
-	sBoard.setTexture(tBoard);
-	_window.draw(sBoard);
-	_window.display();
+		_size = (size == MEDIUM ? 13 : 9);
+	_gB.init(_size);
 }
 void					GameManager::gameLoop(void)
 {
+	_gB.render();
 	while (!_exit)
 	{
 		eventHandler();
-//		_window.display();
+		_gB.render();
 	}
 }
 
 void					GameManager::eventHandler(void)
 {
-	while (_window.pollEvent(_event))
+	int					e(-1);
+
+	e = _gB.getEvent();
+	if (e == GUIBoard::EXIT)
 	{
-		if (_event.type == sf::Event::Closed)
-			_exit = true;
+		_exit = true;
 	}
 }

@@ -13,9 +13,7 @@
 #ifndef GAME_MANAGER_HPP
 # define GAME_MANAGER_HPP
 
-# include "SFML/Graphics.hpp"
-
-# define CELL_SIZE 20
+# include "GUIBoard.hpp"
 
 class GameManager
 {
@@ -34,11 +32,9 @@ public:
 	void				initBoard(eSize size);
 	void				gameLoop(void);
 private:
-	size_t				_width;
-	size_t				_height;
+
+	GUIBoard			_gB;
 	size_t				_size;
-	sf::RenderWindow	_window;
-	sf::Event			_event;
 	bool				_exit;
 
 	GameManager(GameManager const &rhs);
