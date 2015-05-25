@@ -14,6 +14,7 @@
 
 GameManager::GameManager(void):
 	_size(19),
+	_turn(true),
 	_exit(false)
 {
 }
@@ -26,6 +27,11 @@ void					GameManager::initBoard(eSize size)
 	if (size != BIG)
 		_size = (size == MEDIUM ? 13 : 9);
 	_gB.init(_size);
+	for (unsigned int i = 0; i < _size; ++i)
+	{
+		for (unsigned int j = 0; j < _size; ++j)
+			_board[i][j] = EMPTY;
+	}
 }
 void					GameManager::gameLoop(void)
 {
@@ -39,11 +45,13 @@ void					GameManager::gameLoop(void)
 
 void					GameManager::eventHandler(void)
 {
-	int					e(-1);
+	static int	e;
 
 	e = _gB.getEvent();
 	if (e == GUIBoard::EXIT)
-	{
 		_exit = true;
-	}
+	// else if (e == GUIBoard::TOKEN)
+	// {
+	// 	if ()
+	// }
 }

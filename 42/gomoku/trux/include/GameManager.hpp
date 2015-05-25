@@ -26,6 +26,13 @@ public:
 		E_SIZE
 	};
 
+	enum eCell
+	{
+		EMPTY,
+		P1,
+		P2
+	};
+
 	GameManager(void);
 	~GameManager(void);
 
@@ -35,7 +42,9 @@ private:
 
 	GUIBoard			_gB;
 	size_t				_size;
+	bool				_turn;
 	bool				_exit;
+	eCell				_board[19][19];
 
 	GameManager(GameManager const &rhs);
 
