@@ -1,20 +1,26 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   GUIBoard.hpp                                       :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/05/25 17:46:56 by erobert           #+#    #+#             //
+//   Updated: 2015/05/25 18:00:01 by erobert          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
+
 #ifndef G_U_I_BOARD_H
 # define G_U_I_BOARD_H
 
 # include "SFML/Graphics.hpp"
-# define WIDTH 1024
+
 # define HEIGHT 1024
+# define WIDTH 1024
 
 class GUIBoard
 {
 public:
-	GUIBoard(void);
-	~GUIBoard(void);
-	void	init(int size);
-	void	render(void);
-	int		getEvent(void);
-
-
 	enum eEvent
 	{
 		EXIT,
@@ -23,24 +29,30 @@ public:
 		E_EVENT
 	};
 
-	struct		sEvent
+	struct sEvent
 	{
-		eEvent	key;
-		char	c;
-		int		x;
-		int		y;
+		eEvent			key;
+		char			c;
+		int				x;
+		int				y;
 	};
-protected:
-private:
-	GUIBoard(GUIBoard const &rhs);
-	GUIBoard&	operator=(GUIBoard const &rhs);
 
+	GUIBoard(void);
+	~GUIBoard(void);
+
+	void				init(int size);
+	void				render(int *board);
+	int					getEvent(void);
+private:
 	size_t				_size;
 	sf::RenderWindow	_window;
 	sf::Event			_event;
 	sf::Texture			_tBoard;
 	sf::Sprite			_sBoard;
 
+	GUIBoard(GUIBoard const &rhs);
+
+	GUIBoard			&operator=(GUIBoard const &rhs);
 };
 
 #endif
