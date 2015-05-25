@@ -11,17 +11,17 @@
 #******************************************************************************#
 
 NAME = gomoku
-FILES = Board.cpp GameManager.cpp main.cpp
-SRCS = $(addprefix srcs/, $(FILES))
-OBJS = $(SRCS:srcs/%.cpp=objs/%.o)
-INCS = $(SRCS:srcs/%.cpp=incs/%.hpp)
+FILES = GUIBoard.cpp GameManager.cpp main.cpp
+SRCS = $(addprefix src/, $(FILES))
+OBJS = $(SRCS:src/%.cpp=objs/%.o)
+INCS = $(SRCS:src/%.cpp=include/%.hpp)
 TMPS = $(SRCS:.cpp=.cpp~) $(INCS:.hpp=.hpp~) Makefile~
 PWD = $(shell pwd)
 ASFML = SFML-2.2-osx-clang-universal
 DSFML = sfml
 CC = g++
 CFLAGS = -Wall -Wextra -Werror
-IFLAGS = -I./$(DSFML)/include/ -I./incs/
+IFLAGS = -I./$(DSFML)/include/ -I./include/
 LFLAGS = -L./$(DSFML)/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 .PHONY: all clean objs_dir fclean re
@@ -33,7 +33,7 @@ all: objs_dir $(DSFML) $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -rpath $(PWD)/$(DSFML)/lib/ -o $(NAME) $(OBJS) $(LFLAGS)
 
-objs/%.o : srcs/%.cpp
+objs/%.o : src/%.cpp
 	$(CC) $(CFLAGS) -Iinc $(IFLAGS) -o $@ -c $^
 
 objs_dir:
