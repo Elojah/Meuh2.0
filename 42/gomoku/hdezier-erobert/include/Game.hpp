@@ -2,6 +2,7 @@
 # define GAME_H
 
 # define SIZE_BOARD 19
+# define REFRESH_TIME 16
 
 class Game
 {
@@ -13,6 +14,9 @@ public:
 
 	void	launch(void);
 	void	loop(void);
+	void	display(void) const;
+	void	waitP1(void);
+	void	waitP2(void);
 protected:
 private:
 	enum eCase {
