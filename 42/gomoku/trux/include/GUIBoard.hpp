@@ -6,12 +6,12 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/25 17:46:56 by erobert           #+#    #+#             //
-//   Updated: 2015/05/25 18:00:01 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/26 15:48:44 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
-#ifndef G_U_I_BOARD_H
-# define G_U_I_BOARD_H
+#ifndef GUI_BOARD_HPP
+# define GUI_BOARD_HPP
 
 # include "SFML/Graphics.hpp"
 
@@ -21,6 +21,12 @@
 class GUIBoard
 {
 public:
+	enum eCell
+	{
+		EMPTY,
+		BLACK,
+		WHITE
+	};
 	enum eEvent
 	{
 		EXIT,
@@ -31,8 +37,7 @@ public:
 
 	struct sEvent
 	{
-		eEvent			key;
-		char			c;
+		eEvent			e;
 		int				x;
 		int				y;
 	};
@@ -41,14 +46,15 @@ public:
 	~GUIBoard(void);
 
 	void				init(int size);
-	void				render(int *board);
-	int					getEvent(void);
+	void				render(eCell const **board);
+	sEvent				getEvent(void);
 private:
 	size_t				_size;
 	sf::RenderWindow	_window;
 	sf::Event			_event;
 	sf::Texture			_tBoard;
 	sf::Sprite			_sBoard;
+	sf::CircleShape		_stone;
 
 	GUIBoard(GUIBoard const &rhs);
 

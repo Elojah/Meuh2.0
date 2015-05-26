@@ -6,20 +6,22 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/25 17:46:43 by erobert           #+#    #+#             //
-//   Updated: 2015/05/25 18:00:32 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/26 15:48:40 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #include "GUIBoard.hpp"
 
-GUIBoard::GUIBoard(void) {}
+GUIBoard::GUIBoard(void):
+	_stone(20)
+{}
 GUIBoard::~GUIBoard(void)
 {
 	if (_window.isOpen())
 		_window.close();
 }
 
-void	GUIBoard::init(int size)
+void		GUIBoard::init(int size)
 {
 	float	scale[0];
 
@@ -37,17 +39,21 @@ void	GUIBoard::init(int size)
 	_sBoard.scale(scale[0], scale[1]);
 	_sBoard.setTexture(_tBoard);
 }
-void	GUIBoard::render(int *board)
+void		GUIBoard::render(eCell const **board)
 {
+	_stone.setFillColor(sf::Color::Black);
+	(void)board;
 	_window.draw(_sBoard);
+	_window.draw(_stone);
 	_window.display();
 }
-int		GUIBoard::getEvent(void)
+GUIBoard::sEvent		GUIBoard::getEvent(void)
 {
-	while (_window.pollEvent(_event))
-	{
-		if (_event.type == sf::Event::Closed || _event.key.code == 'q')
-			return (EXIT);
-	}
-	return (E_EVENT);
+	sEvent				event;
+
+	event.e = E_EVENT;
+	_window.waitEvent(_event);
+	if (_event.type == sf::Event::Closed || _event.key.code == 'q')
+		event.e = EXIT;
+	return (event);
 }
