@@ -11,15 +11,18 @@ public:
 
 	struct		vec2
 	{
-		unsigned int	x;
-		unsigned int	y;
+		int		x;
+		int		y;
 	};
 
 	const vec2		&play(Board const &b, vec2 const &event);
+	const vec2		&calculus(Board const &b);
 protected:
 private:
 	Player(Player const &src);
 	Player&	operator=(Player const &rhs);
+
+	bool		_ia;
 };
 
 #endif

@@ -15,6 +15,8 @@ public:
 		P2
 	};
 
+	const eValue	&getValue(void);
+	void			init(Cell const **board, int const x, int const y);
 protected:
 private:
 	Cell(Cell const &src);
@@ -33,9 +35,8 @@ private:
 		E_ADJACENT
 	};
 
-	eValue	_value;
-	Cell	*_adjacent[8];
-	void	init(Cell const **board, int const x, int const y);
+	eValue		_value;
+	Cell const	*_adjacent[8];
 };
 
 #endif
