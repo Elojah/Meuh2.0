@@ -39,6 +39,7 @@ void	GUIBoard::init(int size)
 }
 void	GUIBoard::render(int *board)
 {
+	(void)board;
 	_window.draw(_sBoard);
 	_window.display();
 }

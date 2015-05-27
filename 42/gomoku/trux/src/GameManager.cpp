@@ -14,10 +14,9 @@
 
 GameManager::GameManager(void):
 	_size(19),
-	_turn(true),
+	_turn(P1),
 	_exit(false)
-{
-}
+{}
 
 GameManager::~GameManager(void)
 {}
@@ -33,12 +32,22 @@ void					GameManager::initBoard(eSize size)
 			_board[i][j] = EMPTY;
 	}
 }
+
 void					GameManager::gameLoop(void)
 {
+	Player::sMove				currentMove;
+
 	_gB.render();
 	while (!_exit)
 	{
-		eventHandler();
+		if (_turn == P1)
+			currentMove = _p1.getMove();
+		else if (_turn == P2)
+			currentMove = _p2.getMove();
+		if (isValidMove(currentMove))
+			applyMove(currentMove);
+		else
+			continue ;
 		_gB.render();
 	}
 }
@@ -54,4 +63,20 @@ void					GameManager::eventHandler(void)
 	// {
 	// 	if ()
 	// }
+}
+
+bool				GameManager::isValidMove(Player::sMove &move)
+{
+	for (unsigned short i = 0; i < _size; ++i)
+	{
+		for (unsigned short j = 0; j < _size; ++j)
+		{
+			;
+		}
+	}
+}
+
+void			GameManager::applyMove(Player::sMove &move)
+{
+	_board[move.x][move.y] = _turn;
 }
