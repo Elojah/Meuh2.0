@@ -11,7 +11,7 @@ GameManager::~GameManager(void)
 
 void				GameManager::init(void)
 {
-	/*Nothing to do here except if size change*/
+	/*Nothing to do here except if size changes*/
 }
 
 void				GameManager::loop(void)
@@ -42,6 +42,11 @@ const Player::vec2	&GameManager::eventHandler(void)
 	event = _ui.getEvent();
 	if (event.e == UserInterface::EXIT)
 		_exit = true;
+	else if (event.e == UserInterface::MOUSE)
+	{
+		result.x = event.x;
+		result.y = event.y;
+	}
 	return (result);
 }
 
