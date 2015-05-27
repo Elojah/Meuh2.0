@@ -9,8 +9,9 @@ Player::~Player(void)
 
 const Player::vec2		&Player::play(Board const &b, Player::vec2 const &event)
 {
+	_calculusMove = calculus(b);
 	if (_ia)
-		return (calculus(b));
+		return (_calculusMove);
 	else
 		return (event);
 }
