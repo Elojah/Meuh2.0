@@ -25,15 +25,15 @@ public:
 
 	struct sEvent
 	{
-		eEvent			key;
+		eEvent			e;
 		char			c;
 		int				x;
 		int				y;
 	};
 
 	void			init(int size);
-	void			render(Board const &b, Player const &p1, Player const &p2) const;
-	const sEvent	&getEvent(void) const;
+	void			render(Board const &b, Player const &p1, Player const &p2);
+	const sEvent	&getEvent(void);
 
 protected:
 private:

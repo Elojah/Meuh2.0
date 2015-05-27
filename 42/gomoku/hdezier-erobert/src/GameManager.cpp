@@ -20,7 +20,6 @@ void				GameManager::loop(void)
 
 	_ui.render(_b, _p1, _p2);
 	_b.display();
-	return ;
 	while (!_exit)
 	{
 		move = eventHandler();
@@ -36,10 +35,13 @@ void				GameManager::loop(void)
 
 const Player::vec2	&GameManager::eventHandler(void)
 {
-	static Player::vec2		result;
+	static Player::vec2				result;
+	static UserInterface::sEvent	event;
 
-	result.x = -1;
-	result.y = -1;
+	result.x = result.y = -1;
+	event = _ui.getEvent();
+	if (event.e == UserInterface::EXIT)
+		_exit = true;
 	return (result);
 }
 
