@@ -11,6 +11,12 @@ public:
 	GameManager(void);
 	~GameManager(void);
 
+	enum eTurn
+	{
+		P1,
+		P2
+	};
+
 	void				init(void);
 	void				loop(void);
 	const Player::vec2	&eventHandler(void);
@@ -23,6 +29,8 @@ private:
 	Player			_p1;
 	Player			_p2;
 	UserInterface	_ui;
+	eTurn			_turn;
+	bool			_exit;
 };
 
 #endif

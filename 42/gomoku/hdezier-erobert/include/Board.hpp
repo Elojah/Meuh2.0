@@ -10,6 +10,8 @@ class Board
 public:
 	Board(void);
 	~Board(void);
+
+	void		display(void);
 protected:
 private:
 	Board(Board const &src);
