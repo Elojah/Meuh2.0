@@ -1,10 +1,10 @@
-TARGET = bin/runner
+TARGET = bin/gomoku
 
 #Directories
 SRC_DIR = src
 INC_DIR = include
 BUILD_DIR = build
-LIB_DIR =
+LIB_DIR = lib
 
 #Options
 CC = clang++
@@ -13,7 +13,12 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		Game\
+		Cell\
+		Board\
+		UserInterface\
+		Player\
+		Rules\
+		GameManager\
 
 #List interfaces here
 INTERFACE = \
@@ -22,18 +27,26 @@ INTERFACE = \
 SRC = $(addsuffix $(SRC_EXT), $(addprefix $(SRC_DIR)/, $(CLASS)))
 OBJ = $(addsuffix .o, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
-LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3 -g -std=c++98
+CFLAGS =-MMD -Wall -Wextra -Werror -O3 -std=c++98 -Wno-unused-parameter
 LFLAGS =
 
 #Libs
+PWD = $(shell pwd)
+ASFML = SFML-2.2-osx-clang-universal
+DSFML = $(LIB_DIR)/sfml
+
 LIB_LOCAL = \
+			./$(DSFML)\
 
 LIB_GLOBAL = \
+			sfml-graphics\
+			sfml-window\
+			sfml-system\
 
 LIB_OTHER = \
+			-rpath $(PWD)/$(DSFML)/lib/\
 
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
@@ -44,15 +57,24 @@ INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 
 #RULES
-all : dirbin $(TARGET)
+all : dirbin $(DSFML) $(TARGET)
 
 clean :
 	$(RM) $(BUILD_DIR)
 
 fclean :
 	$(RM) $(BUILD_DIR) $(TARGET)
+	$(RM) $(DSFML)
 
 re : fclean all
+
+$(DSFML):
+	curl -L -O -# --progress-bar  http://www.sfml-dev.org/files/$(ASFML).tar.gz
+	tar -xf $(ASFML).tar.gz
+	mv $(ASFML) $(DSFML)
+	cd $(DSFML)/Frameworks/ && ln -s ../extlibs/freetype.framework
+	cd $(DSFML)/Frameworks/ && ln -s ../extlibs/sndfile.framework
+	rm $(ASFML).tar.gz
 
 dirbin:
 	mkdir -p bin
