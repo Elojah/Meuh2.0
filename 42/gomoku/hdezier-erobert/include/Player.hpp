@@ -23,6 +23,7 @@ private:
 	Player&	operator=(Player const &rhs);
 
 	bool		_ia;
+	vec2		_calculusMove;
 };
 
 #endif
