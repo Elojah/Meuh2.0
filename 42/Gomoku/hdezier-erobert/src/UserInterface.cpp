@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2015/05/28 15:33:57 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/28 15:49:39 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -47,14 +47,27 @@ void						UserInterface::init(int size)
 	_stone[HELP].setFillColor(sf::Color::Color(5, 250, 5, 150));
 	_stone[HELP].setOutlineColor(sf::Color::Color(5, 250, 5, 100));
 }
+#include <iostream>
 void						UserInterface::render(Board const &b,
 												  Player const &p1,
 												  Player const &p2)
 {
+	int						i(-1);
+	int						j(-1);
+	Cell::eValue			value;
+
 	_window.draw(_sBoard);
-	drawStone(0, 0, BLACK);
-	drawStone(8, 8, WHITE);
-	drawStone(5, 7, HELP);
+	while (++i < BOARD_SIZE)
+	{
+		while (++j < BOARD_SIZE)
+		{
+			value = b.getCell(i, j).getValue();
+			if (value == Cell::P1)
+				drawStone(i, j, BLACK);
+			else if (value == Cell::P2)
+				drawStone(i, j, WHITE);				
+		}
+	}
 	_window.display();
 }
 UserInterface::sEvent const	&UserInterface::getEvent(void)
