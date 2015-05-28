@@ -11,7 +11,7 @@
 #******************************************************************************#
 
 NAME = gomoku
-FILES = GUIBoard.cpp GameManager.cpp main.cpp
+FILES = GUIBoard.cpp GameManager.cpp main.cpp Player.cpp Cell.cpp
 SRCS = $(addprefix src/, $(FILES))
 OBJS = $(SRCS:src/%.cpp=objs/%.o)
 INCS = $(SRCS:src/%.cpp=include/%.hpp)

@@ -41,7 +41,10 @@ void		GUIBoard::init(int size)
 }
 void		GUIBoard::render(eCell const **board)
 {
+<<<<<<< HEAD
 	_stone.setFillColor(sf::Color::Black);
+=======
+>>>>>>> 82f5b62da3802cdffdbfc432b6413544d02ec05b
 	(void)board;
 	_window.draw(_sBoard);
 	_window.draw(_stone);

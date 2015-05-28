@@ -1,13 +1,15 @@
-#include "Game.hpp"
+#include "GameManager.hpp"
 
-static void	exec(void) {
-	Game	g;
+static void	exec(void)
+{
+	GameManager		g;
 
-	g.launch();
+	g.init();
 	g.loop();
 }
 
-int			main(int ac, char **av) {
+int		main(int ac, char **av)
+{
 	(void)ac;
 	(void)av;
 	exec();

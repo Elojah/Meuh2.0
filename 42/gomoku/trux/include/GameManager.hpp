@@ -14,6 +14,7 @@
 # define GAME_MANAGER_HPP
 
 # include "GUIBoard.hpp"
+# include "Player.hpp"
 
 class GameManager
 {
@@ -34,15 +35,22 @@ public:
 private:
 	GUIBoard			_gB;
 	size_t				_size;
-	bool				_turn;
+	eCell				_turn;
 	bool				_exit;
+<<<<<<< HEAD
 	GUIBoard::eCell		_board[19][19];
+=======
+	eCell				_board[19][19];
+	Player				_p1;
+	Player				_p2;
+>>>>>>> 82f5b62da3802cdffdbfc432b6413544d02ec05b
 
 	GameManager(GameManager const &rhs);
-
 	GameManager			operator=(GameManager const &rhs);
 
 	void				eventHandler(void);
+	bool				isValidMove(Player::sMove &move);
+	void				applyMove(Player::sMove &move);
 };
 
 #endif
