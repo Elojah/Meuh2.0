@@ -16,6 +16,16 @@ Board::Board(void)
 Board::~Board(void)
 {}
 
+Cell		&Board::getCell(int row, int col)
+{
+	return (_cells[row][col]);
+}
+
+Cell const	&Board::getCellConst(int row, int col) const
+{
+	return (_cells[row][col]);
+}
+
 void	Board::display(void)
 {
 	Cell::eValue	v;

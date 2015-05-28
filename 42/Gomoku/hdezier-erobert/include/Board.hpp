@@ -24,13 +24,14 @@ public:
 	~Board(void);
 
 	void		display(void);
+	Cell		&getCell(int row, int col);
+	Cell const	&getCellConst(int row, int col) const;
 protected:
 private:
-	Cell		_cells[BOARD_SIZE][BOARD_SIZE];
-
 	Board(Board const &src);
-
 	Board		&operator=(Board const &rhs);
+
+	Cell		_cells[BOARD_SIZE][BOARD_SIZE];
 };
 
 #endif
