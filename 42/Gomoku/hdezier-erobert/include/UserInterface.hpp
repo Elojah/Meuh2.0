@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:07:12 by erobert           #+#    #+#             //
-//   Updated: 2015/05/28 14:04:04 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/28 15:46:30 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -17,9 +17,8 @@
 # define WIDTH 1000
 
 # include "SFML/Graphics.hpp"
-
-class Board;
-class Player;
+# include "Board.hpp"
+# include "Player.hpp"
 
 class UserInterface
 {

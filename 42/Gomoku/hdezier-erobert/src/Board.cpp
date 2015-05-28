@@ -21,7 +21,7 @@ Cell		&Board::getCell(int row, int col)
 	return (_cells[row][col]);
 }
 
-Cell const	&Board::getCellConst(int row, int col) const
+Cell const	&Board::getCell(int row, int col) const
 {
 	return (_cells[row][col]);
 }

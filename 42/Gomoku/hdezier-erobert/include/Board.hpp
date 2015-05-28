@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:07:33 by hdezier           #+#    #+#             //
-//   Updated: 2015/05/28 12:08:30 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/28 15:47:49 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -25,7 +25,7 @@ public:
 
 	void		display(void);
 	Cell		&getCell(int row, int col);
-	Cell const	&getCellConst(int row, int col) const;
+	Cell const	&getCell(int row, int col) const;
 protected:
 private:
 	Board(Board const &src);
