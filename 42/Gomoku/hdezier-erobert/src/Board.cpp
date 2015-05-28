@@ -26,7 +26,7 @@ Cell const	&Board::getCell(int row, int col) const
 	return (_cells[row][col]);
 }
 
-void	Board::display(void)
+void	Board::display(void) const
 {
 	Cell::eValue	v;
 

@@ -53,19 +53,20 @@ void						UserInterface::render(Board const &b,
 												  Player const &p2)
 {
 	int						i(-1);
-	int						j(-1);
+	int						j;
 	Cell::eValue			value;
 
 	_window.draw(_sBoard);
 	while (++i < BOARD_SIZE)
 	{
+		j = -1;
 		while (++j < BOARD_SIZE)
 		{
 			value = b.getCell(i, j).getValue();
 			if (value == Cell::P1)
 				drawStone(i, j, BLACK);
 			else if (value == Cell::P2)
-				drawStone(i, j, WHITE);				
+				drawStone(i, j, WHITE);
 		}
 	}
 	_window.display();

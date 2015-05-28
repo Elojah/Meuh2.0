@@ -23,7 +23,7 @@ public:
 	Board(void);
 	~Board(void);
 
-	void		display(void);
+	void		display(void) const;
 	Cell		&getCell(int row, int col);
 	Cell const	&getCell(int row, int col) const;
 protected:
