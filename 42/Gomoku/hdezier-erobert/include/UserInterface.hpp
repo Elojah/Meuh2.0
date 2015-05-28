@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:07:12 by erobert           #+#    #+#             //
-//   Updated: 2015/05/28 16:12:52 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/28 16:36:12 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -56,11 +56,11 @@ private:
 
 	size_t				_size;
 	sf::RenderWindow	_window;
-	sf::Event			_event;
 	sf::Texture			_tBoard;
 	sf::Sprite			_sBoard;
 	sf::CircleShape     _stone[E_STONE];
 	sf::Color			_black;
+	sEvent				_event;
 
 	UserInterface(UserInterface const &src);
 
