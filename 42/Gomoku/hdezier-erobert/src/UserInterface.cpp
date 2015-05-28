@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2015/05/28 15:49:39 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/28 16:23:34 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -47,7 +47,6 @@ void						UserInterface::init(int size)
 	_stone[HELP].setFillColor(sf::Color::Color(5, 250, 5, 150));
 	_stone[HELP].setOutlineColor(sf::Color::Color(5, 250, 5, 100));
 }
-#include <iostream>
 void						UserInterface::render(Board const &b,
 												  Player const &p1,
 												  Player const &p2)
@@ -59,6 +58,7 @@ void						UserInterface::render(Board const &b,
 	_window.draw(_sBoard);
 	while (++i < BOARD_SIZE)
 	{
+		j = -1;
 		while (++j < BOARD_SIZE)
 		{
 			value = b.getCell(i, j).getValue();
