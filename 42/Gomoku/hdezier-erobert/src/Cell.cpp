@@ -51,16 +51,17 @@ void	Cell::init(Cell **board, int const x, int const y)
 char		Cell::checkCapture(void) const
 {
 	char		result(0);
-	Cell const	*nextFriend;
+	// Cell const	*nextFriend;
 
 	for (int i = 0; i < 8; ++i)
 	{
-		if (_adjacent[i]
+		if (_adjacent[i] != NULL
 			&& _adjacent[i]->countValueAligned(OPPONENT(_value),
 				static_cast<Cell::eAdjacent>(i)) == 2
-			&& (nextFriend = getNCellDirection(3, static_cast<Cell::eAdjacent>(i)))
-			&& nextFriend->getValue() == _value)
-			result = result & (1 << i);
+			// && (nextFriend = getNCellDirection(3, static_cast<Cell::eAdjacent>(i))) != NULL
+			// && nextFriend->getValue() == _value)
+			)
+			result = result | (1 << i);
 	}
 	return (result);
 }
@@ -69,19 +70,20 @@ Cell const	*Cell::getNCellDirection(int n, Cell::eAdjacent const &dir) const
 {
 	if (!n)
 		return (this);
-	else if (!_adjacent[dir])
+	else if (_adjacent[dir] == NULL)
 		return (NULL);
 	else
 		return (_adjacent[dir]->getNCellDirection(n - 1, dir));
 }
 
+#include <iostream>
 int		Cell::countValueAligned(eValue const &value, Cell::eAdjacent const &dir)
 {
 	if (_value == value)
 	{
-		if (_adjacent[dir])
-			return (1 + _adjacent[dir]->countValueAligned(value, dir));
-		else
+		// if (_adjacent[dir] != NULL)
+		// 	return (1 + _adjacent[dir]->countValueAligned(value, dir));
+		// else
 			return (1);
 	}
 	else
