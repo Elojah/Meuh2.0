@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2015/05/28 16:23:34 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/28 16:51:29 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -70,21 +70,24 @@ void						UserInterface::render(Board const &b,
 	}
 	_window.display();
 }
+
 UserInterface::sEvent const	&UserInterface::getEvent(void)
 {
-	static sEvent			event;
+	sf::Event				event;
 
-	event.e = E_EVENT;
-	_window.waitEvent(_event);
-	if (_event.type == sf::Event::Closed || _event.key.code == 'q')
-		event.e = EXIT;
-	if (_event.type == sf::Event::MouseButtonPressed)
+	_event.e = E_EVENT;
+	_window.waitEvent(event);
+	if (event.type == sf::Event::Closed)
+		_event.e = EXIT;
+	else if (event.key.code == sf::Keyboard::Escape)
+		_event.e = EXIT;
+	else if (event.type == sf::Event::MouseButtonPressed)
 	{
-		event.e = MOUSE;
-		event.x = sf::Mouse::getPosition(_window).x / 52;
-		event.y = sf::Mouse::getPosition(_window).y / 52;
+		_event.e = MOUSE;
+		_event.x = sf::Mouse::getPosition(_window).x / 52;
+		_event.y = sf::Mouse::getPosition(_window).y / 52;
 	}
-	return (event);
+	return (_event);
 }
 
 void						UserInterface::drawStone(int x, int y,
