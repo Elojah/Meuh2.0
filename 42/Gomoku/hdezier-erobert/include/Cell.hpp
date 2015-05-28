@@ -13,6 +13,8 @@
 #ifndef CELL_HPP
 # define CELL_HPP
 
+# define OPPONENT(n) (((n) == Cell::P1 ? Cell::P2 : Cell::P1))
+
 class Cell
 {
 public:
@@ -23,16 +25,6 @@ public:
 		P2
 	};
 
-	Cell(void);
-	~Cell(void);
-
-	const eValue	&getValue(void) const;
-	void			setValue(Cell::eValue const &e);
-
-	void			init(Cell const **board, int const x, int const y);
-	int				makeCapture(void) const;
-protected:
-private:
 	enum eAdjacent
 	{
 		UP = 0,
@@ -46,13 +38,28 @@ private:
 		E_ADJACENT
 	};
 
-	eValue		_value;
-	Cell const	*_adjacent[8];
+	Cell(void);
+	~Cell(void);
+
+	const eValue	&getValue(void) const;
+	void			setValue(Cell::eValue const &e);
+	void			setAdjacentsValue(Cell::eValue const &e, int n,
+										Cell::eAdjacent const &dir);
+
+	void			init(Cell **board, int const x, int const y);
+	char			checkCapture(void) const;
+protected:
+private:
+	eValue				_value;
+	Cell				*_adjacent[8];
+	static const int	_xIndex[8];
+	static const int	_yIndex[8];
+
+	int			countValueAligned(eValue const &value, Cell::eAdjacent const &dir);
+	Cell const	*getNCellDirection(int n, Cell::eAdjacent const &dir) const;
 
 	Cell(Cell const &src);
-
 	Cell			&operator=(Cell const &rhs);
-
 };
 
 #endif

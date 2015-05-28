@@ -7,6 +7,23 @@ Rules::Rules(void)
 Rules::~Rules(void)
 {}
 
+#include <iostream>
+void		Rules::captureStone(Cell &cell)
+{
+	char	captures;
+
+	captures = cell.checkCapture();
+	if (captures == 0)
+		return ;
+	std::cout << "Capture:\t" << captures << std::endl;
+	for (int i = 0; i < 8; ++i)
+	{
+		if (captures & (1 << i))
+			cell.setAdjacentsValue(Cell::EMPTY, 2,
+				static_cast<Cell::eAdjacent>(i));
+	}
+}
+
 bool		Rules::makeMove(Board &b,
 	Player::vec2 const &move, Cell::eValue const &player)
 {
@@ -16,6 +33,7 @@ bool		Rules::makeMove(Board &b,
 		return (false);
 	else
 	{
+		captureStone(c);
 		c.setValue(player);
 		return (true);
 	}

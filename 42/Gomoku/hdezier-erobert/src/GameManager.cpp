@@ -34,7 +34,7 @@ void				GameManager::loop(void)
 			move = _p2.play(_b, move);
 		if (move.x > -1 && move.y > -1
 			&& Rules::makeMove(_b, move, _turn))
-			_turn = _turn == Cell::P1 ? Cell::P2 : Cell::P1;
+			_turn = OPPONENT(_turn);
 		_ui.render(_b, _p1, _p2);
 	}
 }

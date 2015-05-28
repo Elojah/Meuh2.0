@@ -26,6 +26,7 @@ public:
 
 	static bool		makeMove(Board &b, Player::vec2 const &move,
 							 Cell::eValue const &player);
+	static void		captureStone(Cell &cell);
 private:
 	Rules(Rules const &src);
 

@@ -3,9 +3,9 @@
 
 Board::Board(void)
 {
-	Cell const	**castCells;
+	Cell	**castCells;
 
-	castCells = reinterpret_cast<Cell const **>(_cells);
+	castCells = reinterpret_cast<Cell **>(_cells);
 	for (unsigned int i = 0; i < BOARD_SIZE; ++i)
 	{
 		for (unsigned int j = 0; j < BOARD_SIZE; ++j)
