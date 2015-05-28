@@ -14,7 +14,7 @@
 # define RULES_HPP
 
 # include "Player.hpp"
-# include "GameManager.hpp"
+# include "Cell.hpp"
 
 class Board;
 
@@ -25,7 +25,7 @@ public:
 	~Rules(void);
 
 	static bool		makeMove(Board &b, Player::vec2 const &move,
-							 GameManager::eTurn const &player);
+							 Cell::eValue const &player);
 private:
 	Rules(Rules const &src);
 

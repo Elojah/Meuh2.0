@@ -31,6 +31,7 @@ private:
 	Board(Board const &src);
 	Board		&operator=(Board const &rhs);
 
+	/*EDIT in one array [BOARD_SIZE * BOARD_SIZE] ?*/
 	Cell		_cells[BOARD_SIZE][BOARD_SIZE];
 };
 

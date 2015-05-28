@@ -18,7 +18,7 @@ class Cell
 public:
 	enum eValue
 	{
-		EMPTY,
+		EMPTY = 0,
 		P1,
 		P2
 	};
@@ -27,8 +27,10 @@ public:
 	~Cell(void);
 
 	const eValue	&getValue(void) const;
+	void			setValue(Cell::eValue const &e);
+
 	void			init(Cell const **board, int const x, int const y);
-	bool			checkCapture(void) const;
+	int				makeCapture(void) const;
 protected:
 private:
 	enum eAdjacent
