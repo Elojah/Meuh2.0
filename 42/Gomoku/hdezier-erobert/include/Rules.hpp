@@ -24,7 +24,7 @@ public:
 	Rules(void);
 	~Rules(void);
 
-	static bool		makeMove(Board const &b, Player::vec2 const &move, 
+	static bool		makeMove(Board &b, Player::vec2 const &move,
 							 GameManager::eTurn const &player);
 private:
 	Rules(Rules const &src);

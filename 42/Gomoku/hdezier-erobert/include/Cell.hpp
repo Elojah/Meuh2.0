@@ -26,8 +26,9 @@ public:
 	Cell(void);
 	~Cell(void);
 
-	const eValue	&getValue(void);
+	const eValue	&getValue(void) const;
 	void			init(Cell const **board, int const x, int const y);
+	bool			checkCapture(void) const;
 protected:
 private:
 	enum eAdjacent

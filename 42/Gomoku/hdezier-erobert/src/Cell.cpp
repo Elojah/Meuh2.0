@@ -8,7 +8,7 @@ Cell::Cell(void)
 Cell::~Cell(void)
 {}
 
-const Cell::eValue	&Cell::getValue(void)
+const Cell::eValue	&Cell::getValue(void) const
 {
 	return (_value);
 }
@@ -31,4 +31,13 @@ void	Cell::init(Cell const **board, int const x, int const y)
 		else
 			_adjacent[i] = NULL;
 	}
+}
+
+bool	Cell::checkCapture(void) const
+{
+	for (int i = 0; i < 8; ++i)
+	{
+		;
+	}
+	return (false);
 }
