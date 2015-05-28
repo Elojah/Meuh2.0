@@ -57,13 +57,14 @@ INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 
 #RULES
-all : dirbin $(DSFML) $(TARGET)
+all : dirlib dirbin $(DSFML) $(TARGET)
 
 clean :
 	$(RM) $(BUILD_DIR)
 
 fclean :
 	$(RM) $(BUILD_DIR) $(TARGET)
+	$(RM) $(LIB_DIR)
 	$(RM) $(DSFML)
 
 re : fclean all
@@ -79,9 +80,12 @@ $(DSFML):
 dirbin:
 	mkdir -p bin
 
+dirlib:
+	mkdir -p lib
+
 .PHONY: all clean fclean re
 
-.SILENT: dirbuild dirbin
+.SILENT: dirlib dirbuild dirbin
 
 #Build rule
 $(TARGET) : $(OBJ)

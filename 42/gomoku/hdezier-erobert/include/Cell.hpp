@@ -1,13 +1,21 @@
-#ifndef CELL_H
-# define CELL_H
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   Cell.hpp                                           :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/05/28 12:08:43 by hdezier           #+#    #+#             //
+//   Updated: 2015/05/28 12:09:32 by erobert          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
+#ifndef CELL_HPP
+# define CELL_HPP
 
 class Cell
 {
 public:
-	Cell(void);
-	~Cell(void);
-
 	enum eValue
 	{
 		EMPTY,
@@ -15,13 +23,13 @@ public:
 		P2
 	};
 
+	Cell(void);
+	~Cell(void);
+
 	const eValue	&getValue(void);
 	void			init(Cell const **board, int const x, int const y);
 protected:
 private:
-	Cell(Cell const &src);
-	Cell&	operator=(Cell const &rhs);
-
 	enum eAdjacent
 	{
 		UP = 0,
@@ -37,6 +45,11 @@ private:
 
 	eValue		_value;
 	Cell const	*_adjacent[8];
+
+	Cell(Cell const &src);
+
+	Cell			&operator=(Cell const &rhs);
+
 };
 
 #endif

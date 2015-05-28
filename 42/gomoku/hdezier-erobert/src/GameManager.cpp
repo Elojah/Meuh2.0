@@ -18,6 +18,7 @@ void				GameManager::loop(void)
 {
 	Player::vec2	move;
 
+	_ui.init(19);
 	_ui.render(_b, _p1, _p2);
 	_b.display();
 	while (!_exit)

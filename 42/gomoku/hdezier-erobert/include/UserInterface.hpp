@@ -1,8 +1,20 @@
-#ifndef USER_INTERFACE_H
-# define USER_INTERFACE_H
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   UserInterface.hpp                                  :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/05/28 12:07:12 by erobert           #+#    #+#             //
+//   Updated: 2015/05/28 13:04:17 by erobert          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
-# define HEIGHT 1024
-# define WIDTH 1024
+#ifndef USER_INTERFACE_HPP
+# define USER_INTERFACE_HPP
+
+# define HEIGHT 1000
+# define WIDTH 1000
 
 # include "SFML/Graphics.hpp"
 
@@ -12,12 +24,9 @@ class Player;
 class UserInterface
 {
 public:
-	UserInterface(void);
-	~UserInterface(void);
-
 	enum eEvent
 	{
-		EXIT,
+		EXIT = 0,
 		MOUSE,
 		KEY,
 		E_EVENT
@@ -26,25 +35,39 @@ public:
 	struct sEvent
 	{
 		eEvent			e;
-		char			c;
 		int				x;
 		int				y;
 	};
 
-	void			init(int size);
-	void			render(Board const &b, Player const &p1, Player const &p2);
-	const sEvent	&getEvent(void);
+	UserInterface(void);
+	~UserInterface(void);
 
-protected:
+	void				init(int size);
+	void				render(Board const &b, Player const &p1,
+							   Player const &p2);
+	sEvent const		&getEvent(void);
 private:
-	UserInterface(UserInterface const &src);
-	UserInterface&	operator=(UserInterface const &rhs);
+	enum eStone
+	{
+		BLACK = 0,
+		WHITE,
+		HELP,
+		E_STONE
+	};
 
+	size_t				_size;
 	sf::RenderWindow	_window;
 	sf::Event			_event;
 	sf::Texture			_tBoard;
 	sf::Sprite			_sBoard;
-	unsigned int		_size;
+	sf::CircleShape     _stone[E_STONE];
+	sf::Color			_black;
+
+	UserInterface(UserInterface const &src);
+
+	UserInterface		&operator=(UserInterface const &rhs);
+
+	void				drawStone(int x, int y, eStone stone);
 };
 
 #endif
