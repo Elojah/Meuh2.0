@@ -20,12 +20,6 @@
 class GameManager
 {
 public:
-	enum eTurn
-	{
-		P1,
-		P2
-	};
-
 	GameManager(void);
 	~GameManager(void);
 
@@ -38,7 +32,7 @@ private:
 	Player			_p1;
 	Player			_p2;
 	UserInterface	_ui;
-	eTurn			_turn;
+	Cell::eValue	_turn;
 	bool			_exit;
 
 	GameManager(GameManager const &src);

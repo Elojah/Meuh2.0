@@ -13,6 +13,11 @@ const Cell::eValue	&Cell::getValue(void) const
 	return (_value);
 }
 
+void	Cell::setValue(Cell::eValue const &e)
+{
+	_value = e;
+}
+
 void	Cell::init(Cell const **board, int const x, int const y)
 {
 	static const int	xIndex[] = {0, 1, 1, 1, 0, -1, -1, -1};
@@ -33,11 +38,13 @@ void	Cell::init(Cell const **board, int const x, int const y)
 	}
 }
 
-bool	Cell::checkCapture(void) const
+int		Cell::makeCapture(void) const
 {
-	for (int i = 0; i < 8; ++i)
-	{
-		;
-	}
-	return (false);
+	// int		result(0);
+
+	// for (int i = 0; i < 8; ++i)
+	// {
+	// 	;
+	// }
+	return (0);
 }

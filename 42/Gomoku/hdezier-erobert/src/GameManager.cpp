@@ -2,7 +2,7 @@
 #include "Rules.hpp"
 
 GameManager::GameManager(void) :
-	_turn(P1),
+	_turn(Cell::P1),
 	_exit(false)
 {}
 
@@ -20,16 +20,15 @@ void				GameManager::loop(void)
 
 	_ui.init(19);
 	_ui.render(_b, _p1, _p2);
-	_b.display();
 	while (!_exit)
 	{
 		move = eventHandler();
-		if (_turn == P1)
+		if (_turn == Cell::P1)
 			move = _p1.play(_b, move);
-		else if (_turn == P2)
+		else if (_turn == Cell::P2)
 			move = _p2.play(_b, move);
 		if (Rules::makeMove(_b, move, _turn))
-			_turn = _turn == P1 ? P2 : P1;
+			_turn = _turn == Cell::P1 ? Cell::P2 : Cell::P1;
 		_ui.render(_b, _p1, _p2);
 	}
 }

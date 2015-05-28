@@ -25,12 +25,13 @@ public:
 
 	void		display(void);
 	Cell		&getCell(int row, int col);
-	Cell const	&getCellConst(int row, int col) const;
+	Cell const	&getCell(int row, int col) const;
 protected:
 private:
 	Board(Board const &src);
 	Board		&operator=(Board const &rhs);
 
+	/*EDIT in one array [BOARD_SIZE * BOARD_SIZE] ?*/
 	Cell		_cells[BOARD_SIZE][BOARD_SIZE];
 };
 
