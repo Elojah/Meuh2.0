@@ -52,7 +52,7 @@ void						UserInterface::render(Board const &b,
 												  Player const &p2)
 {
 	int						i(-1);
-	int						j(-1);
+	int						j;
 	Cell::eValue			value;
 
 	_window.draw(_sBoard);
@@ -65,7 +65,7 @@ void						UserInterface::render(Board const &b,
 			if (value == Cell::P1)
 				drawStone(i, j, BLACK);
 			else if (value == Cell::P2)
-				drawStone(i, j, WHITE);				
+				drawStone(i, j, WHITE);
 		}
 	}
 	_window.display();

@@ -27,6 +27,7 @@ public:
 	Player(void);
 	~Player(void);
 
+	void			setIA(bool const &ia);
 	const vec2		&play(Board const &b, vec2 const &event);
 	const vec2		&calculus(Board const &b);
 private:
