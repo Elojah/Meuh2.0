@@ -14,6 +14,7 @@
 # define CELL_HPP
 
 # define OPPONENT(n) (((n) == Cell::P1 ? Cell::P2 : Cell::P1))
+# define BOARD_SIZE 19
 
 class Cell
 {
@@ -46,8 +47,9 @@ public:
 	void			setAdjacentsValue(Cell::eValue const &e, int n,
 										Cell::eAdjacent const &dir);
 
-	void			init(Cell **board, int const x, int const y);
-	char			checkCapture(void) const;
+	void			init(Cell board[BOARD_SIZE][BOARD_SIZE], int const x, int const y);
+	int				checkCapture(void) const;
+	int				countValueAligned(eValue const &value, Cell::eAdjacent const &dir);
 protected:
 private:
 	eValue				_value;
@@ -55,7 +57,6 @@ private:
 	static const int	_xIndex[8];
 	static const int	_yIndex[8];
 
-	int			countValueAligned(eValue const &value, Cell::eAdjacent const &dir);
 	Cell const	*getNCellDirection(int n, Cell::eAdjacent const &dir) const;
 
 	Cell(Cell const &src);

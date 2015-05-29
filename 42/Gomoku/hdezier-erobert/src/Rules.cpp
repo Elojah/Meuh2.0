@@ -7,35 +7,45 @@ Rules::Rules(void)
 Rules::~Rules(void)
 {}
 
-#include <iostream>
+bool		Rules::win(Cell &cell)
+{
+	const Cell::eValue	&value = cell.getValue();
+
+	for (int i = 0; i < 4; ++i)
+	{
+		if (cell.countValueAligned(value, static_cast<Cell::eAdjacent>(i))
+			+ cell.countValueAligned(value, static_cast<Cell::eAdjacent>(i + 4)) > 5)
+			return (true);
+	}
+	return (false);
+}
+
 void		Rules::captureStone(Cell &cell)
 {
-	char	captures;
+	int		captures;
 
 	captures = cell.checkCapture();
-	std::cout << "Capture:\t" << captures << std::endl;
 	if (captures == 0)
 		return ;
 	for (int i = 0; i < 8; ++i)
 	{
-		if (captures & (1 << i))
-			;
-			// cell.setAdjacentsValue(Cell::EMPTY, 2,
-			// 	static_cast<Cell::eAdjacent>(i));
+		if ((captures >> i) & 1)
+			cell.setAdjacentsValue(Cell::EMPTY, 2,
+				static_cast<Cell::eAdjacent>(i));
 	}
 }
 
-bool		Rules::makeMove(Board &b,
+Rules::eValidity			Rules::makeMove(Board &b,
 	Player::vec2 const &move, Cell::eValue const &player)
 {
 	Cell	&c = b.getCell(move.x, move.y);
 
 	if (c.getValue() != Cell::EMPTY)
-		return (false);
+		return (INVALID);
 	else
 	{
-		captureStone(c);
 		c.setValue(player);
-		return (true);
+		Rules::captureStone(c);
+		return (Rules::win(c) ? WIN : OK);
 	}
 }

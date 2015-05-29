@@ -3,25 +3,22 @@
 
 Board::Board(void)
 {
-	Cell	**castCells;
-
-	castCells = reinterpret_cast<Cell **>(_cells);
 	for (unsigned int i = 0; i < BOARD_SIZE; ++i)
 	{
 		for (unsigned int j = 0; j < BOARD_SIZE; ++j)
-			_cells[i][j].init(castCells, i, j);
+			_cells[i][j].init(_cells, i, j);
 	}
 }
 
 Board::~Board(void)
 {}
 
-Cell		&Board::getCell(int row, int col)
+const Cell::eValue	&Board::getValue(int row, int col) const
 {
-	return (_cells[row][col]);
+	return (_cells[row][col].getValue());
 }
 
-Cell const	&Board::getCell(int row, int col) const
+Cell		&Board::getCell(int row, int col)
 {
 	return (_cells[row][col]);
 }

@@ -2,6 +2,7 @@
 #include "Rules.hpp"
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
 
 GameManager::GameManager(void) :
 	_turn(Cell::P1),
@@ -21,6 +22,7 @@ void				GameManager::init(void)
 void				GameManager::loop(void)
 {
 	Player::vec2	move;
+	int				validMove;
 
 	_ui.init(19);
 	_ui.render(_b, _p1, _p2);
@@ -32,9 +34,14 @@ void				GameManager::loop(void)
 			move = _p1.play(_b, move);
 		else if (_turn == Cell::P2)
 			move = _p2.play(_b, move);
-		if (move.x > -1 && move.y > -1
-			&& Rules::makeMove(_b, move, _turn))
-			_turn = OPPONENT(_turn);
+		if (move.x > -1 && move.y > -1)
+		{
+			validMove = Rules::makeMove(_b, move, _turn);
+			if (validMove == Rules::OK)
+				_turn = OPPONENT(_turn);
+			else if (validMove == Rules::WIN)
+				std::cout << "Player:\t" << _turn << " wins !" << std::endl;
+		}
 		_ui.render(_b, _p1, _p2);
 	}
 }
