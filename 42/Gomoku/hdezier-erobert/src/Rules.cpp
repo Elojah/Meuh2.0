@@ -35,17 +35,43 @@ void		Rules::captureStone(Cell &cell)
 	}
 }
 
+bool	Rules::insertDoubleFreethrees(Cell &cell)
+{
+	int	count(0);
+
+	for (int i = 0; i < 4; ++i)
+	{
+		if (cell.countValueAlignedPermissive(cell.getValue()
+			, static_cast<Cell::eAdjacent>(i), Cell::EMPTY, 1)
+			+ cell.countValueAlignedPermissive(cell.getValue()
+			, static_cast<Cell::eAdjacent>(i + 4), Cell::EMPTY, 1) > 3)
+			++count;
+	}
+	return (count > 1);
+}
+
 Rules::eValidity			Rules::makeMove(Board &b,
 	Player::vec2 const &move, Cell::eValue const &player)
 {
-	Cell	&c = b.getCell(move.x, move.y);
+	Rules::eValidity	result;
+	Cell				&c = b.getCell(move.x, move.y);
 
 	if (c.getValue() != Cell::EMPTY)
 		return (INVALID);
 	else
 	{
 		c.setValue(player);
-		Rules::captureStone(c);
-		return (Rules::win(c) ? WIN : OK);
+		if (Rules::insertDoubleFreethrees(c))
+		{
+			c.setValue(Cell::EMPTY);
+			result = INVALID;
+		}
+		else if (Rules::win(c))
+			result = WIN;
+		else
+			result = OK;
+		if (result != INVALID)
+			Rules::captureStone(c);
+		return (result);
 	}
 }

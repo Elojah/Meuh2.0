@@ -49,7 +49,9 @@ public:
 
 	void			init(Cell board[BOARD_SIZE][BOARD_SIZE], int const x, int const y);
 	int				checkCapture(void) const;
-	int				countValueAligned(eValue const &value, Cell::eAdjacent const &dir);
+	int				countValueAligned(eValue const &value, Cell::eAdjacent const &dir) const;
+	int				countValueAlignedPermissive(eValue const &value, Cell::eAdjacent const &dir ,
+												eValue const &permissiveValue, int nPermissive) const;
 protected:
 private:
 	eValue				_value;

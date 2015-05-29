@@ -39,6 +39,7 @@ private:
 	Rules			&operator=(Rules const &rhs);
 
 	static bool		win(Cell &cell);
+	static bool		insertDoubleFreethrees(Cell &cell);
 };
 
 #endif
