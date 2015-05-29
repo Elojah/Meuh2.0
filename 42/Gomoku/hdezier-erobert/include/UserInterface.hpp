@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:07:12 by erobert           #+#    #+#             //
-//   Updated: 2015/05/28 16:36:12 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/29 18:20:51 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -54,7 +54,7 @@ private:
 		E_STONE
 	};
 
-	size_t				_size;
+	float				_size;
 	sf::RenderWindow	_window;
 	sf::Texture			_tBoard;
 	sf::Sprite			_sBoard;
@@ -66,6 +66,8 @@ private:
 
 	UserInterface		&operator=(UserInterface const &rhs);
 
+	void				initWindow(void);
+	void				initStone(void);
 	void				drawStone(int x, int y, eStone stone);
 };
 
