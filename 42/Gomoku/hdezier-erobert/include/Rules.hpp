@@ -21,16 +21,25 @@ class Board;
 class Rules
 {
 public:
+
+	enum eValidity
+	{
+		INVALID = 0,
+		OK,
+		WIN
+	};
+
+	static eValidity	makeMove(Board &b, Player::vec2 const &move,
+							 Cell::eValue const &player);
+	static void			captureStone(Cell &cell);
+private:
 	Rules(void);
 	~Rules(void);
-
-	static bool		makeMove(Board &b, Player::vec2 const &move,
-							 Cell::eValue const &player);
-	static void		captureStone(Cell &cell);
-private:
 	Rules(Rules const &src);
-
 	Rules			&operator=(Rules const &rhs);
+
+	static bool		win(Cell &cell);
+	static bool		insertDoubleFreethrees(Cell &cell);
 };
 
 #endif

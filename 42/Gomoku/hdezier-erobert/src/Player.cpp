@@ -21,11 +21,17 @@ void					Player::setAI(bool const &ai)
 }
 Player::vec2 const		&Player::play(Board const &b, Player::vec2 const &event)
 {
-	_calculusMove = calculus(b);
 	if (_ai)
+	{
+		_calculusMove = calculus(b);
 		return (_calculusMove);
-	else
+	}
+	else if (event.x > -1 && event.y > -1)
+	{
+		_calculusMove = calculus(b);
 		return (event);
+	}
+	return (event);
 }
 
 Player::vec2 const		&Player::calculus(Board const &b)

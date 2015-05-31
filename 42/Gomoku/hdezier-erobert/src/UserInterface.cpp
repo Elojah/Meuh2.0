@@ -130,7 +130,7 @@ void						UserInterface::renderBoard(Board const &b)
 		j = -1;
 		while (++j < _size)
 		{
-			value = b.getCell(i, j).getValue();
+			value = b.getValue(i, j);
 			if (value == Cell::P1)
 				drawStone(i, j, BLACK);
 			else if (value == Cell::P2)
