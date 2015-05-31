@@ -60,6 +60,10 @@ const Player::vec2	&GameManager::eventHandler(void)
 		result.x = event.x;
 		result.y = event.y;
 	}
+	else if (event.e == UserInterface::P1_AI)
+		_p1.setAI(!_p1.ai());
+	else if (event.e == UserInterface::P2_AI)
+		_p2.setAI(!_p2.ai());
 	return (result);
 }
 
