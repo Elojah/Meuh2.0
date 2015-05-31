@@ -53,6 +53,7 @@ public:
 	Cell			*operator[](Cell::eAdjacent const &e);
 	int				countFreeThrees(eValue const &value, Cell::eAdjacent const &dir,
 									eValue const &permissiveValue, int &nPermissive);
+	Cell const		*getNCellDirection(int n, Cell::eAdjacent const &dir) const;
 
 protected:
 private:
@@ -61,7 +62,6 @@ private:
 	static const int	_xIndex[8];
 	static const int	_yIndex[8];
 
-	Cell const	*getNCellDirection(int n, Cell::eAdjacent const &dir) const;
 
 	Cell(Cell const &src);
 	Cell			&operator=(Cell const &rhs);

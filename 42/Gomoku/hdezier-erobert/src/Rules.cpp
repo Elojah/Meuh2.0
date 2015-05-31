@@ -50,10 +50,13 @@ bool	Rules::insertDoubleFreethrees(Cell &cell)
 		nPermissive = 1;
 		align1 = cell.countFreeThrees(e, static_cast<Cell::eAdjacent>(i),
 			Cell::EMPTY, nPermissive);
+		// std::cout << "nPermissive:\t" << nPermissive << std::endl;
 		align2 = cell.countFreeThrees(e, static_cast<Cell::eAdjacent>(i + 4)
 			, Cell::EMPTY, nPermissive);
 		// std::cout << "Alignments in " << i << ":\t" << align1 << "\t" << align2 << std::endl;
-		if (align1 + align2 > 3)
+		if (align1 + align2 > 3
+			&& cell.getNCellDirection(align1, static_cast<Cell::eAdjacent>(i))->getValue() == Cell::EMPTY
+			&& cell.getNCellDirection(align2, static_cast<Cell::eAdjacent>(i + 4))->getValue() == Cell::EMPTY)
 			++count;
 	}
 	return (count > 1);
