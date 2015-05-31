@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:07:12 by erobert           #+#    #+#             //
-//   Updated: 2015/05/31 15:17:51 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/31 16:15:43 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -52,7 +52,8 @@ private:
 	{
 		BLACK = 0,
 		WHITE,
-		HELP,
+		P1_HELP,
+		P2_HELP,
 		E_STONE
 	};
 
@@ -64,6 +65,7 @@ private:
 	sf::Font			_font;
 	sf::Text			_text;
 	sEvent				_event;
+	bool				_help;
 
 	UserInterface(UserInterface const &src);
 
