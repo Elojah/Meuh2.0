@@ -30,7 +30,7 @@ void	Cell::setAdjacentsValue(Cell::eValue const &e, int n,
 	_adjacent[dir]->setAdjacentsValue(e, n - 1, dir);
 }
 
-void	Cell::init(Cell **board, int const x, int const y)
+void	Cell::init(Cell board[BOARD_SIZE][BOARD_SIZE], int const x, int const y)
 {
 	int					setX;
 	int					setY;
@@ -48,19 +48,18 @@ void	Cell::init(Cell **board, int const x, int const y)
 	}
 }
 
-char		Cell::checkCapture(void) const
+int			Cell::checkCapture(void) const
 {
-	char		result(0);
+	int		result(0);
 	Cell const	*nextFriend;
 
 	for (int i = 0; i < 8; ++i)
 	{
-		if (_adjacent[i]
-			&& _adjacent[i]->countValueAligned(OPPONENT(_value),
-				static_cast<Cell::eAdjacent>(i)) == 2
-			&& (nextFriend = getNCellDirection(3, static_cast<Cell::eAdjacent>(i)))
+		if (_adjacent[i] != NULL
+			&& _adjacent[i]->countAlign(OPPONENT(_value), static_cast<Cell::eAdjacent>(i)) == 2
+			&& (nextFriend = getNCellDirection(3, static_cast<Cell::eAdjacent>(i))) != NULL
 			&& nextFriend->getValue() == _value)
-			result = result & (1 << i);
+			result |= 1 << i;
 	}
 	return (result);
 }
@@ -69,21 +68,59 @@ Cell const	*Cell::getNCellDirection(int n, Cell::eAdjacent const &dir) const
 {
 	if (!n)
 		return (this);
-	else if (!_adjacent[dir])
+	else if (_adjacent[dir] == NULL)
 		return (NULL);
 	else
 		return (_adjacent[dir]->getNCellDirection(n - 1, dir));
 }
 
-int		Cell::countValueAligned(eValue const &value, Cell::eAdjacent const &dir)
+int		Cell::countFreeThrees(eValue const &value, Cell::eAdjacent const &dir,
+								eValue const &permissiveValue, int &nPermissive)
 {
-	if (_value == value)
+	int		nextResult;
+
+	if (value == _value)
 	{
-		if (_adjacent[dir])
-			return (1 + _adjacent[dir]->countValueAligned(value, dir));
+		if (_adjacent[dir] != NULL)
+			return (1 + _adjacent[dir]->countFreeThrees(value, dir,
+									permissiveValue, nPermissive));
 		else
 			return (1);
 	}
+	else if (_value == permissiveValue && nPermissive > 0)
+	{
+		--nPermissive;
+		if (_adjacent[dir] != NULL)
+		{
+			nextResult = _adjacent[dir]->countFreeThrees(value, dir,
+									permissiveValue, nPermissive);
+			if (nextResult > 0)
+				return (nextResult + 1);
+			else
+				return (0);
+		}
+		else
+			return (0);
+	}
+	else if (_value == OPPONENT(value))
+		return (-BOARD_SIZE);
 	else
 		return (0);
+}
+
+int		Cell::countAlign(eValue const &value, Cell::eAdjacent const &dir) const
+{
+	if (_value == value)
+	{
+		if (_adjacent[dir] != NULL)
+			return (1 + _adjacent[dir]->countAlign(value, dir));
+		else
+			return (1);
+	}
+	return (0);
+}
+
+Cell	*Cell::operator[](Cell::eAdjacent const &e)
+{
+	return (_adjacent[e]);
 }

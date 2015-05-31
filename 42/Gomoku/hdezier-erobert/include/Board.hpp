@@ -25,7 +25,7 @@ public:
 
 	void		display(void) const;
 	Cell		&getCell(int row, int col);
-	Cell const	&getCell(int row, int col) const;
+	const Cell::eValue	&getValue(int row, int col) const;
 protected:
 private:
 	Board(Board const &src);
