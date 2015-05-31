@@ -37,7 +37,6 @@ private:
 	vec2			_calculusMove;
 
 	Player(Player const &src);
-
 	Player			&operator=(Player const &rhs);
 
 	vec2 const		&calculus(Board const &b);

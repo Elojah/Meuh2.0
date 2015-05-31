@@ -23,7 +23,8 @@ public:
 	{
 		EMPTY = 0,
 		P1,
-		P2
+		P2,
+		E_VALUE
 	};
 
 	enum eAdjacent
