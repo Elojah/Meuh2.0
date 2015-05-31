@@ -6,13 +6,17 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2015/05/29 19:01:07 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/31 15:24:15 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #include "UserInterface.hpp"
 
-UserInterface::UserInterface(void) {}
+UserInterface::UserInterface(void)
+{
+	_font.loadFromFile("data/open_sans_light.ttf");
+	_text.setFont(_font);
+}
 UserInterface::~UserInterface(void)
 {
 	if (_window.isOpen())
@@ -35,29 +39,20 @@ void						UserInterface::render(Board const &b,
 												  Player const &p1,
 												  Player const &p2)
 {
-	int						i(-1);
-	int						j;
-	Cell::eValue			value;
-
-	_window.draw(_sBoard);
-	while (++i < _size)
-	{
-		j = -1;
-		while (++j < _size)
-		{
-			value = b.getCell(i, j).getValue();
-			if (value == Cell::P1)
-				drawStone(i, j, BLACK);
-			else if (value == Cell::P2)
-				drawStone(i, j, WHITE);
-		}
-	}
+	_window.clear(sf::Color(50, 100, 250));
+	renderBoard(b);
+	renderPlayers(p1, p2);
+	if (!p1.ai())
+		drawStone(p1.calculusMove().x, p1.calculusMove().y, HELP);
+	if (!p2.ai())
+		drawStone(p2.calculusMove().x, p2.calculusMove().y, HELP);
 	_window.display();
 }
 
 UserInterface::sEvent const	&UserInterface::getEvent(void)
 {
 	sf::Event				event;
+	float					position[2];
 
 	_event.e = E_EVENT;
 	_window.waitEvent(event);
@@ -67,11 +62,21 @@ UserInterface::sEvent const	&UserInterface::getEvent(void)
 		_event.e = EXIT;
 	else if (event.type == sf::Event::MouseButtonPressed)
 	{
-		_event.e = MOUSE;
-		_event.x = sf::Mouse::getPosition(_window).x;
-		_event.x /= (10 + 52.05 * 19.) / _size;
-		_event.y = sf::Mouse::getPosition(_window).y;
-		_event.y /= (10 + 52.05 * 19.) / _size;
+		position[0] = sf::Mouse::getPosition(_window).x;
+		position[1] = sf::Mouse::getPosition(_window).y;
+		if (position[1] < HEIGHT)
+		{
+			_event.e = MOUSE;
+			_event.x = position[0] / ((10 + 52.05 * 19.) / _size);
+			_event.y = position[1] / ((10 + 52.05 * 19.) / _size);
+		}
+		else if (position[1] > HEIGHT + 12 && position[1] < HEIGHT + 52)
+		{
+			if (position[0] > 190 && position[0] < 290)
+				_event.e = P1_AI;
+			else if (position[0] < 810 && position[0] > 710)
+				_event.e = P2_AI;
+		}
 	}
 	return (_event);
 }
@@ -81,8 +86,7 @@ void						UserInterface::initWindow(void)
 	float					scale[0];
 
 	if (!_window.isOpen())
-		_window.create(sf::VideoMode(WIDTH, HEIGHT), "Gomoku");
-	_window.clear(sf::Color(212, 177, 106));
+		_window.create(sf::VideoMode(WIDTH, HEIGHT + 64), "Gomoku");
 	_window.setFramerateLimit(60);
 	scale[0] = WIDTH;
 	scale[0] /= _tBoard.getSize().x;
@@ -113,4 +117,56 @@ void						UserInterface::drawStone(int x, int y,
 	_stone[stone].setPosition((10 + 52.05 * x) * 19. / _size,
 							  (10 + 52.05 * y) * 19. / _size);
 	_window.draw(_stone[stone]);
+}
+void						UserInterface::renderBoard(Board const &b)
+{
+	int						i(-1);
+	int						j;
+	Cell::eValue			value;
+
+	_window.draw(_sBoard);
+	while (++i < _size)
+	{
+		j = -1;
+		while (++j < _size)
+		{
+			value = b.getCell(i, j).getValue();
+			if (value == Cell::P1)
+				drawStone(i, j, BLACK);
+			else if (value == Cell::P2)
+				drawStone(i, j, WHITE);
+		}
+	}
+}
+void						UserInterface::renderPlayers(Player const &p1,
+														 Player const &p2)
+{
+	size_t					position;
+
+	_text.setCharacterSize(32);
+	_text.setStyle(sf::Text::Bold);
+	_text.setColor(sf::Color::Black);
+	_text.setPosition(64, HEIGHT + 12);
+	_text.setString("BLACK");
+	_window.draw(_text);
+	_text.setColor(sf::Color::Color(95, 200, 160));
+	_text.setPosition(190, HEIGHT + 12);
+	if (p1.ai())
+		_text.setString("AI ON");
+	else
+		_text.setString("AI OFF");
+	_window.draw(_text);
+	_text.setColor(sf::Color::White);
+	position = WIDTH - 64 - _text.getLocalBounds().width;
+	_text.setPosition(position, HEIGHT + 12);
+	_text.setString("WHITE");
+	_window.draw(_text);
+	_text.setColor(sf::Color::Color(95, 200, 160));
+	if (p2.ai())
+		_text.setString("AI ON");
+	else
+		_text.setString("AI OFF");
+	position -= _text.getLocalBounds().width + 32;
+	_text.setPosition(position, HEIGHT + 12);
+	_window.draw(_text);
 }
