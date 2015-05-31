@@ -15,7 +15,8 @@ void					Player::setIA(bool const &ia)
 
 const Player::vec2		&Player::play(Board const &b, Player::vec2 const &event)
 {
-	_calculusMove = calculus(b);
+	if (event.x > -1 && event.y > -1)
+		_calculusMove = calculus(b);
 	if (_ia)
 		return (_calculusMove);
 	else
