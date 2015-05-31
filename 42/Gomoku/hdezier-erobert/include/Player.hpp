@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:10:55 by hdezier           #+#    #+#             //
-//   Updated: 2015/05/28 12:11:40 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/31 15:21:39 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -27,16 +27,20 @@ public:
 	Player(void);
 	~Player(void);
 
-	void			setIA(bool const &ia);
-	const vec2		&play(Board const &b, vec2 const &event);
-	const vec2		&calculus(Board const &b);
+	bool			ai(void) const;
+	vec2 const		&calculusMove(void) const;
+
+	void			setAI(bool const &ai);
+	vec2 const		&play(Board const &b, vec2 const &event);
 private:
-	bool			_ia;
+	bool			_ai;
 	vec2			_calculusMove;
 
 	Player(Player const &src);
 
 	Player			&operator=(Player const &rhs);
+
+	vec2 const		&calculus(Board const &b);
 };
 
 #endif

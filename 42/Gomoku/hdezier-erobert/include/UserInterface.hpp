@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:07:12 by erobert           #+#    #+#             //
-//   Updated: 2015/05/28 16:36:12 by erobert          ###   ########.fr       //
+//   Updated: 2015/05/31 15:17:51 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -28,6 +28,8 @@ public:
 		EXIT = 0,
 		MOUSE,
 		KEY,
+		P1_AI,
+		P2_AI,
 		E_EVENT
 	};
 
@@ -54,18 +56,23 @@ private:
 		E_STONE
 	};
 
-	size_t				_size;
+	float				_size;
 	sf::RenderWindow	_window;
 	sf::Texture			_tBoard;
 	sf::Sprite			_sBoard;
 	sf::CircleShape     _stone[E_STONE];
-	sf::Color			_black;
+	sf::Font			_font;
+	sf::Text			_text;
 	sEvent				_event;
 
 	UserInterface(UserInterface const &src);
 
 	UserInterface		&operator=(UserInterface const &rhs);
 
+	void				initWindow(void);
+	void				initStone(void);
+	void				renderBoard(Board const &b);
+	void				renderPlayers(Player const &p1, Player const &p2);
 	void				drawStone(int x, int y, eStone stone);
 };
 

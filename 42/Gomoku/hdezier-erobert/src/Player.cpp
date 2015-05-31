@@ -1,29 +1,40 @@
 #include "Player.hpp"
 #include <cstdlib>
 
-Player::Player(void) :
-	_ia(false)
+Player::Player(void):
+	_ai(false)
 {}
+Player::~Player(void) {}
 
-Player::~Player(void)
-{}
-
-void					Player::setIA(bool const &ia)
+bool					Player::ai(void) const
 {
-	_ia = ia;
+	return (_ai);
+}
+Player::vec2 const		&Player::calculusMove(void) const
+{
+	return (_calculusMove);
 }
 
-const Player::vec2		&Player::play(Board const &b, Player::vec2 const &event)
+void					Player::setAI(bool const &ai)
 {
-	if (event.x > -1 && event.y > -1)
+	_ai = ai;
+}
+Player::vec2 const		&Player::play(Board const &b, Player::vec2 const &event)
+{
+	if (_ai)
+	{
 		_calculusMove = calculus(b);
-	if (_ia)
 		return (_calculusMove);
-	else
+	}
+	else if (event.x > -1 && event.y > -1)
+	{
+		_calculusMove = calculus(b);
 		return (event);
+	}
+	return (event);
 }
 
-const Player::vec2		&Player::calculus(Board const &b)
+Player::vec2 const		&Player::calculus(Board const &b)
 {
 	static vec2			result;
 

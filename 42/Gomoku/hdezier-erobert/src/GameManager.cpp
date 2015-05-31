@@ -26,7 +26,7 @@ void				GameManager::loop(void)
 
 	_ui.init(19);
 	_ui.render(_b, _p1, _p2);
-	_p2.setIA(true);
+	_p2.setAI(true);
 	while (!_exit)
 	{
 		move = eventHandler();
