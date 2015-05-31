@@ -97,16 +97,12 @@ int		Cell::countFreeThrees(eValue const &value, Cell::eAdjacent const &dir,
 			if (nextResult > 0)
 				return (nextResult + 1);
 			else
-			{
 				++nPermissive;
-				return (0);
-			}
 		}
-		else
-			return (0);
 	}
-	else
-		return (0);
+	else if (_value == OPPONENT(value))
+		return (-BOARD_SIZE - 1);
+	return (0);
 }
 
 int		Cell::countAlign(eValue const &value, Cell::eAdjacent const &dir) const

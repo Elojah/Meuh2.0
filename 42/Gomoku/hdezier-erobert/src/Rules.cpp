@@ -35,7 +35,6 @@ void		Rules::captureStone(Cell &cell)
 	}
 }
 
-// #include <iostream>
 bool	Rules::insertDoubleFreethrees(Cell &cell)
 {
 	int				count(0);
@@ -49,14 +48,11 @@ bool	Rules::insertDoubleFreethrees(Cell &cell)
 	{
 		nPermissive = 1;
 		align1 = cell.countFreeThrees(e, static_cast<Cell::eAdjacent>(i),
-			Cell::EMPTY, nPermissive);
-		// std::cout << "nPermissive:\t" << nPermissive << std::endl;
+			Cell::EMPTY, nPermissive) - 1;
 		align2 = cell.countFreeThrees(e, static_cast<Cell::eAdjacent>(i + 4)
-			, Cell::EMPTY, nPermissive);
-		// std::cout << "Alignments in " << i << ":\t" << align1 << "\t" << align2 << std::endl;
-		if (align1 + align2 > 3
-			&& cell.getNCellDirection(align1, static_cast<Cell::eAdjacent>(i))->getValue() == Cell::EMPTY
-			&& cell.getNCellDirection(align2, static_cast<Cell::eAdjacent>(i + 4))->getValue() == Cell::EMPTY)
+			, Cell::EMPTY, nPermissive) - 1;
+		if ((align1 + align2 > 1 && nPermissive > 0)
+			|| (align1 + align2 > 2 && nPermissive == 0))
 			++count;
 	}
 	return (count > 1);
