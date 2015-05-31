@@ -20,19 +20,24 @@ bool		Rules::win(Cell &cell)
 	return (false);
 }
 
-void		Rules::captureStone(Cell &cell)
+Rules::eValidity	Rules::captureStone(Cell &cell, Cell::eValue player)
 {
-	int		captures;
+	static int			nbCaptures[Cell::E_VALUE];
+	int					captures;
 
 	captures = cell.checkCapture();
 	if (captures == 0)
-		return ;
+		return (OK);
 	for (int i = 0; i < 8; ++i)
 	{
 		if ((captures >> i) & 1)
+		{
 			cell.setAdjacentsValue(Cell::EMPTY, 2,
 				static_cast<Cell::eAdjacent>(i));
+			++nbCaptures[player];
+		}
 	}
+	return (nbCaptures[player] > 4 ? WIN : OK);
 }
 
 bool	Rules::insertDoubleFreethrees(Cell &cell)
@@ -58,8 +63,13 @@ bool	Rules::insertDoubleFreethrees(Cell &cell)
 	return (count > 1);
 }
 
+bool						Rules::ensureWin(void)
+{
+	return (false);
+}
+
 Rules::eValidity			Rules::makeMove(Board &b,
-	Player::vec2 const &move, Cell::eValue const &player)
+	Player::vec2 const &move, Cell::eValue player)
 {
 	Rules::eValidity	result;
 	Cell				&c = b.getCell(move.x, move.y);
@@ -69,16 +79,16 @@ Rules::eValidity			Rules::makeMove(Board &b,
 	else
 	{
 		c.setValue(player);
+
 		if (Rules::insertDoubleFreethrees(c))
+		{
 			result = INVALID;
-		else if (Rules::win(c))
+			c.setValue(Cell::EMPTY);
+		}
+		else if (Rules::win(c) && !Rules::ensureWin())
 			result = WIN;
 		else
-			result = OK;
-		if (result == INVALID)
-			c.setValue(Cell::EMPTY);
-		else
-			Rules::captureStone(c);
+			result = Rules::captureStone(c, player);
 		return (result);
 	}
 }

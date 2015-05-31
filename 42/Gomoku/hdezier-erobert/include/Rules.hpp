@@ -22,16 +22,17 @@ class Rules
 {
 public:
 
+	/*DONT TOUCH ME*/
 	enum eValidity
 	{
-		INVALID = 0,
-		OK,
+		OK = 0,
+		INVALID,
 		WIN
 	};
 
 	static eValidity	makeMove(Board &b, Player::vec2 const &move,
-							 Cell::eValue const &player);
-	static void			captureStone(Cell &cell);
+							 Cell::eValue player);
+	static eValidity	captureStone(Cell &cell, Cell::eValue player);
 private:
 	Rules(void);
 	~Rules(void);
@@ -40,6 +41,8 @@ private:
 
 	static bool		win(Cell &cell);
 	static bool		insertDoubleFreethrees(Cell &cell);
+	static bool		ensureWin(void);
+
 };
 
 #endif
