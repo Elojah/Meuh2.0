@@ -4,7 +4,7 @@
 #include <ctime>
 #include <iostream>
 
-GameManager::GameManager(void) :
+GameManager::GameManager(void):
 	_turn(Cell::P1),
 	_exit(false)
 {
@@ -14,9 +14,12 @@ GameManager::GameManager(void) :
 GameManager::~GameManager(void)
 {}
 
-void				GameManager::init(void)
+void				GameManager::init(unsigned int size)
 {
-	/*Nothing to do here except if size changes*/
+	_b.setSize(size);
+	_ui.init(size);
+	_ui.render(_b, _p1, _p2);
+	_p2.setAI(true);
 }
 
 void				GameManager::loop(void)
@@ -24,9 +27,6 @@ void				GameManager::loop(void)
 	Player::vec2	move;
 	int				validMove;
 
-	_ui.init(19);
-	_ui.render(_b, _p1, _p2);
-	_p2.setAI(true);
 	while (!_exit)
 	{
 		move = eventHandler();

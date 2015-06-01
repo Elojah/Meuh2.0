@@ -56,7 +56,7 @@ void	Cell::init(Cell board[BOARD_SIZE][BOARD_SIZE], int const x, int const y)
 	{
 		setX = x + _xIndex[i];
 		setY = y + _yIndex[i];
-		if (setX >= 0 && setX < BOARD_SIZE
+		if (setX >= 0 && setX < 13
 			&& setY >= 0 && setY < BOARD_SIZE)
 			_adjacent[i] = &(board[setX][setY]);
 		else

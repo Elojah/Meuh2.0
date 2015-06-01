@@ -1,6 +1,7 @@
-TARGET = bin/gomoku
+TARGET = gomoku
 
 #Directories
+BIN_DIR = bin
 SRC_DIR = src
 INC_DIR = include
 BUILD_DIR = build
@@ -59,14 +60,13 @@ INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 
 #RULES
-all : dirlib dirbin $(DSFML) $(TARGET)
+all : dirlib dirbin $(DSFML) $(BIN_DIR)/$(TARGET)
 
 clean :
 	$(RM) $(BUILD_DIR)
 
 fclean :
-	$(RM) $(BUILD_DIR) $(TARGET)
-	$(RM) $(LIB_DIR)
+	$(RM) $(BUILD_DIR) $(TARGET) $(BIN_DIR)
 	$(RM) $(DSFML)
 
 re : fclean all
@@ -80,19 +80,20 @@ $(DSFML):
 	rm $(ASFML).tar.gz
 
 dirbin:
-	mkdir -p bin
+	mkdir -p $(BIN_DIR)
 
 dirlib:
-	mkdir -p lib
+	mkdir -p $(LIB_DIR)
 
 .PHONY: all clean fclean re
 
 .SILENT: dirlib dirbuild dirbin
 
 #Build rule
-$(TARGET) : $(OBJ)
+$(BIN_DIR)/$(TARGET) : $(OBJ)
 	@echo "\n\033[1;4;34mLNK:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
 	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+	@ln -sf $(BIN_DIR)/$(TARGET) $(TARGET)
 
 #Compilation rule
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)

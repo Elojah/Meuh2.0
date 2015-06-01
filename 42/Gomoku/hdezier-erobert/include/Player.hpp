@@ -6,12 +6,14 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:10:55 by hdezier           #+#    #+#             //
-//   Updated: 2015/05/31 15:21:39 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/01 18:37:41 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #ifndef PLAYER_HPP
 # define PLAYER_HPP
+
+# include <cstdlib>
 
 class Board;
 

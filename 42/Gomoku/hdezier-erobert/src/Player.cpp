@@ -1,5 +1,17 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   Player.cpp                                         :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/06/01 18:37:06 by hdezier           #+#    #+#             //
+//   Updated: 2015/06/01 18:38:04 by erobert          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
+
 #include "Player.hpp"
-#include <cstdlib>
+#include "Board.hpp"
 
 Player::Player(void):
 	_ai(false)
@@ -57,7 +69,7 @@ Player::vec2 const		&Player::calculus(Board const &b)
 	// 		}
 	// 	}
 	// }
-	result.x = rand() % 19;
-	result.y = rand() % 19;
+	result.x = rand() % b.size();
+	result.y = rand() % b.size();
 	return (result);
 }
