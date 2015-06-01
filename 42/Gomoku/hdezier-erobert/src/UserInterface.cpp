@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2015/05/31 17:16:41 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/01 14:37:46 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -84,6 +84,15 @@ UserInterface::sEvent const	&UserInterface::getEvent(void)
 				else if (position[0] < 600 && position[0] > 430)
 					_help = !_help;
 			}
+		}
+		else if (event.type == sf::Event::KeyPressed)
+		{
+			if (event.key.code == sf::Keyboard::P)
+				_event.e = PLAY;
+			else if (event.key.code == sf::Keyboard::N)
+				_event.e = NEXT;
+			else if (event.key.code == sf::Keyboard::S)
+				_event.e = STOP;
 		}
 	}
 	return (_event);
