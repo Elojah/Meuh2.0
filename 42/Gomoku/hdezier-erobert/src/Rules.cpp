@@ -11,10 +11,10 @@ Rules::Rules(void)
 Rules::~Rules(void)
 {}
 
-int		Rules::win(Cell &cell)
+int							Rules::win(Cell &cell)
 {
-	const Cell::eValue	&value = cell.getValue();
-	int		result(0);
+	Cell::eValue const		&value(cell.getValue());
+	int						result(0);
 
 	for (int i = 0; i < 4; ++i)
 	{
@@ -25,9 +25,10 @@ int		Rules::win(Cell &cell)
 	return (result);
 }
 
-Rules::eValidity	Rules::captureStone(Cell &cell, Cell::eValue player)
+Rules::eValidity			Rules::captureStone(Cell &cell,
+												Cell::eValue player)
 {
-	int					captures;
+	int						captures;
 
 	captures = cell.checkCapture();
 	if (captures == 0)
@@ -44,13 +45,13 @@ Rules::eValidity	Rules::captureStone(Cell &cell, Cell::eValue player)
 	return (_nbCaptures[player] > 4 ? WIN : OK);
 }
 
-bool	Rules::insertDoubleFreethrees(Cell &cell)
+bool						Rules::insertDoubleFreethrees(Cell &cell)
 {
-	int				count(0);
-	int				align1;
-	int				align2;
-	int				nPermissive;
-	Cell::eValue	e;
+	int						count(0);
+	int						align1;
+	int						align2;
+	int						nPermissive;
+	Cell::eValue			e;
 
 	e = cell.getValue();
 	for (int i = 0; i < 4; ++i)
@@ -67,15 +68,18 @@ bool	Rules::insertDoubleFreethrees(Cell &cell)
 	return (count > 1);
 }
 
-bool						Rules::canCaptureLast(Board const &b, Cell::eValue opponent)
+bool						Rules::canCaptureLast(Board const &b,
+												  Cell::eValue opponent)
 {
-	Cell const					*c;
+	Cell const				*c;
+	unsigned int			i;
+	unsigned int			j;
 
 	if (_nbCaptures[OPPONENT(opponent)] != 4)
 		return (false);
-	for (int i = 0; i < BOARD_SIZE; ++i)
+	for (i = 0; i < b.size(); ++i)
 	{
-		for (int j = 0; j < BOARD_SIZE; ++j)
+		for (j = 0; j < b.size(); ++j)
 		{
 			if (b.getValue(i, j) == opponent
 				&& (c = &(b.getCell(i, j)))->isCapturable())
@@ -87,8 +91,8 @@ bool						Rules::canCaptureLast(Board const &b, Cell::eValue opponent)
 
 bool						Rules::canCaptureFive(Cell const &cell, int dirWin)
 {
-	Cell::eValue	e;
-	bool			result;
+	Cell::eValue			e;
+	bool					result;
 
 	e = cell.getValue();
 	for (int i = 0; i < 4; ++i)
@@ -104,12 +108,12 @@ bool						Rules::canCaptureFive(Cell const &cell, int dirWin)
 	return (result);
 }
 
-Rules::eValidity			Rules::makeMove(Board &b,
-	Player::vec2 const &move, Cell::eValue player)
+Rules::eValidity			Rules::makeMove(Board &b, Player::vec2 const &move,
+											Cell::eValue player)
 {
-	Rules::eValidity	result;
-	Cell				&c = b.getCell(move.x, move.y);
-	int					dirWin;
+	Rules::eValidity		result;
+	Cell					&c(b.getCell(move.x, move.y));
+	int						dirWin;
 
 	if (c.getValue() != Cell::EMPTY)
 		return (INVALID);
