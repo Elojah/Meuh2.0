@@ -31,7 +31,7 @@ public:
 	};
 
 	static eValidity	makeMove(Board &b, Player::vec2 const &move,
-							 Cell::eValue player);
+								Cell::eValue player);
 	static eValidity	captureStone(Cell &cell, Cell::eValue player);
 private:
 	Rules(void);
@@ -39,10 +39,9 @@ private:
 	Rules(Rules const &src);
 	Rules			&operator=(Rules const &rhs);
 
-	static bool		win(Cell &cell);
+	static int		win(Cell &cell);
 	static bool		insertDoubleFreethrees(Cell &cell);
-	static bool		ensureWin(void);
-
+	static bool		ensureWin(Cell const &cell, int dirWin);
 };
 
 #endif

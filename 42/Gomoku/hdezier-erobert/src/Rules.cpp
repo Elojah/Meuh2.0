@@ -7,17 +7,18 @@ Rules::Rules(void)
 Rules::~Rules(void)
 {}
 
-bool		Rules::win(Cell &cell)
+int		Rules::win(Cell &cell)
 {
 	const Cell::eValue	&value = cell.getValue();
+	int		result(0);
 
 	for (int i = 0; i < 4; ++i)
 	{
-		if (cell.countAlign(value, static_cast<Cell::eAdjacent>(i))
-			+ cell.countAlign(value, static_cast<Cell::eAdjacent>(i + 4)) > 5)
-			return (true);
+		if (cell.countAlign(value, CAST_DIR(i))
+			+ cell.countAlign(value, CAST_DIR(i + 4)) > 5)
+			result = result | (1 << i);
 	}
-	return (false);
+	return (result);
 }
 
 Rules::eValidity	Rules::captureStone(Cell &cell, Cell::eValue player)
@@ -33,7 +34,7 @@ Rules::eValidity	Rules::captureStone(Cell &cell, Cell::eValue player)
 		if ((captures >> i) & 1)
 		{
 			cell.setAdjacentsValue(Cell::EMPTY, 2,
-				static_cast<Cell::eAdjacent>(i));
+				CAST_DIR(i));
 			++nbCaptures[player];
 		}
 	}
@@ -52,9 +53,9 @@ bool	Rules::insertDoubleFreethrees(Cell &cell)
 	for (int i = 0; i < 4; ++i)
 	{
 		nPermissive = 1;
-		align1 = cell.countFreeThrees(e, static_cast<Cell::eAdjacent>(i),
+		align1 = cell.countFreeThrees(e, CAST_DIR(i),
 			Cell::EMPTY, nPermissive) - 1;
-		align2 = cell.countFreeThrees(e, static_cast<Cell::eAdjacent>(i + 4)
+		align2 = cell.countFreeThrees(e, CAST_DIR(i + 4)
 			, Cell::EMPTY, nPermissive) - 1;
 		if ((align1 + align2 > 1 && nPermissive > 0)
 			|| (align1 + align2 > 2 && nPermissive == 0))
@@ -63,9 +64,23 @@ bool	Rules::insertDoubleFreethrees(Cell &cell)
 	return (count > 1);
 }
 
-bool						Rules::ensureWin(void)
+bool						Rules::ensureWin(Cell const &cell, int dirWin)
 {
-	return (false);
+	Cell::eValue	e;
+	bool			result;
+
+	e = cell.getValue();
+	for (int i = 0; i < 4; ++i)
+	{
+		if (!((dirWin >> i) & 1))
+			continue ;
+		else if (cell.isCapturableDirection(CAST_DIR(i), e)
+			|| cell.isCapturableDirection(CAST_DIR(OPPOSITE(i)), e))
+			result = true;
+		else
+			return (false);
+	}
+	return (result);
 }
 
 Rules::eValidity			Rules::makeMove(Board &b,
@@ -73,6 +88,7 @@ Rules::eValidity			Rules::makeMove(Board &b,
 {
 	Rules::eValidity	result;
 	Cell				&c = b.getCell(move.x, move.y);
+	int					dirWin;
 
 	if (c.getValue() != Cell::EMPTY)
 		return (INVALID);
@@ -85,7 +101,8 @@ Rules::eValidity			Rules::makeMove(Board &b,
 			result = INVALID;
 			c.setValue(Cell::EMPTY);
 		}
-		else if (Rules::win(c) && !Rules::ensureWin())
+		else if ((dirWin = Rules::win(c))
+			&& !Rules::ensureWin(c, dirWin))
 			result = WIN;
 		else
 			result = Rules::captureStone(c, player);
