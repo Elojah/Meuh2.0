@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:07:12 by erobert           #+#    #+#             //
-//   Updated: 2015/05/31 16:15:43 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/01 14:31:58 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -27,7 +27,9 @@ public:
 	{
 		EXIT = 0,
 		MOUSE,
-		KEY,
+		PLAY,
+		NEXT,
+		STOP,
 		P1_AI,
 		P2_AI,
 		E_EVENT

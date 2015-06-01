@@ -67,6 +67,12 @@ const Player::vec2	&GameManager::eventHandler(void)
 		_p1.setAI(!_p1.ai());
 	else if (event.e == UserInterface::P2_AI)
 		_p2.setAI(!_p2.ai());
+	else if (event.e == UserInterface::PLAY)
+		_audio.playMusic(AudioManager::HYMNE_A_LA_KRO);
+	else if (event.e == UserInterface::NEXT)
+		_audio.nextMusic();
+	else if (event.e == UserInterface::STOP)
+		_audio.stopMusic();
 	return (result);
 }
 

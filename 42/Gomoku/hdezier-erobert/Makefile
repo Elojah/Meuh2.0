@@ -18,6 +18,7 @@ CLASS = main\
 		UserInterface\
 		Player\
 		Rules\
+		AudioManager\
 		GameManager\
 
 #List interfaces here
@@ -44,6 +45,7 @@ LIB_GLOBAL = \
 			sfml-graphics\
 			sfml-window\
 			sfml-system\
+			sfml-audio \
 
 LIB_OTHER = \
 			-rpath $(PWD)/$(DSFML)/lib/\

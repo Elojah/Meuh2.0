@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:09:51 by hdezier           #+#    #+#             //
-//   Updated: 2015/05/28 12:10:49 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/01 14:28:40 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -16,6 +16,7 @@
 # include "Board.hpp"
 # include "Player.hpp"
 # include "UserInterface.hpp"
+# include "AudioManager.hpp"
 
 class GameManager
 {
@@ -32,6 +33,7 @@ private:
 	Player			_p1;
 	Player			_p2;
 	UserInterface	_ui;
+	AudioManager	_audio;
 	Cell::eValue	_turn;
 	bool			_exit;
 

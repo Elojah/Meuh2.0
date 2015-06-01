@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2015/05/31 16:16:15 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/01 14:37:46 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -40,7 +40,7 @@ void						UserInterface::render(Board const &b,
 												  Player const &p1,
 												  Player const &p2)
 {
-	_window.clear(sf::Color(50, 100, 250));
+	_window.clear(sf::Color(173, 216, 230));
 	renderBoard(b);
 	renderPlayers(p1, p2);
 	if (_help)
@@ -84,6 +84,15 @@ UserInterface::sEvent const	&UserInterface::getEvent(void)
 				else if (position[0] < 600 && position[0] > 430)
 					_help = !_help;
 			}
+		}
+		else if (event.type == sf::Event::KeyPressed)
+		{
+			if (event.key.code == sf::Keyboard::P)
+				_event.e = PLAY;
+			else if (event.key.code == sf::Keyboard::N)
+				_event.e = NEXT;
+			else if (event.key.code == sf::Keyboard::S)
+				_event.e = STOP;
 		}
 	}
 	return (_event);
