@@ -48,6 +48,42 @@ void	Cell::init(Cell board[BOARD_SIZE][BOARD_SIZE], int const x, int const y)
 	}
 }
 
+bool		Cell::isCapturable(void) const
+{
+	Cell const	*nextCell;
+	eAdjacent	dir;
+	eAdjacent	opposite;
+
+	for (int i = 0; i < 8; ++i)
+	{
+		dir = CAST_DIR(i);
+		opposite = CAST_DIR(OPPOSITE(i));
+		nextCell = _adjacent[dir]->getNCellDirection(1, dir);
+		if (nextCell && _adjacent[dir] && _adjacent[opposite]
+			&& _adjacent[dir]->getValue() == _value)
+		{
+			if ((nextCell->getValue() == OPPONENT(_value)
+					&& _adjacent[opposite]->getValue() == Cell::EMPTY)
+				|| (nextCell->getValue() == Cell::EMPTY
+					&& _adjacent[opposite]->getValue() == OPPONENT(_value)))
+				return (true);
+		}
+	}
+	return (false);
+}
+
+bool		Cell::isCapturableDirection(Cell::eAdjacent dir, Cell::eValue const &value) const
+{
+	if (value != _value)
+		return (false);
+	else if (isCapturable())
+		return (true);
+	else if (_adjacent[dir] == NULL)
+		return (false);
+	else
+		return (_adjacent[dir]->isCapturableDirection(dir, value));
+}
+
 int			Cell::checkCapture(void) const
 {
 	int		result(0);
@@ -56,8 +92,8 @@ int			Cell::checkCapture(void) const
 	for (int i = 0; i < 8; ++i)
 	{
 		if (_adjacent[i] != NULL
-			&& _adjacent[i]->countAlign(OPPONENT(_value), static_cast<Cell::eAdjacent>(i)) == 2
-			&& (nextFriend = getNCellDirection(3, static_cast<Cell::eAdjacent>(i))) != NULL
+			&& _adjacent[i]->countAlign(OPPONENT(_value), CAST_DIR(i)) == 2
+			&& (nextFriend = getNCellDirection(3, CAST_DIR(i))) != NULL
 			&& nextFriend->getValue() == _value)
 			result |= 1 << i;
 	}

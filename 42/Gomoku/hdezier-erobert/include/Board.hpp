@@ -23,8 +23,9 @@ public:
 	Board(void);
 	~Board(void);
 
-	void		display(void) const;
-	Cell		&getCell(int row, int col);
+	void				display(void) const;
+	Cell				&getCell(int row, int col);
+	const Cell			&getCell(int row, int col) const;
 	const Cell::eValue	&getValue(int row, int col) const;
 protected:
 private:

@@ -14,6 +14,8 @@
 # define CELL_HPP
 
 # define OPPONENT(n) (((n) == Cell::P1 ? Cell::P2 : Cell::P1))
+# define OPPOSITE(n) ((n) < 4 ? (n) + 4 : (n) - 4)
+# define CAST_DIR(i) static_cast<Cell::eAdjacent>(i)
 # define BOARD_SIZE 19
 
 class Cell
@@ -56,6 +58,9 @@ public:
 									eValue const &permissiveValue, int &nPermissive);
 	Cell const		*getNCellDirection(int n, Cell::eAdjacent const &dir) const;
 
+	bool			isCapturable(void) const;
+	bool			isCapturableDirection(Cell::eAdjacent dir,
+									Cell::eValue const &value) const;
 protected:
 private:
 	eValue				_value;

@@ -31,18 +31,20 @@ public:
 	};
 
 	static eValidity	makeMove(Board &b, Player::vec2 const &move,
-							 Cell::eValue player);
-	static eValidity	captureStone(Cell &cell, Cell::eValue player);
+								Cell::eValue player);
 private:
 	Rules(void);
 	~Rules(void);
 	Rules(Rules const &src);
 	Rules			&operator=(Rules const &rhs);
 
-	static bool		win(Cell &cell);
-	static bool		insertDoubleFreethrees(Cell &cell);
-	static bool		ensureWin(void);
+	static int			_nbCaptures[Cell::E_VALUE];
 
+	static int			win(Cell &cell);
+	static bool			insertDoubleFreethrees(Cell &cell);
+	static bool			canCaptureFive(Cell const &cell, int dirWin);
+	static eValidity	captureStone(Cell &cell, Cell::eValue player);
+	static bool			canCaptureLast(Board const &b, Cell::eValue opponent);
 };
 
 #endif
