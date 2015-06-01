@@ -116,18 +116,19 @@ Rules::eValidity			Rules::makeMove(Board &b,
 	else
 	{
 		c.setValue(player);
-
 		if (Rules::insertDoubleFreethrees(c))
 		{
 			result = INVALID;
 			c.setValue(Cell::EMPTY);
 		}
 		else if ((dirWin = Rules::win(c))
-			&& !Rules::canCaptureFive(c, dirWin)
-			&& !Rules::canCaptureLast(b, c.getValue()))
+			&& !Rules::canCaptureLast(b, c.getValue())
+			&& !Rules::canCaptureFive(c, dirWin))
 			result = WIN;
 		else
 			result = Rules::captureStone(c, player);
+		if (result != INVALID)
+			b.updateHeuristics(move);
 		return (result);
 	}
 }

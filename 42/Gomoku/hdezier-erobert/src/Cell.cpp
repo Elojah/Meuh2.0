@@ -5,7 +5,8 @@
 const int	Cell::_xIndex[8] = {0, 1, 1, 1, 0, -1, -1, -1};
 const int	Cell::_yIndex[8] = {-1, -1, 0, 1, 1, 1, 0, -1};
 
-Cell::Cell(void)
+Cell::Cell(void):
+	_isPlayable(false)
 {}
 
 Cell::~Cell(void)
@@ -16,9 +17,24 @@ const Cell::eValue	&Cell::getValue(void) const
 	return (_value);
 }
 
-void	Cell::setValue(Cell::eValue const &e)
+void				Cell::setValue(Cell::eValue const &e)
 {
 	_value = e;
+}
+
+bool				Cell::isPlayable(void) const
+{
+	return (_isPlayable);
+}
+
+void	Cell::setPlayableDirection(int dist, Cell::eAdjacent const &dir)
+{
+	if (!dist)
+		return ;
+	_isPlayable = true;
+	if (_adjacent[dir] == NULL)
+		return;
+	_adjacent[dir]->setPlayableDirection(dist - 1, dir);
 }
 
 void	Cell::setAdjacentsValue(Cell::eValue const &e, int n,
