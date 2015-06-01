@@ -40,7 +40,10 @@ void				GameManager::loop(void)
 			if (validMove == Rules::OK)
 				_turn = OPPONENT(_turn);
 			else if (validMove == Rules::WIN)
+			{
 				std::cout << "Player:\t" << _turn << " wins !" << std::endl;
+				_turn = OPPONENT(_turn);
+			}
 		}
 		_ui.render(_b, _p1, _p2);
 	}
