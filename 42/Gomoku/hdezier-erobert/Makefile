@@ -65,7 +65,7 @@ clean :
 	$(RM) $(BUILD_DIR)
 
 fclean :
-	$(RM) $(BUILD_DIR) $(TARGET)
+	$(RM) $(BUILD_DIR) $(TARGET) gomoku
 	$(RM) $(LIB_DIR)
 	$(RM) $(DSFML)
 
@@ -93,6 +93,7 @@ dirlib:
 $(TARGET) : $(OBJ)
 	@echo "\n\033[1;4;34mLNK:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
 	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+	@ln -sf $(TARGET)
 
 #Compilation rule
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)

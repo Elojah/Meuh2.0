@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:09:51 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/01 14:28:40 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/01 18:39:10 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -24,10 +24,9 @@ public:
 	GameManager(void);
 	~GameManager(void);
 
-	void				init(void);
+	void				init(unsigned int size);
 	void				loop(void);
 	const Player::vec2	&eventHandler(void);
-protected:
 private:
 	Board			_b;
 	Player			_p1;

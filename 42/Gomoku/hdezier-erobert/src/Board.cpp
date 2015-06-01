@@ -1,40 +1,62 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   Board.cpp                                          :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/06/01 18:17:27 by hdezier           #+#    #+#             //
+//   Updated: 2015/06/01 18:27:56 by erobert          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
+
 #include "Board.hpp"
 #include <unistd.h>
 
 Board::Board(void)
 {
-	for (unsigned int i = 0; i < BOARD_SIZE; ++i)
+	unsigned int	i;
+	unsigned int	j;
+
+	for (i = 0; i < BOARD_SIZE; ++i)
 	{
-		for (unsigned int j = 0; j < BOARD_SIZE; ++j)
+		for (j = 0; j < BOARD_SIZE; ++j)
 			_cells[i][j].init(_cells, i, j);
 	}
 }
+Board::~Board(void) {}
 
-Board::~Board(void)
-{}
+unsigned int		Board::size(void) const
+{
+	return (_size);
+}
 
-const Cell::eValue	&Board::getValue(int row, int col) const
+void				Board::setSize(unsigned int size)
+{
+	_size = size;
+}
+Cell::eValue const	&Board::getValue(int row, int col) const
 {
 	return (_cells[row][col].getValue());
 }
-
-Cell		&Board::getCell(int row, int col)
+Cell				&Board::getCell(int row, int col)
+{
+	return (_cells[row][col]);
+}
+Cell const			&Board::getCell(int row, int col) const
 {
 	return (_cells[row][col]);
 }
 
-const Cell		&Board::getCell(int row, int col) const
-{
-	return (_cells[row][col]);
-}
-
-void	Board::display(void) const
+void				Board::display(void) const
 {
 	Cell::eValue	v;
+	unsigned int	i;
+	unsigned int	j;
 
-	for (unsigned int i = 0; i < BOARD_SIZE; ++i)
+	for (i = 0; i < _size; ++i)
 	{
-		for (unsigned int j = 0; j < BOARD_SIZE; ++j)
+		for (j = 0; j < _size; ++j)
 		{
 			v = _cells[i][j].getValue();
 			if (v == Cell::P1)
