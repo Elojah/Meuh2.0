@@ -1,6 +1,10 @@
 #include "Rules.hpp"
 #include "Board.hpp"
 
+/*NOT SAFE if E_VALUE is different*/
+int			Rules::_nbCaptures[Cell::E_VALUE] = {0, 0, 0};
+
+
 Rules::Rules(void)
 {}
 
@@ -23,7 +27,6 @@ int		Rules::win(Cell &cell)
 
 Rules::eValidity	Rules::captureStone(Cell &cell, Cell::eValue player)
 {
-	static int			nbCaptures[Cell::E_VALUE];
 	int					captures;
 
 	captures = cell.checkCapture();
@@ -35,10 +38,10 @@ Rules::eValidity	Rules::captureStone(Cell &cell, Cell::eValue player)
 		{
 			cell.setAdjacentsValue(Cell::EMPTY, 2,
 				CAST_DIR(i));
-			++nbCaptures[player];
+			++_nbCaptures[player];
 		}
 	}
-	return (nbCaptures[player] > 4 ? WIN : OK);
+	return (_nbCaptures[player] > 4 ? WIN : OK);
 }
 
 bool	Rules::insertDoubleFreethrees(Cell &cell)
@@ -64,7 +67,25 @@ bool	Rules::insertDoubleFreethrees(Cell &cell)
 	return (count > 1);
 }
 
-bool						Rules::ensureWin(Cell const &cell, int dirWin)
+bool						Rules::canCaptureLast(Board const &b, Cell::eValue opponent)
+{
+	Cell const					*c;
+
+	if (_nbCaptures[OPPONENT(opponent)] != 4)
+		return (false);
+	for (int i = 0; i < BOARD_SIZE; ++i)
+	{
+		for (int j = 0; j < BOARD_SIZE; ++j)
+		{
+			if (b.getValue(i, j) == opponent
+				&& (c = &(b.getCell(i, j)))->isCapturable())
+				return (true);
+		}
+	}
+	return (false);
+}
+
+bool						Rules::canCaptureFive(Cell const &cell, int dirWin)
 {
 	Cell::eValue	e;
 	bool			result;
@@ -102,7 +123,8 @@ Rules::eValidity			Rules::makeMove(Board &b,
 			c.setValue(Cell::EMPTY);
 		}
 		else if ((dirWin = Rules::win(c))
-			&& !Rules::ensureWin(c, dirWin))
+			&& !Rules::canCaptureFive(c, dirWin)
+			&& !Rules::canCaptureLast(b, c.getValue()))
 			result = WIN;
 		else
 			result = Rules::captureStone(c, player);
