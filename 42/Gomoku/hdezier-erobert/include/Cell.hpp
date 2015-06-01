@@ -47,10 +47,15 @@ public:
 
 	const eValue	&getValue(void) const;
 	void			setValue(Cell::eValue const &e);
+
 	void			setAdjacentsValue(Cell::eValue const &e, int n,
 										Cell::eAdjacent const &dir);
 
+	bool			isPlayable(void) const;
+	void			setPlayableDirection(int dist, Cell::eAdjacent const &dir);
+
 	void			init(Cell board[BOARD_SIZE][BOARD_SIZE], int const x, int const y);
+
 	int				checkCapture(void) const;
 	int				countAlign(eValue const &value, Cell::eAdjacent const &dir) const;
 	Cell			*operator[](Cell::eAdjacent const &e);
@@ -65,6 +70,7 @@ protected:
 private:
 	eValue				_value;
 	Cell				*_adjacent[8];
+	bool				_isPlayable;
 	static const int	_xIndex[8];
 	static const int	_yIndex[8];
 

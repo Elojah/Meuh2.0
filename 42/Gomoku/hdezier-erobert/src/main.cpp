@@ -27,16 +27,16 @@ int				main(int ac, char **av)
 		exec(19);
 	else if (ac == 2)
 	{
-		if (!strcmp("small", av[1]))
+		if (!strcmp("-s", av[1]))
 			exec(9);
-		else if (!strcmp("medium", av[1]))
+		else if (!strcmp("-m", av[1]))
 			exec(13);
-		else if (!strcmp("big", av[1]))
+		else if (!strcmp("-b", av[1]))
 			exec(19);
 		else
-			std::cerr << av[0] << " [small/medium/big]" << std::endl;
+			std::cerr << "usage: " << av[0] << " [-s | -m | -b]" << std::endl;
 	}
 	else
-		std::cerr << av[0] << " [small/medium/big]" << std::endl;
+		std::cerr << "usage: " << av[0] << " [-s | -m | -b]" << std::endl;
 	return (0);
 }
