@@ -32,6 +32,8 @@ public:
 
 	static eValidity	makeMove(Board &b, Player::vec2 const &move,
 								Cell::eValue player);
+	static eValidity	simulateMove(Board &b, Player::vec2 const &move,
+								Cell::eValue player);
 private:
 	Rules(void);
 	~Rules(void);
@@ -39,6 +41,7 @@ private:
 	Rules			&operator=(Rules const &rhs);
 
 	static int			_nbCaptures[Cell::E_VALUE];
+	static Player::vec2	_lastChance;
 
 	static int			win(Cell &cell);
 	static bool			insertDoubleFreethrees(Cell &cell);

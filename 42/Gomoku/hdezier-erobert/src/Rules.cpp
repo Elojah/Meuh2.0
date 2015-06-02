@@ -2,8 +2,8 @@
 #include "Board.hpp"
 
 /*NOT SAFE if E_VALUE is different*/
-int			Rules::_nbCaptures[Cell::E_VALUE] = {0, 0, 0};
-
+int				Rules::_nbCaptures[Cell::E_VALUE] = {0, 0, 0};
+Player::vec2	Rules::_lastChance = {-1, -1};
 
 Rules::Rules(void)
 {}
@@ -15,11 +15,14 @@ int							Rules::win(Cell &cell)
 {
 	Cell::eValue const		&value(cell.getValue());
 	int						result(0);
+	int a;
+	int b;
 
 	for (int i = 0; i < 4; ++i)
 	{
-		if (cell.countAlign(value, CAST_DIR(i))
-			+ cell.countAlign(value, CAST_DIR(i + 4)) > 5)
+		a = cell.countAlign(value, CAST_DIR(i));
+		b = cell.countAlign(value, CAST_DIR(i + 4));
+		if (a + b > 5)
 			result = result | (1 << i);
 	}
 	return (result);
@@ -108,6 +111,34 @@ bool						Rules::canCaptureFive(Cell const &cell, int dirWin)
 	return (result);
 }
 
+Rules::eValidity			Rules::simulateMove(Board &b, Player::vec2 const &move,
+											Cell::eValue player)
+{
+	Rules::eValidity		result;
+	Cell					&c(b.getCell(move.x, move.y));
+	int						dirWin;
+
+	if (c.getValue() != Cell::EMPTY)
+		return (INVALID);
+	else
+	{
+		c.setValue(player);
+		if (Rules::insertDoubleFreethrees(c))
+			result = INVALID;
+		else
+		{
+			if ((dirWin = Rules::win(c))
+				&& !Rules::canCaptureLast(b, c.getValue())
+				&& !Rules::canCaptureFive(c, dirWin))
+				result = WIN;
+			result = Rules::captureStone(c, player);
+			b.updateHeuristics(move);
+		}
+		c.setValue(Cell::EMPTY);
+		return (result);
+	}
+}
+
 Rules::eValidity			Rules::makeMove(Board &b, Player::vec2 const &move,
 											Cell::eValue player)
 {
@@ -125,10 +156,17 @@ Rules::eValidity			Rules::makeMove(Board &b, Player::vec2 const &move,
 			result = INVALID;
 			c.setValue(Cell::EMPTY);
 		}
-		else if ((dirWin = Rules::win(c))
-			&& !Rules::canCaptureLast(b, c.getValue())
-			&& !Rules::canCaptureFive(c, dirWin))
-			result = WIN;
+		else if ((dirWin = Rules::win(c)) != 0)
+		{
+			if (!Rules::canCaptureLast(b, c.getValue())
+				&& !Rules::canCaptureFive(c, dirWin))
+				result = WIN;
+			else
+			{
+				_lastChance = move;
+				result = Rules::captureStone(c, player);
+			}
+		}
 		else
 			result = Rules::captureStone(c, player);
 		if (result != INVALID)

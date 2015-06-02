@@ -46,7 +46,8 @@ void	Cell::setAdjacentsValue(Cell::eValue const &e, int n,
 	_adjacent[dir]->setAdjacentsValue(e, n - 1, dir);
 }
 
-void	Cell::init(Cell board[BOARD_SIZE][BOARD_SIZE], int const x, int const y)
+void	Cell::init(Cell board[BOARD_SIZE][BOARD_SIZE], int size
+	, int const x, int const y)
 {
 	int					setX;
 	int					setY;
@@ -56,8 +57,8 @@ void	Cell::init(Cell board[BOARD_SIZE][BOARD_SIZE], int const x, int const y)
 	{
 		setX = x + _xIndex[i];
 		setY = y + _yIndex[i];
-		if (setX >= 0 && setX < 13
-			&& setY >= 0 && setY < BOARD_SIZE)
+		if (setX >= 0 && setX < size
+			&& setY >= 0 && setY < size)
 			_adjacent[i] = &(board[setX][setY]);
 		else
 			_adjacent[i] = NULL;
@@ -74,14 +75,15 @@ bool		Cell::isCapturable(void) const
 	{
 		dir = CAST_DIR(i);
 		opposite = CAST_DIR(OPPOSITE(i));
-		nextCell = _adjacent[dir]->getNCellDirection(1, dir);
-		if (nextCell && _adjacent[dir] && _adjacent[opposite]
+		if (_adjacent[dir] && _adjacent[opposite]
 			&& _adjacent[dir]->getValue() == _value)
 		{
-			if ((nextCell->getValue() == OPPONENT(_value)
+			nextCell = _adjacent[dir]->getNCellDirection(1, dir);
+			if (nextCell
+				&& ((nextCell->getValue() == OPPONENT(_value)
 					&& _adjacent[opposite]->getValue() == Cell::EMPTY)
 				|| (nextCell->getValue() == Cell::EMPTY
-					&& _adjacent[opposite]->getValue() == OPPONENT(_value)))
+					&& _adjacent[opposite]->getValue() == OPPONENT(_value))))
 				return (true);
 		}
 	}
@@ -137,7 +139,7 @@ int		Cell::countFreeThrees(eValue const &value, Cell::eAdjacent const &dir,
 			return (1 + _adjacent[dir]->countFreeThrees(value, dir,
 									permissiveValue, nPermissive));
 		else
-			return (1);
+			return (-BOARD_SIZE - 1);
 	}
 	else if (_value == permissiveValue && nPermissive > 0)
 	{

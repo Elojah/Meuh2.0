@@ -54,7 +54,8 @@ public:
 	bool			isPlayable(void) const;
 	void			setPlayableDirection(int dist, Cell::eAdjacent const &dir);
 
-	void			init(Cell board[BOARD_SIZE][BOARD_SIZE], int const x, int const y);
+	void			init(Cell board[BOARD_SIZE][BOARD_SIZE], int size,
+						int const x, int const y);
 
 	int				checkCapture(void) const;
 	int				countAlign(eValue const &value, Cell::eAdjacent const &dir) const;

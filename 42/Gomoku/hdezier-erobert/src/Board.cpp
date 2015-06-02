@@ -13,17 +13,8 @@
 #include "Board.hpp"
 #include <unistd.h>
 
-Board::Board(void)
-{
-	unsigned int	i;
-	unsigned int	j;
+Board::Board(void) {}
 
-	for (i = 0; i < BOARD_SIZE; ++i)
-	{
-		for (j = 0; j < BOARD_SIZE; ++j)
-			_cells[i][j].init(_cells, i, j);
-	}
-}
 Board::~Board(void) {}
 
 unsigned int		Board::size(void) const
@@ -45,9 +36,19 @@ Board		&Board::operator=(Board const &rhs)
 	return (*this);
 }
 
-void				Board::setSize(unsigned int size)
+void				Board::init(unsigned int size)
 {
+	unsigned int	i;
+	unsigned int	j;
+	int				iSize;
+
 	_size = size;
+	iSize = static_cast<int>(_size);
+	for (i = 0; i < _size; ++i)
+	{
+		for (j = 0; j < _size; ++j)
+			_cells[i][j].init(_cells, iSize, i, j);
+	}
 }
 Cell::eValue const	&Board::getValue(int row, int col) const
 {
