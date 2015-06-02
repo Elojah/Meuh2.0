@@ -3,7 +3,6 @@
 
 /*NOT SAFE if E_VALUE is different*/
 int				Rules::_nbCaptures[Cell::E_VALUE] = {0, 0, 0};
-Player::vec2	Rules::_lastChance = {-1, -1};
 
 Rules::Rules(void)
 {}
@@ -72,12 +71,14 @@ bool						Rules::insertDoubleFreethrees(Cell &cell)
 }
 
 bool						Rules::canCaptureLast(Board const &b,
-												  Cell::eValue opponent)
+													Cell &cell)
 {
 	Cell const				*c;
+	Cell::eValue			opponent;
 	unsigned int			i;
 	unsigned int			j;
 
+	opponent = cell.getValue();
 	if (_nbCaptures[OPPONENT(opponent)] != 4)
 		return (false);
 	for (i = 0; i < b.size(); ++i)
@@ -86,7 +87,10 @@ bool						Rules::canCaptureLast(Board const &b,
 		{
 			if (b.getValue(i, j) == opponent
 				&& (c = &(b.getCell(i, j)))->isCapturable())
+			{
+				// _winP1 = &c;
 				return (true);
+			}
 		}
 	}
 	return (false);
@@ -104,7 +108,10 @@ bool						Rules::canCaptureFive(Cell const &cell, int dirWin)
 			continue ;
 		else if (cell.isCapturableDirection(CAST_DIR(i), e)
 			|| cell.isCapturableDirection(CAST_DIR(OPPOSITE(i)), e))
+		{
+			// _winP1 = &c;
 			result = true;
+		}
 		else
 			return (false);
 	}
@@ -128,7 +135,7 @@ Rules::eValidity			Rules::simulateMove(Board &b, Player::vec2 const &move,
 		else
 		{
 			if ((dirWin = Rules::win(c))
-				&& !Rules::canCaptureLast(b, c.getValue())
+				&& !Rules::canCaptureLast(b, c)
 				&& !Rules::canCaptureFive(c, dirWin))
 				result = WIN;
 			result = Rules::captureStone(c, player);
@@ -156,21 +163,18 @@ Rules::eValidity			Rules::makeMove(Board &b, Player::vec2 const &move,
 			result = INVALID;
 			c.setValue(Cell::EMPTY);
 		}
-		else if ((dirWin = Rules::win(c)) != 0)
-		{
-			if (!Rules::canCaptureLast(b, c.getValue())
-				&& !Rules::canCaptureFive(c, dirWin))
-				result = WIN;
-			else
-			{
-				_lastChance = move;
-				result = Rules::captureStone(c, player);
-			}
-		}
+		else if ((dirWin = Rules::win(c))
+			&& !Rules::canCaptureLast(b, c)
+			&& !Rules::canCaptureFive(c, dirWin))
+			result = WIN;
 		else
 			result = Rules::captureStone(c, player);
 		if (result != INVALID)
 			b.updateHeuristics(move);
+		// if (_winP1 != NULL
+		// 	&& _nbCaptures[player] < 5
+		// 	&& Rules::win(_winP1) != 0)
+		// 	result = LOOSE;
 		return (result);
 	}
 }
