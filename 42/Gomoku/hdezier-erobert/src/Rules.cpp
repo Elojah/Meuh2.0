@@ -3,6 +3,7 @@
 
 /*NOT SAFE if E_VALUE is different*/
 int				Rules::_nbCaptures[Cell::E_VALUE] = {0, 0, 0};
+Cell const		*Rules::_winCounter[Cell::E_VALUE] = {NULL, NULL, NULL};
 
 Rules::Rules(void)
 {}
@@ -10,18 +11,18 @@ Rules::Rules(void)
 Rules::~Rules(void)
 {}
 
-int							Rules::win(Cell &cell)
+int							Rules::win(Cell const &cell)
 {
 	Cell::eValue const		&value(cell.getValue());
 	int						result(0);
-	int a;
-	int b;
+	int						align1;
+	int						align2;
 
 	for (int i = 0; i < 4; ++i)
 	{
-		a = cell.countAlign(value, CAST_DIR(i));
-		b = cell.countAlign(value, CAST_DIR(i + 4));
-		if (a + b > 5)
+		align1 = cell.countAlign(value, CAST_DIR(i));
+		align2 = cell.countAlign(value, CAST_DIR(i + 4));
+		if (align1 + align2 > 5)
 			result = result | (1 << i);
 	}
 	return (result);
@@ -88,7 +89,7 @@ bool						Rules::canCaptureLast(Board const &b,
 			if (b.getValue(i, j) == opponent
 				&& (c = &(b.getCell(i, j)))->isCapturable())
 			{
-				// _winP1 = &c;
+				_winCounter[opponent] = &cell;
 				return (true);
 			}
 		}
@@ -109,7 +110,7 @@ bool						Rules::canCaptureFive(Cell const &cell, int dirWin)
 		else if (cell.isCapturableDirection(CAST_DIR(i), e)
 			|| cell.isCapturableDirection(CAST_DIR(OPPOSITE(i)), e))
 		{
-			// _winP1 = &c;
+			_winCounter[e] = &cell;
 			result = true;
 		}
 		else
@@ -171,10 +172,12 @@ Rules::eValidity			Rules::makeMove(Board &b, Player::vec2 const &move,
 			result = Rules::captureStone(c, player);
 		if (result != INVALID)
 			b.updateHeuristics(move);
-		// if (_winP1 != NULL
-		// 	&& _nbCaptures[player] < 5
-		// 	&& Rules::win(_winP1) != 0)
-		// 	result = LOOSE;
+		if (_winCounter[OPPONENT(player)] != NULL
+			&& _nbCaptures[OPPONENT(player)] < 5
+			&& Rules::win(*_winCounter[OPPONENT(player)]) != 0)
+			result = LOOSE;
+		else
+			_winCounter[OPPONENT(player)] = NULL;
 		return (result);
 	}
 }

@@ -42,9 +42,9 @@ private:
 	Rules			&operator=(Rules const &rhs);
 
 	static int			_nbCaptures[Cell::E_VALUE];
-	static Cell			*_winCounter[Cell::E_VALUE];
+	static Cell const	*_winCounter[Cell::E_VALUE];
 
-	static int			win(Cell &cell);
+	static int			win(Cell const &cell);
 	static bool			insertDoubleFreethrees(Cell &cell);
 	static bool			canCaptureFive(Cell const &cell, int dirWin);
 	static eValidity	captureStone(Cell &cell, Cell::eValue player);
