@@ -45,7 +45,13 @@ void				GameManager::loop(void)
 			{
 				std::cout << "Player:\t" << _turn << " wins !" << std::endl;
 				_turn = OPPONENT(_turn);
-				// _exit = true;
+				_exit = true;
+			}
+			else if (validMove == Rules::LOOSE)
+			{
+				std::cout << "Player:\t" << OPPONENT(_turn) << " wins !" << std::endl;
+				_turn = OPPONENT(_turn);
+				_exit = true;
 			}
 		}
 		_ui.render(_b, _p1, _p2);
