@@ -15,6 +15,7 @@
 
 # include <cstdlib>
 
+# include "Cell.hpp"
 class Board;
 
 class Player
@@ -29,19 +30,24 @@ public:
 	Player(void);
 	~Player(void);
 
+	void			attribPlayer(Cell::eValue e);
+
+
 	bool			ai(void) const;
 	vec2 const		&calculusMove(void) const;
 
 	void			setAI(bool const &ai);
-	vec2 const		&play(Board const &b, vec2 const &event);
+	vec2 const		&play(Board &b, vec2 const &event);
+
 private:
 	bool			_ai;
 	vec2			_calculusMove;
+	Cell::eValue	_e;
 
 	Player(Player const &src);
 	Player			&operator=(Player const &rhs);
 
-	vec2 const		&calculus(Board const &b);
+	vec2 const		&calculus(Board &b);
 };
 
 #endif

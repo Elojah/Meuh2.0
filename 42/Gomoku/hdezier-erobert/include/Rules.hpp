@@ -27,10 +27,13 @@ public:
 	{
 		OK = 0,
 		INVALID,
-		WIN
+		WIN,
+		LOOSE
 	};
 
 	static eValidity	makeMove(Board &b, Player::vec2 const &move,
+								Cell::eValue player);
+	static eValidity	simulateMove(Board &b, Player::vec2 const &move,
 								Cell::eValue player);
 private:
 	Rules(void);
@@ -39,12 +42,13 @@ private:
 	Rules			&operator=(Rules const &rhs);
 
 	static int			_nbCaptures[Cell::E_VALUE];
+	static Cell			*_winCounter[Cell::E_VALUE];
 
 	static int			win(Cell &cell);
 	static bool			insertDoubleFreethrees(Cell &cell);
 	static bool			canCaptureFive(Cell const &cell, int dirWin);
 	static eValidity	captureStone(Cell &cell, Cell::eValue player);
-	static bool			canCaptureLast(Board const &b, Cell::eValue opponent);
+	static bool			canCaptureLast(Board const &b, Cell &cell);
 };
 
 #endif

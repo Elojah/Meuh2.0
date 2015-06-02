@@ -30,7 +30,7 @@ public:
 
 	unsigned int		size(void) const;
 
-	void				setSize(unsigned int size);
+	void				init(unsigned int size);
 	void				display(void) const;
 	Cell::eValue const	&getValue(int row, int col) const;
 	Cell				&getCell(int row, int col);

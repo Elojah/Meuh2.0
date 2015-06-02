@@ -16,10 +16,12 @@ GameManager::~GameManager(void)
 
 void				GameManager::init(unsigned int size)
 {
-	_b.setSize(size);
+	_b.init(size);
 	_ui.init(size);
-	_ui.render(_b, _p1, _p2);
+	_p1.attribPlayer(Cell::P1);
+	_p2.attribPlayer(Cell::P2);
 	_p2.setAI(true);
+	_ui.render(_b, _p1, _p2);
 }
 
 void				GameManager::loop(void)
@@ -43,6 +45,7 @@ void				GameManager::loop(void)
 			{
 				std::cout << "Player:\t" << _turn << " wins !" << std::endl;
 				_turn = OPPONENT(_turn);
+				// _exit = true;
 			}
 		}
 		_ui.render(_b, _p1, _p2);
