@@ -42,7 +42,7 @@ private:
 	Rules			&operator=(Rules const &rhs);
 
 	static int			_nbCaptures[Cell::E_VALUE];
-	static Cell const	*_winCounter[Cell::E_VALUE];
+	static Cell const	*_winMove[Cell::E_VALUE];
 
 	static int			win(Cell const &cell);
 	static bool			insertDoubleFreethrees(Cell &cell);

@@ -61,7 +61,7 @@ UserInterface::sEvent const	&UserInterface::getEvent(void)
 	_event.e = E_EVENT;
 	while (_window.pollEvent(event))
 	{
-		if (event.type == sf::Event::Closed 
+		if (event.type == sf::Event::Closed
 			|| (event.type == sf::Event::KeyPressed
 				&& event.key.code == sf::Keyboard::Escape))
 			_event.e = EXIT;
