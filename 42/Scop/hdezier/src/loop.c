@@ -29,6 +29,16 @@ static void	set_center_obj(t_object *obj)
 	obj->center.z = min.z + ABS(max.z - min.z) / 2;
 }
 
+static void	prepare_obj(t_object *obj)
+{
+	glGenTextures(1, &(obj->tex_id));
+	glBindTexture(GL_TEXTURE_2D, obj->tex_id);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, obj->bmp.width, obj->bmp.height, 0
+		, GL_BGR, GL_UNSIGNED_BYTE, obj->bmp.data);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+}
+
 void		loop(t_window *w)
 {
 	double	t;
@@ -40,6 +50,7 @@ void		loop(t_window *w)
 	set_center_obj(&(w->obj));
 	refresh(w);
 	render(w);
+	prepare_obj(&(w->obj));
 	while (!glfwWindowShouldClose(w->window))
 	{
 		if ((t = glfwGetTime()) < prev_t + REFRESH_TIME)

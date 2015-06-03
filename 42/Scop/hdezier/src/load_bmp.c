@@ -28,10 +28,4 @@ static void		read_bmp_file(t_object *obj, char *filename)
 void		load_bmp(t_object *obj, char *filename)
 {
 	read_bmp_file(obj, filename);
-	glGenTextures(1, &(obj->tex_id));
-	glBindTexture(GL_TEXTURE_2D, obj->tex_id);
-	glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, obj->bmp.width, obj->bmp.height, 0
-		, GL_BGR, GL_UNSIGNED_BYTE, obj->bmp.data);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 }

@@ -22,17 +22,35 @@ static void	rotate_camera(t_window *w, int n)
 static void	move_camera(t_window *w, t_move t)
 {
 	if (t == LEFT)
+	{
 		move_point(&(w->cam.center), &(w->cam.right), -1);
+		move_point(&(w->cam.eye), &(w->cam.right), -1);
+	}
 	else if (t == RIGHT)
+	{
 		move_point(&(w->cam.center), &(w->cam.right), 1);
+		move_point(&(w->cam.eye), &(w->cam.right), 1);
+	}
 	else if (t == FORWARD)
+	{
 		move_point(&(w->cam.center), &(w->cam.forward), 1);
+		move_point(&(w->cam.eye), &(w->cam.forward), 1);
+	}
 	else if (t == BACK)
+	{
 		move_point(&(w->cam.center), &(w->cam.forward), -1);
+		move_point(&(w->cam.eye), &(w->cam.forward), -1);
+	}
 	else if (t == UP)
+	{
 		move_point(&(w->cam.center), &(w->cam.up), 1);
+		move_point(&(w->cam.eye), &(w->cam.up), 1);
+	}
 	else if (t == DOWN)
+	{
 		move_point(&(w->cam.center), &(w->cam.up), -1);
+		move_point(&(w->cam.eye), &(w->cam.up), -1);
+	}
 	else
 		return ;
 	refresh(w);
