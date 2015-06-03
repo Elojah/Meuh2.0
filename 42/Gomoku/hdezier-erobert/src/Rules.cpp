@@ -18,6 +18,8 @@ int							Rules::win(Cell const &cell)
 	int						align1;
 	int						align2;
 
+	if (value == Cell::EMPTY)
+		return (result);
 	for (int i = 0; i < 4; ++i)
 	{
 		align1 = cell.countAlign(value, CAST_DIR(i));
@@ -163,14 +165,13 @@ Rules::eValidity			Rules::makeMove(Board &b, Player::vec2 const &move,
 		{
 			result = INVALID;
 			c.setValue(Cell::EMPTY);
+			return (result);
 		}
-		else if ((dirWin = Rules::win(c))
+		result = Rules::captureStone(c, player);
+		if ((dirWin = Rules::win(c))
 			&& !Rules::canCaptureLast(b, c)
 			&& !Rules::canCaptureFive(c, dirWin))
 			result = WIN;
-		else
-			result = Rules::captureStone(c, player);
-		if (result != INVALID)
 			b.updateHeuristics(move);
 		if (_winMove[OPPONENT(player)] != NULL
 			&& _nbCaptures[player] < 5

@@ -60,7 +60,7 @@ Player::vec2 const		&Player::play(Board &b, Player::vec2 const &event)
 Player::vec2 const		&Player::calculus(Board &b)
 {
 	// static vec2			result;
-	static vec2			tmp;
+	static vec2				tmp;
 	// Cell const			*c;
 	// Rules::eValidity	resultMove;
 	// int					size(b.size());
