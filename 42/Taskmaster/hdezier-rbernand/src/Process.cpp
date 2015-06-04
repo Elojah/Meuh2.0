@@ -1,4 +1,7 @@
 #include "Process.hpp"
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 const std::string	Process::_paramsName[19] = {
 	"cmd",
@@ -19,7 +22,8 @@ const std::string	Process::_paramsName[19] = {
 	"ANSWER"
 };
 
-Process::Process(void) {
+Process::Process(void) :
+	_pid(-1) {
 }
 
 Process::Process(Process const &src) {
@@ -86,6 +90,29 @@ Process		&Process::operator=(Process const &rhs) {
 		;
 	}
 	return (*this);
+}
+
+Process::eState		Process::launch(void) {
+	static const char	*fakeArgs[2] = {NULL, NULL};
+	int		status;
+
+	_pid = fork();
+	if (_pid == 0) {
+		if (execve(_params.cmd.c_str(), (char * const *)fakeArgs, NULL) < 0) {
+			*_log << "Command " << _params.cmd << " can't exec." << std::endl;
+			return (PROC_ERROR);
+		}
+	}
+	else
+	{
+		if (waitpid(_pid, &status, 0) == -1)
+			*_log << "Error waiting command execution" << std::endl;
+		if (!WIFEXITED(status)) {
+			*_log << "Command execution terminated unnormally" << std::endl;
+			return (PROC_ERROR);
+		}
+	}
+	return (PROC_OK);
 }
 
 void		Process::serialize(std::ostream &stream) const {

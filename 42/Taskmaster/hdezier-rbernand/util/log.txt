@@ -4,7 +4,7 @@ Read config file ./config/programs.conf
 File syntax:	OK
 Setting process params...
 Setting process params...
-cmd:	/usr/local/bin/nginx -c /etc/nginx/test.conf
+Launch cmd:	/usr/local/bin/nginx -c /etc/nginx/test.conf
 numprocs:	1
 umask:	18
 workingdir:	/tmp
@@ -20,7 +20,8 @@ stderr:	/tmp/nginx.stderr
 env:	
 STARTED_BY:	taskmaster
 ANSWER:	42
-cmd:	/usr/local/bin/vogsphere-worker --no-prefork
+Command /usr/local/bin/nginx -c /etc/nginx/test.conf can't exec.
+Launch cmd:	/usr/local/bin/vogsphere-worker --no-prefork
 numprocs:	8
 umask:	63
 workingdir:	/tmp
@@ -36,3 +37,21 @@ stderr:	/tmp/vgsworker.stderr
 env:	
 STARTED_BY:	
 ANSWER:	
+Command /usr/local/bin/vogsphere-worker --no-prefork can't exec.
+Launch cmd:	/usr/local/bin/vogsphere-worker --no-prefork
+numprocs:	8
+umask:	63
+workingdir:	/tmp
+autostart:	1
+autorestart:	unexpected
+exitcodes:	0
+startretries:	3
+starttime:	5
+stopsignal:	USR1
+stoptime:	10
+stdout:	/tmp/vgsworker.stdout
+stderr:	/tmp/vgsworker.stderr
+env:	
+STARTED_BY:	
+ANSWER:	
+Command /usr/local/bin/vogsphere-worker --no-prefork can't exec.

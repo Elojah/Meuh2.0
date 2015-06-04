@@ -43,7 +43,6 @@ bool			Master::readConfig(std::string const &filename) {
 	return (true);
 }
 
-
 Master::Master(Master const &src) {
 	if (this != &src)
 		*this = src;
@@ -56,7 +55,8 @@ Master::~Master(void) {
 
 void			Master::loop(void) {
 	for (int i = 0; i < _nProcs; ++i) {
-		_log << _procs[i];
+		_log << "Launch " << _procs[i];
+		_procs[i].launch();
 	}
 	_ui.notifyUser("TEST");
 }
