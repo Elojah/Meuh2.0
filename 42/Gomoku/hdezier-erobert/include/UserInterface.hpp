@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:07:12 by erobert           #+#    #+#             //
-//   Updated: 2015/06/01 14:31:58 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/05 18:01:33 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -76,7 +76,9 @@ private:
 	void				initWindow(void);
 	void				initStone(void);
 	void				renderBoard(Board const &b);
+	void				renderText(Player const &p1, Player const &p2);
 	void				renderPlayers(Player const &p1, Player const &p2);
+	void				renderSwitch(Player const &p1, Player const &p2);
 	void				drawStone(int x, int y, eStone stone);
 };
 

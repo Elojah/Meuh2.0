@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:10:55 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/01 18:37:41 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/05 17:31:17 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -21,7 +21,16 @@ class Board;
 class Player
 {
 public:
-	struct		vec2
+	struct sAttribute
+	{
+		bool		ai;
+		bool		turn;
+		bool		win;
+		int			x;
+		int			y;
+		int			captured;
+	};
+	struct vec2
 	{
 		int		x;
 		int		y;
@@ -30,24 +39,23 @@ public:
 	Player(void);
 	~Player(void);
 
-	void			attribPlayer(Cell::eValue e);
+	sAttribute const	&attribute(void) const;
 
-
-	bool			ai(void) const;
-	vec2 const		&calculusMove(void) const;
-
-	void			setAI(bool const &ai);
-	vec2 const		&play(Board &b, vec2 const &event);
-
+	void				switchAI(void);
+	void				switchTurn(void);
+	void				switchWin(void);
+	void				addCapture(int n);
+	vec2 const			&calculusMove(void) const;
+	vec2 const			&play(Board &b, vec2 const &event);
 private:
-	bool			_ai;
-	vec2			_calculusMove;
-	Cell::eValue	_e;
+	sAttribute			_attribute;
+	vec2				_calculusMove;
+	Cell::eValue		_e;
 
 	Player(Player const &src);
-	Player			&operator=(Player const &rhs);
+	Player				&operator=(Player const &rhs);
 
-	vec2 const		&calculus(Board &b);
+	vec2 const			&calculus(Board &b);
 };
 
 #endif

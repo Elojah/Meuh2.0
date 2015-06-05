@@ -6,14 +6,14 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2015/06/01 14:37:46 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/05 18:00:43 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #include "UserInterface.hpp"
 
 UserInterface::UserInterface(void):
-	_help(true)
+	_help(false)
 {
 	_font.loadFromFile("data/open_sans_light.ttf");
 	_text.setFont(_font);
@@ -40,14 +40,14 @@ void						UserInterface::render(Board const &b,
 												  Player const &p1,
 												  Player const &p2)
 {
-	_window.clear(sf::Color(173, 216, 230));
+	_window.clear(sf::Color(255, 212, 112));
 	renderBoard(b);
-	renderPlayers(p1, p2);
+	renderText(p1, p2);
 	if (_help)
 	{
-		if (!p1.ai())
+		if (!p1.attribute().ai)
 			drawStone(p1.calculusMove().x, p1.calculusMove().y, P1_HELP);
-		if (!p2.ai())
+		if (!p2.attribute().ai)
 			drawStone(p2.calculusMove().x, p2.calculusMove().y, P2_HELP);
 	}
 	_window.display();
@@ -69,13 +69,13 @@ UserInterface::sEvent const	&UserInterface::getEvent(void)
 		{
 			position[0] = sf::Mouse::getPosition(_window).x;
 			position[1] = sf::Mouse::getPosition(_window).y;
-			if (position[1] < HEIGHT)
+			if (position[1] < HEIGHT + 64 && position[1] > 64)
 			{
 				_event.e = MOUSE;
 				_event.x = position[0] / ((10 + 52.05 * 19.) / _size);
-				_event.y = position[1] / ((10 + 52.05 * 19.) / _size);
+				_event.y = (position[1] - 64) / ((10 + 52.05 * 19.) / _size);
 			}
-			else if (position[1] > HEIGHT + 12 && position[1] < HEIGHT + 52)
+			else if (position[1] > HEIGHT + 64 && position[1] < HEIGHT + 116)
 			{
 				if (position[0] > 190 && position[0] < 290)
 					_event.e = P1_AI;
@@ -103,7 +103,7 @@ void						UserInterface::initWindow(void)
 	float					scale[0];
 
 	if (!_window.isOpen())
-		_window.create(sf::VideoMode(WIDTH, HEIGHT + 64), "Gomoku");
+		_window.create(sf::VideoMode(WIDTH, HEIGHT + 128), "Gomoku");
 	_window.setFramerateLimit(60);
 	scale[0] = WIDTH;
 	scale[0] /= _tBoard.getSize().x;
@@ -111,6 +111,7 @@ void						UserInterface::initWindow(void)
 	scale[1] /= _tBoard.getSize().y;
 	_sBoard.scale(scale[0], scale[1]);
 	_sBoard.setTexture(_tBoard);
+	_sBoard.setPosition(0, 64);
 }
 void						UserInterface::initStone(void)
 {
@@ -134,7 +135,7 @@ void						UserInterface::drawStone(int x, int y,
 													 eStone stone)
 {
 	_stone[stone].setPosition((10 + 52.05 * x) * 19. / _size,
-							  (10 + 52.05 * y) * 19. / _size);
+							  (10 + 52.05 * y) * 19. / _size + 64);
 	_window.draw(_stone[stone]);
 }
 void						UserInterface::renderBoard(Board const &b)
@@ -157,37 +158,69 @@ void						UserInterface::renderBoard(Board const &b)
 		}
 	}
 }
-void						UserInterface::renderPlayers(Player const &p1,
-														 Player const &p2)
+void						UserInterface::renderText(Player const &p1,
+													  Player const &p2)
 {
 	_text.setCharacterSize(32);
 	_text.setStyle(sf::Text::Bold);
+	renderPlayers(p1, p2);
+	renderSwitch(p1, p2);
+}
+void						UserInterface::renderPlayers(Player const &p1,
+														 Player const &p2)
+{
 	_text.setColor(sf::Color::Black);
-	_text.setPosition(64, HEIGHT + 12);
+	_text.setPosition(64, 12);
+	if (p1.attribute().win)
+	{
+		_text.setString("BLACK WIN");
+		_window.draw(_text);
+	}
+	else if (!p2.attribute().win && p1.attribute().turn)
+	{
+		_text.setString("BLACK TURN");
+		_window.draw(_text);
+	}
+	_text.setPosition(64, HEIGHT + 76);
 	_text.setString("BLACK");
 	_window.draw(_text);
 	_text.setColor(sf::Color::White);
+	_text.setPosition(64, 12);
+	if (p2.attribute().win)
+	{
+		_text.setString("WHITE WIN");
+		_window.draw(_text);
+	}
+	else if (!p1.attribute().win && p2.attribute().turn)
+	{
+		_text.setString("WHITE TURN");
+		_window.draw(_text);
+	}		
 	_text.setString("WHITE");
-	_text.setPosition(WIDTH - 162, HEIGHT + 12);
+	_text.setPosition(WIDTH - 162, HEIGHT + 76);
 	_window.draw(_text);
+}
+void						UserInterface::renderSwitch(Player const &p1,
+														Player const &p2)
+{
 	_text.setColor(sf::Color::Color(205, 92, 92));
-	_text.setPosition(190, HEIGHT + 12);
-	if (p1.ai())
+	_text.setPosition(190, HEIGHT + 76);
+	if (p1.attribute().ai)
 		_text.setString("AI ON");
 	else
 		_text.setString("AI OFF");
 	_window.draw(_text);
-	if (p2.ai())
+	if (p2.attribute().ai)
 		_text.setString("AI ON");
 	else
 		_text.setString("AI OFF");
-	_text.setPosition(WIDTH - 291, HEIGHT + 12);
+	_text.setPosition(WIDTH - 291, HEIGHT + 76);
 	_window.draw(_text);
 	_text.setColor(sf::Color::Color(95, 200, 160));
 	if (_help)
 		_text.setString("HELP ON");
 	else
 		_text.setString("HELP OFF");
-	_text.setPosition(435, HEIGHT + 12);
+	_text.setPosition(435, HEIGHT + 76);
 	_window.draw(_text);
 }

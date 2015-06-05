@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/06/01 18:37:06 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/01 18:38:04 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/05 17:32:12 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -15,34 +15,45 @@
 #include "Board.hpp"
 #include "Rules.hpp"
 
-Player::Player(void):
-	_ai(false)
-{}
+Player::Player(void)
+{
+	_attribute.ai = false;
+	_attribute.turn = false;
+	_attribute.win = false;
+	_attribute.x = -1;
+	_attribute.y = -1;
+	_attribute.captured = 0;
+}
 Player::~Player(void) {}
 
-bool					Player::ai(void) const
+Player::sAttribute const	&Player::attribute(void) const
 {
-	return (_ai);
+	return (_attribute);
 }
 
-void					Player::setAI(bool const &ai)
+void						Player::switchAI(void)
 {
-	_ai = ai;
+	_attribute.ai = !_attribute.ai;
 }
-
-void					Player::attribPlayer(Cell::eValue e)
+void						Player::switchTurn(void)
 {
-	_e = e;
+	_attribute.turn = !_attribute.turn;
 }
-
-Player::vec2 const		&Player::calculusMove(void) const
+void						Player::switchWin(void)
+{
+	_attribute.win = !_attribute.win;
+}
+void						Player::addCapture(int n)
+{
+	_attribute.captured += n;
+}
+Player::vec2 const			&Player::calculusMove(void) const
 {
 	return (_calculusMove);
 }
-
-Player::vec2 const		&Player::play(Board &b, Player::vec2 const &event)
+Player::vec2 const			&Player::play(Board &b, Player::vec2 const &event)
 {
-	if (_ai)
+	if (_attribute.ai)
 	{
 		_calculusMove = calculus(b);
 		if (_calculusMove.x < 0 || _calculusMove.y < 0)
@@ -57,7 +68,7 @@ Player::vec2 const		&Player::play(Board &b, Player::vec2 const &event)
 	return (event);
 }
 
-Player::vec2 const		&Player::calculus(Board &b)
+Player::vec2 const			&Player::calculus(Board &b)
 {
 	// static vec2			result;
 	static vec2			tmp;
@@ -70,6 +81,8 @@ Player::vec2 const		&Player::calculus(Board &b)
 	(void)b;
 	tmp.x = rand() % b.size();
 	tmp.y = rand() % b.size();
+	_attribute.x = tmp.x;
+	_attribute.y = tmp.y;
 	// for (int i = 0; i < size; ++i)
 	// {
 	// 	for (int j = 0; j < size; ++j)

@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:09:51 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/01 18:39:10 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/05 17:24:33 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -33,7 +33,7 @@ private:
 	Player			_p2;
 	UserInterface	_ui;
 	AudioManager	_audio;
-	Cell::eValue	_turn;
+	bool			_end;
 	bool			_exit;
 
 	GameManager(GameManager const &src);

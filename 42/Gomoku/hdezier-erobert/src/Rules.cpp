@@ -1,15 +1,19 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   Rules.cpp                                          :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/06/05 17:25:46 by hdezier           #+#    #+#             //
+//   Updated: 2015/06/05 18:08:46 by erobert          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
+
 #include "Rules.hpp"
 #include "Board.hpp"
 
-/*NOT SAFE if E_VALUE is different*/
-int				Rules::_nbCaptures[Cell::E_VALUE] = {0, 0, 0};
-Cell const		*Rules::_winMove[Cell::E_VALUE] = {NULL, NULL, NULL};
-
-Rules::Rules(void)
-{}
-
-Rules::~Rules(void)
-{}
+Cell const					*Rules::_winMove[Cell::E_VALUE];
 
 int							Rules::win(Cell const &cell)
 {
@@ -29,7 +33,7 @@ int							Rules::win(Cell const &cell)
 }
 
 Rules::eValidity			Rules::captureStone(Cell &cell,
-												Cell::eValue player)
+												Player &player)
 {
 	int						captures;
 
@@ -42,10 +46,15 @@ Rules::eValidity			Rules::captureStone(Cell &cell,
 		{
 			cell.setAdjacentsValue(Cell::EMPTY, 2,
 				CAST_DIR(i));
-			++_nbCaptures[player];
+			player.addCapture(1);
 		}
 	}
-	return (_nbCaptures[player] > 4 ? WIN : OK);
+	if (player.attribute().captured > 4)
+	{
+		player.switchWin();
+		return (WIN);
+	}
+	return (OK);
 }
 
 bool						Rules::insertDoubleFreethrees(Cell &cell)
@@ -72,24 +81,25 @@ bool						Rules::insertDoubleFreethrees(Cell &cell)
 }
 
 bool						Rules::canCaptureLast(Board const &b,
-													Cell &cell)
+												  Cell &cell,
+												  Player &opponent)
 {
 	Cell const				*c;
-	Cell::eValue			opponent;
+	Cell::eValue			oValue;
 	unsigned int			i;
 	unsigned int			j;
 
-	opponent = cell.getValue();
-	if (_nbCaptures[OPPONENT(opponent)] != 4)
+	oValue = cell.getValue();
+	if (opponent.attribute().captured != 4)
 		return (false);
 	for (i = 0; i < b.size(); ++i)
 	{
 		for (j = 0; j < b.size(); ++j)
 		{
-			if (b.getValue(i, j) == opponent
+			if (b.getValue(i, j) == oValue
 				&& (c = &(b.getCell(i, j)))->isCapturable())
 			{
-				_winMove[opponent] = &cell;
+				_winMove[oValue] = &cell;
 				return (true);
 			}
 		}
@@ -118,7 +128,7 @@ bool						Rules::canCaptureFive(Cell const &cell, int dirWin)
 	}
 	return (result);
 }
-
+/*
 Rules::eValidity			Rules::simulateMove(Board &b, Player::vec2 const &move,
 											Cell::eValue player)
 {
@@ -146,11 +156,14 @@ Rules::eValidity			Rules::simulateMove(Board &b, Player::vec2 const &move,
 		return (result);
 	}
 }
-
+*/
 Rules::eValidity			Rules::makeMove(Board &b, Player::vec2 const &move,
-											Cell::eValue player)
+											Player &p1, Player &p2)
 {
-	Rules::eValidity		result;
+	Player					&player(p1.attribute().turn ? p1 : p2);
+	Player					&opponent(p1.attribute().turn ? p2 : p1);
+	Cell::eValue			pValue(p1.attribute().turn ? Cell::P1 : Cell::P2);
+	Rules::eValidity		result(INVALID);
 	Cell					&c(b.getCell(move.x, move.y));
 	int						dirWin;
 
@@ -158,26 +171,32 @@ Rules::eValidity			Rules::makeMove(Board &b, Player::vec2 const &move,
 		return (INVALID);
 	else
 	{
-		c.setValue(player);
+		c.setValue(pValue);
 		if (Rules::insertDoubleFreethrees(c))
 		{
 			result = INVALID;
 			c.setValue(Cell::EMPTY);
 		}
 		else if ((dirWin = Rules::win(c))
-			&& !Rules::canCaptureLast(b, c)
+				 && !Rules::canCaptureLast(b, c, opponent)
 			&& !Rules::canCaptureFive(c, dirWin))
+		{
+			player.switchWin();
 			result = WIN;
+		}
 		else
 			result = Rules::captureStone(c, player);
 		if (result != INVALID)
 			b.updateHeuristics(move);
-		if (_winMove[OPPONENT(player)] != NULL
-			&& _nbCaptures[player] < 5
-			&& Rules::win(*_winMove[OPPONENT(player)]) != 0)
+		if (_winMove[OPPONENT(pValue)] != NULL
+			&& player.attribute().captured < 5
+			&& Rules::win(*_winMove[OPPONENT(pValue)]) != 0)
+		{
+			opponent.switchWin();
 			result = LOOSE;
+		}
 		else
-			_winMove[OPPONENT(player)] = NULL;
+			_winMove[OPPONENT(pValue)] = NULL;
 		return (result);
 	}
 }

@@ -5,25 +5,21 @@
 #include <iostream>
 
 GameManager::GameManager(void):
-	_turn(Cell::P1),
+	_end(false),
 	_exit(false)
 {
 	std::srand(std::time(0));
 }
-
-GameManager::~GameManager(void)
-{}
+GameManager::~GameManager(void) {}
 
 void				GameManager::init(unsigned int size)
 {
 	_b.init(size);
 	_ui.init(size);
-	_p1.attribPlayer(Cell::P1);
-	_p2.attribPlayer(Cell::P2);
-	_p2.setAI(true);
+	_p1.switchTurn();
+	_p2.switchAI();
 	_ui.render(_b, _p1, _p2);
 }
-
 void				GameManager::loop(void)
 {
 	Player::vec2	move;
@@ -32,33 +28,29 @@ void				GameManager::loop(void)
 	while (!_exit)
 	{
 		move = eventHandler();
-		if (_turn == Cell::P1)
-			move = _p1.play(_b, move);
-		else if (_turn == Cell::P2)
-			move = _p2.play(_b, move);
-		if (move.x > -1 && move.y > -1)
+		if (!_end)
 		{
-			validMove = Rules::makeMove(_b, move, _turn);
-			if (validMove == Rules::OK)
-				_turn = OPPONENT(_turn);
-			else if (validMove == Rules::WIN)
+			if (_p1.attribute().turn)
+				move = _p1.play(_b, move);
+			else if (_p2.attribute().turn)
+				move = _p2.play(_b, move);
+			if (move.x > -1 && move.y > -1)
 			{
-				std::cout << "Player:\t" << _turn << " wins !" << std::endl;
-				_turn = OPPONENT(_turn);
-				_exit = true;
+				validMove = Rules::makeMove(_b, move, _p1, _p2);
+				if (validMove == Rules::OK)
+				{
+					_p1.switchTurn();
+					_p2.switchTurn();
+				}
+				else if (_p1.attribute().win || _p2.attribute().win)
+					_end = true;
 			}
-			else if (validMove == Rules::LOOSE)
-			{
-				std::cout << "Player:\t" << OPPONENT(_turn) << " wins !" << std::endl;
-				_turn = OPPONENT(_turn);
-				_exit = true;
-			}
+			_ui.render(_b, _p1, _p2);
 		}
-		_ui.render(_b, _p1, _p2);
 	}
 }
 
-const Player::vec2	&GameManager::eventHandler(void)
+Player::vec2 const	&GameManager::eventHandler(void)
 {
 	static Player::vec2				result;
 	static UserInterface::sEvent	event;
@@ -73,9 +65,9 @@ const Player::vec2	&GameManager::eventHandler(void)
 		result.y = event.y;
 	}
 	else if (event.e == UserInterface::P1_AI)
-		_p1.setAI(!_p1.ai());
+		_p1.switchAI();
 	else if (event.e == UserInterface::P2_AI)
-		_p2.setAI(!_p2.ai());
+		_p2.switchAI();
 	else if (event.e == UserInterface::PLAY)
 		_audio.playMusic(AudioManager::HYMNE_A_LA_KRO);
 	else if (event.e == UserInterface::NEXT)
