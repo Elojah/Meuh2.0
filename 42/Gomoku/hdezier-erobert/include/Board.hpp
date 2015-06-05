@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:07:33 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/01 18:37:53 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/05 18:42:48 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -35,7 +35,7 @@ public:
 	Cell::eValue const	&getValue(int row, int col) const;
 	Cell				&getCell(int row, int col);
 	Cell const			&getCell(int row, int col) const;
-	void				updateHeuristics(Player::vec2 const &move);
+	void				updateHeuristics(int row, int col);
 protected:
 private:
 	unsigned int		_size;

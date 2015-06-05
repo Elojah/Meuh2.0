@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2015/06/05 18:00:43 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/05 19:24:19 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -173,7 +173,10 @@ void						UserInterface::renderPlayers(Player const &p1,
 	_text.setPosition(64, 12);
 	if (p1.attribute().win)
 	{
-		_text.setString("BLACK WIN");
+		if (p1.attribute().captured > 4)
+			_text.setString("BLACK WIN BY CAPTURE");
+		else
+			_text.setString("BLACK WIN");
 		_window.draw(_text);
 	}
 	else if (!p2.attribute().win && p1.attribute().turn)
@@ -188,7 +191,10 @@ void						UserInterface::renderPlayers(Player const &p1,
 	_text.setPosition(64, 12);
 	if (p2.attribute().win)
 	{
-		_text.setString("WHITE WIN");
+		if (p2.attribute().captured > 4)
+			_text.setString("BLACK WIN BY CAPTURE");
+		else
+			_text.setString("WHITE WIN");
 		_window.draw(_text);
 	}
 	else if (!p1.attribute().win && p2.attribute().turn)

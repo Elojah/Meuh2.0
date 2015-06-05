@@ -12,7 +12,7 @@ GameManager::GameManager(void):
 }
 GameManager::~GameManager(void) {}
 
-void				GameManager::init(unsigned int size)
+void								GameManager::init(unsigned int size)
 {
 	_b.init(size);
 	_ui.init(size);
@@ -20,10 +20,11 @@ void				GameManager::init(unsigned int size)
 	_p2.switchAI();
 	_ui.render(_b, _p1, _p2);
 }
-void				GameManager::loop(void)
+void								GameManager::loop(void)
 {
-	Player::vec2	move;
-	int				validMove;
+	Player::vec2					move;
+	bool							hasPlayed;
+	Rules::eValidity				validity;
 
 	while (!_exit)
 	{
@@ -31,18 +32,18 @@ void				GameManager::loop(void)
 		if (!_end)
 		{
 			if (_p1.attribute().turn)
-				move = _p1.play(_b, move);
+				hasPlayed = _p1.play(_b, move);
 			else if (_p2.attribute().turn)
-				move = _p2.play(_b, move);
-			if (move.x > -1 && move.y > -1)
+				hasPlayed = _p2.play(_b, move);
+			if (hasPlayed)
 			{
-				validMove = Rules::makeMove(_b, move, _p1, _p2);
-				if (validMove == Rules::OK)
+				validity = Rules::makeMove(_b, _p1, _p2);
+				if (validity == Rules::OK)
 				{
 					_p1.switchTurn();
 					_p2.switchTurn();
 				}
-				else if (_p1.attribute().win || _p2.attribute().win)
+				else if (validity != Rules::INVALID)
 					_end = true;
 			}
 			_ui.render(_b, _p1, _p2);
@@ -50,12 +51,13 @@ void				GameManager::loop(void)
 	}
 }
 
-Player::vec2 const	&GameManager::eventHandler(void)
+Player::vec2 const					&GameManager::eventHandler(void)
 {
 	static Player::vec2				result;
 	static UserInterface::sEvent	event;
 
-	result.x = result.y = -1;
+	result.x = -1;
+	result.y = -1;
 	event = _ui.getEvent();
 	if (event.e == UserInterface::EXIT)
 		_exit = true;

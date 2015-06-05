@@ -6,11 +6,9 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/06/01 18:37:06 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/05 17:32:12 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/05 19:03:06 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
-
-#include <iostream>
 #include "Player.hpp"
 #include "Board.hpp"
 #include "Rules.hpp"
@@ -30,6 +28,10 @@ Player::sAttribute const	&Player::attribute(void) const
 {
 	return (_attribute);
 }
+Player::vec2 const			&Player::calculusMove(void) const
+{
+	return (_calculusMove);
+}
 
 void						Player::switchAI(void)
 {
@@ -47,31 +49,33 @@ void						Player::addCapture(int n)
 {
 	_attribute.captured += n;
 }
-Player::vec2 const			&Player::calculusMove(void) const
-{
-	return (_calculusMove);
-}
-Player::vec2 const			&Player::play(Board &b, Player::vec2 const &event)
+bool						Player::play(Board &b, Player::vec2 const &move)
 {
 	if (_attribute.ai)
 	{
-		_calculusMove = calculus(b);
+		calculus(b);
 		if (_calculusMove.x < 0 || _calculusMove.y < 0)
+		{
 			std::cout << "IA can't find valid move :(" << std::endl;
-		return (_calculusMove);
+			return (false);
+		}
+		_attribute.x = _calculusMove.x;
+		_attribute.y = _calculusMove.y;
+		return (true);
 	}
-	else if (event.x > -1 && event.y > -1)
+	else if (move.x > -1 && move.y > -1)
 	{
-		_calculusMove = calculus(b);
-		return (event);
+		_attribute.x = move.x;
+		_attribute.y = move.y;
+		calculus(b);
+		return (true);
 	}
-	return (event);
+	return (false);
 }
 
-Player::vec2 const			&Player::calculus(Board &b)
+void						Player::calculus(Board &b)
 {
 	// static vec2			result;
-	static vec2			tmp;
 	// Cell const			*c;
 	// Rules::eValidity	resultMove;
 	// int					size(b.size());
@@ -79,10 +83,8 @@ Player::vec2 const			&Player::calculus(Board &b)
 	// tmp.x = -1;
 	// tmp.y = -1;
 	(void)b;
-	tmp.x = rand() % b.size();
-	tmp.y = rand() % b.size();
-	_attribute.x = tmp.x;
-	_attribute.y = tmp.y;
+	_calculusMove.x = rand() % b.size();
+	_calculusMove.y = rand() % b.size();
 	// for (int i = 0; i < size; ++i)
 	// {
 	// 	for (int j = 0; j < size; ++j)
@@ -100,5 +102,5 @@ Player::vec2 const			&Player::calculus(Board &b)
 	// 			return (tmp);
 	// 	}
 	// }
-	return (tmp);
+//	return (tmp);
 }

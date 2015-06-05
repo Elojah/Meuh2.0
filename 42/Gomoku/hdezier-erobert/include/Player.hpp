@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:10:55 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/05 17:31:17 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/05 19:01:21 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -14,8 +14,9 @@
 # define PLAYER_HPP
 
 # include <cstdlib>
-
+# include <iostream>
 # include "Cell.hpp"
+
 class Board;
 
 class Player
@@ -40,13 +41,14 @@ public:
 	~Player(void);
 
 	sAttribute const	&attribute(void) const;
+	vec2 const			&calculusMove(void) const;
 
 	void				switchAI(void);
 	void				switchTurn(void);
 	void				switchWin(void);
 	void				addCapture(int n);
-	vec2 const			&calculusMove(void) const;
-	vec2 const			&play(Board &b, vec2 const &event);
+	bool				play(Board &b, Player::vec2 const &move);
+	void				calculus(Board &b);
 private:
 	sAttribute			_attribute;
 	vec2				_calculusMove;
@@ -54,8 +56,6 @@ private:
 
 	Player(Player const &src);
 	Player				&operator=(Player const &rhs);
-
-	vec2 const			&calculus(Board &b);
 };
 
 #endif
