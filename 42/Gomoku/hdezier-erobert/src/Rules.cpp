@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/06/05 17:25:46 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/05 19:35:28 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/05 19:38:00 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -14,7 +14,6 @@
 #include "Board.hpp"
 
 Cell const					*Rules::_winMove[Cell::E_VALUE];
-
 /*
 Rules::eValidity			Rules::simulateMove(Board &b, Player::vec2 const &move,
 											Cell::eValue player)
@@ -147,12 +146,12 @@ bool						Rules::canCaptureFive(Cell const &cell, int dirWin)
 }
 Rules::eValidity			Rules::captureStone(Cell &cell, Player &player)
 {
-	int						captures;
-
-	captures = cell.checkCapture();
+	int						captures(cell.checkCapture());
+	int						i;
+	
 	if (captures == 0)
 		return (OK);
-	for (int i = 0; i < 8; ++i)
+	for (i = 0; i < 8; ++i)
 	{
 		if ((captures >> i) & 1)
 		{

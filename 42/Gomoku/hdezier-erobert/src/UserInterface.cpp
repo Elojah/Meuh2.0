@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2015/06/05 19:24:19 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/05 19:41:31 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -192,7 +192,7 @@ void						UserInterface::renderPlayers(Player const &p1,
 	if (p2.attribute().win)
 	{
 		if (p2.attribute().captured > 4)
-			_text.setString("BLACK WIN BY CAPTURE");
+			_text.setString("WHITE WIN BY CAPTURE");
 		else
 			_text.setString("WHITE WIN");
 		_window.draw(_text);

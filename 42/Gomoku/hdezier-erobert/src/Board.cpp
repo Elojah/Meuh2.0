@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/06/01 18:17:27 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/05 18:35:36 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/05 19:39:23 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -14,7 +14,6 @@
 #include <unistd.h>
 
 Board::Board(void) {}
-
 Board::~Board(void) {}
 
 unsigned int		Board::size(void) const
