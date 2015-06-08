@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/06/05 17:25:46 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/05 19:38:00 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/08 14:34:52 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -60,20 +60,18 @@ Rules::eValidity			Rules::makeMove(Board &b, Player &p1, Player &p2)
 		c.setValue(pValue);
 		if (Rules::insertDoubleFreethrees(c))
 		{
-			result = INVALID;
 			c.setValue(Cell::EMPTY);
+			return (result);
 		}
-		else if ((dirWin = Rules::win(c))
-				 && !Rules::canCaptureLast(b, c, opponent)
+		result = Rules::captureStone(c, player);
+		if ((dirWin = Rules::win(c))
+			&& !Rules::canCaptureLast(b, c, opponent)
 			&& !Rules::canCaptureFive(c, dirWin))
 		{
 			player.switchWin();
 			result = WIN;
 		}
-		else
-			result = Rules::captureStone(c, player);
-		if (result != INVALID)
-			b.updateHeuristics(player.attribute().x, player.attribute().y);
+		b.updateHeuristics(player.attribute().x, player.attribute().y);
 		if (_winMove[OPPONENT(pValue)] != NULL
 			&& player.attribute().captured < 5
 			&& Rules::win(*_winMove[OPPONENT(pValue)]) != 0)
