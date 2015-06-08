@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:11:48 by hdezier           #+#    #+#             //
-//   Updated: 2015/05/28 12:12:23 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/05 18:31:59 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -21,8 +21,6 @@ class Board;
 class Rules
 {
 public:
-
-	/*DONT TOUCH ME*/
 	enum eValidity
 	{
 		OK = 0,
@@ -31,24 +29,24 @@ public:
 		LOOSE
 	};
 
-	static eValidity	makeMove(Board &b, Player::vec2 const &move,
-								Cell::eValue player);
-	static eValidity	simulateMove(Board &b, Player::vec2 const &move,
-								Cell::eValue player);
+	static eValidity	makeMove(Board &b, Player &p1, Player &p2);
+//	static eValidity	simulateMove(Board &b, Player::vec2 const &move,
+//								Cell::eValue player);
 private:
-	Rules(void);
-	~Rules(void);
-	Rules(Rules const &src);
-	Rules			&operator=(Rules const &rhs);
-
-	static int			_nbCaptures[Cell::E_VALUE];
 	static Cell const	*_winMove[Cell::E_VALUE];
+
+	Rules(void);
+	Rules(Rules const &src);
+	~Rules(void);
+
+	Rules			&operator=(Rules const &rhs);
 
 	static int			win(Cell const &cell);
 	static bool			insertDoubleFreethrees(Cell &cell);
 	static bool			canCaptureFive(Cell const &cell, int dirWin);
-	static eValidity	captureStone(Cell &cell, Cell::eValue player);
-	static bool			canCaptureLast(Board const &b, Cell &cell);
+	static eValidity	captureStone(Cell &cell, Player &player);
+	static bool			canCaptureLast(Board const &b, Cell &cell,
+									   Player &opponent);
 };
 
 #endif

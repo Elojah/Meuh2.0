@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/06/01 18:17:27 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/01 18:27:56 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/05 19:39:23 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -14,7 +14,6 @@
 #include <unistd.h>
 
 Board::Board(void) {}
-
 Board::~Board(void) {}
 
 unsigned int		Board::size(void) const
@@ -87,8 +86,8 @@ void				Board::display(void) const
 	}
 }
 
-void	Board::updateHeuristics(Player::vec2 const &move)
+void	Board::updateHeuristics(int row, int col)
 {
 	for (int i = 0; i < 8; ++i)
-		_cells[move.x][move.y].setPlayableDirection(3, CAST_DIR(i));
+		_cells[row][col].setPlayableDirection(3, CAST_DIR(i));
 }
