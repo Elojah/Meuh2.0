@@ -14,7 +14,7 @@
 # define REFRESH_TIME 0.016
 # define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
-# define MAX_SIZE_BMP 65537
+# define MAX_SIZE_BMP 200000
 # define MAX_LENGTH_SHADERS 1024
 # define MAX_VERTEX 256
 # define MAX_INDEX 1024
@@ -36,7 +36,7 @@
 # define SQ(n) ((n) * (n))
 
 # define MOVE_SPEED 0.5
-# define MOUSE_SPEED 0.001
+# define MOUSE_SPEED 0.01
 # define ROTATE_DIST 20
 
 typedef enum		e_move
@@ -68,7 +68,7 @@ typedef struct		s_bmp
 	unsigned int	width;
 	unsigned int	height;
 	unsigned int	size;
-	unsigned char	data[MAX_SIZE_BMP];
+	char			data[MAX_SIZE_BMP + 1];
 }					t_bmp;
 
 typedef struct		s_camera

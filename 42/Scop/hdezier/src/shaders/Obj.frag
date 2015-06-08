@@ -1,7 +1,7 @@
 #version 330 core
 in vec2				UV;
-out vec3			color;
-uniform sampler2D	text_sampler;
+out vec4			color;
+uniform sampler2D	color_map;
 void main() {
-	color = texture(text_sampler, UV).rgb;
+	color = vec4(texture(color_map, UV).rgb, 1.);
 }
