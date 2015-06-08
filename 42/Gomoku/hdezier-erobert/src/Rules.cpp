@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/06/05 17:25:46 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/08 14:34:52 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/08 18:23:57 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -14,6 +14,14 @@
 #include "Board.hpp"
 
 Cell const					*Rules::_winMove[Cell::E_VALUE];
+
+void						Rules::reset(void)
+{
+	int						i(-1);
+
+	while (++i < Cell::E_VALUE)
+		_winMove[i] = NULL;
+}
 /*
 Rules::eValidity			Rules::simulateMove(Board &b, Player::vec2 const &move,
 											Cell::eValue player)

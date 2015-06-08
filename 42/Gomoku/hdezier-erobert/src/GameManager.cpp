@@ -15,6 +15,7 @@ GameManager::~GameManager(void) {}
 
 void								GameManager::init(unsigned int size)
 {
+	Rules::reset();
 	_b.init(size);
 	_ui.init(size);
 	_p1.switchTurn();
