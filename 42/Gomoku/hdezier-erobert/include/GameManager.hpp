@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:09:51 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/05 17:24:33 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/08 12:36:40 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -25,7 +25,7 @@ public:
 	~GameManager(void);
 
 	void				init(unsigned int size);
-	void				loop(void);
+	bool				loop(void);
 	const Player::vec2	&eventHandler(void);
 private:
 	Board			_b;
@@ -34,6 +34,7 @@ private:
 	UserInterface	_ui;
 	AudioManager	_audio;
 	bool			_end;
+	bool			_restart;
 	bool			_exit;
 
 	GameManager(GameManager const &src);

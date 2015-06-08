@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/06/01 18:37:06 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/05 19:03:06 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/08 12:27:44 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 #include "Player.hpp"
@@ -51,7 +51,9 @@ void						Player::addCapture(int n)
 }
 bool						Player::play(Board &b, Player::vec2 const &move)
 {
-	if (_attribute.ai)
+	if (!_attribute.turn)
+		return (false);
+	else if (_attribute.ai)
 	{
 		calculus(b);
 		if (_calculusMove.x < 0 || _calculusMove.y < 0)

@@ -6,6 +6,7 @@
 
 GameManager::GameManager(void):
 	_end(false),
+	_restart(false),
 	_exit(false)
 {
 	std::srand(std::time(0));
@@ -20,10 +21,9 @@ void								GameManager::init(unsigned int size)
 	_p2.switchAI();
 	_ui.render(_b, _p1, _p2);
 }
-void								GameManager::loop(void)
+bool								GameManager::loop(void)
 {
 	Player::vec2					move;
-	bool							hasPlayed;
 	Rules::eValidity				validity;
 
 	while (!_exit)
@@ -31,11 +31,7 @@ void								GameManager::loop(void)
 		move = eventHandler();
 		if (!_end)
 		{
-			if (_p1.attribute().turn)
-				hasPlayed = _p1.play(_b, move);
-			else if (_p2.attribute().turn)
-				hasPlayed = _p2.play(_b, move);
-			if (hasPlayed)
+			if (_p1.play(_b, move) || _p2.play(_b, move))
 			{
 				validity = Rules::makeMove(_b, _p1, _p2);
 				if (validity == Rules::OK)
@@ -49,6 +45,7 @@ void								GameManager::loop(void)
 			_ui.render(_b, _p1, _p2);
 		}
 	}
+	return (_restart);
 }
 
 Player::vec2 const					&GameManager::eventHandler(void)
@@ -61,6 +58,11 @@ Player::vec2 const					&GameManager::eventHandler(void)
 	event = _ui.getEvent();
 	if (event.e == UserInterface::EXIT)
 		_exit = true;
+	else if (event.e == UserInterface::RESTART)
+	{
+		_restart = true;
+		_exit = true;
+	}
 	else if (event.e == UserInterface::MOUSE)
 	{
 		result.x = event.x;

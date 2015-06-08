@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:07:12 by erobert           #+#    #+#             //
-//   Updated: 2015/06/05 18:01:33 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/08 12:32:42 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -26,6 +26,7 @@ public:
 	enum eEvent
 	{
 		EXIT = 0,
+		RESTART,
 		MOUSE,
 		PLAY,
 		NEXT,
