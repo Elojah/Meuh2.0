@@ -14,6 +14,7 @@ public:
 
 	void		setParams(Json::Value &);
 	void		setLog(std::ofstream *log);
+	void		start(void);
 
 	void		serialize(std::ostream &stream) const;
 
