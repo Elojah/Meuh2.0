@@ -34,11 +34,11 @@ public:
 //								Cell::eValue player);
 private:
 	static Cell const	*_winMove[Cell::E_VALUE];
-	
+
 	Rules(void);
 	Rules(Rules const &src);
 	~Rules(void);
-	
+
 	Rules			&operator=(Rules const &rhs);
 
 	static int			win(Cell const &cell);

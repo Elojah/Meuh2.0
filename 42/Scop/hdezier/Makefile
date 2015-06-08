@@ -7,7 +7,7 @@ BUILD_DIR = build
 LIB_DIR =
 
 #Options
-CC = clang-3.6
+CC = clang
 SRC_EXT = .c
 RM = rm -rf
 
@@ -42,20 +42,16 @@ LIB_LOCAL = \
 			lib/glfw\
 
 LIB_GLOBAL = \
-			pthread\
-			Xxf86vm\
-			Xinerama\
-			Xcursor\
-			Xi\
-			Xrandr\
-			X11\
-			GL\
 			glfw3\
 			ft\
 			m\
 
 LIB_OTHER = \
 			-Llib/glfw/src\
+			-framework OpenGL\
+			-framework Cocoa\
+			-framework IOKit\
+			-framework CoreVideo\
 
 LIBS += $(LIB_OTHER)
 LIBS += $(addprefix -L, $(LIB_LOCAL))

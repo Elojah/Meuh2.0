@@ -69,6 +69,31 @@ static void			load_index(t_object *obj, const char *line)
 	++obj->index_buffer_size;
 }
 
+#include <stdio.h>
+static void			print_obj(t_object *obj)
+{
+	return ;
+	for (unsigned int i = 0; i < obj->vertex_buffer_size; ++i)
+	{
+		printf("%f\t%f\t%f\n", obj->vertex_buffer_data[i].x
+			, obj->vertex_buffer_data[i].y
+			, obj->vertex_buffer_data[i].z);
+	}
+	for (unsigned int i = 0; i < obj->tex_buffer_size; ++i)
+	{
+		printf("%f\t%f\n", obj->tex_buffer_data[i].u
+			, obj->tex_buffer_data[i].v);
+	}
+	for (unsigned int i = 0; i < obj->index_buffer_size * 3; ++i)
+	{
+		printf("%u\t%u\t%u\n"
+			,obj->ve_index_buffer_data[i] + 1
+			, obj->te_index_buffer_data[i] + 1
+			, obj->no_index_buffer_data[i] + 1);
+	}
+
+}
+
 void				load_obj(t_object *obj, char *filename)
 {
 	int				fd;
@@ -94,4 +119,5 @@ void				load_obj(t_object *obj, char *filename)
 		ft_memdel((void **)&line);
 	}
 	close(fd);
+	print_obj(obj);
 }

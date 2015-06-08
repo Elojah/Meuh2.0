@@ -12,7 +12,7 @@ static void			render_obj(t_object *obj)
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, obj->ve_index_buffer);
 	glDrawElements(
-		GL_TRIANGLE_STRIP,
+		GL_TRIANGLES,
 		obj->index_buffer_size * 3,
 		GL_UNSIGNED_INT,
 		BUFFER_OFFSET(0)

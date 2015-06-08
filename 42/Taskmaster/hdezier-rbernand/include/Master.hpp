@@ -18,6 +18,7 @@ public:
 	Master&	operator=(Master const &rhs);
 
 	bool			readConfig(std::string const &filename);
+	void			start(void);
 	void			loop(void);
 
 	static const char	log[15];

@@ -88,9 +88,10 @@ int							Rules::win(Cell const &cell)
 	int						result(0);
 	int						align1;
 	int						align2;
-	int						i;
 
-	for (i = 0; i < 4; ++i)
+	if (value == Cell::EMPTY)
+		return (result);
+	for (int i = 0; i < 4; ++i)
 	{
 		align1 = cell.countAlign(value, CAST_DIR(i));
 		align2 = cell.countAlign(value, CAST_DIR(i + 4));
@@ -146,7 +147,7 @@ Rules::eValidity			Rules::captureStone(Cell &cell, Player &player)
 {
 	int						captures(cell.checkCapture());
 	int						i;
-	
+
 	if (captures == 0)
 		return (OK);
 	for (i = 0; i < 8; ++i)
