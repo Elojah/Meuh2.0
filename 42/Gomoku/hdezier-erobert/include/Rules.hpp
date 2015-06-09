@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:11:48 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/05 18:31:59 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/08 18:22:43 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -29,6 +29,7 @@ public:
 		LOOSE
 	};
 
+	static void			reset(void);
 	static eValidity	makeMove(Board &b, Player &p1, Player &p2);
 //	static eValidity	simulateMove(Board &b, Player::vec2 const &move,
 //								Cell::eValue player);
