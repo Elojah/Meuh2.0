@@ -75,7 +75,10 @@ Rules::eValidity			Rules::makeMove(Board &b, Player &p1, Player &p2)
 		if (_winMove[OPPONENT(pValue)] != NULL
 			&& player.attribute().captured < 5
 			&& Rules::win(*_winMove[OPPONENT(pValue)]) != 0)
+		{
+			opponent.switchWin();
 			result = LOOSE;
+		}
 		else
 			_winMove[OPPONENT(pValue)] = NULL;
 		return (result);
