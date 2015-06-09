@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:10:55 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/05 19:01:21 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/09 15:14:49 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -47,8 +47,8 @@ public:
 	void				switchTurn(void);
 	void				switchWin(void);
 	void				addCapture(int n);
-	bool				play(Board &b, Player::vec2 const &move);
-	void				calculus(Board &b);
+	bool				play(Board &b, Player::vec2 const &move,
+							 Player &opponent);
 private:
 	sAttribute			_attribute;
 	vec2				_calculusMove;
@@ -56,6 +56,8 @@ private:
 
 	Player(Player const &src);
 	Player				&operator=(Player const &rhs);
+
+	void				calculus(Board &b, Player &opponent);
 };
 
 #endif
