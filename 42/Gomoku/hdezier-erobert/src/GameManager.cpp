@@ -32,7 +32,7 @@ bool								GameManager::loop(void)
 		move = eventHandler();
 		if (!_end)
 		{
-			if (_p1.play(_b, move) || _p2.play(_b, move))
+			if (_p1.play(_b, move, _p2) || _p2.play(_b, move, _p1))
 			{
 				validity = Rules::makeMove(_b, _p1, _p2);
 				if (validity == Rules::OK)

@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/06/01 18:37:06 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/08 18:39:01 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/09 15:07:20 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 #include "Player.hpp"
@@ -49,13 +49,14 @@ void						Player::addCapture(int n)
 {
 	_attribute.captured += n;
 }
-bool						Player::play(Board &b, Player::vec2 const &move)
+bool						Player::play(Board &b, Player::vec2 const &move,
+										 Player &opponent)
 {
 	if (!_attribute.turn)
 		return (false);
 	else if (_attribute.ai)
 	{
-		calculus(b);
+		calculus(b, opponent);
 		if (_calculusMove.x < 0 || _calculusMove.y < 0)
 		{
 			std::cout << "IA can't find valid move :(" << std::endl;
@@ -69,14 +70,15 @@ bool						Player::play(Board &b, Player::vec2 const &move)
 	{
 		_attribute.x = move.x;
 		_attribute.y = move.y;
-		calculus(b);
+		calculus(b, opponent);
 		return (true);
 	}
 	return (false);
 }
 
-void						Player::calculus(Board &b)
+void						Player::calculus(Board &b, Player &opponent)
 {
+	(void)opponent;
 	// static vec2			result;
 	// Cell const			*c;
 	// Rules::eValidity	resultMove;
