@@ -26,10 +26,10 @@ int		Node::calculus(Board &b, Board::eValue const &player
 	int			current;
 	int			result;
 
-	std::cout << "Calculus node:\n\trec:\t" << rec
-							<< "\n\tvalue:\t" << _value
-							<< "\n\tplayer:\t" << player
-							<< std::endl;
+	// std::cout << "Calculus node:\n\trec:\t" << rec
+	// 						<< "\n\tvalue:\t" << _value
+	// 						<< "\n\tplayer:\t" << player
+							// << std::endl;
 	result = maxmin ? 0 : INT_MAX;
 	if (_value == 0)
 		_value = b.play(n, player, captures);

@@ -24,7 +24,7 @@ Board::Board(void)
 	_playable[BOARD_SIZE / 2] = 1;
 	_root = new Node();
 	_root->create();
-	_root->calculus(*this, Board::P1, BOARD_SIZE / 2, 1, true);
+	_root->calculus(*this, Board::P1, BOARD_SIZE / 2, 4, true);
 }
 
 Board::~Board(void)
@@ -116,7 +116,7 @@ int			Board::play(int const &n, eValue const &player, int &captures)
 	setPlayable(n);
 	captures = checkCapture(n);
 	captureStone(n, captures, Board::EMPTY);
-	display();
+	// display();/*DEBUG*/
 	/*calculus value of that hit*/
 	return (1);/*FORBID return 0 !!!!!!!!!!*/
 }
