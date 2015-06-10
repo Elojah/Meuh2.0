@@ -6,16 +6,16 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:08:43 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/05 19:12:18 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/09 19:15:24 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #ifndef CELL_HPP
 # define CELL_HPP
 
-# define OPPONENT(n) (((n) == Cell::P1 ? Cell::P2 : Cell::P1))
-# define OPPOSITE(n) ((n) < 4 ? (n) + 4 : (n) - 4)
-# define CAST_DIR(i) static_cast<Cell::eAdjacent>(i)
+//# define OPPONENT(n) (((n) == Cell::P1 ? Cell::P2 : Cell::P1))
+//# define OPPOSITE(n) ((n) < 4 ? (n) + 4 : (n) - 4)
+//# define CAST_DIR(i) static_cast<Cell::eAdjacent>(i)
 # define BOARD_SIZE 19
 
 class Cell

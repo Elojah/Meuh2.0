@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:11:48 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/08 18:22:43 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/10 15:49:56 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -14,9 +14,7 @@
 # define RULES_HPP
 
 # include "Player.hpp"
-# include "Cell.hpp"
-
-class Board;
+# include "Board.hpp"
 
 class Rules
 {
@@ -34,7 +32,7 @@ public:
 //	static eValidity	simulateMove(Board &b, Player::vec2 const &move,
 //								Cell::eValue player);
 private:
-	static Cell const	*_winMove[Cell::E_VALUE];
+	static Board::sCell const	*_winMove[Cell::E_VALUE];
 
 	Rules(void);
 	Rules(Rules const &src);
@@ -42,11 +40,13 @@ private:
 
 	Rules			&operator=(Rules const &rhs);
 
-	static int			win(Cell const &cell);
-	static bool			insertDoubleFreethrees(Cell &cell);
-	static bool			canCaptureFive(Cell const &cell, int dirWin);
-	static eValidity	captureStone(Cell &cell, Player &player);
-	static bool			canCaptureLast(Board const &b, Cell &cell,
+	static int			win(Board const &b, Board::sCell const &cell);
+	static bool			insertDoubleFreethrees(Board &b, Board::sCell &cell);
+	static bool			canCaptureFive(Board &b, Board::sCell const &cell,
+									   int dirWin);
+	static eValidity	captureStone(Board &b, Board::sCell &cell,
+									 Player &player);
+	static bool			canCaptureLast(Board &b, Board::sCell &cell,
 									   Player &opponent);
 };
 

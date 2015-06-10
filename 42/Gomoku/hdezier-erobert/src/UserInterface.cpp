@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2015/06/08 12:33:30 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/09 19:12:01 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -144,7 +144,7 @@ void						UserInterface::renderBoard(Board const &b)
 {
 	int						i(-1);
 	int						j;
-	Cell::eValue			value;
+	Board::eValue			value;
 
 	_window.draw(_sBoard);
 	while (++i < _size)
@@ -153,9 +153,9 @@ void						UserInterface::renderBoard(Board const &b)
 		while (++j < _size)
 		{
 			value = b.getValue(i, j);
-			if (value == Cell::P1)
+			if (value == Board::P1)
 				drawStone(i, j, BLACK);
-			else if (value == Cell::P2)
+			else if (value == Board::P2)
 				drawStone(i, j, WHITE);
 		}
 	}

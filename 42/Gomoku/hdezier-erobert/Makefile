@@ -14,7 +14,6 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		Cell\
 		Board\
 		UserInterface\
 		Player\
