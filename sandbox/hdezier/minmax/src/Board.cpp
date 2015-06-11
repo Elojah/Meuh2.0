@@ -1,6 +1,9 @@
 #include "Board.hpp"
 #include "Node.hpp"
+#include "Rules.hpp"
 #include <unistd.h>
+
+#include <iostream>
 
 const int	Board::_dir[E_DIRECTION] = {
 	-BOARD_WIDTH,
@@ -24,11 +27,34 @@ Board::Board(void)
 	_playable[BOARD_SIZE / 2] = 1;
 	_root = new Node();
 	_root->create();
-	_root->calculus(*this, Board::P1, BOARD_SIZE / 2, 4, true);
 }
 
 Board::~Board(void)
 {}
+
+void		Board::exec(void)
+{
+	int		value;
+	int		move;
+	int		captures;
+	Node	*tmp;
+	eValue	player(Board::P1);
+
+	_root->calculus(*this, OPPONENT(player), BOARD_SIZE / 2, 4, false);
+	move = _root->getMax();
+	while (play(move, player, captures, false))
+	{
+		value = _root->calculus(*this, player, BOARD_SIZE / 2, 3, false);
+		move = _root->getMax();
+		std::cout << "Best value:\t" << value << std::endl;
+		std::cout << "at move:\t" << move << std::endl;
+		_root->deleteExceptOne(move);
+		tmp = _root;
+		_root = _root->getChild(move);
+		delete tmp;
+		player = OPPONENT(player);
+	}
+}
 
 void		Board::display(void)
 {
@@ -110,15 +136,35 @@ Board::eValue const	&Board::operator[](int i) const
 	return (error);
 }
 
-int			Board::play(int const &n, eValue const &player, int &captures)
+int			Board::play(int const &n, eValue const &player
+	, int &captures, bool calcResult)
 {
+	int		result(0);
+	int		tmp;
+	int		nPermissive(1);
+
 	_cell[n] = player;
 	setPlayable(n);
 	captures = checkCapture(n);
 	captureStone(n, captures, Board::EMPTY);
+	if (Rules::win(*this, n, player))
+		return (1024);
+	if (calcResult)
+		return (-1);
+	for (int i = 0; i < 4; ++i)
+	{
+		if ((captures >> i) & 1)
+			++result;
+		if ((captures >> (i + 4)) & 1)
+			++result;
+		tmp = alignmentPermissive(n, i, player, nPermissive) +
+					alignmentPermissive(n, i + 4, player, nPermissive) - 2;
+		if (tmp > 0)
+			result += tmp;
+	}
 	// display();/*DEBUG*/
 	/*calculus value of that hit*/
-	return (1);/*FORBID return 0 !!!!!!!!!!*/
+	return (result);/*FORBID return 0 !!!!!!!!!!*/
 }
 
 void		Board::unplay(int const &n, eValue const &player, int const &captures)
@@ -138,6 +184,35 @@ int			Board::alignment(int const &n, int const &dir, eValue const &v) const
 		return (1 + alignment(n + _dir[dir], dir, v));
 	else
 		return (0);
+}
+
+int			Board::alignmentPermissive(int const &n, int const &dir
+	, eValue const &v, int &permissive) const
+{
+	int			nextResult;
+
+	if (_cell[n] == v)
+	{
+		if (IS_IN_RANGE(n + _dir[dir]))
+			return (1 + alignmentPermissive(n + _dir[dir], dir, v, permissive));
+		else
+			return (-BOARD_SIZE - 1);
+	}
+	else if (_cell[n] == Board::EMPTY && permissive > 0)
+	{
+		if (IS_IN_RANGE(n + _dir[dir]))
+		{
+			--permissive;
+			nextResult = alignmentPermissive(n + _dir[dir], dir, v, permissive);
+			if (nextResult > 0)
+				return (nextResult + 1);
+			else
+				++permissive;
+		}
+	}
+	else if (_cell[n] == OPPONENT(v))
+		return (-BOARD_SIZE - 1);
+	return (0);
 }
 
 int			Board::checkCapture(int const &n) const

@@ -1,9 +1,14 @@
 #include "Board.hpp"
 
-int		main(void) {
+void	exec(void)
+{
 	Board		b;
 
 	b.display();
-	while (true);
+}
+
+int		main(void)
+{
+	exec();
 	return (0);
 }

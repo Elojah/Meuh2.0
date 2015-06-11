@@ -14,6 +14,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
+		Rules\
 		Board\
 		Node\
 

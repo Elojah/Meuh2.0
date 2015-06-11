@@ -12,17 +12,31 @@ public:
 	Node(void);
 	~Node(void);
 
-	int		calculus(Board &b, Board::eValue const &player
-		, int const &n, int rec, bool const &maxmin);
-	void	create(void);
+	int			calculus(Board &b, Board::eValue const &player
+					, int const &n, int rec, bool const &maxmin);
+	void		create(void);
+	int const	&getMax(void) const;
+	int const	&getMin(void) const;
+	void		deleteExceptOne(int n);
+	Node		*getChild(int n);
 
 protected:
 private:
+
+	typedef Node* NodePtr;
+
 	Node(Node const &src);
 	Node&	operator=(Node const &rhs);
 
-	Node		*_children;
+	void	calcMaxMin(Board &b, Board::eValue const &player,
+							int rec, bool const &maxmin);
+
+	Node		**_children;
 	int			_value;
+	int			_max;
+	int			_min;
+	int			_maxIndex;
+	int			_minIndex;
 };
 
 #endif

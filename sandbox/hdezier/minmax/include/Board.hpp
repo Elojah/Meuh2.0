@@ -36,6 +36,8 @@ public:
 		E_DIRECTION
 	};
 
+	void		exec(void);
+
 	void		display(void);
 
 	void		setValue(int const &n, eValue const &v);
@@ -46,8 +48,13 @@ public:
 	void		unsetPlayable(int const &n);
 
 
-	int			play(int const &n, eValue const &player, int &captures);
+	int			play(int const &n, eValue const &player, int &captures, bool calcResult);
 	void		unplay(int const &n, eValue const &player, int const &captures);
+
+	int			alignment(int const &n, int const &dir, eValue const &v) const;
+	int			alignmentPermissive(int const &n, int const &dir
+		, eValue const &v, int &permissive) const;
+
 
 	Board::eValue const	&operator[](int i) const;
 
@@ -56,7 +63,6 @@ private:
 	Board(Board const &src);
 	Board&	operator=(Board const &rhs);
 
-	int					alignment(int const &n, int const &dir, eValue const &v) const;
 	int					checkCapture(int const &n) const;
 	void				captureStone(int const &n, int const &captures, eValue const &v);
 
