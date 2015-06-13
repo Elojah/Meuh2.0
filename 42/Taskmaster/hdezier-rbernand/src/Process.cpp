@@ -34,6 +34,23 @@ Process::Process(Process const &src) {
 Process::~Process(void) {
 }
 
+void		Process::start(void) {
+	pid_t	f;
+	int		status;
+
+	f = fork();
+	if (f == 0) {
+		execve(_params.cmd.c_str(), NULL, NULL);
+	} else if (f < 0) {
+		*_log << "Failed to fork process" << std::endl;
+	} else {
+		if (waitpid(f, &status, 0) == -1)
+			*_log << "Error waiting command execution" << std::endl;
+		if (!WIFEXITED(status))
+			*_log << "Command execution terminated unnormally\n" << std::endl;
+	}
+}
+
 void		Process::setLog(std::ofstream *log) {
 	_log = log;
 }

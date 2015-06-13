@@ -1,32 +1,19 @@
 #include "scop.h"
 #include <math.h>
 
-static void	set_fps_view(t_camera *cam
-	, const float angle_x, const float angle_y)
-{
-	cam->eye.x = sin(angle_x) * cos(angle_y) + cam->center.x;
-	cam->eye.y = sin(angle_y) + cam->center.y;
-	cam->eye.z = cos(angle_x) * cos(angle_y) + cam->center.z;
-	cam->up.x = cos(angle_y - M_PI / 2.0f);
-	cam->up.y = sin(angle_y - M_PI / 2.0f);
-	cam->up.z = 0.0f;
-}
-
+#include <stdio.h>
 void		mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
 	static t_window		*win = 0x0;
-	static float		prev_x = W_WIDTH / 2;
-	static float		prev_y = W_HEIGHT / 2;
-	static float		angle_x = 0;
-	static float		angle_y = 0;
+	static double		prev_x = W_WIDTH / 2;
+	static double		prev_y = W_HEIGHT / 2;
 
-	return ;
 	if (!win)
 		win = (t_window *)glfwGetWindowUserPointer(window);
-	angle_x += MOUSE_SPEED * (prev_x - xpos);
-	angle_y += MOUSE_SPEED * (prev_y - ypos);
+	printf("win->cam.eye.x:\t%f\tprev_x:\t%f\txpos:\t%f\t\n", win->cam.eye.x, prev_x, xpos);
+	win->cam.eye.x += (prev_x - xpos) * MOUSE_SPEED;
+	win->cam.eye.y += (prev_y - ypos) * MOUSE_SPEED;
 	prev_x = xpos;
 	prev_y = ypos;
-	set_fps_view(&(win->cam), angle_x, angle_y);
 	refresh(win);
 }
