@@ -3,6 +3,7 @@
 
 # define BOARD_SIZE 361
 # define BOARD_WIDTH 19
+# define PTS_WIN 1024
 # define IS_IN_RANGE(n) ((n) >= 0 && (n) < BOARD_SIZE)
 # define CAST_DIR(i) static_cast<Board::eDirection>(i)
 

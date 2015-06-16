@@ -40,19 +40,18 @@ void		Board::exec(void)
 	Node	*tmp;
 	eValue	player(Board::P1);
 
-	_root->calculus(*this, OPPONENT(player), BOARD_SIZE / 2, 4, false);
+	_root->calculus(*this, OPPONENT(player), BOARD_SIZE / 2, 3, false);
 	move = _root->getMax();
-	while (play(move, player, captures, false))
+	while (play(move, player, captures, false) != PTS_WIN)
 	{
+		player = OPPONENT(player);
 		value = _root->calculus(*this, player, BOARD_SIZE / 2, 3, false);
 		move = _root->getMax();
 		std::cout << "Best value:\t" << value << std::endl;
 		std::cout << "at move:\t" << move << std::endl;
-		_root->deleteExceptOne(move);
 		tmp = _root;
 		_root = _root->getChild(move);
 		delete tmp;
-		player = OPPONENT(player);
 	}
 }
 
@@ -148,7 +147,7 @@ int			Board::play(int const &n, eValue const &player
 	captures = checkCapture(n);
 	captureStone(n, captures, Board::EMPTY);
 	if (Rules::win(*this, n, player))
-		return (1024);
+		return (PTS_WIN);
 	if (calcResult)
 		return (-1);
 	for (int i = 0; i < 4; ++i)

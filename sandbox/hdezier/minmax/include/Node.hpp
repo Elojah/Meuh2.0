@@ -23,15 +23,13 @@ public:
 protected:
 private:
 
-	typedef Node* NodePtr;
-
 	Node(Node const &src);
 	Node&	operator=(Node const &rhs);
 
 	void	calcMaxMin(Board &b, Board::eValue const &player,
 							int rec, bool const &maxmin);
 
-	Node		**_children;
+	Node		*_children;
 	int			_value;
 	int			_max;
 	int			_min;
