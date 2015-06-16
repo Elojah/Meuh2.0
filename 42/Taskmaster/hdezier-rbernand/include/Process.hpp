@@ -12,6 +12,14 @@ public:
 	Process(Process const &src);
 	Process&	operator=(Process const &rhs);
 
+	enum eState
+	{
+		PROC_ERROR = -1,
+		PROC_OK
+	};
+
+	Process::eState		launch(void);
+
 	void		setParams(Json::Value &);
 	void		setLog(std::ofstream *log);
 	void		start(void);
@@ -42,6 +50,8 @@ private:
 
 	sParams						_params;
 	std::ofstream				*_log;
+
+	pid_t						_pid;
 
 	static const std::string	_paramsName[19];
 };
