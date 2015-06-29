@@ -1,4 +1,6 @@
 let test_reg s =
-	Str.global_replace (Str.regexp "[ \t]+") "" s
+	Str.string_match (Str.regexp ".*X\\^") s 0
 
-let () = print_endline (test_reg "   oiodsf sd f ds fds fd   =sd =fds ")
+
+let () = if (test_reg "-X^") then print_endline "OK" else
+	print_endline "None"
