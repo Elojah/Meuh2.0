@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/06/05 17:25:46 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/10 16:15:20 by erobert          ###   ########.fr       //
+//   Updated: 2015/06/29 18:20:58 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -22,36 +22,70 @@ void						Rules::reset(void)
 	while (++i < Cell::E_VALUE)
 		_winMove[i] = NULL;
 }
-/*
-Rules::eValidity			Rules::simulateMove(Board &b, Player::vec2 const &move,
-											Cell::eValue player)
+
+
+int							Rules::captureStone(Cell &cell, Player &player)
 {
-	Rules::eValidity		result;
-	Cell					&c(b.getCell(move.x, move.y));
+	int						captures(cell.checkCapture());
+	int						i;
+
+	if (captures == 0)
+		return (OK);
+	for (i = 0; i < 8; ++i)
+	{
+		if ((captures >> i) & 1)
+		{
+			cell.setAdjacentsValue(Cell::EMPTY, 2, CAST_DIR(i));
+			player.addCapture(1);
+		}
+	}
+	return (OK);
+}
+
+int							Rules::simulateMove(Board &b, Player &p1, Player &p2)
+{
+	Player					&player(p1.attribute().turn ? p1 : p2);
+	Player					&opponent(p1.attribute().turn ? p2 : p1);
+	Cell::eValue			pValue(p1.attribute().turn ? Cell::P1 : Cell::P2);
+	Rules::eValidity		result(INVALID);
+	Cell					&c(b.getCell(player.attribute().x,
+										 player.attribute().y));
 	int						dirWin;
 
 	if (c.getValue() != Cell::EMPTY)
-		return (INVALID);
+		return (0);
 	else
 	{
-		c.setValue(player);
+		c.setValue(pValue);
 		if (Rules::insertDoubleFreethrees(c))
-			result = INVALID;
-		else
 		{
-			if ((dirWin = Rules::win(c))
-				&& !Rules::canCaptureLast(b, c)
-				&& !Rules::canCaptureFive(c, dirWin))
-				result = WIN;
-			result = Rules::captureStone(c, player);
-			b.updateHeuristics(move);
+			c.setValue(Cell::EMPTY);
+			return (0);
 		}
-		c.setValue(Cell::EMPTY);
+		result = Rules::simulateStone(c, player);
+		if ((dirWin = Rules::win(c))
+			&& !Rules::canCaptureLast(b, c, opponent)
+			&& !Rules::canCaptureFive(c, dirWin))
+		{
+			player.switchWin();
+			result = WIN;
+		}
+		b.updateHeuristics(player.attribute().x, player.attribute().y);
+		if (_winMove[OPPONENT(pValue)] != NULL
+			&& player.attribute().captured < 5
+			&& Rules::win(*_winMove[OPPONENT(pValue)]) != 0)
+		{
+			if (player.attribute().win)
+				player.switchWin();
+			opponent.switchWin();
+			result = LOOSE;
+		}
+		else
+			_winMove[OPPONENT(pValue)] = NULL;
 		return (result);
 	}
 }
-*/
-#include <iostream>
+
 Rules::eValidity			Rules::makeMove(Board &b, Player &p1, Player &p2)
 {
 	Player					&player(p1.attribute().turn ? p1 : p2);
@@ -97,7 +131,7 @@ Rules::eValidity			Rules::makeMove(Board &b, Player &p1, Player &p2)
 }
 
 int							Rules::win(Board const &b,
-									   Board::sCell const &cell)
+													 Board::sCell const &cell)
 {
 //	Board::eValue const		&value(cell.value);
 	int						result(0);
@@ -116,7 +150,7 @@ int							Rules::win(Board const &b,
 	return (result);
 }
 bool						Rules::insertDoubleFreethrees(Board &b,
-														  Board::sCell &cell)
+																							Board::sCell &cell)
 {
 //	Cell::eValue			value(cell.getValue());
 	int						count(0);
@@ -138,9 +172,10 @@ bool						Rules::insertDoubleFreethrees(Board &b,
 	}
 	return (count > 1);
 }
+
 bool						Rules::canCaptureFive(Board &b,
-												  Board::sCell const &cell,
-												  int dirWin)
+																			Board::sCell const &cell,
+																			int dirWin)
 {
 //	Cell::eValue			value(cell.getValue());
 	bool					result(false);
@@ -163,7 +198,7 @@ bool						Rules::canCaptureFive(Board &b,
 	return (result);
 }
 Rules::eValidity			Rules::captureStone(Board &b, Board::sCell &cell,
-												Player &player)
+																					Player &player)
 {
 	int						captures(b.checkCapture(cell));
 	int						i;
@@ -185,8 +220,9 @@ Rules::eValidity			Rules::captureStone(Board &b, Board::sCell &cell,
 	}
 	return (OK);
 }
+
 bool						Rules::canCaptureLast(Board &b, Board::sCell &cell,
-												  Player &opponent)
+																			Player &opponent)
 {
 //	Board::eValue			oValue(cell-alue());
 //	Board::sCell const		*c;
