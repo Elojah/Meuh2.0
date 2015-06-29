@@ -1,11 +1,11 @@
-type t = (int * int) list
+type t = (float * int) list
 
 module Parser = struct
 
 let balance (eq0:t) (eq1:t) : t =
 	let rec add_eq1_to_eq0 eq1 acc = match eq1 with
 		| [] -> acc
-		| crt::next -> add_eq1_to_eq0 next (acc @ [crt])
+		| (coef, degree)::next -> add_eq1_to_eq0 next (acc @ [(coef *. (-1.), degree)])
 	in
 	let rec degree_is_in_list lst deg = match lst with
 		| [] -> false
@@ -13,7 +13,7 @@ let balance (eq0:t) (eq1:t) : t =
 	in
 	let rec sum_coef_of_degree lst deg acc = match lst with
 		| [] -> acc
-		| (coef, degree)::next when deg = degree -> sum_coef_of_degree next deg (acc + coef)
+		| (coef, degree)::next when deg = degree -> sum_coef_of_degree next deg (acc +. coef)
 		| (coef, degree)::next -> sum_coef_of_degree next deg acc
 	in
 	let rec merge_same_degree lst acc = match lst with
@@ -28,12 +28,12 @@ let to_polynom (str:string) : t =
 	let separate_by_add (str:string) : string list =
 		Str.split (Str.regexp "[+\t]+") str
 	in
-	let tuple_np_of_strings (a:string) (b:string) : (int * int) =
+	let tuple_np_of_strings (a:string) (b:string) : (float * int) =
 		match Str.string_match (Str.regexp "[X^*\t]+") a 0 with
-		| true -> (int_of_string b, int_of_string (Str.replace_first (Str.regexp "[X^\t]+") "" a))
-		| _ -> (int_of_string a, int_of_string (Str.replace_first (Str.regexp "[X^\t]+") "" b))
+		| true -> (float_of_string b, int_of_string (Str.replace_first (Str.regexp "[X^\t]+") "" a))
+		| _ -> (float_of_string a, int_of_string (Str.replace_first (Str.regexp "[X^\t]+") "" b))
 	in
-	let separate_by_mul (str:string) : (int * int) =
+	let separate_by_mul (str:string) : (float * int) =
 		let lst = Str.split (Str.regexp "[*\t]+") str in
 		match List.length lst with
 			| 1 -> tuple_np_of_strings (List.hd lst) "0"
@@ -77,6 +77,6 @@ end
 let to_string (sol:Solver.solution) =
 	let rec equation_to_string lst acc = match lst with
 		| [] -> acc
-		| (n, p)::next -> equation_to_string next (acc ^ string_of_int n ^ " * X^ " ^ string_of_int p ^ " + ")
+		| (n, p)::next -> equation_to_string next (acc ^ string_of_float n ^ " * X^ " ^ string_of_int p ^ " + ")
 	in
 	equation_to_string sol.equation ""

@@ -1,4 +1,4 @@
-type t = (int * int) list
+type t = (float * int) list
 
 module Parser : sig
 	val to_polynom : string -> t
