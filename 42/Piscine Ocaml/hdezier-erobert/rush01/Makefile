@@ -39,7 +39,7 @@ WITHGRAPHICS = graphics.cma -cclib -lgraphics -cclib -L/usr/X11R6/lib -cclib -lX
 
 WITHUNIX = unix.cma -cclib -lunix
 
-WITHSTR = str.cma -cclib -lstr
+WITHSTR = str.cma -cclib -lcamlstr
 
 WITHNUMS = nums.cma -cclib -lnums
 
