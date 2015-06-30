@@ -127,7 +127,7 @@ module Solver = struct
 			print_endline ("Delta = " ^ string_of_float discrim);
 			match discrim with
 			| x when x < 0. -> 0
-			| x when x = 0. -> 1
+			| x when x = 0. && (get_nth_degree equation 2) <> 0. -> 1
 			| x when x > 0. -> 2
 			| _ -> (-1)
 		in
@@ -136,10 +136,7 @@ module Solver = struct
 		| 1 -> make_solution sort_eq (unique_solution sort_eq) 0.0 1
 		| 2 -> (match double_solution sort_eq discrim with (sol0, sol1) ->
 					make_solution sort_eq sol0 sol1 2)
-		| _ -> failwith "Error happened with delta"
-
-
-end
+		| _ -> failwith "No solutions"
 
 let to_string (sol:solution) =
 	let rec equation_to_string lst acc = match lst with
@@ -148,11 +145,19 @@ let to_string (sol:solution) =
 		| (n, p)::next -> equation_to_string next (acc ^ string_of_float n ^ " * X^ " ^ string_of_int p ^ " + ")
 	in
 	let reduced_eq = equation_to_string sol.equation "" in
-	let nb_solutions = "\nNb_solutions = " ^ (string_of_int sol.nb_solutions) ^ "\n" in
-	let solutions = match sol.nb_solutions with
-		| 0 -> "No solutions !"
-		| 1 -> "Unique solution:\t" ^ string_of_float sol.solution_0
-		| 2 -> "Solution 1:\t" ^ string_of_float sol.solution_0 ^ "\nSolution 2:\t" ^ string_of_float sol.solution_1
-		| _ -> "Solution solver bugged :("
-	in
-	reduced_eq ^ nb_solutions ^ solutions
+	let max_degree = "\nDegree max:\t" ^ (string_of_int sol.degree) in
+	match sol.degree with
+	| x when x > 0 && x < 3 ->(
+		let nb_solutions = "\nNb_solutions =\t" ^ (string_of_int sol.nb_solutions) ^ "\n" in
+		let solutions = match sol.nb_solutions with
+			| 0 -> nb_solutions ^ "No solutions !"
+			| 1 -> nb_solutions ^ "Unique solution:\t" ^ string_of_float sol.solution_0
+			| 2 when (get_nth_degree sol.equation 2) = 0. -> "\nEverything is solution"
+			| 2 -> nb_solutions ^ "Solution 1:\t" ^ string_of_float sol.solution_0 ^ "\nSolution 2:\t" ^ string_of_float sol.solution_1
+			| _ -> "Solution solver bugged :("
+		in
+		reduced_eq ^ max_degree ^ solutions
+	)
+	| _ -> reduced_eq ^ max_degree ^ "\nDegree max must be < 3 to solve"
+
+end

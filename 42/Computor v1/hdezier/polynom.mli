@@ -13,6 +13,6 @@ end
 
 module Solver : sig
 	val solve : t -> solution
+	val to_string : solution -> string
 end
 
-val to_string : solution -> string
