@@ -5,6 +5,8 @@ type solution = {
 	nb_solutions: int;
 	solution_0: float;
 	solution_1: float;
+	im_sol_0: float * float;
+	im_sol_1: float * float;
 }
 
 module Parser = struct
@@ -105,6 +107,21 @@ module Solver = struct
 			nb_solutions = nb_solutions;
 			solution_0 = s0;
 			solution_1 = s1;
+			im_sol_0 = (0.0, 0.0);
+			im_sol_1 = (0.0, 0.0);
+		}
+
+	let make_solution_imaginary (equation:t) (s0:float * float) (s1:float * float) (nb_solutions:int) =
+		let max_degree eq = match List.hd eq with (coef, degree) -> degree
+		in
+		{
+			equation = equation;
+			degree = max_degree equation;
+			nb_solutions = nb_solutions;
+			solution_0 = 0.0;
+			solution_1 = 0.0;
+			im_sol_0 = s0;
+			im_sol_1 = s1;
 		}
 
 	let unique_solution (equation:t) : float =
@@ -117,6 +134,14 @@ module Solver = struct
 		let beta = (get_nth_degree equation 1) ** 2.0 in
 		((((-1.0) *. beta) +. (sqrt delta)) /. (2.0 *. alpha),
 			(((-1.0) *. beta) -. (sqrt delta)) /. (2.0 *. alpha))
+
+	let double_solution_imaginary (equation:t) (delta:float) : (float * float) * (float * float) =
+		let alpha = get_nth_degree equation 2 in
+		let beta = (get_nth_degree equation 1) ** 2.0 in
+		(
+			(((-1.0) *. beta) /. (2.0 *. alpha), (sqrt (abs_float delta)) /. (2.0 *. alpha)),
+			(((-1.0) *. beta) /. (2.0 *. alpha), (sqrt (abs_float delta)) /. ((-2.0) *. alpha))
+		)
 
 	let solve (equation:t) =
 		let sort_eq = List.sort (fun (a, deg0) (b, deg1) -> deg1 - deg0) equation
@@ -132,13 +157,17 @@ module Solver = struct
 			| _ -> (-1)
 		in
 		match nb_solutions discrim with
-		| 0 -> make_solution sort_eq 0.0 0.0 0
+		| 0 -> (match double_solution_imaginary sort_eq discrim with (sol0, sol1) ->
+					make_solution_imaginary sort_eq sol0 sol1 0)
 		| 1 -> make_solution sort_eq (unique_solution sort_eq) 0.0 1
 		| 2 -> (match double_solution sort_eq discrim with (sol0, sol1) ->
 					make_solution sort_eq sol0 sol1 2)
 		| _ -> failwith "No solutions"
 
 let to_string (sol:solution) =
+	let imaginary_to_string (x:float * float) : string = match x with (a, b) ->
+		string_of_float a ^ " + " ^ string_of_float b ^ "i"
+	in
 	let rec equation_to_string lst acc = match lst with
 		| [] -> acc
 		| (n, p)::[] -> acc ^ string_of_float n ^ " * X^ " ^ string_of_int p ^ " = 0"
@@ -150,7 +179,7 @@ let to_string (sol:solution) =
 	| x when x > 0 && x < 3 ->(
 		let nb_solutions = "\nNb_solutions =\t" ^ (string_of_int sol.nb_solutions) ^ "\n" in
 		let solutions = match sol.nb_solutions with
-			| 0 -> nb_solutions ^ "No solutions !"
+			| 0 -> "\nNb_solutions =\t2\n" ^ "Solution 1:\t" ^ imaginary_to_string sol.im_sol_0 ^ "\n" ^ "Solution 2:\t" ^ imaginary_to_string sol.im_sol_1
 			| 1 -> nb_solutions ^ "Unique solution:\t" ^ string_of_float sol.solution_0
 			| 2 when (get_nth_degree sol.equation 2) = 0. -> "\nEverything is solution"
 			| 2 -> nb_solutions ^ "Solution 1:\t" ^ string_of_float sol.solution_0 ^ "\nSolution 2:\t" ^ string_of_float sol.solution_1
