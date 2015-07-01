@@ -54,10 +54,16 @@ let to_polynom (str:string) : t =
 			((-1.0) *. (float_of_string b), int_of_string (Str.replace_first (Str.regexp "[-X^\t]+") "" a))
 		| true ->
 			(float_of_string b, int_of_string (Str.replace_first (Str.regexp "[X^\t]+") "" a))
-		| false when Str.string_match (Str.regexp ".*-.*") b 0 ->
-			((-1.0) *. (float_of_string a), int_of_string (Str.replace_first (Str.regexp "[-X^\t]+") "" b))
-		| false ->
-		(float_of_string a, int_of_string (Str.replace_first (Str.regexp "[X^\t]+") "" b))
+		| false when Str.string_match (Str.regexp ".*-.*") b 0 -> (
+			match Str.string_match (Str.regexp ".*X^.*") b 0 with
+			| true -> ((-1.0) *. (float_of_string a), int_of_string (Str.replace_first (Str.regexp "[-X^\t]+") "" b))
+			| false -> ((-1.0) *. (float_of_string a), 0)
+		)
+		| false -> (
+			match Str.string_match (Str.regexp ".*X^.*") b 0 with
+			| true -> (float_of_string a, int_of_string (Str.replace_first (Str.regexp "[X^\t]+") "" b))
+			| false -> (float_of_string a, 0)
+		)
 	in
 	let split_by_mul (str:string) : (float * int) =
 		let lst = Str.split (Str.regexp "*") str in
