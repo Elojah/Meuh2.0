@@ -16,7 +16,6 @@ const int	Board::_dir[E_DIRECTION] = {
 	-BOARD_WIDTH - 1
 };
 
-
 Board::Board(void)
 {
 	for (int i = 0; i < BOARD_SIZE; ++i)
@@ -34,24 +33,28 @@ Board::~Board(void)
 
 void		Board::exec(void)
 {
-	int		value;
 	int		move;
 	int		captures;
 	Node	*tmp;
 	eValue	player(Board::P1);
 
-	_root->calculus(*this, OPPONENT(player), BOARD_SIZE / 2, 3, false);
+	_root->calcMaxMin(*this, OPPONENT(player), REC_LVL, true);
 	move = _root->getMax();
-	while (play(move, player, captures, false) != PTS_WIN)
+	std::cout << "move:\t" << move << std::endl;
+	tmp = _root;
+	_root = tmp->getChild(move);
+	tmp->deleteExceptOne(move);
+	while (play(move, OPPONENT(player), captures, true) < PTS_WIN)
 	{
+		display();
+		std::cout << "Search max:\t" << std::endl;
 		player = OPPONENT(player);
-		value = _root->calculus(*this, player, BOARD_SIZE / 2, 3, false);
+		_root->calcMaxMin(*this, player, REC_LVL, true);
 		move = _root->getMax();
-		std::cout << "Best value:\t" << value << std::endl;
-		std::cout << "at move:\t" << move << std::endl;
+		std::cout << "Play move:\t" << move << std::endl;
 		tmp = _root;
-		_root = _root->getChild(move);
-		delete tmp;
+		_root = tmp->getChild(move);
+		tmp->deleteExceptOne(move);
 	}
 }
 
@@ -138,7 +141,7 @@ Board::eValue const	&Board::operator[](int i) const
 int			Board::play(int const &n, eValue const &player
 	, int &captures, bool calcResult)
 {
-	int		result(0);
+	int		result(1);
 	int		tmp;
 	int		nPermissive(1);
 
@@ -148,7 +151,7 @@ int			Board::play(int const &n, eValue const &player
 	captureStone(n, captures, Board::EMPTY);
 	if (Rules::win(*this, n, player))
 		return (PTS_WIN);
-	if (calcResult)
+	if (!calcResult)
 		return (-1);
 	for (int i = 0; i < 4; ++i)
 	{

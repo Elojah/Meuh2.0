@@ -6,6 +6,7 @@
 # define PTS_WIN 1024
 # define IS_IN_RANGE(n) ((n) >= 0 && (n) < BOARD_SIZE)
 # define CAST_DIR(i) static_cast<Board::eDirection>(i)
+# define REC_LVL 3
 
 class Node;
 

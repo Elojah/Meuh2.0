@@ -4,6 +4,7 @@ void	exec(void)
 {
 	Board		b;
 
+	b.exec();
 	b.display();
 }
 
