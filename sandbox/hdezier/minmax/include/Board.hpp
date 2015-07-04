@@ -6,7 +6,7 @@
 # define PTS_WIN 1024
 # define IS_IN_RANGE(n) ((n) >= 0 && (n) < BOARD_SIZE)
 # define CAST_DIR(i) static_cast<Board::eDirection>(i)
-# define REC_LVL 3
+# define REC_LVL 2
 
 class Node;
 
@@ -66,7 +66,8 @@ private:
 	Board&	operator=(Board const &rhs);
 
 	int					checkCapture(int const &n) const;
-	void				captureStone(int const &n, int const &captures, eValue const &v);
+	void					captureStone(int const &n, int const &captures, eValue const &v);
+	int					distToWall(int const &n);
 
 	static const int	_dir[E_DIRECTION];
 

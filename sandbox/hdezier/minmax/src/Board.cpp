@@ -56,6 +56,8 @@ void		Board::exec(void)
 		_root = tmp->getChild(move);
 		tmp->deleteExceptOne(move);
 	}
+	display();
+	std::cout << "Winner is:\t" << OPPONENT(player) << std::endl;
 }
 
 void		Board::display(void)
@@ -164,8 +166,7 @@ int			Board::play(int const &n, eValue const &player
 		if (tmp > 0)
 			result += tmp;
 	}
-	// display();/*DEBUG*/
-	/*calculus value of that hit*/
+	result += distToWall(n);
 	return (result);/*FORBID return 0 !!!!!!!!!!*/
 }
 
@@ -245,4 +246,17 @@ void	Board::captureStone(int const &n, int const &captures, eValue const &v)
 			setValue(n + 2 * _dir[i], v);
 		}
 	}
+}
+
+int	Board::distToWall(int const &n)
+{
+	int	h;
+	int	w;
+	int	result(0);
+
+	h = n / BOARD_WIDTH;
+	w = n % BOARD_WIDTH;
+	result += (h > BOARD_WIDTH / 2) ? BOARD_WIDTH - h : h;
+	result += (w > BOARD_WIDTH / 2) ? BOARD_WIDTH - w : w;
+	return (result / 2);
 }
