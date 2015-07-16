@@ -6,8 +6,8 @@ static void		exec(void) {
 	Master		m;
 
 	m.readConfig("./config/programs.conf");
-	// m.start();//TO FIX
-	m.loop();
+	m.start();//TO FIX
+	// m.loop();
 }
 
 int			main(void) {
