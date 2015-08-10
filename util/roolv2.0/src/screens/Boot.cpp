@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/14 13:58:16 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/10 20:21:26 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/10 21:42:41 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void		Boot::createItems(void)
 	std::string		line;
 	char					*tmp;
 
+	addItem("New project", static_cast<Callback>(&Boot::newProject));
+	addItem("Return", static_cast<Callback>(&Boot::endMenu));
 	if (ifs.fail()) {
 		notifyUser("Error: File ./config/.proj doesn't exist.");
 		return ;
@@ -48,8 +50,6 @@ void		Boot::createItems(void)
 		_items[new_item(strdup(basename(tmp)), tmp)]
 			= static_cast<Callback>(&Boot::openProject);
 	}
-	addItem("New project", static_cast<Callback>(&Boot::newProject));
-	addItem("Return", static_cast<Callback>(&Boot::endMenu));
 	ifs.close();
 }
 
@@ -57,9 +57,9 @@ void		Boot::sortItems(const int &length) {
 	const static auto comp = [](const ITEM *lhs, const ITEM *rhs) -> bool {
 		const char *lhsName = item_name(lhs);
 		const char *rhsName = item_name(rhs);
-		if(strcmp(lhsName, "New project") || !strcmp(rhsName, "Return")) {
+		if(!strcmp(lhsName, "Return") || !strcmp(rhsName, "New project")) {
 			return (false);
-		} else if(!strcmp(rhsName, "New project") || strcmp(lhsName, "Return")) {
+		} else if(!strcmp(lhsName, "New project") || !strcmp(rhsName, "Return")) {
 			return (true);
 		} else {
 			return (strcmp(lhsName, rhsName) > 0);

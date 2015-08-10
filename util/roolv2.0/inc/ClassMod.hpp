@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/10 19:59:29 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/10 20:36:36 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/10 22:11:24 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ private:
 
 	virtual void			sortItems(const int &length);
 	virtual void			createItems(void);
+	/*
+	**Callbacks
+	*/
+	void							newClass(ITEM *item);
 };
 
 #endif
