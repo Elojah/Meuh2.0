@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/14 13:05:59 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/10 15:49:39 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/10 20:33:37 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 #include <string.h>
 
 Menu::Menu(void) : Window(),
-					_menu(NULL),
-					_winMenu(NULL) {
-	_menuItems[0] = NULL;
+					_menu(nullptr),
+					_winMenu(nullptr) {
+	_menuItems[0] = nullptr;
 }
 
 Menu::Menu(int h, int w, int y, int x) : Window(h, w, y, x),
-										_menu(NULL),
-										_winMenu(NULL) {
-	_menuItems[0] = NULL;
+										_menu(nullptr),
+										_winMenu(nullptr) {
+	_menuItems[0] = nullptr;
 }
 
 Menu::~Menu(void) {
@@ -36,7 +36,7 @@ Menu::~Menu(void) {
 void				Menu::addItem(const std::string &str, void (Menu::*call)(ITEM *)) {
 	ITEM			*tmp;
 
-	if ((tmp = new_item(strdup(str.c_str()), NULL))) {
+	if ((tmp = new_item(strdup(str.c_str()), nullptr))) {
 		_items[tmp] = call;
 	}
 }
@@ -91,7 +91,7 @@ void		Menu::reset(void) {
 	if (_menu) {
 		unpost_menu(_menu);
 		free_menu(_menu);
-		_menu = NULL;
+		_menu = nullptr;
 	}
 	for (size_t i = 0; _menuItems[i]; ++i) {
 		void	*tmp;
@@ -108,7 +108,7 @@ void		Menu::reset(void) {
 	if (_winMenu) {
 		wrefresh(_winMenu);
 		delwin(_winMenu);
-		_winMenu = NULL;
+		_winMenu = nullptr;
 	}
 }
 
@@ -120,7 +120,7 @@ void			Menu::setMenuItems(void) {
 		_menuItems[i] = it.first;
 		i++;
 	}
-	_menuItems[i] = NULL;
+	_menuItems[i] = nullptr;
 	sortItems(i);
 }
 

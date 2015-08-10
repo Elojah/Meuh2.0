@@ -6,12 +6,13 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/14 13:58:16 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/10 15:51:22 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/10 20:21:26 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Boot.hpp"
 #include "FileDir.hpp"
+#include "Project.hpp"
 #include <fstream>
 #include <iostream>
 #include <algorithm>
@@ -53,8 +54,7 @@ void		Boot::createItems(void)
 }
 
 void		Boot::sortItems(const int &length) {
-
-	static auto comp = [](const ITEM *lhs, const ITEM *rhs) -> bool {
+	const static auto comp = [](const ITEM *lhs, const ITEM *rhs) -> bool {
 		const char *lhsName = item_name(lhs);
 		const char *rhsName = item_name(rhs);
 		if(strcmp(lhsName, "New project") || !strcmp(rhsName, "Return")) {
@@ -91,6 +91,7 @@ void		Boot::newProject(ITEM *item) {
 }
 
 void		Boot::openProject(ITEM *item) {
-	(void)item;
-	notifyUser("Open project !");
+	Project			proj(item_description(item), item_name(item));
+
+	proj.run();
 }

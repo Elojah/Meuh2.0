@@ -6,7 +6,7 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/07/12 13:51:08 by leeios            #+#    #+#              #
-#    Updated: 2015/07/19 11:21:23 by leeios           ###   ########.fr        #
+#    Updated: 2015/08/10 20:00:52 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,12 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-				Window\
-				Menu\
-				menus/Boot\
-				utils/FileDir
+				ncurse/Window\
+					ncurse/Menu\
+				screens/Project\
+					screens/Boot\
+				utils/FileDir\
+				mods/ClassMod\
 
 #List interfaces here
 INTERFACE = \
