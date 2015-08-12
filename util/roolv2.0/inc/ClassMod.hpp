@@ -6,15 +6,19 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/10 19:59:29 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/10 22:11:24 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/12 13:59:05 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLASS_MOD_HPP
 # define CLASS_MOD_HPP
 
+# define MAX_CMD 5
+
 # include "Menu.hpp"
 # include "IModule.hpp"
+
+class ICommand;
 
 class ClassMod : public Menu, public IModule
 {
@@ -25,6 +29,7 @@ public:
 private:
 	std::string		_path;
 	std::string		_name;
+	ICommand			*_cmds[MAX_CMD];
 
 	virtual void			sortItems(const int &length);
 	virtual void			createItems(void);
