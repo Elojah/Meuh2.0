@@ -6,7 +6,7 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/07/12 13:51:08 by leeios            #+#    #+#              #
-#    Updated: 2015/08/10 20:00:52 by leeios           ###   ########.fr        #
+#    Updated: 2015/08/12 12:15:06 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ CLASS = main\
 					screens/Boot\
 				utils/FileDir\
 				mods/ClassMod\
+				commands/StandardCmd\
 
 #List interfaces here
 INTERFACE = \
