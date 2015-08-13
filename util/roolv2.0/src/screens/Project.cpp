@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/10 17:36:41 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/13 14:00:40 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/13 22:01:29 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Project::Project(const std::string &projectPath, const std::string &projectName)
 	_path = projectPath;
 	_name = projectName;
 	setTitle(_name);
-	_mods[0] = new ClassMod(20, 30, 1, 1);
+	_mods[0] = new ClassMod(20, 60, 1, 1);
 	_mods[1] = nullptr;
 }
 

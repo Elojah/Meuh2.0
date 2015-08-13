@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/13 16:09:05 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/13 21:03:29 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/13 22:05:53 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ namespace utils {
 		free(toFree);
 
 		return (result);
-		}
+	}
+
 } // ns utils

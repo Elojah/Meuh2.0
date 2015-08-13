@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 12:31:19 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/13 21:28:19 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/13 22:06:39 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,35 @@ const std::string			duplicateString(std::string const &filename
 		result += line;
 	}
 	return (result);
+}
+
+
+void	addToFile(const std::string &oldName, const std::string &newName
+	, const std::string &filePath, bool removeOld) {
+	std::ifstream	ifs((filePath).c_str());
+	std::ofstream	ofs;
+	std::string		line;
+	std::vector<std::string>			tmpFile;
+
+	while (std::getline(ifs, line)) {
+		tmpFile.push_back(line);
+	}
+	for (auto itRead = tmpFile.begin(); itRead != tmpFile.end(); ++itRead) {
+		if ((*itRead).find(oldName) == std::string::npos) {
+			continue ;
+		}
+		tmpFile.insert(itRead + 1, "\t\t" + newName + "\\");
+		if (removeOld) {
+			tmpFile.erase(itRead);
+		}
+		break ;
+	}
+	ifs.close();
+	ofs.open((filePath).c_str());
+	for (auto itWrite = tmpFile.begin(); itWrite != tmpFile.end(); ++itWrite) {
+		ofs << *itWrite << std::endl;
+	}
+	ofs.close();
 }
 
 } //ns utils

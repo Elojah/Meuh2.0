@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/12 12:13:27 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/13 21:19:56 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/13 22:07:49 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ const std::string			StandardCmd::exec(const std::string &strCmd) const {
 	};
 
 	utils::touchFileVariables("./config/models/src.model", _path + "/src/" + name + ".cpp", map);
-	utils::touchFileVariables("./config/models/inc.model", _path + "/inc/" + name + ".hpp", map);
+	utils::touchFileVariables("./config/models/inc.model", _path + "/include/" + name + ".hpp", map);
+	utils::addToFile("CLASS", name, _path + "/Makefile", false);
 	return ("New class " + name + " created");
 }

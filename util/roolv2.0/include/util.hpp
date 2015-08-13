@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/19 11:21:57 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/13 20:47:01 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/13 22:06:30 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ namespace utils {
 			, const std::map<std::string, std::string> &map);
 	const std::string			duplicateString(std::string const &filename
 		, std::vector< std::map < std::string, std::string > > const &vecMap);
+	void	addToFile(const std::string &oldName, const std::string &newName
+		, const std::string &filePath, bool removeOld);
 
 	/*Str*/
 	std::string		parseClassName(std::string const &str);
