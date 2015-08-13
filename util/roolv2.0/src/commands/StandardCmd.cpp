@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/12 12:13:27 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/13 16:54:40 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/13 21:19:56 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,23 @@ bool		StandardCmd::adhere(const std::string &strCmd) const {
 	return (true);
 }
 
-const std::string			StandardCmd::exec(const std::string &strCmd) {
-	std::map<std::string, std::string> map{
-		{"${NAME}", utils::parseClassName(strCmd)},
-		{"${GUARD}", utils::parseGuard(strCmd)}
+const std::string			StandardCmd::exec(const std::string &strCmd) const {
+	std::string			name(utils::parseClassName(strCmd));
+	auto						inheritParents(
+		utils::duplicateString("./config/models/inherit_parents.model", utils::parseParents(strCmd))
+	);
+
+	if (!inheritParents.empty()) {
+		inheritParents.at(0) = ':';
+	}
+	const std::map<std::string, std::string> map {
+		{"${NAME}", name},
+		{"${GUARD}", utils::parseGuard(strCmd)},
+		{"${INC_PARENTS}", utils::duplicateString("./config/models/inc_parents.model", utils::parseParents(strCmd))},
+		{"${INHERIT_PARENTS}", inheritParents}
 	};
 
-	utils::touchFileVariables("./config/models/src.model", _path + "/src/" + strCmd + ".cpp", map);
-	utils::touchFileVariables("./config/models/inc.model", _path + "/inc/" + strCmd + ".hpp", map);
-	return ("New class " + strCmd + " created");
+	utils::touchFileVariables("./config/models/src.model", _path + "/src/" + name + ".cpp", map);
+	utils::touchFileVariables("./config/models/inc.model", _path + "/inc/" + name + ".hpp", map);
+	return ("New class " + name + " created");
 }

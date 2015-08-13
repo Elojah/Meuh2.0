@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/13 16:09:05 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/13 16:29:55 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/13 21:03:29 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ namespace utils {
 		std::size_t	found;
 
 		if ((found = str.find(':')) != std::string::npos) {
-			return (str.substr(0, found));
+			std::string	toTrim(str.substr(0, found));
+			return (toTrim.erase(toTrim.find_last_not_of(" ") + 1));
 		}
 		return (str);
 	}
@@ -39,33 +40,34 @@ namespace utils {
 		return (result);
 	}
 
-	std::string		parseParents(std::string const &str) {
+	std::vector< std::map < std::string, std::string > >		parseParents(std::string const &str) {
 		std::size_t	found;
+		std::vector<std::map<std::string, std::string> >	result;
 
-		if ((found = str.find(':')) != std::string::npos) {
-			return (str.substr(found + 1));
+		if ((found = str.find(':')) == std::string::npos) {
+			return (result);
 		}
-		return (std::string());
-	}
 
-	std::string		parsePrevName(std::string const &str) {
-		std::size_t	found;
+		char																							*pch;
+		char																							*toFree;
+		std::map<std::string, std::string>								tmp;
 
-		if ((found = str.find("${PREV_NAME=")) != std::string::npos) {
-			found += 12;/*HARDCODE*/
-			return (str.substr(found, str.find('}', found) - found));
+		toFree = strdup(str.substr(found + 1).c_str());
+		pch = std::strtok(toFree,",");
+		while (pch != NULL) {
+			std::string		line(pch);
+			size_t				found(line.find_first_not_of(' '));
+			std::size_t		foundEnd;
+
+			tmp["${PERMISSION}"] = line.substr(found, (foundEnd = line.find(' ', found)) - found);
+			found = line.find_first_not_of(' ', foundEnd);
+			tmp["${NAME}"] = line.substr(found, line.find(' ', found) - found);
+			result.push_back(std::map<std::string, std::string>(tmp));
+			tmp.clear();
+			pch = std::strtok(NULL,",");
 		}
-		return ("");
-	}
+		free(toFree);
 
-	std::string		parseNewName(std::string const &str) {
-		std::size_t	found;
-
-		if ((found = str.find("${NEW_NAME=")) != std::string::npos) {
-			found += 11;/*HARDCODE*/
-			return (str.substr(found, str.find('}', found) - found));
+		return (result);
 		}
-		return ("");
-	}
-
 } // ns utils

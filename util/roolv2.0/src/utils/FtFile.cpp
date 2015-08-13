@@ -6,11 +6,12 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 12:31:19 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/13 16:52:32 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/13 21:28:19 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "util.hpp"
+#include <sstream>
 #include <fstream>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -57,12 +58,12 @@ bool	touchFile(std::string const &origin, std::string const &dest) {
 }
 
 bool	touchFileVariables(std::string const &origin, std::string const &dest
-		, std::map<std::string, std::string> map) {
+		, const std::map<std::string, std::string> &map) {
 	std::ifstream		ifs(origin);
 	std::ofstream		ofs(dest);
 	std::string			line;
 
-	if (ifs.fail()) {
+	if (ifs.fail() || ofs.fail()) {
 		return (false);
 	}
 	while (std::getline(ifs,line)) {
@@ -79,6 +80,33 @@ bool	touchFileVariables(std::string const &origin, std::string const &dest
 	ifs.close();
 	ofs.close();
 	return (true);
+}
+
+const std::string			duplicateString(std::string const &filename
+	, std::vector< std::map < std::string, std::string > > const &vecMap) {
+	std::ifstream		ifs(filename);
+
+	if (vecMap.empty() || ifs.fail()) {
+		return ("");
+	}
+	std::string				result;
+	std::stringstream	buffer;
+
+	buffer << ifs.rdbuf();
+	for (const auto i : vecMap) {
+		std::string line(buffer.str());
+
+		for (const auto s : i) {
+			size_t found(0);
+
+			while ((found = line.find(s.first, found)) != std::string::npos) {
+				line.replace(found, s.first.length(), s.second);
+				found++;
+			}
+		}
+		result += line;
+	}
+	return (result);
 }
 
 } //ns utils

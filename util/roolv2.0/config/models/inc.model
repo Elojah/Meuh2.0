@@ -1,7 +1,8 @@
 #ifndef ${GUARD}_HPP
 # define ${GUARD}_HPP
 
-class ${NAME}
+${INC_PARENTS}
+class ${NAME} ${INHERIT_PARENTS}
 {
 	public:
 	protected:
