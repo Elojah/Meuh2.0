@@ -6,6 +6,6 @@ class ${NAME}
 	public:
 	protected:
 	private:
-}
+};
 
 #endif

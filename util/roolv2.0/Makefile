@@ -6,7 +6,7 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/07/12 13:51:08 by leeios            #+#    #+#              #
-#    Updated: 2015/08/12 12:15:06 by leeios           ###   ########.fr        #
+#    Updated: 2015/08/13 16:56:53 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@ TARGET = runner
 #Directories
 BIN_DIR = bin
 SRC_DIR = src
-INC_DIR = inc
+INC_DIR = include
 BUILD_DIR = build
-LIB_DIR = lib
+LIB_DIR =
 
 #Options
 CC = clang++-3.6
@@ -30,7 +30,8 @@ CLASS = main\
 					ncurse/Menu\
 				screens/Project\
 					screens/Boot\
-				utils/FileDir\
+				utils/FtFile\
+					utils/FtStr\
 				mods/ClassMod\
 				commands/StandardCmd\
 
@@ -43,7 +44,7 @@ OBJ = $(addsuffix .o, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3 -std=c++11
+CFLAGS = -Wall -Wextra -Werror -O3 -std=c++11
 LFLAGS =
 
 #Libs
@@ -64,7 +65,7 @@ INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 
 #RULES
-all : dirlib dirbin $(BIN_DIR)/$(TARGET)
+all : dirbin $(BIN_DIR)/$(TARGET)
 
 clean :
 	$(RM) $(BUILD_DIR)
@@ -76,9 +77,6 @@ re : fclean all
 
 dirbin:
 	mkdir -p $(BIN_DIR)
-
-dirlib:
-	mkdir -p $(LIB_DIR)
 
 .PHONY: all clean fclean re
 

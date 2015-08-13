@@ -1,0 +1,21 @@
+{
+    "folders":
+    [
+        {
+            "path": "/home/leeios/code/meuh/util/roolv2.0/"
+        }
+    ],
+
+    "settings":
+    {
+        // if "cc_include_options" exists in your project settings, it'll override rather than add to the "include_options" defined in cc.sublime-settings.
+        "cc_include_options":
+        [
+            "-I${project_path}/include",
+            "-isystem", "/usr/include",
+            "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed",
+            "-isystem", "/usr/lib/llvm-3.6/lib/clang/3.6.0/include",
+            "-isystem", "/usr/include"
+        ]
+    }
+}

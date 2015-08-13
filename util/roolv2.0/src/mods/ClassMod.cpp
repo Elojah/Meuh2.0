@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/10 20:13:46 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/12 14:02:50 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/13 14:19:43 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ ClassMod::ClassMod(int h, int w, int x, int y) :
 }
 
 ClassMod::~ClassMod(void) {
-	;
+	for (size_t i = 0; _cmds[i]; ++i) {
+		delete _cmds[i];
+	}
 }
 
 void		ClassMod::construct(const std::string &path, const std::string &name) {
@@ -79,7 +81,7 @@ void		ClassMod::newClass(ITEM *item) {
 	(void)item;
 	for (size_t i = 0; _cmds[i]; ++i) {
 		if (_cmds[i]->adhere(input)) {
-			_cmds[i]->exec(input);
+			notifyUser(_cmds[i]->exec(input));
 			return ;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/12 12:13:27 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/12 14:01:23 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/13 16:54:40 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ bool		StandardCmd::adhere(const std::string &strCmd) const {
 }
 
 const std::string			StandardCmd::exec(const std::string &strCmd) {
-	utils::touchFile(_path + "/config/models/src.model", _path + "/src/" + strCmd + ".cpp");
-	utils::touchFile(_path + "/config/models/inc.model", _path + "/inc/" + strCmd + ".hpp");
-	return (std::string("ok ok"));
+	std::map<std::string, std::string> map{
+		{"${NAME}", utils::parseClassName(strCmd)},
+		{"${GUARD}", utils::parseGuard(strCmd)}
+	};
+
+	utils::touchFileVariables("./config/models/src.model", _path + "/src/" + strCmd + ".cpp", map);
+	utils::touchFileVariables("./config/models/inc.model", _path + "/inc/" + strCmd + ".hpp", map);
+	return ("New class " + strCmd + " created");
 }

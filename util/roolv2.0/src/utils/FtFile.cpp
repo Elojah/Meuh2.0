@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FileDir.cpp                                        :+:      :+:    :+:   */
+/*   FtFile.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 12:31:19 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/12 14:01:00 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/13 16:52:32 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,31 @@ bool	touchFile(std::string const &origin, std::string const &dest) {
 		return (false);
 	}
 	while (std::getline(ifs, line)) {
+		ofs << line << std::endl;
+	}
+	ifs.close();
+	ofs.close();
+	return (true);
+}
+
+bool	touchFileVariables(std::string const &origin, std::string const &dest
+		, std::map<std::string, std::string> map) {
+	std::ifstream		ifs(origin);
+	std::ofstream		ofs(dest);
+	std::string			line;
+
+	if (ifs.fail()) {
+		return (false);
+	}
+	while (std::getline(ifs,line)) {
+		for (const auto i : map) {
+			size_t found(0);
+
+			while ((found = line.find(i.first, found)) != std::string::npos) {
+				line.replace(found, i.first.length(), i.second);
+				found++;
+			}
+		}
 		ofs << line << std::endl;
 	}
 	ifs.close();
