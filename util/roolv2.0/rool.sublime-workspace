@@ -4,8 +4,32 @@
 		"selected_items":
 		[
 			[
+				"par",
+				"parseDirectories	(util.hpp)"
+			],
+			[
+				"cst",
+				"c_str() const	const char *"
+			],
+			[
+				"findlast",
+				"find_last_of(char __c) const	size_type"
+			],
+			[
+				"touc",
+				"touchFile(const std::string &origin, const std::string &dest)	bool"
+			],
+			[
+				"du",
+				"duplicateString(const std::string &filename, const std::vector<std::map<std::string, std::string> > &vecMap)	const std::string"
+			],
+			[
 				"parse",
-				"parseGuard(const std::string &str)	std::string"
+				"parseParents	(util.hpp)"
+			],
+			[
+				"cs",
+				"c_str() const	const char *"
 			],
 			[
 				"touch",
@@ -420,10 +444,6 @@
 				"create_map"
 			],
 			[
-				"par",
-				"_parseInterface"
-			],
-			[
 				"templ",
 				"templates"
 			],
@@ -494,76 +514,48 @@
 			[
 				"pl",
 				"playerPush"
-			],
-			[
-				"answ",
-				"answer"
-			],
-			[
-				"quest",
-				"question"
-			],
-			[
-				"answer",
-				"answer0"
-			],
-			[
-				"backgronu",
-				"background-image"
-			],
-			[
-				"webkit-mas",
-				"-webkit-mask-image:   (property)"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/utils/FtFile.cpp",
+			"file": "src/mods/ClassMod.cpp",
 			"settings":
 			{
-				"buffer_size": 2346,
+				"buffer_size": 3043,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/commands/StandardCmd.cpp",
+			"file": "src/mods/MemberMod.cpp",
 			"settings":
 			{
-				"buffer_size": 1594,
+				"buffer_size": 3776,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "Makefile",
+			"file": "include/MemberMod.hpp",
 			"settings":
 			{
-				"buffer_size": 2483,
+				"buffer_size": 1403,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+			"file": "include/ClassMod.hpp",
 			"settings":
 			{
-				"buffer_size": 3270,
+				"buffer_size": 1483,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "include/util.hpp",
+			"file": "src/screens/Project.cpp",
 			"settings":
 			{
-				"buffer_size": 1545,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/utils/FtStr.cpp",
-			"settings":
-			{
-				"buffer_size": 2234,
+				"buffer_size": 1415,
 				"line_ending": "Unix"
 			}
 		}
@@ -575,10 +567,26 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 254.0,
-		"last_filter": "prefe",
+		"height": 302.0,
+		"last_filter": "color",
 		"selected_items":
 		[
+			[
+				"color",
+				"Color Picker"
+			],
+			[
+				"pack li",
+				"Package Control: List Packages"
+			],
+			[
+				"pref",
+				"Preferences: Settings - User"
+			],
+			[
+				"linter",
+				"SublimeLinter: Disable Linter"
+			],
 			[
 				"prefe",
 				"Preferences: Key Bindings - User"
@@ -618,18 +626,6 @@
 			[
 				"pack remove",
 				"Package Control: Remove Package"
-			],
-			[
-				"pack li",
-				"Package Control: List Packages"
-			],
-			[
-				"pref",
-				"Preferences: Settings - User"
-			],
-			[
-				"linter",
-				"SublimeLinter: Toggle Linter"
 			],
 			[
 				"pack l",
@@ -835,30 +831,46 @@
 		"/home/leeios/code/meuh/util/roolv2.0/config/models",
 		"/home/leeios/code/meuh/util/roolv2.0/src",
 		"/home/leeios/code/meuh/util/roolv2.0/src/commands",
-		"/home/leeios/code/meuh/util/roolv2.0/src/utils",
-		"/home/leeios/code/meuh/util/roolv2.0/test"
+		"/home/leeios/code/meuh/util/roolv2.0/src/mods",
+		"/home/leeios/code/meuh/util/roolv2.0/src/ncurse",
+		"/home/leeios/code/meuh/util/roolv2.0/src/screens",
+		"/home/leeios/code/meuh/util/roolv2.0/src/utils"
 	],
 	"file_history":
 	[
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/main.model",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/Makefile.model",
+		"/home/leeios/code/meuh/util/roolv2.0/src/utils/FtFile.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/utils/FtStr.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/interface.model",
+		"/home/leeios/code/meuh/util/roolv2.0/include/util.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/include/InterfaceCmd.hpp",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/leeios/code/meuh/util/roolv2.0/config/models/inc.model",
+		"/home/leeios/code/meuh/util/roolv2.0/src/commands/StandardCmd.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/commands/InterfaceCmd.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/screens/Project.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/screens/Boot.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/proj_tree/classic.tree",
+		"/home/leeios/code/meuh/util/roolv2.0/config/.proj",
+		"/home/leeios/code/meuh/util/roolv2.0/include/StandardCmd.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/inc_parents.model",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/inherit_parents.model",
 		"/home/leeios/code/meuh/util/roolv2.0/Makefile",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/leeios/code/meuh/util/roolv2.0/include/ICommand.hpp",
+		"/home/leeios/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
 		"/home/leeios/.config/sublime-text-3/Packages/Clang-Complete/cc.sublime-settings",
 		"/home/leeios/code/meuh/util/roolv2.0/src/main.cpp",
-		"/home/leeios/code/meuh/util/roolv2.0/src/screens/Boot.cpp",
 		"/home/leeios/code/meuh/util/roolv2.0/src/mods/ClassMod.cpp",
-		"/home/leeios/code/meuh/util/roolv2.0/src/commands/StandardCmd.cpp",
-		"/home/leeios/code/meuh/util/roolv2.0/include/StandardCmd.hpp",
 		"/home/leeios/code/meuh/util/roolv2.0/src/ncurse/Window.cpp",
 		"/home/leeios/code/meuh/util/roolv2.0/src/ncurse/Menu.cpp",
-		"/home/leeios/code/meuh/util/roolv2.0/src/screens/Project.cpp",
 		"/home/leeios/code/meuh/util/roolv2.0/src/utils/FileDir.cpp",
 		"/home/leeios/code/meuh/util/roolv2.0/rool.sublime-workspace",
 		"/home/leeios/code/meuh/util/roolv2.0/roolv2.0.sublime-project",
 		"/home/leeios/.config/sublime-text-3/Packages/User/ClangComplete.sublime-settings",
 		"/home/leeios/.config/sublime-text-3/Packages/ClangComplete/ClangComplete.sublime-settings",
 		"/home/leeios/code/meuh/util/roolv2.0/CMakeLists.txt",
-		"/home/leeios/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-		"/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
 		"/home/leeios/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
 		"/home/leeios/code/meuh/util/roolv2.0/util/Makefile",
 		"/home/leeios/code/meuh/util/roolv2.0/CMakeLists",
@@ -868,7 +880,6 @@
 		"/home/leeios/code/meuh/util/roolv2.0/inc/Menu.hpp",
 		"/home/leeios/code/meuh/util/roolv2.0/inc/ICommand.hpp",
 		"/home/leeios/code/meuh/util/roolv2.0/inc/ClassMod.hpp",
-		"/home/leeios/code/meuh/util/roolv2.0/config/.proj",
 		"/home/leeios/code/meuh/util/roolv2.0/config/models/src.model",
 		"/home/leeios/code/meuh/util/roolv2.0/inc/StandardCmd.hpp",
 		"/home/leeios/code/meuh/util/roolv2.0/inc/util.hpp",
@@ -906,7 +917,6 @@
 		"/home/leeios/code/meuh/42/Scop/hdezier/src/callback/mouse_callback.c",
 		"/home/leeios/code/meuh/util/roolv2.0/runner",
 		"/home/leeios/code/meuh/util/Rool/src/menus/Boot.cpp",
-		"/home/leeios/code/meuh/util/roolv2.0/config/proj_tree/classic.tree",
 		"/home/leeios/code/meuh/util/roolv2.0/src/Window.cpp",
 		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/main.cpp",
 		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/Master.cpp",
@@ -934,7 +944,6 @@
 		"/home/leeios/code/rool/include/SortItems.hpp",
 		"/home/leeios/code/rool/src/SortItems.cpp",
 		"/home/leeios/code/meuh/util/Rool/include/Menu.hpp",
-		"/home/leeios/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
 		"/home/leeios/.config/sublime-text-3/Packages/SublimeLinter/Default (Linux).sublime-keymap",
 		"/home/leeios/code/Txt-index/src/Node.cpp",
 		"/home/leeios/code/Txt-index/src/main.cpp",
@@ -956,18 +965,7 @@
 		"/home/leeios/code/meuh/util/Rool/src/Project.cpp",
 		"/home/leeios/code/meuh/util/Rool/src/SortItems.cpp",
 		"/home/leeios/code/meuh/42/Gomoku/hdezier-erobert/Makefile",
-		"/home/leeios/code/meuh/util/Rool/config/templates/Makefile.template",
-		"/home/leeios/code/meuh/util/Rool/config/.proj",
-		"/home/leeios/code/meuh/util/Rool/Makefile",
-		"/home/leeios/code/meuh/42/Scop/hdezier/src/render.c",
-		"/home/leeios/code/meuh/42/Scop/hdezier/test/cube.obj",
-		"/home/leeios/code/meuh/42/Scop/hdezier/src/load_bmp.c",
-		"/home/leeios/code/meuh/42/Scop/hdezier/src/key_callback.c",
-		"/home/leeios/code/meuh/42/Scop/hdezier/src/init_camera.c",
-		"/home/leeios/code/meuh/42/Scop/hdezier/src/load_obj.c",
-		"/home/leeios/code/meuh/42/Scop/hdezier/include/scop.h",
-		"/home/leeios/code/meuh/42/Scop/hdezier/src/mouse_callback.c",
-		"/home/leeios/code/meuh/42/Scop/hdezier/src/loop.c"
+		"/home/leeios/code/meuh/util/Rool/config/templates/Makefile.template"
 	],
 	"find":
 	{
@@ -1012,6 +1010,19 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"class",
+			"MemberList",
+			"StandardCmd",
+			"virtual",
+			" = 0",
+			"pathToMake",
+			"str",
+			"Strings",
+			"wholeParent",
+			"strCmd",
+			"i",
+			"str",
+			"bool",
 			"LIB_DIR",
 			"filename",
 			"i->",
@@ -1126,20 +1137,7 @@
 			"ctrl",
 			"lib",
 			"endline",
-			"pathDir",
-			"alt+s",
-			"super",
-			"ctrl",
-			"keypad8",
-			"stdout",
-			"Out",
-			"fd",
-			"fdOut",
-			"nginx",
-			"execve",
-			"dir",
-			"src",
-			"OK"
+			"pathDir"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1167,24 +1165,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/utils/FtFile.cpp",
+					"file": "src/mods/ClassMod.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2346,
+						"buffer_size": 3043,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1972,
-								1972
+								2073,
+								2073
 							]
 						],
 						"settings":
@@ -1192,16 +1190,51 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
@@ -1211,42 +1244,7 @@
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
-								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content"
+								"bh_square_content"
 							],
 							"glsv_configured": true,
 							"glsv_enabled": 1,
@@ -1256,118 +1254,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 636.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/commands/StandardCmd.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1594,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1449,
-								1449
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content"
-							],
-							"glsv_configured": true,
-							"glsv_enabled": 1,
-							"glsv_spec": 0,
-							"hasHeader": true,
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 81.0,
+						"translation.y": 748.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "Makefile",
+					"buffer": 1,
+					"file": "src/mods/MemberMod.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2483,
+						"buffer_size": 3776,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1848,
-								1848
+								2617,
+								2617
 							]
 						],
 						"settings":
@@ -1375,36 +1282,26 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -1415,33 +1312,44 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content"
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
 							],
 							"glsv_configured": true,
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
 							"hasHeader": true,
-							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 673.0,
+						"translation.y": 705.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1451,20 +1359,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 3,
-					"file": "/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+					"buffer": 2,
+					"file": "include/MemberMod.hpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3270,
+						"buffer_size": 1403,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3270,
-								3270
+								1204,
+								1204
 							]
 						],
 						"settings":
@@ -1472,36 +1380,26 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -1512,51 +1410,61 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content"
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
 							],
 							"glsv_configured": true,
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
-							"hasHeader": false,
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"hasHeader": true,
+							"history_list_is_closing": true,
+							"syntax": "Packages/C++/C++.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 346.0,
+						"translation.y": 211.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "include/util.hpp",
+					"buffer": 3,
+					"file": "include/ClassMod.hpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1545,
+						"buffer_size": 1483,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1258,
-								1258
+								1471,
+								1471
 							]
 						],
 						"settings":
@@ -1564,36 +1472,26 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -1604,21 +1502,31 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content"
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
 							],
 							"glsv_configured": true,
 							"glsv_enabled": 1,
@@ -1628,10 +1536,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 166.0,
+						"translation.y": 301.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1641,20 +1549,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 5,
-					"file": "src/utils/FtStr.cpp",
-					"semi_transient": false,
+					"buffer": 4,
+					"file": "src/screens/Project.cpp",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 2234,
+						"buffer_size": 1415,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1968,
-								1968
+								1180,
+								1180
 							]
 						],
 						"settings":
@@ -1662,36 +1570,26 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -1702,21 +1600,31 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content"
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
 							],
 							"glsv_configured": true,
 							"glsv_enabled": 1,
@@ -1726,10 +1634,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 736.0,
+						"translation.y": 90.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1801,6 +1709,26 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"clasm",
+				"include/ClassMod.hpp"
+			],
+			[
+				"mem",
+				"src/mods/MemberMod.cpp"
+			],
+			[
+				"mod",
+				"src/mods/ClassMod.cpp"
+			],
+			[
+				"ftst",
+				"src/utils/FtStr.cpp"
+			],
+			[
+				"stan",
+				"src/commands/StandardCmd.cpp"
+			],
 			[
 				"util",
 				"include/util.hpp"

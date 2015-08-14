@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/13 16:09:05 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/14 14:52:16 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/14 19:25:49 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,17 @@ namespace utils {
 		while (pch != NULL) {
 			std::string		line(pch);
 			size_t				found(line.find_first_not_of(' '));
-			std::size_t		foundEnd;
+			std::size_t		foundEnd(line.find(' ', found));
 
-			tmp["${PERMISSION}"] = line.substr(found, (foundEnd = line.find(' ', found)) - found);
-			found = line.find_first_not_of(' ', foundEnd);
+			if (found == std::string::npos) {
+				pch = std::strtok(NULL,",");
+				continue ;
+			} else if (foundEnd == std::string::npos) {
+				tmp["${PERMISSION}"] = "public";
+			} else {
+				tmp["${PERMISSION}"] = line.substr(found, foundEnd - found);
+				found = line.find_first_not_of(' ', foundEnd);
+			}
 			tmp["${NAME}"] = line.substr(found, line.find(' ', found) - found);
 			result.push_back(std::map<std::string, std::string>(tmp));
 			tmp.clear();
