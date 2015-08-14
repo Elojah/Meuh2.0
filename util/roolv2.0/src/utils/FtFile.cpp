@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 12:31:19 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/13 22:06:39 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/14 14:50:02 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <string.h>
 
 namespace utils {
 
@@ -37,6 +38,26 @@ bool	makeFolderTree(std::string const &schema, std::string const &path) {
 		}
 	}
 	ifs.close();
+	return (true);
+}
+
+bool	makePath(const std::string &pathEnsure, const std::string &pathToMake) {
+	std::string		finalPath(pathEnsure);
+	char					*token;
+	char					*toFree;
+
+	if (pathToMake.empty()) {
+		return (false);
+	}
+	toFree = strdup(pathToMake.c_str());
+	token = strtok(toFree, "/");
+	while (token != nullptr) {
+		finalPath += "/";
+		finalPath += token;
+		mkdir(finalPath.c_str(), S_IRWXU);
+		token = strtok(nullptr, "/");
+	}
+	free(toFree);
 	return (true);
 }
 

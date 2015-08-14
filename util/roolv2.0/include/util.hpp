@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/19 11:21:57 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/13 22:06:30 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/14 14:36:37 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 namespace utils {
 	/*File*/
 	bool	makeFolderTree(std::string const &schema, std::string const &path);
+	bool	makePath(const std::string &pathEnsure, const std::string &pathToMake);
 	bool	touchFile(std::string const &origin, std::string const &dest);
 	bool	touchFileVariables(std::string const &origin, std::string const &dest
 			, const std::map<std::string, std::string> &map);
@@ -30,6 +31,7 @@ namespace utils {
 
 	/*Str*/
 	std::string		parseClassName(std::string const &str);
+	std::string		parseDirectories(std::string const &str);
 	std::string		parseGuard(std::string const &str);
 	std::vector< std::map < std::string, std::string > >		parseParents(std::string const &str);
 

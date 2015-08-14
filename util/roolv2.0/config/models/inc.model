@@ -4,9 +4,11 @@
 ${INC_PARENTS}
 class ${NAME} ${INHERIT_PARENTS}
 {
-	public:
-	protected:
-	private:
+public:
+	${NAME}(void);
+	virtual ~${NAME}(void);
+protected:
+private:
 };
 
 #endif

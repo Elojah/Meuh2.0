@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/12 12:13:27 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/13 22:07:49 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/14 14:55:05 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ bool		StandardCmd::adhere(const std::string &strCmd) const {
 
 const std::string			StandardCmd::exec(const std::string &strCmd) const {
 	std::string			name(utils::parseClassName(strCmd));
+	std::string			dirs(utils::parseDirectories(strCmd));
 	auto						inheritParents(
 		utils::duplicateString("./config/models/inherit_parents.model", utils::parseParents(strCmd))
 	);
@@ -42,8 +43,11 @@ const std::string			StandardCmd::exec(const std::string &strCmd) const {
 		{"${INHERIT_PARENTS}", inheritParents}
 	};
 
-	utils::touchFileVariables("./config/models/src.model", _path + "/src/" + name + ".cpp", map);
-	utils::touchFileVariables("./config/models/inc.model", _path + "/include/" + name + ".hpp", map);
-	utils::addToFile("CLASS", name, _path + "/Makefile", false);
+	utils::makePath(_path + "/src/", dirs);
+	utils::touchFileVariables("./config/models/src.model"
+		, _path + "/src/" + dirs + '/' + name + ".cpp", map);
+	utils::touchFileVariables("./config/models/inc.model"
+		, _path + "/include/" + name + ".hpp", map);
+	utils::addToFile("CLASS", dirs + '/' + name, _path + "/Makefile", false);
 	return ("New class " + name + " created");
 }

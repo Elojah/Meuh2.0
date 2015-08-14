@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/13 16:09:05 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/13 22:05:53 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/14 14:52:16 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,28 @@ namespace utils {
 
 	std::string		parseClassName(std::string const &str) {
 		std::size_t	found;
+		std::string	name;
 
-		if ((found = str.find(':')) != std::string::npos) {
-			std::string	toTrim(str.substr(0, found));
+		if ((found = str.find_last_of('/')) != std::string::npos) {
+			name = str.substr(found + 1, str.length() - found - 1);
+		} else {
+			name = str;
+		}
+		if ((found = name.find(':')) != std::string::npos) {
+			std::string	toTrim(name.substr(0, found));
 			return (toTrim.erase(toTrim.find_last_not_of(" ") + 1));
 		}
-		return (str);
+		return (name);
+	}
+
+	std::string		parseDirectories(std::string const &str) {
+		std::size_t	found;
+
+		if ((found = str.find_last_of('/')) != std::string::npos) {
+			return(str.substr(0, found));
+		} else {
+			return ("");
+		}
 	}
 
 	std::string		parseGuard(std::string const &str) {
