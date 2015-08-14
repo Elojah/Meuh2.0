@@ -6,12 +6,13 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/10 20:13:46 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/13 14:19:43 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/14 15:06:37 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClassMod.hpp"
 #include "StandardCmd.hpp"
+#include "InterfaceCmd.hpp"
 #include <string.h>
 #include <dirent.h>
 #include <algorithm>
@@ -30,8 +31,9 @@ ClassMod::~ClassMod(void) {
 void		ClassMod::construct(const std::string &path, const std::string &name) {
 	_path = path;
 	_name = name;
-	_cmds[0] = new StandardCmd(_path);
-	_cmds[1] = nullptr;
+	_cmds[0] = new InterfaceCmd(_path);
+	_cmds[1] = new StandardCmd(_path);
+	_cmds[2] = nullptr;
 	simpleCreate(_name);
 }
 

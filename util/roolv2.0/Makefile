@@ -26,6 +26,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
+		commands/InterfaceCmd\
 				ncurse/Window\
 					ncurse/Menu\
 				screens/Project\
