@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <fcntl.h>
 
 const std::string	Process::_paramsName[19] = {
 	"cmd",
@@ -35,20 +36,7 @@ Process::~Process(void) {
 }
 
 void		Process::start(void) {
-	pid_t	f;
-	int		status;
-
-	f = fork();
-	if (f == 0) {
-		execve(_params.cmd.c_str(), NULL, NULL);
-	} else if (f < 0) {
-		*_log << "Failed to fork process" << std::endl;
-	} else {
-		if (waitpid(f, &status, 0) == -1)
-			*_log << "Error waiting command execution" << std::endl;
-		if (!WIFEXITED(status))
-			*_log << "Command execution terminated unnormally\n" << std::endl;
-	}
+	launch();
 }
 
 void		Process::setLog(std::ofstream *log) {
@@ -110,11 +98,42 @@ Process		&Process::operator=(Process const &rhs) {
 }
 
 Process::eState		Process::launch(void) {
-	static const char	*fakeArgs[2] = {NULL, NULL};
 	int		status;
+	int		fdOut;
+	int		fdErr;
+	int		pipeOut[2];
+	int		pipeErr[2];
 
+	if ((fdOut = open(_params.stdout.c_str(), O_WRONLY)) < 0) {
+		fdOut = 1;
+		*_log << "Can't redirect stdout to " << _params.stdout << std::endl;
+	} else {
+		*_log << "Redirect stdout to " << _params.stdout << std::endl;
+	}
+	if ((fdErr = open(_params.stderr.c_str(), O_WRONLY)) < 0) {
+		fdErr = 2;
+		*_log << "Can't redirect stderr to " << _params.stderr << std::endl;
+	} else {
+		*_log << "Redirect stderr to " << _params.stderr << std::endl;
+	}
+	if (pipe(pipeOut)) {
+		*_log << "Error piping stdout ..." << std::endl;
+	}
+	if (pipe(pipeErr)) {
+		*_log << "Error piping stderr ..." << std::endl;
+	}
+
+	*_log << "Launch " << *this;
 	_pid = fork();
+
 	if (_pid == 0) {
+		static const char	*fakeArgs[2] = {NULL, NULL};
+		close(pipeOut[0]);
+		dup2(pipeOut[1], fdOut);
+		close(fdOut);
+		close(pipeErr[0]);
+		dup2(pipeErr[1], fdErr);
+		close(fdErr);
 		if (execve(_params.cmd.c_str(), (char * const *)fakeArgs, NULL) < 0) {
 			*_log << "Command " << _params.cmd << " can't exec." << std::endl;
 			return (PROC_ERROR);
@@ -122,18 +141,24 @@ Process::eState		Process::launch(void) {
 	}
 	else
 	{
-		if (waitpid(_pid, &status, 0) == -1)
+		close(pipeOut[1]);
+		close(pipeErr[1]);
+		if (waitpid(_pid, &status, 0) == -1) {
 			*_log << "Error waiting command execution" << std::endl;
+		}
 		if (!WIFEXITED(status)) {
 			*_log << "Command execution terminated unnormally" << std::endl;
 			return (PROC_ERROR);
+		} else {
+			*_log << "Command " << _params.cmd << " executed normally."<< std::endl
+																		<< "Exit code:\t" << status << std::endl;
 		}
 	}
 	return (PROC_OK);
 }
 
 void		Process::serialize(std::ostream &stream) const {
-	stream  << "cmd:\t" << _params.cmd << std::endl
+	stream << "cmd:\t" << _params.cmd << std::endl
 			<< "numprocs:\t" << _params.numprocs << std::endl
 			<< "umask:\t" << _params.umask << std::endl
 			<< "workingdir:\t" << _params.workingdir << std::endl

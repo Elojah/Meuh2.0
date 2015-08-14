@@ -61,10 +61,8 @@ void			Master::start(void) {
 
 void			Master::loop(void) {
 	for (int i = 0; i < _nProcs; ++i) {
-		_log << "Launch " << _procs[i];
 		_procs[i].launch();
 	}
-	_ui.notifyUser("WAIT");
 }
 
 Master		&Master::operator=(Master const &rhs) {

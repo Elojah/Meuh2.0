@@ -1,0 +1,1986 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"parse",
+				"parseGuard(const std::string &str)	std::string"
+			],
+			[
+				"touch",
+				"touchFileVariables	(FtFile.cpp)"
+			],
+			[
+				"touf",
+				"touchFileVariables	(FtFile.cpp)"
+			],
+			[
+				"size",
+				"size_t	(FtStr.cpp)"
+			],
+			[
+				"string",
+				"std::string"
+			],
+			[
+				"ifs",
+				"ifstream	Typedef"
+			],
+			[
+				"strin",
+				"std::string"
+			],
+			[
+				"pro",
+				"project_path"
+			],
+			[
+				"std",
+				"std=c++11"
+			],
+			[
+				"ICOM",
+				"I_COMMAND_HPP"
+			],
+			[
+				"item",
+				"item_name"
+			],
+			[
+				"_me",
+				"_menuItems	(Menu.cpp)"
+			],
+			[
+				"paddin",
+				"padding-left"
+			],
+			[
+				"padding",
+				"padding-left"
+			],
+			[
+				"border",
+				"border-right"
+			],
+			[
+				"height",
+				"min-height"
+			],
+			[
+				"datas",
+				"dateStart"
+			],
+			[
+				"glyp",
+				"glyphicon-calendar"
+			],
+			[
+				"inpu",
+				"input-group-addon"
+			],
+			[
+				"form",
+				"form-control"
+			],
+			[
+				"dateti",
+				"datetimepicker6"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"max-",
+				"max-width"
+			],
+			[
+				"aria",
+				"aria-hidden"
+			],
+			[
+				"gl",
+				"glyphicon-chevron-right"
+			],
+			[
+				"to",
+				"toDOM"
+			],
+			[
+				"inn",
+				"innerHTML"
+			],
+			[
+				"app",
+				"App"
+			],
+			[
+				"File",
+				"FileDir	(FileDir.cpp)"
+			],
+			[
+				"nu",
+				"ncurses	(Window.hpp)"
+			],
+			[
+				"colo",
+				"color_map	(Obj.frag)"
+			],
+			[
+				"IN",
+				"INT_MAX	(Node.hpp)"
+			],
+			[
+				"res",
+				"resetAlphaBeta	(Node.hpp)"
+			],
+			[
+				"W",
+				"PTS_WIN"
+			],
+			[
+				"BOA",
+				"BOARD_WIDTH"
+			],
+			[
+				"vert",
+				"vertexUV"
+			],
+			[
+				"fil",
+				"filename"
+			],
+			[
+				"read",
+				"read_bmp_file"
+			],
+			[
+				"refr",
+				"refresh"
+			],
+			[
+				"glEn",
+				"glEnable"
+			],
+			[
+				"forw",
+				"forward"
+			],
+			[
+				"pr",
+				"print_obj"
+			],
+			[
+				"glEna",
+				"glEnableVertexAttribArray"
+			],
+			[
+				"rev",
+				"revert_mat"
+			],
+			[
+				"mvp",
+				"mvp_id"
+			],
+			[
+				"refre",
+				"refresh_vp"
+			],
+			[
+				"set",
+				"set_eye_view"
+			],
+			[
+				"norm",
+				"normal_buffer"
+			],
+			[
+				"VIE",
+				"VIEW_ASPECT"
+			],
+			[
+				"VIEWF",
+				"VIEW_FAR"
+			],
+			[
+				"vie",
+				"view_one"
+			],
+			[
+				"VI",
+				"VIEW_RATIO"
+			],
+			[
+				"verbuf",
+				"vertex_buffer_data"
+			],
+			[
+				"veb",
+				"vertex_buffer_size"
+			],
+			[
+				"un",
+				"unsigned"
+			],
+			[
+				"ve_indeb",
+				"ve_index_buffer_data"
+			],
+			[
+				"fta",
+				"ft_atof"
+			],
+			[
+				"o",
+				"obj"
+			],
+			[
+				"ver",
+				"vertex_buffer_size"
+			],
+			[
+				"index",
+				"index_buffer_size"
+			],
+			[
+				"GL_ELEMENT_ARRAY_",
+				"GL_ELEMENT_ARRAY_BUFFER"
+			],
+			[
+				"verte",
+				"vertex_buffer_data"
+			],
+			[
+				"Ent",
+				"Entity"
+			],
+			[
+				"E",
+				"Entity"
+			],
+			[
+				"GLUin",
+				"GLuint"
+			],
+			[
+				"Wi",
+				"WIDTH_MAP"
+			],
+			[
+				"buffer",
+				"_buffer"
+			],
+			[
+				"_ver",
+				"_vertexBuffer"
+			],
+			[
+				"HE",
+				"HEIGHT_MAP"
+			],
+			[
+				"vec",
+				"vec3"
+			],
+			[
+				"Vertexs",
+				"VertexSourcePointer"
+			],
+			[
+				"Compl",
+				"Compiling"
+			],
+			[
+				"_pro",
+				"_progID"
+			],
+			[
+				"rea",
+				"_read"
+			],
+			[
+				"excep",
+				"except"
+			],
+			[
+				"tok",
+				"tokenMask"
+			],
+			[
+				"r",
+				"_readTokens"
+			],
+			[
+				"empty",
+				"emptyWord"
+			],
+			[
+				"inc",
+				"inc	#include \"…\""
+			],
+			[
+				"pri",
+				"printout	Cpp-print"
+			],
+			[
+				"X11",
+				"X11Win"
+			],
+			[
+				"final",
+				"finalMap"
+			],
+			[
+				"isI",
+				"isInterface"
+			],
+			[
+				"fou",
+				"foundEnd"
+			],
+			[
+				"_v",
+				"_vertexBuffer"
+			],
+			[
+				"Vertexsh",
+				"VertexShaderCode"
+			],
+			[
+				"verb",
+				"_vertexbuffer"
+			],
+			[
+				"conte",
+				"context_attribs"
+			],
+			[
+				"patem",
+				"_patternMap"
+			],
+			[
+				"itemna",
+				"itemNames"
+			],
+			[
+				"make",
+				"makeModule"
+			],
+			[
+				"_mod",
+				"_modsFactory"
+			],
+			[
+				"Im",
+				"IModule"
+			],
+			[
+				"Ite",
+				"ITEM"
+			],
+			[
+				"config",
+				"configFile"
+			],
+			[
+				"vi",
+				"void"
+			],
+			[
+				"err",
+				"errorCallback"
+			],
+			[
+				"tie",
+				"t_itemFull"
+			],
+			[
+				"tits",
+				"titleSet"
+			],
+			[
+				"Winc",
+				"WinCurse"
+			],
+			[
+				"Wincu",
+				"WinCurse_menu"
+			],
+			[
+				"crem",
+				"_createMapName"
+			],
+			[
+				"cre",
+				"create_map"
+			],
+			[
+				"par",
+				"_parseInterface"
+			],
+			[
+				"templ",
+				"templates"
+			],
+			[
+				"_",
+				"_makeClassList"
+			],
+			[
+				"ws",
+				"ws_row"
+			],
+			[
+				"retr",
+				"return"
+			],
+			[
+				"Mod",
+				"Mod_view"
+			],
+			[
+				"ftstr",
+				"ft_strjoin"
+			],
+			[
+				"ftputfd",
+				"ft_putendl_fd"
+			],
+			[
+				"ftpute",
+				"ft_putendl_fd"
+			],
+			[
+				"en",
+				"env"
+			],
+			[
+				"builti",
+				"builtin_fcts"
+			],
+			[
+				"ftsr",
+				"ft_strcmp"
+			],
+			[
+				"ft",
+				"ft_minishell"
+			],
+			[
+				"XCreate",
+				"XCreateSimpleWindow"
+			],
+			[
+				"na",
+				"namespace"
+			],
+			[
+				"Test",
+				"TestApp"
+			],
+			[
+				"SRC",
+				"SRC_EXT"
+			],
+			[
+				"ke",
+				"keydown"
+			],
+			[
+				"pl",
+				"playerPush"
+			],
+			[
+				"answ",
+				"answer"
+			],
+			[
+				"quest",
+				"question"
+			],
+			[
+				"answer",
+				"answer0"
+			],
+			[
+				"backgronu",
+				"background-image"
+			],
+			[
+				"webkit-mas",
+				"-webkit-mask-image:   (property)"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/utils/FtFile.cpp",
+			"settings":
+			{
+				"buffer_size": 2346,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/commands/StandardCmd.cpp",
+			"settings":
+			{
+				"buffer_size": 1594,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 2483,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+			"settings":
+			{
+				"buffer_size": 3270,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/util.hpp",
+			"settings":
+			{
+				"buffer_size": 1545,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/utils/FtStr.cpp",
+			"settings":
+			{
+				"buffer_size": 2234,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 254.0,
+		"last_filter": "prefe",
+		"selected_items":
+		[
+			[
+				"prefe",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"pack in",
+				"Package Control: Install Package"
+			],
+			[
+				"clangc",
+				"Preferences: ClangComplete Settings – User"
+			],
+			[
+				"",
+				"42 : Add a header"
+			],
+			[
+				"clagcomp",
+				"Preferences: ClangComplete Settings – User"
+			],
+			[
+				"keybin",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"keyb",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"keybi",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"prefere",
+				"Preferences: Settings - User"
+			],
+			[
+				"pack remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack li",
+				"Package Control: List Packages"
+			],
+			[
+				"pref",
+				"Preferences: Settings - User"
+			],
+			[
+				"linter",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"pack l",
+				"Package Control: List Packages"
+			],
+			[
+				"pack remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack chann",
+				"Package Control: Add Channel"
+			],
+			[
+				"project",
+				"Project: Add Folder"
+			],
+			[
+				"prefse",
+				"Preferences: Settings - User"
+			],
+			[
+				"pack rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"keybn",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"alignment",
+				"Preferences: Alignment Key Bindings – Default"
+			],
+			[
+				"align",
+				"Preferences: Alignment Key Bindings – User"
+			],
+			[
+				"prefre",
+				"Preferences: Settings - User"
+			],
+			[
+				"d def",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"delete",
+				"File: Delete"
+			],
+			[
+				"keybind",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"menu",
+				"View: Toggle Menu"
+			],
+			[
+				"sublimelinter",
+				"SublimeLinter: Next Error"
+			],
+			[
+				"me",
+				"View: Toggle Menu"
+			],
+			[
+				"pack ins",
+				"Package Control: Install Package"
+			],
+			[
+				"remove pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"toggl",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"pack list",
+				"Package Control: List Packages"
+			],
+			[
+				"tog",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"toggle lin",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"warn",
+				"SublimeLinter: Don't Make Warnings Passive"
+			],
+			[
+				"warnin",
+				"SublimeLinter: Make Warnings Passive"
+			],
+			[
+				"gutter",
+				"SublimeLinter: Choose Gutter Theme"
+			],
+			[
+				"mark",
+				"SublimeLinter: Choose Mark Style"
+			],
+			[
+				"show",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"mode",
+				"SublimeLinter: Choose Lint Mode"
+			],
+			[
+				"next",
+				"SublimeLinter: Next Error"
+			],
+			[
+				"pack i",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"Snippet: ",
+				"Snippet: Cpp-print"
+			],
+			[
+				"pac rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"remove pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"list pack",
+				"Package Control: List Packages"
+			],
+			[
+				"pac kin",
+				"Package Control: Install Package"
+			],
+			[
+				"parem",
+				"Package Control: Remove Package"
+			],
+			[
+				"remopa",
+				"Package Control: Remove Package"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"paki",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pak ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 503.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/leeios/code/meuh/util/roolv2.0",
+		"/home/leeios/code/meuh/util/roolv2.0/config",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models",
+		"/home/leeios/code/meuh/util/roolv2.0/src",
+		"/home/leeios/code/meuh/util/roolv2.0/src/commands",
+		"/home/leeios/code/meuh/util/roolv2.0/src/utils",
+		"/home/leeios/code/meuh/util/roolv2.0/test"
+	],
+	"file_history":
+	[
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/inc.model",
+		"/home/leeios/code/meuh/util/roolv2.0/Makefile",
+		"/home/leeios/.config/sublime-text-3/Packages/Clang-Complete/cc.sublime-settings",
+		"/home/leeios/code/meuh/util/roolv2.0/src/main.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/screens/Boot.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/mods/ClassMod.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/commands/StandardCmd.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/include/StandardCmd.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/ncurse/Window.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/ncurse/Menu.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/screens/Project.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/utils/FileDir.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/rool.sublime-workspace",
+		"/home/leeios/code/meuh/util/roolv2.0/roolv2.0.sublime-project",
+		"/home/leeios/.config/sublime-text-3/Packages/User/ClangComplete.sublime-settings",
+		"/home/leeios/.config/sublime-text-3/Packages/ClangComplete/ClangComplete.sublime-settings",
+		"/home/leeios/code/meuh/util/roolv2.0/CMakeLists.txt",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/leeios/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/leeios/code/meuh/util/roolv2.0/util/Makefile",
+		"/home/leeios/code/meuh/util/roolv2.0/CMakeLists",
+		"/usr/include/c++/4.8/bits/basic_string.h",
+		"/home/leeios/code/Wektiv/public/js/app.js",
+		"/home/leeios/code/meuh/util/Rool/lib/fileManip/src/fileManip.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/inc/Menu.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/inc/ICommand.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/inc/ClassMod.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/.proj",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/src.model",
+		"/home/leeios/code/meuh/util/roolv2.0/inc/StandardCmd.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/inc/util.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/inc/FileDir.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/inc/IModule.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/inc/Project.hpp",
+		"/home/leeios/code/meuh/util/Rool/include/IModule.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/inc/Boot.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/menus/Boot.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/inc/Window.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/Menu.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/Project.cpp",
+		"/home/leeios/code/rool/src/Project.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/cpp-rool.json",
+		"/home/leeios/code/meuh/sandbox/hdezier/minmax/src/Board.cpp",
+		"/home/leeios/code/Wektiv/public/css/app.css",
+		"/home/leeios/code/Wektiv/views/templates/head.jade",
+		"/home/leeios/.config/sublime-text-3/Packages/Package Control/Package Control.sublime-settings",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Package Control.sublime-settings",
+		"/home/leeios/code/meuh/sandbox/hdezier/minmax/include/Board.hpp",
+		"/home/leeios/code/meuh/sandbox/hdezier/minmax/src/Node.cpp",
+		"/home/leeios/code/meuh/sandbox/hdezier/minmax/Makefile",
+		"/home/leeios/code/Wektiv/views/index.jade",
+		"/home/leeios/code/Txt-index/src/FileScanner.cpp",
+		"/home/leeios/code/Wektiv/package.json",
+		"/home/leeios/.config/sublime-text-3/Packages/Alignment/Default (Linux).sublime-keymap",
+		"/home/leeios/code/Wektiv/server.js",
+		"/home/leeios/.config/sublime-text-3/Packages/User/JSON.sublime-settings",
+		"/home/leeios/code/Wektiv/.gitignore",
+		"/home/leeios/code/Wektiv/routes/socket.js",
+		"/home/leeios/code/Wektiv/routes/main.js",
+		"/home/leeios/code/Wektiv/launcher.js",
+		"/home/leeios/code/Wektiv/routes/upload.js",
+		"/home/leeios/code/meuh/42/Scop/hdezier/Makefile",
+		"/home/leeios/code/meuh/42/Scop/hdezier/src/callback/mouse_callback.c",
+		"/home/leeios/code/meuh/util/roolv2.0/runner",
+		"/home/leeios/code/meuh/util/Rool/src/menus/Boot.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/proj_tree/classic.tree",
+		"/home/leeios/code/meuh/util/roolv2.0/src/Window.cpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/main.cpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/Master.cpp",
+		"/home/leeios/code/meuh/42/ft_sh1/hdezier/src/exec.c",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/Process.cpp",
+		"/home/leeios/code/tools/VSCode-linux-x64/resources/app/client/vs/workbench/contrib/files/media/AddFolder_inverse.svg",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/config/programs.conf",
+		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-typed-test.cc",
+		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-test-part.cc",
+		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-printers.cc",
+		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-port.cc",
+		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest_main.cc",
+		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-internal-inl.h",
+		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-filepath.cc",
+		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-death-test.cc",
+		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-all.cc",
+		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest.cc",
+		"/home/leeios/code/Txt-index/src/Trie.cpp",
+		"/home/leeios/code/rool/include/GUI.hpp",
+		"/home/leeios/code/local/cpp/cpp-event/obj/Bridge.d",
+		"/home/leeios/code/rool/src/menus/Boot.cpp",
+		"/home/leeios/code/meuh/util/Rool/src/main.cpp",
+		"/home/leeios/code/rool/src/GUI.cpp",
+		"/home/leeios/code/meuh/util/Rool/include/Boot.hpp",
+		"/home/leeios/code/rool/include/SortItems.hpp",
+		"/home/leeios/code/rool/src/SortItems.cpp",
+		"/home/leeios/code/meuh/util/Rool/include/Menu.hpp",
+		"/home/leeios/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
+		"/home/leeios/.config/sublime-text-3/Packages/SublimeLinter/Default (Linux).sublime-keymap",
+		"/home/leeios/code/Txt-index/src/Node.cpp",
+		"/home/leeios/code/Txt-index/src/main.cpp",
+		"/home/leeios/code/Txt-index/include/FileScanner.hpp",
+		"/home/leeios/code/Txt-index/include/List.hpp",
+		"/home/leeios/code/Txt-index/include/Node.hpp",
+		"/home/leeios/code/Txt-index/include/Trie.hpp",
+		"/home/leeios/code/meuh/util/Rool/src/menus/ClassList.cpp",
+		"/home/leeios/code/meuh/util/Rool/src/menus/MemberList.cpp",
+		"/home/leeios/code/meuh/util/Rool/src/models/Menu.cpp",
+		"/home/leeios/code/meuh/util/Rool/src/models/Window.cpp",
+		"/home/leeios/code/meuh/util/Rool/src/patterns/ReplaceClassName.cpp",
+		"/home/leeios/code/meuh/util/Rool/src/patterns/UsualClass.cpp",
+		"/home/leeios/code/meuh/util/Rool/src/patterns/UsualInterface.cpp",
+		"/home/leeios/code/meuh/util/Rool/src/ClassTemplate.cpp",
+		"/home/leeios/code/meuh/util/Rool/src/GUI.cpp",
+		"/home/leeios/code/meuh/util/Rool/src/MemberTemplate.cpp",
+		"/home/leeios/code/meuh/util/Rool/src/ModuleFactory.cpp",
+		"/home/leeios/code/meuh/util/Rool/src/Project.cpp",
+		"/home/leeios/code/meuh/util/Rool/src/SortItems.cpp",
+		"/home/leeios/code/meuh/42/Gomoku/hdezier-erobert/Makefile",
+		"/home/leeios/code/meuh/util/Rool/config/templates/Makefile.template",
+		"/home/leeios/code/meuh/util/Rool/config/.proj",
+		"/home/leeios/code/meuh/util/Rool/Makefile",
+		"/home/leeios/code/meuh/42/Scop/hdezier/src/render.c",
+		"/home/leeios/code/meuh/42/Scop/hdezier/test/cube.obj",
+		"/home/leeios/code/meuh/42/Scop/hdezier/src/load_bmp.c",
+		"/home/leeios/code/meuh/42/Scop/hdezier/src/key_callback.c",
+		"/home/leeios/code/meuh/42/Scop/hdezier/src/init_camera.c",
+		"/home/leeios/code/meuh/42/Scop/hdezier/src/load_obj.c",
+		"/home/leeios/code/meuh/42/Scop/hdezier/include/scop.h",
+		"/home/leeios/code/meuh/42/Scop/hdezier/src/mouse_callback.c",
+		"/home/leeios/code/meuh/42/Scop/hdezier/src/loop.c"
+	],
+	"find":
+	{
+		"height": 25.0
+	},
+	"find_in_files":
+	{
+		"height": 158.0,
+		"where_history":
+		[
+			"/home/leeios/code/meuh/util/roolv2.0",
+			"/home/leeios/code/meuh/util/Rool/src,/home/leeios/code/meuh/util/Rool/include",
+			"/home/leeios/code/meuh/sandbox/util/Rool",
+			"/home/leeios/code/meuh/42/Scop/hdezier/src",
+			"/home/leeios/code/meuh/42/scop/hdezier/src",
+			"/home/leeios/code/meuh/42/scop/hdezier",
+			"/home/leeios/code/meuh/util/project_ruler/test",
+			"/home/leeios/taf/Moods/moods/public/js/libs/moods",
+			"/home/leeios/taf/whibo-dev/app/",
+			"/home/leeios/taf/whibo-dev/app/controllers",
+			"/home/leeios/taf/whibo-dev/app/assets/javascripts/zen/app/docViewer/review",
+			"/home/leeios/taf/Review/js/libs/etherpad-lite/node_modules/ep_etherpad-lite",
+			"/home/leeios/taf/Review/js/libs/etherpad-lite/src",
+			"/home/leeios/taf/Review/js/libs/etherpad-lite/SRC",
+			"/home/leeios/taf/Review/js/libs/etherpad-lite",
+			"/home/leeios/taf/Review",
+			"/home/leeios/taf/tmp_taf/public/js/libs/feedy",
+			"/home/leeios/taf/tmp_taf/",
+			"/home/leeios/taf/tmp_taf/public/js/libs/feedy",
+			"/home/leeios/taf/tmp_taf/public/js/libs/comApp",
+			"/home/leeios/taf/tmp_taf/model",
+			"/home/leeios/taf/tmp_taf/public/js/libs/comApp",
+			"/home/leeios/taf/tmp_taf/public/js/libs/appComments",
+			"/home/leeios/taf/tmp_taf/public/js/libs/appcomments",
+			"/home/leeios/taf/tmp_taf/public/js/libs/appcoments",
+			"/home/leeios/taf/tmp_taf/public/js/libs",
+			"/home/leeios/code/C/grimly/include,/home/leeios/code/C/grimly/src,/home/leeios/code/C/grimly/test"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"LIB_DIR",
+			"filename",
+			"i->",
+			"it",
+			"command",
+			"not",
+			"/us",
+			" \"",
+			" ",
+			"//",
+			" ",
+			"BUILD_DIR",
+			"command",
+			"ctrl+k",
+			"delete",
+			"include",
+			"DIR",
+			"_PATH",
+			"cpp",
+			"include",
+			"src",
+			"${YOUR_DIRECTORY}",
+			"\n",
+			"\\",
+			"include",
+			"line",
+			"_path + ",
+			"FileDir.hpp",
+			"FileDir",
+			"FILE_DIR_HPP",
+			"input",
+			"Icommand",
+			"I_COMMAND_HPP",
+			"(GUARD)",
+			"origin",
+			"toLoop",
+			"project",
+			"ClassList",
+			"Boot",
+			"virtual",
+			" = 0",
+			"project",
+			"path",
+			"\\",
+			"NULL",
+			"WINDOW_HPP",
+			"IModules",
+			"MENU_HPP",
+			"_items",
+			"sortMenu",
+			"lhs",
+			"sort",
+			"innerHTML",
+			"-column",
+			"80px",
+			" ",
+			"script",
+			"datetimepicker7",
+			"datetimepicker6",
+			"datetimepicker7",
+			"datetimepicker6",
+			"$(\"#datetimepicker6\")",
+			"\"",
+			"date",
+			"carousel",
+			"Carousel",
+			"200px",
+			"img-slide",
+			"  ",
+			"'img',",
+			"img",
+			"quadranta",
+			"item",
+			"myCarousel",
+			".active",
+			"0",
+			"li",
+			"}}",
+			"attribute",
+			"attributes",
+			"}}",
+			"{tag: 'li",
+			"data-target",
+			"</li>",
+			"<",
+			"Header",
+			" ",
+			"//- ",
+			"\n  ",
+			"              ",
+			"             ",
+			"            ",
+			"           ",
+			"          ",
+			"         ",
+			"        ",
+			"       ",
+			"      ",
+			"     ",
+			"    ",
+			"   ",
+			"  ",
+			"script",
+			"alt",
+			"[\n",
+			"keys",
+			"ctrl",
+			"super",
+			"ctrl",
+			"select_all",
+			"keys",
+			"ctrl",
+			"lib",
+			"endline",
+			"pathDir",
+			"alt+s",
+			"super",
+			"ctrl",
+			"keypad8",
+			"stdout",
+			"Out",
+			"fd",
+			"fdOut",
+			"nginx",
+			"execve",
+			"dir",
+			"src",
+			"OK"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"nullptr",
+			"userInput",
+			"scop",
+			"suggestComment",
+			"preValid",
+			"addComment",
+			"id",
+			"r.Seed.",
+			"ViewFile",
+			"grimly"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/utils/FtFile.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2346,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1972,
+								1972
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": true,
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 636.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/commands/StandardCmd.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1594,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1449,
+								1449
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": true,
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 81.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2483,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1848,
+								1848
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": true,
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 673.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3270,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3270,
+								3270
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": false,
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 346.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "include/util.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1545,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1258,
+								1258
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": true,
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 166.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "src/utils/FtStr.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2234,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1968,
+								1968
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": true,
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 736.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 63.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				2
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
+				1,
+				1,
+				2,
+				2
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			0.5,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.cc":
+	{
+		"height": 120.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "rool.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"util",
+				"include/util.hpp"
+			],
+			[
+				"uti",
+				"include/util.hpp"
+			],
+			[
+				"classmod",
+				"meuh/util/roolv2.0/inc/ClassMod.hpp"
+			],
+			[
+				"projecth",
+				"meuh/util/roolv2.0/inc/Project.hpp"
+			],
+			[
+				"projectc",
+				"meuh/util/roolv2.0/src/Project.cpp"
+			],
+			[
+				"window",
+				"meuh/util/roolv2.0/inc/Window.hpp"
+			],
+			[
+				"menuh",
+				"meuh/util/roolv2.0/inc/Menu.hpp"
+			],
+			[
+				".proj",
+				"meuh/util/roolv2.0/config/.proj"
+			],
+			[
+				"boot",
+				"meuh/util/Rool/src/menus/Boot.cpp"
+			],
+			[
+				"filedi",
+				"meuh/util/roolv2.0/inc/FileDir.hpp"
+			],
+			[
+				"rool2make",
+				"meuh/util/roolv2.0/Makefile"
+			],
+			[
+				"taskmastercon",
+				"meuh/42/Taskmaster/hdezier-rbernand/config/programs.conf"
+			],
+			[
+				"taskconfig",
+				"tools/VSCode-linux-x64/resources/app/client/vs/workbench/contrib/files/media/AddFolder_inverse.svg"
+			],
+			[
+				"master",
+				"meuh/42/Taskmaster/hdezier-rbernand/src/Master.cpp"
+			],
+			[
+				"bootcp",
+				"meuh/util/roolv2.0/src/menus/Boot.cpp"
+			],
+			[
+				"cppjson",
+				"meuh/util/roolv2.0/config/cpp-rool.json"
+			],
+			[
+				"classic",
+				"meuh/util/roolv2.0/config/proj_tree/classic.tree"
+			],
+			[
+				"rool2.0",
+				"meuh/util/roolv2.0/src/menus/Boot.cpp"
+			],
+			[
+				"filed",
+				"meuh/util/roolv2.0/inc/FileDir.hpp"
+			],
+			[
+				"filesc",
+				"Txt-index/src/FileScanner.cpp"
+			],
+			[
+				"trie",
+				"Txt-index/src/Trie.cpp"
+			],
+			[
+				"menucp",
+				"meuh/util/roolv2.0/src/Menu.cpp"
+			],
+			[
+				"b",
+				"local/cpp/cpp-event/obj/Bridge.d"
+			],
+			[
+				"gui",
+				"rool/src/GUI.cpp"
+			],
+			[
+				"roolmain",
+				"meuh/util/Rool/src/main.cpp"
+			],
+			[
+				"booth",
+				"meuh/util/roolv2.0/inc/Boot.hpp"
+			],
+			[
+				"sortic",
+				"rool/src/SortItems.cpp"
+			],
+			[
+				"sorti",
+				"rool/include/SortItems.hpp"
+			],
+			[
+				"menhp",
+				"meuh/util/roolv2.0/inc/Menu.hpp"
+			],
+			[
+				"v2.0makefile",
+				"meuh/util/roolv2.0/Makefile"
+			],
+			[
+				"winhp",
+				"meuh/util/roolv2.0/inc/Window.hpp"
+			],
+			[
+				"win",
+				"meuh/util/roolv2.0/src/Window.cpp"
+			],
+			[
+				"windo",
+				"meuh/util/roolv2.0/src/Window.cpp"
+			],
+			[
+				"roolv2.0",
+				"meuh/util/roolv2.0/src/Menu.cpp"
+			],
+			[
+				"gomoku/m",
+				"meuh/42/Gomoku/hdezier-erobert/Makefile"
+			],
+			[
+				"",
+				"code/cpp/XoX/src/main.cpp"
+			],
+			[
+				"ver",
+				"public/js/libs/comApp/VersionPicker.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 211.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

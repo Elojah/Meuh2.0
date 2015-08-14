@@ -5,6 +5,8 @@ type solution = {
 	nb_solutions: int;
 	solution_0: float;
 	solution_1: float;
+	im_sol_0: float * float;
+	im_sol_1: float * float;
 }
 
 module Parser : sig
@@ -13,6 +15,6 @@ end
 
 module Solver : sig
 	val solve : t -> solution
+	val to_string : solution -> string
 end
 
-val to_string : solution -> string
