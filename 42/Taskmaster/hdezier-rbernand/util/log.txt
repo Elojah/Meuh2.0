@@ -5,13 +5,14 @@ File syntax:	OK
 Setting process params...
 Redirect stdout to ./util/log.txt
 Redirect stderr to ./util/log.txt
-Launch cmd:	/usr/local/bin/thor
+Launch:______________
+cmd:	/usr/bin/top
 numprocs:	1
 umask:	18
 workingdir:	/tmp
 autostart:	1
 autorestart:	unexpected
-exitcodes:	1847730208
+exitcodes:	33949344
 startretries:	3
 starttime:	5
 stopsignal:	TERM
@@ -21,5 +22,4 @@ stderr:	./util/log.txt
 env:	
 STARTED_BY:	taskmaster
 ANSWER:	42
-Command /usr/local/bin/thor executed normally.
-Exit code:	0
+Command execution terminated unnormally
