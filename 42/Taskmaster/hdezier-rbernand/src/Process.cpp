@@ -92,6 +92,7 @@ Process::eState		Process::launch(void) {
 	int		fdOut;
 	int		fdErr;
 
+	Log::write("Launch:_____________________________");
 	if ((fdOut = open(_params.stdout.c_str(), O_WRONLY | O_APPEND)) < 0) {
 		fdOut = 1;
 		Log::write("Can't redirect stdout to " + _params.stdout);
@@ -105,15 +106,16 @@ Process::eState		Process::launch(void) {
 		Log::write("Redirect stderr to " + _params.stderr);
 	}
 
-	Log::write("Launch:_____________________________");
 	Log::getLog() << *this;
 	_pid = fork();
 
 	if (_pid == 0) {
-		static const char	*fakeArgs[2] = {NULL, NULL};
+		static const char cmdName[4] = "cat";
+		static const char	*fakeArgs[2] = {(char *)cmdName, nullptr};
+
 		dup2(fdOut, 1);
 		dup2(fdErr, 2);
-		if (execve(_params.cmd.c_str(), (char * const *)fakeArgs, NULL) < 0) {
+		if (execve(_params.cmd.c_str(), (char * const *)fakeArgs, nullptr) < 0) {
 			Log::write("Command " + _params.cmd + " can't exec.");
 			close(fdErr);
 			close(fdOut);

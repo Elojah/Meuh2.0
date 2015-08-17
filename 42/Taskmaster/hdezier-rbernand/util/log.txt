@@ -3,23 +3,22 @@ Init UINcurses ... DONE
 Read config file ./config/programs.conf
 File syntax:	OK
 Setting process params...
-Redirect stdout to ./util/log.txt
-Redirect stderr to ./util/log.txt
-Launch:______________
-cmd:	/usr/bin/top
+Launch:_____________________________
+Redirect stdout to ./util/thor.txt
+Redirect stderr to ./util/thor.txt
+cmd:	/bin/cat
 numprocs:	1
 umask:	18
 workingdir:	/tmp
 autostart:	1
 autorestart:	unexpected
-exitcodes:	33949344
+exitcodes:	11769504
 startretries:	3
 starttime:	5
 stopsignal:	TERM
 stoptime:	10
-stdout:	./util/log.txt
-stderr:	./util/log.txt
+stdout:	./util/thor.txt
+stderr:	./util/thor.txt
 env:	
 STARTED_BY:	taskmaster
 ANSWER:	42
-Command execution terminated unnormally
