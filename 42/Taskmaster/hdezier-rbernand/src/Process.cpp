@@ -1,4 +1,5 @@
 #include "Process.hpp"
+#include "Log.hpp"
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -39,15 +40,11 @@ void		Process::start(void) {
 	launch();
 }
 
-void		Process::setLog(std::ofstream *log) {
-	_log = log;
-}
-
 void			Process::setParams(Json::Value &params) {
-	Json::Value							value;
+	Json::Value													value;
 	std::map<std::string, std::string>	tmp;
 
-	*_log << "Setting process params..." << std::endl;
+	Log::write("Setting process params...");
 	for (int i = 0; i < 19; ++i) {
 		value = params.get(Process::_paramsName[i], "");
 		if (value.isArray()) {
@@ -90,68 +87,55 @@ void			Process::setParams(Json::Value &params) {
 	}
 }
 
-Process		&Process::operator=(Process const &rhs) {
-	if (this != &rhs) {
-		;
-	}
-	return (*this);
-}
-
 Process::eState		Process::launch(void) {
 	int		status;
 	int		fdOut;
 	int		fdErr;
-	int		pipeOut[2];
-	int		pipeErr[2];
 
-	if ((fdOut = open(_params.stdout.c_str(), O_WRONLY)) < 0) {
+	Log::write("Launch:_____________________________");
+	if ((fdOut = open(_params.stdout.c_str(), O_WRONLY | O_APPEND)) < 0) {
 		fdOut = 1;
-		*_log << "Can't redirect stdout to " << _params.stdout << std::endl;
+		Log::write("Can't redirect stdout to " + _params.stdout);
 	} else {
-		*_log << "Redirect stdout to " << _params.stdout << std::endl;
+		Log::write("Redirect stdout to " + _params.stdout);
 	}
-	if ((fdErr = open(_params.stderr.c_str(), O_WRONLY)) < 0) {
+	if ((fdErr = open(_params.stderr.c_str(), O_WRONLY | O_APPEND)) < 0) {
 		fdErr = 2;
-		*_log << "Can't redirect stderr to " << _params.stderr << std::endl;
+		Log::write("Can't redirect stderr to " + _params.stderr);
 	} else {
-		*_log << "Redirect stderr to " << _params.stderr << std::endl;
-	}
-	if (pipe(pipeOut)) {
-		*_log << "Error piping stdout ..." << std::endl;
-	}
-	if (pipe(pipeErr)) {
-		*_log << "Error piping stderr ..." << std::endl;
+		Log::write("Redirect stderr to " + _params.stderr);
 	}
 
-	*_log << "Launch " << *this;
+	Log::getLog() << *this;
 	_pid = fork();
 
 	if (_pid == 0) {
-		static const char	*fakeArgs[2] = {NULL, NULL};
-		close(pipeOut[0]);
-		dup2(pipeOut[1], fdOut);
-		close(fdOut);
-		close(pipeErr[0]);
-		dup2(pipeErr[1], fdErr);
-		close(fdErr);
-		if (execve(_params.cmd.c_str(), (char * const *)fakeArgs, NULL) < 0) {
-			*_log << "Command " << _params.cmd << " can't exec." << std::endl;
+		static const char cmdName[4] = "cat";
+		static const char	*fakeArgs[2] = {(char *)cmdName, nullptr};
+
+		dup2(fdOut, 1);
+		dup2(fdErr, 2);
+		if (execve(_params.cmd.c_str(), (char * const *)fakeArgs, nullptr) < 0) {
+			Log::write("Command " + _params.cmd + " can't exec.");
+			close(fdErr);
+			close(fdOut);
 			return (PROC_ERROR);
 		}
+		close(fdErr);
+		close(fdOut);
 	}
 	else
 	{
-		close(pipeOut[1]);
-		close(pipeErr[1]);
 		if (waitpid(_pid, &status, 0) == -1) {
-			*_log << "Error waiting command execution" << std::endl;
+			Log::write("Error waiting command execution");
 		}
 		if (!WIFEXITED(status)) {
-			*_log << "Command execution terminated unnormally" << std::endl;
+			Log::write("Command execution terminated unnormally");
 			return (PROC_ERROR);
 		} else {
-			*_log << "Command " << _params.cmd << " executed normally."<< std::endl
-																		<< "Exit code:\t" << status << std::endl;
+			Log::write("Command " + _params.cmd + " executed");
+			Log::write("Exit code:");
+			Log::getLog() << "_____________________________" << status << std::endl;
 		}
 	}
 	return (PROC_OK);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Process.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/08/15 14:00:57 by leeios            #+#    #+#             */
+/*   Updated: 2015/08/15 14:38:11 by leeios           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PROCESS_H
 # define PROCESS_H
 
@@ -10,7 +22,7 @@ public:
 	Process(void);
 	~Process(void);
 	Process(Process const &src);
-	Process&	operator=(Process const &rhs);
+	Process&	operator=(Process const &rhs) = default;
 
 	enum eState
 	{
@@ -21,7 +33,6 @@ public:
 	Process::eState		launch(void);
 
 	void		setParams(Json::Value &);
-	void		setLog(std::ofstream *log);
 	void		start(void);
 
 	void		serialize(std::ostream &stream) const;
@@ -49,7 +60,6 @@ private:
 	};
 
 	sParams						_params;
-	std::ofstream				*_log;
 
 	pid_t						_pid;
 

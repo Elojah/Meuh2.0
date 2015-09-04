@@ -26,6 +26,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
+		mods/MemberMod\
 		commands/InterfaceCmd\
 				ncurse/Window\
 					ncurse/Menu\

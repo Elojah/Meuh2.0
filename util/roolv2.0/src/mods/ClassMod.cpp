@@ -6,11 +6,12 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/10 20:13:46 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/14 15:06:37 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/14 15:51:03 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClassMod.hpp"
+#include "MemberMod.hpp"
 #include "StandardCmd.hpp"
 #include "InterfaceCmd.hpp"
 #include <string.h>
@@ -71,7 +72,7 @@ void			ClassMod::createItems(void) {
 		found = value.find_last_of(".");
 		if (value.compare(found + 1, value.size(), "hpp") == 0
 			&& !value.substr(0, found).empty()) {
-			addItem(value.substr(0, found), static_cast<Callback>(&ClassMod::errorCallback));
+			addItem(value.substr(0, found), static_cast<Callback>(&ClassMod::selectClass));
 		}
 	}
 	closedir(dir);
@@ -87,4 +88,10 @@ void		ClassMod::newClass(ITEM *item) {
 			return ;
 		}
 	}
+}
+
+void	ClassMod::selectClass(ITEM *item) {
+	MemberMod		member(20, 60, 1, 59);
+
+	member.construct(_path, item_name(item));
 }
