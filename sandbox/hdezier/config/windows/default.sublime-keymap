@@ -14,8 +14,8 @@
 	{ "keys": ["ctrl+down"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": true} },
 	{ "keys": ["ctrl+shift+up"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": false, "extend": true} },
 	{ "keys": ["ctrl+shift+down"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": true, "extend": true} },
-	{"keys": ["ctrl+super+up"], "command": "swap_line_up"},
-	{"keys": ["ctrl+super+down"],"command": "swap_line_down"},
+	{"keys": ["ctrl+shift+up"], "command": "swap_line_up"},
+	{"keys": ["ctrl+shift+down"],"command": "swap_line_down"},
 	{ "keys": ["ctrl+shift+a"], "command": "expand_selection_to_paragraph" },
 	{ "keys": ["ctrl+shift+d"], "command": "find_all_under" },
 	//Power cursor config
@@ -24,8 +24,9 @@
 	{ "keys": ["ctrl+q"], "command": "power_cursor_exit" },
 	{ "keys": ["ctrl+shift+q"], "command": "power_cursor_remove" },
 	{ "keys": ["ctrl+."], "command": "power_cursor_select", "args": {"forward": true}},
-	{ "keys": ["ctrl+/"], "command": "power_cursor_select", "args": {"forward": false}},
+	{ "keys": ["ctrl+,"], "command": "power_cursor_select", "args": {"forward": false}},
 	// Navigate between files
+	{ "keys": ["alt+r"], "command": "goto_definition" },
 	{ "keys": ["ctrl+pagedown"], "command": "next_view_in_stack" },
 	{ "keys": ["ctrl+pageup"], "command": "prev_view_in_stack" },
 	{ "keys": ["ctrl+tab"], "command": "next_view" },
