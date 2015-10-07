@@ -2,6 +2,7 @@
 all autocomplete
 bracket highlighter
 c++ starting kit
+Diffy
 fold comments
 lorem ipsum
 Makefile improved
