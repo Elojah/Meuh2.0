@@ -18,10 +18,15 @@
 	{"keys": ["ctrl+shift+down"],"command": "swap_line_down"},
 	{ "keys": ["ctrl+shift+a"], "command": "expand_selection_to_paragraph" },
 	{ "keys": ["ctrl+shift+d"], "command": "find_all_under" },
+	{ "keys": ["ctrl+q"], "command": "single_selection"},
+	{ "keys": ["ctrl+f2"], "command": "sublime_bookmark", "args" : { "type" : "add"  } },
+    { "keys": ["f2"], "command": "sublime_bookmark", "args" : { "type" : "goto_next" } },
+	{ "keys": ["shift+f2"], "command": "sublime_bookmark", "args" : { "type" : "goto_prev" } },
+	{ "keys": ["ctrl+shift+f2"], "command": "sublime_bookmark", "args" : { "type" : "toggle_line"  } },
 	//Power cursor config
 	{ "keys": ["ctrl+space"], "command": "power_cursor_add" },
 	{ "keys": ["ctrl+shift+space"], "command": "power_cursor_activate" },
-	{ "keys": ["ctrl+q"], "command": "power_cursor_exit" },
+	// { "keys": ["ctrl+q"], "command": "power_cursor_exit" },
 	{ "keys": ["ctrl+shift+q"], "command": "power_cursor_remove" },
 	{ "keys": ["ctrl+."], "command": "power_cursor_select", "args": {"forward": true}},
 	{ "keys": ["ctrl+,"], "command": "power_cursor_select", "args": {"forward": false}},
@@ -44,4 +49,5 @@
 	{ "keys": ["ctrl+e"], "command": "sublimelinter_goto_error", "args": {"direction": "next"} },
 	{ "keys": ["ctrl+shift+e"], "command": "sublimelinter_goto_error", "args": {"direction": "previous"} },
 	{ "keys": ["ctrl+/"], "command": "toggle_comment", "args": { "block": false } },
+	{ "keys": ["alt+shift+a"], "command": "align_tab", "args" : {"user_input" : "\t"}},
 ]
