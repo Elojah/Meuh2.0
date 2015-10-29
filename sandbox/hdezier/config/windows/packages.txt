@@ -1,0 +1,20 @@
+42 headers
+all autocomplete
+bracket highlighter
+c++ starting kit
+Diffy
+fold comments
+lorem ipsum
+Makefile improved
+Material theme
+Oasis theme
+Origami
+Package control
+Package resource viewer
+power cursors
+sidebarenhancements
+sublimelinter
+sublimelinter-cppcheck
+textpastry
+transparency
+ublim color schemes

@@ -6,7 +6,7 @@ SRC = polynom.ml main.ml
 
 # The executable file to generate
 
-TARGET = runner
+TARGET = computor
 
 
 ########################## Advanced user's variables #####################

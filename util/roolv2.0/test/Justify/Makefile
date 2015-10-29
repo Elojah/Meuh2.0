@@ -1,22 +1,20 @@
-TARGET = gomoku
+TARGET = runner
 
 #Directories
 BIN_DIR = bin
 SRC_DIR = src
 INC_DIR = include
 BUILD_DIR = build
-LIB_DIR = lib
+LIB_DIR =
 
 #Options
-CC = clang++-3.6
+CC = g++
 SRC_EXT = .cpp
 RM = rm -rf
 
 #List classes here
 CLASS = main\
-		Rules\
-		Board\
-		Node\
+		/TextJustify\
 
 #List interfaces here
 INTERFACE = \
@@ -27,7 +25,7 @@ OBJ = $(addsuffix .o, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3 -std=c++98
+CFLAGS = -Wall -Wextra -Werror -O3 -std=c++11
 LFLAGS =
 
 #Libs
@@ -46,7 +44,7 @@ INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 
 #RULES
-all : dirlib dirbin $(BIN_DIR)/$(TARGET)
+all : dirbin $(BIN_DIR)/$(TARGET)
 
 clean :
 	$(RM) $(BUILD_DIR)
@@ -58,9 +56,6 @@ re : fclean all
 
 dirbin:
 	mkdir -p $(BIN_DIR)
-
-dirlib:
-	mkdir -p $(LIB_DIR)
 
 .PHONY: all clean fclean re
 
@@ -75,7 +70,7 @@ $(BIN_DIR)/$(TARGET) : $(OBJ)
 #Compilation rule
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)
 	@mkdir -p $(dir $@)
-	@echo "\n\033[1;4;34mCOMPIL:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"
+	@echo "\n\033[1;4;34mCOMPILE:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
 -include $(DEP)
