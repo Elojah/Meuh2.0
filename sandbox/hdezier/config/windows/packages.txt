@@ -19,6 +19,7 @@
 		"Makefile Improved",
 		"Material Theme",
 		"Oasis Theme",
+		"Open-Include",
 		"Origami",
 		"Package Control",
 		"PackageResourceViewer",
