@@ -44,7 +44,7 @@
 		"Makefile",
 		"Vintage"
 	],
-	"material_theme_accent_purple": true,
+	"material_theme_accent_orange": true,
 	"material_theme_contrast_mode": true,
 	"material_theme_small_statusbar": true,
 	"material_theme_small_tab": true,
@@ -65,5 +65,6 @@
 	"trim_automatic_white_space": true,
 	"trim_trailing_white_space_on_save": true,
 	"use_tab_stops": true,
-	"word_separators": true
+	"word_separators": true,
+	"highlight_modified_tabs": true,
 }
