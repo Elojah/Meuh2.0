@@ -1,0 +1,2584 @@
+{
+	"folder_history":
+	[
+		"/C/source/wdprj",
+		"/C/source/Squelette",
+		"/C/source/wdhf",
+		"/C/source/WDOBJ",
+		"/C/source/wdfen",
+		"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0",
+		"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter-contrib-pynorm",
+		"/C/source/wdstd",
+		"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/test/Justify",
+		"/C/wx",
+		"/C/cygwin64/home/hd/code",
+		"/C/cygwin64/home/hd/code/meuh2.0",
+		"/J/WX21/Encours/Source",
+		"/C/source",
+		"/C/Users/hd/Documents"
+	],
+	"last_version": 3083,
+	"last_window_id": 15,
+	"log_indexing": false,
+	"settings":
+	{
+		"new_window_height": 872.0,
+		"new_window_settings":
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+					[
+						"msp",
+						"m_nSepSize"
+					],
+					[
+						"nesp",
+						"nEspaceRestantModulo"
+					],
+					[
+						"nlarg",
+						"nLargeurConsomee"
+					],
+					[
+						"psz",
+						"pszMot"
+					],
+					[
+						"OBJ",
+						"OBJ_DESACTIVE_JUSTIFIER	(TextJustifier.cpp)"
+					],
+					[
+						"nla",
+						"nLargeurConsomee"
+					],
+					[
+						"_bc",
+						"_bCompenseLigne"
+					],
+					[
+						"CF",
+						"CFCtrlTab"
+					],
+					[
+						"Cfra",
+						"CFrameObjetWD	(FrameObjetWD.cpp)"
+					],
+					[
+						"mp",
+						"m_piTm"
+					],
+					[
+						"_bo",
+						"_bCoupeLongsMots"
+					],
+					[
+						"m_p",
+						"m_piTm"
+					],
+					[
+						"bs",
+						"bEstSeparateur"
+					],
+					[
+						"boo",
+						"BOOL"
+					],
+					[
+						"ps",
+						"pszOrigine"
+					],
+					[
+						"b",
+						"bJustifie"
+					],
+					[
+						"pszO",
+						"pszOrigine"
+					],
+					[
+						"CV",
+						"CVisiteurPrint"
+					],
+					[
+						"MEM",
+						"MEMCPY	(TextJustify.hpp)"
+					],
+					[
+						"nofs",
+						"nOffsetExceed"
+					],
+					[
+						"mn",
+						"m_nSpaceSize"
+					],
+					[
+						"offs",
+						"nOffsetExceed"
+					],
+					[
+						"nof",
+						"nOffsetExceed"
+					],
+					[
+						"nl",
+						"nLine"
+					],
+					[
+						"off",
+						"nOffset"
+					],
+					[
+						"nwor",
+						"nWordsInLine"
+					],
+					[
+						"nwo",
+						"nWordsInLine"
+					],
+					[
+						"cure",
+						"currentLine"
+					],
+					[
+						"CT",
+						"CTextJustify	(main.cpp)"
+					],
+					[
+						"nLarg",
+						"nLargeurLigne"
+					],
+					[
+						"nL",
+						"nLargeur"
+					],
+					[
+						"nw",
+						"nWordLen"
+					],
+					[
+						"curr",
+						"currentWidth"
+					],
+					[
+						"cur",
+						"currentWidth"
+					],
+					[
+						"nlar",
+						"nLargeurLigne"
+					],
+					[
+						"TEX",
+						"TextJustify	(TextJustify.cpp)"
+					],
+					[
+						"str",
+						"struct	struct"
+					],
+					[
+						"DT_T",
+						"DT_TOP	(XDrawTextIncline.cpp)"
+					],
+					[
+						"ESR",
+						"ES_RIGHT"
+					],
+					[
+						"ft",
+						"ft_strncat_offset"
+					],
+					[
+						"nb",
+						"n_buffer"
+					],
+					[
+						"space",
+						"space_per_word"
+					],
+					[
+						"spac",
+						"spaces_offset"
+					],
+					[
+						"REG",
+						"REGISTER_TYPE"
+					],
+					[
+						"STR",
+						"STRLEN"
+					],
+					[
+						"SIZ",
+						"SIZE_MAX_EXTENSION"
+					],
+					[
+						"LOCA",
+						"LOCAL_PATH"
+					],
+					[
+						"STR_NCAT",
+						"STR_NCAT"
+					],
+					[
+						"LOCAL",
+						"LOCAL_REGISTER"
+					],
+					[
+						"USER",
+						"USER_PATH"
+					]
+				]
+			},
+			"build_system_choices":
+			[
+			],
+			"build_varint": "",
+			"command_palette":
+			{
+				"height": 92.0,
+				"last_filter": "plugin",
+				"selected_items":
+				[
+					[
+						"plugin",
+						"SublimeLinter: Create Linter Plugin"
+					],
+					[
+						"pack in",
+						"Package Control: Install Package"
+					],
+					[
+						"lore",
+						"LoremIpsum: (15) some"
+					],
+					[
+						"Lore",
+						"LoremIpsum: (15) some"
+					],
+					[
+						"lo",
+						"LoremIpsum: (200) stick shake"
+					],
+					[
+						"keyus",
+						"Preferences: Key Bindings - User"
+					],
+					[
+						"pref us",
+						"Preferences: Settings - User"
+					],
+					[
+						"lorem",
+						"LoremIpsum: (200) stick shake"
+					],
+					[
+						"pref linter",
+						"Preferences: SublimeLinter Settings – User"
+					],
+					[
+						"lorep",
+						"LoremIpsum: (200) stick shake"
+					],
+					[
+						"header",
+						"42 : Disable headers"
+					],
+					[
+						"pack li",
+						"Package Control: List Packages"
+					],
+					[
+						"ke",
+						"Preferences: Key Bindings - User"
+					],
+					[
+						"user",
+						"Preferences: Settings - User"
+					],
+					[
+						"package resou",
+						"PackageResourceViewer: Extract Package"
+					],
+					[
+						"pack lis",
+						"Package Control: List Packages"
+					],
+					[
+						"prv",
+						"PackageResourceViewer: Extract Package"
+					],
+					[
+						"pack inst",
+						"Package Control: Install Package"
+					],
+					[
+						"preu",
+						"Preferences: Settings - User"
+					],
+					[
+						"pref",
+						"Preferences: Settings - User"
+					],
+					[
+						"pre",
+						"Preferences: Settings - User"
+					],
+					[
+						"lin",
+						"SublimeLinter: Lint This View"
+					],
+					[
+						"key use",
+						"Preferences: Key Bindings - User"
+					],
+					[
+						"pack remo",
+						"Package Control: Remove Package"
+					],
+					[
+						"user ",
+						"Preferences: Settings - User"
+					],
+					[
+						"keyb",
+						"Preferences: Key Bindings - User"
+					],
+					[
+						"keybin",
+						"Preferences: Key Bindings - User"
+					]
+				],
+				"width": 334.0
+			},
+			"console":
+			{
+				"height": 126.0,
+				"history":
+				[
+					"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) ",
+					" import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": false,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"file_history":
+			[
+				"/C/source/wdstd/XErrorPr.cpp",
+				"/C/source/wdstd/f_sys.cpp",
+				"/C/source/wdstd/XErrorpr.h",
+				"/C/source/wdstd/STDres.rc",
+				"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/test/Justify/src/main.cpp",
+				"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/test/Justify/include/TextJustify.hpp",
+				"/C/source/WDOBJ/SRC/TextJustifier.h",
+				"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/test/Justify/src/TextJustify.cpp",
+				"/C/source/WDOBJ/SRC/TextJustifier.cpp",
+				"/C/source/wdstd/public/wdstd/standard.h",
+				"/C/source/wdstd/resource.h",
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
+				"/C/source/Squelette/Autres/commun_editeur/IEdFrameObjet.h",
+				"/C/source/Squelette/Src/FCtrlTab.h",
+				"/C/source/Squelette/Src/FCtrlTab.cpp",
+				"/C/source/Squelette/Autres/wdfen/FrameObjetWD.cpp",
+				"/C/source/Squelette/Autres/wdfen/FrameObjetWD.h",
+				"/c/source/wdstd/f_sys.cpp",
+				"/C/source/Squelette/Autres/wdreq/FrameBarHelp.cpp",
+				"/C/source/Squelette/Src/Editeur.cpp",
+				"/C/source/WDOBJ/WST/Rep a Copier Sur C_WST/WST_ModeEmploi.txt",
+				"/C/source/Squelette/Autres/commun_editeur/Document Objet WD.cpp",
+				"/C/source/Squelette/Autres/wdcore/WDExternAPI.h",
+				"/C/source/Squelette/Autres/wdcore/WDExternAPI.cpp",
+				"/C/source/Squelette/Autres/commun_editeur/ChampPolice.cpp",
+				"/C/source/WDOBJ/SRC/Version.h",
+				"/C/Users/hd/Desktop/INSTALL.txt",
+				"/c/source/wdstd/public/wdstd/standard.h",
+				"/C/source/Squelette/Autres/commun_langage_externe/WDExtern.h",
+				"/C/source/Squelette/Src/mdiclien.h",
+				"/C/source/Squelette/Src/BarreDocumentEx.cpp",
+				"/C/source/Squelette/Autres/wdcore/WDWDIAL.h",
+				"/C/source/Squelette/Autres/wdcore/WDWDIAL.cpp",
+				"/C/source/Squelette/Src/Mdiclien.cpp",
+				"/C/cygwin64/home/hd/code/meuh2.0/sandbox/hdezier/config/windows/packages.txt",
+				"/C/cygwin64/home/hd/code/meuh2.0/sandbox/hdezier/config/windows/default.sublime-keymap",
+				"/C/cygwin64/home/hd/code/meuh2.0/sandbox/hdezier/config/windows/preferences.sublime-settings",
+				"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/Makefile",
+				"/C/source/Squelette/Src/dicotarget.h",
+				"/C/source/Squelette/Autres/commun_editeur/EditeurUtil.cpp",
+				"/C/source/Squelette/Src/mainfrm.cpp",
+				"/C/source/Squelette/Src/BarreDocFrmItem.cpp",
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/Transparency/SublimeTextTrans.sublime-settings",
+				"/C/source/Squelette/Autres/wdcore/WDDialogChampModele.cpp",
+				"/C/source/Squelette/Autres/txtres.h",
+				"/C/source/Squelette/Squelett.ncb",
+				"/C/source/Squelette/Src/Boutondnd.cpp",
+				"/C/source/WDOBJ/WDOBJ_VS2008.vcproj.vspscc",
+				"/C/Users/hd/AppData/Local/Temp/Temp1_CMemLeakDemo.zip/memleak.mak",
+				"/C/source/wdstd/autres/wdcore/ObjetComposante.h",
+				"/C/source/wdstd/autres/wdcore/CompoFonc.h",
+				"/C/source/wdstd/autres/commun_execution/Wll.h",
+				"/C/source/wdstd/F_date.cpp",
+				"/C/source/wdstd/F_date.h",
+				"/C/source/wdstd/autres/wdcore/ChaineMultilangue.cpp",
+				"/C/source/wdstd/res/STDres.h",
+				"/C/source/wdstd/autres/wdcore/ChaineMultilangue.h",
+				"/C/source/wdstd/STDres.h",
+				"/C/cygwin64/home/hd/code/sandbox/justify.html",
+				"/C/source/wdstd/Central.h",
+				"/C/source/wdstd/res/ResANSI.cpp",
+				"/C/source/WDOBJ/autres/wdcore/xsystem.h",
+				"/C/source/WDOBJ/SRC/Central.h",
+				"/C/source/WDOBJ/SRC/saisie.cpp",
+				"/C/source/WDOBJ/SRC/saisie.h",
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/Oasis Theme/Oasis.tmTheme",
+				"/c/source/WDOBJ/SRC/saisie.cpp",
+				"/C/source/TextJustifier.h",
+				"/C/source/TextJustifier.cpp",
+				"/C/source/WDOBJ/WDOBJ_VS2008.mak",
+				"/C/source/WDOBJ/TextJustifier.cpp",
+				"/c/source/WDOBJ/TextJustifier.h",
+				"/c/source/WDOBJ/TextJustifier.cpp",
+				"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/test/Justify/Makefile",
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/Fold Comments/Default (Windows).sublime-keymap",
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+				"/C/source/WDOBJ/autres/wdcore/Tableau.h",
+				"/C/source/WDOBJ/autres/wdcore/STR.h",
+				"/C/source/WDOBJ/autres/wdcore/ListeChainee.h",
+				"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/test/Justify/include/ITailleMots.hpp",
+				"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/test/Justify/include/IVisiteurJustifier.hpp",
+				"/C/source/WDOBJ/autres/wdcore/Liste.h",
+				"/C/home/hd/code/meuh2.0/util/roolv2.0/test/Justify",
+				"/C/source/WDOBJ/autres/wdcore/Tstring.h",
+				"/C/source/WDOBJ/autres/wdcore/Tstring.cpp",
+				"/C/source/WDOBJ/autres/commun_objpage/libelle.cpp",
+				"/C/source/WDOBJ/autres/wdcore/STR.cpp",
+				"/C/source/WDOBJ/autres/wdprn/XDrawText.cpp",
+				"/C/source/WDOBJ/autres/wdprn/XDrawText.h",
+				"/C/source/WDOBJ/autres/wdfen/IEditeurFenetre.h",
+				"/C/source/WDOBJ/autres/commun_objpage/ChampSaisie_ObjEtPage.cpp",
+				"/C/source/WDOBJ/autres/wdprn/XDrawTextIncline.cpp",
+				"/C/source/WDOBJ/autres/commun_objpage/Libelle.h",
+				"/C/source/WDOBJ/autres/commun_objpage/Util_ObjEtPage.cpp",
+				"/C/source/WDOBJ/public/iobjbase/StyleConst.h",
+				"/C/source/WDOBJ/autres/wdcore/IDObj.h",
+				"/C/source/WDOBJ/SRC/StyleChampLibelle.cpp",
+				"/C/source/WDOBJ/public/wdobj/stylesaisie.h",
+				"/C/source/WDOBJ/SRC/StyleChampLibelle.h",
+				"/C/source/WDOBJ/WX/Win32/Debug/obj/wd210obj.pch",
+				"/C/source/WDOBJ/Interface/cistylesaisie.h",
+				"/C/source/WDOBJ/public/wdobj/istylesaisie.h",
+				"/c/source/WDOBJ/SRC/ChampLibelle.h",
+				"/c/source/WDOBJ/SRC/ChampLibelle.cpp",
+				"/c/source/WDOBJ/SRC/VueChampLibelle.cpp",
+				"/c/source/WDOBJ/SRC/VueChampSaisie_Win32.cpp",
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+				"/C/source/WDOBJ/autres/wdstd/standard.h",
+				"/C/home/hd/code",
+				"/C/source/WDOBJ/SRC/Champ.cpp",
+				"/C/source/WDOBJ/SRC/Champ.h",
+				"/C/source/WDOBJ/autres/wdimg/ImgConst.h",
+				"/C/source/WDOBJ/SRC/ChampDeSaisieInPlace.cpp",
+				"/C/source/WDOBJ/SRC/ChampTable.cpp",
+				"/C/source/WDOBJ/autres/wdfen/OptionAffImage.cpp",
+				"/C/source/WDOBJ/autres/wdimg_implbase/bitmap.cpp",
+				"/C/source/WDOBJ/autres/wdimg_implbase/Image.cpp",
+				"/C/source/WDOBJ/autres/wdimg_implbase/XGDIPlusBitmap.cpp",
+				"/C/source/WDOBJ/autres/wdxls/ConstanteExcel.h",
+				"/C/source/WDOBJ/SRC/champimage.cpp",
+				"/C/source/WDOBJ/SRC/ChampListView.cpp",
+				"/J/WX21/Encours/Source/PAD/Source/WDOBJ/public/iobjbase/StyleConst.h",
+				"/J/WX21/Encours/Source/PAD/Source/WDOBJ/public/wdobj/IChampCodeBarre.h",
+				"/J/WX21/Encours/Source/PAD/Source/WDOBJ/public/wdobj/ICaseStatusBar.h",
+				"/C/source/wdstd/AppParametre.cpp",
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/AutoFileName/autofilename.sublime-settings"
+			],
+			"find":
+			{
+				"height": 70.0
+			},
+			"find_in_files":
+			{
+				"height": 158.0,
+				"where_history":
+				[
+					"C:\\source\\wdstd",
+					"C:\\source\\WDOBJ",
+					"C:\\source\\Squelette",
+					"C:\\source\\wdfen",
+					"C:\\source\\Squelette",
+					"C:\\source\\WDOBJ",
+					"C:\\source\\wdstd",
+					"C:\\source\\WDOBJ",
+					"C:\\source\\WDOBJ\\SRC",
+					"C:\\source\\wdstd",
+					"C:\\source\\WDOBJ",
+					"J:\\WX21\\Encours\\Source\\PAD\\Source\\WDOBJ\\public\\wdobj",
+					"<open folders>"
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+					"	ERR_S",
+					"ERR_SYS_",
+					"ERR_FIC_RECUP_ESPACE_DISQUE",
+					"ERR_SYS_ESTINVALIDEBIG",
+					"ERR_SYS_ESTIVALIDEPOINT",
+					"ERR_FIC_ESPACE_LIBRE_INSUFFISANT",
+					"sysass",
+					"ERR_MEM_BORNE",
+					"SAINTE_LUCIE",
+					"RaiseError",
+					"ERR_SYS_ESTIN",
+					"ERR_SYS_ES",
+					"nEspaceRestant",
+					"_libereTab",
+					"<< std",
+					"nLargeurConsomee",
+					"m_nLargeurLigne",
+					"nEspaceRestant",
+					"<< m_tabInfoMot[i] << s",
+					"ERR_SYS_NOMEM",
+					"RaiseError",
+					"WLL_METHOD",
+					"sysinfo",
+					"CComposanteStandard",
+					"SYSTEM_ASS",
+					"sysass",
+					" ",
+					"l",
+					"m_nSepSize",
+					" ",
+					"_DEBUG",
+					"debug",
+					"1",
+					"_bCompenseLigne",
+					"extension",
+					"ChangeIndice",
+					"OnPriseFocus",
+					"CFrameObjetWD",
+					"hwnd",
+					"intermed",
+					"MASKLECTURE_EDIT",
+					"iedframeobjet",
+					"fromhandlepermanent",
+					"=",
+					"pszDebutMot",
+					"runtime_class",
+					"thumbnail",
+					"OuvreFille",
+					"OuvreNonModal",
+					"m_clFenCtrlTab",
+					"ctrltab",
+					"createw",
+					"HHOOK",
+					"bg_fctrltab",
+					"HWND",
+					"define HWND",
+					"HWND",
+					"class CWDDialog",
+					"task",
+					"switcher",
+					"task",
+					"tab",
+					"pszDest",
+					"MEM_free",
+					"MEM_FREE",
+					"pfree",
+					"_bJustifieTexte",
+					"m_",
+					"m_piTm",
+					"IS_SEP(pszOrigine[i])",
+					"_snCountMotsEtCopie",
+					"nle",
+					"<<<<<<<",
+					"<<<<<<",
+					"<<<<<",
+					"<<<<",
+					"<<<",
+					"<<<<<<<",
+					"<<<<<<",
+					"define WLL_METHOD",
+					"PREMIERJOURD",
+					"lannee",
+					"annee",
+					"bDateVerif",
+					"PREMIERJOURD",
+					"premierjourd",
+					"PremierJourDuMois",
+					"IDS_LANGUE",
+					"m_tabInfoMot[i]",
+					"j",
+					"pszTxt",
+					"_snCountMots",
+					"WLL_METHOD_DECL",
+					"STD_DESACTIVE_SYSTEM_ASSOCIATION",
+					"SysDissocieExtension",
+					"_snCountMots",
+					"tailleMemoire",
+					"free",
+					"IS_SEP",
+					"BOOL",
+					"XWINDOWS",
+					"XCP_ISO_8859_15",
+					"#",
+					"droite",
+					"GetTextAffiche",
+					"gauche",
+					"CTextJustify",
+					", \"",
+					"XASSERT",
+					"m_pszTxt",
+					"sizeof(char) * (strlen(pszTxt) + 1)",
+					"tempor",
+					"m_tabInfoMot",
+					")\n{\n",
+					"nMotsInLine",
+					"nWidth",
+					"nCurrentLine",
+					"nCurrentWidth",
+					"nCount",
+					"pszTxt",
+					"_setWordStr",
+					"_nCountMots",
+					"Word",
+					"_setWordPosition",
+					"Words",
+					"bVisit",
+					" = 0",
+					"gap"
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": false,
+				"show_context": true,
+				"use_buffer2": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"incremental_find":
+			{
+				"height": 25.0
+			},
+			"input":
+			{
+				"height": 64.0
+			},
+			"menu_visible": false,
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"pinned_build_system": "",
+			"replace":
+			{
+				"height": 46.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+					[
+						"frame",
+						"Autres\\wdfen\\FrameObjetWD.cpp"
+					],
+					[
+						"ctrltab",
+						"Src\\FCtrlTab.cpp"
+					],
+					[
+						"xerrorp",
+						"XErrorpr.h"
+					],
+					[
+						"fsys",
+						"f_sys.cpp"
+					],
+					[
+						"stdres",
+						"STDres.rc"
+					],
+					[
+						"text",
+						"WDOBJ\\SRC\\TextJustifier.h"
+					],
+					[
+						"stand",
+						"public\\wdstd\\standard.h"
+					],
+					[
+						"texj",
+						"WDOBJ\\SRC\\TextJustifier.cpp"
+					],
+					[
+						"sys",
+						"wdstd\\f_sys.cpp"
+					],
+					[
+						"f_sys",
+						"wdstd\\f_sys.cpp"
+					],
+					[
+						"fctrltabh",
+						"Src\\FCtrlTab.h"
+					],
+					[
+						"frameo",
+						"Autres\\wdfen\\FrameObjetWD.h"
+					],
+					[
+						"iedfra",
+						"Autres\\commun_editeur\\IEdFrameObjet.h"
+					],
+					[
+						"texjus",
+						"WDOBJ\\SRC\\TextJustifier.h"
+					],
+					[
+						"justi",
+						"WDOBJ\\SRC\\TextJustifier.cpp"
+					],
+					[
+						"iedframeobj",
+						"Autres\\commun_editeur\\IEdFrameObjet.h"
+					],
+					[
+						"barredoc",
+						"Squelette\\Src\\BarreDocumentEx.cpp"
+					],
+					[
+						"mdici",
+						"Src\\mdiclien.h"
+					],
+					[
+						"mdicli",
+						"Src\\Mdiclien.cpp"
+					],
+					[
+						"dicot",
+						"Src\\dicotarget.h"
+					],
+					[
+						"wddial.h",
+						"Autres\\wdcore\\WDWDIAL.h"
+					],
+					[
+						"cwddialog",
+						"Autres\\wdcore\\WDDialogChampModele.cpp"
+					],
+					[
+						"tex",
+						"WDOBJ\\SRC\\TextJustifier.h"
+					],
+					[
+						"composant",
+						"autres\\wdcore\\ObjetComposante.h"
+					],
+					[
+						"fdat",
+						"F_date.h"
+					],
+					[
+						"composante",
+						"autres\\wdcore\\ObjetComposante.h"
+					],
+					[
+						"fda",
+						"F_date.cpp"
+					],
+					[
+						"chain",
+						"autres\\wdcore\\ChaineMultilangue.h"
+					],
+					[
+						"chaine",
+						"autres\\wdcore\\ChaineMultilangue.cpp"
+					],
+					[
+						"justify",
+						"code\\sandbox\\justify.html"
+					],
+					[
+						"standa",
+						"wdstd\\public\\wdstd\\standard.h"
+					],
+					[
+						"cen",
+						"wdstd\\Central.h"
+					],
+					[
+						"centr",
+						"wdstd\\Central.h"
+					],
+					[
+						"xsysh",
+						"WDOBJ\\autres\\wdcore\\xsystem.h"
+					],
+					[
+						"sais",
+						"WDOBJ\\SRC\\saisie.cpp"
+					],
+					[
+						"saisi",
+						"WDOBJ\\SRC\\saisie.cpp"
+					],
+					[
+						"x.h",
+						"WDOBJ\\autres\\wdcore\\xsystem.h"
+					],
+					[
+						"ttableau",
+						"WDOBJ\\autres\\wdcore\\Tableau.h"
+					],
+					[
+						"liste",
+						"WDOBJ\\autres\\wdcore\\ListeChainee.h"
+					],
+					[
+						"list",
+						"WDOBJ\\autres\\wdcore\\Liste.h"
+					],
+					[
+						"strh",
+						"WDOBJ\\autres\\wdcore\\STR.h"
+					],
+					[
+						"tstringh",
+						"WDOBJ\\autres\\wdcore\\Tstring.h"
+					],
+					[
+						"tst",
+						"WDOBJ\\autres\\wdcore\\Tstring.cpp"
+					],
+					[
+						"str",
+						"autres\\wdcore\\STR.cpp"
+					],
+					[
+						"xdra",
+						"autres\\wdprn\\XDrawText.cpp"
+					],
+					[
+						"champsa",
+						"autres\\commun_objpage\\ChampSaisie_ObjEtPage.cpp"
+					],
+					[
+						"saisie",
+						"SRC\\saisie.h"
+					],
+					[
+						"idobj.h",
+						"autres\\wdcore\\IDObj.h"
+					],
+					[
+						"libelle",
+						"autres\\commun_objpage\\Libelle.h"
+					],
+					[
+						"stylibell",
+						"SRC\\StyleChampLibelle.h"
+					],
+					[
+						"stylelibe",
+						"SRC\\StyleChampLibelle.cpp"
+					],
+					[
+						"lib",
+						"autres\\commun_objpage\\libelle.cpp"
+					],
+					[
+						"style",
+						"public\\wdobj\\stylesaisie.h"
+					],
+					[
+						"cistylesaisie",
+						"public\\wdobj\\istylesaisie.h"
+					],
+					[
+						"cisty",
+						"Interface\\cistylesaisie.h"
+					],
+					[
+						"xerro",
+						"wdstd\\XErrorpr.h"
+					],
+					[
+						"standar",
+						"wdstd\\public\\wdstd\\standard.h"
+					],
+					[
+						"sta",
+						"WDOBJ\\autres\\wdstd\\standard.h"
+					],
+					[
+						"standard",
+						"WDOBJ\\autres\\wdstd\\standard.h"
+					],
+					[
+						"ctstring",
+						"wdstd\\autres\\wdcore\\Tstring.h"
+					],
+					[
+						"imgcon",
+						"WDOBJ\\autres\\wdimg\\ImgConst.h"
+					]
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"show_minimap": true,
+			"show_open_files": false,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 258.0,
+			"status_bar_visible": true,
+			"template_settings":
+			{
+			}
+		},
+		"new_window_width": 510.0
+	},
+	"windows":
+	[
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+					[
+						"Cli",
+						"CLibelle"
+					],
+					[
+						"mh",
+						"m_eHAlign"
+					],
+					[
+						"jus",
+						"justifié"
+					],
+					[
+						"nlarge",
+						"nLargeurConsomee"
+					],
+					[
+						"mp",
+						"m_pszTxt"
+					],
+					[
+						"pszit",
+						"pszItemList"
+					],
+					[
+						"geth",
+						"getSelectHWND	(FCtrlTab.cpp)"
+					],
+					[
+						"m_clc",
+						"m_clFenCtrlTab"
+					],
+					[
+						"m_nIndC",
+						"m_nIndCourant	(FCtrlTab.h)"
+					],
+					[
+						"Remove",
+						"RemoveAt	(BarreDocFrmItem.cpp)"
+					],
+					[
+						"Cbar",
+						"CBarreDocFrmItem"
+					],
+					[
+						"get",
+						"GetSize"
+					],
+					[
+						"CBI",
+						"CBitmapIO"
+					],
+					[
+						"nli",
+						"nLigneCourante"
+					],
+					[
+						"cz",
+						"czChamp"
+					],
+					[
+						"CS",
+						"CString"
+					],
+					[
+						"Bard",
+						"BarreDocFrmItem	(BarreDocFrmItem.cpp)"
+					],
+					[
+						"Get",
+						"GetSize"
+					],
+					[
+						"SetS",
+						"SetSize	(SimpleBuffer.h)"
+					],
+					[
+						"h",
+						"hWnd"
+					],
+					[
+						"TAU",
+						"TAUX_DERNIERE_LIGNE	(TextJustifier.h)"
+					],
+					[
+						"nLargeur",
+						"nLargeurLigne"
+					],
+					[
+						"nhau",
+						"nHauteurLigne"
+					],
+					[
+						"nh",
+						"nHauteur1ligne"
+					],
+					[
+						"Ied",
+						"IEdFrameObjet	(FCtrlTab.cpp)"
+					],
+					[
+						"ori",
+						"orientation"
+					],
+					[
+						"thu",
+						"thumbSize"
+					],
+					[
+						"pi",
+						"pIGetEdInterface"
+					],
+					[
+						"pclfram",
+						"pclFrameWnd"
+					],
+					[
+						"IEd",
+						"IEdFrameObjet"
+					],
+					[
+						"CFR",
+						"CFrameObjetWD"
+					],
+					[
+						"Cw",
+						"CWnd	(FrameObjetWD.cpp)"
+					],
+					[
+						"msp",
+						"m_nSepSize"
+					],
+					[
+						"nesp",
+						"nEspaceRestantModulo"
+					],
+					[
+						"nlarg",
+						"nLargeurConsomee"
+					],
+					[
+						"psz",
+						"pszMot"
+					],
+					[
+						"OBJ",
+						"OBJ_DESACTIVE_JUSTIFIER	(TextJustifier.cpp)"
+					],
+					[
+						"nla",
+						"nLargeurConsomee"
+					],
+					[
+						"_bc",
+						"_bCompenseLigne"
+					],
+					[
+						"CF",
+						"CFCtrlTab"
+					],
+					[
+						"Cfra",
+						"CFrameObjetWD	(FrameObjetWD.cpp)"
+					],
+					[
+						"_bo",
+						"_bCoupeLongsMots"
+					],
+					[
+						"m_p",
+						"m_piTm"
+					],
+					[
+						"bs",
+						"bEstSeparateur"
+					],
+					[
+						"boo",
+						"BOOL"
+					],
+					[
+						"ps",
+						"pszOrigine"
+					],
+					[
+						"b",
+						"bJustifie"
+					],
+					[
+						"pszO",
+						"pszOrigine"
+					],
+					[
+						"CV",
+						"CVisiteurPrint"
+					],
+					[
+						"MEM",
+						"MEMCPY	(TextJustify.hpp)"
+					],
+					[
+						"nofs",
+						"nOffsetExceed"
+					],
+					[
+						"mn",
+						"m_nSpaceSize"
+					],
+					[
+						"offs",
+						"nOffsetExceed"
+					],
+					[
+						"nof",
+						"nOffsetExceed"
+					],
+					[
+						"nl",
+						"nLine"
+					],
+					[
+						"off",
+						"nOffset"
+					],
+					[
+						"nwor",
+						"nWordsInLine"
+					],
+					[
+						"nwo",
+						"nWordsInLine"
+					],
+					[
+						"cure",
+						"currentLine"
+					],
+					[
+						"CT",
+						"CTextJustify	(main.cpp)"
+					],
+					[
+						"nLarg",
+						"nLargeurLigne"
+					],
+					[
+						"nL",
+						"nLargeur"
+					],
+					[
+						"nw",
+						"nWordLen"
+					],
+					[
+						"curr",
+						"currentWidth"
+					],
+					[
+						"cur",
+						"currentWidth"
+					],
+					[
+						"nlar",
+						"nLargeurLigne"
+					],
+					[
+						"TEX",
+						"TextJustify	(TextJustify.cpp)"
+					],
+					[
+						"str",
+						"struct	struct"
+					],
+					[
+						"DT_T",
+						"DT_TOP	(XDrawTextIncline.cpp)"
+					],
+					[
+						"ESR",
+						"ES_RIGHT"
+					],
+					[
+						"ft",
+						"ft_strncat_offset"
+					],
+					[
+						"nb",
+						"n_buffer"
+					],
+					[
+						"space",
+						"space_per_word"
+					],
+					[
+						"spac",
+						"spaces_offset"
+					],
+					[
+						"REG",
+						"REGISTER_TYPE"
+					],
+					[
+						"STR",
+						"STRLEN"
+					],
+					[
+						"SIZ",
+						"SIZE_MAX_EXTENSION"
+					],
+					[
+						"LOCA",
+						"LOCAL_PATH"
+					],
+					[
+						"STR_NCAT",
+						"STR_NCAT"
+					],
+					[
+						"LOCAL",
+						"LOCAL_REGISTER"
+					],
+					[
+						"USER",
+						"USER_PATH"
+					]
+				]
+			},
+			"buffers":
+			[
+				{
+					"file": "/C/source/wdprj/Autres/wdcore/STR.cpp",
+					"settings":
+					{
+						"buffer_size": 187907,
+						"line_ending": "Windows"
+					}
+				},
+				{
+					"file": "/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+					"settings":
+					{
+						"buffer_size": 1234,
+						"line_ending": "Unix"
+					}
+				}
+			],
+			"build_system": "",
+			"build_system_choices":
+			[
+			],
+			"build_varint": "",
+			"command_palette":
+			{
+				"height": 137.0,
+				"last_filter": "key use",
+				"selected_items":
+				[
+					[
+						"key use",
+						"Preferences: Key Bindings - User"
+					],
+					[
+						"pref def",
+						"Preferences: Settings - Default"
+					],
+					[
+						"key us",
+						"Preferences: Key Bindings - User"
+					],
+					[
+						"pref de",
+						"Preferences: Settings - Default"
+					],
+					[
+						"pref user",
+						"Preferences: Settings - User"
+					],
+					[
+						"pack ins",
+						"Package Control: Install Package"
+					],
+					[
+						"lo",
+						"LoremIpsum: (200) stick shake"
+					],
+					[
+						"lorem",
+						"LoremIpsum: (200) stick shake"
+					],
+					[
+						"key",
+						"Preferences: Key Bindings - User"
+					],
+					[
+						"pref",
+						"Preferences: Settings - User"
+					],
+					[
+						"prefere",
+						"Preferences: Settings - User"
+					],
+					[
+						"color",
+						"Color Picker"
+					],
+					[
+						"pack in",
+						"Package Control: Install Package"
+					],
+					[
+						"lore",
+						"LoremIpsum: (200) stick shake"
+					],
+					[
+						"pref us",
+						"Preferences: Settings - User"
+					],
+					[
+						"plugin",
+						"SublimeLinter: Create Linter Plugin"
+					],
+					[
+						"Lore",
+						"LoremIpsum: (15) some"
+					],
+					[
+						"keyus",
+						"Preferences: Key Bindings - User"
+					],
+					[
+						"pref linter",
+						"Preferences: SublimeLinter Settings – User"
+					],
+					[
+						"lorep",
+						"LoremIpsum: (200) stick shake"
+					],
+					[
+						"header",
+						"42 : Disable headers"
+					],
+					[
+						"pack li",
+						"Package Control: List Packages"
+					],
+					[
+						"ke",
+						"Preferences: Key Bindings - User"
+					],
+					[
+						"user",
+						"Preferences: Settings - User"
+					],
+					[
+						"package resou",
+						"PackageResourceViewer: Extract Package"
+					],
+					[
+						"pack lis",
+						"Package Control: List Packages"
+					],
+					[
+						"prv",
+						"PackageResourceViewer: Extract Package"
+					],
+					[
+						"pack inst",
+						"Package Control: Install Package"
+					],
+					[
+						"preu",
+						"Preferences: Settings - User"
+					],
+					[
+						"pre",
+						"Preferences: Settings - User"
+					],
+					[
+						"lin",
+						"SublimeLinter: Lint This View"
+					],
+					[
+						"pack remo",
+						"Package Control: Remove Package"
+					],
+					[
+						"user ",
+						"Preferences: Settings - User"
+					],
+					[
+						"keyb",
+						"Preferences: Key Bindings - User"
+					],
+					[
+						"keybin",
+						"Preferences: Key Bindings - User"
+					]
+				],
+				"width": 446.0
+			},
+			"console":
+			{
+				"height": 126.0,
+				"history":
+				[
+					"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) ",
+					" import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": false,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"expanded_folders":
+			[
+				"/C/source/wdprj"
+			],
+			"file_history":
+			[
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+				"/J/WX21/Encours/Source/YB/Source/wdbrw/Autres/wdprj/DiffObjetProjet.h",
+				"/C/source/WDOBJ/SRC/TextJustifier.h",
+				"/C/source/WDOBJ/autres/commun_objpage/libelle.cpp",
+				"/C/source/WDOBJ/SRC/TextJustifier.cpp",
+				"/C/source/Squelette/Src/FCtrlTab.h",
+				"/C/source/Squelette/Src/Mdiclien.cpp",
+				"/C/source/Squelette/Src/FCtrlTab.cpp",
+				"/C/source/Squelette/Src/mainfrm.cpp",
+				"/C/source/Squelette/Src/mdiclien.h",
+				"/C/source/wdhf/Autres/commun_hfclient_hfserveur/ImportExportXML.h",
+				"/C/source/wdhf/Autres/wdcore/xsystem.h",
+				"/C/source/wdhf/Autres/commun_hfclient_hfserveur/DataAccess.h",
+				"/C/source/wdhf/Autres/commun_hfclient_hfserveur/DataAccess.cpp",
+				"/C/source/wdhf/Autres/commun_hfclient_hfserveur/tablemanager.h",
+				"/C/source/wdhf/Autres/commun_hfclient_hfserveur/TableManager.cpp",
+				"/C/source/wdhf/Autres/commun_hfclient_hfserveur/ImportExportXML.cpp",
+				"/C/source/wdhf/public/wdhf/IHFContext.h",
+				"/C/source/wdhf/public/wdhf/IHFContextExtended.h",
+				"/C/source/wdhf/Autres/wdcore/GenerateurJSON.cpp",
+				"/C/source/wdhf/Autres/wdcore/GenerateurJSON.h",
+				"/C/source/wdhf/public/wdhf/HFExtDef.h",
+				"/C/source/wdhf/Autres/commun_hfclient_hfserveur/ItemData.h",
+				"/C/source/wdhf/Autres/wdxml/InterfaceJSON.h",
+				"/C/source/wdhf/Autres/commun_hfclient_hfserveur/ImportBase.h",
+				"/C/source/wdhf/Autres/commun_hfclient_hfserveur/ImportBase.cpp",
+				"/C/source/wdhf/Autres/commun_hfclient_hfserveur/Context.h",
+				"/C/source/wdhf/Autres/commun_hfclient_hfserveur/ComposanteHyperFile.cpp",
+				"/C/source/wdhf/Autres/commun_hfclient_hfserveur/Context.cpp",
+				"/C/source/wdhf/Autres/commun_hfclient_hfserveur/ComposanteHyperFile.h",
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+				"/C/source/wdhf/Autres/wdcore/IObjetAPCode.h",
+				"/C/source/log.txt",
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/User/ColorPicker.sublime-settings",
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/ColorPicker/ColorPicker.sublime-settings",
+				"/C/source/Squelette/Src/BarreDocFrmItem.cpp",
+				"/C/source/Squelette/Autres/commun_editeur/TableMultilangue.cpp",
+				"/C/source/Squelette/Autres/commun_editeur/BitmapIO.h",
+				"/C/source/Squelette/Autres/wdfen/BitmapUtil.h",
+				"/C/source/Squelette/Autres/wdcore/BitmapUtilsExec.h",
+				"/C/source/Squelette/Autres/commun_editeur/BitmapIO.cpp",
+				"/C/source/Squelette/Autres/wdfen/BitmapUtil.cpp",
+				"/C/source/Squelette/Autres/commun_editeur/EditeurUtil.cpp",
+				"/C/source/Squelette/Autres/wdcore/WDExternAPI.cpp",
+				"/C/source/WDOBJ/autres/wdimg_implbase/Bitmap.h",
+				"/C/source/Squelette/Src/BarreDocumentBase.cpp",
+				"/C/source/WDOBJ/autres/wdimg_implbase/bitmap.cpp",
+				"/C/source/Squelette/Src/BarreDocFermeRecent.cpp",
+				"/C/source/Squelette/Src/BarreDocDrawCtx.cpp",
+				"/C/source/Squelette/Src/MyMenuMgr.h",
+				"/C/source/Squelette/Src/BarreDocumentEx.h",
+				"/C/source/Squelette/Autres/wdpnt/MemoryDC.h",
+				"/C/source/Squelette/Autres/wdpnt/MemoryDC.cpp",
+				"/C/source/Squelette/Src/FMyMenuDescItem.cpp",
+				"/C/source/Squelette/Src/FSupportBarreDoc.cpp",
+				"/C/source/Squelette/Autres/wdcore/SimpleBuffer.h",
+				"/C/source/Squelette/Src/BarreDocFrmItem.h",
+				"/C/source/WDOBJ/autres/commun_objpage/Libelle.h",
+				"/C/source/WDOBJ/SRC/ChampLibelle.cpp",
+				"/C/source/Squelette/Autres/commun_editeur/FAjoutProjet.CPP",
+				"/C/source/Squelette/Autres/commun_editeur/IEdFrameObjet.h",
+				"/C/source/WDOBJ/autres/commun_objpage/CadreLibelle.cpp",
+				"/C/source/Squelette/Autres/wdcore/WDExternAPI.h",
+				"/C/source/WDOBJ/autres/wdcore_directx/x64/d3dx9core.h",
+				"/c/source/WDOBJ/autres/commun_objpage/CadreLibelle.cpp",
+				"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/test/Justify/src/main.cpp",
+				"/C/source/Squelette/Autres/commun_editeur/CalqueInfo.cpp",
+				"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/test/Justify/src/TextJustify.cpp",
+				"/C/cygwin64/home/hd/code/scripts/obj.sh",
+				"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/test/Justify/include/TextJustify.hpp",
+				"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/test/Justify/Makefile",
+				"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/test/Justify/src/CMemLeakSrc/CMemLeak.c",
+				"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/test/Justify/src/CMemLeakSrc/CMemLeak.cpp",
+				"/C/Users/hd/AppData/Local/Temp/Temp1_CMemLeakSrc.zip/leaktest.c",
+				"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/src/main.cpp",
+				"/C/source/wdstd/f_sys.cpp",
+				"/C/source/Squelette/Autres/commun_editeur/WdDialUpdateUI.cpp",
+				"/C/source/Squelette/Ecr/FCtrlTabTEST.wdw",
+				"/C/source/Squelette/Wx/Win32/@Debug/WinDev.res",
+				"/C/source/wdfen/Src/FrmFenetre.cpp",
+				"/C/source/wdfen/Src/FrmFenetre.h",
+				"/C/source/Squelette/Autres/commun_editeur/IEdModuleTarget.h",
+				"/C/source/Squelette/Autres/wdfen/CadreTrackerFenResizeChamp.cpp",
+				"/C/source/Squelette/Autres/wdfen/FrameObjetWD.h",
+				"/C/source/wdfen/Src/SplitterFrameFenetre.cpp",
+				"/C/source/Squelette/Autres/wdfen/FrameObjetWD.cpp",
+				"/C/source/wdfen/Src/IEdImplementpr.h",
+				"/C/source/wdfen/Src/FSupportVignetteAgencementEd.cpp",
+				"/C/source/Squelette/Autres/wdfen/MDIRulerChildFrame.cpp",
+				"/C/source/wdfen/Src/VueFenetre.h",
+				"/C/source/wdfen/Src/VueMenu.h",
+				"/C/source/wdfen/autres/commun_editeur/IEdImplement.cpp",
+				"/C/source/Squelette/Src/BarreOnglet.cpp",
+				"/C/source/Squelette/Src/DetachedMDIClient.cpp",
+				"/C/source/Squelette/Src/BarreDocumentEx.cpp",
+				"/C/source/Squelette/Autres/commun_editeur/WaitWindow.cpp",
+				"/C/source/wdstd/XErrorPr.cpp",
+				"/C/source/wdstd/XErrorpr.h",
+				"/C/source/wdstd/STDres.rc",
+				"/C/source/wdstd/public/wdstd/standard.h",
+				"/C/source/wdstd/resource.h",
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
+				"/c/source/wdstd/f_sys.cpp",
+				"/C/source/Squelette/Autres/wdreq/FrameBarHelp.cpp",
+				"/C/source/Squelette/Src/Editeur.cpp",
+				"/C/source/WDOBJ/WST/Rep a Copier Sur C_WST/WST_ModeEmploi.txt",
+				"/C/source/Squelette/Autres/commun_editeur/Document Objet WD.cpp",
+				"/C/source/Squelette/Autres/commun_editeur/ChampPolice.cpp",
+				"/C/source/WDOBJ/SRC/Version.h",
+				"/C/Users/hd/Desktop/INSTALL.txt",
+				"/c/source/wdstd/public/wdstd/standard.h",
+				"/C/source/Squelette/Autres/commun_langage_externe/WDExtern.h",
+				"/C/source/Squelette/Autres/wdcore/WDWDIAL.h",
+				"/C/source/Squelette/Autres/wdcore/WDWDIAL.cpp",
+				"/C/cygwin64/home/hd/code/meuh2.0/sandbox/hdezier/config/windows/packages.txt",
+				"/C/cygwin64/home/hd/code/meuh2.0/sandbox/hdezier/config/windows/default.sublime-keymap",
+				"/C/cygwin64/home/hd/code/meuh2.0/sandbox/hdezier/config/windows/preferences.sublime-settings",
+				"/C/cygwin64/home/hd/code/meuh2.0/util/roolv2.0/Makefile",
+				"/C/source/Squelette/Src/dicotarget.h",
+				"/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/Transparency/SublimeTextTrans.sublime-settings",
+				"/C/source/Squelette/Autres/wdcore/WDDialogChampModele.cpp",
+				"/C/source/Squelette/Autres/txtres.h",
+				"/C/source/Squelette/Squelett.ncb",
+				"/C/source/Squelette/Src/Boutondnd.cpp",
+				"/C/source/WDOBJ/WDOBJ_VS2008.vcproj.vspscc",
+				"/C/Users/hd/AppData/Local/Temp/Temp1_CMemLeakDemo.zip/memleak.mak",
+				"/C/source/wdstd/autres/wdcore/ObjetComposante.h"
+			],
+			"find":
+			{
+				"height": 70.0
+			},
+			"find_in_files":
+			{
+				"height": 158.0,
+				"where_history":
+				[
+					"C:\\source\\wdprj",
+					"C:\\source\\wdhf",
+					"C:\\source\\WDOBJ",
+					"C:\\source\\Squelette",
+					"C:\\source\\WDOBJ",
+					"C:\\source\\wdhf",
+					"C:\\source\\Squelette",
+					"C:\\source\\WDOBJ",
+					"C:\\source\\Squelette",
+					"C:\\source\\WDOBJ",
+					"C:\\source\\wdfen",
+					"C:\\source\\Squelette",
+					"C:\\source\\wdfen",
+					"C:\\source\\Squelette",
+					"C:\\source\\wdfen",
+					"C:\\source\\Squelette",
+					"C:\\source\\wdfen",
+					"C:\\source\\Squelette",
+					"C:\\source\\wdstd",
+					"C:\\source\\WDOBJ",
+					"C:\\source\\Squelette",
+					"C:\\source\\wdfen",
+					"C:\\source\\Squelette",
+					"C:\\source\\WDOBJ",
+					"C:\\source\\wdstd",
+					"C:\\source\\WDOBJ",
+					"C:\\source\\WDOBJ\\SRC",
+					"C:\\source\\wdstd",
+					"C:\\source\\WDOBJ",
+					"J:\\WX21\\Encours\\Source\\PAD\\Source\\WDOBJ\\public\\wdobj",
+					"<open folders>"
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": true,
+				"find_history":
+				[
+					"pszChn",
+					"STR_Delete( pszChn",
+					"STR_Delete ( pszChn",
+					"STR_Delete (pszChn",
+					"STR_Delete(pszChn",
+					"pszchn",
+					"STR_Delete( pszchn",
+					"STR_Delete (pszchn",
+					"STR_Delete(pszchn",
+					"nTableAjouteFilsEx",
+					"nTableAjouteFils",
+					"JSON",
+					"_DrawInternalJustifie",
+					"CalcRectAffichage",
+					"adroite",
+					"CalculeRectAligne",
+					"DrawInternalPeintre",
+					"_DrawInternalJustifie",
+					"alt",
+					"_DrawInternalJustifie",
+					"DrawInternalPeintre",
+					"_DrawInternalJustifie",
+					"CTextJustifier",
+					"m_tabHWnd",
+					"DesactiveCtrlTab_Safe",
+					"CFCtrlTab",
+					"m_nIndCourant",
+					" ",
+					"_DrawInternalJustifie",
+					"CTextJustifier",
+					"chDroite",
+					"xml",
+					"json",
+					"IT_MEMOBINARY",
+					"xHEnregistrementVersXML",
+					"CGenerateurJSON",
+					"cBLOC_JSON_O",
+					"Igetjson",
+					"XML",
+					"HF_DESACTIVE_XML",
+					"XML",
+					"bHEnregistrementVersXML",
+					"HEnregistrementVersXML",
+					"bHEnregistrementVersXML",
+					"xHEnregistrementVersXML",
+					"bHEnregistrementVersXML",
+					"HF_DESACTIVE_XML",
+					"XML",
+					"xml",
+					"E_J",
+					"XML",
+					"\n		",
+					"CTableManager",
+					"xHEnregistrementVersXML",
+					"XML",
+					"bHEnregistrementVersXML",
+					"keys",
+					"ctrl",
+					"HF_DESACTIVE_XML",
+					"henregistremen",
+					"json",
+					"trailing_spaces_include_current_line",
+					"bHEnregistrementVersXML",
+					"IHFContextExtended",
+					"PIHFContextExtended",
+					"IHFContextExtended",
+					"OnChangeIndiceClick",
+					"m_nIndDepart",
+					"pWndOther",
+					"::OnMDINext",
+					"DesactiveCtrlTab_Safe",
+					"OnMDIRefreshMenu",
+					"OnLBDblClick",
+					"OnKeyDown",
+					"lDefWndProc",
+					"OnKeyDown",
+					"WM_MDINEXT",
+					"WM_KEYDOWN",
+					"OnMDINext",
+					"CPtrArray",
+					"CPtrArray.",
+					"CPtrArray",
+					"s_CloseWnd",
+					"Ctrltab",
+					"void ",
+					"m_clFenCtrlTab",
+					"CFCtrlTab",
+					"hdc",
+					"szRecup",
+					"getdc",
+					"HICON",
+					"HBITMAP",
+					"s_hBitmapFromHIcon",
+					"bitmap",
+					"drawicon",
+					"HICON",
+					"AfficheImage",
+					"DestroyAllButBMP",
+					"define HBITMAP",
+					"HBITMAP",
+					"s_hGetIcon",
+					"HBITMAP",
+					"s_bGetThumnails",
+					"s_hGetIcon",
+					"Thumb",
+					"HICON",
+					"GetNbFenetres",
+					"textjus",
+					"nGetNbLigneNeeded",
+					"_DrawInternalJustifie",
+					"textju",
+					"\n	",
+					"nGetHauteur1LigneTexte",
+					"nLigneCourante",
+					"HICON",
+					"afficheIcon",
+					"nItem",
+					"item",
+					"Recup(",
+					"Thumb",
+					"=",
+					"HDC",
+					"afficheIm",
+					"  ",
+					"AfficheImage",
+					"\"Popup\"",
+					"Popup",
+					"ON_TOUCHE(\"Popup\""
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": false,
+				"show_context": true,
+				"use_buffer2": true,
+				"whole_word": true,
+				"wrap": true
+			},
+			"folders":
+			[
+				{
+					"path": "C:\\source\\wdprj"
+				}
+			],
+			"groups":
+			[
+				{
+					"selected": 0,
+					"sheets":
+					[
+						{
+							"buffer": 0,
+							"file": "/C/source/wdprj/Autres/wdcore/STR.cpp",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 187907,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										2198,
+										2198
+									]
+								],
+								"settings":
+								{
+									"BracketHighlighterBusy": false,
+									"bh_regions":
+									[
+										"bh_unmatched",
+										"bh_unmatched_center",
+										"bh_unmatched_open",
+										"bh_unmatched_close",
+										"bh_unmatched_content",
+										"bh_round",
+										"bh_round_center",
+										"bh_round_open",
+										"bh_round_close",
+										"bh_round_content",
+										"bh_angle",
+										"bh_angle_center",
+										"bh_angle_open",
+										"bh_angle_close",
+										"bh_angle_content",
+										"bh_curly",
+										"bh_curly_center",
+										"bh_curly_open",
+										"bh_curly_close",
+										"bh_curly_content",
+										"bh_single_quote",
+										"bh_single_quote_center",
+										"bh_single_quote_open",
+										"bh_single_quote_close",
+										"bh_single_quote_content",
+										"bh_default",
+										"bh_default_center",
+										"bh_default_open",
+										"bh_default_close",
+										"bh_default_content",
+										"bh_c_define",
+										"bh_c_define_center",
+										"bh_c_define_open",
+										"bh_c_define_close",
+										"bh_c_define_content",
+										"bh_regex",
+										"bh_regex_center",
+										"bh_regex_open",
+										"bh_regex_close",
+										"bh_regex_content",
+										"bh_tag",
+										"bh_tag_center",
+										"bh_tag_open",
+										"bh_tag_close",
+										"bh_tag_content",
+										"bh_square",
+										"bh_square_center",
+										"bh_square_open",
+										"bh_square_close",
+										"bh_square_content",
+										"bh_double_quote",
+										"bh_double_quote_center",
+										"bh_double_quote_open",
+										"bh_double_quote_close",
+										"bh_double_quote_content"
+									],
+									"hasHeader": false,
+									"syntax": "Packages/C++/C++.tmLanguage",
+									"translate_tabs_to_spaces": false
+								},
+								"translation.x": 0.0,
+								"translation.y": 675.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 1,
+							"type": "text"
+						}
+					]
+				},
+				{
+					"selected": 0,
+					"sheets":
+					[
+						{
+							"buffer": 1,
+							"file": "/C/Users/hd/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 1234,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										290,
+										290
+									]
+								],
+								"settings":
+								{
+									"BracketHighlighterBusy": false,
+									"bh_regions":
+									[
+										"bh_unmatched",
+										"bh_unmatched_center",
+										"bh_unmatched_open",
+										"bh_unmatched_close",
+										"bh_unmatched_content",
+										"bh_round",
+										"bh_round_center",
+										"bh_round_open",
+										"bh_round_close",
+										"bh_round_content",
+										"bh_angle",
+										"bh_angle_center",
+										"bh_angle_open",
+										"bh_angle_close",
+										"bh_angle_content",
+										"bh_curly",
+										"bh_curly_center",
+										"bh_curly_open",
+										"bh_curly_close",
+										"bh_curly_content",
+										"bh_single_quote",
+										"bh_single_quote_center",
+										"bh_single_quote_open",
+										"bh_single_quote_close",
+										"bh_single_quote_content",
+										"bh_default",
+										"bh_default_center",
+										"bh_default_open",
+										"bh_default_close",
+										"bh_default_content",
+										"bh_c_define",
+										"bh_c_define_center",
+										"bh_c_define_open",
+										"bh_c_define_close",
+										"bh_c_define_content",
+										"bh_regex",
+										"bh_regex_center",
+										"bh_regex_open",
+										"bh_regex_close",
+										"bh_regex_content",
+										"bh_tag",
+										"bh_tag_center",
+										"bh_tag_open",
+										"bh_tag_close",
+										"bh_tag_content",
+										"bh_square",
+										"bh_square_center",
+										"bh_square_open",
+										"bh_square_close",
+										"bh_square_content",
+										"bh_double_quote",
+										"bh_double_quote_center",
+										"bh_double_quote_open",
+										"bh_double_quote_close",
+										"bh_double_quote_content"
+									],
+									"hasHeader": false,
+									"syntax": "Packages/JavaScript/JSON.tmLanguage",
+									"translate_tabs_to_spaces": false
+								},
+								"translation.x": 0.0,
+								"translation.y": 0.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 0,
+							"type": "text"
+						}
+					]
+				},
+				{
+					"sheets":
+					[
+					]
+				},
+				{
+					"sheets":
+					[
+					]
+				}
+			],
+			"incremental_find":
+			{
+				"height": 25.0
+			},
+			"input":
+			{
+				"height": 64.0
+			},
+			"layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						2
+					],
+					[
+						1,
+						0,
+						3,
+						1
+					],
+					[
+						1,
+						1,
+						2,
+						2
+					],
+					[
+						2,
+						1,
+						3,
+						2
+					]
+				],
+				"cols":
+				[
+					0.0,
+					0.461791970703,
+					0.949409461943,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					0.543601895734,
+					1.0
+				]
+			},
+			"menu_visible": false,
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"pinned_build_system": "",
+			"position": "1,2,3,-1,-1,-1,-1,1080,-1920,149,-1394",
+			"project": "",
+			"replace":
+			{
+				"height": 46.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+					[
+						"",
+						"C:\\Users\\hd\\AppData\\Roaming\\Sublime Text 3\\Packages\\User\\Preferences.sublime-settings"
+					],
+					[
+						"str.cpp",
+						"Autres\\wdcore\\STR.cpp"
+					],
+					[
+						"text",
+						"SRC\\TextJustifier.h"
+					],
+					[
+						"libell",
+						"autres\\commun_objpage\\libelle.cpp"
+					],
+					[
+						"mdicli",
+						"Src\\Mdiclien.cpp"
+					],
+					[
+						"ctrlta",
+						"Src\\FCtrlTab.h"
+					],
+					[
+						"fctrl",
+						"Src\\FCtrlTab.cpp"
+					],
+					[
+						"libel",
+						"autres\\commun_objpage\\libelle.cpp"
+					],
+					[
+						"ihfconexte",
+						"public\\wdhf\\IHFContextExtended.h"
+					],
+					[
+						"ihfcontext",
+						"public\\wdhf\\IHFContext.h"
+					],
+					[
+						"item",
+						"Autres\\commun_hfclient_hfserveur\\ItemData.h"
+					],
+					[
+						"impoex",
+						"Autres\\commun_hfclient_hfserveur\\ImportExportXML.h"
+					],
+					[
+						"importex",
+						"Autres\\commun_hfclient_hfserveur\\ImportExportXML.cpp"
+					],
+					[
+						"importbas",
+						"Autres\\commun_hfclient_hfserveur\\ImportBase.cpp"
+					],
+					[
+						"impoexport",
+						"Autres\\commun_hfclient_hfserveur\\ImportExportXML.h"
+					],
+					[
+						"impo",
+						"Autres\\commun_hfclient_hfserveur\\ImportExportXML.cpp"
+					],
+					[
+						"generejson",
+						"Autres\\wdcore\\GenerateurJSON.h"
+					],
+					[
+						"import",
+						"Autres\\commun_hfclient_hfserveur\\ImportExportXML.cpp"
+					],
+					[
+						"dataac",
+						"Autres\\commun_hfclient_hfserveur\\DataAccess.h"
+					],
+					[
+						"composantehy",
+						"Autres\\commun_hfclient_hfserveur\\ComposanteHyperFile.h"
+					],
+					[
+						"tablemana",
+						"Autres\\commun_hfclient_hfserveur\\tablemanager.h"
+					],
+					[
+						"json",
+						"Autres\\wdcore\\GenerateurJSON.cpp"
+					],
+					[
+						"dataa",
+						"Autres\\commun_hfclient_hfserveur\\DataAccess.cpp"
+					],
+					[
+						"composante",
+						"Autres\\commun_hfclient_hfserveur\\ComposanteHyperFile.cpp"
+					],
+					[
+						"barredocfr",
+						"Src\\BarreDocFrmItem.cpp"
+					],
+					[
+						"bitmap",
+						"Autres\\commun_editeur\\BitmapIO.h"
+					],
+					[
+						"bitmapio",
+						"Autres\\commun_editeur\\BitmapIO.cpp"
+					],
+					[
+						"bitmaph",
+						"WDOBJ\\autres\\wdimg_implbase\\Bitmap.h"
+					],
+					[
+						"libelle",
+						"WDOBJ\\autres\\commun_objpage\\libelle.cpp"
+					],
+					[
+						"li",
+						"WDOBJ\\autres\\commun_objpage\\Libelle.h"
+					],
+					[
+						"champli",
+						"WDOBJ\\SRC\\ChampLibelle.cpp"
+					],
+					[
+						"tex",
+						"WDOBJ\\SRC\\TextJustifier.h"
+					],
+					[
+						"simple",
+						"Squelette\\Autres\\wdcore\\SimpleBuffer.h"
+					],
+					[
+						"barredocfrm",
+						"Squelette\\Src\\BarreDocFrmItem.h"
+					],
+					[
+						"bit",
+						"Squelette\\Autres\\commun_editeur\\BitmapIO.h"
+					],
+					[
+						"wdexter",
+						"Squelette\\Autres\\wdcore\\WDExternAPI.h"
+					],
+					[
+						"fctr",
+						"Squelette\\Src\\FCtrlTab.h"
+					],
+					[
+						"fctrlt",
+						"Squelette\\Src\\FCtrlTab.cpp"
+					],
+					[
+						"clibelle",
+						"WDOBJ\\autres\\commun_objpage\\libelle.cpp"
+					],
+					[
+						"cadreli",
+						"WDOBJ\\autres\\commun_objpage\\CadreLibelle.cpp"
+					],
+					[
+						"textjustifier",
+						"WDOBJ\\SRC\\TextJustifier.cpp"
+					],
+					[
+						"iedframe",
+						"Squelette\\Autres\\commun_editeur\\IEdFrameObjet.h"
+					],
+					[
+						"libelh",
+						"WDOBJ\\autres\\commun_objpage\\Libelle.h"
+					],
+					[
+						"libe",
+						"WDOBJ\\autres\\commun_objpage\\Libelle.h"
+					],
+					[
+						"main.cpp",
+						"roolv2.0\\test\\Justify\\src\\main.cpp"
+					],
+					[
+						"textjus",
+						"WDOBJ\\SRC\\TextJustifier.cpp"
+					],
+					[
+						"main",
+						"roolv2.0\\src\\main.cpp"
+					],
+					[
+						"textj",
+						"WDOBJ\\SRC\\TextJustifier.h"
+					],
+					[
+						"iedfra",
+						"Squelette\\Autres\\commun_editeur\\IEdFrameObjet.h"
+					],
+					[
+						"wddial",
+						"Squelette\\Autres\\commun_editeur\\WdDialUpdateUI.cpp"
+					],
+					[
+						"frmfene",
+						"wdfen\\Src\\FrmFenetre.cpp"
+					],
+					[
+						"iedimpl",
+						"wdfen\\autres\\commun_editeur\\IEdImplement.cpp"
+					],
+					[
+						"fram",
+						"Squelette\\Autres\\wdfen\\FrameObjetWD.h"
+					],
+					[
+						"iedfr",
+						"Squelette\\Autres\\commun_editeur\\IEdFrameObjet.h"
+					],
+					[
+						"frame",
+						"Autres\\wdfen\\FrameObjetWD.cpp"
+					],
+					[
+						"ctrltab",
+						"Src\\FCtrlTab.cpp"
+					],
+					[
+						"xerrorp",
+						"XErrorpr.h"
+					],
+					[
+						"fsys",
+						"f_sys.cpp"
+					],
+					[
+						"stdres",
+						"STDres.rc"
+					],
+					[
+						"stand",
+						"public\\wdstd\\standard.h"
+					],
+					[
+						"texj",
+						"WDOBJ\\SRC\\TextJustifier.cpp"
+					],
+					[
+						"sys",
+						"wdstd\\f_sys.cpp"
+					],
+					[
+						"f_sys",
+						"wdstd\\f_sys.cpp"
+					],
+					[
+						"fctrltabh",
+						"Src\\FCtrlTab.h"
+					],
+					[
+						"frameo",
+						"Autres\\wdfen\\FrameObjetWD.h"
+					],
+					[
+						"texjus",
+						"WDOBJ\\SRC\\TextJustifier.h"
+					],
+					[
+						"justi",
+						"WDOBJ\\SRC\\TextJustifier.cpp"
+					],
+					[
+						"iedframeobj",
+						"Autres\\commun_editeur\\IEdFrameObjet.h"
+					],
+					[
+						"barredoc",
+						"Squelette\\Src\\BarreDocumentEx.cpp"
+					],
+					[
+						"mdici",
+						"Src\\mdiclien.h"
+					],
+					[
+						"dicot",
+						"Src\\dicotarget.h"
+					],
+					[
+						"wddial.h",
+						"Autres\\wdcore\\WDWDIAL.h"
+					],
+					[
+						"cwddialog",
+						"Autres\\wdcore\\WDDialogChampModele.cpp"
+					],
+					[
+						"composant",
+						"autres\\wdcore\\ObjetComposante.h"
+					],
+					[
+						"fdat",
+						"F_date.h"
+					],
+					[
+						"fda",
+						"F_date.cpp"
+					],
+					[
+						"chain",
+						"autres\\wdcore\\ChaineMultilangue.h"
+					],
+					[
+						"chaine",
+						"autres\\wdcore\\ChaineMultilangue.cpp"
+					],
+					[
+						"justify",
+						"code\\sandbox\\justify.html"
+					],
+					[
+						"standa",
+						"wdstd\\public\\wdstd\\standard.h"
+					],
+					[
+						"cen",
+						"wdstd\\Central.h"
+					],
+					[
+						"centr",
+						"wdstd\\Central.h"
+					],
+					[
+						"xsysh",
+						"WDOBJ\\autres\\wdcore\\xsystem.h"
+					],
+					[
+						"sais",
+						"WDOBJ\\SRC\\saisie.cpp"
+					],
+					[
+						"saisi",
+						"WDOBJ\\SRC\\saisie.cpp"
+					],
+					[
+						"x.h",
+						"WDOBJ\\autres\\wdcore\\xsystem.h"
+					],
+					[
+						"ttableau",
+						"WDOBJ\\autres\\wdcore\\Tableau.h"
+					],
+					[
+						"liste",
+						"WDOBJ\\autres\\wdcore\\ListeChainee.h"
+					],
+					[
+						"list",
+						"WDOBJ\\autres\\wdcore\\Liste.h"
+					],
+					[
+						"strh",
+						"WDOBJ\\autres\\wdcore\\STR.h"
+					],
+					[
+						"tstringh",
+						"WDOBJ\\autres\\wdcore\\Tstring.h"
+					],
+					[
+						"tst",
+						"WDOBJ\\autres\\wdcore\\Tstring.cpp"
+					],
+					[
+						"str",
+						"autres\\wdcore\\STR.cpp"
+					],
+					[
+						"xdra",
+						"autres\\wdprn\\XDrawText.cpp"
+					],
+					[
+						"champsa",
+						"autres\\commun_objpage\\ChampSaisie_ObjEtPage.cpp"
+					],
+					[
+						"saisie",
+						"SRC\\saisie.h"
+					],
+					[
+						"idobj.h",
+						"autres\\wdcore\\IDObj.h"
+					],
+					[
+						"stylibell",
+						"SRC\\StyleChampLibelle.h"
+					],
+					[
+						"stylelibe",
+						"SRC\\StyleChampLibelle.cpp"
+					],
+					[
+						"lib",
+						"autres\\commun_objpage\\libelle.cpp"
+					],
+					[
+						"style",
+						"public\\wdobj\\stylesaisie.h"
+					],
+					[
+						"cistylesaisie",
+						"public\\wdobj\\istylesaisie.h"
+					],
+					[
+						"cisty",
+						"Interface\\cistylesaisie.h"
+					],
+					[
+						"xerro",
+						"wdstd\\XErrorpr.h"
+					],
+					[
+						"standar",
+						"wdstd\\public\\wdstd\\standard.h"
+					],
+					[
+						"sta",
+						"WDOBJ\\autres\\wdstd\\standard.h"
+					],
+					[
+						"standard",
+						"WDOBJ\\autres\\wdstd\\standard.h"
+					],
+					[
+						"ctstring",
+						"wdstd\\autres\\wdcore\\Tstring.h"
+					],
+					[
+						"imgcon",
+						"WDOBJ\\autres\\wdimg\\ImgConst.h"
+					]
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"selected_group": 1,
+			"settings":
+			{
+			},
+			"show_minimap": true,
+			"show_open_files": false,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 306.0,
+			"status_bar_visible": true,
+			"template_settings":
+			{
+			},
+			"window_id": 5,
+			"workspace_name": ""
+		}
+	],
+	"workspaces":
+	{
+		"recent_workspaces":
+		[
+		]
+	}
+}
