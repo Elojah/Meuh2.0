@@ -167,7 +167,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\bdelete\b(\s*\[\])?|\bnew\b(?!])</string>
+			<string>\bdelete\b(\s*\[\])?|\bnew\b(?!])|\bref\b(?!])</string>
 			<key>name</key>
 			<string>keyword.control.c++</string>
 		</dict>
@@ -415,7 +415,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;=\.|->)\w+</string>
+			<string>(?&lt;=\.|->)\w+(?=[^\w|\(])</string>
 			<key>name</key>
 			<string>member.ccpp</string>
 		</dict>
@@ -424,7 +424,7 @@
 ----------------------------------------------------->
 		<dict>
 			<key>match</key>
-			<string>\b(\_\w+)\b</string>
+			<string>\b(\_\w+)(?=[^\w|\(])\b</string>
 			<key>name</key>
 			<string>method.private.ccpp</string>
 		</dict>
@@ -449,11 +449,20 @@
 <!---------------------------------------------------
 	Type namespace - CCpp
 ----------------------------------------------------->
-		<dict>
+<!-- 		<dict>
 			<key>match</key>
 			<string>(?&lt;=\::)\w+(?=[^\w|\(])</string>
 			<key>name</key>
 			<string>type-namespace.ccpp</string>
+		</dict>
+ --><!---------------------------------------------------
+	Type namespace for Goto Symbol - CCpp
+----------------------------------------------------->
+		<dict>
+			<key>match</key>
+			<string>(?&lt;=\::)\w+(?=[^\w|\(])</string>
+			<key>showInSymbolList</key>
+			<integer>1</integer>
 		</dict>
 <!---------------------------------------------------
 	Define Enum - CCpp
@@ -538,13 +547,13 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;=operator)(\&gt;\=)</string>
+			<string>(?&lt;=operator)(\&gt;|\&lt;)\=</string>
 			<key>name</key>
 			<string>keyword.operator.comparison.ccpp</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;=operator)(\&lt;\=)</string>
+			<string>(?&lt;=operator)(\&lt;\&lt;|\&gt;\&gt;)</string>
 			<key>name</key>
 			<string>keyword.operator.comparison.ccpp</string>
 		</dict>
@@ -585,12 +594,21 @@
 			<string>keyword.operator.arithmetic.ccpp</string>
 		</dict>
 <!----------------------------------------
+	Arithmetic operators - CCpp
+------------------------------------------>
+		<dict>
+			<key>match</key>
+			<string>\+\+|\-\-|\-</string>
+			<key>name</key>
+			<string>keyword.operator.arithmetic.ccpp</string>
+		</dict>
+<!----------------------------------------
 	Variable precision - CCpp
 	Get all multisense symbols after first parsing
 ------------------------------------------>
 		<dict>
 			<key>match</key>
-			<string>\&|\*|\&lt;|\&gt;</string>
+			<string>\&|\*|\&lt;|\&gt;|\^</string>
 			<key>name</key>
 			<string>variable.precision.ccpp</string>
 		</dict>
