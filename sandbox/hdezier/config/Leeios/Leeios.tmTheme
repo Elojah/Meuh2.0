@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>Oasis</string>
+	<string>Leeios</string>
 	<key>settings</key>
 	<array>
 		<dict>
 			<key>settings</key>
 			<dict>
 				<key>background</key>
-				<string>#010101</string>
+				<string>#0F0F0F</string>
 				<key>caret</key>
 				<string>#F8F8F0</string>
 				<key>foreground</key>
@@ -54,7 +54,7 @@
 				<key>fontStyle</key>
 				<string></string>
 				<key>foreground</key>
-				<string>#eee8d5</string>
+				<string>#c5c5c5</string>
 			</dict>
 		</dict>
 		<dict>
@@ -94,6 +94,19 @@
 				<string></string>
 				<key>foreground</key>
 				<string>#2aa12a</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Member C++</string>
+			<key>scope</key>
+			<string>member.ccpp</string>
+			<key>settings</key>
+			<dict>
+				<key>fontStyle</key>
+				<string>bold</string>
+				<key>foreground</key>
+				<string>#85aa85</string>
 			</dict>
 		</dict>
 		<dict>
@@ -251,19 +264,6 @@
 				<string></string>
 				<key>foreground</key>
 				<string>#E595D0</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>Member C++</string>
-			<key>scope</key>
-			<string>member.ccpp, method.private.ccpp</string>
-			<key>settings</key>
-			<dict>
-				<key>fontStyle</key>
-				<string></string>
-				<key>foreground</key>
-				<string>#839496</string>
 			</dict>
 		</dict>
 		<dict>
