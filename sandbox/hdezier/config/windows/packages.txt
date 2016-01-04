@@ -1,20 +1,45 @@
-42 headers
-all autocomplete
-bracket highlighter
-c++ starting kit
-Diffy
-fold comments
-lorem ipsum
-Makefile improved
-Material theme
-Oasis theme
-Origami
-Package control
-Package resource viewer
-power cursors
-sidebarenhancements
-sublimelinter
-sublimelinter-cppcheck
-textpastry
-transparency
-ublim color schemes
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"42 Headers",
+		"AlignTab",
+		"All Autocomplete",
+		"Better Completion",
+		"BetterFindBuffer",
+		"BracketHighlighter",
+		"C Improved",
+		"C++ Starting Kit",
+		"Diffy",
+		"DoxyDoc",
+		"Fold Comments",
+		"ImprovedMacros",
+		"JSON Reindent",
+		"LoremIpsum",
+		"Makefile Improved",
+		"Material Theme",
+		"Oasis Theme",
+		"Open-Include",
+		"Origami",
+		"Package Control",
+		"PackageResourceViewer",
+		"PowerCursors",
+		"SideBarEnhancements",
+		"Sublime Bookmarks",
+		"SublimeLinter",
+		"SublimeLinter-cppcheck",
+		"Text Pastry",
+		"Ublime Color Schemes"
+	],
+	"repositories":
+	[
+		"https://github.com/skuroda/ImprovedMacros"
+	]
+}
+
++ SublimeLinter
++ Linter dynamique (ClangComplete)
++ Gitgutter for git

@@ -2,7 +2,7 @@
 	"auto_match_enabled": true,
 	"bold_folder_labels": true,
 	"caret_style": "phase",
-	"color_scheme": "Packages/User/SublimeLinter/Oasis (SL).tmTheme",
+	"color_scheme": "Packages/Oasis Theme/Oasis.tmTheme",
 	"detect_indentation": true,
 	"draw_white_space": "all",
 	"ensure_newline_at_eof_on_save": true,
@@ -36,15 +36,16 @@
 		"CVS"
 	],
 	"font_face": "Consolas",
-	"font_size": 10,
+	"font_size": 9,
 	"highlight_line": true,
 	"hot_exit": true,
 	"ignored_packages":
 	[
-		"Vintage",
-		"Makefile"
+		"Makefile",
+		"Vintage"
 	],
-	"material_theme_accent_purple": true,
+	"material_theme_accent_orange": true,
+	"material_theme_contrast_mode": true,
 	"material_theme_small_statusbar": true,
 	"material_theme_small_tab": true,
 	"material_theme_tabs_separator": true,
@@ -64,5 +65,6 @@
 	"trim_automatic_white_space": true,
 	"trim_trailing_white_space_on_save": true,
 	"use_tab_stops": true,
-	"word_separators": true
+	"word_separators": true,
+	"highlight_modified_tabs": true,
 }
