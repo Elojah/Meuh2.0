@@ -5,7 +5,6 @@ void	exec(void)
 	Board		b;
 
 	b.exec();
-	b.display();
 }
 
 int		main(void)

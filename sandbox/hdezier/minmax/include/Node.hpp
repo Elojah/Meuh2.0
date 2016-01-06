@@ -13,12 +13,12 @@ public:
 	~Node(void);
 
 	void	calcMaxMin(Board &b, Board::eValue const &player,
-							int rec, bool const &maxmin);
+							int rec, bool const &turn);
 	void		create(void);
 	int const	&getMax(void) const;
-	int const	&getMin(void) const;
 	void		deleteExceptOne(int n);
 	Node		*getChild(int n);
+	void		resetAlphaBeta(void);
 
 protected:
 private:
@@ -26,14 +26,16 @@ private:
 	Node(Node const &src);
 	Node&	operator=(Node const &rhs);
 	int			calculus(Board &b, Board::eValue const &player
-					, int const &n, int rec, bool const &maxmin);
+					, int const &n, int rec, bool const &turn);
 
-	Node		**_children;
-	int			_value;
-	int			_max;
-	int			_min;
-	int			_maxIndex;
-	int			_minIndex;
+	Node			**_children;
+	int				_value;
+	int				_max;
+	int				_min;
+	int				_maxIndex;
+	int				_minIndex;
+	static int		_alpha;
+	static int		_beta;
 };
 
 #endif
