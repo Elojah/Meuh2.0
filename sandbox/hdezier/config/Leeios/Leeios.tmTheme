@@ -152,7 +152,7 @@
 			<key>name</key>
 			<string>Functions</string>
 			<key>scope</key>
-			<string>keyword.other, support.function.builtin, meta.function-call support.type, storage.type.c, storage.type.c++, storage.type.c++11, support.type, support.type.sys-types.c, support.type.pthread.c, support.type.stdint.c, source.c++ meta.class-struct-block.c++ entity.name.type.c++, meta.class-struct.c++ entity.name.type.c++, type-namespace.ccpp</string>
+			<string>keyword.other, support.function.builtin, meta.function-call support.type, storage.type.c, storage.type.c++, storage.type.c++11, support.type, support.type.sys-types.c, support.type.pthread.c, support.type.stdint.c, source.c++ meta.class-struct-block.c++ entity.name.type.c++, meta.class-struct.c++ entity.name.type.c++, type-namespace.ccpp, type-guess.c++</string>
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
