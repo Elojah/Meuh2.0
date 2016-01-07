@@ -6,7 +6,7 @@
 (*   By: erobert <marvin@42.fr>                     +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2016/01/06 12:32:30 by erobert           #+#    #+#             *)
-(*   Updated: 2016/01/06 14:52:12 by erobert          ###   ########.fr       *)
+(*   Updated: 2016/01/07 15:54:48 by erobert          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -35,10 +35,11 @@ let rec gradient_descent data teta alpha iter =
 					 alpha
 					 (iter - 1)
   else
-	teta
+	{t0 = teta.t0 -. teta.t1 *. 22899. /. (240000. -. 22899.);
+	 t1 = teta.t1 /. (240000. -. 22899.)}
 
 let scale (mileage, price) =
-  (mileage /. 300000., price)
+  ((mileage -. 22899.)  /. (240000. -. 22899.), price)
 
 let read_csv =
   try
@@ -60,8 +61,10 @@ let read_csv =
 		  !data
 		)
   with _ ->
-	print_endline (Sys.argv.(0) ^ " file.csv");
-	[]
+	(
+	  print_endline (Sys.argv.(0) ^ " data.csv");
+	  []
+	)
 
 let () =
   let data = read_csv in

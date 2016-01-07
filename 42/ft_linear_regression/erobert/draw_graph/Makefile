@@ -6,14 +6,14 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/17 17:24:53 by erobert           #+#    #+#              #
-#    Updated: 2016/01/06 14:57:30 by erobert          ###   ########.fr        #
+#    Updated: 2016/01/06 16:59:45 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME = gradient_descent
+NAME = draw-graph
 FILES = main.ml
 SRCS = $(addprefix srcs/, $(FILES))
-LIBS = str.cma
+LIBS = graphics.cma str.cma
 CMOS = $(SRCS:srcs/%.ml=objs/%.cmo)
 CMXS = $(SRCS:srcs/%.ml=objs/%.cmx)
 TMPS = $(SRCS:.ml=.ml~) Makefile~
@@ -21,7 +21,7 @@ OCC = ocamlc
 OPT = ocamlopt
 DEP = ocamldep
 OFLAGS = 
-LFLAGS =
+LFLAGS = -cclib -lgraphics
 
 .PHONY: all clean objs_dir fclean re
 
