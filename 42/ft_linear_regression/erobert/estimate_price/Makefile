@@ -6,14 +6,14 @@
 #    By: erobert <erobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/17 17:24:53 by erobert           #+#    #+#              #
-#    Updated: 2016/01/06 15:11:57 by erobert          ###   ########.fr        #
+#    Updated: 2016/01/07 16:29:19 by erobert          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = estimate-price
 FILES = main.ml
 SRCS = $(addprefix srcs/, $(FILES))
-LIBS = graphics.cma
+LIBS =
 CMOS = $(SRCS:srcs/%.ml=objs/%.cmo)
 CMXS = $(SRCS:srcs/%.ml=objs/%.cmx)
 TMPS = $(SRCS:.ml=.ml~) Makefile~
@@ -21,7 +21,7 @@ OCC = ocamlc
 OPT = ocamlopt
 DEP = ocamldep
 OFLAGS = 
-LFLAGS = -cclib -lgraphics
+LFLAGS =
 
 .PHONY: all clean objs_dir fclean re
 

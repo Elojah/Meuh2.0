@@ -6,7 +6,7 @@
 (*   By: erobert <marvin@42.fr>                     +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2016/01/06 15:03:30 by erobert           #+#    #+#             *)
-(*   Updated: 2016/01/07 16:00:59 by erobert          ###   ########.fr       *)
+(*   Updated: 2016/01/07 16:45:03 by erobert          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -54,8 +54,9 @@ let () =
   if data != [] then
 	(
 	  Graphics.open_graph " 1024x1024";
-	  Graphics.set_color Graphics.black;
+	  Graphics.set_color Graphics.blue;
 	  Graphics.plots (Array.of_list data);
+	  Graphics.set_color Graphics.green;
 	  Graphics.moveto 0 (int_of_float (t0 *. 1024. /. 9000.));
 	  Graphics.lineto 1024
 					  (int_of_float ((t0 +. t1 *. 300000.) *. 1024. /. 9000.));
