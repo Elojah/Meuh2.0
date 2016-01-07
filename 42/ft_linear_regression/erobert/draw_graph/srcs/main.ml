@@ -6,7 +6,7 @@
 (*   By: erobert <marvin@42.fr>                     +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2016/01/06 15:03:30 by erobert           #+#    #+#             *)
-(*   Updated: 2016/01/07 16:45:03 by erobert          ###   ########.fr       *)
+(*   Updated: 2016/01/07 16:58:14 by erobert          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -60,10 +60,6 @@ let () =
 	  Graphics.moveto 0 (int_of_float (t0 *. 1024. /. 9000.));
 	  Graphics.lineto 1024
 					  (int_of_float ((t0 +. t1 *. 300000.) *. 1024. /. 9000.));
-	  print_float (t0 *. 1024. /. 9000. +. t1 *. 1024.);
-	  print_char '\n';
-	  print_float (t0 *. 1024. /. 9000. +. t1 *. 1024.);
-	  print_char '\n';
 	  Graphics.read_key ();
 	  print_endline "Ciao"
 	)
