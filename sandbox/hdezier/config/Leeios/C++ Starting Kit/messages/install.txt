@@ -1,0 +1,11 @@
+POST INSTALLATION
+-----------------
+
+
+    * New documentation available :
+    
+    http://cppstartingkitproject-guide.readthedocs.org/en/latest/
+    ``````````````````````````````````````````````````````````````
+    
+    * For Post Installation procedures please refer to the documentation
+          ----------------------------

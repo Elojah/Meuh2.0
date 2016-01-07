@@ -38,6 +38,7 @@ void		Board::exec(void)
 	Node	*tmp;
 	eValue	player(Board::P1);
 
+	_root->resetAlphaBeta();
 	_root->calcMaxMin(*this, OPPONENT(player), REC_LVL, true);
 	move = _root->getMax();
 	std::cout << "move:\t" << move << std::endl;
@@ -49,6 +50,7 @@ void		Board::exec(void)
 		display();
 		std::cout << "Search max:\t" << std::endl;
 		player = OPPONENT(player);
+		_root->resetAlphaBeta();
 		_root->calcMaxMin(*this, player, REC_LVL, true);
 		move = _root->getMax();
 		std::cout << "Play move:\t" << move << std::endl;
@@ -87,12 +89,12 @@ void		Board::setValue(int const &n, eValue const &v)
 
 void		Board::setPlayable(int const &n)
 {
-	int		first;
-	int		second;
-
 	++_playable[n];
 	for (int i = 0; i < E_DIRECTION; ++i)
 	{
+		int		first;
+		int		second;
+
 		first = n + _dir[i];
 		second = first + _dir[i];
 		if (!IS_IN_RANGE(first))
@@ -106,13 +108,12 @@ void		Board::setPlayable(int const &n)
 
 void		Board::unsetPlayable(int const &n)
 {
-	int		first;
-	int		second;
-
 	if (_playable[n] > 0)
 		--_playable[n];
 	for (int i = 0; i < E_DIRECTION; ++i)
 	{
+		int		first;
+		int		second;
 		first = n + _dir[i];
 		second = first + _dir[i];
 		if (!IS_IN_RANGE(first))
@@ -144,7 +145,6 @@ int			Board::play(int const &n, eValue const &player
 	, int &captures, bool calcResult)
 {
 	int		result(1);
-	int		tmp;
 	int		nPermissive(1);
 
 	_cell[n] = player;
@@ -157,6 +157,7 @@ int			Board::play(int const &n, eValue const &player
 		return (-1);
 	for (int i = 0; i < 4; ++i)
 	{
+		int		tmp;
 		if ((captures >> i) & 1)
 			++result;
 		if ((captures >> (i + 4)) & 1)
@@ -221,10 +222,10 @@ int			Board::alignmentPermissive(int const &n, int const &dir
 int			Board::checkCapture(int const &n) const
 {
 	int		result(0);
-	int		next;
 
 	for (int i = 0; i < E_DIRECTION; ++i)
 	{
+		int		next;
 		next = n + 3 * _dir[i];
 		if (alignment(n, i, OPPONENT(_cell[n])) == 2
 			&& IS_IN_RANGE(next)

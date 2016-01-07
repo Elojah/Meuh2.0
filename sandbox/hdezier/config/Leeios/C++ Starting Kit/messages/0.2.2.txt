@@ -1,0 +1,11 @@
+RELEASE NOTE
+------------
+	Version 0.2.2
+
+
+CHANGES
+-------
+	
+	[v] Due to a conflict with the binary operator "~", the destructor highliting was removed.	
+	
+	[v] Logical operators "!" and "~" now behave correctly.
