@@ -18,8 +18,8 @@
 	{ "keys": ["ctrl+shift+down"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": true, "extend": true} },
 	{"keys": ["alt+up"], "command": "swap_line_up"},
 	{"keys": ["alt+down"],"command": "swap_line_down"},
-	{ "keys": ["ctrl+shift+z"], "command": "navigation_history_back"},
-	{ "keys": ["ctrl+shift+y"], "command": "navigation_history_forward"},
+	{ "keys": ["ctrl+shift+z"], "command": "jump_back"},
+	{ "keys": ["ctrl+shift+y"], "command": "jump_forward"},
 	{ "keys": ["ctrl+shift+a"], "command": "expand_selection_to_paragraph" },
 	{ "keys": ["ctrl+shift+d"], "command": "find_all_under" },
 	{ "keys": ["alt+d"], "command": "open_include"},
@@ -29,18 +29,17 @@
 	{ "keys": ["shift+f2"], "command": "sublime_bookmark", "args" : { "type" : "goto_previous" } },
 	{ "keys": ["ctrl+shift+f2"], "command": "sublime_bookmark", "args" : { "type" : "toggle_line"  } },
 	//Power cursor config
-	{ "keys": ["ctrl+space"], "command": "power_cursor_add" },
-	{ "keys": ["ctrl+shift+space"], "command": "power_cursor_activate" },
+	{ "keys": ["ctrl+\\"], "command": "power_cursor_add" },
+	{ "keys": ["ctrl+shift+\\"], "command": "power_cursor_activate" },
 	{ "keys": ["ctrl+shift+q"], "command": "power_cursor_remove" },
 	{ "keys": ["ctrl+."], "command": "power_cursor_select", "args": {"forward": true}},
 	{ "keys": ["ctrl+,"], "command": "power_cursor_select", "args": {"forward": false}},
 	{ "keys": ["ctrl+q"], "command": "single_selection"},
 	// Navigate between files
-	{ "keys": ["alt+r"], "command": "goto_definition" },
 	{ "keys": ["ctrl+tab"], "command": "next_view_in_stack" },
 	{ "keys": ["ctrl+shift+tab"], "command": "prev_view_in_stack" },
-	{ "keys": ["ctrl+pageup"], "command": "next_view" },
-	{ "keys": ["ctrl+pagedown"], "command": "prev_view" },
+	{ "keys": ["ctrl+pageup"], "command": "prev_view" },
+	{ "keys": ["ctrl+pagedown"], "command": "next_view" },
 	{ "keys": ["ctrl+keypad8"], "command": "travel_to_pane", "args": {"direction": "up"} },
 	{ "keys": ["ctrl+keypad6"], "command": "travel_to_pane", "args": {"direction": "right"} },
 	{ "keys": ["ctrl+keypad2"], "command": "travel_to_pane", "args": {"direction": "down"} },
@@ -60,6 +59,7 @@
 	{ "keys": ["ctrl+/"], "command": "toggle_comment", "args": { "block": false } },
 	{ "keys": ["alt+shift+a"], "command": "align_tab", "args" : {"user_input" : "\t"}},
 	{ "keys": ["alt+/"], "command": "insert", "args": {"characters": "/**"} },
+	{ "keys": ["ctrl+enter"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Add Line Before.sublime-macro"} },
 	{
 	"keys": ["ctrl+;"], "command": "run_multiple_commands",
 	"args": {
@@ -69,18 +69,9 @@
 		"args": {"to": "eol", "extend": false}},
 	{"context": "window",
 		"command": "insert",
-		"args": {"characters": ";"}}]
-	}
-	},
-	{ "keys": ["ctrl+k", "ctrl+f"],
-	"command": "run_multiple_commands",
-	"args": {
-	"commands": [
-		{"command": "find_under_expand", "context": "window"},
-		{"command": "slurp_find_string", "context": "window"},
-		{"command": "show_panel", "args": {"panel": "find"}, "context": "window"}
+		"args": {"characters": ";"}}
 	]}},
-		{ "keys": ["ctrl+k", "ctrl+l"],
+	{ "keys": ["ctrl+k", "ctrl+l"],
 	"command": "run_multiple_commands",
 	"args": {
 	"commands": [
@@ -92,6 +83,33 @@
 	},
 	{
 		"keys": ["alt+shift+d"], "command": "reverse_select"
+	},
+	//CTags
+	{
+		"command": "navigate_to_definition",
+		"keys": ["ctrl+t", "ctrl+t"]
+	},
+	{
+		"command": "search_for_definition",
+		"keys": ["ctrl+t", "ctrl+y"]
+	},
+	{
+		"command": "jump_prev",
+		"keys": ["ctrl+t", "ctrl+b"]
+	},
+	{
+		"command": "jump_prev",
+		"keys": ["ctrl+shift+comma"]
+	},
+	{
+		"command": "rebuild_tags",
+		"keys": ["ctrl+t", "ctrl+r"]
+	},
+	{ // override current default
+		"command": "transpose",
+		"context": [
+			{ "key": "num_selections", "operator": "not_equal", "operand": 1 }
+		],
+		"keys": ["ctrl+t"]
 	}
-
 ]
