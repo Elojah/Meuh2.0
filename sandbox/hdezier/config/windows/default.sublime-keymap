@@ -5,6 +5,7 @@
 	{ "keys": ["ctrl+i"], "command": "copy_path" },
 	// Misc
 	{ "keys": ["ctrl+/"], "command": "toggle_comment", "args": { "block": false } },
+	{ "keys": ["ctrl+shift+/"], "command": "toggle_comment", "args": { "block": true } },
 	{ "keys": ["alt+/"], "command": "insert", "args": {"characters": "/**"} },
 	{ "keys": ["alt+shift+a"], "command": "align_tab", "args" : {"user_input" : "\t"}},
 	//_______________________Navigate in file_______________________
@@ -69,8 +70,30 @@
 	// Linter
 	// { "keys": ["ctrl+e"], "command": "sublimelinter_goto_error", "args": {"direction": "next"} },
 	// { "keys": ["ctrl+shift+e"], "command": "sublimelinter_goto_error", "args": {"direction": "previous"} },
-	// ; at eol
+	// Open whole function
+	{
+	"keys": ["alt+]"], "command": "run_multiple_commands",
+	"args": {
+	"commands":
+	[{"context": "window",
+		"command": "expand_selection",
+		"args": {"to": "brackets"} },
+	{"context": "window",
+		"command": "unfold"}
+	]}},
+	{
+	"keys": ["alt+["], "command": "run_multiple_commands",
+	"args": {
+	"commands":
+	[{"context": "window",
+		"command": "expand_selection",
+		"args": {"to": "brackets"} },
+	{"context": "window",
+		"command": "fold"}
+	]}},
+	// Insert EOL previous
 	{ "keys": ["ctrl+enter"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Add Line Before.sublime-macro"} },
+	// ; at eol
 	{
 	"keys": ["ctrl+;"], "command": "run_multiple_commands",
 	"args": {
