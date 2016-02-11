@@ -68,5 +68,5 @@
 	"translate_spaces_to_tabs": true,
 	"use_tab_stops": true,
 	"word_separators": true,
-	"word_wrap": false,
+	"word_wrap": false
 }
