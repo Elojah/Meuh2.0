@@ -6,12 +6,13 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/15 12:58:14 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/15 14:48:53 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/29 07:01:28 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Master.hpp"
 #include "Log.hpp"
+#include "MLog.hpp"
 #include <iostream>
 #include <json/json.h>
 
@@ -19,6 +20,7 @@ Master::Master(void) {
 	Log::write("Init UINcurses ... ");
 	_ui.init();
 	_ui.setTitle("Master");
+	_mods[0] = new MLog("./util/log.txt");
 	Log::write("Init UINcurses ... DONE");
 }
 
@@ -58,15 +60,18 @@ Master::~Master(void) {
 	Log::close();
 }
 
-void			Master::start(void) {
+void			Master::launch(void) {
 	for (int i = 0; i < _nProcs; ++i) {
-		_procs[i].start();
+		_procs[i].launch();
 	}
 }
 
 void			Master::loop(void) {
-	for (int i = 0; i < _nProcs; ++i) {
-		_procs[i].launch();
+	for (int i = 0; i < N_MODULES; ++i) {
+		_mods[i]->init();
+	}
+	while (true) {
+		_mods[0]->update();
 	}
 }
 

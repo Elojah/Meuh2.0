@@ -34,6 +34,7 @@ Process::Process(Process const &src) {
 }
 
 Process::~Process(void) {
+	SOME_DEFINE
 }
 
 void		Process::start(void) {
@@ -57,6 +58,9 @@ void			Process::setParams(Json::Value &params) {
 			tmp[_paramsName[i]] = value.asString();
 		}
 	}
+	/**
+	 * Some comment here
+	 */
 	_params.cmd = tmp["cmd"];
 	_params.workingdir = tmp["workingdir"];
 	_params.autostart = (tmp["autostart"] == "true");

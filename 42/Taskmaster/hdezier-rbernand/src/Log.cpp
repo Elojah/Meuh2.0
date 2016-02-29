@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/15 13:01:29 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/15 14:32:32 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/29 06:36:21 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 const char					Log::logFile[15] = "./util/log.txt";
 std::ofstream				Log::_log(Log::logFile);
-
 
 Log::Log(void) {
 	;

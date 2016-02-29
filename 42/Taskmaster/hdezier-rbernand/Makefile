@@ -26,6 +26,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
+		modules/MLog\
 		Log\
 		Process\
 		jsoncpp\

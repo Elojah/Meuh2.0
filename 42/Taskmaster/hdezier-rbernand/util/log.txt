@@ -12,7 +12,7 @@ umask:	18
 workingdir:	/tmp
 autostart:	1
 autorestart:	unexpected
-exitcodes:	11769504
+exitcodes:	6848752
 startretries:	3
 starttime:	5
 stopsignal:	TERM
@@ -22,3 +22,6 @@ stderr:	./util/thor.txt
 env:	
 STARTED_BY:	taskmaster
 ANSWER:	42
+Command /bin/cat executed
+Exit code:
+_____________________________4357107
