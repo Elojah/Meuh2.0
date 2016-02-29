@@ -8,11 +8,11 @@
 		"42 Headers",
 		"AlignTab",
 		"All Autocomplete",
-		"Better Completion",
 		"BetterFindBuffer",
 		"BracketHighlighter",
 		"C Improved",
 		"C++ Starting Kit",
+		"CTags",
 		"Diffy",
 		"DoxyDoc",
 		"Fold Comments",
@@ -31,6 +31,7 @@
 		"Sublime Bookmarks",
 		"SublimeLinter",
 		"SublimeLinter-cppcheck",
+		"SublimeLinter-cpplint",
 		"Text Pastry",
 		"Ublime Color Schemes"
 	],
@@ -39,7 +40,3 @@
 		"https://github.com/skuroda/ImprovedMacros"
 	]
 }
-
-+ SublimeLinter
-+ Linter dynamique (ClangComplete)
-+ Gitgutter for git
