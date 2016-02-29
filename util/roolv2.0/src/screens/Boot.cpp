@@ -6,12 +6,12 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/14 13:58:16 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/14 14:07:22 by leeios           ###   ########.fr       */
+/*   Updated: 2015/12/30 02:34:21 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Boot.hpp"
-#include "util.hpp"
+#include "utils.hpp"
 #include "Project.hpp"
 #include <fstream>
 #include <iostream>
@@ -65,6 +65,7 @@ void		Boot::sortItems(const int &length) {
 			return (strcmp(lhsName, rhsName) > 0);
 		}
 	};
+
 	std::sort(_menuItems, _menuItems + length, comp);
 }
 
@@ -79,6 +80,13 @@ void		Boot::newProject(ITEM *item) {
 		notifyUser("Project " + path + " failed to build ...");
 		return ;
 	} else {
+		std::string			name(utils::parseClassName(path));
+		const std::map<std::string, std::string> map {
+			{"${NAME}", path}
+		};
+
+		utils::touchFileVariables("./config/models/sublime-project.model"
+			, path + '/' + name + ".sublime-project", map);
 		utils::touchFile("./config/models/Makefile.model", path + "/Makefile");
 		utils::touchFile("./config/models/main.model", path + "/src/main.cpp");
 		notifyUser("Project " + path + " created successfully !");
@@ -89,10 +97,10 @@ void		Boot::newProject(ITEM *item) {
 		} else {
 			proj << path << std::endl;
 		}
-	}
-}
+	}}
 
 void		Boot::openProject(ITEM *item) {
+	// Schema is HARDCODE here, customize like an option with default ?
 	Project			proj(item_description(item), item_name(item));
 
 	proj.run();

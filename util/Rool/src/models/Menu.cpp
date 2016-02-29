@@ -5,7 +5,8 @@
 
 Menu::Menu(void) : Window(),
 					menu(NULL),
-					winMenu(NULL) {
+					winMenu(NULL),
+					sortObject(NULL) {
 	menuItems[0] = NULL;
 }
 
@@ -29,6 +30,9 @@ Menu::~Menu(void) {
 		wrefresh(winMenu);
 		delwin(winMenu);
 	}
+	if (sortObject) {
+		delete sortObject;
+	}
 }
 
 /*
@@ -37,7 +41,7 @@ Menu::~Menu(void) {
 void				Menu::addItem(const std::string &str, void (Menu::*call)(ITEM *)) {
 	ITEM			*tmp;
 
-	if ((tmp = new_item(strdup(str.c_str()), ""))) {
+	if ((tmp = new_item(str.c_str(), ""))) {
 		items[tmp] = call;
 	}
 }
@@ -49,7 +53,7 @@ void		Menu::simpleCreate(const std::string &title, const std::string &up, const 
 	sortObject = new SortItems(up, down);
 	setTitle(title);
 	loop();
-	waitUser();
+	userInput();
 }
 
 void		Menu::sortMenu(size_t length) {
@@ -66,7 +70,7 @@ void		Menu::loop(void) {
 	createMenu();
 }
 
-void			Menu::waitUser(void)
+void			Menu::userInput(void)
 {
 	char			key;
 	Items::iterator	it;
@@ -75,7 +79,7 @@ void			Menu::waitUser(void)
 	while((key = wgetch(win)) != 27)
 	{
 		if (key == 's') {
-		   menu_driver(menu, REQ_DOWN_ITEM);
+			menu_driver(menu, REQ_DOWN_ITEM);
 		} else if (key == 'w') {
 			menu_driver(menu, REQ_UP_ITEM);
 		} else if (key == 10) {
@@ -117,7 +121,7 @@ void			Menu::setMenuItems(void) {
 	size_t		i;
 
 	i = 0;
-	for (Items::iterator it = items.begin(); it != items.end(); it++) {
+	for (Items::iterator it = items.begin(); it != items.end(); ++it) {
 		menuItems[i] = it->first;
 		i++;
 	}

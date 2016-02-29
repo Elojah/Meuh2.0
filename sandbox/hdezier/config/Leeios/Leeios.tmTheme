@@ -100,7 +100,7 @@
 			<key>name</key>
 			<string>Member C++</string>
 			<key>scope</key>
-			<string>member.ccpp</string>
+			<string>member.ccpp, class.scope.ccpp</string>
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
@@ -150,9 +150,22 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>Internal methods</string>
+			<key>scope</key>
+			<string>intern.method.ccpp</string>
+			<key>settings</key>
+			<dict>
+				<key>fontStyle</key>
+				<string>bold</string>
+				<key>foreground</key>
+				<string>#6c71c4</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>Functions</string>
 			<key>scope</key>
-			<string>keyword.other, support.function.builtin, meta.function-call support.type, storage.type.c, storage.type.c++, storage.type.c++11, support.type, support.type.sys-types.c, support.type.pthread.c, support.type.stdint.c, source.c++ meta.class-struct-block.c++ entity.name.type.c++, meta.class-struct.c++ entity.name.type.c++, type-namespace.ccpp</string>
+			<string>keyword.other, support.function.builtin, meta.function-call support.type, storage.type.c, storage.type.c++, storage.type.c++11, support.type, support.type.sys-types.c, support.type.pthread.c, support.type.stdint.c, source.c++ meta.class-struct-block.c++ entity.name.type.c++, meta.class-struct.c++ entity.name.type.c++, type-guess.c++, type-namespace.ccpp</string>
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>

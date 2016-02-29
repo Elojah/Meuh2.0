@@ -6,12 +6,13 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/14 14:59:27 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/14 15:05:27 by leeios           ###   ########.fr       */
+/*   Updated: 2015/09/06 18:57:31 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "InterfaceCmd.hpp"
-#include "util.hpp"
+#include "utils.hpp"
+#include "config.hpp"
 
 InterfaceCmd::InterfaceCmd(const std::string &path) :
 	_path(path) {
@@ -44,8 +45,7 @@ const std::string		InterfaceCmd::exec(const std::string &strCmd) const {
 	};
 
 	utils::touchFileVariables("./config/models/interface.model"
-		, _path + "/include/" + name + ".hpp", map);
+		, _path + '/' + INCLUDE_DIRECTORY + '/' + name + ".hpp", map);
 	return ("New class " + name + " created");
-
 }
 

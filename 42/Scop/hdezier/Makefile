@@ -4,24 +4,24 @@ TARGET = bin/scop
 SRC_DIR = src
 INC_DIR = include
 BUILD_DIR = build
-LIB_DIR =
+LIB_DIR = lib
 
 #Options
-CC = clang
+CC = clang-3.6
 SRC_EXT = .c
 RM = rm -rf
 
 #List classes here
 CLASS = main\
+		init_camera\
 		loop\
 		refresh\
 		render\
-		load_obj\
-		load_bmp\
-		key_callback\
-		mouse_callback\
-		load_shaders\
-		init_camera\
+		load/load_obj\
+		load/load_bmp\
+		load/load_shaders\
+		callback/key_callback\
+		callback/mouse_callback\
 
 #List interfaces here
 INTERFACE = \
@@ -38,20 +38,25 @@ LFLAGS =
 
 #Libs
 LIB_LOCAL = \
-			lib/libft\
-			lib/glfw\
+			$(LIB_DIR)/libft\
+			$(LIB_DIR)/glfw\
 
 LIB_GLOBAL = \
+			pthread\
+			Xxf86vm\
+			Xinerama\
+			Xcursor\
+			Xi\
+			dl\
+			Xrandr\
+			X11\
+			GL\
 			glfw3\
 			ft\
 			m\
 
 LIB_OTHER = \
 			-Llib/glfw/src\
-			-framework OpenGL\
-			-framework Cocoa\
-			-framework IOKit\
-			-framework CoreVideo\
 
 LIBS += $(LIB_OTHER)
 LIBS += $(addprefix -L, $(LIB_LOCAL))
@@ -66,11 +71,11 @@ INC += \
 all : dirbin dirlib $(TARGET)
 
 clean :
-	make clean -C lib/libft
+	make clean -C $(LIB_DIR)/libft
 	$(RM) $(BUILD_DIR)
 
 fclean :
-	make fclean -C lib/libft
+	make fclean -C $(LIB_DIR)/libft
 	$(RM) $(BUILD_DIR) $(TARGET)
 
 re : fclean all
@@ -79,7 +84,7 @@ dirbin:
 	mkdir -p bin
 
 dirlib:
-	make -C lib/libft
+	make -C $(LIB_DIR)/libft
 	sh ./util/install_lib.sh
 
 .PHONY: all clean fclean re

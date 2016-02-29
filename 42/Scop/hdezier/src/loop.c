@@ -2,8 +2,8 @@
 
 static void	set_center_obj(t_object *obj)
 {
-	t_point			max;
-	t_point			min;
+	t_point				max;
+	t_point				min;
 	unsigned int	i;
 
 	max.x = max.y = max.z = i = 0;
@@ -37,6 +37,8 @@ static void	prepare_obj(t_object *obj)
 		, GL_BGR, GL_UNSIGNED_BYTE, obj->bmp.data);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 }
 
 void		loop(t_window *w)
@@ -55,10 +57,10 @@ void		loop(t_window *w)
 	{
 		if ((t = glfwGetTime()) < prev_t + REFRESH_TIME)
 			continue ;
+		glfwPollEvents();
 		prev_t = t;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		render(w);
 		glfwSwapBuffers(w->window);
-		glfwPollEvents();
 	}
 }

@@ -28,15 +28,16 @@ void	createNewFile(std::string const &schema, std::string const &fileName
 	std::ofstream	ofs;
 	std::string		line;
 	std::string		tmp;
-	std::size_t		found;
-	std::size_t		foundEnd;
-	std::size_t		len;
+
 
 	ofs.open((fileName).c_str());
 	while (std::getline(ifs, line))
 	{
+		std::size_t		found;
 		found = 0;
 		while ((found = line.find("${", found)) != std::string::npos) {
+			std::size_t		foundEnd;
+			std::size_t		len;
 			foundEnd = line.find('}', found);
 			len = foundEnd - found + 1;
 			tmp = line.substr(found, len);
@@ -72,10 +73,8 @@ std::string		loopTemplate(const std::string &fileName, loopMap &loopMapName) {
 	std::string		tmp;
 	std::string		lineToAppend;
 	std::string		result;
-	std::size_t		found;
 	std::size_t		foundEnd;
 	std::size_t		len;
-	std::map<std::string, std::string>	toLoop;
 
 	if (ifs.fail()) {
 		return ("[ERROR<File " + fileName + " not found>]");
@@ -87,6 +86,7 @@ std::string		loopTemplate(const std::string &fileName, loopMap &loopMapName) {
 	std::getline(ifs, line, '^');
 	for (std::vector<std::map<std::string, std::string> >::iterator it = loopMapName[loopVar].begin(); it != loopMapName[loopVar].end(); ++it) {
 		/*Same bloc than createnewfile, shortcut ?*/
+		std::size_t		found;
 		lineToAppend = std::string(line);
 		found = 0;
 		while ((found = lineToAppend.find("${", found)) != std::string::npos) {
@@ -127,7 +127,7 @@ void	replaceMapToMap(const std::string &oldFileName, const std::string &newFileN
 	*/
 	while (std::getline(ifs, line))
 	{
-		for (std::map<std::string, std::string>::iterator it = oldMap.begin(); it != oldMap.end(); it++) {
+		for (std::map<std::string, std::string>::iterator it = oldMap.begin(); it != oldMap.end(); ++it) {
 			found = 0;
 			while ((found = line.find(it->second, found)) != std::string::npos) {
 				line.replace(found, it->second.length(), newMap[it->first]);
@@ -174,7 +174,7 @@ std::string		searchInFile(std::string const &fileName, std::string const &str) {
 	std::string		line;
 
 	while (std::getline(ifs, line)) {
-		if (line.find(str)) {
+		if (line.compare(str)) {
 			return (line);
 		}
 	}

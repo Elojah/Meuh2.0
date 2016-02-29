@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/10 20:13:46 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/14 15:51:03 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/14 19:40:21 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "MemberMod.hpp"
 #include "StandardCmd.hpp"
 #include "InterfaceCmd.hpp"
+#include "config.hpp"
 #include <string.h>
 #include <dirent.h>
 #include <algorithm>
@@ -60,12 +61,11 @@ void			ClassMod::createItems(void) {
 
 	addItem("New class", static_cast<Callback>(&ClassMod::newClass));
 	addItem("Return", static_cast<Callback>(&ClassMod::endMenu));
-	if ((dir = opendir((_path + "/include").c_str())) == NULL
-			&& (dir = opendir((_path + "/inc").c_str())) == NULL) {
+	if ((dir = opendir((_path + '/' + INCLUDE_DIRECTORY).c_str())) == nullptr) {
 		notifyUser("Error opening include directory");
 		return ;
 	}
-	while ((ent = readdir(dir)) != NULL) {
+	while ((ent = readdir(dir)) != nullptr) {
 		int				found;
 
 		value = std::string(ent->d_name);

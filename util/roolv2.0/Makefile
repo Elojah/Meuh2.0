@@ -6,7 +6,7 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/07/12 13:51:08 by leeios            #+#    #+#              #
-#    Updated: 2015/08/13 16:56:53 by leeios           ###   ########.fr        #
+#    Updated: 2015/09/06 19:04:14 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,16 +26,17 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		mods/MemberMod\
-		commands/InterfaceCmd\
+				mods/ClassMod\
+					mods/MemberMod\
+				commands/StandardCmd\
+					commands/InterfaceCmd\
 				ncurse/Window\
 					ncurse/Menu\
 				screens/Project\
 					screens/Boot\
 				utils/FtFile\
 					utils/FtStr\
-				mods/ClassMod\
-				commands/StandardCmd\
+				json/jsoncpp
 
 #List interfaces here
 INTERFACE = \

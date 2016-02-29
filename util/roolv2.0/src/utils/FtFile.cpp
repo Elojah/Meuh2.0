@@ -6,11 +6,11 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 12:31:19 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/14 14:50:02 by leeios           ###   ########.fr       */
+/*   Updated: 2015/09/06 19:03:43 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "util.hpp"
+#include "utils.hpp"
 #include <sstream>
 #include <fstream>
 #include <sys/stat.h>
@@ -18,6 +18,13 @@
 #include <string.h>
 
 namespace utils {
+
+bool	makeFolder(const std::string &path) {
+	if (mkdir(path.c_str(), S_IRWXU) < 0) {
+		return (false);
+	}
+	return (true);
+}
 
 bool	makeFolderTree(std::string const &schema, std::string const &path) {
 	std::ifstream	ifs(("./config/proj_tree/" + schema).c_str());

@@ -11,6 +11,9 @@ ClassTemplate::ClassTemplate(std::string const &path) : _path(path) {
 }
 
 ClassTemplate::~ClassTemplate(void) {
+	for (tBehaviors::const_iterator it = _behav.begin(); it != _behav.end(); ++it) {
+		delete (*it);
+	}
 }
 
 std::string						ClassTemplate::create(const std::string &str) {

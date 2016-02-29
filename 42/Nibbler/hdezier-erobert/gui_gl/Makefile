@@ -31,6 +31,7 @@ LIB_GLOBAL = \
 
 LIB_OTHER = \
 			-framework Cocoa\
+			-framework Carbon\
 			-framework OpenGL\
 			-framework IOKit\
 			-framework CoreVideo\

@@ -6,12 +6,13 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/12 12:13:27 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/14 14:55:05 by leeios           ###   ########.fr       */
+/*   Updated: 2015/12/30 02:06:43 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "StandardCmd.hpp"
-#include "util.hpp"
+#include "utils.hpp"
+#include "config.hpp"
 
 StandardCmd::StandardCmd(const std::string &path) :
 	_path(path) {
@@ -47,7 +48,7 @@ const std::string			StandardCmd::exec(const std::string &strCmd) const {
 	utils::touchFileVariables("./config/models/src.model"
 		, _path + "/src/" + dirs + '/' + name + ".cpp", map);
 	utils::touchFileVariables("./config/models/inc.model"
-		, _path + "/include/" + name + ".hpp", map);
+		, _path + '/' + INCLUDE_DIRECTORY + '/' + name + ".hpp", map);
 	utils::addToFile("CLASS", dirs + '/' + name, _path + "/Makefile", false);
 	return ("New class " + name + " created");
 }
