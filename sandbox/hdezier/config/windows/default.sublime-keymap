@@ -33,6 +33,8 @@
 	{ "keys": ["ctrl+shift+a"], "command": "expand_selection_to_paragraph" },
 	{ "keys": ["ctrl+shift+d"], "command": "find_all_under" },
 	{ "keys": ["alt+r"], "command": "open_include"},
+	{ "keys": ["alt+shift+c"], "command": "copy_path" },
+	//{ "keys": ["alt+shift+c"], "command": "copy_file_name" },
 	//_______________________Bookmarks_______________________
 	{ "keys": ["ctrl+shift+f2"], "command": "prev_bookmark" },
 	{ "keys": ["shift+f2"], "command": "next_bookmark" },
@@ -66,7 +68,7 @@
 	// Scope hunter
 	{ "keys" : ["ctrl+k", "ctrl+p"], "command": "get_selection_scope"},
 	// Fold Comments
-	{ "keys": ["alt+shift+c"],  "command": "toggle_fold_comments" },
+//	{ "keys": ["alt+shift+c"],  "command": "toggle_fold_comments" },
 	// Linter
 	// { "keys": ["ctrl+e"], "command": "sublimelinter_goto_error", "args": {"direction": "next"} },
 	// { "keys": ["ctrl+shift+e"], "command": "sublimelinter_goto_error", "args": {"direction": "previous"} },
