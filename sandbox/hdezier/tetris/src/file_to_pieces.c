@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/23 18:49:43 by leeios            #+#    #+#             */
-/*   Updated: 2015/12/27 18:01:22 by leeios           ###   ########.fr       */
+/*   Updated: 2015/12/31 17:53:37 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ static t_error	is_valid_piece_four_consecutive(t_piece *piece)
 				if (consecutive_bloc(piece, i, j, &check_mask) == SIZE_PIECE)
 					return (NONE);
 				else
-					return (FILE_INVALID);
+					return (NO_FOUR_IN_A_ROW);
 			}
 		}
 	}
-	return (FILE_INVALID);
+	return (NO_FOUR_IN_A_ROW);
 }
 
 static t_error	convert_piece(t_piece *piece, char *s)
@@ -73,40 +73,39 @@ static t_error	convert_piece(t_piece *piece, char *s)
 		{
 			n = i * (SIZE_PIECE + 1) + j;
 			if (s[n] != '#' && s[n] != '.')
-				return (FILE_INVALID);
+				return (UNKNOWN_CHAR);
 			piece->data[i][j] = s[n] == '#' ? BLOC : EMPTY;
 		}
 		if (s[i * (SIZE_PIECE + 1) + j] != '\n'
 			&& s[i * (SIZE_PIECE + 1) + j] != '\0')
-			return (FILE_INVALID);
+			return (BAD_SEPARATION);
 	}
 	return (is_valid_piece_four_consecutive(piece));
 }
 
-static t_error	read_loop(t_result *result, int fd)
+static t_error	read_loop(t_array_piece *array, int fd)
 {
 	int		reader;
 	int		buf_size = SIZE_PIECE * (SIZE_PIECE + 1) + 1;
 	char	buffer[SIZE_PIECE * (SIZE_PIECE + 1) + 1];
-	t_piece	piece;
 	int		n;
 
 	n = 0;
 	while ((reader = read(fd, buffer, buf_size)) != 0)
 	{
 		buffer[reader] = '\0';
-		exit_with_error(convert_piece(&piece, buffer));
-		exit_with_error(add_piece_to_result(result, &piece, n++));
+		exit_with_error(convert_piece(&(array->data[n++]), buffer));
+		++array->size;
 	}
 	return (NONE);
 }
 
-t_error		file_to_pieces(t_result *result, char *file_name)
+t_error		file_to_pieces(t_array_piece *array, char *file_name)
 {
 	int		fd;
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		return (READING_ERROR);
-	return (read_loop(result, fd));
+	return (read_loop(array, fd));
 }
