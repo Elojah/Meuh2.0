@@ -6,11 +6,12 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/14 15:24:43 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/14 15:48:50 by leeios           ###   ########.fr       */
+/*   Updated: 2015/08/14 19:40:28 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MemberMod.hpp"
+#include "config.hpp"
 #include <fstream>
 #include <algorithm>
 #include <string.h>
@@ -52,7 +53,7 @@ void		MemberMod::createItems(void) {
 	std::string		access;
 	size_t				count;
 
-	line = _path + "/include/" + _name + ".hpp";
+	line = _path + '/' + INCLUDE_DIRECTORY + '/' + _name + ".hpp";
 	access = "";
 	count = 0;
 	ifs.open(line.c_str());

@@ -6,11 +6,11 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/13 16:09:05 by leeios            #+#    #+#             */
-/*   Updated: 2015/08/14 19:25:49 by leeios           ###   ########.fr       */
+/*   Updated: 2015/09/06 18:57:16 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "util.hpp"
+#include "utils.hpp"
 #include <stdlib.h>
 #include <strings.h>
 #include <cstring>
@@ -70,27 +70,26 @@ namespace utils {
 
 		toFree = strdup(str.substr(found + 1).c_str());
 		pch = std::strtok(toFree,",");
-		while (pch != NULL) {
-			std::string		line(pch);
-			size_t				found(line.find_first_not_of(' '));
-			std::size_t		foundEnd(line.find(' ', found));
+		while (pch != nullptr) {
+			std::string		tok(pch);
+			size_t				found(tok.find_first_not_of(' '));
+			std::size_t		foundEnd(tok.find(' ', found + 1));
 
 			if (found == std::string::npos) {
-				pch = std::strtok(NULL,",");
+				pch = std::strtok(nullptr,",");
 				continue ;
 			} else if (foundEnd == std::string::npos) {
 				tmp["${PERMISSION}"] = "public";
 			} else {
-				tmp["${PERMISSION}"] = line.substr(found, foundEnd - found);
-				found = line.find_first_not_of(' ', foundEnd);
+				tmp["${PERMISSION}"] = tok.substr(found, foundEnd - found);
+				found = tok.find_first_not_of(' ', foundEnd + 1);
 			}
-			tmp["${NAME}"] = line.substr(found, line.find(' ', found) - found);
+			tmp["${NAME}"] = tok.substr(found, tok.length() - found);
 			result.push_back(std::map<std::string, std::string>(tmp));
 			tmp.clear();
-			pch = std::strtok(NULL,",");
+			pch = std::strtok(nullptr,",");
 		}
 		free(toFree);
-
 		return (result);
 	}
 

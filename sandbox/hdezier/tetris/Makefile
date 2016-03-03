@@ -15,10 +15,10 @@ RM = rm -rf
 CLASS = main\
 				error\
 				file_to_pieces\
-				add_piece_to_result\
+				resolve\
+				fill_result_in_size\
+				calculus_dead_blocks\
 				print_pieces\
-				lib_rect\
-				grow_rect_with_piece\
 
 #List interfaces here
 INTERFACE = \

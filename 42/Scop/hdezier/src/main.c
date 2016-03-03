@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/07/09 17:20:09 by leeios            #+#    #+#             */
+/*   Updated: 2015/07/09 18:28:23 by leeios           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "scop.h"
 #include "libft.h"
 #include <stdlib.h>
@@ -51,7 +63,7 @@ static void		destroy_obj(t_object *obj)
 
 static void		init_window(t_window *w)
 {
-	ft_exit(!glfwInit(), "init glfw");
+	ft_exit(!glfwInit(), "Error init glfw");
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -61,9 +73,9 @@ static void		init_window(t_window *w)
 	glfwSetWindowUserPointer(w->window, w);
 	glfwSetInputMode(w->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSwapInterval(1);
+	glClearColor(0.2, 0.2, 0.2, 0.2);
 	glfwSetKeyCallback(w->window, key_callback);
 	glfwSetCursorPosCallback(w->window, mouse_callback);
-	glClearColor(0.2, 0.2, 0.2, 0.2);
 }
 
 static void		destroy_window(t_window *w)

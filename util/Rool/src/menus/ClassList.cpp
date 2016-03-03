@@ -8,7 +8,6 @@
 #include <algorithm>
 #include <fstream>
 
-
 ClassList::ClassList(void) {
 }
 
@@ -20,14 +19,14 @@ ClassList::~ClassList(void) {
 
 void		ClassList::sortMenu(size_t length) {
 	SortItems	sortObject0("New class", "Return");
-	SortItems	sortObject1("New lib", "");
+	SortItems	sortObject1("New lib", "")
 
 	std::sort(menuItems, menuItems + length, sortObject0);
 	std::sort(&(menuItems[1]), &(menuItems[1]) + length - 2, sortObject1);
 }
 
 void		ClassList::init(const std::string &path, const std::string &name) {
-	_path = path;
+	_path = path
 	_name = name;
 	simpleCreate("Classes", "", "");
 }
@@ -36,12 +35,13 @@ void		ClassList::createItems(void) {
 	DIR				*dir;
 	struct dirent	*ent;
 	std::string		value;
-	int				found;
 
 	if ((dir = opendir((_path + "/include").c_str())) == NULL) {
 		return ;
 	}
 	while ((ent = readdir(dir)) != NULL) {
+		int				found;
+
 		value = std::string(ent->d_name);
 		found = value.find_last_of(".");
 		if (value.compare(found + 1, value.size(), "hpp") == 0
@@ -60,7 +60,7 @@ void		ClassList::createItems(void) {
 */
 void		ClassList::newClass(ITEM *item) {
 	std::string		className;
-	ClassTemplate	tpl(_path);
+	ClassTemplate	tpl(_path)
 
 	(void)item;
 	className = readUser();

@@ -8,7 +8,6 @@
 
     "settings":
     {
-        // if "cc_include_options" exists in your project settings, it'll override rather than add to the "include_options" defined in cc.sublime-settings.
         "cc_include_options":
         [
             "-I${project_path}/include",

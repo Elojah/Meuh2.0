@@ -22,7 +22,7 @@ void		Boot::createItems(void)
 {
 	std::ifstream	ifs("./config/.proj");
 	std::string		line;
-	char			*tmp;
+	char					*tmp;
 
 	if (ifs.fail()) {
 		std::cout << "Error: File ./config/.proj doesn't exist." << std::endl;
@@ -45,18 +45,12 @@ void		Boot::createItems(void)
 **Callbacks
 */
 void		Boot::newProject(ITEM *item) {
-	std::string		projName;
-	std::ofstream	ofs("./config/.proj", std::ios::app);
-	std::map<std::string, std::string>	tmpMap;
-	loopMap								tmpLoopMap;
+	std::string	path(readUser());
 
-	(void)item;
-	projName = readUser();
-	createArbo("project", projName, "");
-	createNewFile("Makefile", projName + "/Makefile", tmpMap, tmpLoopMap);
-	ofs << projName << std::endl;
-	ofs.close();
-	notifyUser("Project " + projName + " created successfully !");
+	if (!utils::makeFolderTree("classic.tree", path)) {
+		notifyUser("Project " + path + " failed to build ...");
+	}
+	notifyUser("Project " + path + " created successfully !");
 }
 
 void		Boot::openProject(ITEM *item) {

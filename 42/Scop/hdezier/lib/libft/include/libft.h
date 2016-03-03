@@ -94,6 +94,7 @@ void				ft_exit(int test, char *error_msg);
 int					get_next_line(const int fd, char **line);
 float				ft_atof(const char *str);
 char				*ft_goto_next(const char *line, char c);
+char				*ft_goto_next_digit(const char *line);
 unsigned int		ft_uatoi(const char *str);
 
 #endif
