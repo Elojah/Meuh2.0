@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 18:16:02 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/03 20:15:20 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/04 18:01:01 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@
 enum class		eTokenType
 {
 	COMMENT = 0,
+	PRIORITIES,
 	ENTITY,
+	NEGATION,
+	OPERATOR,
+	OPERAND,
+	CONTEXTMARK,
 	N_TOKEN_TYPE
 };
 
