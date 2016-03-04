@@ -4,6 +4,82 @@
 		"selected_items":
 		[
 			[
+				"symbo",
+				"symbolIm"
+			],
+			[
+				"min",
+				"min(const _Tp &__a, const _Tp &__b, _Compare __comp)	const _Tp &"
+			],
+			[
+				"find",
+				"find_first_of(char __c) const	size_type"
+			],
+			[
+				"size",
+				"sizeToCompare"
+			],
+			[
+				"_is",
+				"_isCtxMarkSymbol	(TContextMark.hpp)"
+			],
+			[
+				"Toper",
+				"TOperand"
+			],
+			[
+				"TOpera",
+				"TOperand	(TOperand.cpp)"
+			],
+			[
+				"to",
+				"to_string(long double __val)	string"
+			],
+			[
+				"else",
+				"else if (condition) {\nstatements\n}	KeyWord"
+			],
+			[
+				"isal",
+				"isalnum(_CharT __c, const std::locale &__loc)	bool"
+			],
+			[
+				"mall",
+				"m_allTokens	const IToken *[2]"
+			],
+			[
+				"back",
+				"back() const	const_reference"
+			],
+			[
+				"tok",
+				"tok_indexes	Typedef"
+			],
+			[
+				"uin",
+				"uint8_t	Typedef"
+			],
+			[
+				"m_",
+				"m_allTokens"
+			],
+			[
+				"curr",
+				"currentToken"
+			],
+			[
+				"N",
+				"N_TOKEN_TYPE	(Parser.hpp)"
+			],
+			[
+				"TOKE",
+				"TokenBase	class"
+			],
+			[
+				"Toke",
+				"TokenCreator"
+			],
+			[
 				"stream",
 				"istringstream	Typedef"
 			],
@@ -184,10 +260,6 @@
 				"touchFileVariables	(FtFile.cpp)"
 			],
 			[
-				"size",
-				"size_t	(FtStr.cpp)"
-			],
-			[
 				"ifs",
 				"ifstream	Typedef"
 			],
@@ -270,10 +342,6 @@
 			[
 				"gl",
 				"glyphicon-chevron-right"
-			],
-			[
-				"to",
-				"toDOM"
 			],
 			[
 				"inn",
@@ -446,92 +514,48 @@
 			[
 				"HE",
 				"HEIGHT_MAP"
-			],
-			[
-				"vec",
-				"vec3"
-			],
-			[
-				"Vertexs",
-				"VertexSourcePointer"
-			],
-			[
-				"Compl",
-				"Compiling"
-			],
-			[
-				"_pro",
-				"_progID"
-			],
-			[
-				"excep",
-				"except"
-			],
-			[
-				"tok",
-				"tokenMask"
-			],
-			[
-				"r",
-				"_readTokens"
-			],
-			[
-				"empty",
-				"emptyWord"
-			],
-			[
-				"inc",
-				"inc	#include \"…\""
-			],
-			[
-				"X11",
-				"X11Win"
-			],
-			[
-				"final",
-				"finalMap"
-			],
-			[
-				"isI",
-				"isInterface"
-			],
-			[
-				"fou",
-				"foundEnd"
-			],
-			[
-				"_v",
-				"_vertexBuffer"
-			],
-			[
-				"Vertexsh",
-				"VertexShaderCode"
-			],
-			[
-				"verb",
-				"_vertexbuffer"
-			],
-			[
-				"conte",
-				"context_attribs"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/main.cpp",
+			"file": "src/Parser.cpp",
 			"settings":
 			{
-				"buffer_size": 427,
+				"buffer_size": 3303,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/Parser.cpp",
+			"file": "src/Tokens/TComment.cpp",
 			"settings":
 			{
-				"buffer_size": 81,
+				"buffer_size": 1457,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Tokens/TPriorities.cpp",
+			"settings":
+			{
+				"buffer_size": 1587,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Tokens/TEntity.cpp",
+			"settings":
+			{
+				"buffer_size": 1472,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/TOperator.hpp",
+			"settings":
+			{
+				"buffer_size": 1343,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,23 +563,31 @@
 			"file": "include/Parser.hpp",
 			"settings":
 			{
-				"buffer_size": 133,
+				"buffer_size": 1368,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "include/Error.hpp",
+			"file": "include/TPriorities.hpp",
 			"settings":
 			{
-				"buffer_size": 246,
+				"buffer_size": 1345,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/Error.cpp",
+			"file": "test/test0.rl",
 			"settings":
 			{
-				"buffer_size": 400,
+				"buffer_size": 721,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 1574,
 				"line_ending": "Unix"
 			}
 		},
@@ -574,19 +606,6 @@
 				"buffer_size": 16218,
 				"line_ending": "Unix"
 			}
-		},
-		{
-			"contents": "[\n	{ \"keys\": [\"ctrl+q\"], \"command\": \"exit\" },\n\n	{ \"keys\": [\"ctrl+shift+n\"], \"command\": \"new_window\" },\n	{ \"keys\": [\"ctrl+shift+w\"], \"command\": \"close_window\" },\n	{ \"keys\": [\"ctrl+o\"], \"command\": \"prompt_open_file\" },\n	{ \"keys\": [\"ctrl+shift+t\"], \"command\": \"reopen_last_file\" },\n	{ \"keys\": [\"alt+o\"], \"command\": \"switch_file\", \"args\": {\"extensions\": [\"cpp\", \"cxx\", \"cc\", \"c\", \"hpp\", \"hxx\", \"hh\", \"h\", \"ipp\", \"inl\", \"m\", \"mm\"]} },\n	{ \"keys\": [\"ctrl+n\"], \"command\": \"new_file\" },\n	{ \"keys\": [\"ctrl+s\"], \"command\": \"save\" },\n	{ \"keys\": [\"ctrl+shift+s\"], \"command\": \"prompt_save_as\" },\n	{ \"keys\": [\"ctrl+f4\"], \"command\": \"close_file\" },\n	{ \"keys\": [\"ctrl+w\"], \"command\": \"close\" },\n\n	{ \"keys\": [\"ctrl+k\", \"ctrl+b\"], \"command\": \"toggle_side_bar\" },\n	{ \"keys\": [\"f11\"], \"command\": \"toggle_full_screen\" },\n	{ \"keys\": [\"shift+f11\"], \"command\": \"toggle_distraction_free\" },\n\n	{ \"keys\": [\"backspace\"], \"command\": \"left_delete\" },\n	{ \"keys\": [\"shift+backspace\"], \"command\": \"left_delete\" },\n	{ \"keys\": [\"ctrl+shift+backspace\"], \"command\": \"left_delete\" },\n	{ \"keys\": [\"delete\"], \"command\": \"right_delete\" },\n	{ \"keys\": [\"enter\"], \"command\": \"insert\", \"args\": {\"characters\": \"\\n\"} },\n	{ \"keys\": [\"shift+enter\"], \"command\": \"insert\", \"args\": {\"characters\": \"\\n\"} },\n	{ \"keys\": [\"keypad_enter\"], \"command\": \"insert\", \"args\": {\"characters\": \"\\n\"} },\n	{ \"keys\": [\"shift+keypad_enter\"], \"command\": \"insert\", \"args\": {\"characters\": \"\\n\"} },\n\n	{ \"keys\": [\"ctrl+z\"], \"command\": \"undo\" },\n	{ \"keys\": [\"ctrl+shift+z\"], \"command\": \"redo\" },\n	{ \"keys\": [\"ctrl+y\"], \"command\": \"redo_or_repeat\" },\n	{ \"keys\": [\"ctrl+u\"], \"command\": \"soft_undo\" },\n	{ \"keys\": [\"ctrl+shift+u\"], \"command\": \"soft_redo\" },\n\n	{ \"keys\": [\"shift+delete\"], \"command\": \"cut\" },\n	{ \"keys\": [\"ctrl+insert\"], \"command\": \"copy\" },\n	{ \"keys\": [\"shift+insert\"], \"command\": \"paste\" },\n\n	// These two key bindings should replace the above three if you'd prefer\n	// the traditional X11 behavior of shift+insert pasting from the primary\n	// selection. The above CUA keys are the default, to match most GTK\n	// applications.\n	//{ \"keys\": [\"shift+insert\"], \"command\": \"paste\", \"args\": {\"clipboard\": \"selection\"} },\n	//{ \"keys\": [\"shift+delete\"], \"command\": \"right_delete\" },\n\n	{ \"keys\": [\"ctrl+x\"], \"command\": \"cut\" },\n	{ \"keys\": [\"ctrl+c\"], \"command\": \"copy\" },\n	{ \"keys\": [\"ctrl+v\"], \"command\": \"paste\" },\n	{ \"keys\": [\"ctrl+shift+v\"], \"command\": \"paste_and_indent\" },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+v\"], \"command\": \"paste_from_history\" },\n\n	{ \"keys\": [\"left\"], \"command\": \"move\", \"args\": {\"by\": \"characters\", \"forward\": false} },\n	{ \"keys\": [\"right\"], \"command\": \"move\", \"args\": {\"by\": \"characters\", \"forward\": true} },\n	{ \"keys\": [\"up\"], \"command\": \"move\", \"args\": {\"by\": \"lines\", \"forward\": false} },\n	{ \"keys\": [\"down\"], \"command\": \"move\", \"args\": {\"by\": \"lines\", \"forward\": true} },\n	{ \"keys\": [\"shift+left\"], \"command\": \"move\", \"args\": {\"by\": \"characters\", \"forward\": false, \"extend\": true} },\n	{ \"keys\": [\"shift+right\"], \"command\": \"move\", \"args\": {\"by\": \"characters\", \"forward\": true, \"extend\": true} },\n	{ \"keys\": [\"shift+up\"], \"command\": \"move\", \"args\": {\"by\": \"lines\", \"forward\": false, \"extend\": true} },\n	{ \"keys\": [\"shift+down\"], \"command\": \"move\", \"args\": {\"by\": \"lines\", \"forward\": true, \"extend\": true} },\n\n	{ \"keys\": [\"ctrl+left\"], \"command\": \"move\", \"args\": {\"by\": \"words\", \"forward\": false} },\n	{ \"keys\": [\"ctrl+right\"], \"command\": \"move\", \"args\": {\"by\": \"word_ends\", \"forward\": true} },\n	{ \"keys\": [\"ctrl+shift+left\"], \"command\": \"move\", \"args\": {\"by\": \"words\", \"forward\": false, \"extend\": true} },\n	{ \"keys\": [\"ctrl+shift+right\"], \"command\": \"move\", \"args\": {\"by\": \"word_ends\", \"forward\": true, \"extend\": true} },\n\n	{ \"keys\": [\"alt+left\"], \"command\": \"move\", \"args\": {\"by\": \"subwords\", \"forward\": false} },\n	{ \"keys\": [\"alt+right\"], \"command\": \"move\", \"args\": {\"by\": \"subword_ends\", \"forward\": true} },\n	{ \"keys\": [\"alt+shift+left\"], \"command\": \"move\", \"args\": {\"by\": \"subwords\", \"forward\": false, \"extend\": true} },\n	{ \"keys\": [\"alt+shift+right\"], \"command\": \"move\", \"args\": {\"by\": \"subword_ends\", \"forward\": true, \"extend\": true} },\n\n	{ \"keys\": [\"alt+shift+up\"], \"command\": \"select_lines\", \"args\": {\"forward\": false} },\n	{ \"keys\": [\"alt+shift+down\"], \"command\": \"select_lines\", \"args\": {\"forward\": true} },\n\n	{ \"keys\": [\"pageup\"], \"command\": \"move\", \"args\": {\"by\": \"pages\", \"forward\": false} },\n	{ \"keys\": [\"pagedown\"], \"command\": \"move\", \"args\": {\"by\": \"pages\", \"forward\": true} },\n	{ \"keys\": [\"shift+pageup\"], \"command\": \"move\", \"args\": {\"by\": \"pages\", \"forward\": false, \"extend\": true} },\n	{ \"keys\": [\"shift+pagedown\"], \"command\": \"move\", \"args\": {\"by\": \"pages\", \"forward\": true, \"extend\": true} },\n\n	{ \"keys\": [\"home\"], \"command\": \"move_to\", \"args\": {\"to\": \"bol\", \"extend\": false} },\n	{ \"keys\": [\"end\"], \"command\": \"move_to\", \"args\": {\"to\": \"eol\", \"extend\": false} },\n	{ \"keys\": [\"shift+home\"], \"command\": \"move_to\", \"args\": {\"to\": \"bol\", \"extend\": true} },\n	{ \"keys\": [\"shift+end\"], \"command\": \"move_to\", \"args\": {\"to\": \"eol\", \"extend\": true} },\n	{ \"keys\": [\"ctrl+home\"], \"command\": \"move_to\", \"args\": {\"to\": \"bof\", \"extend\": false} },\n	{ \"keys\": [\"ctrl+end\"], \"command\": \"move_to\", \"args\": {\"to\": \"eof\", \"extend\": false} },\n	{ \"keys\": [\"ctrl+shift+home\"], \"command\": \"move_to\", \"args\": {\"to\": \"bof\", \"extend\": true} },\n	{ \"keys\": [\"ctrl+shift+end\"], \"command\": \"move_to\", \"args\": {\"to\": \"eof\", \"extend\": true} },\n\n	{ \"keys\": [\"ctrl+up\"], \"command\": \"scroll_lines\", \"args\": {\"amount\": 1.0 } },\n	{ \"keys\": [\"ctrl+down\"], \"command\": \"scroll_lines\", \"args\": {\"amount\": -1.0 } },\n\n	{ \"keys\": [\"ctrl+pagedown\"], \"command\": \"next_view\" },\n	{ \"keys\": [\"ctrl+pageup\"], \"command\": \"prev_view\" },\n\n	{ \"keys\": [\"ctrl+tab\"], \"command\": \"next_view_in_stack\" },\n	{ \"keys\": [\"ctrl+shift+tab\"], \"command\": \"prev_view_in_stack\" },\n\n	{ \"keys\": [\"ctrl+a\"], \"command\": \"select_all\" },\n	{ \"keys\": [\"ctrl+shift+l\"], \"command\": \"split_selection_into_lines\" },\n	{ \"keys\": [\"escape\"], \"command\": \"single_selection\", \"context\":\n		[\n			{ \"key\": \"num_selections\", \"operator\": \"not_equal\", \"operand\": 1 }\n		]\n	},\n	{ \"keys\": [\"escape\"], \"command\": \"clear_fields\", \"context\":\n		[\n			{ \"key\": \"has_next_field\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"escape\"], \"command\": \"clear_fields\", \"context\":\n		[\n			{ \"key\": \"has_prev_field\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"escape\"], \"command\": \"hide_panel\", \"args\": {\"cancel\": true},\n		\"context\":\n		[\n			{ \"key\": \"panel_visible\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"escape\"], \"command\": \"hide_overlay\", \"context\":\n		[\n			{ \"key\": \"overlay_visible\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"escape\"], \"command\": \"hide_popup\", \"context\":\n		[\n			{ \"key\": \"popup_visible\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"escape\"], \"command\": \"hide_auto_complete\", \"context\":\n		[\n			{ \"key\": \"auto_complete_visible\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n\n	{ \"keys\": [\"tab\"], \"command\": \"insert_best_completion\", \"args\": {\"default\": \"\\t\", \"exact\": true} },\n	{ \"keys\": [\"tab\"], \"command\": \"insert_best_completion\", \"args\": {\"default\": \"\\t\", \"exact\": false},\n		\"context\":\n		[\n			{ \"key\": \"setting.tab_completion\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"not_regex_match\", \"operand\": \".*\\\\b[0-9]+$\", \"match_all\": true },\n		]\n	},\n	{ \"keys\": [\"tab\"], \"command\": \"replace_completion_with_next_completion\", \"context\":\n		[\n			{ \"key\": \"last_command\", \"operator\": \"equal\", \"operand\": \"insert_best_completion\" },\n			{ \"key\": \"setting.tab_completion\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"tab\"], \"command\": \"reindent\", \"context\":\n		[\n			{ \"key\": \"setting.auto_indent\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_match\", \"operand\": \"^$\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_match\", \"operand\": \"^$\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"tab\"], \"command\": \"indent\", \"context\":\n		[\n			{ \"key\": \"text\", \"operator\": \"regex_contains\", \"operand\": \"\\n\" }\n		]\n	},\n	{ \"keys\": [\"tab\"], \"command\": \"next_field\", \"context\":\n		[\n			{ \"key\": \"has_next_field\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"tab\"], \"command\": \"commit_completion\", \"context\":\n		[\n			{ \"key\": \"auto_complete_visible\" },\n			{ \"key\": \"setting.auto_complete_commit_on_tab\" }\n		]\n	},\n\n	{ \"keys\": [\"shift+tab\"], \"command\": \"insert\", \"args\": {\"characters\": \"\\t\"} },\n	{ \"keys\": [\"shift+tab\"], \"command\": \"unindent\", \"context\":\n		[\n			{ \"key\": \"setting.shift_tab_unindent\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"shift+tab\"], \"command\": \"unindent\", \"context\":\n		[\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_match\", \"operand\": \"^[\\t ]*\" }\n		]\n	},\n	{ \"keys\": [\"shift+tab\"], \"command\": \"unindent\", \"context\":\n		[\n			{ \"key\": \"text\", \"operator\": \"regex_contains\", \"operand\": \"\\n\" }\n		]\n	},\n	{ \"keys\": [\"shift+tab\"], \"command\": \"prev_field\", \"context\":\n		[\n			{ \"key\": \"has_prev_field\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n\n	{ \"keys\": [\"ctrl+]\"], \"command\": \"indent\" },\n	{ \"keys\": [\"ctrl+[\"], \"command\": \"unindent\" },\n\n	{ \"keys\": [\"insert\"], \"command\": \"toggle_overwrite\" },\n\n	{ \"keys\": [\"ctrl+l\"], \"command\": \"expand_selection\", \"args\": {\"to\": \"line\"} },\n	{ \"keys\": [\"ctrl+d\"], \"command\": \"find_under_expand\" },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+d\"], \"command\": \"find_under_expand_skip\" },\n	{ \"keys\": [\"ctrl+shift+space\"], \"command\": \"expand_selection\", \"args\": {\"to\": \"scope\"} },\n	{ \"keys\": [\"ctrl+shift+m\"], \"command\": \"expand_selection\", \"args\": {\"to\": \"brackets\"} },\n	{ \"keys\": [\"ctrl+m\"], \"command\": \"move_to\", \"args\": {\"to\": \"brackets\"} },\n	{ \"keys\": [\"ctrl+shift+j\"], \"command\": \"expand_selection\", \"args\": {\"to\": \"indentation\"} },\n	{ \"keys\": [\"ctrl+shift+a\"], \"command\": \"expand_selection\", \"args\": {\"to\": \"tag\"} },\n\n	{ \"keys\": [\"alt+.\"], \"command\": \"close_tag\" },\n\n	{ \"keys\": [\"ctrl+alt+q\"], \"command\": \"toggle_record_macro\" },\n	{ \"keys\": [\"ctrl+alt+shift+q\"], \"command\": \"run_macro\" },\n\n	{ \"keys\": [\"ctrl+enter\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Add Line.sublime-macro\"} },\n	{ \"keys\": [\"ctrl+shift+enter\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Add Line Before.sublime-macro\"} },\n	{ \"keys\": [\"enter\"], \"command\": \"commit_completion\", \"context\":\n		[\n			{ \"key\": \"auto_complete_visible\" },\n			{ \"key\": \"setting.auto_complete_commit_on_tab\", \"operand\": false }\n		]\n	},\n\n	{ \"keys\": [\"ctrl+p\"], \"command\": \"show_overlay\", \"args\": {\"overlay\": \"goto\", \"show_files\": true} },\n	{ \"keys\": [\"ctrl+shift+p\"], \"command\": \"show_overlay\", \"args\": {\"overlay\": \"command_palette\"} },\n	{ \"keys\": [\"ctrl+alt+p\"], \"command\": \"prompt_select_workspace\" },\n	{ \"keys\": [\"ctrl+r\"], \"command\": \"show_overlay\", \"args\": {\"overlay\": \"goto\", \"text\": \"@\"} },\n	{ \"keys\": [\"ctrl+g\"], \"command\": \"show_overlay\", \"args\": {\"overlay\": \"goto\", \"text\": \":\"} },\n	{ \"keys\": [\"ctrl+;\"], \"command\": \"show_overlay\", \"args\": {\"overlay\": \"goto\", \"text\": \"#\"} },\n	{ \"keys\": [\"f12\"], \"command\": \"goto_definition\" },\n	{ \"keys\": [\"ctrl+shift+r\"], \"command\": \"goto_symbol_in_project\" },\n	{ \"keys\": [\"alt+-\"], \"command\": \"jump_back\" },\n	{ \"keys\": [\"alt+shift+-\"], \"command\": \"jump_forward\" },\n	{ \"keys\": [\"alt+keypad_minus\"], \"command\": \"jump_back\" },\n	{ \"keys\": [\"alt+shift+keypad_minus\"], \"command\": \"jump_forward\" },\n\n	{ \"keys\": [\"ctrl+i\"], \"command\": \"show_panel\", \"args\": {\"panel\": \"incremental_find\", \"reverse\": false} },\n	{ \"keys\": [\"ctrl+shift+i\"], \"command\": \"show_panel\", \"args\": {\"panel\": \"incremental_find\", \"reverse\": true} },\n	{ \"keys\": [\"ctrl+f\"], \"command\": \"show_panel\", \"args\": {\"panel\": \"find\", \"reverse\": false} },\n	{ \"keys\": [\"ctrl+h\"], \"command\": \"show_panel\", \"args\": {\"panel\": \"replace\", \"reverse\": false} },\n	{ \"keys\": [\"ctrl+shift+h\"], \"command\": \"replace_next\" },\n	{ \"keys\": [\"f3\"], \"command\": \"find_next\" },\n	{ \"keys\": [\"shift+f3\"], \"command\": \"find_prev\" },\n	{ \"keys\": [\"ctrl+f3\"], \"command\": \"find_under\" },\n	{ \"keys\": [\"ctrl+shift+f3\"], \"command\": \"find_under_prev\" },\n	{ \"keys\": [\"alt+f3\"], \"command\": \"find_all_under\" },\n	{ \"keys\": [\"ctrl+e\"], \"command\": \"slurp_find_string\" },\n	{ \"keys\": [\"ctrl+shift+e\"], \"command\": \"slurp_replace_string\" },\n	{ \"keys\": [\"ctrl+shift+f\"], \"command\": \"show_panel\", \"args\": {\"panel\": \"find_in_files\"} },\n	{ \"keys\": [\"f4\"], \"command\": \"next_result\" },\n	{ \"keys\": [\"shift+f4\"], \"command\": \"prev_result\" },\n\n	{ \"keys\": [\"f6\"], \"command\": \"toggle_setting\", \"args\": {\"setting\": \"spell_check\"} },\n	{ \"keys\": [\"ctrl+f6\"], \"command\": \"next_misspelling\" },\n	{ \"keys\": [\"ctrl+shift+f6\"], \"command\": \"prev_misspelling\" },\n\n	{ \"keys\": [\"ctrl+shift+up\"], \"command\": \"swap_line_up\" },\n	{ \"keys\": [\"ctrl+shift+down\"], \"command\": \"swap_line_down\" },\n\n	{ \"keys\": [\"ctrl+backspace\"], \"command\": \"delete_word\", \"args\": { \"forward\": false } },\n	{ \"keys\": [\"ctrl+shift+backspace\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete to Hard BOL.sublime-macro\"} },\n\n	{ \"keys\": [\"ctrl+delete\"], \"command\": \"delete_word\", \"args\": { \"forward\": true } },\n	{ \"keys\": [\"ctrl+shift+delete\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete to Hard EOL.sublime-macro\"} },\n\n	{ \"keys\": [\"ctrl+/\"], \"command\": \"toggle_comment\", \"args\": { \"block\": false } },\n	{ \"keys\": [\"ctrl+shift+/\"], \"command\": \"toggle_comment\", \"args\": { \"block\": true } },\n\n	{ \"keys\": [\"ctrl+j\"], \"command\": \"join_lines\" },\n	{ \"keys\": [\"ctrl+shift+d\"], \"command\": \"duplicate_line\" },\n\n	{ \"keys\": [\"ctrl+`\"], \"command\": \"show_panel\", \"args\": {\"panel\": \"console\", \"toggle\": true} },\n\n	{ \"keys\": [\"alt+/\"], \"command\": \"auto_complete\" },\n	{ \"keys\": [\"alt+/\"], \"command\": \"replace_completion_with_auto_complete\", \"context\":\n		[\n			{ \"key\": \"last_command\", \"operator\": \"equal\", \"operand\": \"insert_best_completion\" },\n			{ \"key\": \"auto_complete_visible\", \"operator\": \"equal\", \"operand\": false },\n			{ \"key\": \"setting.tab_completion\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n\n	{ \"keys\": [\"ctrl+alt+shift+p\"], \"command\": \"show_scope_name\" },\n\n	{ \"keys\": [\"f7\"], \"command\": \"build\" },\n	{ \"keys\": [\"ctrl+b\"], \"command\": \"build\" },\n	{ \"keys\": [\"ctrl+shift+b\"], \"command\": \"build\", \"args\": {\"select\": true} },\n	{ \"keys\": [\"ctrl+break\"], \"command\": \"exec\", \"args\": {\"kill\": true} },\n\n	{ \"keys\": [\"ctrl+t\"], \"command\": \"transpose\" },\n\n	{ \"keys\": [\"f9\"], \"command\": \"sort_lines\", \"args\": {\"case_sensitive\": false} },\n	{ \"keys\": [\"ctrl+f9\"], \"command\": \"sort_lines\", \"args\": {\"case_sensitive\": true} },\n\n	// Auto-pair quotes\n	{ \"keys\": [\"\\\"\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"\\\"$0\\\"\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^(?:\\t| |\\\\)|]|\\\\}|>|$)\", \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"not_regex_contains\", \"operand\": \"[\\\"a-zA-Z0-9_]$\", \"match_all\": true },\n			{ \"key\": \"eol_selector\", \"operator\": \"not_equal\", \"operand\": \"string.quoted.double - punctuation.definition.string.end\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"\\\"\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"\\\"${0:$SELECTION}\\\"\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": false, \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"\\\"\"], \"command\": \"move\", \"args\": {\"by\": \"characters\", \"forward\": true}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\"\", \"match_all\": true },\n			{ \"key\": \"selector\", \"operator\": \"not_equal\", \"operand\": \"punctuation.definition.string.begin\", \"match_all\": true },\n			{ \"key\": \"eol_selector\", \"operator\": \"not_equal\", \"operand\": \"string.quoted.double - punctuation.definition.string.end\", \"match_all\": true },\n		]\n	},\n	{ \"keys\": [\"backspace\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete Left Right.sublime-macro\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_contains\", \"operand\": \"\\\"$\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\"\", \"match_all\": true },\n			{ \"key\": \"selector\", \"operator\": \"not_equal\", \"operand\": \"punctuation.definition.string.begin\", \"match_all\": true },\n			{ \"key\": \"eol_selector\", \"operator\": \"not_equal\", \"operand\": \"string.quoted.double - punctuation.definition.string.end\", \"match_all\": true },\n		]\n	},\n\n	// Auto-pair single quotes\n	{ \"keys\": [\"'\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"'$0'\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^(?:\\t| |\\\\)|]|\\\\}|>|$)\", \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"not_regex_contains\", \"operand\": \"['a-zA-Z0-9_]$\", \"match_all\": true },\n			{ \"key\": \"eol_selector\", \"operator\": \"not_equal\", \"operand\": \"string.quoted.single - punctuation.definition.string.end\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"'\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"'${0:$SELECTION}'\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": false, \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"'\"], \"command\": \"move\", \"args\": {\"by\": \"characters\", \"forward\": true}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^'\", \"match_all\": true },\n			{ \"key\": \"selector\", \"operator\": \"not_equal\", \"operand\": \"punctuation.definition.string.begin\", \"match_all\": true },\n			{ \"key\": \"eol_selector\", \"operator\": \"not_equal\", \"operand\": \"string.quoted.single - punctuation.definition.string.end\", \"match_all\": true },\n		]\n	},\n	{ \"keys\": [\"backspace\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete Left Right.sublime-macro\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_contains\", \"operand\": \"'$\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^'\", \"match_all\": true },\n			{ \"key\": \"selector\", \"operator\": \"not_equal\", \"operand\": \"punctuation.definition.string.begin\", \"match_all\": true },\n			{ \"key\": \"eol_selector\", \"operator\": \"not_equal\", \"operand\": \"string.quoted.single - punctuation.definition.string.end\", \"match_all\": true },\n		]\n	},\n\n	// Auto-pair brackets\n	{ \"keys\": [\"(\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"($0)\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^(?:\\t| |\\\\)|]|;|\\\\}|$)\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"(\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"(${0:$SELECTION})\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": false, \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\")\"], \"command\": \"move\", \"args\": {\"by\": \"characters\", \"forward\": true}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\)\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"backspace\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete Left Right.sublime-macro\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_contains\", \"operand\": \"\\\\($\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\)\", \"match_all\": true }\n		]\n	},\n\n	// Auto-pair square brackets\n	{ \"keys\": [\"[\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"[$0]\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^(?:\\t| |\\\\)|]|;|\\\\}|$)\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"[\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"[${0:$SELECTION}]\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": false, \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"]\"], \"command\": \"move\", \"args\": {\"by\": \"characters\", \"forward\": true}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\]\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"backspace\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete Left Right.sublime-macro\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_contains\", \"operand\": \"\\\\[$\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\]\", \"match_all\": true }\n		]\n	},\n\n	// Auto-pair curly brackets\n	{ \"keys\": [\"{\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"{$0}\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^(?:\\t| |\\\\)|]|\\\\}|$)\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"{\"], \"command\": \"wrap_block\", \"args\": {\"begin\": \"{\", \"end\": \"}\"}, \"context\":\n		[\n			{ \"key\": \"indented_block\", \"match_all\": true },\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_match\", \"operand\": \"^$\", \"match_all\": true },\n		]\n	},\n	{ \"keys\": [\"{\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"{${0:$SELECTION}}\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": false, \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"}\"], \"command\": \"move\", \"args\": {\"by\": \"characters\", \"forward\": true}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\}\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"backspace\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete Left Right.sublime-macro\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_contains\", \"operand\": \"\\\\{$\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\}\", \"match_all\": true }\n		]\n	},\n\n	{ \"keys\": [\"enter\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Add Line in Braces.sublime-macro\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_indent\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_contains\", \"operand\": \"\\\\{$\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\}\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"shift+enter\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Add Line in Braces.sublime-macro\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_indent\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_contains\", \"operand\": \"\\\\{$\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\}\", \"match_all\": true }\n		]\n	},\n\n	{ \"keys\": [\"enter\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"\\n\\t$0\\n\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_indent\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selector\", \"operator\": \"equal\", \"operand\": \"meta.scope.between-tag-pair\", \"match_all\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n		]\n	},\n	{ \"keys\": [\"shift+enter\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"\\n\\t$0\\n\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_indent\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selector\", \"operator\": \"equal\", \"operand\": \"meta.scope.between-tag-pair\", \"match_all\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n		]\n	},\n\n	{\n		\"keys\": [\"alt+shift+1\"],\n		\"command\": \"set_layout\",\n		\"args\":\n		{\n			\"cols\": [0.0, 1.0],\n			\"rows\": [0.0, 1.0],\n			\"cells\": [[0, 0, 1, 1]]\n		}\n	},\n	{\n		\"keys\": [\"alt+shift+2\"],\n		\"command\": \"set_layout\",\n		\"args\":\n		{\n			\"cols\": [0.0, 0.5, 1.0],\n			\"rows\": [0.0, 1.0],\n			\"cells\": [[0, 0, 1, 1], [1, 0, 2, 1]]\n		}\n	},\n	{\n		\"keys\": [\"alt+shift+3\"],\n		\"command\": \"set_layout\",\n		\"args\":\n		{\n			\"cols\": [0.0, 0.33, 0.66, 1.0],\n			\"rows\": [0.0, 1.0],\n			\"cells\": [[0, 0, 1, 1], [1, 0, 2, 1], [2, 0, 3, 1]]\n		}\n	},\n	{\n		\"keys\": [\"alt+shift+4\"],\n		\"command\": \"set_layout\",\n		\"args\":\n		{\n			\"cols\": [0.0, 0.25, 0.5, 0.75, 1.0],\n			\"rows\": [0.0, 1.0],\n			\"cells\": [[0, 0, 1, 1], [1, 0, 2, 1], [2, 0, 3, 1], [3, 0, 4, 1]]\n		}\n	},\n	{\n		\"keys\": [\"alt+shift+8\"],\n		\"command\": \"set_layout\",\n		\"args\":\n		{\n			\"cols\": [0.0, 1.0],\n			\"rows\": [0.0, 0.5, 1.0],\n			\"cells\": [[0, 0, 1, 1], [0, 1, 1, 2]]\n		}\n	},\n	{\n		\"keys\": [\"alt+shift+9\"],\n		\"command\": \"set_layout\",\n		\"args\":\n		{\n			\"cols\": [0.0, 1.0],\n			\"rows\": [0.0, 0.33, 0.66, 1.0],\n			\"cells\": [[0, 0, 1, 1], [0, 1, 1, 2], [0, 2, 1, 3]]\n		}\n	},\n	{\n		\"keys\": [\"alt+shift+5\"],\n		\"command\": \"set_layout\",\n		\"args\":\n		{\n			\"cols\": [0.0, 0.5, 1.0],\n			\"rows\": [0.0, 0.5, 1.0],\n			\"cells\":\n			[\n				[0, 0, 1, 1], [1, 0, 2, 1],\n				[0, 1, 1, 2], [1, 1, 2, 2]\n			]\n		}\n	},\n	{ \"keys\": [\"ctrl+1\"], \"command\": \"focus_group\", \"args\": { \"group\": 0 } },\n	{ \"keys\": [\"ctrl+2\"], \"command\": \"focus_group\", \"args\": { \"group\": 1 } },\n	{ \"keys\": [\"ctrl+3\"], \"command\": \"focus_group\", \"args\": { \"group\": 2 } },\n	{ \"keys\": [\"ctrl+4\"], \"command\": \"focus_group\", \"args\": { \"group\": 3 } },\n	{ \"keys\": [\"ctrl+5\"], \"command\": \"focus_group\", \"args\": { \"group\": 4 } },\n	{ \"keys\": [\"ctrl+6\"], \"command\": \"focus_group\", \"args\": { \"group\": 5 } },\n	{ \"keys\": [\"ctrl+7\"], \"command\": \"focus_group\", \"args\": { \"group\": 6 } },\n	{ \"keys\": [\"ctrl+8\"], \"command\": \"focus_group\", \"args\": { \"group\": 7 } },\n	{ \"keys\": [\"ctrl+9\"], \"command\": \"focus_group\", \"args\": { \"group\": 8 } },\n	{ \"keys\": [\"ctrl+shift+1\"], \"command\": \"move_to_group\", \"args\": { \"group\": 0 } },\n	{ \"keys\": [\"ctrl+shift+2\"], \"command\": \"move_to_group\", \"args\": { \"group\": 1 } },\n	{ \"keys\": [\"ctrl+shift+3\"], \"command\": \"move_to_group\", \"args\": { \"group\": 2 } },\n	{ \"keys\": [\"ctrl+shift+4\"], \"command\": \"move_to_group\", \"args\": { \"group\": 3 } },\n	{ \"keys\": [\"ctrl+shift+5\"], \"command\": \"move_to_group\", \"args\": { \"group\": 4 } },\n	{ \"keys\": [\"ctrl+shift+6\"], \"command\": \"move_to_group\", \"args\": { \"group\": 5 } },\n	{ \"keys\": [\"ctrl+shift+7\"], \"command\": \"move_to_group\", \"args\": { \"group\": 6 } },\n	{ \"keys\": [\"ctrl+shift+8\"], \"command\": \"move_to_group\", \"args\": { \"group\": 7 } },\n	{ \"keys\": [\"ctrl+shift+9\"], \"command\": \"move_to_group\", \"args\": { \"group\": 8 } },\n	{ \"keys\": [\"ctrl+0\"], \"command\": \"focus_side_bar\" },\n\n	{ \"keys\": [\"ctrl+k\", \"ctrl+up\"], \"command\": \"new_pane\" },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+shift+up\"], \"command\": \"new_pane\", \"args\": {\"move\": false} },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+down\"], \"command\": \"close_pane\" },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+left\"], \"command\": \"focus_neighboring_group\", \"args\": {\"forward\": false} },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+right\"], \"command\": \"focus_neighboring_group\" },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+shift+left\"], \"command\": \"move_to_neighboring_group\", \"args\": {\"forward\": false} },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+shift+right\"], \"command\": \"move_to_neighboring_group\" },\n\n	{ \"keys\": [\"alt+1\"], \"command\": \"select_by_index\", \"args\": { \"index\": 0 } },\n	{ \"keys\": [\"alt+2\"], \"command\": \"select_by_index\", \"args\": { \"index\": 1 } },\n	{ \"keys\": [\"alt+3\"], \"command\": \"select_by_index\", \"args\": { \"index\": 2 } },\n	{ \"keys\": [\"alt+4\"], \"command\": \"select_by_index\", \"args\": { \"index\": 3 } },\n	{ \"keys\": [\"alt+5\"], \"command\": \"select_by_index\", \"args\": { \"index\": 4 } },\n	{ \"keys\": [\"alt+6\"], \"command\": \"select_by_index\", \"args\": { \"index\": 5 } },\n	{ \"keys\": [\"alt+7\"], \"command\": \"select_by_index\", \"args\": { \"index\": 6 } },\n	{ \"keys\": [\"alt+8\"], \"command\": \"select_by_index\", \"args\": { \"index\": 7 } },\n	{ \"keys\": [\"alt+9\"], \"command\": \"select_by_index\", \"args\": { \"index\": 8 } },\n	{ \"keys\": [\"alt+0\"], \"command\": \"select_by_index\", \"args\": { \"index\": 9 } },\n\n	{ \"keys\": [\"f2\"], \"command\": \"next_bookmark\" },\n	{ \"keys\": [\"shift+f2\"], \"command\": \"prev_bookmark\" },\n	{ \"keys\": [\"ctrl+f2\"], \"command\": \"toggle_bookmark\" },\n	{ \"keys\": [\"ctrl+shift+f2\"], \"command\": \"clear_bookmarks\" },\n	{ \"keys\": [\"alt+f2\"], \"command\": \"select_all_bookmarks\" },\n\n	{ \"keys\": [\"ctrl+shift+k\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete Line.sublime-macro\"} },\n\n	{ \"keys\": [\"alt+q\"], \"command\": \"wrap_lines\" },\n\n	{ \"keys\": [\"ctrl+k\", \"ctrl+u\"], \"command\": \"upper_case\" },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+l\"], \"command\": \"lower_case\" },\n\n	{ \"keys\": [\"ctrl+k\", \"ctrl+space\"], \"command\": \"set_mark\" },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+a\"], \"command\": \"select_to_mark\" },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+w\"], \"command\": \"delete_to_mark\" },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+x\"], \"command\": \"swap_with_mark\" },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+y\"], \"command\": \"yank\" },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+k\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete to Hard EOL.sublime-macro\"} },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+backspace\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete to Hard BOL.sublime-macro\"} },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+g\"], \"command\": \"clear_bookmarks\", \"args\": {\"name\": \"mark\"} },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+c\"], \"command\": \"show_at_center\" },\n\n	{ \"keys\": [\"ctrl++\"], \"command\": \"increase_font_size\" },\n	{ \"keys\": [\"ctrl+=\"], \"command\": \"increase_font_size\" },\n	{ \"keys\": [\"ctrl+-\"], \"command\": \"decrease_font_size\" },\n\n	{ \"keys\": [\"alt+shift+w\"], \"command\": \"insert_snippet\", \"args\": { \"name\": \"Packages/XML/long-tag.sublime-snippet\" } },\n\n	{ \"keys\": [\"ctrl+shift+[\"], \"command\": \"fold\" },\n	{ \"keys\": [\"ctrl+shift+]\"], \"command\": \"unfold\" },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+1\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 1} },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+2\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 2} },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+3\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 3} },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+4\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 4} },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+5\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 5} },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+6\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 6} },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+7\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 7} },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+8\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 8} },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+9\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 9} },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+0\"], \"command\": \"unfold_all\" },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+j\"], \"command\": \"unfold_all\" },\n	{ \"keys\": [\"ctrl+k\", \"ctrl+t\"], \"command\": \"fold_tag_attributes\" },\n\n	{ \"keys\": [\"context_menu\"], \"command\": \"context_menu\" },\n\n	{ \"keys\": [\"alt+c\"], \"command\": \"toggle_case_sensitive\", \"context\":\n		[\n			{ \"key\": \"setting.is_widget\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"alt+r\"], \"command\": \"toggle_regex\", \"context\":\n		[\n			{ \"key\": \"setting.is_widget\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"alt+w\"], \"command\": \"toggle_whole_word\", \"context\":\n		[\n			{ \"key\": \"setting.is_widget\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"alt+a\"], \"command\": \"toggle_preserve_case\", \"context\":\n		[\n			{ \"key\": \"setting.is_widget\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n\n	// Find panel key bindings\n	{ \"keys\": [\"enter\"], \"command\": \"find_next\", \"context\":\n		[{\"key\": \"panel\", \"operand\": \"find\"}, {\"key\": \"panel_has_focus\"}]\n	},\n	{ \"keys\": [\"shift+enter\"], \"command\": \"find_prev\", \"context\":\n		[{\"key\": \"panel\", \"operand\": \"find\"}, {\"key\": \"panel_has_focus\"}]\n	},\n	{ \"keys\": [\"alt+enter\"], \"command\": \"find_all\", \"args\": {\"close_panel\": true},\n		 \"context\": [{\"key\": \"panel\", \"operand\": \"find\"}, {\"key\": \"panel_has_focus\"}]\n	},\n\n	// Replace panel key bindings\n	{ \"keys\": [\"enter\"], \"command\": \"find_next\", \"context\":\n		[{\"key\": \"panel\", \"operand\": \"replace\"}, {\"key\": \"panel_has_focus\"}]\n	},\n	{ \"keys\": [\"shift+enter\"], \"command\": \"find_prev\", \"context\":\n		[{\"key\": \"panel\", \"operand\": \"replace\"}, {\"key\": \"panel_has_focus\"}]\n	},\n	{ \"keys\": [\"alt+enter\"], \"command\": \"find_all\", \"args\": {\"close_panel\": true},\n		\"context\": [{\"key\": \"panel\", \"operand\": \"replace\"}, {\"key\": \"panel_has_focus\"}]\n	},\n	{ \"keys\": [\"ctrl+alt+enter\"], \"command\": \"replace_all\", \"args\": {\"close_panel\": true},\n		 \"context\": [{\"key\": \"panel\", \"operand\": \"replace\"}, {\"key\": \"panel_has_focus\"}]\n	},\n\n	// Incremental find panel key bindings\n	{ \"keys\": [\"enter\"], \"command\": \"hide_panel\", \"context\":\n		[{\"key\": \"panel\", \"operand\": \"incremental_find\"}, {\"key\": \"panel_has_focus\"}]\n	},\n	{ \"keys\": [\"shift+enter\"], \"command\": \"find_prev\", \"context\":\n		[{\"key\": \"panel\", \"operand\": \"incremental_find\"}, {\"key\": \"panel_has_focus\"}]\n	},\n	{ \"keys\": [\"alt+enter\"], \"command\": \"find_all\", \"args\": {\"close_panel\": true},\n		\"context\": [{\"key\": \"panel\", \"operand\": \"incremental_find\"}, {\"key\": \"panel_has_focus\"}]\n	},\n\n	// HTML, XML close tag\n	{ \"keys\": [\"/\"], \"command\": \"close_tag\", \"args\": { \"insert_slash\": true }, \"context\":\n		[\n			{ \"key\": \"selector\", \"operator\": \"equal\", \"operand\": \"(text.html, text.xml) - string - comment\", \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_match\", \"operand\": \".*<$\", \"match_all\": true },\n			{ \"key\": \"setting.auto_close_tags\" }\n		]\n	}\n]\n",
-			"file": "/home/leeios/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
-			"file_size": -1,
-			"file_write_time": -1,
-			"settings":
-			{
-				"buffer_size": 35912,
-				"line_ending": "Unix",
-				"read_only": true,
-				"scratch": true
-			}
 		}
 	],
 	"build_system": "",
@@ -596,10 +615,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 131.0,
-		"last_filter": "key def",
+		"height": 354.0,
+		"last_filter": "linter",
 		"selected_items":
 		[
+			[
+				"linter",
+				"SublimeLinter: Enable Linter"
+			],
 			[
 				"key def",
 				"Preferences: Key Bindings - Default"
@@ -635,10 +658,6 @@
 			[
 				"pref u",
 				"Preferences: Settings - User"
-			],
-			[
-				"linter",
-				"SublimeLinter: Disable Linter"
 			],
 			[
 				"pack ",
@@ -888,14 +907,37 @@
 	"expanded_folders":
 	[
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier",
-		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include",
-		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src"
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Tokens"
 	],
 	"file_history":
 	[
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Token/TOperand.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Tokens/TOperator.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/IToken.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Tokens/TContextMark.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/TContextMark.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/TOperand.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/TEntity.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/main.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Tokens/TEntity.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/TComment.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Tokens/TComment.cpp",
+		"/home/leeios/code/meuh/sandbox/hdezier/Parser/src/Parser.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/Parser.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/main.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/Makefile",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/test/test0.rl",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/Error.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Error.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Token.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/Token.hpp",
+		"/home/leeios/code/meuh/sandbox/hdezier/Parser/include/IToken.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/Lexer.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/Gate.hpp",
+		"/home/leeios/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
 		"/home/leeios/.config/sublime-text-3/Packages/Leeios/Symbol.tmPreferences",
 		"/home/leeios/.config/sublime-text-3/Packages/Leeios/SymbolHide.tmPreferences",
-		"/home/leeios/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
 		"/home/leeios/.config/sublime-text-3/Packages/Open-Include/Default (Linux).sublime-keymap",
 		"/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
 		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/grow_rect_with_piece.c",
@@ -997,30 +1039,7 @@
 		"/home/leeios/code/Wektiv/views/index.jade",
 		"/home/leeios/code/Txt-index/src/FileScanner.cpp",
 		"/home/leeios/code/Wektiv/package.json",
-		"/home/leeios/.config/sublime-text-3/Packages/Alignment/Default (Linux).sublime-keymap",
-		"/home/leeios/code/Wektiv/server.js",
-		"/home/leeios/.config/sublime-text-3/Packages/User/JSON.sublime-settings",
-		"/home/leeios/code/Wektiv/.gitignore",
-		"/home/leeios/code/Wektiv/routes/socket.js",
-		"/home/leeios/code/Wektiv/routes/main.js",
-		"/home/leeios/code/Wektiv/launcher.js",
-		"/home/leeios/code/Wektiv/routes/upload.js",
-		"/home/leeios/code/meuh/42/Scop/hdezier/Makefile",
-		"/home/leeios/code/meuh/42/Scop/hdezier/src/callback/mouse_callback.c",
-		"/home/leeios/code/meuh/util/roolv2.0/runner",
-		"/home/leeios/code/meuh/util/Rool/src/menus/Boot.cpp",
-		"/home/leeios/code/meuh/util/roolv2.0/src/Window.cpp",
-		"/home/leeios/code/meuh/42/ft_sh1/hdezier/src/exec.c",
-		"/home/leeios/code/tools/VSCode-linux-x64/resources/app/client/vs/workbench/contrib/files/media/AddFolder_inverse.svg",
-		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-typed-test.cc",
-		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-test-part.cc",
-		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-printers.cc",
-		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-port.cc",
-		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest_main.cc",
-		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-internal-inl.h",
-		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-filepath.cc",
-		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-death-test.cc",
-		"/home/leeios/.cache/.fr-KSrKv9/gtest-1.7.0/src/gtest-all.cc"
+		"/home/leeios/.config/sublime-text-3/Packages/Alignment/Default (Linux).sublime-keymap"
 	],
 	"find":
 	{
@@ -1066,6 +1085,42 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"std::cer",
+			"return",
+			"size_t",
+			"_isOperatorSymbol",
+			"TOperator",
+			"_isOperatorSymbol",
+			"TOperator",
+			" {\n",
+			"TEntity",
+			"iToken",
+			"i",
+			"TEntity",
+			"virtual",
+			"= 0",
+			"initMask",
+			"tokens_list_t",
+			"I_TOKEN_HPP",
+			"<A...>",
+			"Token",
+			"TOKEN_HPP",
+			"A",
+			"template<class A, class... B>",
+			"T...",
+			"template<class... T>",
+			"err_msgs",
+			"TVarName",
+			"<T>",
+			"template",
+			" {\n",
+			"c",
+			"numline",
+			"} e",
+			"\n{",
+			"_globalTokens",
+			"iTok",
+			"{\n",
 			"ctrl+space",
 			"alt+o",
 			"secondKeyName",
@@ -1157,43 +1212,7 @@
 			"LIB_DIR",
 			"line",
 			"src",
-			"UTIL_HPP",
-			"/include",
-			"NULL",
-			"std::std",
-			"class",
-			"MemberList",
-			"StandardCmd",
-			"virtual",
-			" = 0",
-			"pathToMake",
-			"str",
-			"Strings",
-			"wholeParent",
-			"strCmd",
-			"i",
-			"str",
-			"bool",
-			"LIB_DIR",
-			"filename",
-			"i->",
-			"it",
-			"command",
-			"not",
-			"/us",
-			" \"",
-			" ",
-			"//",
-			" ",
-			"BUILD_DIR",
-			"command",
-			"ctrl+k",
-			"delete",
-			"include",
-			"DIR",
-			"_PATH",
-			"cpp",
-			"include"
+			"UTIL_HPP"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1222,24 +1241,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/main.cpp",
+					"file": "src/Parser.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 427,
+						"buffer_size": 3303,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								299,
-								299
+								1488,
+								1488
 							]
 						],
 						"settings":
@@ -1247,7 +1266,36 @@
 							"glsv_configured": true,
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
-							"hasHeader": false,
+							"hasHeader": true,
+							"history_list_is_closing": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/Tokens/TComment.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1457,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								935,
+								935
+							]
+						],
+						"settings":
+						{
 							"syntax": "Packages/Leeios/Leeios.tmLanguage"
 						},
 						"translation.x": 0.0,
@@ -1258,20 +1306,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "src/Parser.cpp",
+					"buffer": 2,
+					"file": "src/Tokens/TPriorities.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 81,
+						"buffer_size": 1587,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1145,
+								1145
 							]
 						],
 						"settings":
@@ -1279,38 +1327,79 @@
 							"glsv_configured": true,
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
-							"hasHeader": false,
-							"history_list_is_closing": true,
+							"hasHeader": true,
 							"syntax": "Packages/Leeios/Leeios.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 182.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/Tokens/TEntity.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1472,
+						"regions":
+						{
+							"bookmarks":
+							{
+								"flags": 144,
+								"icon": "Packages/BetterBookmarks/icons/todo.png",
+								"regions":
+								[
+								],
+								"scope": "comment"
+							}
+						},
+						"selection":
+						[
+							[
+								1111,
+								1111
+							]
+						],
+						"settings":
+						{
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 47.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
-					"buffer": 2,
-					"file": "include/Parser.hpp",
+					"buffer": 4,
+					"file": "include/TOperator.hpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 133,
+						"buffer_size": 1343,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								133,
-								133
+								1332,
+								1332
 							]
 						],
 						"settings":
@@ -1318,31 +1407,98 @@
 							"glsv_configured": true,
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
-							"hasHeader": false,
+							"hasHeader": true,
+							"history_list_is_closing": true,
 							"syntax": "Packages/Leeios/Leeios.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 125.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "include/Parser.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1368,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								891,
+								891
+							]
+						],
+						"settings":
+						{
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 165.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "include/TPriorities.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1345,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1275,
+								1275
+							]
+						],
+						"settings":
+						{
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": true,
+							"history_list_is_closing": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+						},
+						"translation.x": -0.0,
+						"translation.y": 65.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "include/Error.hpp",
+					"buffer": 7,
+					"file": "test/test0.rl",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 246,
+						"buffer_size": 721,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								233,
-								233
+								274,
+								274
 							]
 						],
 						"settings":
@@ -1351,30 +1507,30 @@
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
 							"hasHeader": false,
-							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "src/Error.cpp",
+					"buffer": 8,
+					"file": "Makefile",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 400,
+						"buffer_size": 1574,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								100,
-								100
+								192,
+								192
 							]
 						],
 						"settings":
@@ -1383,13 +1539,13 @@
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
 							"hasHeader": false,
-							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+							"syntax": "Packages/Makefile Improved/Makefile Improved.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 110.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1399,7 +1555,7 @@
 			"sheets":
 			[
 				{
-					"buffer": 5,
+					"buffer": 9,
 					"file": "/home/leeios/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 					"semi_transient": false,
 					"settings":
@@ -1411,8 +1567,8 @@
 						"selection":
 						[
 							[
-								1498,
-								1498
+								833,
+								833
 							]
 						],
 						"settings":
@@ -1425,14 +1581,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 769.0,
+						"translation.y": 454.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 10,
 					"file": "/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
 					"semi_transient": false,
 					"settings":
@@ -1444,8 +1600,8 @@
 						"selection":
 						[
 							[
-								620,
-								620
+								5118,
+								5118
 							]
 						],
 						"settings":
@@ -1458,42 +1614,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 934.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "/home/leeios/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 35912,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								31193,
-								31193
-							]
-						],
-						"settings":
-						{
-							"glsv_configured": true,
-							"glsv_enabled": 1,
-							"glsv_spec": 0,
-							"hasHeader": false,
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 9154.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
+					"stack_index": 9,
 					"type": "text"
 				}
 			]
@@ -1570,6 +1694,110 @@
 		"selected_items":
 		[
 			[
+				"makef",
+				"Makefile"
+			],
+			[
+				"topera",
+				"src/Token/TOperand.cpp"
+			],
+			[
+				"itok",
+				"include/IToken.hpp"
+			],
+			[
+				"tprio",
+				"src/Tokens/TPriorities.cpp"
+			],
+			[
+				"tpio",
+				"include/TPriorities.hpp"
+			],
+			[
+				"test",
+				"test/test0.rl"
+			],
+			[
+				"tcon",
+				"src/Tokens/TContextMark.cpp"
+			],
+			[
+				"par",
+				"include/Parser.hpp"
+			],
+			[
+				"tcpp",
+				"src/Tokens/TEntity.cpp"
+			],
+			[
+				"toper",
+				"src/Tokens/TOperator.cpp"
+			],
+			[
+				"top",
+				"include/TOperand.hpp"
+			],
+			[
+				"t",
+				"include/TEntity.hpp"
+			],
+			[
+				"tope",
+				"include/TOperator.hpp"
+			],
+			[
+				"tco",
+				"include/TComment.hpp"
+			],
+			[
+				"ten",
+				"include/TEntity.hpp"
+			],
+			[
+				"make",
+				"Makefile"
+			],
+			[
+				"main",
+				"include/main.hpp"
+			],
+			[
+				"te0",
+				"test/test0.rl"
+			],
+			[
+				"tcom",
+				"src/Tokens/TComment.cpp"
+			],
+			[
+				"tenti",
+				"src/Tokens/TEntity.cpp"
+			],
+			[
+				"tcomm",
+				"include/TComment.hpp"
+			],
+			[
+				"toke",
+				"src/Token.cpp"
+			],
+			[
+				"ito",
+				"include/IToken.hpp"
+			],
+			[
+				"tokencp",
+				"src/Token.cpp"
+			],
+			[
+				"le",
+				"include/Lexer.hpp"
+			],
+			[
+				"gate",
+				"include/Gate.hpp"
+			],
+			[
 				"erro",
 				"src/Error.cpp"
 			],
@@ -1580,10 +1808,6 @@
 			[
 				"pars",
 				"include/Parser.hpp"
-			],
-			[
-				"par",
-				"src/Parser.cpp"
 			],
 			[
 				"dead",
@@ -1622,10 +1846,6 @@
 				"src/lib_rect.c"
 			],
 			[
-				"make",
-				"Makefile"
-			],
-			[
 				"calc",
 				"src/calc_added_rows_cols.c"
 			],
@@ -1642,10 +1862,6 @@
 				"test/log.txt"
 			],
 			[
-				"test",
-				"test/test_00.p"
-			],
-			[
 				"add",
 				"src/add_piece_to_result.c"
 			],
@@ -1660,10 +1876,6 @@
 			[
 				"prin",
 				"src/print_pieces.c"
-			],
-			[
-				"makef",
-				"Makefile"
 			],
 			[
 				"file_",
@@ -1911,7 +2123,7 @@
 	{
 	},
 	"show_minimap": false,
-	"show_open_files": false,
+	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
 	"side_bar_width": 245.0,

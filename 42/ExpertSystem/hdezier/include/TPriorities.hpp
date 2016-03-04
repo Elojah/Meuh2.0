@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Parser.hpp                                         :+:      :+:    :+:   */
+/*   TPriorities.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/03 18:21:58 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/04 15:14:40 by leeios           ###   ########.fr       */
+/*   Created: 2016/03/04 16:14:52 by leeios            #+#    #+#             */
+/*   Updated: 2016/03/04 16:15:11 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_HPP
-# define PARSER_HPP
+#ifndef T_PRIORITIES_HPP
+# define T_PRIORITIES_HPP
 
-#include "IToken.hpp"
+# include "IToken.hpp"
 
-class Parser
+class TPriorities : public IToken
 {
 public:
-	Parser(void);
-	virtual ~Parser(void);
-	void	exec(char *filename);
-	static void				initMask(tok_indexes &mask);
-	#ifdef _DBG_
-		void	printResult(void);
-	#endif
+	TPriorities(void);
+	virtual ~TPriorities(void);
+	virtual eResponse		detect(const std::string &str) const override;
+	virtual void			getNextTokens(tok_indexes &mask) const override;
+	virtual IToken			*getNewInstance(const std::string &s) const override;
 protected:
 private:
-	static const size_t		m_nbToken;
-	static const IToken		*m_allTokens[(size_t)eTokenType::N_TOKEN_TYPE];
-	std::vector<IToken *>	m_resultToken;
-
-	bool					_readToken(tok_indexes &mask, std::string &s);
+	static bool				_isPrioritySymbol(const char c);
 };
 
 #endif
