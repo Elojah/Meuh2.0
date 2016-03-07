@@ -46,9 +46,9 @@ static void	refresh_eye(float row[4], t_point *eye)
 
 static void	refresh_view(t_camera *cam)
 {
-	cam->forward.x = cam->eye.x - cam->center.x;
-	cam->forward.y = cam->eye.y - cam->center.y;
-	cam->forward.z = cam->eye.z - cam->center.z;
+	cam->forward.x = cam->center.x - cam->eye.x;
+	cam->forward.y = cam->center.y - cam->eye.y;
+	cam->forward.z = cam->center.z - cam->eye.z;
 	normalize(&(cam->forward));
 	normalize(&(cam->up));
 	cam->right.x = (cam->forward.y * cam->up.z) - (cam->forward.z * cam->up.y);

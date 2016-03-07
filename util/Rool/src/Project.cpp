@@ -38,7 +38,7 @@ void		Project::setModules(std::string const &configFile) {
 }
 
 void		Project::initModules(void) {
-	for (std::vector<IModule *>::iterator it = _mods.begin(); it != _mods.end(); it++) {
+	for (std::vector<IModule *>::iterator it = _mods.begin(); it != _mods.end(); ++it) {
 		(*it)->init(_path, _name);
 	}
 }

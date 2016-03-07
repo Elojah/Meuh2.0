@@ -20,7 +20,7 @@ public:
 	Menu(int, int, int, int);
 	virtual ~Menu(void);
 
-	void			waitUser(void);
+	void			userInput(void);
 
 protected:
 	typedef void	(Menu::*Callback)(ITEM *);
@@ -33,7 +33,7 @@ protected:
 	Items							items;
 	/*Final Items*/
 	ITEM							*menuItems[MAX_ITEMS];
-	SortItems						*sortObject;
+	SortItems					*sortObject;
 
 	void				simpleCreate(const std::string&, const std::string&, const std::string&);
 	void				loop(void);

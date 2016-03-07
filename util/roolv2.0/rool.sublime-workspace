@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"string",
+				"std::string::npos"
+			],
+			[
 				"par",
 				"parseDirectories	(util.hpp)"
 			],
@@ -42,10 +46,6 @@
 			[
 				"size",
 				"size_t	(FtStr.cpp)"
-			],
-			[
-				"string",
-				"std::string"
 			],
 			[
 				"ifs",
@@ -520,26 +520,53 @@
 	"buffers":
 	[
 		{
-			"file": "src/mods/ClassMod.cpp",
+			"file": "/home/leeios/code/meuh/42/Nibbler/hdezier-erobert/game/srcs/Game.cpp",
 			"settings":
 			{
-				"buffer_size": 3043,
+				"buffer_size": 6701,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/mods/MemberMod.cpp",
+			"file": "/home/leeios/.config/sublime-text-3/Packages/C++ Starting Kit/C++.tmLanguage",
 			"settings":
 			{
-				"buffer_size": 3776,
+				"buffer_size": 37038,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "include/MemberMod.hpp",
+			"file": "/home/leeios/.config/sublime-text-3/Packages/Oasis Theme/Oasis.tmTheme",
 			"settings":
 			{
-				"buffer_size": 1403,
+				"buffer_size": 10491,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/cpp-rool.json",
+			"settings":
+			{
+				"buffer_size": 948,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "/// Json-cpp amalgated source (http://jsoncpp.sourceforge.net/).\n/// It is intended to be used with #include \"json/json.h\"\n\n// //////////////////////////////////////////////////////////////////////\n// Beginning of content of file: LICENSE\n// //////////////////////////////////////////////////////////////////////\n\n/*\nThe JsonCpp library's source code, including accompanying documentation, \ntests and demonstration applications, are licensed under the following\nconditions...\n\nThe author (Baptiste Lepilleur) explicitly disclaims copyright in all \njurisdictions which recognize such a disclaimer. In such jurisdictions, \nthis software is released into the Public Domain.\n\nIn jurisdictions which do not recognize Public Domain property (e.g. Germany as of\n2010), this software is Copyright (c) 2007-2010 by Baptiste Lepilleur, and is\nreleased under the terms of the MIT License (see below).\n\nIn jurisdictions which recognize Public Domain property, the user of this \nsoftware may choose to accept it either as 1) Public Domain, 2) under the \nconditions of the MIT License (see below), or 3) under the terms of dual \nPublic Domain/MIT License conditions described here, as they choose.\n\nThe MIT License is about as close to Public Domain as a license can get, and is\ndescribed in clear, concise terms at:\n\n   http://en.wikipedia.org/wiki/MIT_License\n   \nThe full text of the MIT License follows:\n\n========================================================================\nCopyright (c) 2007-2010 Baptiste Lepilleur\n\nPermission is hereby granted, free of charge, to any person\nobtaining a copy of this software and associated documentation\nfiles (the \"Software\"), to deal in the Software without\nrestriction, including without limitation the rights to use, copy,\nmodify, merge, publish, distribute, sublicense, and/or sell copies\nof the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS\nBE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN\nACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n========================================================================\n(END LICENSE TEXT)\n\nThe MIT license is compatible with both the GPL and commercial\nsoftware, affording one all of the rights of Public Domain with the\nminor nuisance of being required to keep the above copyright notice\nand license text in the source code. Note also that by accepting the\nPublic Domain \"license\" you can re-license your copy using whatever\nlicense you like.\n\n*/\n\n// //////////////////////////////////////////////////////////////////////\n// End of content of file: LICENSE\n// //////////////////////////////////////////////////////////////////////\n\n\n\n\n\n\n#include \"json/json.h\"\n\n#ifndef JSON_IS_AMALGAMATION\n#error \"Compile with -I PATH_TO_JSON_DIRECTORY\"\n#endif\n\n\n// //////////////////////////////////////////////////////////////////////\n// Beginning of content of file: src/lib_json/json_tool.h\n// //////////////////////////////////////////////////////////////////////\n\n// Copyright 2007-2010 Baptiste Lepilleur\n// Distributed under MIT license, or public domain if desired and\n// recognized in your jurisdiction.\n// See file LICENSE for detail or copy at http://jsoncpp.sourceforge.net/LICENSE\n\n#ifndef LIB_JSONCPP_JSON_TOOL_H_INCLUDED\n#define LIB_JSONCPP_JSON_TOOL_H_INCLUDED\n\n/* This header provides common string manipulation support, such as UTF-8,\n * portable conversion from/to string...\n *\n * It is an internal header that must not be exposed.\n */\n\nnamespace Json {\n\n/// Converts a unicode code-point to UTF-8.\nstatic inline std::string codePointToUTF8(unsigned int cp) {\n  std::string result;\n\n  // based on description from http://en.wikipedia.org/wiki/UTF-8\n\n  if (cp <= 0x7f) {\n    result.resize(1);\n    result[0] = static_cast<char>(cp);\n  } else if (cp <= 0x7FF) {\n    result.resize(2);\n    result[1] = static_cast<char>(0x80 | (0x3f & cp));\n    result[0] = static_cast<char>(0xC0 | (0x1f & (cp >> 6)));\n  } else if (cp <= 0xFFFF) {\n    result.resize(3);\n    result[2] = static_cast<char>(0x80 | (0x3f & cp));\n    result[1] = 0x80 | static_cast<char>((0x3f & (cp >> 6)));\n    result[0] = 0xE0 | static_cast<char>((0xf & (cp >> 12)));\n  } else if (cp <= 0x10FFFF) {\n    result.resize(4);\n    result[3] = static_cast<char>(0x80 | (0x3f & cp));\n    result[2] = static_cast<char>(0x80 | (0x3f & (cp >> 6)));\n    result[1] = static_cast<char>(0x80 | (0x3f & (cp >> 12)));\n    result[0] = static_cast<char>(0xF0 | (0x7 & (cp >> 18)));\n  }\n\n  return result;\n}\n\n/// Returns true if ch is a control character (in range [0,32[).\nstatic inline bool isControlCharacter(char ch) { return ch > 0 && ch <= 0x1F; }\n\nenum {\n  /// Constant that specify the size of the buffer that must be passed to\n  /// uintToString.\n  uintToStringBufferSize = 3 * sizeof(LargestUInt) + 1\n};\n\n// Defines a char buffer for use with uintToString().\ntypedef char UIntToStringBuffer[uintToStringBufferSize];\n\n/** Converts an unsigned integer to string.\n * @param value Unsigned interger to convert to string\n * @param current Input/Output string buffer.\n *        Must have at least uintToStringBufferSize chars free.\n */\nstatic inline void uintToString(LargestUInt value, char*& current) {\n  *--current = 0;\n  do {\n    *--current = char(value % 10) + '0';\n    value /= 10;\n  } while (value != 0);\n}\n\n/** Change ',' to '.' everywhere in buffer.\n *\n * We had a sophisticated way, but it did not work in WinCE.\n * @see https://github.com/open-source-parsers/jsoncpp/pull/9\n */\nstatic inline void fixNumericLocale(char* begin, char* end) {\n  while (begin < end) {\n    if (*begin == ',') {\n      *begin = '.';\n    }\n    ++begin;\n  }\n}\n\n} // namespace Json {\n\n#endif // LIB_JSONCPP_JSON_TOOL_H_INCLUDED\n\n// //////////////////////////////////////////////////////////////////////\n// End of content of file: src/lib_json/json_tool.h\n// //////////////////////////////////////////////////////////////////////\n\n\n\n\n\n\n// //////////////////////////////////////////////////////////////////////\n// Beginning of content of file: src/lib_json/json_reader.cpp\n// //////////////////////////////////////////////////////////////////////\n\n// Copyright 2007-2011 Baptiste Lepilleur\n// Distributed under MIT license, or public domain if desired and\n// recognized in your jurisdiction.\n// See file LICENSE for detail or copy at http://jsoncpp.sourceforge.net/LICENSE\n\n#if !defined(JSON_IS_AMALGAMATION)\n#include <json/assertions.h>\n#include <json/reader.h>\n#include <json/value.h>\n#include \"json_tool.h\"\n#endif // if !defined(JSON_IS_AMALGAMATION)\n#include <utility>\n#include <cstdio>\n#include <cassert>\n#include <cstring>\n#include <istream>\n#include <sstream>\n#include <memory>\n#include <set>\n\n#if defined(_MSC_VER) && _MSC_VER < 1500 // VC++ 8.0 and below\n#define snprintf _snprintf\n#endif\n\n#if defined(_MSC_VER) && _MSC_VER >= 1400 // VC++ 8.0\n// Disable warning about strdup being deprecated.\n#pragma warning(disable : 4996)\n#endif\n\nstatic int const stackLimit_g = 1000;\nstatic int       stackDepth_g = 0;  // see readValue()\n\nnamespace Json {\n\n#if __cplusplus >= 201103L\ntypedef std::unique_ptr<CharReader> CharReaderPtr;\n#else\ntypedef std::auto_ptr<CharReader>   CharReaderPtr;\n#endif\n\n// Implementation of class Features\n// ////////////////////////////////\n\nFeatures::Features()\n    : allowComments_(true), strictRoot_(false),\n      allowDroppedNullPlaceholders_(false), allowNumericKeys_(false) {}\n\nFeatures Features::all() { return Features(); }\n\nFeatures Features::strictMode() {\n  Features features;\n  features.allowComments_ = false;\n  features.strictRoot_ = true;\n  features.allowDroppedNullPlaceholders_ = false;\n  features.allowNumericKeys_ = false;\n  return features;\n}\n\n// Implementation of class Reader\n// ////////////////////////////////\n\nstatic bool containsNewLine(Reader::Location begin, Reader::Location end) {\n  for (; begin < end; ++begin)\n    if (*begin == '\\n' || *begin == '\\r')\n      return true;\n  return false;\n}\n\n// Class Reader\n// //////////////////////////////////////////////////////////////////\n\nReader::Reader()\n    : errors_(), document_(), begin_(), end_(), current_(), lastValueEnd_(),\n      lastValue_(), commentsBefore_(), features_(Features::all()),\n      collectComments_() {}\n\nReader::Reader(const Features& features)\n    : errors_(), document_(), begin_(), end_(), current_(), lastValueEnd_(),\n      lastValue_(), commentsBefore_(), features_(features), collectComments_() {\n}\n\nbool\nReader::parse(const std::string& document, Value& root, bool collectComments) {\n  document_ = document;\n  const char* begin = document_.c_str();\n  const char* end = begin + document_.length();\n  return parse(begin, end, root, collectComments);\n}\n\nbool Reader::parse(std::istream& sin, Value& root, bool collectComments) {\n  // std::istream_iterator<char> begin(sin);\n  // std::istream_iterator<char> end;\n  // Those would allow streamed input from a file, if parse() were a\n  // template function.\n\n  // Since std::string is reference-counted, this at least does not\n  // create an extra copy.\n  std::string doc;\n  std::getline(sin, doc, (char)EOF);\n  return parse(doc, root, collectComments);\n}\n\nbool Reader::parse(const char* beginDoc,\n                   const char* endDoc,\n                   Value& root,\n                   bool collectComments) {\n  if (!features_.allowComments_) {\n    collectComments = false;\n  }\n\n  begin_ = beginDoc;\n  end_ = endDoc;\n  collectComments_ = collectComments;\n  current_ = begin_;\n  lastValueEnd_ = 0;\n  lastValue_ = 0;\n  commentsBefore_ = \"\";\n  errors_.clear();\n  while (!nodes_.empty())\n    nodes_.pop();\n  nodes_.push(&root);\n\n  stackDepth_g = 0;  // Yes, this is bad coding, but options are limited.\n  bool successful = readValue();\n  Token token;\n  skipCommentTokens(token);\n  if (collectComments_ && !commentsBefore_.empty())\n    root.setComment(commentsBefore_, commentAfter);\n  if (features_.strictRoot_) {\n    if (!root.isArray() && !root.isObject()) {\n      // Set error location to start of doc, ideally should be first token found\n      // in doc\n      token.type_ = tokenError;\n      token.start_ = beginDoc;\n      token.end_ = endDoc;\n      addError(\n          \"A valid JSON document must be either an array or an object value.\",\n          token);\n      return false;\n    }\n  }\n  return successful;\n}\n\nbool Reader::readValue() {\n  // This is a non-reentrant way to support a stackLimit. Terrible!\n  // But this deprecated class has a security problem: Bad input can\n  // cause a seg-fault. This seems like a fair, binary-compatible way\n  // to prevent the problem.\n  if (stackDepth_g >= stackLimit_g) throwRuntimeError(\"Exceeded stackLimit in readValue().\");\n  ++stackDepth_g;\n\n  Token token;\n  skipCommentTokens(token);\n  bool successful = true;\n\n  if (collectComments_ && !commentsBefore_.empty()) {\n    currentValue().setComment(commentsBefore_, commentBefore);\n    commentsBefore_ = \"\";\n  }\n\n  switch (token.type_) {\n  case tokenObjectBegin:\n    successful = readObject(token);\n    currentValue().setOffsetLimit(current_ - begin_);\n    break;\n  case tokenArrayBegin:\n    successful = readArray(token);\n    currentValue().setOffsetLimit(current_ - begin_);\n    break;\n  case tokenNumber:\n    successful = decodeNumber(token);\n    break;\n  case tokenString:\n    successful = decodeString(token);\n    break;\n  case tokenTrue:\n    {\n    Value v(true);\n    currentValue().swapPayload(v);\n    currentValue().setOffsetStart(token.start_ - begin_);\n    currentValue().setOffsetLimit(token.end_ - begin_);\n    }\n    break;\n  case tokenFalse:\n    {\n    Value v(false);\n    currentValue().swapPayload(v);\n    currentValue().setOffsetStart(token.start_ - begin_);\n    currentValue().setOffsetLimit(token.end_ - begin_);\n    }\n    break;\n  case tokenNull:\n    {\n    Value v;\n    currentValue().swapPayload(v);\n    currentValue().setOffsetStart(token.start_ - begin_);\n    currentValue().setOffsetLimit(token.end_ - begin_);\n    }\n    break;\n  case tokenArraySeparator:\n  case tokenObjectEnd:\n  case tokenArrayEnd:\n    if (features_.allowDroppedNullPlaceholders_) {\n      // \"Un-read\" the current token and mark the current value as a null\n      // token.\n      current_--;\n      Value v;\n      currentValue().swapPayload(v);\n      currentValue().setOffsetStart(current_ - begin_ - 1);\n      currentValue().setOffsetLimit(current_ - begin_);\n      break;\n    } // Else, fall through...\n  default:\n    currentValue().setOffsetStart(token.start_ - begin_);\n    currentValue().setOffsetLimit(token.end_ - begin_);\n    return addError(\"Syntax error: value, object or array expected.\", token);\n  }\n\n  if (collectComments_) {\n    lastValueEnd_ = current_;\n    lastValue_ = &currentValue();\n  }\n\n  --stackDepth_g;\n  return successful;\n}\n\nvoid Reader::skipCommentTokens(Token& token) {\n  if (features_.allowComments_) {\n    do {\n      readToken(token);\n    } while (token.type_ == tokenComment);\n  } else {\n    readToken(token);\n  }\n}\n\nbool Reader::readToken(Token& token) {\n  skipSpaces();\n  token.start_ = current_;\n  Char c = getNextChar();\n  bool ok = true;\n  switch (c) {\n  case '{':\n    token.type_ = tokenObjectBegin;\n    break;\n  case '}':\n    token.type_ = tokenObjectEnd;\n    break;\n  case '[':\n    token.type_ = tokenArrayBegin;\n    break;\n  case ']':\n    token.type_ = tokenArrayEnd;\n    break;\n  case '\"':\n    token.type_ = tokenString;\n    ok = readString();\n    break;\n  case '/':\n    token.type_ = tokenComment;\n    ok = readComment();\n    break;\n  case '0':\n  case '1':\n  case '2':\n  case '3':\n  case '4':\n  case '5':\n  case '6':\n  case '7':\n  case '8':\n  case '9':\n  case '-':\n    token.type_ = tokenNumber;\n    readNumber();\n    break;\n  case 't':\n    token.type_ = tokenTrue;\n    ok = match(\"rue\", 3);\n    break;\n  case 'f':\n    token.type_ = tokenFalse;\n    ok = match(\"alse\", 4);\n    break;\n  case 'n':\n    token.type_ = tokenNull;\n    ok = match(\"ull\", 3);\n    break;\n  case ',':\n    token.type_ = tokenArraySeparator;\n    break;\n  case ':':\n    token.type_ = tokenMemberSeparator;\n    break;\n  case 0:\n    token.type_ = tokenEndOfStream;\n    break;\n  default:\n    ok = false;\n    break;\n  }\n  if (!ok)\n    token.type_ = tokenError;\n  token.end_ = current_;\n  return true;\n}\n\nvoid Reader::skipSpaces() {\n  while (current_ != end_) {\n    Char c = *current_;\n    if (c == ' ' || c == '\\t' || c == '\\r' || c == '\\n')\n      ++current_;\n    else\n      break;\n  }\n}\n\nbool Reader::match(Location pattern, int patternLength) {\n  if (end_ - current_ < patternLength)\n    return false;\n  int index = patternLength;\n  while (index--)\n    if (current_[index] != pattern[index])\n      return false;\n  current_ += patternLength;\n  return true;\n}\n\nbool Reader::readComment() {\n  Location commentBegin = current_ - 1;\n  Char c = getNextChar();\n  bool successful = false;\n  if (c == '*')\n    successful = readCStyleComment();\n  else if (c == '/')\n    successful = readCppStyleComment();\n  if (!successful)\n    return false;\n\n  if (collectComments_) {\n    CommentPlacement placement = commentBefore;\n    if (lastValueEnd_ && !containsNewLine(lastValueEnd_, commentBegin)) {\n      if (c != '*' || !containsNewLine(commentBegin, current_))\n        placement = commentAfterOnSameLine;\n    }\n\n    addComment(commentBegin, current_, placement);\n  }\n  return true;\n}\n\nstatic std::string normalizeEOL(Reader::Location begin, Reader::Location end) {\n  std::string normalized;\n  normalized.reserve(end - begin);\n  Reader::Location current = begin;\n  while (current != end) {\n    char c = *current++;\n    if (c == '\\r') {\n      if (current != end && *current == '\\n')\n         // convert dos EOL\n         ++current;\n      // convert Mac EOL\n      normalized += '\\n';\n    } else {\n      normalized += c;\n    }\n  }\n  return normalized;\n}\n\nvoid\nReader::addComment(Location begin, Location end, CommentPlacement placement) {\n  assert(collectComments_);\n  const std::string& normalized = normalizeEOL(begin, end);\n  if (placement == commentAfterOnSameLine) {\n    assert(lastValue_ != 0);\n    lastValue_->setComment(normalized, placement);\n  } else {\n    commentsBefore_ += normalized;\n  }\n}\n\nbool Reader::readCStyleComment() {\n  while (current_ != end_) {\n    Char c = getNextChar();\n    if (c == '*' && *current_ == '/')\n      break;\n  }\n  return getNextChar() == '/';\n}\n\nbool Reader::readCppStyleComment() {\n  while (current_ != end_) {\n    Char c = getNextChar();\n    if (c == '\\n')\n      break;\n    if (c == '\\r') {\n      // Consume DOS EOL. It will be normalized in addComment.\n      if (current_ != end_ && *current_ == '\\n')\n        getNextChar();\n      // Break on Moc OS 9 EOL.\n      break;\n    }\n  }\n  return true;\n}\n\nvoid Reader::readNumber() {\n  const char *p = current_;\n  char c = '0'; // stopgap for already consumed character\n  // integral part\n  while (c >= '0' && c <= '9')\n    c = (current_ = p) < end_ ? *p++ : 0;\n  // fractional part\n  if (c == '.') {\n    c = (current_ = p) < end_ ? *p++ : 0;\n    while (c >= '0' && c <= '9')\n      c = (current_ = p) < end_ ? *p++ : 0;\n  }\n  // exponential part\n  if (c == 'e' || c == 'E') {\n    c = (current_ = p) < end_ ? *p++ : 0;\n    if (c == '+' || c == '-')\n      c = (current_ = p) < end_ ? *p++ : 0;\n    while (c >= '0' && c <= '9')\n      c = (current_ = p) < end_ ? *p++ : 0;\n  }\n}\n\nbool Reader::readString() {\n  Char c = 0;\n  while (current_ != end_) {\n    c = getNextChar();\n    if (c == '\\\\')\n      getNextChar();\n    else if (c == '\"')\n      break;\n  }\n  return c == '\"';\n}\n\nbool Reader::readObject(Token& tokenStart) {\n  Token tokenName;\n  std::string name;\n  Value init(objectValue);\n  currentValue().swapPayload(init);\n  currentValue().setOffsetStart(tokenStart.start_ - begin_);\n  while (readToken(tokenName)) {\n    bool initialTokenOk = true;\n    while (tokenName.type_ == tokenComment && initialTokenOk)\n      initialTokenOk = readToken(tokenName);\n    if (!initialTokenOk)\n      break;\n    if (tokenName.type_ == tokenObjectEnd && name.empty()) // empty object\n      return true;\n    name = \"\";\n    if (tokenName.type_ == tokenString) {\n      if (!decodeString(tokenName, name))\n        return recoverFromError(tokenObjectEnd);\n    } else if (tokenName.type_ == tokenNumber && features_.allowNumericKeys_) {\n      Value numberName;\n      if (!decodeNumber(tokenName, numberName))\n        return recoverFromError(tokenObjectEnd);\n      name = numberName.asString();\n    } else {\n      break;\n    }\n\n    Token colon;\n    if (!readToken(colon) || colon.type_ != tokenMemberSeparator) {\n      return addErrorAndRecover(\n          \"Missing ':' after object member name\", colon, tokenObjectEnd);\n    }\n    Value& value = currentValue()[name];\n    nodes_.push(&value);\n    bool ok = readValue();\n    nodes_.pop();\n    if (!ok) // error already set\n      return recoverFromError(tokenObjectEnd);\n\n    Token comma;\n    if (!readToken(comma) ||\n        (comma.type_ != tokenObjectEnd && comma.type_ != tokenArraySeparator &&\n         comma.type_ != tokenComment)) {\n      return addErrorAndRecover(\n          \"Missing ',' or '}' in object declaration\", comma, tokenObjectEnd);\n    }\n    bool finalizeTokenOk = true;\n    while (comma.type_ == tokenComment && finalizeTokenOk)\n      finalizeTokenOk = readToken(comma);\n    if (comma.type_ == tokenObjectEnd)\n      return true;\n  }\n  return addErrorAndRecover(\n      \"Missing '}' or object member name\", tokenName, tokenObjectEnd);\n}\n\nbool Reader::readArray(Token& tokenStart) {\n  Value init(arrayValue);\n  currentValue().swapPayload(init);\n  currentValue().setOffsetStart(tokenStart.start_ - begin_);\n  skipSpaces();\n  if (*current_ == ']') // empty array\n  {\n    Token endArray;\n    readToken(endArray);\n    return true;\n  }\n  int index = 0;\n  for (;;) {\n    Value& value = currentValue()[index++];\n    nodes_.push(&value);\n    bool ok = readValue();\n    nodes_.pop();\n    if (!ok) // error already set\n      return recoverFromError(tokenArrayEnd);\n\n    Token token;\n    // Accept Comment after last item in the array.\n    ok = readToken(token);\n    while (token.type_ == tokenComment && ok) {\n      ok = readToken(token);\n    }\n    bool badTokenType =\n        (token.type_ != tokenArraySeparator && token.type_ != tokenArrayEnd);\n    if (!ok || badTokenType) {\n      return addErrorAndRecover(\n          \"Missing ',' or ']' in array declaration\", token, tokenArrayEnd);\n    }\n    if (token.type_ == tokenArrayEnd)\n      break;\n  }\n  return true;\n}\n\nbool Reader::decodeNumber(Token& token) {\n  Value decoded;\n  if (!decodeNumber(token, decoded))\n    return false;\n  currentValue().swapPayload(decoded);\n  currentValue().setOffsetStart(token.start_ - begin_);\n  currentValue().setOffsetLimit(token.end_ - begin_);\n  return true;\n}\n\nbool Reader::decodeNumber(Token& token, Value& decoded) {\n  // Attempts to parse the number as an integer. If the number is\n  // larger than the maximum supported value of an integer then\n  // we decode the number as a double.\n  Location current = token.start_;\n  bool isNegative = *current == '-';\n  if (isNegative)\n    ++current;\n  // TODO: Help the compiler do the div and mod at compile time or get rid of them.\n  Value::LargestUInt maxIntegerValue =\n      isNegative ? Value::LargestUInt(-Value::minLargestInt)\n                 : Value::maxLargestUInt;\n  Value::LargestUInt threshold = maxIntegerValue / 10;\n  Value::LargestUInt value = 0;\n  while (current < token.end_) {\n    Char c = *current++;\n    if (c < '0' || c > '9')\n      return decodeDouble(token, decoded);\n    Value::UInt digit(c - '0');\n    if (value >= threshold) {\n      // We've hit or exceeded the max value divided by 10 (rounded down). If\n      // a) we've only just touched the limit, b) this is the last digit, and\n      // c) it's small enough to fit in that rounding delta, we're okay.\n      // Otherwise treat this number as a double to avoid overflow.\n      if (value > threshold || current != token.end_ ||\n          digit > maxIntegerValue % 10) {\n        return decodeDouble(token, decoded);\n      }\n    }\n    value = value * 10 + digit;\n  }\n  if (isNegative)\n    decoded = -Value::LargestInt(value);\n  else if (value <= Value::LargestUInt(Value::maxInt))\n    decoded = Value::LargestInt(value);\n  else\n    decoded = value;\n  return true;\n}\n\nbool Reader::decodeDouble(Token& token) {\n  Value decoded;\n  if (!decodeDouble(token, decoded))\n    return false;\n  currentValue().swapPayload(decoded);\n  currentValue().setOffsetStart(token.start_ - begin_);\n  currentValue().setOffsetLimit(token.end_ - begin_);\n  return true;\n}\n\nbool Reader::decodeDouble(Token& token, Value& decoded) {\n  double value = 0;\n  const int bufferSize = 32;\n  int count;\n  int length = int(token.end_ - token.start_);\n\n  // Sanity check to avoid buffer overflow exploits.\n  if (length < 0) {\n    return addError(\"Unable to parse token length\", token);\n  }\n\n  // Avoid using a string constant for the format control string given to\n  // sscanf, as this can cause hard to debug crashes on OS X. See here for more\n  // info:\n  //\n  //     http://developer.apple.com/library/mac/#DOCUMENTATION/DeveloperTools/gcc-4.0.1/gcc/Incompatibilities.html\n  char format[] = \"%lf\";\n\n  if (length <= bufferSize) {\n    Char buffer[bufferSize + 1];\n    memcpy(buffer, token.start_, length);\n    buffer[length] = 0;\n    count = sscanf(buffer, format, &value);\n  } else {\n    std::string buffer(token.start_, token.end_);\n    count = sscanf(buffer.c_str(), format, &value);\n  }\n\n  if (count != 1)\n    return addError(\"'\" + std::string(token.start_, token.end_) +\n                        \"' is not a number.\",\n                    token);\n  decoded = value;\n  return true;\n}\n\nbool Reader::decodeString(Token& token) {\n  std::string decoded_string;\n  if (!decodeString(token, decoded_string))\n    return false;\n  Value decoded(decoded_string);\n  currentValue().swapPayload(decoded);\n  currentValue().setOffsetStart(token.start_ - begin_);\n  currentValue().setOffsetLimit(token.end_ - begin_);\n  return true;\n}\n\nbool Reader::decodeString(Token& token, std::string& decoded) {\n  decoded.reserve(token.end_ - token.start_ - 2);\n  Location current = token.start_ + 1; // skip '\"'\n  Location end = token.end_ - 1;       // do not include '\"'\n  while (current != end) {\n    Char c = *current++;\n    if (c == '\"')\n      break;\n    else if (c == '\\\\') {\n      if (current == end)\n        return addError(\"Empty escape sequence in string\", token, current);\n      Char escape = *current++;\n      switch (escape) {\n      case '\"':\n        decoded += '\"';\n        break;\n      case '/':\n        decoded += '/';\n        break;\n      case '\\\\':\n        decoded += '\\\\';\n        break;\n      case 'b':\n        decoded += '\\b';\n        break;\n      case 'f':\n        decoded += '\\f';\n        break;\n      case 'n':\n        decoded += '\\n';\n        break;\n      case 'r':\n        decoded += '\\r';\n        break;\n      case 't':\n        decoded += '\\t';\n        break;\n      case 'u': {\n        unsigned int unicode;\n        if (!decodeUnicodeCodePoint(token, current, end, unicode))\n          return false;\n        decoded += codePointToUTF8(unicode);\n      } break;\n      default:\n        return addError(\"Bad escape sequence in string\", token, current);\n      }\n    } else {\n      decoded += c;\n    }\n  }\n  return true;\n}\n\nbool Reader::decodeUnicodeCodePoint(Token& token,\n                                    Location& current,\n                                    Location end,\n                                    unsigned int& unicode) {\n\n  if (!decodeUnicodeEscapeSequence(token, current, end, unicode))\n    return false;\n  if (unicode >= 0xD800 && unicode <= 0xDBFF) {\n    // surrogate pairs\n    if (end - current < 6)\n      return addError(\n          \"additional six characters expected to parse unicode surrogate pair.\",\n          token,\n          current);\n    unsigned int surrogatePair;\n    if (*(current++) == '\\\\' && *(current++) == 'u') {\n      if (decodeUnicodeEscapeSequence(token, current, end, surrogatePair)) {\n        unicode = 0x10000 + ((unicode & 0x3FF) << 10) + (surrogatePair & 0x3FF);\n      } else\n        return false;\n    } else\n      return addError(\"expecting another \\\\u token to begin the second half of \"\n                      \"a unicode surrogate pair\",\n                      token,\n                      current);\n  }\n  return true;\n}\n\nbool Reader::decodeUnicodeEscapeSequence(Token& token,\n                                         Location& current,\n                                         Location end,\n                                         unsigned int& unicode) {\n  if (end - current < 4)\n    return addError(\n        \"Bad unicode escape sequence in string: four digits expected.\",\n        token,\n        current);\n  unicode = 0;\n  for (int index = 0; index < 4; ++index) {\n    Char c = *current++;\n    unicode *= 16;\n    if (c >= '0' && c <= '9')\n      unicode += c - '0';\n    else if (c >= 'a' && c <= 'f')\n      unicode += c - 'a' + 10;\n    else if (c >= 'A' && c <= 'F')\n      unicode += c - 'A' + 10;\n    else\n      return addError(\n          \"Bad unicode escape sequence in string: hexadecimal digit expected.\",\n          token,\n          current);\n  }\n  return true;\n}\n\nbool\nReader::addError(const std::string& message, Token& token, Location extra) {\n  ErrorInfo info;\n  info.token_ = token;\n  info.message_ = message;\n  info.extra_ = extra;\n  errors_.push_back(info);\n  return false;\n}\n\nbool Reader::recoverFromError(TokenType skipUntilToken) {\n  int errorCount = int(errors_.size());\n  Token skip;\n  for (;;) {\n    if (!readToken(skip))\n      errors_.resize(errorCount); // discard errors caused by recovery\n    if (skip.type_ == skipUntilToken || skip.type_ == tokenEndOfStream)\n      break;\n  }\n  errors_.resize(errorCount);\n  return false;\n}\n\nbool Reader::addErrorAndRecover(const std::string& message,\n                                Token& token,\n                                TokenType skipUntilToken) {\n  addError(message, token);\n  return recoverFromError(skipUntilToken);\n}\n\nValue& Reader::currentValue() { return *(nodes_.top()); }\n\nReader::Char Reader::getNextChar() {\n  if (current_ == end_)\n    return 0;\n  return *current_++;\n}\n\nvoid Reader::getLocationLineAndColumn(Location location,\n                                      int& line,\n                                      int& column) const {\n  Location current = begin_;\n  Location lastLineStart = current;\n  line = 0;\n  while (current < location && current != end_) {\n    Char c = *current++;\n    if (c == '\\r') {\n      if (*current == '\\n')\n        ++current;\n      lastLineStart = current;\n      ++line;\n    } else if (c == '\\n') {\n      lastLineStart = current;\n      ++line;\n    }\n  }\n  // column & line start at 1\n  column = int(location - lastLineStart) + 1;\n  ++line;\n}\n\nstd::string Reader::getLocationLineAndColumn(Location location) const {\n  int line, column;\n  getLocationLineAndColumn(location, line, column);\n  char buffer[18 + 16 + 16 + 1];\n#if defined(_MSC_VER) && defined(__STDC_SECURE_LIB__)\n#if defined(WINCE)\n  _snprintf(buffer, sizeof(buffer), \"Line %d, Column %d\", line, column);\n#else\n  sprintf_s(buffer, sizeof(buffer), \"Line %d, Column %d\", line, column);\n#endif\n#else\n  snprintf(buffer, sizeof(buffer), \"Line %d, Column %d\", line, column);\n#endif\n  return buffer;\n}\n\n// Deprecated. Preserved for backward compatibility\nstd::string Reader::getFormatedErrorMessages() const {\n  return getFormattedErrorMessages();\n}\n\nstd::string Reader::getFormattedErrorMessages() const {\n  std::string formattedMessage;\n  for (Errors::const_iterator itError = errors_.begin();\n       itError != errors_.end();\n       ++itError) {\n    const ErrorInfo& error = *itError;\n    formattedMessage +=\n        \"* \" + getLocationLineAndColumn(error.token_.start_) + \"\\n\";\n    formattedMessage += \"  \" + error.message_ + \"\\n\";\n    if (error.extra_)\n      formattedMessage +=\n          \"See \" + getLocationLineAndColumn(error.extra_) + \" for detail.\\n\";\n  }\n  return formattedMessage;\n}\n\nstd::vector<Reader::StructuredError> Reader::getStructuredErrors() const {\n  std::vector<Reader::StructuredError> allErrors;\n  for (Errors::const_iterator itError = errors_.begin();\n       itError != errors_.end();\n       ++itError) {\n    const ErrorInfo& error = *itError;\n    Reader::StructuredError structured;\n    structured.offset_start = error.token_.start_ - begin_;\n    structured.offset_limit = error.token_.end_ - begin_;\n    structured.message = error.message_;\n    allErrors.push_back(structured);\n  }\n  return allErrors;\n}\n\nbool Reader::pushError(const Value& value, const std::string& message) {\n  size_t length = end_ - begin_;\n  if(value.getOffsetStart() > length\n    || value.getOffsetLimit() > length)\n    return false;\n  Token token;\n  token.type_ = tokenError;\n  token.start_ = begin_ + value.getOffsetStart();\n  token.end_ = end_ + value.getOffsetLimit();\n  ErrorInfo info;\n  info.token_ = token;\n  info.message_ = message;\n  info.extra_ = 0;\n  errors_.push_back(info);\n  return true;\n}\n\nbool Reader::pushError(const Value& value, const std::string& message, const Value& extra) {\n  size_t length = end_ - begin_;\n  if(value.getOffsetStart() > length\n    || value.getOffsetLimit() > length\n    || extra.getOffsetLimit() > length)\n    return false;\n  Token token;\n  token.type_ = tokenError;\n  token.start_ = begin_ + value.getOffsetStart();\n  token.end_ = begin_ + value.getOffsetLimit();\n  ErrorInfo info;\n  info.token_ = token;\n  info.message_ = message;\n  info.extra_ = begin_ + extra.getOffsetStart();\n  errors_.push_back(info);\n  return true;\n}\n\nbool Reader::good() const {\n  return !errors_.size();\n}\n\n// exact copy of Features\nclass OurFeatures {\npublic:\n  static OurFeatures all();\n  OurFeatures();\n  bool allowComments_;\n  bool strictRoot_;\n  bool allowDroppedNullPlaceholders_;\n  bool allowNumericKeys_;\n  bool allowSingleQuotes_;\n  bool failIfExtra_;\n  bool rejectDupKeys_;\n  int stackLimit_;\n};  // OurFeatures\n\n// exact copy of Implementation of class Features\n// ////////////////////////////////\n\nOurFeatures::OurFeatures()\n    : allowComments_(true), strictRoot_(false)\n    , allowDroppedNullPlaceholders_(false), allowNumericKeys_(false)\n    , allowSingleQuotes_(false)\n    , failIfExtra_(false)\n{\n}\n\nOurFeatures OurFeatures::all() { return OurFeatures(); }\n\n// Implementation of class Reader\n// ////////////////////////////////\n\n// exact copy of Reader, renamed to OurReader\nclass OurReader {\npublic:\n  typedef char Char;\n  typedef const Char* Location;\n  struct StructuredError {\n    size_t offset_start;\n    size_t offset_limit;\n    std::string message;\n  };\n\n  OurReader(OurFeatures const& features);\n  bool parse(const char* beginDoc,\n             const char* endDoc,\n             Value& root,\n             bool collectComments = true);\n  std::string getFormattedErrorMessages() const;\n  std::vector<StructuredError> getStructuredErrors() const;\n  bool pushError(const Value& value, const std::string& message);\n  bool pushError(const Value& value, const std::string& message, const Value& extra);\n  bool good() const;\n\nprivate:\n  OurReader(OurReader const&);  // no impl\n  void operator=(OurReader const&);  // no impl\n\n  enum TokenType {\n    tokenEndOfStream = 0,\n    tokenObjectBegin,\n    tokenObjectEnd,\n    tokenArrayBegin,\n    tokenArrayEnd,\n    tokenString,\n    tokenNumber,\n    tokenTrue,\n    tokenFalse,\n    tokenNull,\n    tokenArraySeparator,\n    tokenMemberSeparator,\n    tokenComment,\n    tokenError\n  };\n\n  class Token {\n  public:\n    TokenType type_;\n    Location start_;\n    Location end_;\n  };\n\n  class ErrorInfo {\n  public:\n    Token token_;\n    std::string message_;\n    Location extra_;\n  };\n\n  typedef std::deque<ErrorInfo> Errors;\n\n  bool readToken(Token& token);\n  void skipSpaces();\n  bool match(Location pattern, int patternLength);\n  bool readComment();\n  bool readCStyleComment();\n  bool readCppStyleComment();\n  bool readString();\n  bool readStringSingleQuote();\n  void readNumber();\n  bool readValue();\n  bool readObject(Token& token);\n  bool readArray(Token& token);\n  bool decodeNumber(Token& token);\n  bool decodeNumber(Token& token, Value& decoded);\n  bool decodeString(Token& token);\n  bool decodeString(Token& token, std::string& decoded);\n  bool decodeDouble(Token& token);\n  bool decodeDouble(Token& token, Value& decoded);\n  bool decodeUnicodeCodePoint(Token& token,\n                              Location& current,\n                              Location end,\n                              unsigned int& unicode);\n  bool decodeUnicodeEscapeSequence(Token& token,\n                                   Location& current,\n                                   Location end,\n                                   unsigned int& unicode);\n  bool addError(const std::string& message, Token& token, Location extra = 0);\n  bool recoverFromError(TokenType skipUntilToken);\n  bool addErrorAndRecover(const std::string& message,\n                          Token& token,\n                          TokenType skipUntilToken);\n  void skipUntilSpace();\n  Value& currentValue();\n  Char getNextChar();\n  void\n  getLocationLineAndColumn(Location location, int& line, int& column) const;\n  std::string getLocationLineAndColumn(Location location) const;\n  void addComment(Location begin, Location end, CommentPlacement placement);\n  void skipCommentTokens(Token& token);\n\n  typedef std::stack<Value*> Nodes;\n  Nodes nodes_;\n  Errors errors_;\n  std::string document_;\n  Location begin_;\n  Location end_;\n  Location current_;\n  Location lastValueEnd_;\n  Value* lastValue_;\n  std::string commentsBefore_;\n  int stackDepth_;\n\n  OurFeatures const features_;\n  bool collectComments_;\n};  // OurReader\n\n// complete copy of Read impl, for OurReader\n\nOurReader::OurReader(OurFeatures const& features)\n    : errors_(), document_(), begin_(), end_(), current_(), lastValueEnd_(),\n      lastValue_(), commentsBefore_(), features_(features), collectComments_() {\n}\n\nbool OurReader::parse(const char* beginDoc,\n                   const char* endDoc,\n                   Value& root,\n                   bool collectComments) {\n  if (!features_.allowComments_) {\n    collectComments = false;\n  }\n\n  begin_ = beginDoc;\n  end_ = endDoc;\n  collectComments_ = collectComments;\n  current_ = begin_;\n  lastValueEnd_ = 0;\n  lastValue_ = 0;\n  commentsBefore_ = \"\";\n  errors_.clear();\n  while (!nodes_.empty())\n    nodes_.pop();\n  nodes_.push(&root);\n\n  stackDepth_ = 0;\n  bool successful = readValue();\n  Token token;\n  skipCommentTokens(token);\n  if (features_.failIfExtra_) {\n    if (token.type_ != tokenError && token.type_ != tokenEndOfStream) {\n      addError(\"Extra non-whitespace after JSON value.\", token);\n      return false;\n    }\n  }\n  if (collectComments_ && !commentsBefore_.empty())\n    root.setComment(commentsBefore_, commentAfter);\n  if (features_.strictRoot_) {\n    if (!root.isArray() && !root.isObject()) {\n      // Set error location to start of doc, ideally should be first token found\n      // in doc\n      token.type_ = tokenError;\n      token.start_ = beginDoc;\n      token.end_ = endDoc;\n      addError(\n          \"A valid JSON document must be either an array or an object value.\",\n          token);\n      return false;\n    }\n  }\n  return successful;\n}\n\nbool OurReader::readValue() {\n  if (stackDepth_ >= features_.stackLimit_) throwRuntimeError(\"Exceeded stackLimit in readValue().\");\n  ++stackDepth_;\n  Token token;\n  skipCommentTokens(token);\n  bool successful = true;\n\n  if (collectComments_ && !commentsBefore_.empty()) {\n    currentValue().setComment(commentsBefore_, commentBefore);\n    commentsBefore_ = \"\";\n  }\n\n  switch (token.type_) {\n  case tokenObjectBegin:\n    successful = readObject(token);\n    currentValue().setOffsetLimit(current_ - begin_);\n    break;\n  case tokenArrayBegin:\n    successful = readArray(token);\n    currentValue().setOffsetLimit(current_ - begin_);\n    break;\n  case tokenNumber:\n    successful = decodeNumber(token);\n    break;\n  case tokenString:\n    successful = decodeString(token);\n    break;\n  case tokenTrue:\n    {\n    Value v(true);\n    currentValue().swapPayload(v);\n    currentValue().setOffsetStart(token.start_ - begin_);\n    currentValue().setOffsetLimit(token.end_ - begin_);\n    }\n    break;\n  case tokenFalse:\n    {\n    Value v(false);\n    currentValue().swapPayload(v);\n    currentValue().setOffsetStart(token.start_ - begin_);\n    currentValue().setOffsetLimit(token.end_ - begin_);\n    }\n    break;\n  case tokenNull:\n    {\n    Value v;\n    currentValue().swapPayload(v);\n    currentValue().setOffsetStart(token.start_ - begin_);\n    currentValue().setOffsetLimit(token.end_ - begin_);\n    }\n    break;\n  case tokenArraySeparator:\n  case tokenObjectEnd:\n  case tokenArrayEnd:\n    if (features_.allowDroppedNullPlaceholders_) {\n      // \"Un-read\" the current token and mark the current value as a null\n      // token.\n      current_--;\n      Value v;\n      currentValue().swapPayload(v);\n      currentValue().setOffsetStart(current_ - begin_ - 1);\n      currentValue().setOffsetLimit(current_ - begin_);\n      break;\n    } // else, fall through ...\n  default:\n    currentValue().setOffsetStart(token.start_ - begin_);\n    currentValue().setOffsetLimit(token.end_ - begin_);\n    return addError(\"Syntax error: value, object or array expected.\", token);\n  }\n\n  if (collectComments_) {\n    lastValueEnd_ = current_;\n    lastValue_ = &currentValue();\n  }\n\n  --stackDepth_;\n  return successful;\n}\n\nvoid OurReader::skipCommentTokens(Token& token) {\n  if (features_.allowComments_) {\n    do {\n      readToken(token);\n    } while (token.type_ == tokenComment);\n  } else {\n    readToken(token);\n  }\n}\n\nbool OurReader::readToken(Token& token) {\n  skipSpaces();\n  token.start_ = current_;\n  Char c = getNextChar();\n  bool ok = true;\n  switch (c) {\n  case '{':\n    token.type_ = tokenObjectBegin;\n    break;\n  case '}':\n    token.type_ = tokenObjectEnd;\n    break;\n  case '[':\n    token.type_ = tokenArrayBegin;\n    break;\n  case ']':\n    token.type_ = tokenArrayEnd;\n    break;\n  case '\"':\n    token.type_ = tokenString;\n    ok = readString();\n    break;\n  case '\\'':\n    if (features_.allowSingleQuotes_) {\n    token.type_ = tokenString;\n    ok = readStringSingleQuote();\n    break;\n    } // else continue\n  case '/':\n    token.type_ = tokenComment;\n    ok = readComment();\n    break;\n  case '0':\n  case '1':\n  case '2':\n  case '3':\n  case '4':\n  case '5':\n  case '6':\n  case '7':\n  case '8':\n  case '9':\n  case '-':\n    token.type_ = tokenNumber;\n    readNumber();\n    break;\n  case 't':\n    token.type_ = tokenTrue;\n    ok = match(\"rue\", 3);\n    break;\n  case 'f':\n    token.type_ = tokenFalse;\n    ok = match(\"alse\", 4);\n    break;\n  case 'n':\n    token.type_ = tokenNull;\n    ok = match(\"ull\", 3);\n    break;\n  case ',':\n    token.type_ = tokenArraySeparator;\n    break;\n  case ':':\n    token.type_ = tokenMemberSeparator;\n    break;\n  case 0:\n    token.type_ = tokenEndOfStream;\n    break;\n  default:\n    ok = false;\n    break;\n  }\n  if (!ok)\n    token.type_ = tokenError;\n  token.end_ = current_;\n  return true;\n}\n\nvoid OurReader::skipSpaces() {\n  while (current_ != end_) {\n    Char c = *current_;\n    if (c == ' ' || c == '\\t' || c == '\\r' || c == '\\n')\n      ++current_;\n    else\n      break;\n  }\n}\n\nbool OurReader::match(Location pattern, int patternLength) {\n  if (end_ - current_ < patternLength)\n    return false;\n  int index = patternLength;\n  while (index--)\n    if (current_[index] != pattern[index])\n      return false;\n  current_ += patternLength;\n  return true;\n}\n\nbool OurReader::readComment() {\n  Location commentBegin = current_ - 1;\n  Char c = getNextChar();\n  bool successful = false;\n  if (c == '*')\n    successful = readCStyleComment();\n  else if (c == '/')\n    successful = readCppStyleComment();\n  if (!successful)\n    return false;\n\n  if (collectComments_) {\n    CommentPlacement placement = commentBefore;\n    if (lastValueEnd_ && !containsNewLine(lastValueEnd_, commentBegin)) {\n      if (c != '*' || !containsNewLine(commentBegin, current_))\n        placement = commentAfterOnSameLine;\n    }\n\n    addComment(commentBegin, current_, placement);\n  }\n  return true;\n}\n\nvoid\nOurReader::addComment(Location begin, Location end, CommentPlacement placement) {\n  assert(collectComments_);\n  const std::string& normalized = normalizeEOL(begin, end);\n  if (placement == commentAfterOnSameLine) {\n    assert(lastValue_ != 0);\n    lastValue_->setComment(normalized, placement);\n  } else {\n    commentsBefore_ += normalized;\n  }\n}\n\nbool OurReader::readCStyleComment() {\n  while (current_ != end_) {\n    Char c = getNextChar();\n    if (c == '*' && *current_ == '/')\n      break;\n  }\n  return getNextChar() == '/';\n}\n\nbool OurReader::readCppStyleComment() {\n  while (current_ != end_) {\n    Char c = getNextChar();\n    if (c == '\\n')\n      break;\n    if (c == '\\r') {\n      // Consume DOS EOL. It will be normalized in addComment.\n      if (current_ != end_ && *current_ == '\\n')\n        getNextChar();\n      // Break on Moc OS 9 EOL.\n      break;\n    }\n  }\n  return true;\n}\n\nvoid OurReader::readNumber() {\n  const char *p = current_;\n  char c = '0'; // stopgap for already consumed character\n  // integral part\n  while (c >= '0' && c <= '9')\n    c = (current_ = p) < end_ ? *p++ : 0;\n  // fractional part\n  if (c == '.') {\n    c = (current_ = p) < end_ ? *p++ : 0;\n    while (c >= '0' && c <= '9')\n      c = (current_ = p) < end_ ? *p++ : 0;\n  }\n  // exponential part\n  if (c == 'e' || c == 'E') {\n    c = (current_ = p) < end_ ? *p++ : 0;\n    if (c == '+' || c == '-')\n      c = (current_ = p) < end_ ? *p++ : 0;\n    while (c >= '0' && c <= '9')\n      c = (current_ = p) < end_ ? *p++ : 0;\n  }\n}\nbool OurReader::readString() {\n  Char c = 0;\n  while (current_ != end_) {\n    c = getNextChar();\n    if (c == '\\\\')\n      getNextChar();\n    else if (c == '\"')\n      break;\n  }\n  return c == '\"';\n}\n\n\nbool OurReader::readStringSingleQuote() {\n  Char c = 0;\n  while (current_ != end_) {\n    c = getNextChar();\n    if (c == '\\\\')\n      getNextChar();\n    else if (c == '\\'')\n      break;\n  }\n  return c == '\\'';\n}\n\nbool OurReader::readObject(Token& tokenStart) {\n  Token tokenName;\n  std::string name;\n  Value init(objectValue);\n  currentValue().swapPayload(init);\n  currentValue().setOffsetStart(tokenStart.start_ - begin_);\n  while (readToken(tokenName)) {\n    bool initialTokenOk = true;\n    while (tokenName.type_ == tokenComment && initialTokenOk)\n      initialTokenOk = readToken(tokenName);\n    if (!initialTokenOk)\n      break;\n    if (tokenName.type_ == tokenObjectEnd && name.empty()) // empty object\n      return true;\n    name = \"\";\n    if (tokenName.type_ == tokenString) {\n      if (!decodeString(tokenName, name))\n        return recoverFromError(tokenObjectEnd);\n    } else if (tokenName.type_ == tokenNumber && features_.allowNumericKeys_) {\n      Value numberName;\n      if (!decodeNumber(tokenName, numberName))\n        return recoverFromError(tokenObjectEnd);\n      name = numberName.asString();\n    } else {\n      break;\n    }\n\n    Token colon;\n    if (!readToken(colon) || colon.type_ != tokenMemberSeparator) {\n      return addErrorAndRecover(\n          \"Missing ':' after object member name\", colon, tokenObjectEnd);\n    }\n    if (name.length() >= (1U<<30)) throwRuntimeError(\"keylength >= 2^30\");\n    if (features_.rejectDupKeys_ && currentValue().isMember(name)) {\n      std::string msg = \"Duplicate key: '\" + name + \"'\";\n      return addErrorAndRecover(\n          msg, tokenName, tokenObjectEnd);\n    }\n    Value& value = currentValue()[name];\n    nodes_.push(&value);\n    bool ok = readValue();\n    nodes_.pop();\n    if (!ok) // error already set\n      return recoverFromError(tokenObjectEnd);\n\n    Token comma;\n    if (!readToken(comma) ||\n        (comma.type_ != tokenObjectEnd && comma.type_ != tokenArraySeparator &&\n         comma.type_ != tokenComment)) {\n      return addErrorAndRecover(\n          \"Missing ',' or '}' in object declaration\", comma, tokenObjectEnd);\n    }\n    bool finalizeTokenOk = true;\n    while (comma.type_ == tokenComment && finalizeTokenOk)\n      finalizeTokenOk = readToken(comma);\n    if (comma.type_ == tokenObjectEnd)\n      return true;\n  }\n  return addErrorAndRecover(\n      \"Missing '}' or object member name\", tokenName, tokenObjectEnd);\n}\n\nbool OurReader::readArray(Token& tokenStart) {\n  Value init(arrayValue);\n  currentValue().swapPayload(init);\n  currentValue().setOffsetStart(tokenStart.start_ - begin_);\n  skipSpaces();\n  if (*current_ == ']') // empty array\n  {\n    Token endArray;\n    readToken(endArray);\n    return true;\n  }\n  int index = 0;\n  for (;;) {\n    Value& value = currentValue()[index++];\n    nodes_.push(&value);\n    bool ok = readValue();\n    nodes_.pop();\n    if (!ok) // error already set\n      return recoverFromError(tokenArrayEnd);\n\n    Token token;\n    // Accept Comment after last item in the array.\n    ok = readToken(token);\n    while (token.type_ == tokenComment && ok) {\n      ok = readToken(token);\n    }\n    bool badTokenType =\n        (token.type_ != tokenArraySeparator && token.type_ != tokenArrayEnd);\n    if (!ok || badTokenType) {\n      return addErrorAndRecover(\n          \"Missing ',' or ']' in array declaration\", token, tokenArrayEnd);\n    }\n    if (token.type_ == tokenArrayEnd)\n      break;\n  }\n  return true;\n}\n\nbool OurReader::decodeNumber(Token& token) {\n  Value decoded;\n  if (!decodeNumber(token, decoded))\n    return false;\n  currentValue().swapPayload(decoded);\n  currentValue().setOffsetStart(token.start_ - begin_);\n  currentValue().setOffsetLimit(token.end_ - begin_);\n  return true;\n}\n\nbool OurReader::decodeNumber(Token& token, Value& decoded) {\n  // Attempts to parse the number as an integer. If the number is\n  // larger than the maximum supported value of an integer then\n  // we decode the number as a double.\n  Location current = token.start_;\n  bool isNegative = *current == '-';\n  if (isNegative)\n    ++current;\n  // TODO: Help the compiler do the div and mod at compile time or get rid of them.\n  Value::LargestUInt maxIntegerValue =\n      isNegative ? Value::LargestUInt(-Value::minLargestInt)\n                 : Value::maxLargestUInt;\n  Value::LargestUInt threshold = maxIntegerValue / 10;\n  Value::LargestUInt value = 0;\n  while (current < token.end_) {\n    Char c = *current++;\n    if (c < '0' || c > '9')\n      return decodeDouble(token, decoded);\n    Value::UInt digit(c - '0');\n    if (value >= threshold) {\n      // We've hit or exceeded the max value divided by 10 (rounded down). If\n      // a) we've only just touched the limit, b) this is the last digit, and\n      // c) it's small enough to fit in that rounding delta, we're okay.\n      // Otherwise treat this number as a double to avoid overflow.\n      if (value > threshold || current != token.end_ ||\n          digit > maxIntegerValue % 10) {\n        return decodeDouble(token, decoded);\n      }\n    }\n    value = value * 10 + digit;\n  }\n  if (isNegative)\n    decoded = -Value::LargestInt(value);\n  else if (value <= Value::LargestUInt(Value::maxInt))\n    decoded = Value::LargestInt(value);\n  else\n    decoded = value;\n  return true;\n}\n\nbool OurReader::decodeDouble(Token& token) {\n  Value decoded;\n  if (!decodeDouble(token, decoded))\n    return false;\n  currentValue().swapPayload(decoded);\n  currentValue().setOffsetStart(token.start_ - begin_);\n  currentValue().setOffsetLimit(token.end_ - begin_);\n  return true;\n}\n\nbool OurReader::decodeDouble(Token& token, Value& decoded) {\n  double value = 0;\n  const int bufferSize = 32;\n  int count;\n  int length = int(token.end_ - token.start_);\n\n  // Sanity check to avoid buffer overflow exploits.\n  if (length < 0) {\n    return addError(\"Unable to parse token length\", token);\n  }\n\n  // Avoid using a string constant for the format control string given to\n  // sscanf, as this can cause hard to debug crashes on OS X. See here for more\n  // info:\n  //\n  //     http://developer.apple.com/library/mac/#DOCUMENTATION/DeveloperTools/gcc-4.0.1/gcc/Incompatibilities.html\n  char format[] = \"%lf\";\n\n  if (length <= bufferSize) {\n    Char buffer[bufferSize + 1];\n    memcpy(buffer, token.start_, length);\n    buffer[length] = 0;\n    count = sscanf(buffer, format, &value);\n  } else {\n    std::string buffer(token.start_, token.end_);\n    count = sscanf(buffer.c_str(), format, &value);\n  }\n\n  if (count != 1)\n    return addError(\"'\" + std::string(token.start_, token.end_) +\n                        \"' is not a number.\",\n                    token);\n  decoded = value;\n  return true;\n}\n\nbool OurReader::decodeString(Token& token) {\n  std::string decoded_string;\n  if (!decodeString(token, decoded_string))\n    return false;\n  Value decoded(decoded_string);\n  currentValue().swapPayload(decoded);\n  currentValue().setOffsetStart(token.start_ - begin_);\n  currentValue().setOffsetLimit(token.end_ - begin_);\n  return true;\n}\n\nbool OurReader::decodeString(Token& token, std::string& decoded) {\n  decoded.reserve(token.end_ - token.start_ - 2);\n  Location current = token.start_ + 1; // skip '\"'\n  Location end = token.end_ - 1;       // do not include '\"'\n  while (current != end) {\n    Char c = *current++;\n    if (c == '\"')\n      break;\n    else if (c == '\\\\') {\n      if (current == end)\n        return addError(\"Empty escape sequence in string\", token, current);\n      Char escape = *current++;\n      switch (escape) {\n      case '\"':\n        decoded += '\"';\n        break;\n      case '/':\n        decoded += '/';\n        break;\n      case '\\\\':\n        decoded += '\\\\';\n        break;\n      case 'b':\n        decoded += '\\b';\n        break;\n      case 'f':\n        decoded += '\\f';\n        break;\n      case 'n':\n        decoded += '\\n';\n        break;\n      case 'r':\n        decoded += '\\r';\n        break;\n      case 't':\n        decoded += '\\t';\n        break;\n      case 'u': {\n        unsigned int unicode;\n        if (!decodeUnicodeCodePoint(token, current, end, unicode))\n          return false;\n        decoded += codePointToUTF8(unicode);\n      } break;\n      default:\n        return addError(\"Bad escape sequence in string\", token, current);\n      }\n    } else {\n      decoded += c;\n    }\n  }\n  return true;\n}\n\nbool OurReader::decodeUnicodeCodePoint(Token& token,\n                                    Location& current,\n                                    Location end,\n                                    unsigned int& unicode) {\n\n  if (!decodeUnicodeEscapeSequence(token, current, end, unicode))\n    return false;\n  if (unicode >= 0xD800 && unicode <= 0xDBFF) {\n    // surrogate pairs\n    if (end - current < 6)\n      return addError(\n          \"additional six characters expected to parse unicode surrogate pair.\",\n          token,\n          current);\n    unsigned int surrogatePair;\n    if (*(current++) == '\\\\' && *(current++) == 'u') {\n      if (decodeUnicodeEscapeSequence(token, current, end, surrogatePair)) {\n        unicode = 0x10000 + ((unicode & 0x3FF) << 10) + (surrogatePair & 0x3FF);\n      } else\n        return false;\n    } else\n      return addError(\"expecting another \\\\u token to begin the second half of \"\n                      \"a unicode surrogate pair\",\n                      token,\n                      current);\n  }\n  return true;\n}\n\nbool OurReader::decodeUnicodeEscapeSequence(Token& token,\n                                         Location& current,\n                                         Location end,\n                                         unsigned int& unicode) {\n  if (end - current < 4)\n    return addError(\n        \"Bad unicode escape sequence in string: four digits expected.\",\n        token,\n        current);\n  unicode = 0;\n  for (int index = 0; index < 4; ++index) {\n    Char c = *current++;\n    unicode *= 16;\n    if (c >= '0' && c <= '9')\n      unicode += c - '0';\n    else if (c >= 'a' && c <= 'f')\n      unicode += c - 'a' + 10;\n    else if (c >= 'A' && c <= 'F')\n      unicode += c - 'A' + 10;\n    else\n      return addError(\n          \"Bad unicode escape sequence in string: hexadecimal digit expected.\",\n          token,\n          current);\n  }\n  return true;\n}\n\nbool\nOurReader::addError(const std::string& message, Token& token, Location extra) {\n  ErrorInfo info;\n  info.token_ = token;\n  info.message_ = message;\n  info.extra_ = extra;\n  errors_.push_back(info);\n  return false;\n}\n\nbool OurReader::recoverFromError(TokenType skipUntilToken) {\n  int errorCount = int(errors_.size());\n  Token skip;\n  for (;;) {\n    if (!readToken(skip))\n      errors_.resize(errorCount); // discard errors caused by recovery\n    if (skip.type_ == skipUntilToken || skip.type_ == tokenEndOfStream)\n      break;\n  }\n  errors_.resize(errorCount);\n  return false;\n}\n\nbool OurReader::addErrorAndRecover(const std::string& message,\n                                Token& token,\n                                TokenType skipUntilToken) {\n  addError(message, token);\n  return recoverFromError(skipUntilToken);\n}\n\nValue& OurReader::currentValue() { return *(nodes_.top()); }\n\nOurReader::Char OurReader::getNextChar() {\n  if (current_ == end_)\n    return 0;\n  return *current_++;\n}\n\nvoid OurReader::getLocationLineAndColumn(Location location,\n                                      int& line,\n                                      int& column) const {\n  Location current = begin_;\n  Location lastLineStart = current;\n  line = 0;\n  while (current < location && current != end_) {\n    Char c = *current++;\n    if (c == '\\r') {\n      if (*current == '\\n')\n        ++current;\n      lastLineStart = current;\n      ++line;\n    } else if (c == '\\n') {\n      lastLineStart = current;\n      ++line;\n    }\n  }\n  // column & line start at 1\n  column = int(location - lastLineStart) + 1;\n  ++line;\n}\n\nstd::string OurReader::getLocationLineAndColumn(Location location) const {\n  int line, column;\n  getLocationLineAndColumn(location, line, column);\n  char buffer[18 + 16 + 16 + 1];\n#if defined(_MSC_VER) && defined(__STDC_SECURE_LIB__)\n#if defined(WINCE)\n  _snprintf(buffer, sizeof(buffer), \"Line %d, Column %d\", line, column);\n#else\n  sprintf_s(buffer, sizeof(buffer), \"Line %d, Column %d\", line, column);\n#endif\n#else\n  snprintf(buffer, sizeof(buffer), \"Line %d, Column %d\", line, column);\n#endif\n  return buffer;\n}\n\nstd::string OurReader::getFormattedErrorMessages() const {\n  std::string formattedMessage;\n  for (Errors::const_iterator itError = errors_.begin();\n       itError != errors_.end();\n       ++itError) {\n    const ErrorInfo& error = *itError;\n    formattedMessage +=\n        \"* \" + getLocationLineAndColumn(error.token_.start_) + \"\\n\";\n    formattedMessage += \"  \" + error.message_ + \"\\n\";\n    if (error.extra_)\n      formattedMessage +=\n          \"See \" + getLocationLineAndColumn(error.extra_) + \" for detail.\\n\";\n  }\n  return formattedMessage;\n}\n\nstd::vector<OurReader::StructuredError> OurReader::getStructuredErrors() const {\n  std::vector<OurReader::StructuredError> allErrors;\n  for (Errors::const_iterator itError = errors_.begin();\n       itError != errors_.end();\n       ++itError) {\n    const ErrorInfo& error = *itError;\n    OurReader::StructuredError structured;\n    structured.offset_start = error.token_.start_ - begin_;\n    structured.offset_limit = error.token_.end_ - begin_;\n    structured.message = error.message_;\n    allErrors.push_back(structured);\n  }\n  return allErrors;\n}\n\nbool OurReader::pushError(const Value& value, const std::string& message) {\n  size_t length = end_ - begin_;\n  if(value.getOffsetStart() > length\n    || value.getOffsetLimit() > length)\n    return false;\n  Token token;\n  token.type_ = tokenError;\n  token.start_ = begin_ + value.getOffsetStart();\n  token.end_ = end_ + value.getOffsetLimit();\n  ErrorInfo info;\n  info.token_ = token;\n  info.message_ = message;\n  info.extra_ = 0;\n  errors_.push_back(info);\n  return true;\n}\n\nbool OurReader::pushError(const Value& value, const std::string& message, const Value& extra) {\n  size_t length = end_ - begin_;\n  if(value.getOffsetStart() > length\n    || value.getOffsetLimit() > length\n    || extra.getOffsetLimit() > length)\n    return false;\n  Token token;\n  token.type_ = tokenError;\n  token.start_ = begin_ + value.getOffsetStart();\n  token.end_ = begin_ + value.getOffsetLimit();\n  ErrorInfo info;\n  info.token_ = token;\n  info.message_ = message;\n  info.extra_ = begin_ + extra.getOffsetStart();\n  errors_.push_back(info);\n  return true;\n}\n\nbool OurReader::good() const {\n  return !errors_.size();\n}\n\n\nclass OurCharReader : public CharReader {\n  bool const collectComments_;\n  OurReader reader_;\npublic:\n  OurCharReader(\n    bool collectComments,\n    OurFeatures const& features)\n  : collectComments_(collectComments)\n  , reader_(features)\n  {}\n  virtual bool parse(\n      char const* beginDoc, char const* endDoc,\n      Value* root, std::string* errs) {\n    bool ok = reader_.parse(beginDoc, endDoc, *root, collectComments_);\n    if (errs) {\n      *errs = reader_.getFormattedErrorMessages();\n    }\n    return ok;\n  }\n};\n\nCharReaderBuilder::CharReaderBuilder()\n{\n  setDefaults(&settings_);\n}\nCharReaderBuilder::~CharReaderBuilder()\n{}\nCharReader* CharReaderBuilder::newCharReader() const\n{\n  bool collectComments = settings_[\"collectComments\"].asBool();\n  OurFeatures features = OurFeatures::all();\n  features.allowComments_ = settings_[\"allowComments\"].asBool();\n  features.strictRoot_ = settings_[\"strictRoot\"].asBool();\n  features.allowDroppedNullPlaceholders_ = settings_[\"allowDroppedNullPlaceholders\"].asBool();\n  features.allowNumericKeys_ = settings_[\"allowNumericKeys\"].asBool();\n  features.allowSingleQuotes_ = settings_[\"allowSingleQuotes\"].asBool();\n  features.stackLimit_ = settings_[\"stackLimit\"].asInt();\n  features.failIfExtra_ = settings_[\"failIfExtra\"].asBool();\n  features.rejectDupKeys_ = settings_[\"rejectDupKeys\"].asBool();\n  return new OurCharReader(collectComments, features);\n}\nstatic void getValidReaderKeys(std::set<std::string>* valid_keys)\n{\n  valid_keys->clear();\n  valid_keys->insert(\"collectComments\");\n  valid_keys->insert(\"allowComments\");\n  valid_keys->insert(\"strictRoot\");\n  valid_keys->insert(\"allowDroppedNullPlaceholders\");\n  valid_keys->insert(\"allowNumericKeys\");\n  valid_keys->insert(\"allowSingleQuotes\");\n  valid_keys->insert(\"stackLimit\");\n  valid_keys->insert(\"failIfExtra\");\n  valid_keys->insert(\"rejectDupKeys\");\n}\nbool CharReaderBuilder::validate(Json::Value* invalid) const\n{\n  Json::Value my_invalid;\n  if (!invalid) invalid = &my_invalid;  // so we do not need to test for NULL\n  Json::Value& inv = *invalid;\n  std::set<std::string> valid_keys;\n  getValidReaderKeys(&valid_keys);\n  Value::Members keys = settings_.getMemberNames();\n  size_t n = keys.size();\n  for (size_t i = 0; i < n; ++i) {\n    std::string const& key = keys[i];\n    if (valid_keys.find(key) == valid_keys.end()) {\n      inv[key] = settings_[key];\n    }\n  }\n  return 0u == inv.size();\n}\nValue& CharReaderBuilder::operator[](std::string key)\n{\n  return settings_[key];\n}\n// static\nvoid CharReaderBuilder::strictMode(Json::Value* settings)\n{\n//! [CharReaderBuilderStrictMode]\n  (*settings)[\"allowComments\"] = false;\n  (*settings)[\"strictRoot\"] = true;\n  (*settings)[\"allowDroppedNullPlaceholders\"] = false;\n  (*settings)[\"allowNumericKeys\"] = false;\n  (*settings)[\"allowSingleQuotes\"] = false;\n  (*settings)[\"failIfExtra\"] = true;\n  (*settings)[\"rejectDupKeys\"] = true;\n//! [CharReaderBuilderStrictMode]\n}\n// static\nvoid CharReaderBuilder::setDefaults(Json::Value* settings)\n{\n//! [CharReaderBuilderDefaults]\n  (*settings)[\"collectComments\"] = true;\n  (*settings)[\"allowComments\"] = true;\n  (*settings)[\"strictRoot\"] = false;\n  (*settings)[\"allowDroppedNullPlaceholders\"] = false;\n  (*settings)[\"allowNumericKeys\"] = false;\n  (*settings)[\"allowSingleQuotes\"] = false;\n  (*settings)[\"stackLimit\"] = 1000;\n  (*settings)[\"failIfExtra\"] = false;\n  (*settings)[\"rejectDupKeys\"] = false;\n//! [CharReaderBuilderDefaults]\n}\n\n//////////////////////////////////\n// global functions\n\nbool parseFromStream(\n    CharReader::Factory const& fact, std::istream& sin,\n    Value* root, std::string* errs)\n{\n  std::ostringstream ssin;\n  ssin << sin.rdbuf();\n  std::string doc = ssin.str();\n  char const* begin = doc.data();\n  char const* end = begin + doc.size();\n  // Note that we do not actually need a null-terminator.\n  CharReaderPtr const reader(fact.newCharReader());\n  return reader->parse(begin, end, root, errs);\n}\n\nstd::istream& operator>>(std::istream& sin, Value& root) {\n  CharReaderBuilder b;\n  std::string errs;\n  bool ok = parseFromStream(b, sin, &root, &errs);\n  if (!ok) {\n    fprintf(stderr,\n            \"Error from reader: %s\",\n            errs.c_str());\n\n    throwRuntimeError(\"reader error\");\n  }\n  return sin;\n}\n\n} // namespace Json\n\n// //////////////////////////////////////////////////////////////////////\n// End of content of file: src/lib_json/json_reader.cpp\n// //////////////////////////////////////////////////////////////////////\n\n\n\n\n\n\n// //////////////////////////////////////////////////////////////////////\n// Beginning of content of file: src/lib_json/json_valueiterator.inl\n// //////////////////////////////////////////////////////////////////////\n\n// Copyright 2007-2010 Baptiste Lepilleur\n// Distributed under MIT license, or public domain if desired and\n// recognized in your jurisdiction.\n// See file LICENSE for detail or copy at http://jsoncpp.sourceforge.net/LICENSE\n\n// included by json_value.cpp\n\nnamespace Json {\n\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// class ValueIteratorBase\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n\nValueIteratorBase::ValueIteratorBase()\n    : current_(), isNull_(true) {\n}\n\nValueIteratorBase::ValueIteratorBase(\n    const Value::ObjectValues::iterator& current)\n    : current_(current), isNull_(false) {}\n\nValue& ValueIteratorBase::deref() const {\n  return current_->second;\n}\n\nvoid ValueIteratorBase::increment() {\n  ++current_;\n}\n\nvoid ValueIteratorBase::decrement() {\n  --current_;\n}\n\nValueIteratorBase::difference_type\nValueIteratorBase::computeDistance(const SelfType& other) const {\n#ifdef JSON_USE_CPPTL_SMALLMAP\n  return other.current_ - current_;\n#else\n  // Iterator for null value are initialized using the default\n  // constructor, which initialize current_ to the default\n  // std::map::iterator. As begin() and end() are two instance\n  // of the default std::map::iterator, they can not be compared.\n  // To allow this, we handle this comparison specifically.\n  if (isNull_ && other.isNull_) {\n    return 0;\n  }\n\n  // Usage of std::distance is not portable (does not compile with Sun Studio 12\n  // RogueWave STL,\n  // which is the one used by default).\n  // Using a portable hand-made version for non random iterator instead:\n  //   return difference_type( std::distance( current_, other.current_ ) );\n  difference_type myDistance = 0;\n  for (Value::ObjectValues::iterator it = current_; it != other.current_;\n       ++it) {\n    ++myDistance;\n  }\n  return myDistance;\n#endif\n}\n\nbool ValueIteratorBase::isEqual(const SelfType& other) const {\n  if (isNull_) {\n    return other.isNull_;\n  }\n  return current_ == other.current_;\n}\n\nvoid ValueIteratorBase::copy(const SelfType& other) {\n  current_ = other.current_;\n  isNull_ = other.isNull_;\n}\n\nValue ValueIteratorBase::key() const {\n  const Value::CZString czstring = (*current_).first;\n  if (czstring.data()) {\n    if (czstring.isStaticString())\n      return Value(StaticString(czstring.data()));\n    return Value(czstring.data(), czstring.data() + czstring.length());\n  }\n  return Value(czstring.index());\n}\n\nUInt ValueIteratorBase::index() const {\n  const Value::CZString czstring = (*current_).first;\n  if (!czstring.data())\n    return czstring.index();\n  return Value::UInt(-1);\n}\n\nstd::string ValueIteratorBase::name() const {\n  char const* key;\n  char const* end;\n  key = memberName(&end);\n  if (!key) return std::string();\n  return std::string(key, end);\n}\n\nchar const* ValueIteratorBase::memberName() const {\n  const char* name = (*current_).first.data();\n  return name ? name : \"\";\n}\n\nchar const* ValueIteratorBase::memberName(char const** end) const {\n  const char* name = (*current_).first.data();\n  if (!name) {\n    *end = NULL;\n    return NULL;\n  }\n  *end = name + (*current_).first.length();\n  return name;\n}\n\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// class ValueConstIterator\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n\nValueConstIterator::ValueConstIterator() {}\n\nValueConstIterator::ValueConstIterator(\n    const Value::ObjectValues::iterator& current)\n    : ValueIteratorBase(current) {}\n\nValueConstIterator& ValueConstIterator::\noperator=(const ValueIteratorBase& other) {\n  copy(other);\n  return *this;\n}\n\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// class ValueIterator\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n\nValueIterator::ValueIterator() {}\n\nValueIterator::ValueIterator(const Value::ObjectValues::iterator& current)\n    : ValueIteratorBase(current) {}\n\nValueIterator::ValueIterator(const ValueConstIterator& other)\n    : ValueIteratorBase(other) {}\n\nValueIterator::ValueIterator(const ValueIterator& other)\n    : ValueIteratorBase(other) {}\n\nValueIterator& ValueIterator::operator=(const SelfType& other) {\n  copy(other);\n  return *this;\n}\n\n} // namespace Json\n\n// //////////////////////////////////////////////////////////////////////\n// End of content of file: src/lib_json/json_valueiterator.inl\n// //////////////////////////////////////////////////////////////////////\n\n\n\n\n\n\n// //////////////////////////////////////////////////////////////////////\n// Beginning of content of file: src/lib_json/json_value.cpp\n// //////////////////////////////////////////////////////////////////////\n\n// Copyright 2011 Baptiste Lepilleur\n// Distributed under MIT license, or public domain if desired and\n// recognized in your jurisdiction.\n// See file LICENSE for detail or copy at http://jsoncpp.sourceforge.net/LICENSE\n\n#if !defined(JSON_IS_AMALGAMATION)\n#include <json/assertions.h>\n#include <json/value.h>\n#include <json/writer.h>\n#endif // if !defined(JSON_IS_AMALGAMATION)\n#include <math.h>\n#include <sstream>\n#include <utility>\n#include <cstring>\n#include <cassert>\n#ifdef JSON_USE_CPPTL\n#include <cpptl/conststring.h>\n#endif\n#include <cstddef> // size_t\n#include <algorithm> // min()\n\n#define JSON_ASSERT_UNREACHABLE assert(false)\n\nnamespace Json {\n\n// This is a walkaround to avoid the static initialization of Value::null.\n// kNull must be word-aligned to avoid crashing on ARM.  We use an alignment of\n// 8 (instead of 4) as a bit of future-proofing.\n#if defined(__ARMEL__)\n#define ALIGNAS(byte_alignment) __attribute__((aligned(byte_alignment)))\n#else\n#define ALIGNAS(byte_alignment)\n#endif\nstatic const unsigned char ALIGNAS(8) kNull[sizeof(Value)] = { 0 };\nconst unsigned char& kNullRef = kNull[0];\nconst Value& Value::null = reinterpret_cast<const Value&>(kNullRef);\nconst Value& Value::nullRef = null;\n\nconst Int Value::minInt = Int(~(UInt(-1) / 2));\nconst Int Value::maxInt = Int(UInt(-1) / 2);\nconst UInt Value::maxUInt = UInt(-1);\n#if defined(JSON_HAS_INT64)\nconst Int64 Value::minInt64 = Int64(~(UInt64(-1) / 2));\nconst Int64 Value::maxInt64 = Int64(UInt64(-1) / 2);\nconst UInt64 Value::maxUInt64 = UInt64(-1);\n// The constant is hard-coded because some compiler have trouble\n// converting Value::maxUInt64 to a double correctly (AIX/xlC).\n// Assumes that UInt64 is a 64 bits integer.\nstatic const double maxUInt64AsDouble = 18446744073709551615.0;\n#endif // defined(JSON_HAS_INT64)\nconst LargestInt Value::minLargestInt = LargestInt(~(LargestUInt(-1) / 2));\nconst LargestInt Value::maxLargestInt = LargestInt(LargestUInt(-1) / 2);\nconst LargestUInt Value::maxLargestUInt = LargestUInt(-1);\n\n#if !defined(JSON_USE_INT64_DOUBLE_CONVERSION)\ntemplate <typename T, typename U>\nstatic inline bool InRange(double d, T min, U max) {\n  return d >= min && d <= max;\n}\n#else  // if !defined(JSON_USE_INT64_DOUBLE_CONVERSION)\nstatic inline double integerToDouble(Json::UInt64 value) {\n  return static_cast<double>(Int64(value / 2)) * 2.0 + Int64(value & 1);\n}\n\ntemplate <typename T> static inline double integerToDouble(T value) {\n  return static_cast<double>(value);\n}\n\ntemplate <typename T, typename U>\nstatic inline bool InRange(double d, T min, U max) {\n  return d >= integerToDouble(min) && d <= integerToDouble(max);\n}\n#endif // if !defined(JSON_USE_INT64_DOUBLE_CONVERSION)\n\n/** Duplicates the specified string value.\n * @param value Pointer to the string to duplicate. Must be zero-terminated if\n *              length is \"unknown\".\n * @param length Length of the value. if equals to unknown, then it will be\n *               computed using strlen(value).\n * @return Pointer on the duplicate instance of string.\n */\nstatic inline char* duplicateStringValue(const char* value,\n                                         size_t length) {\n  // Avoid an integer overflow in the call to malloc below by limiting length\n  // to a sane value.\n  if (length >= (size_t)Value::maxInt)\n    length = Value::maxInt - 1;\n\n  char* newString = static_cast<char*>(malloc(length + 1));\n  if (newString == NULL) {\n    throwRuntimeError(\n        \"in Json::Value::duplicateStringValue(): \"\n        \"Failed to allocate string value buffer\");\n  }\n  memcpy(newString, value, length);\n  newString[length] = 0;\n  return newString;\n}\n\n/* Record the length as a prefix.\n */\nstatic inline char* duplicateAndPrefixStringValue(\n    const char* value,\n    unsigned int length)\n{\n  // Avoid an integer overflow in the call to malloc below by limiting length\n  // to a sane value.\n  JSON_ASSERT_MESSAGE(length <= (unsigned)Value::maxInt - sizeof(unsigned) - 1U,\n                      \"in Json::Value::duplicateAndPrefixStringValue(): \"\n                      \"length too big for prefixing\");\n  unsigned actualLength = length + sizeof(unsigned) + 1U;\n  char* newString = static_cast<char*>(malloc(actualLength));\n  if (newString == 0) {\n    throwRuntimeError(\n        \"in Json::Value::duplicateAndPrefixStringValue(): \"\n        \"Failed to allocate string value buffer\");\n  }\n  *reinterpret_cast<unsigned*>(newString) = length;\n  memcpy(newString + sizeof(unsigned), value, length);\n  newString[actualLength - 1U] = 0; // to avoid buffer over-run accidents by users later\n  return newString;\n}\ninline static void decodePrefixedString(\n    bool isPrefixed, char const* prefixed,\n    unsigned* length, char const** value)\n{\n  if (!isPrefixed) {\n    *length = strlen(prefixed);\n    *value = prefixed;\n  } else {\n    *length = *reinterpret_cast<unsigned const*>(prefixed);\n    *value = prefixed + sizeof(unsigned);\n  }\n}\n/** Free the string duplicated by duplicateStringValue()/duplicateAndPrefixStringValue().\n */\nstatic inline void releaseStringValue(char* value) { free(value); }\n\n} // namespace Json\n\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// ValueInternals...\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n#if !defined(JSON_IS_AMALGAMATION)\n\n#include \"json_valueiterator.inl\"\n#endif // if !defined(JSON_IS_AMALGAMATION)\n\nnamespace Json {\n\nclass JSON_API Exception : public std::exception {\npublic:\n  Exception(std::string const& msg);\n  virtual ~Exception() throw();\n  virtual char const* what() const throw();\nprotected:\n  std::string const msg_;\n};\nclass JSON_API RuntimeError : public Exception {\npublic:\n  RuntimeError(std::string const& msg);\n};\nclass JSON_API LogicError : public Exception {\npublic:\n  LogicError(std::string const& msg);\n};\n\nException::Exception(std::string const& msg)\n  : msg_(msg)\n{}\nException::~Exception() throw()\n{}\nchar const* Exception::what() const throw()\n{\n  return msg_.c_str();\n}\nRuntimeError::RuntimeError(std::string const& msg)\n  : Exception(msg)\n{}\nLogicError::LogicError(std::string const& msg)\n  : Exception(msg)\n{}\nvoid throwRuntimeError(std::string const& msg)\n{\n  throw RuntimeError(msg);\n}\nvoid throwLogicError(std::string const& msg)\n{\n  throw LogicError(msg);\n}\n\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// class Value::CommentInfo\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n\nValue::CommentInfo::CommentInfo() : comment_(0) {}\n\nValue::CommentInfo::~CommentInfo() {\n  if (comment_)\n    releaseStringValue(comment_);\n}\n\nvoid Value::CommentInfo::setComment(const char* text, size_t len) {\n  if (comment_) {\n    releaseStringValue(comment_);\n    comment_ = 0;\n  }\n  JSON_ASSERT(text != 0);\n  JSON_ASSERT_MESSAGE(\n      text[0] == '\\0' || text[0] == '/',\n      \"in Json::Value::setComment(): Comments must start with /\");\n  // It seems that /**/ style comments are acceptable as well.\n  comment_ = duplicateStringValue(text, len);\n}\n\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// class Value::CZString\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n\n// Notes: policy_ indicates if the string was allocated when\n// a string is stored.\n\nValue::CZString::CZString(ArrayIndex index) : cstr_(0), index_(index) {}\n\nValue::CZString::CZString(char const* str, unsigned length, DuplicationPolicy allocate)\n    : cstr_(str)\n{\n  // allocate != duplicate\n  storage_.policy_ = allocate;\n  storage_.length_ = length;\n}\n\nValue::CZString::CZString(const CZString& other)\n    : cstr_(other.storage_.policy_ != noDuplication && other.cstr_ != 0\n                ? duplicateStringValue(other.cstr_, other.storage_.length_)\n                : other.cstr_)\n{\n  storage_.policy_ = (other.cstr_\n                 ? (other.storage_.policy_ == noDuplication\n                     ? noDuplication : duplicate)\n                 : other.storage_.policy_);\n  storage_.length_ = other.storage_.length_;\n}\n\nValue::CZString::~CZString() {\n  if (cstr_ && storage_.policy_ == duplicate)\n    releaseStringValue(const_cast<char*>(cstr_));\n}\n\nvoid Value::CZString::swap(CZString& other) {\n  std::swap(cstr_, other.cstr_);\n  std::swap(index_, other.index_);\n}\n\nValue::CZString& Value::CZString::operator=(CZString other) {\n  swap(other);\n  return *this;\n}\n\nbool Value::CZString::operator<(const CZString& other) const {\n  if (!cstr_) return index_ < other.index_;\n  //return strcmp(cstr_, other.cstr_) < 0;\n  // Assume both are strings.\n  unsigned this_len = this->storage_.length_;\n  unsigned other_len = other.storage_.length_;\n  unsigned min_len = std::min(this_len, other_len);\n  int comp = memcmp(this->cstr_, other.cstr_, min_len);\n  if (comp < 0) return true;\n  if (comp > 0) return false;\n  return (this_len < other_len);\n}\n\nbool Value::CZString::operator==(const CZString& other) const {\n  if (!cstr_) return index_ == other.index_;\n  //return strcmp(cstr_, other.cstr_) == 0;\n  // Assume both are strings.\n  unsigned this_len = this->storage_.length_;\n  unsigned other_len = other.storage_.length_;\n  if (this_len != other_len) return false;\n  int comp = memcmp(this->cstr_, other.cstr_, this_len);\n  return comp == 0;\n}\n\nArrayIndex Value::CZString::index() const { return index_; }\n\n//const char* Value::CZString::c_str() const { return cstr_; }\nconst char* Value::CZString::data() const { return cstr_; }\nunsigned Value::CZString::length() const { return storage_.length_; }\nbool Value::CZString::isStaticString() const { return storage_.policy_ == noDuplication; }\n\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// class Value::Value\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n// //////////////////////////////////////////////////////////////////\n\n/*! \\internal Default constructor initialization must be equivalent to:\n * memset( this, 0, sizeof(Value) )\n * This optimization is used in ValueInternalMap fast allocator.\n */\nValue::Value(ValueType type) {\n  initBasic(type);\n  switch (type) {\n  case nullValue:\n    break;\n  case intValue:\n  case uintValue:\n    value_.int_ = 0;\n    break;\n  case realValue:\n    value_.real_ = 0.0;\n    break;\n  case stringValue:\n    value_.string_ = 0;\n    break;\n  case arrayValue:\n  case objectValue:\n    value_.map_ = new ObjectValues();\n    break;\n  case booleanValue:\n    value_.bool_ = false;\n    break;\n  default:\n    JSON_ASSERT_UNREACHABLE;\n  }\n}\n\nValue::Value(Int value) {\n  initBasic(intValue);\n  value_.int_ = value;\n}\n\nValue::Value(UInt value) {\n  initBasic(uintValue);\n  value_.uint_ = value;\n}\n#if defined(JSON_HAS_INT64)\nValue::Value(Int64 value) {\n  initBasic(intValue);\n  value_.int_ = value;\n}\nValue::Value(UInt64 value) {\n  initBasic(uintValue);\n  value_.uint_ = value;\n}\n#endif // defined(JSON_HAS_INT64)\n\nValue::Value(double value) {\n  initBasic(realValue);\n  value_.real_ = value;\n}\n\nValue::Value(const char* value) {\n  initBasic(stringValue, true);\n  value_.string_ = duplicateAndPrefixStringValue(value, static_cast<unsigned>(strlen(value)));\n}\n\nValue::Value(const char* beginValue, const char* endValue) {\n  initBasic(stringValue, true);\n  value_.string_ =\n      duplicateAndPrefixStringValue(beginValue, static_cast<unsigned>(endValue - beginValue));\n}\n\nValue::Value(const std::string& value) {\n  initBasic(stringValue, true);\n  value_.string_ =\n      duplicateAndPrefixStringValue(value.data(), static_cast<unsigned>(value.length()));\n}\n\nValue::Value(const StaticString& value) {\n  initBasic(stringValue);\n  value_.string_ = const_cast<char*>(value.c_str());\n}\n\n#ifdef JSON_USE_CPPTL\nValue::Value(const CppTL::ConstString& value) {\n  initBasic(stringValue, true);\n  value_.string_ = duplicateAndPrefixStringValue(value, static_cast<unsigned>(value.length()));\n}\n#endif\n\nValue::Value(bool value) {\n  initBasic(booleanValue);\n  value_.bool_ = value;\n}\n\nValue::Value(Value const& other)\n    : type_(other.type_), allocated_(false)\n      ,\n      comments_(0), start_(other.start_), limit_(other.limit_)\n{\n  switch (type_) {\n  case nullValue:\n  case intValue:\n  case uintValue:\n  case realValue:\n  case booleanValue:\n    value_ = other.value_;\n    break;\n  case stringValue:\n    if (other.value_.string_ && other.allocated_) {\n      unsigned len;\n      char const* str;\n      decodePrefixedString(other.allocated_, other.value_.string_,\n          &len, &str);\n      value_.string_ = duplicateAndPrefixStringValue(str, len);\n      allocated_ = true;\n    } else {\n      value_.string_ = other.value_.string_;\n      allocated_ = false;\n    }\n    break;\n  case arrayValue:\n  case objectValue:\n    value_.map_ = new ObjectValues(*other.value_.map_);\n    break;\n  default:\n    JSON_ASSERT_UNREACHABLE;\n  }\n  if (other.comments_) {\n    comments_ = new CommentInfo[numberOfCommentPlacement];\n    for (int comment = 0; comment < numberOfCommentPlacement; ++comment) {\n      const CommentInfo& otherComment = other.comments_[comment];\n      if (otherComment.comment_)\n        comments_[comment].setComment(\n            otherComment.comment_, strlen(otherComment.comment_));\n    }\n  }\n}\n\nValue::~Value() {\n  switch (type_) {\n  case nullValue:\n  case intValue:\n  case uintValue:\n  case realValue:\n  case booleanValue:\n    break;\n  case stringValue:\n    if (allocated_)\n      releaseStringValue(value_.string_);\n    break;\n  case arrayValue:\n  case objectValue:\n    delete value_.map_;\n    break;\n  default:\n    JSON_ASSERT_UNREACHABLE;\n  }\n\n  if (comments_)\n    delete[] comments_;\n}\n\nValue& Value::operator=(Value other) {\n  swap(other);\n  return *this;\n}\n\nvoid Value::swapPayload(Value& other) {\n  ValueType temp = type_;\n  type_ = other.type_;\n  other.type_ = temp;\n  std::swap(value_, other.value_);\n  int temp2 = allocated_;\n  allocated_ = other.allocated_;\n  other.allocated_ = temp2;\n}\n\nvoid Value::swap(Value& other) {\n  swapPayload(other);\n  std::swap(comments_, other.comments_);\n  std::swap(start_, other.start_);\n  std::swap(limit_, other.limit_);\n}\n\nValueType Value::type() const { return type_; }\n\nint Value::compare(const Value& other) const {\n  if (*this < other)\n    return -1;\n  if (*this > other)\n    return 1;\n  return 0;\n}\n\nbool Value::operator<(const Value& other) const {\n  int typeDelta = type_ - other.type_;\n  if (typeDelta)\n    return typeDelta < 0 ? true : false;\n  switch (type_) {\n  case nullValue:\n    return false;\n  case intValue:\n    return value_.int_ < other.value_.int_;\n  case uintValue:\n    return value_.uint_ < other.value_.uint_;\n  case realValue:\n    return value_.real_ < other.value_.real_;\n  case booleanValue:\n    return value_.bool_ < other.value_.bool_;\n  case stringValue:\n  {\n    if ((value_.string_ == 0) || (other.value_.string_ == 0)) {\n      if (other.value_.string_) return true;\n      else return false;\n    }\n    unsigned this_len;\n    unsigned other_len;\n    char const* this_str;\n    char const* other_str;\n    decodePrefixedString(this->allocated_, this->value_.string_, &this_len, &this_str);\n    decodePrefixedString(other.allocated_, other.value_.string_, &other_len, &other_str);\n    unsigned min_len = std::min(this_len, other_len);\n    int comp = memcmp(this_str, other_str, min_len);\n    if (comp < 0) return true;\n    if (comp > 0) return false;\n    return (this_len < other_len);\n  }\n  case arrayValue:\n  case objectValue: {\n    int delta = int(value_.map_->size() - other.value_.map_->size());\n    if (delta)\n      return delta < 0;\n    return (*value_.map_) < (*other.value_.map_);\n  }\n  default:\n    JSON_ASSERT_UNREACHABLE;\n  }\n  return false; // unreachable\n}\n\nbool Value::operator<=(const Value& other) const { return !(other < *this); }\n\nbool Value::operator>=(const Value& other) const { return !(*this < other); }\n\nbool Value::operator>(const Value& other) const { return other < *this; }\n\nbool Value::operator==(const Value& other) const {\n  // if ( type_ != other.type_ )\n  // GCC 2.95.3 says:\n  // attempt to take address of bit-field structure member `Json::Value::type_'\n  // Beats me, but a temp solves the problem.\n  int temp = other.type_;\n  if (type_ != temp)\n    return false;\n  switch (type_) {\n  case nullValue:\n    return true;\n  case intValue:\n    return value_.int_ == other.value_.int_;\n  case uintValue:\n    return value_.uint_ == other.value_.uint_;\n  case realValue:\n    return value_.real_ == other.value_.real_;\n  case booleanValue:\n    return value_.bool_ == other.value_.bool_;\n  case stringValue:\n  {\n    if ((value_.string_ == 0) || (other.value_.string_ == 0)) {\n      return (value_.string_ == other.value_.string_);\n    }\n    unsigned this_len;\n    unsigned other_len;\n    char const* this_str;\n    char const* other_str;\n    decodePrefixedString(this->allocated_, this->value_.string_, &this_len, &this_str);\n    decodePrefixedString(other.allocated_, other.value_.string_, &other_len, &other_str);\n    if (this_len != other_len) return false;\n    int comp = memcmp(this_str, other_str, this_len);\n    return comp == 0;\n  }\n  case arrayValue:\n  case objectValue:\n    return value_.map_->size() == other.value_.map_->size() &&\n           (*value_.map_) == (*other.value_.map_);\n  default:\n    JSON_ASSERT_UNREACHABLE;\n  }\n  return false; // unreachable\n}\n\nbool Value::operator!=(const Value& other) const { return !(*this == other); }\n\nconst char* Value::asCString() const {\n  JSON_ASSERT_MESSAGE(type_ == stringValue,\n                      \"in Json::Value::asCString(): requires stringValue\");\n  if (value_.string_ == 0) return 0;\n  unsigned this_len;\n  char const* this_str;\n  decodePrefixedString(this->allocated_, this->value_.string_, &this_len, &this_str);\n  return this_str;\n}\n\nbool Value::getString(char const** str, char const** end) const {\n  if (type_ != stringValue) return false;\n  if (value_.string_ == 0) return false;\n  unsigned length;\n  decodePrefixedString(this->allocated_, this->value_.string_, &length, str);\n  *end = *str + length;\n  return true;\n}\n\nstd::string Value::asString() const {\n  switch (type_) {\n  case nullValue: $test\n    return \"\";\n  case stringValue:\n  {\n    if (value_.string_ == 0) return \"\";\n    unsigned this_len;\n    char const* this_str;\n    decodePrefixedString(this->allocated_, this->value_.string_, &this_len, &this_str);\n    return std::string(this_str, this_len);\n  }\n  case booleanValue:\n    return value_.bool_ ? \"true\" : \"false\";\n  case intValue:\n    return valueToString(value_.int_);\n  case uintValue:\n    return valueToString(value_.uint_);\n  case realValue:\n    return valueToString(value_.real_);\n  default:\n    JSON_FAIL_MESSAGE(\"Type is not convertible to string\");\n  }\n}\n\n#ifdef JSON_USE_CPPTL\nCppTL::ConstString Value::asConstString() const {\n  unsigned len;\n  char const* str;\n  decodePrefixedString(allocated_, value_.string_,\n      &len, &str);\n  return CppTL::ConstString(str, len);\n}\n#endif\n\nValue::Int Value::asInt() const {\n  switch (type_) {\n  case intValue:\n    JSON_ASSERT_MESSAGE(isInt(), \"LargestInt out of Int range\");\n    return Int(value_.int_);\n  case uintValue:\n    JSON_ASSERT_MESSAGE(isInt(), \"LargestUInt out of Int range\");\n    return Int(value_.uint_);\n  case realValue:\n    JSON_ASSERT_MESSAGE(InRange(value_.real_, minInt, maxInt),\n                        \"double out of Int range\");\n    return Int(value_.real_);\n  case nullValue:\n    return 0;\n  case booleanValue:\n    return value_.bool_ ? 1 : 0;\n  default:\n    break;\n  }\n  JSON_FAIL_MESSAGE(\"Value is not convertible to Int.\");\n}\n\nValue::UInt Value::asUInt() const {\n  switch (type_) {\n  case intValue:\n    JSON_ASSERT_MESSAGE(isUInt(), \"LargestInt out of UInt range\");\n    return UInt(value_.int_);\n  case uintValue:\n    JSON_ASSERT_MESSAGE(isUInt(), \"LargestUInt out of UInt range\");\n    return UInt(value_.uint_);\n  case realValue:\n    JSON_ASSERT_MESSAGE(InRange(value_.real_, 0, maxUInt),\n                        \"double out of UInt range\");\n    return UInt(value_.real_);\n  case nullValue:\n    return 0;\n  case booleanValue:\n    return value_.bool_ ? 1 : 0;\n  default:\n    break;\n  }\n  JSON_FAIL_MESSAGE(\"Value is not convertible to UInt.\");\n}\n\n#if defined(JSON_HAS_INT64)\n\nValue::Int64 Value::asInt64() const {\n  switch (type_) {\n  case intValue:\n    return Int64(value_.int_);\n  case uintValue:\n    JSON_ASSERT_MESSAGE(isInt64(), \"LargestUInt out of Int64 range\");\n    return Int64(value_.uint_);\n  case realValue:\n    JSON_ASSERT_MESSAGE(InRange(value_.real_, minInt64, maxInt64),\n                        \"double out of Int64 range\");\n    return Int64(value_.real_);\n  case nullValue:\n    return 0;\n  case booleanValue:\n    return value_.bool_ ? 1 : 0;\n  default:\n    break;\n  }\n  JSON_FAIL_MESSAGE(\"Value is not convertible to Int64.\");\n}\n\nValue::UInt64 Value::asUInt64() const {\n  switch (type_) {\n  case intValue:\n    JSON_ASSERT_MESSAGE(isUInt64(), \"LargestInt out of UInt64 range\");\n    return UInt64(value_.int_);\n  case uintValue:\n    return UInt64(value_.uint_);\n  case realValue:\n    JSON_ASSERT_MESSAGE(InRange(value_.real_, 0, maxUInt64),\n                        \"double out of UInt64 range\");\n    return UInt64(value_.real_);\n  case nullValue:\n    return 0;\n  case booleanValue:\n    return value_.bool_ ? 1 : 0;\n  default:\n    break;\n  }\n  JSON_FAIL_MESSAGE(\"Value is not convertible to UInt64.\");\n}\n#endif // if defined(JSON_HAS_INT64)\n\nLargestInt Value::asLargestInt() const {\n#if defined(JSON_NO_INT64)\n  return asInt();\n#else\n  return asInt64();\n#endif\n}\n\nLargestUInt Value::asLargestUInt() const {\n#if defined(JSON_NO_INT64)\n  return asUInt();\n#else\n  return asUInt64();\n#endif\n}\n\ndouble Value::asDouble() const {\n  switch (type_) {\n  case intValue:\n    return static_cast<double>(value_.int_);\n  case uintValue:\n#if !defined(JSON_USE_INT64_DOUBLE_CONVERSION)\n    return static_cast<double>(value_.uint_);\n#else  // if !defined(JSON_USE_INT64_DOUBLE_CONVERSION)\n    return integerToDouble(value_.uint_);\n#endif // if !defined(JSON_USE_INT64_DOUBLE_CONVERSION)\n  case realValue:\n    return value_.real_;\n  case nullValue:\n    return 0.0;\n  case booleanValue:\n    return value_.bool_ ? 1.0 : 0.0;\n  default:\n    break;\n  }\n  JSON_FAIL_MESSAGE(\"Value is not convertible to double.\");\n}\n\nfloat Value::asFloat() const {\n  switch (type_) {\n  case intValue:\n    return static_cast<float>(value_.int_);\n  case uintValue:\n#if !defined(JSON_USE_INT64_DOUBLE_CONVERSION)\n    return static_cast<float>(value_.uint_);\n#else  // if !defined(JSON_USE_INT64_DOUBLE_CONVERSION)\n    return integerToDouble(value_.uint_);\n#endif // if !defined(JSON_USE_INT64_DOUBLE_CONVERSION)\n  case realValue:\n    return static_cast<float>(value_.real_);\n  case nullValue:\n    return 0.0;\n  case booleanValue:\n    return value_.bool_ ? 1.0f : 0.0f;\n  default:\n    break;\n  }\n  JSON_FAIL_MESSAGE(\"Value is not convertible to float.\");\n}\n\nbool Value::asBool() const {\n  switch (type_) {\n  case booleanValue:\n    return value_.bool_;\n  case nullValue:\n    return false;\n  case intValue:\n    return value_.int_ ? true : false;\n  case uintValue:\n    return value_.uint_ ? true : false;\n  case realValue:\n    return value_.real_ ? true : false;\n  default:\n    break;\n  }\n  JSON_FAIL_MESSAGE(\"Value is not convertible to bool.\");\n}\n\nbool Value::isConvertibleTo(ValueType other) const {\n  switch (other) {\n  case nullValue:\n    return (isNumeric() && asDouble() == 0.0) ||\n           (type_ == booleanValue && value_.bool_ == false) ||\n           (type_ == stringValue && asString() == \"\") ||\n           (type_ == arrayValue && value_.map_->size() == 0) ||\n           (type_ == objectValue && value_.map_->size() == 0) ||\n           type_ == nullValue;\n  case intValue:\n    return isInt() ||\n           (type_ == realValue && InRange(value_.real_, minInt, maxInt)) ||\n           type_ == booleanValue || type_ == nullValue;\n  case uintValue:\n    return isUInt() ||\n           (type_ == realValue && InRange(value_.real_, 0, maxUInt)) ||\n           type_ == booleanValue || type_ == nullValue;\n  case realValue:\n    return isNumeric() || type_ == booleanValue || type_ == nullValue;\n  case booleanValue:\n    return isNumeric() || type_ == booleanValue || type_ == nullValue;\n  case stringValue:\n    return isNumeric() || type_ == booleanValue || type_ == stringValue ||\n           type_ == nullValue;\n  case arrayValue:\n    return type_ == arrayValue || type_ == nullValue;\n  case objectValue:\n    return type_ == objectValue || type_ == nullValue;\n  }\n  JSON_ASSERT_UNREACHABLE;\n  return false;\n}\n\n/// Number of values in array or object\nArrayIndex Value::size() const {\n  switch (type_) {\n  case nullValue:\n  case intValue:\n  case uintValue:\n  case realValue:\n  case booleanValue:\n  case stringValue:\n    return 0;\n  case arrayValue: // size of the array is highest index + 1\n    if (!value_.map_->empty()) {\n      ObjectValues::const_iterator itLast = value_.map_->end();\n      --itLast;\n      return (*itLast).first.index() + 1;\n    }\n    return 0;\n  case objectValue:\n    return ArrayIndex(value_.map_->size());\n  }\n  JSON_ASSERT_UNREACHABLE;\n  return 0; // unreachable;\n}\n\nbool Value::empty() const {\n  if (isNull() || isArray() || isObject())\n    return size() == 0u;\n  else\n    return false;\n}\n\nbool Value::operator!() const { return isNull(); }\n\nvoid Value::clear() {\n  JSON_ASSERT_MESSAGE(type_ == nullValue || type_ == arrayValue ||\n                          type_ == objectValue,\n                      \"in Json::Value::clear(): requires complex value\");\n  start_ = 0;\n  limit_ = 0;\n  switch (type_) {\n  case arrayValue:\n  case objectValue:\n    value_.map_->clear();\n    break;\n  default:\n    break;\n  }\n}\n\nvoid Value::resize(ArrayIndex newSize) {\n  JSON_ASSERT_MESSAGE(type_ == nullValue || type_ == arrayValue,\n                      \"in Json::Value::resize(): requires arrayValue\");\n  if (type_ == nullValue)\n    *this = Value(arrayValue);\n  ArrayIndex oldSize = size();\n  if (newSize == 0)\n    clear();\n  else if (newSize > oldSize)\n    (*this)[newSize - 1];\n  else {\n    for (ArrayIndex index = newSize; index < oldSize; ++index) {\n      value_.map_->erase(index);\n    }\n    assert(size() == newSize);\n  }\n}\n\nValue& Value::operator[](ArrayIndex index) {\n  JSON_ASSERT_MESSAGE(\n      type_ == nullValue || type_ == arrayValue,\n      \"in Json::Value::operator[](ArrayIndex): requires arrayValue\");\n  if (type_ == nullValue)\n    *this = Value(arrayValue);\n  CZString key(index);\n  ObjectValues::iterator it = value_.map_->lower_bound(key);\n  if (it != value_.map_->end() && (*it).first == key)\n    return (*it).second;\n\n  ObjectValues::value_type defaultValue(key, nullRef);\n  it = value_.map_->insert(it, defaultValue);\n  return (*it).second;\n}\n\nValue& Value::operator[](int index) {\n  JSON_ASSERT_MESSAGE(\n      index >= 0,\n      \"in Json::Value::operator[](int index): index cannot be negative\");\n  return (*this)[ArrayIndex(index)];\n}\n\nconst Value& Value::operator[](ArrayIndex index) const {\n  JSON_ASSERT_MESSAGE(\n      type_ == nullValue || type_ == arrayValue,\n      \"in Json::Value::operator[](ArrayIndex)const: requires arrayValue\");\n  if (type_ == nullValue)\n    return nullRef;\n  CZString key(index);\n  ObjectValues::const_iterator it = value_.map_->find(key);\n  if (it == value_.map_->end())\n    return nullRef;\n  return (*it).second;\n}\n\nconst Value& Value::operator[](int index) const {\n  JSON_ASSERT_MESSAGE(\n      index >= 0,\n      \"in Json::Value::operator[](int index) const: index cannot be negative\");\n  return (*this)[ArrayIndex(index)];\n}\n\nvoid Value::initBasic(ValueType type, bool allocated) {\n  type_ = type;\n  allocated_ = allocated;\n  comments_ = 0;\n  start_ = 0;\n  limit_ = 0;\n}\n\n// Access an object value by name, create a null member if it does not exist.\n// @pre Type of '*this' is object or null.\n// @param key is null-terminated.\nValue& Value::resolveReference(const char* key) {\n  JSON_ASSERT_MESSAGE(\n      type_ == nullValue || type_ == objectValue,\n      \"in Json::Value::resolveReference(): requires objectValue\");\n  if (type_ == nullValue)\n    *this = Value(objectValue);\n  CZString actualKey(\n      key, static_cast<unsigned>(strlen(key)), CZString::noDuplication); // NOTE!\n  ObjectValues::iterator it = value_.map_->lower_bound(actualKey);\n  if (it != value_.map_->end() && (*it).first == actualKey)\n    return (*it).second;\n\n  ObjectValues::value_type defaultValue(actualKey, nullRef);\n  it = value_.map_->insert(it, defaultValue);\n  Value& value = (*it).second;\n  return value;\n}\n\n// @param key is not null-terminated.\nValue& Value::resolveReference(char const* key, char const* end)\n{\n  JSON_ASSERT_MESSAGE(\n      type_ == nullValue || type_ == objectValue,\n      \"in Json::Value::resolveReference(key, end): requires objectValue\");\n  if (type_ == nullValue)\n    *this = Value(objectValue);\n  CZString actualKey(\n      key, static_cast<unsigned>(end-key), CZString::duplicateOnCopy);\n  ObjectValues::iterator it = value_.map_->lower_bound(actualKey);\n  if (it != value_.map_->end() && (*it).first == actualKey)\n    return (*it).second;\n\n  ObjectValues::value_type defaultValue(actualKey, nullRef);\n  it = value_.map_->insert(it, defaultValue);\n  Value& value = (*it).second;\n  return value;\n}\n\nValue Value::get(ArrayIndex index, const Value& defaultValue) const {\n  const Value* value = &((*this)[index]);\n  return value == &nullRef ? defaultValue : *value;\n}\n\nbool Value::isValidIndex(ArrayIndex index) const { return index < size(); }\n\nValue const* Value::find(char const* key, char const* end) const\n{\n  JSON_ASSERT_MESSAGE(\n      type_ == nullValue || type_ == objectValue,\n      \"in Json::Value::find(key, end, found): requires objectValue or nullValue\");\n  if (type_ == nullValue) return NULL;\n  CZString actualKey(key, static_cast<unsigned>(end-key), CZString::noDuplication);\n  ObjectValues::const_iterator it = value_.map_->find(actualKey);\n  if (it == value_.map_->end()) return NULL;\n  return &(*it).second;\n}\nconst Value& Value::operator[](const char* key) const\n{\n  Value const* found = find(key, key + strlen(key));\n  if (!found) return nullRef;\n  return *found;\n}\nValue const& Value::operator[](std::string const& key) const\n{\n  Value const* found = find(key.data(), key.data() + key.length());\n  if (!found) return nullRef;\n  return *found;\n}\n\nValue& Value::operator[](const char* key) {\n  return resolveReference(key, key + strlen(key));\n}\n\nValue& Value::operator[](const std::string& key) {\n  return resolveReference(key.data(), key.data() + key.length());\n}\n\nValue& Value::operator[](const StaticString& key) {\n  return resolveReference(key.c_str());\n}\n\n#ifdef JSON_USE_CPPTL\nValue& Value::operator[](const CppTL::ConstString& key) {\n  return resolveReference(key.c_str(), key.end_c_str());\n}\nValue const& Value::operator[](CppTL::ConstString const& key) const\n{\n  Value const* found = find(key.c_str(), key.end_c_str());\n  if (!found) return nullRef;\n  return *found;\n}\n#endif\n\nValue& Value::append(const Value& value) { return (*this)[size()] = value; }\n\nValue Value::get(char const* key, char const* end, Value const& defaultValue) const\n{\n  Value const* found = find(key, end);\n  return !found ? defaultValue : *found;\n}\nValue Value::get(char const* key, Value const& defaultValue) const\n{\n  return get(key, key + strlen(key), defaultValue);\n}\nValue Value::get(std::string const& key, Value const& defaultValue) const\n{\n  return get(key.data(), key.data() + key.length(), defaultValue);\n}\n\n\nbool Value::removeMember(const char* key, const char* end, Value* removed)\n{\n  if (type_ != objectValue) {\n    return false;\n  }\n  CZString actualKey(key, static_cast<unsigned>(end-key), CZString::noDuplication);\n  ObjectValues::iterator it = value_.map_->find(actualKey);\n  if (it == value_.map_->end())\n    return false;\n  *removed = it->second;\n  value_.map_->erase(it);\n  return true;\n}\nbool Value::removeMember(const char* key, Value* removed)\n{\n  return removeMember(key, key + strlen(key), removed);\n}\nbool Value::removeMember(std::string const& key, Value* removed)\n{\n  return removeMember(key.data(), key.data() + key.length(), removed);\n}\nValue Value::removeMember(const char* key)\n{\n  JSON_ASSERT_MESSAGE(type_ == nullValue || type_ == objectValue,\n                      \"in Json::Value::removeMember(): requires objectValue\");\n  if (type_ == nullValue)\n    return nullRef;\n\n  Value removed;  // null\n  removeMember(key, key + strlen(key), &removed);\n  return removed; // still null if removeMember() did nothing\n}\nValue Value::removeMember(const std::string& key)\n{\n  return removeMember(key.c_str());\n}\n\nbool Value::removeIndex(ArrayIndex index, Value* removed) {\n  if (type_ != arrayValue) {\n    return false;\n  }\n  CZString key(index);\n  ObjectValues::iterator it = value_.map_->find(key);\n  if (it == value_.map_->end()) {\n    return false;\n  }\n  *removed = it->second;\n  ArrayIndex oldSize = size();\n  // shift left all items left, into the place of the \"removed\"\n  for (ArrayIndex i = index; i < (oldSize - 1); ++i){\n    CZString key(i);\n    (*value_.map_)[key] = (*this)[i + 1];\n  }\n  // erase the last one (\"leftover\")\n  CZString keyLast(oldSize - 1);\n  ObjectValues::iterator itLast = value_.map_->find(keyLast);\n  value_.map_->erase(itLast);\n  return true;\n}\n\n#ifdef JSON_USE_CPPTL\nValue Value::get(const CppTL::ConstString& key,\n                 const Value& defaultValue) const {\n  return get(key.c_str(), key.end_c_str(), defaultValue);\n}\n#endif\n\nbool Value::isMember(char const* key, char const* end) const\n{\n  Value const* value = find(key, end);\n  return NULL != value;\n}\nbool Value::isMember(char const* key) const\n{\n  return isMember(key, key + strlen(key));\n}\nbool Value::isMember(std::string const& key) const\n{\n  return isMember(key.data(), key.data() + key.length());\n}\n\n#ifdef JSON_USE_CPPTL\nbool Value::isMember(const CppTL::ConstString& key) const {\n  return isMember(key.c_str(), key.end_c_str());\n}\n#endif\n\nValue::Members Value::getMemberNames() const {\n  JSON_ASSERT_MESSAGE(\n      type_ == nullValue || type_ == objectValue,\n      \"in Json::Value::getMemberNames(), value must be objectValue\");\n  if (type_ == nullValue)\n    return Value::Members();\n  Members members;\n  members.reserve(value_.map_->size());\n  ObjectValues::const_iterator it = value_.map_->begin();\n  ObjectValues::const_iterator itEnd = value_.map_->end();\n  for (; it != itEnd; ++it) {\n    members.push_back(std::string((*it).first.data(),\n                                  (*it).first.length()));\n  }\n  return members;\n}\n//\n//# ifdef JSON_USE_CPPTL\n// EnumMemberNames\n// Value::enumMemberNames() const\n//{\n//   if ( type_ == objectValue )\n//   {\n//      return CppTL::Enum::any(  CppTL::Enum::transform(\n//         CppTL::Enum::keys( *(value_.map_), CppTL::Type<const CZString &>() ),\n//         MemberNamesTransform() ) );\n//   }\n//   return EnumMemberNames();\n//}\n//\n//\n// EnumValues\n// Value::enumValues() const\n//{\n//   if ( type_ == objectValue  ||  type_ == arrayValue )\n//      return CppTL::Enum::anyValues( *(value_.map_),\n//                                     CppTL::Type<const Value &>() );\n//   return EnumValues();\n//}\n//\n//# endif\n\nstatic bool IsIntegral(double d) {\n  double integral_part;\n  return modf(d, &integral_part) == 0.0;\n}\n\nbool Value::isNull() const { return type_ == nullValue; }\n\nbool Value::isBool() const { return type_ == booleanValue; }\n\nbool Value::isInt() const {\n  switch (type_) {\n  case intValue:\n    return value_.int_ >= minInt && value_.int_ <= maxInt;\n  case uintValue:\n    return value_.uint_ <= UInt(maxInt);\n  case realValue:\n    return value_.real_ >= minInt && value_.real_ <= maxInt &&\n           IsIntegral(value_.real_);\n  default:\n    break;\n  }\n  return false;\n}\n\nbool Value::isUInt() const {\n  switch (type_) {\n  case intValue:\n    return value_.int_ >= 0 && LargestUInt(value_.int_) <= LargestUInt(maxUInt);\n  case uintValue:\n    return value_.uint_ <= maxUInt;\n  case realValue:\n    return value_.real_ >= 0 && value_.real_ <= maxUInt &&\n           IsIntegral(value_.real_);\n  default:\n    break;\n  }\n  return false;\n}\n\nbool Value::isInt64() const {\n#if defined(JSON_HAS_INT64)\n  switch (type_) {\n  case intValue:\n    return true;\n  case uintValue:\n    return value_.uint_ <= UInt64(maxInt64);\n  case realValue:\n    // Note that maxInt64 (= 2^63 - 1) is not exactly representable as a\n    // double, so double(maxInt64) will be rounded up to 2^63. Therefore we\n    // require the value to be strictly less than the limit.\n    return value_.real_ >= double(minInt64) &&\n           value_.real_ < double(maxInt64) && IsIntegral(value_.real_);\n  default:\n    break;\n  }\n#endif // JSON_HAS_INT64\n  return false;\n}\n\nbool Value::isUInt64() const {\n#if defined(JSON_HAS_INT64)\n  switch (type_) {\n  case intValue:\n    return value_.int_ >= 0;\n  case uintValue:\n    return true;\n  case realValue:\n    // Note that maxUInt64 (= 2^64 - 1) is not exactly representable as a\n    // double, so double(maxUInt64) will be rounded up to 2^64. Therefore we\n    // require the value to be strictly less than the limit.\n    return value_.real_ >= 0 && value_.real_ < maxUInt64AsDouble &&\n           IsIntegral(value_.real_);\n  default:\n    break;\n  }\n#endif // JSON_HAS_INT64\n  return false;\n}\n\nbool Value::isIntegral() const {\n#if defined(JSON_HAS_INT64)\n  return isInt64() || isUInt64();\n#else\n  return isInt() || isUInt();\n#endif\n}\n\nbool Value::isDouble() const { return type_ == realValue || isIntegral(); }\n\nbool Value::isNumeric() const { return isIntegral() || isDouble(); }\n\nbool Value::isString() const { return type_ == stringValue; }\n\nbool Value::isArray() const { return type_ == arrayValue; }\n\nbool Value::isObject() const { return type_ == objectValue; }\n\nvoid Value::setComment(const char* comment, size_t len, CommentPlacement placement) {\n  if (!comments_)\n    comments_ = new CommentInfo[numberOfCommentPlacement];\n  if ((len > 0) && (comment[len-1] == '\\n')) {\n    // Always discard trailing newline, to aid indentation.\n    len -= 1;\n  }\n  comments_[placement].setComment(comment, len);\n}\n\nvoid Value::setComment(const char* comment, CommentPlacement placement) {\n  setComment(comment, strlen(comment), placement);\n}\n\nvoid Value::setComment(const std::string& comment, CommentPlacement placement) {\n  setComment(comment.c_str(), comment.length(), placement);\n}\n\nbool Value::hasComment(CommentPlacement placement) const {\n  return comments_ != 0 && comments_[placement].comment_ != 0;\n}\n\nstd::string Value::getComment(CommentPlacement placement) const {\n  if (hasComment(placement))\n    return comments_[placement].comment_;\n  return \"\";\n}\n\nvoid Value::setOffsetStart(size_t start) { start_ = start; }\n\nvoid Value::setOffsetLimit(size_t limit) { limit_ = limit; }\n\nsize_t Value::getOffsetStart() const { return start_; }\n\nsize_t Value::getOffsetLimit() const { return limit_; }\n\nstd::string Value::toStyledString() const {\n  StyledWriter writer;\n  return writer.write(*this);\n}\n\nValue::const_iterator Value::begin() const {\n  switch (type_) {\n  case arrayValue:\n  case objectValue:\n    if (value_.map_)\n      return const_iterator(value_.map_->begin());\n    break;\n  default:\n    break;\n  }\n  return const_iterator();\n}\n\nValue::const_iterator Value::end() const {\n  switch (type_) {\n  case arrayValue:\n  case objectValue:\n    if (value_.map_)\n      return const_iterator(value_.map_->end());\n    break;\n  default:\n    break;\n  }\n  return const_iterator();\n}\n\nValue::iterator Value::begin() {\n  switch (type_) {\n  case arrayValue:\n  case objectValue:\n    if (value_.map_)\n      return iterator(value_.map_->begin());\n    break;\n  default:\n    break;\n  }\n  return iterator();\n}\n\nValue::iterator Value::end() {\n  switch (type_) {\n  case arrayValue:\n  case objectValue:\n    if (value_.map_)\n      return iterator(value_.map_->end());\n    break;\n  default:\n    break;\n  }\n  return iterator();\n}\n\n// class PathArgument\n// //////////////////////////////////////////////////////////////////\n\nPathArgument::PathArgument() : key_(), index_(), kind_(kindNone) {}\n\nPathArgument::PathArgument(ArrayIndex index)\n    : key_(), index_(index), kind_(kindIndex) {}\n\nPathArgument::PathArgument(const char* key)\n    : key_(key), index_(), kind_(kindKey) {}\n\nPathArgument::PathArgument(const std::string& key)\n    : key_(key.c_str()), index_(), kind_(kindKey) {}\n\n// class Path\n// //////////////////////////////////////////////////////////////////\n\nPath::Path(const std::string& path,\n           const PathArgument& a1,\n           const PathArgument& a2,\n           const PathArgument& a3,\n           const PathArgument& a4,\n           const PathArgument& a5) {\n  InArgs in;\n  in.push_back(&a1);\n  in.push_back(&a2);\n  in.push_back(&a3);\n  in.push_back(&a4);\n  in.push_back(&a5);\n  makePath(path, in);\n}\n\nvoid Path::makePath(const std::string& path, const InArgs& in) {\n  const char* current = path.c_str();\n  const char* end = current + path.length();\n  InArgs::const_iterator itInArg = in.begin();\n  while (current != end) {\n    if (*current == '[') {\n      ++current;\n      if (*current == '%')\n        addPathInArg(path, in, itInArg, PathArgument::kindIndex);\n      else {\n        ArrayIndex index = 0;\n        for (; current != end && *current >= '0' && *current <= '9'; ++current)\n          index = index * 10 + ArrayIndex(*current - '0');\n        args_.push_back(index);\n      }\n      if (current == end || *current++ != ']')\n        invalidPath(path, int(current - path.c_str()));\n    } else if (*current == '%') {\n      addPathInArg(path, in, itInArg, PathArgument::kindKey);\n      ++current;\n    } else if (*current == '.') {\n      ++current;\n    } else {\n      const char* beginName = current;\n      while (current != end && !strchr(\"[.\", *current))\n        ++current;\n      args_.push_back(std::string(beginName, current));\n    }\n  }\n}\n\nvoid Path::addPathInArg(const std::string& /*path*/,\n                        const InArgs& in,\n                        InArgs::const_iterator& itInArg,\n                        PathArgument::Kind kind) {\n  if (itInArg == in.end()) {\n    // Error: missing argument %d\n  } else if ((*itInArg)->kind_ != kind) {\n    // Error: bad argument type\n  } else {\n    args_.push_back(**itInArg);\n  }\n}\n\nvoid Path::invalidPath(const std::string& /*path*/, int /*location*/) {\n  // Error: invalid path.\n}\n\nconst Value& Path::resolve(const Value& root) const {\n  const Value* node = &root;\n  for (Args::const_iterator it = args_.begin(); it != args_.end(); ++it) {\n    const PathArgument& arg = *it;\n    if (arg.kind_ == PathArgument::kindIndex) {\n      if (!node->isArray() || !node->isValidIndex(arg.index_)) {\n        // Error: unable to resolve path (array value expected at position...\n      }\n      node = &((*node)[arg.index_]);\n    } else if (arg.kind_ == PathArgument::kindKey) {\n      if (!node->isObject()) {\n        // Error: unable to resolve path (object value expected at position...)\n      }\n      node = &((*node)[arg.key_]);\n      if (node == &Value::nullRef) {\n        // Error: unable to resolve path (object has no member named '' at\n        // position...)\n      }\n    }\n  }\n  return *node;\n}\n\nValue Path::resolve(const Value& root, const Value& defaultValue) const {\n  const Value* node = &root;\n  for (Args::const_iterator it = args_.begin(); it != args_.end(); ++it) {\n    const PathArgument& arg = *it;\n    if (arg.kind_ == PathArgument::kindIndex) {\n      if (!node->isArray() || !node->isValidIndex(arg.index_))\n        return defaultValue;\n      node = &((*node)[arg.index_]);\n    } else if (arg.kind_ == PathArgument::kindKey) {\n      if (!node->isObject())\n        return defaultValue;\n      node = &((*node)[arg.key_]);\n      if (node == &Value::nullRef)\n        return defaultValue;\n    }\n  }\n  return *node;\n}\n\nValue& Path::make(Value& root) const {\n  Value* node = &root;\n  for (Args::const_iterator it = args_.begin(); it != args_.end(); ++it) {\n    const PathArgument& arg = *it;\n    if (arg.kind_ == PathArgument::kindIndex) {\n      if (!node->isArray()) {\n        // Error: node is not an array at position ...\n      }\n      node = &((*node)[arg.index_]);\n    } else if (arg.kind_ == PathArgument::kindKey) {\n      if (!node->isObject()) {\n        // Error: node is not an object at position...\n      }\n      node = &((*node)[arg.key_]);\n    }\n  }\n  return *node;\n}\n\n} // namespace Json\n\n// //////////////////////////////////////////////////////////////////////\n// End of content of file: src/lib_json/json_value.cpp\n// //////////////////////////////////////////////////////////////////////\n\n\n\n\n\n\n// //////////////////////////////////////////////////////////////////////\n// Beginning of content of file: src/lib_json/json_writer.cpp\n// //////////////////////////////////////////////////////////////////////\n\n// Copyright 2011 Baptiste Lepilleur\n// Distributed under MIT license, or public domain if desired and\n// recognized in your jurisdiction.\n// See file LICENSE for detail or copy at http://jsoncpp.sourceforge.net/LICENSE\n\n#if !defined(JSON_IS_AMALGAMATION)\n#include <json/writer.h>\n#include \"json_tool.h\"\n#endif // if !defined(JSON_IS_AMALGAMATION)\n#include <iomanip>\n#include <memory>\n#include <sstream>\n#include <utility>\n#include <set>\n#include <cassert>\n#include <cstring>\n#include <cstdio>\n\n#if defined(_MSC_VER) && _MSC_VER >= 1200 && _MSC_VER < 1800 // Between VC++ 6.0 and VC++ 11.0\n#include <float.h>\n#define isfinite _finite\n#elif defined(__sun) && defined(__SVR4) //Solaris\n#include <ieeefp.h>\n#define isfinite finite\n#else\n#include <cmath>\n#define isfinite std::isfinite\n#endif\n\n#if defined(_MSC_VER) && _MSC_VER < 1500 // VC++ 8.0 and below\n#define snprintf _snprintf\n#elif __cplusplus >= 201103L\n#define snprintf std::snprintf\n#endif\n\n#if defined(_MSC_VER) && _MSC_VER >= 1400 // VC++ 8.0\n// Disable warning about strdup being deprecated.\n#pragma warning(disable : 4996)\n#endif\n\nnamespace Json {\n\n#if __cplusplus >= 201103L\ntypedef std::unique_ptr<StreamWriter> StreamWriterPtr;\n#else\ntypedef std::auto_ptr<StreamWriter>   StreamWriterPtr;\n#endif\n\nstatic bool containsControlCharacter(const char* str) {\n  while (*str) {\n    if (isControlCharacter(*(str++)))\n      return true;\n  }\n  return false;\n}\n\nstatic bool containsControlCharacter0(const char* str, unsigned len) {\n  char const* end = str + len;\n  while (end != str) {\n    if (isControlCharacter(*str) || 0==*str)\n      return true;\n    ++str;\n  }\n  return false;\n}\n\nstd::string valueToString(LargestInt value) {\n  UIntToStringBuffer buffer;\n  char* current = buffer + sizeof(buffer);\n  bool isNegative = value < 0;\n  if (isNegative)\n    value = -value;\n  uintToString(LargestUInt(value), current);\n  if (isNegative)\n    *--current = '-';\n  assert(current >= buffer);\n  return current;\n}\n\nstd::string valueToString(LargestUInt value) {\n  UIntToStringBuffer buffer;\n  char* current = buffer + sizeof(buffer);\n  uintToString(value, current);\n  assert(current >= buffer);\n  return current;\n}\n\n#if defined(JSON_HAS_INT64)\n\nstd::string valueToString(Int value) {\n  return valueToString(LargestInt(value));\n}\n\nstd::string valueToString(UInt value) {\n  return valueToString(LargestUInt(value));\n}\n\n#endif // # if defined(JSON_HAS_INT64)\n\nstd::string valueToString(double value) {\n  // Allocate a buffer that is more than large enough to store the 16 digits of\n  // precision requested below.\n  char buffer[32];\n  int len = -1;\n\n// Print into the buffer. We need not request the alternative representation\n// that always has a decimal point because JSON doesn't distingish the\n// concepts of reals and integers.\n#if defined(_MSC_VER) && defined(__STDC_SECURE_LIB__) // Use secure version with\n                                                      // visual studio 2005 to\n                                                      // avoid warning.\n#if defined(WINCE)\n  len = _snprintf(buffer, sizeof(buffer), \"%.17g\", value);\n#else\n  len = sprintf_s(buffer, sizeof(buffer), \"%.17g\", value);\n#endif\n#else\n  if (isfinite(value)) {\n    len = snprintf(buffer, sizeof(buffer), \"%.17g\", value);\n  } else {\n    // IEEE standard states that NaN values will not compare to themselves\n    if (value != value) {\n      len = snprintf(buffer, sizeof(buffer), \"null\");\n    } else if (value < 0) {\n      len = snprintf(buffer, sizeof(buffer), \"-1e+9999\");\n    } else {\n      len = snprintf(buffer, sizeof(buffer), \"1e+9999\");\n    }\n    // For those, we do not need to call fixNumLoc, but it is fast.\n  }\n#endif\n  assert(len >= 0);\n  fixNumericLocale(buffer, buffer + len);\n  return buffer;\n}\n\nstd::string valueToString(bool value) { return value ? \"true\" : \"false\"; }\n\nstd::string valueToQuotedString(const char* value) {\n  if (value == NULL)\n    return \"\";\n  // Not sure how to handle unicode...\n  if (strpbrk(value, \"\\\"\\\\\\b\\f\\n\\r\\t\") == NULL &&\n      !containsControlCharacter(value))\n    return std::string(\"\\\"\") + value + \"\\\"\";\n  // We have to walk value and escape any special characters.\n  // Appending to std::string is not efficient, but this should be rare.\n  // (Note: forward slashes are *not* rare, but I am not escaping them.)\n  std::string::size_type maxsize =\n      strlen(value) * 2 + 3; // allescaped+quotes+NULL\n  std::string result;\n  result.reserve(maxsize); // to avoid lots of mallocs\n  result += \"\\\"\";\n  for (const char* c = value; *c != 0; ++c) {\n    switch (*c) {\n    case '\\\"':\n      result += \"\\\\\\\"\";\n      break;\n    case '\\\\':\n      result += \"\\\\\\\\\";\n      break;\n    case '\\b':\n      result += \"\\\\b\";\n      break;\n    case '\\f':\n      result += \"\\\\f\";\n      break;\n    case '\\n':\n      result += \"\\\\n\";\n      break;\n    case '\\r':\n      result += \"\\\\r\";\n      break;\n    case '\\t':\n      result += \"\\\\t\";\n      break;\n    // case '/':\n    // Even though \\/ is considered a legal escape in JSON, a bare\n    // slash is also legal, so I see no reason to escape it.\n    // (I hope I am not misunderstanding something.\n    // blep notes: actually escaping \\/ may be useful in javascript to avoid </\n    // sequence.\n    // Should add a flag to allow this compatibility mode and prevent this\n    // sequence from occurring.\n    default:\n      if (isControlCharacter(*c)) {\n        std::ostringstream oss;\n        oss << \"\\\\u\" << std::hex << std::uppercase << std::setfill('0')\n            << std::setw(4) << static_cast<int>(*c);\n        result += oss.str();\n      } else {\n        result += *c;\n      }\n      break;\n    }\n  }\n  result += \"\\\"\";\n  return result;\n}\n\n// https://github.com/upcaste/upcaste/blob/master/src/upcore/src/cstring/strnpbrk.cpp\nstatic char const* strnpbrk(char const* s, char const* accept, size_t n) {\n  assert((s || !n) && accept);\n\n  char const* const end = s + n;\n  for (char const* cur = s; cur < end; ++cur) {\n    int const c = *cur;\n    for (char const* a = accept; *a; ++a) {\n      if (*a == c) {\n        return cur;\n      }\n    }\n  }\n  return NULL;\n}\nstatic std::string valueToQuotedStringN(const char* value, unsigned length) {\n  if (value == NULL)\n    return \"\";\n  // Not sure how to handle unicode...\n  if (strnpbrk(value, \"\\\"\\\\\\b\\f\\n\\r\\t\", length) == NULL &&\n      !containsControlCharacter0(value, length))\n    return std::string(\"\\\"\") + value + \"\\\"\";\n  // We have to walk value and escape any special characters.\n  // Appending to std::string is not efficient, but this should be rare.\n  // (Note: forward slashes are *not* rare, but I am not escaping them.)\n  std::string::size_type maxsize =\n      length * 2 + 3; // allescaped+quotes+NULL\n  std::string result;\n  result.reserve(maxsize); // to avoid lots of mallocs\n  result += \"\\\"\";\n  char const* end = value + length;\n  for (const char* c = value; c != end; ++c) {\n    switch (*c) {\n    case '\\\"':\n      result += \"\\\\\\\"\";\n      break;\n    case '\\\\':\n      result += \"\\\\\\\\\";\n      break;\n    case '\\b':\n      result += \"\\\\b\";\n      break;\n    case '\\f':\n      result += \"\\\\f\";\n      break;\n    case '\\n':\n      result += \"\\\\n\";\n      break;\n    case '\\r':\n      result += \"\\\\r\";\n      break;\n    case '\\t':\n      result += \"\\\\t\";\n      break;\n    // case '/':\n    // Even though \\/ is considered a legal escape in JSON, a bare\n    // slash is also legal, so I see no reason to escape it.\n    // (I hope I am not misunderstanding something.)\n    // blep notes: actually escaping \\/ may be useful in javascript to avoid </\n    // sequence.\n    // Should add a flag to allow this compatibility mode and prevent this\n    // sequence from occurring.\n    default:\n      if ((isControlCharacter(*c)) || (*c == 0)) {\n        std::ostringstream oss;\n        oss << \"\\\\u\" << std::hex << std::uppercase << std::setfill('0')\n            << std::setw(4) << static_cast<int>(*c);\n        result += oss.str();\n      } else {\n        result += *c;\n      }\n      break;\n    }\n  }\n  result += \"\\\"\";\n  return result;\n}\n\n// Class Writer\n// //////////////////////////////////////////////////////////////////\nWriter::~Writer() {}\n\n// Class FastWriter\n// //////////////////////////////////////////////////////////////////\n\nFastWriter::FastWriter()\n    : yamlCompatiblityEnabled_(false), dropNullPlaceholders_(false),\n      omitEndingLineFeed_(false) {}\n\nvoid FastWriter::enableYAMLCompatibility() { yamlCompatiblityEnabled_ = true; }\n\nvoid FastWriter::dropNullPlaceholders() { dropNullPlaceholders_ = true; }\n\nvoid FastWriter::omitEndingLineFeed() { omitEndingLineFeed_ = true; }\n\nstd::string FastWriter::write(const Value& root) {\n  document_ = \"\";\n  writeValue(root);\n  if (!omitEndingLineFeed_)\n    document_ += \"\\n\";\n  return document_;\n}\n\nvoid FastWriter::writeValue(const Value& value) {\n  switch (value.type()) {\n  case nullValue:\n    if (!dropNullPlaceholders_)\n      document_ += \"null\";\n    break;\n  case intValue:\n    document_ += valueToString(value.asLargestInt());\n    break;\n  case uintValue:\n    document_ += valueToString(value.asLargestUInt());\n    break;\n  case realValue:\n    document_ += valueToString(value.asDouble());\n    break;\n  case stringValue:\n  {\n    // Is NULL possible for value.string_?\n    char const* str;\n    char const* end;\n    bool ok = value.getString(&str, &end);\n    if (ok) document_ += valueToQuotedStringN(str, static_cast<unsigned>(end-str));\n    break;\n  }\n  case booleanValue:\n    document_ += valueToString(value.asBool());\n    break;\n  case arrayValue: {\n    document_ += '[';\n    int size = value.size();\n    for (int index = 0; index < size; ++index) {\n      if (index > 0)\n        document_ += ',';\n      writeValue(value[index]);\n    }\n    document_ += ']';\n  } break;\n  case objectValue: {\n    Value::Members members(value.getMemberNames());\n    document_ += '{';\n    for (Value::Members::iterator it = members.begin(); it != members.end();\n         ++it) {\n      const std::string& name = *it;\n      if (it != members.begin())\n        document_ += ',';\n      document_ += valueToQuotedStringN(name.data(), name.length());\n      document_ += yamlCompatiblityEnabled_ ? \": \" : \":\";\n      writeValue(value[name]);\n    }\n    document_ += '}';\n  } break;\n  }\n}\n\n// Class StyledWriter\n// //////////////////////////////////////////////////////////////////\n\nStyledWriter::StyledWriter()\n    : rightMargin_(74), indentSize_(3), addChildValues_() {}\n\nstd::string StyledWriter::write(const Value& root) {\n  document_ = \"\";\n  addChildValues_ = false;\n  indentString_ = \"\";\n  writeCommentBeforeValue(root);\n  writeValue(root);\n  writeCommentAfterValueOnSameLine(root);\n  document_ += \"\\n\";\n  return document_;\n}\n\nvoid StyledWriter::writeValue(const Value& value) {\n  switch (value.type()) {\n  case nullValue:\n    pushValue(\"null\");\n    break;\n  case intValue:\n    pushValue(valueToString(value.asLargestInt()));\n    break;\n  case uintValue:\n    pushValue(valueToString(value.asLargestUInt()));\n    break;\n  case realValue:\n    pushValue(valueToString(value.asDouble()));\n    break;\n  case stringValue:\n  {\n    // Is NULL possible for value.string_?\n    char const* str;\n    char const* end;\n    bool ok = value.getString(&str, &end);\n    if (ok) pushValue(valueToQuotedStringN(str, static_cast<unsigned>(end-str)));\n    else pushValue(\"\");\n    break;\n  }\n  case booleanValue:\n    pushValue(valueToString(value.asBool()));\n    break;\n  case arrayValue:\n    writeArrayValue(value);\n    break;\n  case objectValue: {\n    Value::Members members(value.getMemberNames());\n    if (members.empty())\n      pushValue(\"{}\");\n    else {\n      writeWithIndent(\"{\");\n      indent();\n      Value::Members::iterator it = members.begin();\n      for (;;) {\n        const std::string& name = *it;\n        const Value& childValue = value[name];\n        writeCommentBeforeValue(childValue);\n        writeWithIndent(valueToQuotedString(name.c_str()));\n        document_ += \" : \";\n        writeValue(childValue);\n        if (++it == members.end()) {\n          writeCommentAfterValueOnSameLine(childValue);\n          break;\n        }\n        document_ += ',';\n        writeCommentAfterValueOnSameLine(childValue);\n      }\n      unindent();\n      writeWithIndent(\"}\");\n    }\n  } break;\n  }\n}\n\nvoid StyledWriter::writeArrayValue(const Value& value) {\n  unsigned size = value.size();\n  if (size == 0)\n    pushValue(\"[]\");\n  else {\n    bool isArrayMultiLine = isMultineArray(value);\n    if (isArrayMultiLine) {\n      writeWithIndent(\"[\");\n      indent();\n      bool hasChildValue = !childValues_.empty();\n      unsigned index = 0;\n      for (;;) {\n        const Value& childValue = value[index];\n        writeCommentBeforeValue(childValue);\n        if (hasChildValue)\n          writeWithIndent(childValues_[index]);\n        else {\n          writeIndent();\n          writeValue(childValue);\n        }\n        if (++index == size) {\n          writeCommentAfterValueOnSameLine(childValue);\n          break;\n        }\n        document_ += ',';\n        writeCommentAfterValueOnSameLine(childValue);\n      }\n      unindent();\n      writeWithIndent(\"]\");\n    } else // output on a single line\n    {\n      assert(childValues_.size() == size);\n      document_ += \"[ \";\n      for (unsigned index = 0; index < size; ++index) {\n        if (index > 0)\n          document_ += \", \";\n        document_ += childValues_[index];\n      }\n      document_ += \" ]\";\n    }\n  }\n}\n\nbool StyledWriter::isMultineArray(const Value& value) {\n  int size = value.size();\n  bool isMultiLine = size * 3 >= rightMargin_;\n  childValues_.clear();\n  for (int index = 0; index < size && !isMultiLine; ++index) {\n    const Value& childValue = value[index];\n    isMultiLine =\n        isMultiLine || ((childValue.isArray() || childValue.isObject()) &&\n                        childValue.size() > 0);\n  }\n  if (!isMultiLine) // check if line length > max line length\n  {\n    childValues_.reserve(size);\n    addChildValues_ = true;\n    int lineLength = 4 + (size - 1) * 2; // '[ ' + ', '*n + ' ]'\n    for (int index = 0; index < size; ++index) {\n      if (hasCommentForValue(value[index])) {\n        isMultiLine = true;\n      }\n      writeValue(value[index]);\n      lineLength += int(childValues_[index].length());\n    }\n    addChildValues_ = false;\n    isMultiLine = isMultiLine || lineLength >= rightMargin_;\n  }\n  return isMultiLine;\n}\n\nvoid StyledWriter::pushValue(const std::string& value) {\n  if (addChildValues_)\n    childValues_.push_back(value);\n  else\n    document_ += value;\n}\n\nvoid StyledWriter::writeIndent() {\n  if (!document_.empty()) {\n    char last = document_[document_.length() - 1];\n    if (last == ' ') // already indented\n      return;\n    if (last != '\\n') // Comments may add new-line\n      document_ += '\\n';\n  }\n  document_ += indentString_;\n}\n\nvoid StyledWriter::writeWithIndent(const std::string& value) {\n  writeIndent();\n  document_ += value;\n}\n\nvoid StyledWriter::indent() { indentString_ += std::string(indentSize_, ' '); }\n\nvoid StyledWriter::unindent() {\n  assert(int(indentString_.size()) >= indentSize_);\n  indentString_.resize(indentString_.size() - indentSize_);\n}\n\nvoid StyledWriter::writeCommentBeforeValue(const Value& root) {\n  if (!root.hasComment(commentBefore))\n    return;\n\n  document_ += \"\\n\";\n  writeIndent();\n  const std::string& comment = root.getComment(commentBefore);\n  std::string::const_iterator iter = comment.begin();\n  while (iter != comment.end()) {\n    document_ += *iter;\n    if (*iter == '\\n' &&\n       (iter != comment.end() && *(iter + 1) == '/'))\n      writeIndent();\n    ++iter;\n  }\n\n  // Comments are stripped of trailing newlines, so add one here\n  document_ += \"\\n\";\n}\n\nvoid StyledWriter::writeCommentAfterValueOnSameLine(const Value& root) {\n  if (root.hasComment(commentAfterOnSameLine))\n    document_ += \" \" + root.getComment(commentAfterOnSameLine);\n\n  if (root.hasComment(commentAfter)) {\n    document_ += \"\\n\";\n    document_ += root.getComment(commentAfter);\n    document_ += \"\\n\";\n  }\n}\n\nbool StyledWriter::hasCommentForValue(const Value& value) {\n  return value.hasComment(commentBefore) ||\n         value.hasComment(commentAfterOnSameLine) ||\n         value.hasComment(commentAfter);\n}\n\n// Class StyledStreamWriter\n// //////////////////////////////////////////////////////////////////\n\nStyledStreamWriter::StyledStreamWriter(std::string indentation)\n    : document_(NULL), rightMargin_(74), indentation_(indentation),\n      addChildValues_() {}\n\nvoid StyledStreamWriter::write(std::ostream& out, const Value& root) {\n  document_ = &out;\n  addChildValues_ = false;\n  indentString_ = \"\";\n  indented_ = true;\n  writeCommentBeforeValue(root);\n  if (!indented_) writeIndent();\n  indented_ = true;\n  writeValue(root);\n  writeCommentAfterValueOnSameLine(root);\n  *document_ << \"\\n\";\n  document_ = NULL; // Forget the stream, for safety.\n}\n\nvoid StyledStreamWriter::writeValue(const Value& value) {\n  switch (value.type()) {\n  case nullValue:\n    pushValue(\"null\");\n    break;\n  case intValue:\n    pushValue(valueToString(value.asLargestInt()));\n    break;\n  case uintValue:\n    pushValue(valueToString(value.asLargestUInt()));\n    break;\n  case realValue:\n    pushValue(valueToString(value.asDouble()));\n    break;\n  case stringValue:\n  {\n    // Is NULL possible for value.string_?\n    char const* str;\n    char const* end;\n    bool ok = value.getString(&str, &end);\n    if (ok) pushValue(valueToQuotedStringN(str, static_cast<unsigned>(end-str)));\n    else pushValue(\"\");\n    break;\n  }\n  case booleanValue:\n    pushValue(valueToString(value.asBool()));\n    break;\n  case arrayValue:\n    writeArrayValue(value);\n    break;\n  case objectValue: {\n    Value::Members members(value.getMemberNames());\n    if (members.empty())\n      pushValue(\"{}\");\n    else {\n      writeWithIndent(\"{\");\n      indent();\n      Value::Members::iterator it = members.begin();\n      for (;;) {\n        const std::string& name = *it;\n        const Value& childValue = value[name];\n        writeCommentBeforeValue(childValue);\n        writeWithIndent(valueToQuotedString(name.c_str()));\n        *document_ << \" : \";\n        writeValue(childValue);\n        if (++it == members.end()) {\n          writeCommentAfterValueOnSameLine(childValue);\n          break;\n        }\n        *document_ << \",\";\n        writeCommentAfterValueOnSameLine(childValue);\n      }\n      unindent();\n      writeWithIndent(\"}\");\n    }\n  } break;\n  }\n}\n\nvoid StyledStreamWriter::writeArrayValue(const Value& value) {\n  unsigned size = value.size();\n  if (size == 0)\n    pushValue(\"[]\");\n  else {\n    bool isArrayMultiLine = isMultineArray(value);\n    if (isArrayMultiLine) {\n      writeWithIndent(\"[\");\n      indent();\n      bool hasChildValue = !childValues_.empty();\n      unsigned index = 0;\n      for (;;) {\n        const Value& childValue = value[index];\n        writeCommentBeforeValue(childValue);\n        if (hasChildValue)\n          writeWithIndent(childValues_[index]);\n        else {\n          if (!indented_) writeIndent();\n          indented_ = true;\n          writeValue(childValue);\n          indented_ = false;\n        }\n        if (++index == size) {\n          writeCommentAfterValueOnSameLine(childValue);\n          break;\n        }\n        *document_ << \",\";\n        writeCommentAfterValueOnSameLine(childValue);\n      }\n      unindent();\n      writeWithIndent(\"]\");\n    } else // output on a single line\n    {\n      assert(childValues_.size() == size);\n      *document_ << \"[ \";\n      for (unsigned index = 0; index < size; ++index) {\n        if (index > 0)\n          *document_ << \", \";\n        *document_ << childValues_[index];\n      }\n      *document_ << \" ]\";\n    }\n  }\n}\n\nbool StyledStreamWriter::isMultineArray(const Value& value) {\n  int size = value.size();\n  bool isMultiLine = size * 3 >= rightMargin_;\n  childValues_.clear();\n  for (int index = 0; index < size && !isMultiLine; ++index) {\n    const Value& childValue = value[index];\n    isMultiLine =\n        isMultiLine || ((childValue.isArray() || childValue.isObject()) &&\n                        childValue.size() > 0);\n  }\n  if (!isMultiLine) // check if line length > max line length\n  {\n    childValues_.reserve(size);\n    addChildValues_ = true;\n    int lineLength = 4 + (size - 1) * 2; // '[ ' + ', '*n + ' ]'\n    for (int index = 0; index < size; ++index) {\n      if (hasCommentForValue(value[index])) {\n        isMultiLine = true;\n      }\n      writeValue(value[index]);\n      lineLength += int(childValues_[index].length());\n    }\n    addChildValues_ = false;\n    isMultiLine = isMultiLine || lineLength >= rightMargin_;\n  }\n  return isMultiLine;\n}\n\nvoid StyledStreamWriter::pushValue(const std::string& value) {\n  if (addChildValues_)\n    childValues_.push_back(value);\n  else\n    *document_ << value;\n}\n\nvoid StyledStreamWriter::writeIndent() {\n  // blep intended this to look at the so-far-written string\n  // to determine whether we are already indented, but\n  // with a stream we cannot do that. So we rely on some saved state.\n  // The caller checks indented_.\n  *document_ << '\\n' << indentString_;\n}\n\nvoid StyledStreamWriter::writeWithIndent(const std::string& value) {\n  if (!indented_) writeIndent();\n  *document_ << value;\n  indented_ = false;\n}\n\nvoid StyledStreamWriter::indent() { indentString_ += indentation_; }\n\nvoid StyledStreamWriter::unindent() {\n  assert(indentString_.size() >= indentation_.size());\n  indentString_.resize(indentString_.size() - indentation_.size());\n}\n\nvoid StyledStreamWriter::writeCommentBeforeValue(const Value& root) {\n  if (!root.hasComment(commentBefore))\n    return;\n\n  if (!indented_) writeIndent();\n  const std::string& comment = root.getComment(commentBefore);\n  std::string::const_iterator iter = comment.begin();\n  while (iter != comment.end()) {\n    *document_ << *iter;\n    if (*iter == '\\n' &&\n       (iter != comment.end() && *(iter + 1) == '/'))\n      // writeIndent();  // would include newline\n      *document_ << indentString_;\n    ++iter;\n  }\n  indented_ = false;\n}\n\nvoid StyledStreamWriter::writeCommentAfterValueOnSameLine(const Value& root) {\n  if (root.hasComment(commentAfterOnSameLine))\n    *document_ << ' ' << root.getComment(commentAfterOnSameLine);\n\n  if (root.hasComment(commentAfter)) {\n    writeIndent();\n    *document_ << root.getComment(commentAfter);\n  }\n  indented_ = false;\n}\n\nbool StyledStreamWriter::hasCommentForValue(const Value& value) {\n  return value.hasComment(commentBefore) ||\n         value.hasComment(commentAfterOnSameLine) ||\n         value.hasComment(commentAfter);\n}\n\n//////////////////////////\n// BuiltStyledStreamWriter\n\n/// Scoped enums are not available until C++11.\nstruct CommentStyle {\n  /// Decide whether to write comments.\n  enum Enum {\n    None,  ///< Drop all comments.\n    Most,  ///< Recover odd behavior of previous versions (not implemented yet).\n    All  ///< Keep all comments.\n  };\n};\n\nstruct BuiltStyledStreamWriter : public StreamWriter\n{\n  BuiltStyledStreamWriter(\n      std::string const& indentation,\n      CommentStyle::Enum cs,\n      std::string const& colonSymbol,\n      std::string const& nullSymbol,\n      std::string const& endingLineFeedSymbol);\n  virtual int write(Value const& root, std::ostream* sout);\nprivate:\n  void writeValue(Value const& value);\n  void writeArrayValue(Value const& value);\n  bool isMultineArray(Value const& value);\n  void pushValue(std::string const& value);\n  void writeIndent();\n  void writeWithIndent(std::string const& value);\n  void indent();\n  void unindent();\n  void writeCommentBeforeValue(Value const& root);\n  void writeCommentAfterValueOnSameLine(Value const& root);\n  static bool hasCommentForValue(const Value& value);\n\n  typedef std::vector<std::string> ChildValues;\n\n  ChildValues childValues_;\n  std::string indentString_;\n  int rightMargin_;\n  std::string indentation_;\n  CommentStyle::Enum cs_;\n  std::string colonSymbol_;\n  std::string nullSymbol_;\n  std::string endingLineFeedSymbol_;\n  bool addChildValues_ : 1;\n  bool indented_ : 1;\n};\nBuiltStyledStreamWriter::BuiltStyledStreamWriter(\n      std::string const& indentation,\n      CommentStyle::Enum cs,\n      std::string const& colonSymbol,\n      std::string const& nullSymbol,\n      std::string const& endingLineFeedSymbol)\n  : rightMargin_(74)\n  , indentation_(indentation)\n  , cs_(cs)\n  , colonSymbol_(colonSymbol)\n  , nullSymbol_(nullSymbol)\n  , endingLineFeedSymbol_(endingLineFeedSymbol)\n  , addChildValues_(false)\n  , indented_(false)\n{\n}\nint BuiltStyledStreamWriter::write(Value const& root, std::ostream* sout)\n{\n  sout_ = sout;\n  addChildValues_ = false;\n  indented_ = true;\n  indentString_ = \"\";\n  writeCommentBeforeValue(root);\n  if (!indented_) writeIndent();\n  indented_ = true;\n  writeValue(root);\n  writeCommentAfterValueOnSameLine(root);\n  *sout_ << endingLineFeedSymbol_;\n  sout_ = NULL;\n  return 0;\n}\nvoid BuiltStyledStreamWriter::writeValue(Value const& value) {\n  switch (value.type()) {\n  case nullValue:\n    pushValue(nullSymbol_);\n    break;\n  case intValue:\n    pushValue(valueToString(value.asLargestInt()));\n    break;\n  case uintValue:\n    pushValue(valueToString(value.asLargestUInt()));\n    break;\n  case realValue:\n    pushValue(valueToString(value.asDouble()));\n    break;\n  case stringValue:\n  {\n    // Is NULL is possible for value.string_?\n    char const* str;\n    char const* end;\n    bool ok = value.getString(&str, &end);\n    if (ok) pushValue(valueToQuotedStringN(str, static_cast<unsigned>(end-str)));\n    else pushValue(\"\");\n    break;\n  }\n  case booleanValue:\n    pushValue(valueToString(value.asBool()));\n    break;\n  case arrayValue:\n    writeArrayValue(value);\n    break;\n  case objectValue: {\n    Value::Members members(value.getMemberNames());\n    if (members.empty())\n      pushValue(\"{}\");\n    else {\n      writeWithIndent(\"{\");\n      indent();\n      Value::Members::iterator it = members.begin();\n      for (;;) {\n        std::string const& name = *it;\n        Value const& childValue = value[name];\n        writeCommentBeforeValue(childValue);\n        writeWithIndent(valueToQuotedStringN(name.data(), name.length()));\n        *sout_ << colonSymbol_;\n        writeValue(childValue);\n        if (++it == members.end()) {\n          writeCommentAfterValueOnSameLine(childValue);\n          break;\n        }\n        *sout_ << \",\";\n        writeCommentAfterValueOnSameLine(childValue);\n      }\n      unindent();\n      writeWithIndent(\"}\");\n    }\n  } break;\n  }\n}\n\nvoid BuiltStyledStreamWriter::writeArrayValue(Value const& value) {\n  unsigned size = value.size();\n  if (size == 0)\n    pushValue(\"[]\");\n  else {\n    bool isMultiLine = (cs_ == CommentStyle::All) || isMultineArray(value);\n    if (isMultiLine) {\n      writeWithIndent(\"[\");\n      indent();\n      bool hasChildValue = !childValues_.empty();\n      unsigned index = 0;\n      for (;;) {\n        Value const& childValue = value[index];\n        writeCommentBeforeValue(childValue);\n        if (hasChildValue)\n          writeWithIndent(childValues_[index]);\n        else {\n          if (!indented_) writeIndent();\n          indented_ = true;\n          writeValue(childValue);\n          indented_ = false;\n        }\n        if (++index == size) {\n          writeCommentAfterValueOnSameLine(childValue);\n          break;\n        }\n        *sout_ << \",\";\n        writeCommentAfterValueOnSameLine(childValue);\n      }\n      unindent();\n      writeWithIndent(\"]\");\n    } else // output on a single line\n    {\n      assert(childValues_.size() == size);\n      *sout_ << \"[\";\n      if (!indentation_.empty()) *sout_ << \" \";\n      for (unsigned index = 0; index < size; ++index) {\n        if (index > 0)\n          *sout_ << \", \";\n        *sout_ << childValues_[index];\n      }\n      if (!indentation_.empty()) *sout_ << \" \";\n      *sout_ << \"]\";\n    }\n  }\n}\n\nbool BuiltStyledStreamWriter::isMultineArray(Value const& value) {\n  int size = value.size();\n  bool isMultiLine = size * 3 >= rightMargin_;\n  childValues_.clear();\n  for (int index = 0; index < size && !isMultiLine; ++index) {\n    Value const& childValue = value[index];\n    isMultiLine =\n        isMultiLine || ((childValue.isArray() || childValue.isObject()) &&\n                        childValue.size() > 0);\n  }\n  if (!isMultiLine) // check if line length > max line length\n  {\n    childValues_.reserve(size);\n    addChildValues_ = true;\n    int lineLength = 4 + (size - 1) * 2; // '[ ' + ', '*n + ' ]'\n    for (int index = 0; index < size; ++index) {\n      if (hasCommentForValue(value[index])) {\n        isMultiLine = true;\n      }\n      writeValue(value[index]);\n      lineLength += int(childValues_[index].length());\n    }\n    addChildValues_ = false;\n    isMultiLine = isMultiLine || lineLength >= rightMargin_;\n  }\n  return isMultiLine;\n}\n\nvoid BuiltStyledStreamWriter::pushValue(std::string const& value) {\n  if (addChildValues_)\n    childValues_.push_back(value);\n  else\n    *sout_ << value;\n}\n\nvoid BuiltStyledStreamWriter::writeIndent() {\n  // blep intended this to look at the so-far-written string\n  // to determine whether we are already indented, but\n  // with a stream we cannot do that. So we rely on some saved state.\n  // The caller checks indented_.\n\n  if (!indentation_.empty()) {\n    // In this case, drop newlines too.\n    *sout_ << '\\n' << indentString_;\n  }\n}\n\nvoid BuiltStyledStreamWriter::writeWithIndent(std::string const& value) {\n  if (!indented_) writeIndent();\n  *sout_ << value;\n  indented_ = false;\n}\n\nvoid BuiltStyledStreamWriter::indent() { indentString_ += indentation_; }\n\nvoid BuiltStyledStreamWriter::unindent() {\n  assert(indentString_.size() >= indentation_.size());\n  indentString_.resize(indentString_.size() - indentation_.size());\n}\n\nvoid BuiltStyledStreamWriter::writeCommentBeforeValue(Value const& root) {\n  if (cs_ == CommentStyle::None) return;\n  if (!root.hasComment(commentBefore))\n    return;\n\n  if (!indented_) writeIndent();\n  const std::string& comment = root.getComment(commentBefore);\n  std::string::const_iterator iter = comment.begin();\n  while (iter != comment.end()) {\n    *sout_ << *iter;\n    if (*iter == '\\n' &&\n       (iter != comment.end() && *(iter + 1) == '/'))\n      // writeIndent();  // would write extra newline\n      *sout_ << indentString_;\n    ++iter;\n  }\n  indented_ = false;\n}\n\nvoid BuiltStyledStreamWriter::writeCommentAfterValueOnSameLine(Value const& root) {\n  if (cs_ == CommentStyle::None) return;\n  if (root.hasComment(commentAfterOnSameLine))\n    *sout_ << \" \" + root.getComment(commentAfterOnSameLine);\n\n  if (root.hasComment(commentAfter)) {\n    writeIndent();\n    *sout_ << root.getComment(commentAfter);\n  }\n}\n\n// static\nbool BuiltStyledStreamWriter::hasCommentForValue(const Value& value) {\n  return value.hasComment(commentBefore) ||\n         value.hasComment(commentAfterOnSameLine) ||\n         value.hasComment(commentAfter);\n}\n\n///////////////\n// StreamWriter\n\nStreamWriter::StreamWriter()\n    : sout_(NULL)\n{\n}\nStreamWriter::~StreamWriter()\n{\n}\nStreamWriter::Factory::~Factory()\n{}\nStreamWriterBuilder::StreamWriterBuilder()\n{\n  setDefaults(&settings_);\n}\nStreamWriterBuilder::~StreamWriterBuilder()\n{}\nStreamWriter* StreamWriterBuilder::newStreamWriter() const\n{\n  std::string indentation = settings_[\"indentation\"].asString();\n  std::string cs_str = settings_[\"commentStyle\"].asString();\n  bool eyc = settings_[\"enableYAMLCompatibility\"].asBool();\n  bool dnp = settings_[\"dropNullPlaceholders\"].asBool();\n  CommentStyle::Enum cs = CommentStyle::All;\n  if (cs_str == \"All\") {\n    cs = CommentStyle::All;\n  } else if (cs_str == \"None\") {\n    cs = CommentStyle::None;\n  } else {\n    throwRuntimeError(\"commentStyle must be 'All' or 'None'\");\n  }\n  std::string colonSymbol = \" : \";\n  if (eyc) {\n    colonSymbol = \": \";\n  } else if (indentation.empty()) {\n    colonSymbol = \":\";\n  }\n  std::string nullSymbol = \"null\";\n  if (dnp) {\n    nullSymbol = \"\";\n  }\n  std::string endingLineFeedSymbol = \"\";\n  return new BuiltStyledStreamWriter(\n      indentation, cs,\n      colonSymbol, nullSymbol, endingLineFeedSymbol);\n}\nstatic void getValidWriterKeys(std::set<std::string>* valid_keys)\n{\n  valid_keys->clear();\n  valid_keys->insert(\"indentation\");\n  valid_keys->insert(\"commentStyle\");\n  valid_keys->insert(\"enableYAMLCompatibility\");\n  valid_keys->insert(\"dropNullPlaceholders\");\n}\nbool StreamWriterBuilder::validate(Json::Value* invalid) const\n{\n  Json::Value my_invalid;\n  if (!invalid) invalid = &my_invalid;  // so we do not need to test for NULL\n  Json::Value& inv = *invalid;\n  std::set<std::string> valid_keys;\n  getValidWriterKeys(&valid_keys);\n  Value::Members keys = settings_.getMemberNames();\n  size_t n = keys.size();\n  for (size_t i = 0; i < n; ++i) {\n    std::string const& key = keys[i];\n    if (valid_keys.find(key) == valid_keys.end()) {\n      inv[key] = settings_[key];\n    }\n  }\n  return 0u == inv.size();\n}\nValue& StreamWriterBuilder::operator[](std::string key)\n{\n  return settings_[key];\n}\n// static\nvoid StreamWriterBuilder::setDefaults(Json::Value* settings)\n{\n  //! [StreamWriterBuilderDefaults]\n  (*settings)[\"commentStyle\"] = \"All\";\n  (*settings)[\"indentation\"] = \"\\t\";\n  (*settings)[\"enableYAMLCompatibility\"] = false;\n  (*settings)[\"dropNullPlaceholders\"] = false;\n  //! [StreamWriterBuilderDefaults]\n}\n\nstd::string writeString(StreamWriter::Factory const& builder, Value const& root) {\n  std::ostringstream sout;\n  StreamWriterPtr const writer(builder.newStreamWriter());\n  writer->write(root, &sout);\n  return sout.str();\n}\n\nstd::ostream& operator<<(std::ostream& sout, Value const& root) {\n  StreamWriterBuilder builder;\n  StreamWriterPtr const writer(builder.newStreamWriter());\n  writer->write(root, &sout);\n  return sout;\n}\n\n} // namespace Json\n\n// //////////////////////////////////////////////////////////////////////\n// End of content of file: src/lib_json/json_writer.cpp\n// //////////////////////////////////////////////////////////////////////\n\n\n\n\n\n",
+			"file": "src/json/jsoncpp.cpp",
+			"file_size": 147838,
+			"file_write_time": 130860314141783500,
+			"settings":
+			{
+				"buffer_size": 147844,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/screens/Boot.cpp",
+			"settings":
+			{
+				"buffer_size": 3309,
 				"line_ending": "Unix"
 			}
 		},
@@ -552,10 +579,34 @@
 			}
 		},
 		{
-			"file": "src/screens/Project.cpp",
+			"file": "/home/leeios/.config/sublime-text-3/Packages/1337 Color Scheme/1337.tmTheme",
 			"settings":
 			{
-				"buffer_size": 1415,
+				"buffer_size": 10944,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/utils.hpp",
+			"settings":
+			{
+				"buffer_size": 1963,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 2549,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/Project.hpp",
+			"settings":
+			{
+				"buffer_size": 1375,
 				"line_ending": "Unix"
 			}
 		}
@@ -568,9 +619,21 @@
 	"command_palette":
 	{
 		"height": 302.0,
-		"last_filter": "color",
+		"last_filter": "key",
 		"selected_items":
 		[
+			[
+				"key",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"key bin",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"pref",
+				"Preferences: Settings - User"
+			],
 			[
 				"color",
 				"Color Picker"
@@ -578,10 +641,6 @@
 			[
 				"pack li",
 				"Package Control: List Packages"
-			],
-			[
-				"pref",
-				"Preferences: Settings - User"
 			],
 			[
 				"linter",
@@ -829,8 +888,11 @@
 		"/home/leeios/code/meuh/util/roolv2.0",
 		"/home/leeios/code/meuh/util/roolv2.0/config",
 		"/home/leeios/code/meuh/util/roolv2.0/config/models",
+		"/home/leeios/code/meuh/util/roolv2.0/config/proj_tree",
+		"/home/leeios/code/meuh/util/roolv2.0/include",
 		"/home/leeios/code/meuh/util/roolv2.0/src",
 		"/home/leeios/code/meuh/util/roolv2.0/src/commands",
+		"/home/leeios/code/meuh/util/roolv2.0/src/json",
 		"/home/leeios/code/meuh/util/roolv2.0/src/mods",
 		"/home/leeios/code/meuh/util/roolv2.0/src/ncurse",
 		"/home/leeios/code/meuh/util/roolv2.0/src/screens",
@@ -838,31 +900,47 @@
 	],
 	"file_history":
 	[
+		"/home/leeios/code/meuh/sandbox/hdezier/config/Leeios/C++ Starting Kit/C++.tmLanguage",
+		"/home/leeios/code/meuh/sandbox/hdezier/config/Leeios/C++ Starting Kit/Symbol Index Hide Ctors.tmPreferences",
+		"/home/leeios/code/meuh/util/roolv2.0/src/commands/StandardCmd.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/sublime-project.model",
+		"/home/leeios/.config/sublime-text-3/Packages/Oasis Theme/Oasis.tmTheme",
+		"/home/leeios/.config/sublime-text-3/Packages/C++ Starting Kit/C++.tmLanguage",
+		"/home/leeios/.config/sublime-text-3/Packages/C++ Starting Kit/Indentation Rules.tmPreferences",
+		"/home/leeios/code/meuh/util/roolv2.0/src/screens/Project.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/screens/Boot.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/utils/FtFile.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/commands/InterfaceCmd.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/include/utils.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/Makefile",
+		"/home/leeios/code/meuh/util/roolv2.0/include/Project.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/main.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/utils/FtStr.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/rool.sublime-project",
+		"/home/leeios/.config/sublime-text-3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/leeios/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/leeios/code/meuh/util/roolv2.0/config/.proj",
+		"/home/leeios/code/meuh/util/roolv2.0/include/MemberMod.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/include/ClassMod.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/include/IModule.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/mods/ClassMod.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/mods/MemberMod.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/include/config.hpp",
 		"/home/leeios/code/meuh/util/roolv2.0/config/models/main.model",
 		"/home/leeios/code/meuh/util/roolv2.0/config/models/Makefile.model",
-		"/home/leeios/code/meuh/util/roolv2.0/src/utils/FtFile.cpp",
-		"/home/leeios/code/meuh/util/roolv2.0/src/utils/FtStr.cpp",
 		"/home/leeios/code/meuh/util/roolv2.0/config/models/interface.model",
 		"/home/leeios/code/meuh/util/roolv2.0/include/util.hpp",
 		"/home/leeios/code/meuh/util/roolv2.0/include/InterfaceCmd.hpp",
-		"/home/leeios/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/leeios/code/meuh/util/roolv2.0/config/models/inc.model",
-		"/home/leeios/code/meuh/util/roolv2.0/src/commands/StandardCmd.cpp",
-		"/home/leeios/code/meuh/util/roolv2.0/src/commands/InterfaceCmd.cpp",
-		"/home/leeios/code/meuh/util/roolv2.0/src/screens/Project.cpp",
-		"/home/leeios/code/meuh/util/roolv2.0/src/screens/Boot.cpp",
 		"/home/leeios/code/meuh/util/roolv2.0/config/proj_tree/classic.tree",
-		"/home/leeios/code/meuh/util/roolv2.0/config/.proj",
 		"/home/leeios/code/meuh/util/roolv2.0/include/StandardCmd.hpp",
 		"/home/leeios/code/meuh/util/roolv2.0/config/models/inc_parents.model",
 		"/home/leeios/code/meuh/util/roolv2.0/config/models/inherit_parents.model",
-		"/home/leeios/code/meuh/util/roolv2.0/Makefile",
-		"/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
 		"/home/leeios/code/meuh/util/roolv2.0/include/ICommand.hpp",
 		"/home/leeios/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
 		"/home/leeios/.config/sublime-text-3/Packages/Clang-Complete/cc.sublime-settings",
-		"/home/leeios/code/meuh/util/roolv2.0/src/main.cpp",
-		"/home/leeios/code/meuh/util/roolv2.0/src/mods/ClassMod.cpp",
 		"/home/leeios/code/meuh/util/roolv2.0/src/ncurse/Window.cpp",
 		"/home/leeios/code/meuh/util/roolv2.0/src/ncurse/Menu.cpp",
 		"/home/leeios/code/meuh/util/roolv2.0/src/utils/FileDir.cpp",
@@ -871,7 +949,6 @@
 		"/home/leeios/.config/sublime-text-3/Packages/User/ClangComplete.sublime-settings",
 		"/home/leeios/.config/sublime-text-3/Packages/ClangComplete/ClangComplete.sublime-settings",
 		"/home/leeios/code/meuh/util/roolv2.0/CMakeLists.txt",
-		"/home/leeios/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
 		"/home/leeios/code/meuh/util/roolv2.0/util/Makefile",
 		"/home/leeios/code/meuh/util/roolv2.0/CMakeLists",
 		"/usr/include/c++/4.8/bits/basic_string.h",
@@ -950,26 +1027,11 @@
 		"/home/leeios/code/Txt-index/include/FileScanner.hpp",
 		"/home/leeios/code/Txt-index/include/List.hpp",
 		"/home/leeios/code/Txt-index/include/Node.hpp",
-		"/home/leeios/code/Txt-index/include/Trie.hpp",
-		"/home/leeios/code/meuh/util/Rool/src/menus/ClassList.cpp",
-		"/home/leeios/code/meuh/util/Rool/src/menus/MemberList.cpp",
-		"/home/leeios/code/meuh/util/Rool/src/models/Menu.cpp",
-		"/home/leeios/code/meuh/util/Rool/src/models/Window.cpp",
-		"/home/leeios/code/meuh/util/Rool/src/patterns/ReplaceClassName.cpp",
-		"/home/leeios/code/meuh/util/Rool/src/patterns/UsualClass.cpp",
-		"/home/leeios/code/meuh/util/Rool/src/patterns/UsualInterface.cpp",
-		"/home/leeios/code/meuh/util/Rool/src/ClassTemplate.cpp",
-		"/home/leeios/code/meuh/util/Rool/src/GUI.cpp",
-		"/home/leeios/code/meuh/util/Rool/src/MemberTemplate.cpp",
-		"/home/leeios/code/meuh/util/Rool/src/ModuleFactory.cpp",
-		"/home/leeios/code/meuh/util/Rool/src/Project.cpp",
-		"/home/leeios/code/meuh/util/Rool/src/SortItems.cpp",
-		"/home/leeios/code/meuh/42/Gomoku/hdezier-erobert/Makefile",
-		"/home/leeios/code/meuh/util/Rool/config/templates/Makefile.template"
+		"/home/leeios/code/Txt-index/include/Trie.hpp"
 	],
 	"find":
 	{
-		"height": 25.0
+		"height": 70.0
 	},
 	"find_in_files":
 	{
@@ -1007,9 +1069,68 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			".",
+			"semi_colon",
+			"define",
+			"semi_colon",
+			"61a64b",
+			"(?=\\s)",
+			"90E7F7",
+			"=\\s",
+			"&",
+			"=\\S",
+			"\\s",
+			"\\S",
+			"keyword.op",
+			"=\\s",
+			"=&lt;",
+			"=\\s",
+			"?=\\ ",
+			"?=&lt;\\ ",
+			"\\b",
+			"/b",
+			"(?=&lt;\\ )",
+			"(?&lt;=\\ )",
+			"bracket.block",
+			"variabl",
+			"be",
+			"size_t",
+			"class",
+			"meta.class-struct.c++ entity.name.type.c++",
+			"class",
+			"meta.class-struct.c++ entity.name.type.c++",
+			"?=",
+			"\\:\\:",
+			"name.type",
+			"\\:\\:",
+			"support.type.sys-types.c",
+			"json",
+			"xml",
+			"FFE1FC",
+			"storage.modifier.c",
+			"#",
+			"method",
+			"namesp",
+			":",
+			"false",
+			"util.hpp",
+			"util",
+			"utils",
+			"void",
+			"creation",
+			"args",
+			"source",
+			"multi",
+			"model",
+			"line",
+			"src",
+			"UTIL_HPP",
+			"/include",
+			"NULL",
+			"std::std",
 			"class",
 			"MemberList",
 			"StandardCmd",
@@ -1078,66 +1199,7 @@
 			"innerHTML",
 			"-column",
 			"80px",
-			" ",
-			"script",
-			"datetimepicker7",
-			"datetimepicker6",
-			"datetimepicker7",
-			"datetimepicker6",
-			"$(\"#datetimepicker6\")",
-			"\"",
-			"date",
-			"carousel",
-			"Carousel",
-			"200px",
-			"img-slide",
-			"  ",
-			"'img',",
-			"img",
-			"quadranta",
-			"item",
-			"myCarousel",
-			".active",
-			"0",
-			"li",
-			"}}",
-			"attribute",
-			"attributes",
-			"}}",
-			"{tag: 'li",
-			"data-target",
-			"</li>",
-			"<",
-			"Header",
-			" ",
-			"//- ",
-			"\n  ",
-			"              ",
-			"             ",
-			"            ",
-			"           ",
-			"          ",
-			"         ",
-			"        ",
-			"       ",
-			"      ",
-			"     ",
-			"    ",
-			"   ",
-			"  ",
-			"script",
-			"alt",
-			"[\n",
-			"keys",
-			"ctrl",
-			"super",
-			"ctrl",
-			"select_all",
-			"keys",
-			"ctrl",
-			"lib",
-			"endline",
-			"pathDir"
+			" "
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1145,6 +1207,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"utils.hpp",
 			"nullptr",
 			"userInput",
 			"scop",
@@ -1170,19 +1233,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "src/mods/ClassMod.cpp",
+					"file": "/home/leeios/code/meuh/42/Nibbler/hdezier-erobert/game/srcs/Game.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3043,
+						"buffer_size": 6701,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2073,
-								2073
+								3384,
+								3384
 							]
 						],
 						"settings":
@@ -1190,31 +1253,31 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
@@ -1225,56 +1288,56 @@
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
 							],
 							"glsv_configured": true,
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
-							"hasHeader": true,
-							"syntax": "Packages/C++/C++.tmLanguage",
+							"hasHeader": false,
+							"syntax": "Packages/C++ Starting Kit/C++.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 748.0,
+						"translation.y": 1618.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/mods/MemberMod.cpp",
+					"file": "/home/leeios/.config/sublime-text-3/Packages/C++ Starting Kit/C++.tmLanguage",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3776,
+						"buffer_size": 37038,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2617,
-								2617
+								13073,
+								13073
 							]
 						],
 						"settings":
@@ -1282,71 +1345,163 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content"
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
 							"glsv_configured": true,
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
-							"hasHeader": true,
-							"syntax": "Packages/C++/C++.tmLanguage",
+							"hasHeader": false,
+							"syntax": "Packages/XML/XML.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 705.0,
+						"translation.y": 6900.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/leeios/.config/sublime-text-3/Packages/Oasis Theme/Oasis.tmTheme",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10491,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								605,
+								605
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": false,
+							"syntax": "Packages/XML/XML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 193.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -1359,20 +1514,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 2,
-					"file": "include/MemberMod.hpp",
+					"buffer": 3,
+					"file": "config/cpp-rool.json",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1403,
+						"buffer_size": 948,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1204,
-								1204
+								566,
+								566
 							]
 						],
 						"settings":
@@ -1380,51 +1535,41 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
@@ -1434,26 +1579,221 @@
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
-								"bh_round_content"
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
 							],
 							"glsv_configured": true,
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
-							"hasHeader": true,
-							"history_list_is_closing": true,
-							"syntax": "Packages/C++/C++.tmLanguage"
+							"hasHeader": false,
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 211.0,
+						"translation.y": 210.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/json/jsoncpp.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 147844,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								87698,
+								87698
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": false,
+							"syntax": "Packages/C++ Starting Kit/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 45285.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "include/ClassMod.hpp",
+					"buffer": 5,
+					"file": "src/screens/Boot.cpp",
 					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3309,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2494,
+								2494
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": true,
+							"syntax": "Packages/C++ Starting Kit/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1167.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "include/ClassMod.hpp",
+					"semi_transient": true,
 					"settings":
 					{
 						"buffer_size": 1483,
@@ -1463,8 +1803,8 @@
 						"selection":
 						[
 							[
-								1471,
-								1471
+								1225,
+								1225
 							]
 						],
 						"settings":
@@ -1472,51 +1812,41 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
@@ -1526,20 +1856,122 @@
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
-								"bh_round_content"
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
 							],
 							"glsv_configured": true,
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
 							"hasHeader": true,
-							"syntax": "Packages/C++/C++.tmLanguage",
+							"syntax": "Packages/C++ Starting Kit/C++.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 301.0,
+						"translation.y": 285.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/home/leeios/.config/sublime-text-3/Packages/1337 Color Scheme/1337.tmTheme",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10944,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2675,
+								2675
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": false,
+							"syntax": "Packages/XML/XML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1800.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -1549,20 +1981,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 4,
-					"file": "src/screens/Project.cpp",
-					"semi_transient": true,
+					"buffer": 8,
+					"file": "include/utils.hpp",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1415,
+						"buffer_size": 1963,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1180,
-								1180
+								978,
+								994
 							]
 						],
 						"settings":
@@ -1570,51 +2002,31 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
@@ -1624,20 +2036,223 @@
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
-								"bh_round_content"
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": false,
+							"syntax": "Packages/C++ Starting Kit/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 270.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2549,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1345,
+								1345
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
 							"glsv_configured": true,
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
 							"hasHeader": true,
-							"syntax": "Packages/C++/C++.tmLanguage",
+							"syntax": "Packages/Makefile/Makefile.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 90.0,
+						"translation.y": 421.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "include/Project.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1375,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								955,
+								955
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": true,
+							"syntax": "Packages/C++ Starting Kit/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 150.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1710,6 +2325,26 @@
 		"selected_items":
 		[
 			[
+				"proj",
+				"include/Project.hpp"
+			],
+			[
+				"util",
+				"include/util.hpp"
+			],
+			[
+				"fstr",
+				"src/utils/FtStr.cpp"
+			],
+			[
+				"strf",
+				"src/utils/FtFile.cpp"
+			],
+			[
+				"cmd",
+				"src/commands/InterfaceCmd.cpp"
+			],
+			[
 				"clasm",
 				"include/ClassMod.hpp"
 			],
@@ -1728,10 +2363,6 @@
 			[
 				"stan",
 				"src/commands/StandardCmd.cpp"
-			],
-			[
-				"util",
-				"include/util.hpp"
 			],
 			[
 				"uti",

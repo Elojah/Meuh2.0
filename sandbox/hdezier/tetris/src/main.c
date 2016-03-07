@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/23 18:49:43 by leeios            #+#    #+#             */
-/*   Updated: 2015/12/27 17:22:36 by leeios           ###   ########.fr       */
+/*   Updated: 2015/12/31 18:47:02 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	init_result(t_result *result)
 {
-	int					i;
-	int					j;
+	int		i;
+	int		j;
 
 	i = -1;
 	while (++i < MAX_PIECES * SIZE_PIECE)
@@ -24,7 +24,7 @@ static void	init_result(t_result *result)
 		while (++j < MAX_PIECES * SIZE_PIECE)
 			result->data[i][j] = EMPTY;
 	}
-	set_as_point(&result->frame, MAX_PIECES * SIZE_PIECE / 2);
+	result->pieces.size = 0;
 }
 
 static void	exec(int ac, char **av)
@@ -35,7 +35,8 @@ static void	exec(int ac, char **av)
 	i = 0;
 	init_result(&result);
 	while (++i < ac)
-		exit_with_error(file_to_pieces(&result, av[i]));
+		exit_with_error(file_to_pieces(&(result.pieces), av[i]));
+	exit_with_error(resolve(&result));
 	print_pieces(&result);
 }
 
