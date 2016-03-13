@@ -4,15 +4,71 @@
 		"selected_items":
 		[
 			[
+				"dete",
+				"detect_meth_t"
+			],
+			[
+				"esp",
+				"eSpe"
+			],
+			[
+				"str",
+				"string"
+			],
+			[
+				"ere",
+				"eResponse"
+			],
+			[
+				"es",
+				"eSpecialization_	classTemplate"
+			],
+			[
+				"spe",
+				"special_words_"
+			],
+			[
+				"Toe",
+				"TokenSpecializations"
+			],
+			[
+				"Toke",
+				"TokenOperator	Token<TokensDefinitions::sOperator>"
+			],
+			[
+				"re",
+				"readToken"
+			],
+			[
+				"W",
+				"WORDS_ATT	eSpecialization"
+			],
+			[
+				"w",
+				"WORDS_ATT	eSpecialization"
+			],
+			[
+				"has",
+				"has_words_attribute"
+			],
+			[
+				"wor",
+				"words_spe_	(Token.hpp)"
+			],
+			[
+				"vec",
+				"vec_string_	(Token.hpp)"
+			],
+			[
+				"Tokend",
+				"TokensDefinitions	(Token.hpp)"
+			],
+			[
 				"sizet",
 				"size_t	Typedef"
 			],
 			[
 				"Token",
-				"TokenDef"
-			],
-			[
-				"Toke",
 				"TokenDef"
 			],
 			[
@@ -216,10 +272,6 @@
 				"exit_with_error	(main.c)"
 			],
 			[
-				"re",
-				"reader"
-			],
-			[
 				"isva",
 				"is_valid_bloc"
 			],
@@ -380,10 +432,6 @@
 				"resetAlphaBeta	(Node.hpp)"
 			],
 			[
-				"W",
-				"PTS_WIN"
-			],
-			[
 				"BOA",
 				"BOARD_WIDTH"
 			],
@@ -466,54 +514,6 @@
 			[
 				"un",
 				"unsigned"
-			],
-			[
-				"ve_indeb",
-				"ve_index_buffer_data"
-			],
-			[
-				"fta",
-				"ft_atof"
-			],
-			[
-				"o",
-				"obj"
-			],
-			[
-				"ver",
-				"vertex_buffer_size"
-			],
-			[
-				"index",
-				"index_buffer_size"
-			],
-			[
-				"GL_ELEMENT_ARRAY_",
-				"GL_ELEMENT_ARRAY_BUFFER"
-			],
-			[
-				"verte",
-				"vertex_buffer_data"
-			],
-			[
-				"Ent",
-				"Entity"
-			],
-			[
-				"E",
-				"Entity"
-			],
-			[
-				"GLUin",
-				"GLuint"
-			],
-			[
-				"Wi",
-				"WIDTH_MAP"
-			],
-			[
-				"buffer",
-				"_buffer"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "include/Token.hpp",
 			"settings":
 			{
-				"buffer_size": 500,
+				"buffer_size": 2883,
 				"line_ending": "Unix"
 			}
 		},
@@ -531,7 +531,7 @@
 			"file": "src/main.cpp",
 			"settings":
 			{
-				"buffer_size": 232,
+				"buffer_size": 493,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,7 +539,7 @@
 			"file": "src/Token.cpp",
 			"settings":
 			{
-				"buffer_size": 1045,
+				"buffer_size": 140,
 				"line_ending": "Unix"
 			}
 		}
@@ -848,6 +848,7 @@
 	],
 	"file_history":
 	[
+		"/home/leeios/code/meuh/sandbox/hdezier/test/MetaProgC++/Makefile",
 		"/home/leeios/code/meuh/sandbox/hdezier/test/MetaProgC++/test/test.txt",
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/Parser.hpp",
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/TNegation.hpp",
@@ -974,8 +975,7 @@
 		"/home/leeios/.config/sublime-text-3/Packages/Package Control/Package Control.sublime-settings",
 		"/home/leeios/code/meuh/sandbox/hdezier/minmax/include/Board.hpp",
 		"/home/leeios/code/meuh/sandbox/hdezier/minmax/src/Node.cpp",
-		"/home/leeios/code/meuh/sandbox/hdezier/minmax/Makefile",
-		"/home/leeios/code/Wektiv/views/index.jade"
+		"/home/leeios/code/meuh/sandbox/hdezier/minmax/Makefile"
 	],
 	"find":
 	{
@@ -1022,6 +1022,33 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"#",
+			"words",
+			"struct",
+			"vec_string_",
+			"const std::vector<std::string>",
+			"tDico",
+			"const std::vector<std::string>",
+			"&readToken",
+			"readToken",
+			"T",
+			"eSpecialization",
+			"eSpecialization_",
+			"sOperand",
+			"TokenDef",
+			"_detect_impl",
+			"call(",
+			"call",
+			"eResponse	call",
+			"call",
+			"_detect_impl",
+			"call",
+			"sOperator",
+			"inline",
+			"struct",
+			"has_words_attribute",
+			"has_detect_method",
+			"TokenDef",
 			"has_reserve_method",
 			"m_words",
 			"TokensDefinitions",
@@ -1122,34 +1149,7 @@
 			"0",
 			"result->point_down_right[1] - result->point_up_left[1]",
 			"result->point_down_right[0] - result->point_up_left[0]",
-			"$",
-			"x + i",
-			"min_position[1] + j",
-			"min_position[0] + i",
-			"i",
-			"0",
-			"x + i",
-			"poin",
-			"calc_dist_from_center",
-			"a",
-			".#",
-			"MAX_PIECES",
-			"MAX_PIECES * SIZE_PIECE / 2",
-			"vals",
-			"s_peice",
-			"s_list",
-			"4",
-			"i * 5 + j",
-			"4",
-			"reader",
-			"waitpi",
-			"cmdName",
-			"O_WRONLY",
-			"Log::_log",
-			"_log",
-			"<<",
-			"\n			",
-			"<<"
+			"$"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1188,15 +1188,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 500,
+						"buffer_size": 2883,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								151,
-								151
+								397,
+								397
 							]
 						],
 						"settings":
@@ -1205,13 +1205,14 @@
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
 							"hasHeader": false,
-							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 62.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1220,15 +1221,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 232,
+						"buffer_size": 493,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								183,
-								183
+								224,
+								224
 							]
 						],
 						"settings":
@@ -1237,13 +1238,14 @@
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
 							"hasHeader": false,
-							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1258,15 +1260,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1045,
+						"buffer_size": 140,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								343,
-								343
+								61,
+								61
 							]
 						],
 						"settings":
@@ -1279,10 +1281,10 @@
 							"syntax": "Packages/Leeios/Leeios.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 300.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1364,6 +1366,10 @@
 		"selected_items":
 		[
 			[
+				"make",
+				"Makefile"
+			],
+			[
 				"main",
 				"src/main.cpp"
 			],
@@ -1442,10 +1448,6 @@
 			[
 				"ten",
 				"include/TEntity.hpp"
-			],
-			[
-				"make",
-				"Makefile"
 			],
 			[
 				"te0",
@@ -1800,7 +1802,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},

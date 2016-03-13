@@ -1,92 +1,55 @@
 #ifndef TOKEN_HPP
 # define TOKEN_HPP
 
-#include <string>
-#include <vector>
+# include <string>
+# include <vector>
+# include <iostream>
+# include <type_traits>
+
+typedef const std::vector<std::string>	tLexicon;
 
 enum class	eResponse
 {
-	NONE,
+	NONE = 0,
 	OK,
 	COMPLETE
 };
 
-enum class	eSpecialization
-{
-	NONE,
-	WORDS_ATT,
-	DETECT_METH
-};
-
-namespace	DetectImpl
-{
-	template<eSpecialization>
-	struct		_detect_impl {};
-	/*
-	**TokenDef  => NONE
-	**/
-	template<>
-	struct _detect_impl<eSpecialization::NONE>
-	{
-		template<typename TokenDef>
-		static eResponse	call(const std::string &readToken)
-		{
-			(void)readToken;
-		};
-	};
-	/*
-	**TokenDef  => detect
-	**/
-	template<>
-	struct _detect_impl<eSpecialization::DETECT_METH>
-	{
-
-		template<typename TokenDef>
-		static eResponse	call(const std::string &readToken)
-		{
-			TokenDef::detect(readToken);
-		};
-	};
-
-	/*
-	**TokenDef  => words
-	**/
-	template<>
-	struct _detect_impl<eSpecialization::WORDS_ATT>
-	{
-		template<typename TokenDef>
-		static eResponse	call(const std::string &readToken)
-		{
-			size_t		readSize = readToken.size();
-			for (const auto word : TokenDef::words)
-			{
-				size_t	sizeToCompare = std::min(readSize, word.size());
-				if (word.compare(0, sizeToCompare, readToken.c_str(), sizeToCompare) == 0)
-				{
-					if (readSize > word.size())
-						return (eResponse::COMPLETE);
-					else
-						return (eResponse::OK);
-				}
-			}
-		};
-	};
-};
-
-namespace TokensDefinitions
+namespace	TokensDefinitions
 {
 	struct		sOperator
 	{
 		sOperator(void) = default;
 		virtual ~sOperator(void) = default;
-		static const std::vector<std::string>	words;
+		static tLexicon	words;
 	};
 	struct		sOperand
 	{
 		sOperand(void) = default;
 		virtual ~sOperand(void) = default;
-		static const std::vector<std::string>	words;
+		static tLexicon	words;
 	};
+	struct		sEntity
+	{
+		sEntity(void) = default;
+		virtual ~sEntity(void) = default;
+		static eResponse		detect(const std::string &str)
+		{
+			if (std::isalnum(str.back()))
+				return (eResponse::OK);
+			else if (std::isalnum(str.at(0)))
+				return (eResponse::COMPLETE);
+			else
+				return (eResponse::NONE);
+		}
+	};
+};
+
+enum class	eSpecialization
+{
+	NONE = 0,
+	DETECT_METH,
+	WORDS_ATT
 };
 
 template<typename TokenDef>
@@ -95,9 +58,82 @@ class Token
 public:
 	Token(void) = default;
 	virtual ~Token(void) = default;
-	static eResponse	detect(const std::string &readToken);
 protected:
 private:
+
+	typedef std::integral_constant<int, 0>	spe_none;
+	template <typename T, typename = int>
+	struct spe_check : spe_none {};
+
+	typedef std::integral_constant<int, 1>	spe_detect;
+	template <typename T>
+	struct spe_check <T, decltype((void) T::detect, 0)> : spe_detect {};
+
+	typedef std::integral_constant<int, 2>	spe_words;
+	template <typename T>
+	struct spe_check <T, decltype((void) T::words, 0)> : spe_words {};
+
+	static const spe_check<TokenDef>	_specialization;
+
+	/*
+	**
+	** Detect implementations
+	**
+	*/
+
+	/*
+	** Words attribute
+	*/
+	template<typename T>
+	static eResponse	_detect_impl(const std::string &readToken, spe_words)
+	{
+		std::cerr << "call to WORDS_ATT" << std::endl;
+		size_t		readSize = readToken.size();
+		for (const auto word : T::words)
+		{
+			size_t	sizeToCompare = std::min(readSize, word.size());
+			if (word.compare(0, sizeToCompare, readToken.c_str(), sizeToCompare) == 0)
+			{
+				if (readSize > word.size())
+					return (eResponse::COMPLETE);
+				else
+					return (eResponse::OK);
+			}
+		}
+		return (eResponse::NONE);
+	};
+
+	/*
+	** Detect method
+	*/
+	template<typename T>
+	static eResponse	_detect_impl(const std::string &readToken, spe_detect)
+	{
+		std::cerr << "call to DETECT_METH" << std::endl;
+		return (T::detect(readToken));
+	};
+
+	/*
+	** Default fallback
+	*/
+	template<typename T>
+	static eResponse	_detect_impl(const std::string &readToken, spe_none)
+	{
+		std::cerr << "call to NONE" << std::endl;
+		(void)readToken;
+		return (eResponse::NONE);
+	};
+	/*
+	**
+	**!Detect implementations
+	**
+	*/
+
+public:
+	static eResponse	detect(const std::string &readToken)
+	{
+		return (_detect_impl<TokenDef>(readToken, _specialization));
+	};
 };
 
 #endif
