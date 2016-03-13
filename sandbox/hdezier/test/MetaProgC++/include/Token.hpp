@@ -1,10 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Token.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/13 22:26:33 by leeios            #+#    #+#             */
+/*   Updated: 2016/03/13 22:35:00 by leeios           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TOKEN_HPP
 # define TOKEN_HPP
+
+# include "specialization.h"
 
 # include <string>
 # include <vector>
 # include <iostream>
-# include <type_traits>
 
 typedef const std::vector<std::string>	tLexicon;
 
@@ -45,13 +58,6 @@ namespace	TokensDefinitions
 	};
 };
 
-enum class	eSpecialization
-{
-	NONE = 0,
-	DETECT_METH,
-	WORDS_ATT
-};
-
 template<typename TokenDef>
 class Token
 {
@@ -61,19 +67,9 @@ public:
 protected:
 private:
 
-	typedef std::integral_constant<int, 0>	spe_none;
-	template <typename T, typename = int>
-	struct spe_check : spe_none {};
-
-	typedef std::integral_constant<int, 1>	spe_detect;
-	template <typename T>
-	struct spe_check <T, decltype((void) T::detect, 0)> : spe_detect {};
-
-	typedef std::integral_constant<int, 2>	spe_words;
-	template <typename T>
-	struct spe_check <T, decltype((void) T::words, 0)> : spe_words {};
-
-	static const spe_check<TokenDef>	_specialization;
+	DECL_INIT(0, spe_none, TokenDef)
+	DECL_SPE(1, spe_detect, detect)
+	DECL_SPE(2, spe_words, words)
 
 	/*
 	**
