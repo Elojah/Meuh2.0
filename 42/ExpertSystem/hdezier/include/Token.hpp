@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 22:26:33 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/14 17:20:01 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/14 17:26:36 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ private:
 	static eResponse	_detect_impl(const std::string &readToken, spe_none)
 	{
 		(void)readToken;
+		// Dev error, this should not happen
 		std::cerr << "Class:Token | Call to detect function: Template error | No specialization available." << std::endl;
 		return (eResponse::NONE);
 	};

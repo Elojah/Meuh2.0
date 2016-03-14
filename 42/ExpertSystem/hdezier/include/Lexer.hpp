@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Parser.hpp                                         :+:      :+:    :+:   */
+/*   Lexer.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/03 18:21:58 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/14 17:25:11 by leeios           ###   ########.fr       */
+/*   Created: 2016/03/14 17:42:05 by leeios            #+#    #+#             */
+/*   Updated: 2016/03/14 17:42:34 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_HPP
-# define PARSER_HPP
+#ifndef LEXER_HPP
+# define LEXER_HPP
 
-#include "IToken.hpp"
 
-class Parser
+class Lexer
 {
 public:
-	Parser(void);
-	virtual ~Parser(void);
-	void	exec(char *filename);
-	static void				initMask(tok_indexes &mask);
-	#ifdef _DBG_
-		void	printResult(void);
-	#endif
+	Lexer(void);
+	virtual ~Lexer(void);
 protected:
 private:
-	static const size_t		m_nbToken;
-	static const IToken		*m_allTokens[(size_t)eTokenType::N_TOKEN_TYPE];
-	std::vector<IToken *>	m_resultToken;
-
-	bool					_readToken(tok_indexes &mask, std::string &s);
 };
 
 #endif
