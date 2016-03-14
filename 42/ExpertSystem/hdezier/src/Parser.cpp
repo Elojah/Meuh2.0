@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 18:22:14 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/04 18:04:47 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/14 17:14:46 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,18 @@
 #include "Error.hpp"
 
 #include "IToken.hpp"
-#include "TComment.hpp"
-#include "TPriorities.hpp"
-#include "TEntity.hpp"
-#include "TNegation.hpp"
-#include "TOperator.hpp"
-#include "TOperand.hpp"
-#include "TContextMark.hpp"
+#include "Token.hpp"
 
 const size_t		Parser::m_nbToken = (size_t)eTokenType::N_TOKEN_TYPE;
 const IToken		*Parser::m_allTokens[(size_t)eTokenType::N_TOKEN_TYPE] =
 {
-	(const IToken *)new TComment,
-	(const IToken *)new TPriorities,
-	(const IToken *)new TEntity,
-	(const IToken *)new TNegation,
-	(const IToken *)new TOperator,
-	(const IToken *)new TOperand,
-	(const IToken *)new TContextMark,
+	(const IToken *)new Token<TokensDefinition::sComment>,
+	(const IToken *)new Token<TokensDefinition::sPriorities>,
+	(const IToken *)new Token<TokensDefinition::sEntity>,
+	(const IToken *)new Token<TokensDefinition::sNegation>,
+	(const IToken *)new Token<TokensDefinition::sOperator>,
+	(const IToken *)new Token<TokensDefinition::sOperand>,
+	(const IToken *)new Token<TokensDefinition::sContextMark>,
 };
 
 Parser::Parser(void)

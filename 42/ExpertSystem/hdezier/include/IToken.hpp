@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 18:16:02 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/04 18:01:01 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/14 17:14:43 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,8 @@ public:
 	virtual eResponse		detect(const std::string &str) const = 0;
 	virtual void			getNextTokens(tok_indexes &mask) const = 0;
 	virtual IToken			*getNewInstance(const std::string &s) const = 0;
-	void					setStr(const std::string &s) {m_str = s;};
-	void					printStr(void) const {std::cerr << m_str << std::endl;};
-protected:
-private:
-	std::string				m_str;
+	virtual void			setStr(const std::string &s) = 0;
+	virtual void			printStr(void) const = 0;
 };
 
 #endif

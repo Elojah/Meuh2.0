@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   TComment.hpp                                       :+:      :+:    :+:   */
+/*   TokensDefinition.cpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/03 18:16:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/03 20:14:17 by leeios           ###   ########.fr       */
+/*   Created: 2016/03/14 16:34:03 by leeios            #+#    #+#             */
+/*   Updated: 2016/03/14 16:55:08 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_COMMENT_HPP
-# define T_COMMENT_HPP
+#include "TokensDefinition.hpp"
 
-#include "IToken.hpp"
-
-class TComment : public IToken
+namespace TokensDefinition
 {
-public:
-	TComment(void);
-	virtual ~TComment(void) override;
-	virtual eResponse		detect(const std::string &str) const override;
-	virtual void			getNextTokens(tok_indexes &mask) const override;
-	virtual IToken			*getNewInstance(const std::string &s) const override;
-protected:
-private:
-};
 
-#endif
+	tLexicon	sContextMark::words =
+	{
+		"=", "?"
+	};
+	tLexicon	sNegation::words =
+	{
+		"!"
+	};
+	tLexicon	sOperand::words =
+	{
+		"=>", "<=>"
+	};
+	tLexicon	sOperator::words =
+	{
+		"+", "|", "^"
+	};
+	tLexicon	sPriorities::words =
+	{
+		"(", ")"
+	};
+
+};

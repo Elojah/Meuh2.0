@@ -14,13 +14,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		Tokens/TNegation\
-		Tokens/TPriorities\
-		Tokens/TContextMark\
-		Tokens/TOperand\
-		Tokens/TOperator\
-		Tokens/TEntity\
-		Tokens/TComment\
+		/TokensDefinition\
 		/Parser\
 		/Error\
 
