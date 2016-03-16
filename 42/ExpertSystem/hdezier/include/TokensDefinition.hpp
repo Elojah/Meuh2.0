@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 16:34:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/14 17:36:58 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/16 09:19:43 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ namespace	TokensDefinition
 {
 	typedef const std::vector<std::string>	tLexicon;
 
+	/*
+	** Rules & variables definition
+	**/
 	TOKEN_STRUCT_WORDS(sNegation);
 	TOKEN_STRUCT_WORDS(sOperator);
 	TOKEN_STRUCT_WORDS(sPriorities);
@@ -79,6 +82,14 @@ namespace	TokensDefinition
 			return (eResponse::NONE);
 	}
 	);
+
+	/*
+	** Variables initialization
+	**/
+
+	/*
+	** Variables initialization
+	**/
 };
 
 #endif

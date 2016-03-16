@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 18:22:14 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/14 17:28:27 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/16 11:11:53 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ bool	Parser::_readToken(tok_indexes &mask, std::string &s)
 				break ;
 			case (eResponse::COMPLETE):
 				s.pop_back();
-				m_resultToken.push_back(m_allTokens[currentToken]->getNewInstance(s));
+				m_lex->addToken(s, (eTokenType)i);
 				m_allTokens[currentToken]->getNextTokens(mask);
 				s.clear();
 				return (true);
@@ -115,7 +115,7 @@ bool	Parser::_readToken(tok_indexes &mask, std::string &s)
 void	Parser::printResult(void)
 {
 	std::cerr << "Result:" << std::endl;
-	for (auto iToken : m_resultToken)
-		iToken->printStr();
+	// for (auto iToken : m_resultToken)
+	// 	iToken->printStr();
 }
 #endif

@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Lexer.hpp                                          :+:      :+:    :+:   */
+/*   IExpr.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/14 17:42:05 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/16 11:11:17 by leeios           ###   ########.fr       */
+/*   Created: 2016/03/16 11:05:28 by leeios            #+#    #+#             */
+/*   Updated: 2016/03/16 11:08:23 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_HPP
-# define LEXER_HPP
+#ifndef I_EXPR_HPP
+# define I_EXPR_HPP
 
-#include "IToken.hpp"
-#include "IExpr.hpp"
 
-class Lexer
+class IExpr
 {
 public:
-	Lexer(void);
-	virtual ~Lexer(void);
-	void	addToken(const std::string &token, eTokenType type);
+	virtual ~IExpr(void) {}
+	virtual bool	eval(void) const = 0;
 protected:
 private:
-	std::vector<IExpr *>	m_rules;
 };
 
 #endif
