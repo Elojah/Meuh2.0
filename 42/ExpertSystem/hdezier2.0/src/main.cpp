@@ -6,14 +6,14 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:40:48 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/20 11:56:45 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/20 18:53:36 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
-#include "Error.hpp"
 #include "Analyzer.hpp"
+#include "Error.hpp"
 
 const static std::string		printEValue(eValue e)
 {
@@ -32,21 +32,25 @@ static void		exec(const std::string &filename)
 
 	state_ctr			initStates =
 	{
-		{'A', eValue::FALSE},
-		{'C', eValue::FALSE}
+		{'A', eValue::TRUE},
+		{'C', eValue::TRUE}
 	};
 
 	Expr<char, char>	test;
 	test.setLeftOperand('A');
 	test.setLeftOperand('C');
 	test.setOperator('|');
-	std::cout << printEValue(test.eval()) << std::endl;
+	Expr<char, char>	test1;
+	test.setLeftOperand('A');
+	test.setLeftOperand('C');
+	test.setOperator('^');
+	// std::cout << printEValue(test.eval(initStates)) << std::endl;
 
 	Expr<IExpr *, IExpr *>	testExpr;
 	testExpr.setLeftOperand(&test);
-	testExpr.setLeftOperand(&test);
-	testExpr.setOperator('^');
-	std::cout << printEValue(testExpr.eval()) << std::endl;
+	testExpr.setLeftOperand(&test1);
+	testExpr.setOperator('|');
+	std::cout << printEValue(testExpr.eval(initStates)) << std::endl;
 
 };
 

@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 09:44:47 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/20 13:05:39 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/20 18:56:20 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 
 # include "Error.hpp"
 
+# include <typeinfo>
+
 // DANGER !!! EVALUATE TWICE
-# define XOR_VAL(a, b) (((a) == eValue::TRUE && (b) == eValue::FALSE)\
-					|| ((a) == eValue::FALSE && (b) == eValue::TRUE))
+# define XOR_VAL(a, b) (((a) == eValue::TRUE && (b) == eValue::FALSE) || ((a) == eValue::FALSE && (b) == eValue::TRUE))
 
 #define XOR(a, b) (!(a) != !(b))
 
@@ -38,7 +39,7 @@ class IExpr
 {
 public:
 	virtual ~IExpr(void) {};
-	virtual eValue	eval(void) const = 0;
+	virtual eValue	eval(const state_ctr &initStates) const = 0;
 };
 
 template<typename Left, typename Right>
@@ -54,20 +55,20 @@ class	Expr : public IExpr
 	};
 
 public :
-	Expr(void) :
+	inline Expr(void) :
 		m_operator(eOperator::NONE),
 		m_leftNegative(false),
 		m_rightNegative(false)
 	{};
 	// TODO : LEAKS !!! leftOp & rightOp
-	virtual ~Expr(void)
+	inline virtual ~Expr(void)
 	{};
 
-	virtual void	setLeftOperand(const Left op) {m_leftOp = op;};
-	virtual void	setRightOperand(const Right op) {m_rightOp = op;};
-	virtual void	setLeftNegative(bool neg) {m_leftNegative = neg;};
-	virtual void	setRightNegative(bool neg) {m_rightNegative = neg;};
-	virtual void	setOperator(const char c)
+	inline virtual void	setLeftOperand(const Left op) {m_leftOp = op;};
+	inline virtual void	setRightOperand(const Right op) {m_rightOp = op;};
+	inline virtual void	setLeftNegative(bool neg) {m_leftNegative = neg;};
+	inline virtual void	setRightNegative(bool neg) {m_rightNegative = neg;};
+	inline virtual void	setOperator(const char c)
 	{
 		switch (c)
 		{
@@ -77,12 +78,16 @@ public :
 		}
 	};
 
-	virtual eValue	eval(void) const override
+	inline virtual eValue	eval(const state_ctr &initStates) const override
 	{
+		std::cerr
+		<< std::string("Eval: Left_") + typeid(m_leftOp).name()
+		+ std::string("_Right_") + typeid(m_rightOp).name()
+		 << std::endl;
 		if (m_operator == eOperator::NONE)
-			return (_evalLeft());
-		eValue		leftVal = _evalLeft();
-		eValue		rightVal = _evalRight();
+			return (_evalLeft(initStates));
+		eValue		leftVal = _evalLeft(initStates);
+		eValue		rightVal = _evalRight(initStates);
 		if (m_operator == eOperator::AND)
 		{
 			return ((leftVal == eValue::TRUE && rightVal == eValue::TRUE) ?
@@ -104,47 +109,37 @@ public :
 		return (eValue::ERROR);
 	};
 
-	void	setInitStates(const state_ctr *initStates)
-	{
-		m_initialStates = initStates;
-	}
-
 private:
 	eOperator					m_operator;
 	Left						m_leftOp;
 	Right						m_rightOp;
 	bool						m_leftNegative;
 	bool						m_rightNegative;
-	static const state_ctr		*m_initialStates;
 
-	// POSSIBLE ERROR: Call evalOp<Left/Right>() instead of evalOp()
-	eValue			_evalLeft(void) const
+	inline eValue			_evalLeft(const state_ctr &initStates) const
 	{
-		bool val = (_evalOp(m_leftOp) == eValue::TRUE);
+		std::cerr << "____eval Left" << std::endl;
+		bool val = (_evalOp(m_leftOp, initStates) == eValue::TRUE);
 		return (XOR(val, m_leftNegative) ?
 			eValue::TRUE :
 			eValue::FALSE);
 	};
-	eValue			_evalRight(void) const
+
+	inline eValue			_evalRight(const state_ctr &initStates) const
 	{
-		bool val = (_evalOp(m_rightOp) == eValue::TRUE);
+		std::cerr << "____eval Right" << std::endl;
+		bool val = (_evalOp(m_rightOp, initStates) == eValue::TRUE);
 		return (XOR(val, m_rightNegative) ?
 			eValue::TRUE :
 			eValue::FALSE);
 	};
 
 	// Actual template dispatching by overload
-	template<typename T>
-	static eValue	_evalOp(T op)
+	inline static eValue	_evalOp(const char op, const state_ctr &initStates)
 	{
-		(void)op;
-		err::raise_error(eErr::FATAL, "Error: Can't eval this type, unrecognized value");
-		return (eValue::ERROR);
-	};
-	static eValue	_evalOp(const char op)
-	{
-		auto value = m_initialStates->find(op);
-		if (value != m_initialStates->end())
+		std::cerr << "____eval as char" << std::endl;
+		auto value = initStates.find(op);
+		if (value != initStates.end())
 		{
 			if (value->second == eValue::UNDEFINED)
 				;// TODO : Calculate value by inference
@@ -153,10 +148,13 @@ private:
 		else
 			return (eValue::ERROR);
 	};
-	static eValue	_evalOp(const IExpr *op)
+
+	inline static eValue	_evalOp(const IExpr *op, const state_ctr &initStates)
 	{
-		return (op->eval());
+		std::cerr << "____eval as IExpr*" << std::endl;
+		return (op->eval(initStates));
 	};
+
 };
 
 #endif

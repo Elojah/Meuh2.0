@@ -6,14 +6,13 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:45:24 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/20 13:02:28 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/20 17:19:38 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RULE_HPP
 # define RULE_HPP
 
-#include "Error.hpp"
 #include "Expr.hpp"
 
 class Rule
