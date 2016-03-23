@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   TContextMark.hpp                                   :+:      :+:    :+:   */
+/*   Analyzer.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/04 15:34:51 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/04 16:04:51 by leeios           ###   ########.fr       */
+/*   Created: 2016/03/16 11:41:26 by leeios            #+#    #+#             */
+/*   Updated: 2016/03/20 17:54:29 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_CONTEXT_MARK_HPP
-# define T_CONTEXT_MARK_HPP
+#ifndef ANALYZER_HPP
+# define ANALYZER_HPP
 
-# include "IToken.hpp"
+# include <vector>
 
-class TContextMark : public IToken
+# include "Rule.hpp"
+# include "Expr.hpp"
+
+# include "Error.hpp"
+
+class Analyzer
 {
 public:
-	TContextMark(void);
-	virtual ~TContextMark(void) override;
-	virtual eResponse		detect(const std::string &str) const override;
-	virtual void			getNextTokens(tok_indexes &mask) const override;
-	virtual IToken			*getNewInstance(const std::string &s) const override;
+	Analyzer(void);
+	virtual ~Analyzer(void);
+	virtual eErr	analyze_file(const std::string &filename);
 protected:
 private:
-	static bool				_isCtxMarkSymbol(const char c);
+	std::vector<Rule *>		m_rules;
+	state_ctr				m_initValues;
+
+	eErr	_set_true(const std::string &line);
+	eErr	_calculus(const std::string &line);
+	eErr	_add_rule(const std::string &line);
 };
 
 #endif

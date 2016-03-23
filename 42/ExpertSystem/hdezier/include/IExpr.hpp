@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   TPriorities.hpp                                    :+:      :+:    :+:   */
+/*   IExpr.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/04 16:14:52 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/04 16:15:11 by leeios           ###   ########.fr       */
+/*   Created: 2016/03/16 11:05:28 by leeios            #+#    #+#             */
+/*   Updated: 2016/03/16 11:08:23 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_PRIORITIES_HPP
-# define T_PRIORITIES_HPP
+#ifndef I_EXPR_HPP
+# define I_EXPR_HPP
 
-# include "IToken.hpp"
 
-class TPriorities : public IToken
+class IExpr
 {
 public:
-	TPriorities(void);
-	virtual ~TPriorities(void);
-	virtual eResponse		detect(const std::string &str) const override;
-	virtual void			getNextTokens(tok_indexes &mask) const override;
-	virtual IToken			*getNewInstance(const std::string &s) const override;
+	virtual ~IExpr(void) {}
+	virtual bool	eval(void) const = 0;
 protected:
 private:
-	static bool				_isPrioritySymbol(const char c);
 };
 
 #endif

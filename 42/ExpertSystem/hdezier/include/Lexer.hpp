@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   TComment.hpp                                       :+:      :+:    :+:   */
+/*   Lexer.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/03 18:16:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/03 20:14:17 by leeios           ###   ########.fr       */
+/*   Created: 2016/03/14 17:42:05 by leeios            #+#    #+#             */
+/*   Updated: 2016/03/16 11:11:17 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_COMMENT_HPP
-# define T_COMMENT_HPP
+#ifndef LEXER_HPP
+# define LEXER_HPP
 
 #include "IToken.hpp"
+#include "IExpr.hpp"
 
-class TComment : public IToken
+class Lexer
 {
 public:
-	TComment(void);
-	virtual ~TComment(void) override;
-	virtual eResponse		detect(const std::string &str) const override;
-	virtual void			getNextTokens(tok_indexes &mask) const override;
-	virtual IToken			*getNewInstance(const std::string &s) const override;
+	Lexer(void);
+	virtual ~Lexer(void);
+	void	addToken(const std::string &token, eTokenType type);
 protected:
 private:
+	std::vector<IExpr *>	m_rules;
 };
 
 #endif

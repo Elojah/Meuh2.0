@@ -1,30 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   TOperand.hpp                                       :+:      :+:    :+:   */
+/*   Rule.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/04 15:25:31 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/04 15:26:54 by leeios           ###   ########.fr       */
+/*   Created: 2016/03/20 10:08:13 by leeios            #+#    #+#             */
+/*   Updated: 2016/03/20 13:01:18 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_OPERAND_HPP
-# define T_OPERAND_HPP
+#include "Rule.hpp"
 
-# include "IToken.hpp"
-
-class TOperand : public IToken
+Rule::Rule(void)
 {
-public:
-	TOperand(void);
-	virtual ~TOperand(void) override;
-	virtual eResponse		detect(const std::string &str) const override;
-	virtual void			getNextTokens(tok_indexes &mask) const override;
-	virtual IToken			*getNewInstance(const std::string &s) const override;
-protected:
-private:
-};
+	(void)m_rightExpr;
+	(void)m_link;
+}
 
-#endif
+Rule::~Rule(void)
+{
+	;
+}
+
+eErr	Rule::set(const std::string &line)
+{
+	IExpr	*currentExpr = m_leftExpr;
+	(void)currentExpr;
+
+	for (const auto c : line)
+	{
+		if (isalpha(c))
+		(void)c;
+	}
+	return (eErr::NONE);
+}
+
+eErr	Rule::_addSymbol(IExpr *expr, char c)
+{
+	(void)expr;
+	(void)c;
+	return (eErr::NONE);
+}
