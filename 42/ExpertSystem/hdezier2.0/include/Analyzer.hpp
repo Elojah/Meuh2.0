@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:41:26 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/24 11:17:52 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/24 14:05:24 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ public:
 	Analyzer(void);
 	virtual ~Analyzer(void);
 	virtual eErr	analyze_file(const std::string &filename);
+	void			printRules(void);
 protected:
 private:
 	std::vector<Rule *>		m_rules;

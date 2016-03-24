@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:45:24 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/24 11:41:33 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/24 14:32:56 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,29 @@
 
 class Rule
 {
+public:
+
 	enum class eLinkExpr
 	{
-		IMPLIES = 0,
+		NONE = 0,
+		IMPLIES,
 		IF_ONLY_IF
 	};
 
-public:
 	Rule(void);
 	virtual ~Rule(void);
 	virtual eErr	set(const std::string &line);
+	std::string		serialize(void);
 protected:
 private:
+	eLinkExpr	m_link;
 	IExpr*		m_leftExpr;
 	IExpr*		m_rightExpr;
-	eLinkExpr	m_link;
 
-	virtual eErr	_addSymbol(IExpr *expr, char c);
+	static const char											m_opSymbols[];
+	static const std::map<Rule::eLinkExpr, std::string>			m_linkSymbols;
+
+	static IExpr		*_setExpr(const std::string &s);
 };
 
 #endif

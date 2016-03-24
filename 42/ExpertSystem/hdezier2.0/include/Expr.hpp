@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 09:44:47 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/24 12:42:35 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/24 14:47:32 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@
 /*
 ** Type definitions
 */
+enum class	eOperator
+{
+	NONE = 0,
+	AND,
+	OR,
+	XOR
+};
 enum class	eValue
 {
 	UNDEFINED = 0,
@@ -44,24 +51,16 @@ class IExpr
 {
 public:
 	virtual ~IExpr(void) {};
-	virtual eValue	eval(const state_ctr &initStates) const = 0;
+	virtual eValue		eval(const state_ctr &initStates) const = 0;
+	virtual std::string	serialize(void) const = 0;
 };
 
 /*
 ** Implementation
 */
-template<typename Left, typename Right>
+template<typename T>
 class	Expr : public IExpr
 {
-
-	enum class	eOperator
-	{
-		NONE = 0,
-		AND,
-		OR,
-		XOR
-	};
-
 public :
 	inline Expr(void) :
 		m_operator(eOperator::NONE),
@@ -69,11 +68,31 @@ public :
 		m_rightNegative(false)
 	{};
 	// TODO : LEAKS !!! leftOp & rightOp
-	inline virtual ~Expr(void)
-	{};
+	inline virtual ~Expr(void) override
+	{
+		_deleteOp(m_leftOp);
+		_deleteOp(m_rightOp);
+	};
 
-	inline virtual void	setLeftOperand(const Left op) {m_leftOp = op;};
-	inline virtual void	setRightOperand(const Right op) {m_rightOp = op;};
+	inline virtual std::string	serialize(void) const override
+	{
+		std::string		result;
+		if (m_leftNegative)
+			result += '!';
+		result += _serialize(m_leftOp);
+		if (m_operator == eOperator::NONE)
+			return (result);
+		result += m_opSymbols.at(m_operator);
+		if (m_leftNegative)
+			result += '!';
+		result += _serialize(m_rightOp);
+		return (result);
+	};
+	inline virtual std::string	_serialize(const IExpr *op) const {return (op->serialize());};
+	inline virtual std::string	_serialize(const char op) const {return (std::string(1, op));};
+
+	inline virtual void	setLeftOperand(const T op) {m_leftOp = op;};
+	inline virtual void	setRightOperand(const T op) {m_rightOp = op;};
 	inline virtual void	setLeftNegative(bool neg) {m_leftNegative = neg;};
 	inline virtual void	setRightNegative(bool neg) {m_rightNegative = neg;};
 	inline virtual void	setOperator(const char c)
@@ -114,11 +133,16 @@ public :
 	};
 
 private:
-	eOperator					m_operator;
-	Left						m_leftOp;
-	Right						m_rightOp;
-	bool						m_leftNegative;
-	bool						m_rightNegative;
+	eOperator				m_operator;
+	T						m_leftOp;
+	T						m_rightOp;
+	bool					m_leftNegative;
+	bool					m_rightNegative;
+
+	static const std::map<eOperator, char>	m_opSymbols;
+
+	inline virtual void		_deleteOp(const IExpr *op) {delete (op);}
+	inline virtual void		_deleteOp(const char op) {(void)op;}
 
 	inline eValue			_evalLeft(const state_ctr &initStates) const
 	{
@@ -155,6 +179,14 @@ private:
 		return (op->eval(initStates));
 	};
 
+};
+
+template<typename T>
+const std::map<eOperator, char>		Expr<T>::m_opSymbols =
+{
+	{eOperator::AND, '+'},
+	{eOperator::OR, '|'},
+	{eOperator::XOR, '^'}
 };
 
 #endif
