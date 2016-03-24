@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:40:48 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/20 18:53:36 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/24 12:40:58 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,18 @@ static void		exec(const std::string &filename)
 
 	Expr<char, char>	test;
 	test.setLeftOperand('A');
-	test.setLeftOperand('C');
+	test.setRightOperand('C');
 	test.setOperator('|');
 	Expr<char, char>	test1;
 	test.setLeftOperand('A');
-	test.setLeftOperand('C');
+	test.setRightOperand('C');
 	test.setOperator('^');
 	// std::cout << printEValue(test.eval(initStates)) << std::endl;
 
 	Expr<IExpr *, IExpr *>	testExpr;
 	testExpr.setLeftOperand(&test);
-	testExpr.setLeftOperand(&test1);
-	testExpr.setOperator('|');
+	testExpr.setRightOperand(&test1);
+	testExpr.setOperator('&');
 	std::cout << printEValue(testExpr.eval(initStates)) << std::endl;
 
 };

@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 09:44:47 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/20 18:56:20 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/24 12:42:35 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@
 
 // DANGER !!! EVALUATE TWICE
 # define XOR_VAL(a, b) (((a) == eValue::TRUE && (b) == eValue::FALSE) || ((a) == eValue::FALSE && (b) == eValue::TRUE))
+# define XOR(a, b) (!(a) != !(b))
 
-#define XOR(a, b) (!(a) != !(b))
-
+/*
+** Type definitions
+*/
 enum class	eValue
 {
 	UNDEFINED = 0,
@@ -35,6 +37,9 @@ enum class	eValue
 };
 typedef std::map<char, eValue>	state_ctr;
 
+/*
+** Interface
+*/
 class IExpr
 {
 public:
@@ -42,6 +47,9 @@ public:
 	virtual eValue	eval(const state_ctr &initStates) const = 0;
 };
 
+/*
+** Implementation
+*/
 template<typename Left, typename Right>
 class	Expr : public IExpr
 {
@@ -80,10 +88,6 @@ public :
 
 	inline virtual eValue	eval(const state_ctr &initStates) const override
 	{
-		std::cerr
-		<< std::string("Eval: Left_") + typeid(m_leftOp).name()
-		+ std::string("_Right_") + typeid(m_rightOp).name()
-		 << std::endl;
 		if (m_operator == eOperator::NONE)
 			return (_evalLeft(initStates));
 		eValue		leftVal = _evalLeft(initStates);
@@ -118,7 +122,6 @@ private:
 
 	inline eValue			_evalLeft(const state_ctr &initStates) const
 	{
-		std::cerr << "____eval Left" << std::endl;
 		bool val = (_evalOp(m_leftOp, initStates) == eValue::TRUE);
 		return (XOR(val, m_leftNegative) ?
 			eValue::TRUE :
@@ -127,7 +130,6 @@ private:
 
 	inline eValue			_evalRight(const state_ctr &initStates) const
 	{
-		std::cerr << "____eval Right" << std::endl;
 		bool val = (_evalOp(m_rightOp, initStates) == eValue::TRUE);
 		return (XOR(val, m_rightNegative) ?
 			eValue::TRUE :
@@ -137,7 +139,6 @@ private:
 	// Actual template dispatching by overload
 	inline static eValue	_evalOp(const char op, const state_ctr &initStates)
 	{
-		std::cerr << "____eval as char" << std::endl;
 		auto value = initStates.find(op);
 		if (value != initStates.end())
 		{
@@ -151,7 +152,6 @@ private:
 
 	inline static eValue	_evalOp(const IExpr *op, const state_ctr &initStates)
 	{
-		std::cerr << "____eval as IExpr*" << std::endl;
 		return (op->eval(initStates));
 	};
 
