@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:40:48 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/24 14:34:26 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/25 15:06:45 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void		exec(const std::string &filename)
 	Analyzer	a;
 
 	a.analyze_file(filename);
-	a.printRules();
+	// a.printRules();
 }
 
 int			main(int ac, char **av)

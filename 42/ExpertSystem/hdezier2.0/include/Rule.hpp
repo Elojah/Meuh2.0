@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:45:24 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/25 14:53:28 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/25 15:01:58 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ public:
 	virtual ~Rule(void);
 	virtual eErr	set(const std::string &line);
 	std::string		serialize(void);
+	std::string		serializeEval(const state_ctr &initStates);
 protected:
 private:
 	eLinkExpr	m_link;

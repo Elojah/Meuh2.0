@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/20 10:08:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/25 14:54:17 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/25 15:06:16 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,52 @@ std::string	Rule::serialize(void)
 	return (m_leftExpr->serialize() + link + m_rightExpr->serialize());
 }
 
+std::string	Rule::serializeEval(const state_ctr &initStates)
+{
+	std::string	result;
+	switch (m_leftExpr->eval(initStates))
+	{
+		case(eValue::UNDEFINED) :
+			result += "UNDEFINED";
+			break ;
+		case(eValue::TRUE) :
+			result += "TRUE";
+			break ;
+		case(eValue::FALSE) :
+			result += "FALSE";
+			break ;
+		case(eValue::ERROR) :
+			result += "ERROR";
+			break ;
+	}
+	std::string		link;
+	auto hasLink = Rule::m_linkSymbols.find(m_link);
+	if (hasLink != Rule::m_linkSymbols.end())
+		link = hasLink->second;
+	else
+		link = "XXX";
+	result += link;
+	switch (m_rightExpr->eval(initStates))
+	{
+		case(eValue::UNDEFINED) :
+			result += "UNDEFINED";
+			break ;
+		case(eValue::TRUE) :
+			result += "TRUE";
+			break ;
+		case(eValue::FALSE) :
+			result += "FALSE";
+			break ;
+		case(eValue::ERROR) :
+			result += "ERROR";
+			break ;
+	}
+	return(result);
+}
+
+/*
+** Set expressions
+*/
 eErr	Rule::set(const std::string &line)
 {
 	size_t		separator;

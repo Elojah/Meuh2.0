@@ -58,13 +58,19 @@ eErr	Analyzer::_set_true(const std::string &line)
 
 eErr	Analyzer::_calculus(const std::string &line)
 {
-	for (const auto c : line)
+	(void)line;
+	// for (const auto c : line)
+	// {
+	// 	if (isalpha(c))
+	// 	{
+	// 	}
+	// }
+	for (auto rule : m_rules)
 	{
-		if (isalpha(c))
-		{
-			;
-		}
+		std::cout << rule->serialize() << std::endl;
+		std::cout << rule->serializeEval(m_initValues) << std::endl;
 	}
+
 	return (eErr::NONE);
 }
 
