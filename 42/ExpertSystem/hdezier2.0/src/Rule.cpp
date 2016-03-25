@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/20 10:08:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/24 14:44:48 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/25 14:54:17 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,38 +66,86 @@ eErr	Rule::set(const std::string &line)
 	return (eErr::NONE);
 }
 
-IExpr	*Rule::_setExpr(const std::string &s)
+IExpr	*Rule::_setExprAsChar(const std::string &s)
 {
-	size_t	symbol = s.find_first_of(Rule::m_opSymbols);
-	if (symbol == std::string::npos)
+	auto result = new Expr<char>;
+	for (const char &c : s)
 	{
-		auto result = new Expr<char>;
+		if (c == ' ' || c == '\t' || c == '\r')
+			continue ;
+		else if (c == '!')
+		{
+			result->setLeftNegative(true);
+			continue ;
+		}
+		else if (!isalpha(c))
+		{
+			delete result;
+			err::raise_error(eErr::FATAL, "Character can't be identified as symbol");
+			return (nullptr);
+		}
+		result->setLeftOperand(c);
+		return (result);
+	}
+	return (nullptr);
+}
+
+IExpr	*Rule::_setExprParenthesis(const std::string &s, Expr<IExpr *> *result, size_t parenthesis)
+{
+	size_t	parenthesisEnd = s.find(')');
+	if (parenthesisEnd == std::string::npos)
+	{
+		delete result;
+		err::raise_error(eErr::FATAL, "Parenthesis without end");
+		return (nullptr);
+	}
+	result->setLeftOperand(_setExpr(s.substr(parenthesis + 1, parenthesisEnd)));
+	if (parenthesisEnd < s.size())
+	{
+		auto	rightSide = s.substr(parenthesisEnd + 1);
+		auto symbol = rightSide.find_first_of(Rule::m_opSymbols);
+		if (symbol != std::string::npos)
+		{
+			result->setOperator(rightSide.at(symbol));
+			result->setRightOperand(_setExpr(rightSide.substr(symbol + 1)));
+		}
+	}
+	return (result);
+}
+
+IExpr	*Rule::_setExprAsExpr(const std::string &s, size_t symbol)
+{
+	auto result = new Expr<IExpr *>;
+
+	size_t	parenthesis = s.find('(');
+	if (parenthesis != std::string::npos)
+	{
 		for (const char &c : s)
 		{
 			if (c == ' ' || c == '\t' || c == '\r')
 				continue ;
-			if (c == '!')
+			else if (c == '!')
 			{
 				result->setLeftNegative(true);
 				continue ;
 			}
-			if (!isalpha(c))
-			{
-				delete result;
-				err::raise_error(eErr::FATAL, "Character can't be identified as symbol");
-				return (nullptr);
-			}
-			result->setLeftOperand(c);
-			return (result);
+			else if (c == '(')
+				return (_setExprParenthesis(s, result, parenthesis));
+			else
+				break ;
 		}
 	}
+	result->setOperator(s.at(symbol));
+	result->setLeftOperand(_setExpr(s.substr(0, symbol)));
+	result->setRightOperand(_setExpr(s.substr(symbol + 1)));
+	return (result);
+}
+
+IExpr	*Rule::_setExpr(const std::string &s)
+{
+	size_t	symbol = s.find_first_of(Rule::m_opSymbols);
+	if (symbol == std::string::npos)
+		return (_setExprAsChar(s));
 	else
-	{
-		auto result = new Expr<IExpr *>;
-		result->setOperator(s.at(symbol));
-		result->setLeftOperand(_setExpr(s.substr(0, symbol)));
-		result->setRightOperand(_setExpr(s.substr(symbol + 1)));
-		return (result);
-	}
-	return (nullptr);
+		return (_setExprAsExpr(s, symbol));
 }

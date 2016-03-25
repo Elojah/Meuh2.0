@@ -48,13 +48,23 @@ eErr	Analyzer::analyze_file(const std::string &filename)
 
 eErr	Analyzer::_set_true(const std::string &line)
 {
-	(void)line;
+	for (const auto c : line)
+	{
+		if (isalpha(c))
+			m_initValues[c] = eValue::TRUE;
+	}
 	return (eErr::NONE);
 }
 
 eErr	Analyzer::_calculus(const std::string &line)
 {
-	(void)line;
+	for (const auto c : line)
+	{
+		if (isalpha(c))
+		{
+			;
+		}
+	}
 	return (eErr::NONE);
 }
 

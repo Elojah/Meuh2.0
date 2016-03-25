@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 09:44:47 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/24 14:47:32 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/25 14:32:09 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ public :
 		_deleteOp(m_leftOp);
 		_deleteOp(m_rightOp);
 	};
-
 	inline virtual std::string	serialize(void) const override
 	{
 		std::string		result;
@@ -83,12 +82,12 @@ public :
 		if (m_operator == eOperator::NONE)
 			return (result);
 		result += m_opSymbols.at(m_operator);
-		if (m_leftNegative)
+		if (m_rightNegative)
 			result += '!';
 		result += _serialize(m_rightOp);
 		return (result);
 	};
-	inline virtual std::string	_serialize(const IExpr *op) const {return (op->serialize());};
+	inline virtual std::string	_serialize(const IExpr *op) const {return ( "(" + op->serialize() + ')');};
 	inline virtual std::string	_serialize(const char op) const {return (std::string(1, op));};
 
 	inline virtual void	setLeftOperand(const T op) {m_leftOp = op;};

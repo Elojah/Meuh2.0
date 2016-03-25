@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:45:24 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/24 14:32:56 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/25 14:53:28 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ private:
 	static const char											m_opSymbols[];
 	static const std::map<Rule::eLinkExpr, std::string>			m_linkSymbols;
 
+	static IExpr		*_setExprAsExpr(const std::string &s, size_t symbol);
+	static IExpr		*_setExprParenthesis(const std::string &s, Expr<IExpr *> *result, size_t parenthesis);
+	static IExpr		*_setExprAsChar(const std::string &s);
 	static IExpr		*_setExpr(const std::string &s);
 };
 
