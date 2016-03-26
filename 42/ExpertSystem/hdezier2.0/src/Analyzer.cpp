@@ -18,7 +18,8 @@
 
 Analyzer::Analyzer(void)
 {
-	;
+	for (char c = 'A'; c <= 'Z'; ++c)
+		m_initValues[c] = eValue::UNDEFINED;
 }
 
 Analyzer::~Analyzer(void)
@@ -33,6 +34,9 @@ eErr	Analyzer::analyze_file(const std::string &filename)
 	std::string			line;
 	while (std::getline(ifs, line))
 	{
+		auto comment = line.find('#');
+		if (comment != std::string::npos)
+			line = line.substr(0, comment);
 		if (line.empty())
 			continue ;
 		switch (line.at(0))
@@ -50,21 +54,38 @@ eErr	Analyzer::_set_true(const std::string &line)
 {
 	for (const auto c : line)
 	{
-		if (isalpha(c))
+		if (IS_SYMBOL(c))
 			m_initValues[c] = eValue::TRUE;
+		else if (c == '=' || c == ' ' || c == '\t')
+			continue ;
+		else
+		{
+			err::raise_error(eErr::FATAL, "Unrecognized symbol in initialization");
+			return (eErr::FATAL);
+		}
 	}
 	return (eErr::NONE);
 }
 
 eErr	Analyzer::_calculus(const std::string &line)
 {
-	(void)line;
-	// for (const auto c : line)
-	// {
-	// 	if (isalpha(c))
-	// 	{
-	// 	}
-	// }
+	for (const auto c : line)
+	{
+		if (IS_SYMBOL(c))
+		{
+			auto value = m_initValues.find(c);
+			if (value == m_initValues.end())
+				m_initValues[c] = eValue::CACULATING;
+		}
+		else if (c == '?' || c == ' ' || c == '\t')
+			continue ;
+		else
+		{
+			err::raise_error(eErr::FATAL, "Unrecognized symbol in calculation:");
+			return (eErr::FATAL);
+		}
+	}
+	// TEST
 	for (auto rule : m_rules)
 	{
 		std::cout << rule->serialize() << std::endl;

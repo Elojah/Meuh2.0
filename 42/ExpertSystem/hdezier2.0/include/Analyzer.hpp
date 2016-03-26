@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:41:26 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/24 14:05:24 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/26 16:20:20 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "Expr.hpp"
 
 # include "Error.hpp"
+
+# define IS_SYMBOL(c) ((c) >= 'A' && (c) <= 'Z')
 
 class Analyzer
 {

@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 09:44:47 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/25 15:09:09 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/26 16:14:48 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@
 # include <iostream>
 
 # include "Error.hpp"
+# include "Symbol.hpp"
 
 # include <typeinfo>
 
-// DANGER !!! EVALUATE TWICE
-# define XOR_VAL(a, b) (((a) == eValue::TRUE && (b) == eValue::FALSE) || ((a) == eValue::FALSE && (b) == eValue::TRUE))
 # define XOR(a, b) (!(a) != !(b))
 
 /*
@@ -34,13 +33,6 @@ enum class	eOperator
 	AND,
 	OR,
 	XOR
-};
-enum class	eValue
-{
-	UNDEFINED = 0,
-	TRUE,
-	FALSE,
-	ERROR
 };
 typedef std::map<char, eValue>	state_ctr;
 
@@ -96,11 +88,13 @@ public :
 	inline virtual void	setRightNegative(bool neg) {m_rightNegative = neg;};
 	inline virtual void	setOperator(const char c)
 	{
-		switch (c)
+		for (const auto &symbol : m_opSymbols)
 		{
-			case ('+') : m_operator = eOperator::AND; break;
-			case ('|') : m_operator = eOperator::OR; break;
-			case ('^') : m_operator = eOperator::XOR; break;
+			if (c == symbol.second)
+			{
+				m_operator = symbol.first;
+				break ;
+			}
 		}
 	};
 
@@ -108,26 +102,14 @@ public :
 	{
 		if (m_operator == eOperator::NONE)
 			return (_evalLeft(initStates));
-		eValue		leftVal = _evalLeft(initStates);
-		eValue		rightVal = _evalRight(initStates);
+		Symbol		leftVal(_evalLeft(initStates));
+		Symbol		rightVal(_evalRight(initStates));
 		if (m_operator == eOperator::AND)
-		{
-			return ((leftVal == eValue::TRUE && rightVal == eValue::TRUE) ?
-				eValue::TRUE :
-				eValue::FALSE);
-		}
+			return (leftVal && rightVal);
 		else if (m_operator == eOperator::OR)
-		{
-			return ((leftVal == eValue::TRUE || rightVal == eValue::TRUE) ?
-				eValue::TRUE :
-				eValue::FALSE);
-		}
+			return (leftVal || rightVal);
 		else if (m_operator == eOperator::XOR)
-		{
-			return (XOR_VAL(leftVal, rightVal) ?
-				eValue::TRUE :
-				eValue::FALSE);
-		}
+			return (leftVal ^ rightVal);
 		return (eValue::ERROR);
 	};
 
@@ -145,18 +127,12 @@ private:
 
 	inline eValue			_evalLeft(const state_ctr &initStates) const
 	{
-		bool val = (_evalOp(m_leftOp, initStates) == eValue::TRUE);
-		return (XOR(val, m_leftNegative) ?
-			eValue::TRUE :
-			eValue::FALSE);
+		return (Symbol(_evalOp(m_leftOp, initStates))).getValNegative(m_leftNegative);
 	};
 
 	inline eValue			_evalRight(const state_ctr &initStates) const
 	{
-		bool val = (_evalOp(m_rightOp, initStates) == eValue::TRUE);
-		return (XOR(val, m_rightNegative) ?
-			eValue::TRUE :
-			eValue::FALSE);
+		return (Symbol(_evalOp(m_rightOp, initStates))).getValNegative(m_rightNegative);
 	};
 
 	// Actual template dispatching by overload
@@ -165,7 +141,7 @@ private:
 		auto value = initStates.find(op);
 		if (value != initStates.end())
 		{
-			if (value->second == eValue::UNDEFINED)
+			if (value->second == eValue::CACULATING)
 				;// TODO : Calculate value by inference
 			return (value->second);
 		}

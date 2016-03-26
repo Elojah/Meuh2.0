@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/20 10:08:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/25 15:06:16 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/25 15:13:09 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 		case(eValue::ERROR) :
 			result += "ERROR";
 			break ;
+		case(eValue::CACULATING) :
+			result += "CACULATING";
+			break ;
 	}
 	std::string		link;
 	auto hasLink = Rule::m_linkSymbols.find(m_link);
@@ -80,6 +83,9 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 			break ;
 		case(eValue::ERROR) :
 			result += "ERROR";
+			break ;
+		case(eValue::CACULATING) :
+			result += "CACULATING";
 			break ;
 	}
 	return(result);
