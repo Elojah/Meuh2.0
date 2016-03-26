@@ -10,6 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+
+Test A ->
+A is true/false
+check rule#1 valid
+-> undefined values
+-> calc with (rules - rule#1, same state)
+
+*/
+
 #include "Analyzer.hpp"
 
 #include <fstream>
@@ -42,8 +52,8 @@ eErr	Analyzer::analyze_file(const std::string &filename)
 		switch (line.at(0))
 		{
 			case ('#') : break ;
-			case ('=') : _set_true(line); break ;
-			case ('?') : _calculus(line); break ;
+			case ('=') : _set_true(line.substr(1)); break ;
+			case ('?') : _calculus(line.substr(1)); break ;
 			default : _add_rule(line); break ;
 		}
 	}
@@ -56,7 +66,7 @@ eErr	Analyzer::_set_true(const std::string &line)
 	{
 		if (IS_SYMBOL(c))
 			m_initValues[c] = eValue::TRUE;
-		else if (c == '=' || c == ' ' || c == '\t')
+		else if (c == ' ' || c == '\t')
 			continue ;
 		else
 		{
@@ -67,30 +77,66 @@ eErr	Analyzer::_set_true(const std::string &line)
 	return (eErr::NONE);
 }
 
+bool	Analyzer::_calcTest(const char c, state_ctr &initValues, const std::vector<Rule *> rules)
+{
+	auto value = initValues.find(c);
+	if (value != initValues.end())
+	{
+		if (value->second != eValue::UNDEFINED)
+			return (true);
+		for (const auto &rule : rules)
+		{
+			// Modify initValues
+			if (!rule->isValid(initValues, rules))
+				return (false);
+		}
+		// TODO: Calculus HERE !!!
+	}
+	else
+		err::raise_error(eErr::FATAL, "Symbol asked doesn't exist");
+	return (false);
+}
+
 eErr	Analyzer::_calculus(const std::string &line)
 {
 	for (const auto c : line)
 	{
 		if (IS_SYMBOL(c))
 		{
-			auto value = m_initValues.find(c);
-			if (value == m_initValues.end())
-				m_initValues[c] = eValue::CACULATING;
+			state_ctr	testTrue(m_initValues);
+			testTrue[c] = eValue::TRUE;
+			auto res = _calcTest(c, testTrue, m_rules);
+			if (res == true)
+			{
+				m_initValues = testTrue;
+				return (eErr::NONE);
+			}
+			state_ctr	testFalse(m_initValues);
+			testFalse[c] = eValue::FALSE;
+			res = _calcTest(c, testFalse, m_rules);
+			if (res == true)
+			{
+				m_initValues = testTrue;
+				return (eErr::NONE);
+			}
+			m_initValues[c] = eValue::UNDEFINED;
+			err::raise_error(eErr::FATAL, "No possible value");
+			return (eErr::FATAL);
 		}
-		else if (c == '?' || c == ' ' || c == '\t')
+		else if (c == ' ' || c == '\t')
 			continue ;
 		else
 		{
-			err::raise_error(eErr::FATAL, "Unrecognized symbol in calculation:");
+			err::raise_error(eErr::FATAL, "Unrecognized symbol in calculation");
 			return (eErr::FATAL);
 		}
 	}
-	// TEST
-	for (auto rule : m_rules)
-	{
-		std::cout << rule->serialize() << std::endl;
-		std::cout << rule->serializeEval(m_initValues) << std::endl;
-	}
+	// // TEST
+	// for (auto rule : m_rules)
+	// {
+	// 	std::cout << rule->serialize() << std::endl;
+	// 	std::cout << rule->serializeEval(m_initValues) << std::endl;
+	// }
 
 	return (eErr::NONE);
 }

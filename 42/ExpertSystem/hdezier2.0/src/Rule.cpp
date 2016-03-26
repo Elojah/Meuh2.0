@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/20 10:08:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/25 15:13:09 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/26 17:42:22 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,6 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 		case(eValue::ERROR) :
 			result += "ERROR";
 			break ;
-		case(eValue::CACULATING) :
-			result += "CACULATING";
-			break ;
 	}
 	std::string		link;
 	auto hasLink = Rule::m_linkSymbols.find(m_link);
@@ -84,11 +81,23 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 		case(eValue::ERROR) :
 			result += "ERROR";
 			break ;
-		case(eValue::CACULATING) :
-			result += "CACULATING";
-			break ;
 	}
 	return(result);
+}
+
+/*
+** Calc value
+*/
+bool	Rule::isValid(state_ctr &initStates, const std::vector<Rule *> rules) const
+{
+	(void)initStates;
+	(void)rules;
+	// TODO: Add rules to eval and callback static Analyzer::calcTest
+	if (m_leftExpr->eval(initStates) == eValue::UNDEFINED)
+	{
+		;
+	}
+	return (false);
 }
 
 /*

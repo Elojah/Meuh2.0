@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:41:26 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/26 16:20:20 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/26 17:23:35 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ private:
 	eErr	_set_true(const std::string &line);
 	eErr	_calculus(const std::string &line);
 	eErr	_add_rule(const std::string &line);
+	static bool	_calcTest(const char c, state_ctr &initValues, const std::vector<Rule *> rules);
 };
 
 #endif

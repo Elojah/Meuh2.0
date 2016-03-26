@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 15:44:11 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/26 16:09:40 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/26 16:58:27 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 enum class	eValue
 {
 	UNDEFINED = 0,
-	CACULATING,
 	TRUE,
 	FALSE,
 	ERROR
@@ -35,7 +34,6 @@ public:
 		switch (m_val)
 		{
 			case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-			case (eValue::CACULATING) : return (eValue::CACULATING);
 			case (eValue::TRUE) : return (eValue::FALSE);
 			case (eValue::FALSE) : return (eValue::TRUE);
 			case (eValue::ERROR) : return (eValue::ERROR);
@@ -50,16 +48,6 @@ public:
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::CACULATING) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::UNDEFINED);
-					case (eValue::FALSE) : return (eValue::UNDEFINED);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
-			case (eValue::CACULATING) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::CACULATING) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::UNDEFINED);
 					case (eValue::FALSE) : return (eValue::UNDEFINED);
 					case (eValue::ERROR) : return (eValue::ERROR);
@@ -68,7 +56,6 @@ public:
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::CACULATING) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::TRUE);
 					case (eValue::FALSE) : return (eValue::FALSE);
 					case (eValue::ERROR) : return (eValue::ERROR);
@@ -77,7 +64,6 @@ public:
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::CACULATING) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::FALSE);
 					case (eValue::FALSE) : return (eValue::FALSE);
 					case (eValue::ERROR) : return (eValue::ERROR);
@@ -86,7 +72,6 @@ public:
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::ERROR);
-					case (eValue::CACULATING) : return (eValue::ERROR);
 					case (eValue::TRUE) : return (eValue::ERROR);
 					case (eValue::FALSE) : return (eValue::ERROR);
 					case (eValue::ERROR) : return (eValue::ERROR);
@@ -102,16 +87,6 @@ public:
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::CACULATING) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::UNDEFINED);
-					case (eValue::FALSE) : return (eValue::UNDEFINED);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
-			case (eValue::CACULATING) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::CACULATING) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::UNDEFINED);
 					case (eValue::FALSE) : return (eValue::UNDEFINED);
 					case (eValue::ERROR) : return (eValue::ERROR);
@@ -120,7 +95,6 @@ public:
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::CACULATING) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::TRUE);
 					case (eValue::FALSE) : return (eValue::TRUE);
 					case (eValue::ERROR) : return (eValue::ERROR);
@@ -129,7 +103,6 @@ public:
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::CACULATING) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::TRUE);
 					case (eValue::FALSE) : return (eValue::FALSE);
 					case (eValue::ERROR) : return (eValue::ERROR);
@@ -138,7 +111,6 @@ public:
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::ERROR);
-					case (eValue::CACULATING) : return (eValue::ERROR);
 					case (eValue::TRUE) : return (eValue::ERROR);
 					case (eValue::FALSE) : return (eValue::ERROR);
 					case (eValue::ERROR) : return (eValue::ERROR);
@@ -154,16 +126,6 @@ public:
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::CACULATING) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::UNDEFINED);
-					case (eValue::FALSE) : return (eValue::UNDEFINED);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
-			case (eValue::CACULATING) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::CACULATING) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::UNDEFINED);
 					case (eValue::FALSE) : return (eValue::UNDEFINED);
 					case (eValue::ERROR) : return (eValue::ERROR);
@@ -172,7 +134,6 @@ public:
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::CACULATING) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::FALSE);
 					case (eValue::FALSE) : return (eValue::TRUE);
 					case (eValue::ERROR) : return (eValue::ERROR);
@@ -181,7 +142,6 @@ public:
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::CACULATING) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::TRUE);
 					case (eValue::FALSE) : return (eValue::FALSE);
 					case (eValue::ERROR) : return (eValue::ERROR);
@@ -190,7 +150,6 @@ public:
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::ERROR);
-					case (eValue::CACULATING) : return (eValue::ERROR);
 					case (eValue::TRUE) : return (eValue::ERROR);
 					case (eValue::FALSE) : return (eValue::ERROR);
 					case (eValue::ERROR) : return (eValue::ERROR);

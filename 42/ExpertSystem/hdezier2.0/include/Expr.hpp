@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 09:44:47 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/26 16:14:48 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/26 17:07:57 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ private:
 		auto value = initStates.find(op);
 		if (value != initStates.end())
 		{
-			if (value->second == eValue::CACULATING)
+			if (value->second == eValue::UNDEFINED)
 				;// TODO : Calculate value by inference
 			return (value->second);
 		}
