@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Rule.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/20 10:08:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/26 17:42:22 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/29 14:53:14 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ std::string	Rule::serialize(void)
 std::string	Rule::serializeEval(const state_ctr &initStates)
 {
 	std::string	result;
-	switch (m_leftExpr->eval(initStates))
+	std::string	useless;
+	switch (m_leftExpr->eval(initStates, useless))
 	{
 		case(eValue::UNDEFINED) :
 			result += "UNDEFINED";
@@ -67,7 +68,7 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 	else
 		link = "XXX";
 	result += link;
-	switch (m_rightExpr->eval(initStates))
+	switch (m_rightExpr->eval(initStates, useless))
 	{
 		case(eValue::UNDEFINED) :
 			result += "UNDEFINED";
@@ -88,16 +89,11 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 /*
 ** Calc value
 */
-bool	Rule::isValid(state_ctr &initStates, const std::vector<Rule *> rules) const
+eValue	Rule::isValid(const state_ctr &initStates, std::string &valuesRequired) const
 {
-	(void)initStates;
-	(void)rules;
-	// TODO: Add rules to eval and callback static Analyzer::calcTest
-	if (m_leftExpr->eval(initStates) == eValue::UNDEFINED)
-	{
-		;
-	}
-	return (false);
+	Symbol		leftVal(m_leftExpr->eval(initStates, valuesRequired));
+	Symbol		rightVal(m_rightExpr->eval(initStates, valuesRequired));
+	return (leftVal == rightVal);
 }
 
 /*

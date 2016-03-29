@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Analyzer.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:41:26 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/24 14:42:13 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/29 15:29:08 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,7 @@ eErr	Analyzer::_set_true(const std::string &line)
 	{
 		if (IS_SYMBOL(c))
 			m_initValues[c] = eValue::TRUE;
-		else if (c == ' ' || c == '\t')
-			continue ;
-		else
+		else if (c != ' ' && c != '\t')
 		{
 			err::raise_error(eErr::FATAL, "Unrecognized symbol in initialization");
 			return (eErr::FATAL);
@@ -82,13 +80,20 @@ bool	Analyzer::_calcTest(const char c, state_ctr &initValues, const std::vector<
 	auto value = initValues.find(c);
 	if (value != initValues.end())
 	{
-		if (value->second != eValue::UNDEFINED)
-			return (true);
 		for (const auto &rule : rules)
 		{
-			// Modify initValues
-			if (!rule->isValid(initValues, rules))
-				return (false);
+			std::string		valuesRequired;
+			eValue			val = rule->isValid(initValues, valuesRequired);
+			switch (val)
+			{
+			case (eValue::FALSE) : return (false);
+			case (eValue::TRUE) : break ;
+			case (eValue::UNDEFINED) :
+				std::cout << "Rule:" + rule->serialize() << std::endl;
+				std::cout << "need:" + valuesRequired << std::endl;
+				break ;
+			default : break ;
+			}
 		}
 		// TODO: Calculus HERE !!!
 	}
@@ -103,13 +108,19 @@ eErr	Analyzer::_calculus(const std::string &line)
 	{
 		if (IS_SYMBOL(c))
 		{
+			std::cout << "Search value:" << c << std::endl;
+			if (m_initValues[c] != eValue::UNDEFINED)
+			{
+				m_initValues[c] = eValue::FALSE;
+				continue ;
+			}
 			state_ctr	testTrue(m_initValues);
 			testTrue[c] = eValue::TRUE;
 			auto res = _calcTest(c, testTrue, m_rules);
 			if (res == true)
 			{
 				m_initValues = testTrue;
-				return (eErr::NONE);
+				continue ;
 			}
 			state_ctr	testFalse(m_initValues);
 			testFalse[c] = eValue::FALSE;
@@ -117,27 +128,17 @@ eErr	Analyzer::_calculus(const std::string &line)
 			if (res == true)
 			{
 				m_initValues = testTrue;
-				return (eErr::NONE);
+				continue ;
 			}
 			m_initValues[c] = eValue::UNDEFINED;
 			err::raise_error(eErr::FATAL, "No possible value");
-			return (eErr::FATAL);
 		}
-		else if (c == ' ' || c == '\t')
-			continue ;
-		else
+		else if (c != ' ' && c != '\t')
 		{
 			err::raise_error(eErr::FATAL, "Unrecognized symbol in calculation");
 			return (eErr::FATAL);
 		}
 	}
-	// // TEST
-	// for (auto rule : m_rules)
-	// {
-	// 	std::cout << rule->serialize() << std::endl;
-	// 	std::cout << rule->serializeEval(m_initValues) << std::endl;
-	// }
-
 	return (eErr::NONE);
 }
 
@@ -157,4 +158,7 @@ void	Analyzer::printRules(void)
 	std::cout << "N Rules:" << m_rules.size() << std::endl;
 	for (const auto &rule : m_rules)
 		std::cout << rule->serialize() << std::endl;
+	std::cout << "Values:" << m_rules.size() << std::endl;
+	for (const auto &val : m_initValues)
+		std::cout << val.first << " = " << (int)val.second << std::endl;
 }

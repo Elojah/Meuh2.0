@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Expr.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 09:44:47 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/26 17:07:57 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/29 15:36:04 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ class IExpr
 {
 public:
 	virtual ~IExpr(void) {};
-	virtual eValue		eval(const state_ctr &initStates) const = 0;
+	virtual eValue		eval(const state_ctr &initStates, std::string &valuesRequired) const = 0;
+	virtual std::string	getSymbols(void) const = 0;
 	virtual std::string	serialize(void) const = 0;
 };
 
@@ -98,12 +99,26 @@ public :
 		}
 	};
 
-	inline virtual eValue	eval(const state_ctr &initStates) const override
+	inline virtual std::string	getSymbols(void) const override
+	{
+		return (_getSymbol(m_leftOp) + _getSymbol(m_rightOp));
+	}
+	inline virtual std::string	_getSymbol(const char c) const
+	{
+		return (std::string(1, c));
+	}
+	inline virtual std::string	_getSymbol(const IExpr *op) const
+	{
+		return (op->getSymbols());
+	}
+
+
+	inline virtual eValue	eval(const state_ctr &initStates, std::string &valuesRequired) const override
 	{
 		if (m_operator == eOperator::NONE)
-			return (_evalLeft(initStates));
-		Symbol		leftVal(_evalLeft(initStates));
-		Symbol		rightVal(_evalRight(initStates));
+			return (_evalLeft(initStates, valuesRequired));
+		Symbol		leftVal(_evalLeft(initStates, valuesRequired));
+		Symbol		rightVal(_evalRight(initStates, valuesRequired));
 		if (m_operator == eOperator::AND)
 			return (leftVal && rightVal);
 		else if (m_operator == eOperator::OR)
@@ -125,33 +140,33 @@ private:
 	inline virtual void		_deleteOp(const IExpr *op) {delete (op);}
 	inline virtual void		_deleteOp(const char op) {(void)op;}
 
-	inline eValue			_evalLeft(const state_ctr &initStates) const
+	inline eValue			_evalLeft(const state_ctr &initStates, std::string &valuesRequired) const
 	{
-		return (Symbol(_evalOp(m_leftOp, initStates))).getValNegative(m_leftNegative);
+		return (Symbol(_evalOp(m_leftOp, initStates, valuesRequired))).getValNegative(m_leftNegative);
 	};
 
-	inline eValue			_evalRight(const state_ctr &initStates) const
+	inline eValue			_evalRight(const state_ctr &initStates, std::string &valuesRequired) const
 	{
-		return (Symbol(_evalOp(m_rightOp, initStates))).getValNegative(m_rightNegative);
+		return (Symbol(_evalOp(m_rightOp, initStates, valuesRequired))).getValNegative(m_rightNegative);
 	};
 
 	// Actual template dispatching by overload
-	inline static eValue	_evalOp(const char op, const state_ctr &initStates)
+	inline static eValue	_evalOp(const char op, const state_ctr &initStates, std::string &valuesRequired)
 	{
 		auto value = initStates.find(op);
 		if (value != initStates.end())
 		{
 			if (value->second == eValue::UNDEFINED)
-				;// TODO : Calculate value by inference
+				valuesRequired += value->first;
 			return (value->second);
 		}
 		else
 			return (eValue::ERROR);
 	};
 
-	inline static eValue	_evalOp(const IExpr *op, const state_ctr &initStates)
+	inline static eValue	_evalOp(const IExpr *op, const state_ctr &initStates, std::string &valuesRequired)
 	{
-		return (op->eval(initStates));
+		return (op->eval(initStates, valuesRequired));
 	};
 
 };

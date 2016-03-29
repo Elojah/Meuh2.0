@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Rule.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:45:24 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/26 17:38:18 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/29 14:37:33 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ public:
 	virtual eErr	set(const std::string &line);
 	std::string		serialize(void);
 	std::string		serializeEval(const state_ctr &initStates);
-	bool			isValid(state_ctr &initStates, const std::vector<Rule *> rules) const;
+	eValue			isValid(const state_ctr &initStates, std::string &valuesRequired) const;
 protected:
 private:
 	eLinkExpr	m_link;

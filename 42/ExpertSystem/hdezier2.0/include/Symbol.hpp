@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Symbol.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 15:44:11 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/26 16:58:27 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/29 14:53:12 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,46 @@ public:
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::TRUE);
 					case (eValue::FALSE) : return (eValue::FALSE);
+					case (eValue::ERROR) : return (eValue::ERROR);
+				}
+			case (eValue::ERROR) :
+				switch (rightOp.getVal())
+				{
+					case (eValue::UNDEFINED) : return (eValue::ERROR);
+					case (eValue::TRUE) : return (eValue::ERROR);
+					case (eValue::FALSE) : return (eValue::ERROR);
+					case (eValue::ERROR) : return (eValue::ERROR);
+				}
+		}
+	};
+
+
+	inline eValue		operator==(const Symbol &rightOp) const
+	{
+		switch (m_val)
+		{
+			case (eValue::UNDEFINED) :
+				switch (rightOp.getVal())
+				{
+					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
+					case (eValue::TRUE) : return (eValue::UNDEFINED);
+					case (eValue::FALSE) : return (eValue::UNDEFINED);
+					case (eValue::ERROR) : return (eValue::ERROR);
+				}
+			case (eValue::TRUE) :
+				switch (rightOp.getVal())
+				{
+					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
+					case (eValue::TRUE) : return (eValue::TRUE);
+					case (eValue::FALSE) : return (eValue::FALSE);
+					case (eValue::ERROR) : return (eValue::ERROR);
+				}
+			case (eValue::FALSE) :
+				switch (rightOp.getVal())
+				{
+					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
+					case (eValue::TRUE) : return (eValue::FALSE);
+					case (eValue::FALSE) : return (eValue::TRUE);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 			case (eValue::ERROR) :
