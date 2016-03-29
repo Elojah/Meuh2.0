@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 12:08:55 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/20 18:05:40 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/25 14:28:46 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define ERR_HPP
 
 #include <iostream>
+
+# define DBG_PRINT(s) std::cerr << s << std::endl;
 
 enum class	eErr
 {

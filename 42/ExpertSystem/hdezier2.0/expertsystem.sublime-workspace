@@ -520,10 +520,18 @@
 	"buffers":
 	[
 		{
-			"file": "include/Analyzer.hpp",
+			"file": "src/main.cpp",
 			"settings":
 			{
-				"buffer_size": 1364,
+				"buffer_size": 2113,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/leeios/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 1350,
 				"line_ending": "Unix"
 			}
 		},
@@ -531,15 +539,23 @@
 			"file": "src/Analyzer.cpp",
 			"settings":
 			{
-				"buffer_size": 1758,
+				"buffer_size": 2058,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "include/Rule.hpp",
+			"file": "include/Analyzer.hpp",
 			"settings":
 			{
-				"buffer_size": 1269,
+				"buffer_size": 1390,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/Expr.hpp",
+			"settings":
+			{
+				"buffer_size": 4995,
 				"line_ending": "Unix"
 			}
 		},
@@ -552,34 +568,10 @@
 			}
 		},
 		{
-			"file": "src/Rule.cpp",
-			"settings":
-			{
-				"buffer_size": 1272,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main.cpp",
-			"settings":
-			{
-				"buffer_size": 1881,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "include/Expr.hpp",
-			"settings":
-			{
-				"buffer_size": 4067,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "include/Error.hpp",
 			"settings":
 			{
-				"buffer_size": 1151,
+				"buffer_size": 1154,
 				"line_ending": "Unix"
 			}
 		}
@@ -591,10 +583,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 302.0,
-		"last_filter": "clang",
+		"height": 354.0,
+		"last_filter": "pack l",
 		"selected_items":
 		[
+			[
+				"pack l",
+				"Package Control: List Packages"
+			],
 			[
 				"clang",
 				"Set Syntax: ClangErrorPanel"
@@ -702,10 +698,6 @@
 			[
 				"pack remove",
 				"Package Control: Remove Package"
-			],
-			[
-				"pack l",
-				"Package Control: List Packages"
 			],
 			[
 				"pack chann",
@@ -887,10 +879,16 @@
 	"expanded_folders":
 	[
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/include",
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/src"
 	],
 	"file_history":
 	[
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/src/Rule.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/include/Analyzer.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/src/Analyzer.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/include/Rule.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/Makefile",
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/expertsystem.sublime-project",
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/include/Expr.hpp",
 		"/home/leeios/.config/sublime-text-3/Packages/Package Control/Package Control.sublime-settings",
@@ -1013,12 +1011,7 @@
 		"/home/leeios/code/meuh/util/roolv2.0/config/models/src.model",
 		"/home/leeios/code/meuh/util/roolv2.0/inc/StandardCmd.hpp",
 		"/home/leeios/code/meuh/util/roolv2.0/inc/util.hpp",
-		"/home/leeios/code/meuh/util/roolv2.0/inc/FileDir.hpp",
-		"/home/leeios/code/meuh/util/roolv2.0/inc/IModule.hpp",
-		"/home/leeios/code/meuh/util/roolv2.0/inc/Project.hpp",
-		"/home/leeios/code/meuh/util/Rool/include/IModule.hpp",
-		"/home/leeios/code/meuh/util/roolv2.0/inc/Boot.hpp",
-		"/home/leeios/code/meuh/util/roolv2.0/src/menus/Boot.cpp"
+		"/home/leeios/code/meuh/util/roolv2.0/inc/FileDir.hpp"
 	],
 	"find":
 	{
@@ -1067,6 +1060,14 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"static",
+			"ERROR_HPP",
+			"virtual",
+			"static",
+			"cpp",
+			"eval",
+			"initialStates",
+			"m_initialStates",
 			"\neErr	",
 			"eErr",
 			"raise_error",
@@ -1186,15 +1187,7 @@
 			"&frame",
 			"base_position.x",
 			"y",
-			"x",
-			"(y)",
-			"(x)",
-			"y + j",
-			"new_frame",
-			"&new_frame",
-			"x + i",
-			"update_limit_points",
-			"enum e_error"
+			"x"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1225,24 +1218,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "include/Analyzer.hpp",
+					"file": "src/main.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1364,
+						"buffer_size": 2113,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								955,
-								955
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1254,94 +1247,27 @@
 							"syntax": "Packages/Leeios/Leeios.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 242.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/Analyzer.cpp",
+					"file": "/home/leeios/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1758,
+						"buffer_size": 1350,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1400,
-								1400
-							]
-						],
-						"settings":
-						{
-							"glsv_configured": true,
-							"glsv_enabled": 1,
-							"glsv_spec": 0,
-							"hasHeader": true,
-							"history_list_is_closing": true,
-							"syntax": "Packages/Leeios/Leeios.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 182.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "include/Rule.hpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1269,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1048,
-								1048
-							]
-						],
-						"settings":
-						{
-							"glsv_configured": true,
-							"glsv_enabled": 1,
-							"glsv_spec": 0,
-							"hasHeader": true,
-							"syntax": "Packages/Leeios/Leeios.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "Makefile",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1426,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								214,
-								214
+								300,
+								300
 							]
 						],
 						"settings":
@@ -1350,131 +1276,54 @@
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
 							"hasHeader": false,
-							"syntax": "Packages/Makefile Improved/Makefile Improved.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "src/Rule.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1272,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								913,
-								913
-							]
-						],
-						"settings":
-						{
-							"glsv_configured": true,
-							"glsv_enabled": 1,
-							"glsv_spec": 0,
-							"hasHeader": true,
-							"syntax": "Packages/Leeios/Leeios.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/main.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1881,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1415,
-								1415
-							]
-						],
-						"settings":
-						{
-							"glsv_configured": true,
-							"glsv_enabled": 1,
-							"glsv_spec": 0,
-							"hasHeader": true,
-							"syntax": "Packages/Leeios/Leeios.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 197.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 6,
-					"file": "include/Expr.hpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4067,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1348,
-								1348
-							]
-						],
-						"settings":
-						{
-							"glsv_configured": true,
-							"glsv_enabled": 1,
-							"glsv_spec": 0,
-							"hasHeader": true,
-							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 74.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 7,
-					"file": "include/Error.hpp",
+					"buffer": 2,
+					"file": "src/Analyzer.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1151,
+						"buffer_size": 2058,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+						},
+						"translation.x": -0.0,
+						"translation.y": 675.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "include/Analyzer.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1390,
 						"regions":
 						{
 						},
@@ -1497,7 +1346,116 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 6,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 4,
+					"file": "include/Expr.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4995,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1740.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1426,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								679,
+								679
+							]
+						],
+						"settings":
+						{
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": false,
+							"syntax": "Packages/Makefile Improved/Makefile Improved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 360.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 6,
+					"file": "include/Error.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1154,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1011,
+								1011
+							]
+						],
+						"settings":
+						{
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 332.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1573,6 +1531,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"makef",
+				"Makefile"
+			],
+			[
+				"ana",
+				"include/Analyzer.hpp"
+			],
 			[
 				"make",
 				"Makefile"
@@ -1696,10 +1662,6 @@
 			[
 				"tnega",
 				"include/TNegation.hpp"
-			],
-			[
-				"makef",
-				"Makefile"
 			],
 			[
 				"topera",
