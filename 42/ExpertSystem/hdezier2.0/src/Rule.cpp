@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Rule.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/20 10:08:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/29 14:53:14 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/03/30 13:46:29 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Rule.hpp"
+
+#include <algorithm>
 
 const char												Rule::m_opSymbols[] = "+|^";
 const std::map<Rule::eLinkExpr, std::string>			Rule::m_linkSymbols =
@@ -28,7 +30,10 @@ Rule::Rule(void)
 
 Rule::~Rule(void)
 {
-	;
+	// if (m_leftExpr != nullptr)
+	// 	delete (m_leftExpr);
+	// if (m_rightExpr != nullptr)
+	// 	delete (m_rightExpr);
 }
 
 std::string	Rule::serialize(void)
@@ -45,8 +50,7 @@ std::string	Rule::serialize(void)
 std::string	Rule::serializeEval(const state_ctr &initStates)
 {
 	std::string	result;
-	std::string	useless;
-	switch (m_leftExpr->eval(initStates, useless))
+	switch (m_leftExpr->eval(initStates))
 	{
 		case(eValue::UNDEFINED) :
 			result += "UNDEFINED";
@@ -68,7 +72,7 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 	else
 		link = "XXX";
 	result += link;
-	switch (m_rightExpr->eval(initStates, useless))
+	switch (m_rightExpr->eval(initStates))
 	{
 		case(eValue::UNDEFINED) :
 			result += "UNDEFINED";
@@ -89,10 +93,10 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 /*
 ** Calc value
 */
-eValue	Rule::isValid(const state_ctr &initStates, std::string &valuesRequired) const
+eValue	Rule::isValid(const state_ctr &initStates) const
 {
-	Symbol		leftVal(m_leftExpr->eval(initStates, valuesRequired));
-	Symbol		rightVal(m_rightExpr->eval(initStates, valuesRequired));
+	Symbol		leftVal(m_leftExpr->eval(initStates));
+	Symbol		rightVal(m_rightExpr->eval(initStates));
 	return (leftVal == rightVal);
 }
 
@@ -120,6 +124,10 @@ eErr	Rule::set(const std::string &line)
 	m_leftExpr = _setExpr(line.substr(0, separator));
 	m_rightExpr = _setExpr(line.substr(separator + linkSize));
 
+	// Remove duplicates
+	std::sort(m_presentSymbols.begin(), m_presentSymbols.end());
+	m_presentSymbols.erase(std::unique(m_presentSymbols.begin(), m_presentSymbols.end()), m_presentSymbols.end());
+
 	return (eErr::NONE);
 }
 
@@ -142,6 +150,7 @@ IExpr	*Rule::_setExprAsChar(const std::string &s)
 			return (nullptr);
 		}
 		result->setLeftOperand(c);
+		m_presentSymbols += c;
 		return (result);
 	}
 	return (nullptr);

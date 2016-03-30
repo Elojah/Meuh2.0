@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Rule.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:45:24 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/29 14:37:33 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/03/30 13:19:25 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,25 @@ public:
 	virtual eErr	set(const std::string &line);
 	std::string		serialize(void);
 	std::string		serializeEval(const state_ctr &initStates);
-	eValue			isValid(const state_ctr &initStates, std::string &valuesRequired) const;
+	eValue			isValid(const state_ctr &initStates) const;
+
+	inline const std::string	&getSymbols(void) const {return (m_presentSymbols);};
+
 protected:
 private:
 	eLinkExpr	m_link;
 	IExpr*		m_leftExpr;
 	IExpr*		m_rightExpr;
 
+
+	std::string													m_presentSymbols;
 	static const char											m_opSymbols[];
 	static const std::map<Rule::eLinkExpr, std::string>			m_linkSymbols;
 
-	static IExpr		*_setExprAsExpr(const std::string &s, size_t symbol);
-	static IExpr		*_setExprParenthesis(const std::string &s, Expr<IExpr *> *result, size_t parenthesis);
-	static IExpr		*_setExprAsChar(const std::string &s);
-	static IExpr		*_setExpr(const std::string &s);
+	IExpr			*_setExprAsExpr(const std::string &s, size_t symbol);
+	IExpr			*_setExprParenthesis(const std::string &s, Expr<IExpr *> *result, size_t parenthesis);
+	IExpr			*_setExprAsChar(const std::string &s);
+	IExpr			*_setExpr(const std::string &s);
 };
 
 #endif
