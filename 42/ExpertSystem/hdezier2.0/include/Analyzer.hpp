@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Analyzer.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:41:26 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/26 17:23:35 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/31 19:58:17 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ private:
 
 	eErr	_set_true(const std::string &line);
 	eErr	_calculus(const std::string &line);
+	void	_setInitSymbols(void);
 	eErr	_add_rule(const std::string &line);
-	static bool	_calcTest(const char c, state_ctr &initValues, const std::vector<Rule *> rules);
+	bool	_calcTest(const char c);
+	void	_resetTestValues(void);
 };
 
 #endif

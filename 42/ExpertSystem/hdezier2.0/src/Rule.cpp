@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Rule.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/20 10:08:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/30 13:46:29 by leeios           ###   ########.fr       */
+/*   Updated: 2016/03/31 19:28:22 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 		case(eValue::FALSE) :
 			result += "FALSE";
 			break ;
+		case(eValue::TRUE_TEST) :
+			result += "TRUE_TEST";
+			break ;
+		case(eValue::FALSE_TEST) :
+			result += "FALSE_TEST";
+			break ;
 		case(eValue::ERROR) :
 			result += "ERROR";
 			break ;
@@ -83,6 +89,12 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 		case(eValue::FALSE) :
 			result += "FALSE";
 			break ;
+		case(eValue::TRUE_TEST) :
+			result += "TRUE_TEST";
+			break ;
+		case(eValue::FALSE_TEST) :
+			result += "FALSE_TEST";
+			break ;
 		case(eValue::ERROR) :
 			result += "ERROR";
 			break ;
@@ -93,11 +105,23 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 /*
 ** Calc value
 */
-eValue	Rule::isValid(const state_ctr &initStates) const
+eValue	Rule::isValid(state_ctr &initStates) const
 {
 	Symbol		leftVal(m_leftExpr->eval(initStates));
 	Symbol		rightVal(m_rightExpr->eval(initStates));
-	return (leftVal == rightVal);
+	if (m_link == eLinkExpr::IF_ONLY_IF)
+		return (leftVal == rightVal);
+	else if (m_link == eLinkExpr::IMPLIES)
+	{
+		if (leftVal.getVal() != eValue::UNDEFINED && leftVal.getVal() != eValue::ERROR)
+		{
+			if (m_rightExpr->setAll(leftVal.getVal(), initStates))
+				return (eValue::TRUE);
+			else
+				return (eValue::FALSE);
+		}
+	}
+	return (eValue::FALSE);
 }
 
 /*
