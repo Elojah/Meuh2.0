@@ -8,16 +8,14 @@ BUILD_DIR = build
 LIB_DIR =
 
 #Options
-CC = clang++-3.6
+CC = clang++
 SRC_EXT = .cpp
 RM = rm -rf
 
 #List classes here
 CLASS = main\
-		/Lexer\
-		/TokensDefinition\
-		/Parser\
-		/Error\
+		/Rule\
+		/Analyzer\
 
 #List interfaces here
 INTERFACE = \
@@ -28,7 +26,7 @@ OBJ = $(addsuffix .o, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 
 #Flags
-CFLAGS = -Wall -Wextra -Werror -O3 -std=c++11 -D_DBG_
+CFLAGS = -Wall -Wextra -Werror -O3 -std=c++11
 LFLAGS =
 
 #Libs

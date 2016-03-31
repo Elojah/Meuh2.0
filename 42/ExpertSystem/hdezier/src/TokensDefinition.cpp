@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   TOperand.hpp                                       :+:      :+:    :+:   */
+/*   TokensDefinition.cpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/04 15:25:31 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/04 15:26:54 by leeios           ###   ########.fr       */
+/*   Created: 2016/03/14 16:34:03 by leeios            #+#    #+#             */
+/*   Updated: 2016/03/14 17:41:52 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_OPERAND_HPP
-# define T_OPERAND_HPP
+#include "TokensDefinition.hpp"
 
-# include "IToken.hpp"
-
-class TOperand : public IToken
+namespace TokensDefinition
 {
-public:
-	TOperand(void);
-	virtual ~TOperand(void) override;
-	virtual eResponse		detect(const std::string &str) const override;
-	virtual void			getNextTokens(tok_indexes &mask) const override;
-	virtual IToken			*getNewInstance(const std::string &s) const override;
-protected:
-private:
-};
+	tLexicon	sNegation::words =
+	{
+		"!"
+	};
+	tLexicon	sOperand::words =
+	{
+		"=>", "<=>"
+	};
+	tLexicon	sOperator::words =
+	{
+		"+", "|", "^"
+	};
+	tLexicon	sPriorities::words =
+	{
+		"(", ")"
+	};
 
-#endif
+};

@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   TEntity.hpp                                        :+:      :+:    :+:   */
+/*   Error.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/03 18:16:21 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/03 20:14:30 by leeios           ###   ########.fr       */
+/*   Created: 2016/03/16 12:08:55 by leeios            #+#    #+#             */
+/*   Updated: 2016/03/25 14:28:46 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_ENTITY_HPP
-# define T_ENTITY_HPP
+#ifndef ERR_HPP
+# define ERR_HPP
 
-#include "IToken.hpp"
+#include <iostream>
 
-class TEntity : public IToken
+# define DBG_PRINT(s) std::cerr << s << std::endl;
+
+enum class	eErr
 {
-public:
-	TEntity(void);
-	virtual ~TEntity(void) override;
-	virtual eResponse		detect(const std::string &str) const override;
-	virtual void			getNextTokens(tok_indexes &mask) const override;
-	virtual IToken			*getNewInstance(const std::string &s) const override;
-protected:
-private:
+	NONE = 0,
+	FATAL
+};
+
+namespace	err
+{
+	inline eErr	raise_error(eErr err, const std::string &msg)
+	{
+		if (err != eErr::NONE)
+			std::cerr << msg << std::endl;
+		return (err);
+	}
 };
 
 #endif

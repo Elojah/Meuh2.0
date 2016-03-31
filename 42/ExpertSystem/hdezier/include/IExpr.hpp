@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   TContextMark.hpp                                   :+:      :+:    :+:   */
+/*   IExpr.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/04 15:34:51 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/04 16:04:51 by leeios           ###   ########.fr       */
+/*   Created: 2016/03/16 11:05:28 by leeios            #+#    #+#             */
+/*   Updated: 2016/03/16 11:08:23 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_CONTEXT_MARK_HPP
-# define T_CONTEXT_MARK_HPP
+#ifndef I_EXPR_HPP
+# define I_EXPR_HPP
 
-# include "IToken.hpp"
 
-class TContextMark : public IToken
+class IExpr
 {
 public:
-	TContextMark(void);
-	virtual ~TContextMark(void) override;
-	virtual eResponse		detect(const std::string &str) const override;
-	virtual void			getNextTokens(tok_indexes &mask) const override;
-	virtual IToken			*getNewInstance(const std::string &s) const override;
+	virtual ~IExpr(void) {}
+	virtual bool	eval(void) const = 0;
 protected:
 private:
-	static bool				_isCtxMarkSymbol(const char c);
 };
 
 #endif
