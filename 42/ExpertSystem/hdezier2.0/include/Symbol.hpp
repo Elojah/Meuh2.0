@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 15:44:11 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/31 19:23:54 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/04 14:36:49 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ enum class	eValue
 {
 	UNDEFINED = 0,
 	TRUE,
-	TRUE_TEST,
 	FALSE,
-	FALSE_TEST,
 	ERROR
 };
 
@@ -40,8 +38,6 @@ public:
 			case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 			case (eValue::TRUE) : return (eValue::FALSE);
 			case (eValue::FALSE) : return (eValue::TRUE);
-			case (eValue::TRUE_TEST) : return (eValue::FALSE_TEST);
-			case (eValue::FALSE_TEST) : return (eValue::TRUE_TEST);
 			case (eValue::ERROR) : return (eValue::ERROR);
 		};
 	};
@@ -50,24 +46,13 @@ public:
 	{
 		switch (m_val)
 		{
-			case (eValue::UNDEFINED) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::UNDEFINED);
-					case (eValue::FALSE) : return (eValue::UNDEFINED);
-					case (eValue::TRUE_TEST) : return (eValue::UNDEFINED);
-					case (eValue::FALSE_TEST) : return (eValue::UNDEFINED);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
+			case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 			case (eValue::TRUE) :
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::TRUE);
 					case (eValue::FALSE) : return (eValue::FALSE);
-					case (eValue::TRUE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::FALSE_TEST);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 			case (eValue::FALSE) :
@@ -76,28 +61,6 @@ public:
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::FALSE);
 					case (eValue::FALSE) : return (eValue::FALSE);
-					case (eValue::TRUE_TEST) : return (eValue::FALSE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::FALSE_TEST);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
-			case (eValue::TRUE_TEST) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE) : return (eValue::FALSE_TEST);
-					case (eValue::TRUE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::FALSE_TEST);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
-			case (eValue::FALSE_TEST) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::FALSE_TEST);
-					case (eValue::FALSE) : return (eValue::FALSE_TEST);
-					case (eValue::TRUE_TEST) : return (eValue::FALSE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::FALSE_TEST);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 			case (eValue::ERROR) :
@@ -106,8 +69,6 @@ public:
 					case (eValue::UNDEFINED) : return (eValue::ERROR);
 					case (eValue::TRUE) : return (eValue::ERROR);
 					case (eValue::FALSE) : return (eValue::ERROR);
-					case (eValue::TRUE_TEST) : return (eValue::ERROR);
-					case (eValue::FALSE_TEST) : return (eValue::ERROR);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 		}
@@ -117,24 +78,13 @@ public:
 	{
 		switch (m_val)
 		{
-			case (eValue::UNDEFINED) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::UNDEFINED);
-					case (eValue::FALSE) : return (eValue::UNDEFINED);
-					case (eValue::TRUE_TEST) : return (eValue::UNDEFINED);
-					case (eValue::FALSE_TEST) : return (eValue::UNDEFINED);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
+			case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 			case (eValue::TRUE) :
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::TRUE);
 					case (eValue::FALSE) : return (eValue::TRUE);
-					case (eValue::TRUE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::TRUE_TEST);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 			case (eValue::FALSE) :
@@ -143,28 +93,6 @@ public:
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::TRUE);
 					case (eValue::FALSE) : return (eValue::FALSE);
-					case (eValue::TRUE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::FALSE_TEST);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
-			case (eValue::TRUE_TEST) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE) : return (eValue::TRUE_TEST);
-					case (eValue::TRUE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
-			case (eValue::FALSE_TEST) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE) : return (eValue::FALSE_TEST);
-					case (eValue::TRUE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::FALSE_TEST);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 			case (eValue::ERROR) :
@@ -173,8 +101,6 @@ public:
 					case (eValue::UNDEFINED) : return (eValue::ERROR);
 					case (eValue::TRUE) : return (eValue::ERROR);
 					case (eValue::FALSE) : return (eValue::ERROR);
-					case (eValue::TRUE_TEST) : return (eValue::ERROR);
-					case (eValue::FALSE_TEST) : return (eValue::ERROR);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 		}
@@ -184,24 +110,13 @@ public:
 	{
 		switch (m_val)
 		{
-			case (eValue::UNDEFINED) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::UNDEFINED);
-					case (eValue::FALSE) : return (eValue::UNDEFINED);
-					case (eValue::TRUE_TEST) : return (eValue::UNDEFINED);
-					case (eValue::FALSE_TEST) : return (eValue::UNDEFINED);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
+			case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 			case (eValue::TRUE) :
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::FALSE);
 					case (eValue::FALSE) : return (eValue::TRUE);
-					case (eValue::TRUE_TEST) : return (eValue::FALSE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::TRUE_TEST);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 			case (eValue::FALSE) :
@@ -210,28 +125,6 @@ public:
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::TRUE);
 					case (eValue::FALSE) : return (eValue::FALSE);
-					case (eValue::TRUE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::FALSE_TEST);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
-			case (eValue::TRUE_TEST) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::FALSE_TEST);
-					case (eValue::FALSE) : return (eValue::TRUE_TEST);
-					case (eValue::TRUE_TEST) : return (eValue::FALSE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
-			case (eValue::FALSE_TEST) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE) : return (eValue::FALSE_TEST);
-					case (eValue::TRUE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::FALSE_TEST);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 			case (eValue::ERROR) :
@@ -240,8 +133,6 @@ public:
 					case (eValue::UNDEFINED) : return (eValue::ERROR);
 					case (eValue::TRUE) : return (eValue::ERROR);
 					case (eValue::FALSE) : return (eValue::ERROR);
-					case (eValue::TRUE_TEST) : return (eValue::ERROR);
-					case (eValue::FALSE_TEST) : return (eValue::ERROR);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 		}
@@ -258,8 +149,6 @@ public:
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::UNDEFINED);
 					case (eValue::FALSE) : return (eValue::UNDEFINED);
-					case (eValue::TRUE_TEST) : return (eValue::UNDEFINED);
-					case (eValue::FALSE_TEST) : return (eValue::UNDEFINED);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 			case (eValue::TRUE) :
@@ -268,8 +157,6 @@ public:
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::TRUE);
 					case (eValue::FALSE) : return (eValue::FALSE);
-					case (eValue::TRUE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::FALSE_TEST);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 			case (eValue::FALSE) :
@@ -278,28 +165,6 @@ public:
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::FALSE);
 					case (eValue::FALSE) : return (eValue::TRUE);
-					case (eValue::TRUE_TEST) : return (eValue::FALSE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
-			case (eValue::TRUE_TEST) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE) : return (eValue::FALSE_TEST);
-					case (eValue::TRUE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::FALSE_TEST);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
-			case (eValue::FALSE_TEST) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::FALSE_TEST);
-					case (eValue::FALSE) : return (eValue::TRUE_TEST);
-					case (eValue::TRUE_TEST) : return (eValue::FALSE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::TRUE_TEST);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 			case (eValue::ERROR) :
@@ -308,8 +173,6 @@ public:
 					case (eValue::UNDEFINED) : return (eValue::ERROR);
 					case (eValue::TRUE) : return (eValue::ERROR);
 					case (eValue::FALSE) : return (eValue::ERROR);
-					case (eValue::TRUE_TEST) : return (eValue::ERROR);
-					case (eValue::FALSE_TEST) : return (eValue::ERROR);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 		}
@@ -325,8 +188,6 @@ public:
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::UNDEFINED);
 					case (eValue::FALSE) : return (eValue::UNDEFINED);
-					case (eValue::TRUE_TEST) : return (eValue::UNDEFINED);
-					case (eValue::FALSE_TEST) : return (eValue::UNDEFINED);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 			case (eValue::TRUE) :
@@ -335,8 +196,6 @@ public:
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::FALSE);
 					case (eValue::FALSE) : return (eValue::TRUE);
-					case (eValue::TRUE_TEST) : return (eValue::FALSE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::TRUE_TEST);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 			case (eValue::FALSE) :
@@ -345,28 +204,6 @@ public:
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 					case (eValue::TRUE) : return (eValue::TRUE);
 					case (eValue::FALSE) : return (eValue::FALSE);
-					case (eValue::TRUE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::FALSE_TEST);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
-			case (eValue::TRUE_TEST) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::FALSE_TEST);
-					case (eValue::FALSE) : return (eValue::TRUE_TEST);
-					case (eValue::TRUE_TEST) : return (eValue::FALSE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
-			case (eValue::FALSE_TEST) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE) : return (eValue::FALSE_TEST);
-					case (eValue::TRUE_TEST) : return (eValue::TRUE_TEST);
-					case (eValue::FALSE_TEST) : return (eValue::FALSE_TEST);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 			case (eValue::ERROR) :
@@ -375,8 +212,6 @@ public:
 					case (eValue::UNDEFINED) : return (eValue::ERROR);
 					case (eValue::TRUE) : return (eValue::ERROR);
 					case (eValue::FALSE) : return (eValue::ERROR);
-					case (eValue::TRUE_TEST) : return (eValue::ERROR);
-					case (eValue::FALSE_TEST) : return (eValue::ERROR);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
 		}
@@ -389,8 +224,6 @@ public:
 			case (eValue::UNDEFINED) : return (false);
 			case (eValue::TRUE) : return (true);
 			case (eValue::FALSE) : return (false);
-			case (eValue::TRUE_TEST) : return (true);
-			case (eValue::FALSE_TEST) : return (false);
 			case (eValue::ERROR) : return (false);
 		}
 	};
@@ -404,8 +237,6 @@ public:
 			case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
 			case (eValue::TRUE) : return (eValue::FALSE);
 			case (eValue::FALSE) : return (eValue::TRUE);
-			case (eValue::TRUE_TEST) : return (eValue::FALSE_TEST);
-			case (eValue::FALSE_TEST) : return (eValue::TRUE_TEST);
 			case (eValue::ERROR) : return (eValue::ERROR);
 		}
 	};
@@ -416,9 +247,7 @@ public:
 		{
 			"UNDEFINED",
 			"TRUE",
-			"TRUE_TEST",
 			"FALSE",
-			"FALSE_TEST",
 			"ERROR"
 		};
 		return (valueNames[(int)val]);
@@ -427,6 +256,5 @@ public:
 private:
 	const eValue				m_val;
 };
-
 
 #endif

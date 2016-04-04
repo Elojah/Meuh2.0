@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:41:26 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/31 20:00:23 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/04 14:42:49 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,73 +84,69 @@ bool	Analyzer::_calcTest(const char c)
 		// if symbol doesn't appear in that rule
 		if (rule->getSymbols().find(c) == std::string::npos)
 			continue ;
-		auto		ruleEvaluation = rule->isValid(m_initValues);
-		std::cout << "Test on rule#" << rule->serialize() << std::endl;
-		std::cout << "======>" << Symbol::getName(ruleEvaluation) << std::endl;
-		if (ruleEvaluation == eValue::FALSE || ruleEvaluation == eValue::FALSE_TEST)
-			return (false);
-		else if (ruleEvaluation == eValue::TRUE || ruleEvaluation == eValue::TRUE_TEST)
+		const std::string	&symbols = rule->getSymbols();
+		auto				separator = symbols.find('=');
+		// Should never happen
+		if (separator == std::string::npos)
 			continue ;
+		auto				rightSide = symbols.substr(separator);
+		if (rightSide.find(c) != std::string::npos)
+		{
+			if (rule->apply(m_initValues))
+			{
+				std::cout << "On rule:" << rule->serialize() << std::endl;
+				return (true);
+			}
+		}
 	}
-	return (true);
+	return (false);
 }
 
 eErr	Analyzer::_calculus(const std::string &line)
 {
-	// Print result with line
-	(void)line;
 	_setInitSymbols();
+	// Calc if initial values
 	restart : for (const auto &val : m_initValues)
 	{
 		if (val.second != eValue::UNDEFINED)
 			continue ;
 
-		// Error testing
-		for (const auto &i : m_initValues)
-			std::cout << i.first << " = " << Symbol::getName(i.second) << std::endl;
-
 		std::cout << "Testing value:" << val.first << std::endl;
 
-		m_initValues[val.first] = eValue::TRUE_TEST;
-		std::cout << "Is True ? " << val.first << std::endl;
 		if (_calcTest(val.first))
-		{
-			std::cout << "Set value by deduction:" << val.first << " at TRUE" << std::endl;
-			m_initValues[val.first] = eValue::TRUE;
 			goto restart;
-		}
-		_resetTestValues();
-		
-		m_initValues[val.first] = eValue::FALSE_TEST;
-		std::cout << "Is False ? " << val.first << std::endl;
-		if (_calcTest(val.first))
-		{
-			std::cout << "Set value by deduction:" << val.first << " at FALSE" << std::endl;
-			m_initValues[val.first] = eValue::FALSE;
-			goto restart;
-		}
-		_resetTestValues();
-
-		m_initValues[val.first] = eValue::UNDEFINED;
-		std::cout << "Still UNDEFINED... " << val.first << std::endl;
 	}
+	// else set them false
 	for (auto &val : m_initValues)
 	{
-		if (val.second == eValue::TRUE_TEST)
-			val.second = eValue::TRUE;
-		else if (val.second == eValue::FALSE_TEST || val.second == eValue::UNDEFINED)
+		if (val.second == eValue::UNDEFINED)
 			val.second = eValue::FALSE;
 	}
-	return (eErr::NONE);
-}
-
-void	Analyzer::_resetTestValues(void)
-{
-	for (auto &val : m_initValues)
+	// calc values
+	restart_calc : for (const auto c : line)
 	{
-		if (val.second == eValue::TRUE_TEST || val.second == eValue::FALSE_TEST)
-			val.second = eValue::UNDEFINED;
+		if (IS_SYMBOL(c))
+		{
+			auto	val = m_initValues.find(c);
+			if (val != m_initValues.end() && val->second != eValue::UNDEFINED)
+				continue ;
+			if (_calcTest(c))
+				goto restart_calc;
+		}
+		else if (c != ' ' && c != '\t')
+		{
+			err::raise_error(eErr::FATAL, "Unrecognized symbol in initialization");
+			return (eErr::FATAL);
+		}
 	}
+	// Show results
+	std::cout << "Results:" << std::endl;
+	for (const auto c : line)
+	{
+		if (IS_SYMBOL(c))
+			std::cout << c << " = " << Symbol::getName(m_initValues[c]) << std::endl;
+	}
+	return (eErr::NONE);
 }
 
 void	Analyzer::_setInitSymbols(void)
@@ -160,7 +156,10 @@ void	Analyzer::_setInitSymbols(void)
 	{
 		auto	symbols = rule->getSymbols();
 		for (const auto c : symbols)
-			allSymbols.insert(c);
+		{
+			if (c != '=')
+				allSymbols.insert(c);
+		}
 	}
 	for (const auto c : allSymbols)
 	{

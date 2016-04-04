@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/20 10:08:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/31 19:28:22 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/04 14:30:12 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,6 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 		case(eValue::FALSE) :
 			result += "FALSE";
 			break ;
-		case(eValue::TRUE_TEST) :
-			result += "TRUE_TEST";
-			break ;
-		case(eValue::FALSE_TEST) :
-			result += "FALSE_TEST";
-			break ;
 		case(eValue::ERROR) :
 			result += "ERROR";
 			break ;
@@ -89,12 +83,6 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 		case(eValue::FALSE) :
 			result += "FALSE";
 			break ;
-		case(eValue::TRUE_TEST) :
-			result += "TRUE_TEST";
-			break ;
-		case(eValue::FALSE_TEST) :
-			result += "FALSE_TEST";
-			break ;
 		case(eValue::ERROR) :
 			result += "ERROR";
 			break ;
@@ -102,26 +90,22 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 	return(result);
 }
 
-/*
-** Calc value
-*/
-eValue	Rule::isValid(state_ctr &initStates) const
+bool	Rule::apply(state_ctr &initValues)
 {
-	Symbol		leftVal(m_leftExpr->eval(initStates));
-	Symbol		rightVal(m_rightExpr->eval(initStates));
-	if (m_link == eLinkExpr::IF_ONLY_IF)
-		return (leftVal == rightVal);
-	else if (m_link == eLinkExpr::IMPLIES)
+	auto	leftVal = _evalLeft(initValues);
+	switch (leftVal)
 	{
-		if (leftVal.getVal() != eValue::UNDEFINED && leftVal.getVal() != eValue::ERROR)
-		{
-			if (m_rightExpr->setAll(leftVal.getVal(), initStates))
-				return (eValue::TRUE);
-			else
-				return (eValue::FALSE);
-		}
+		case (eValue::UNDEFINED) :
+			return (false);
+		case (eValue::TRUE) :
+			m_rightExpr->setAll(eValue::TRUE, initValues);
+			return (true);
+		case (eValue::FALSE) :
+			m_rightExpr->setAll(eValue::FALSE, initValues);
+			return (true);
+		case (eValue::ERROR) :
+			return (false);
 	}
-	return (eValue::FALSE);
 }
 
 /*
@@ -146,6 +130,8 @@ eErr	Rule::set(const std::string &line)
 
 	sep_found:
 	m_leftExpr = _setExpr(line.substr(0, separator));
+	// Add separator to better side detection
+	m_presentSymbols += '=';
 	m_rightExpr = _setExpr(line.substr(separator + linkSize));
 
 	// Remove duplicates

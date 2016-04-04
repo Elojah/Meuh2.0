@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:45:24 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/31 18:38:05 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/04 14:29:17 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ public:
 	virtual eErr	set(const std::string &line);
 	std::string		serialize(void);
 	std::string		serializeEval(const state_ctr &initStates);
-	eValue			isValid(state_ctr &initStates) const;
 
 	inline const std::string	&getSymbols(void) const {return (m_presentSymbols);};
+	inline eLinkExpr			getLink(void) const {return (m_link);};
+
+	bool						apply(state_ctr &initValues);
 
 protected:
 private:
@@ -52,6 +54,9 @@ private:
 	IExpr			*_setExprParenthesis(const std::string &s, Expr<IExpr *> *result, size_t parenthesis);
 	IExpr			*_setExprAsChar(const std::string &s);
 	IExpr			*_setExpr(const std::string &s);
+
+	inline eValue				_evalLeft(state_ctr &initStates) const {return (m_leftExpr->eval(initStates));}
+	inline eValue				_evalRight(state_ctr &initStates) const {return (m_rightExpr->eval(initStates));}
 };
 
 #endif
