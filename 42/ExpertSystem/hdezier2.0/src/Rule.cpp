@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/20 10:08:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/04 14:30:12 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/04 15:03:19 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,20 +92,65 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 
 bool	Rule::apply(state_ctr &initValues)
 {
-	auto	leftVal = _evalLeft(initValues);
-	switch (leftVal)
+	if (m_link == eLinkExpr::IMPLIES)
 	{
-		case (eValue::UNDEFINED) :
-			return (false);
-		case (eValue::TRUE) :
-			m_rightExpr->setAll(eValue::TRUE, initValues);
-			return (true);
-		case (eValue::FALSE) :
-			m_rightExpr->setAll(eValue::FALSE, initValues);
-			return (true);
-		case (eValue::ERROR) :
-			return (false);
+		auto	leftVal = _evalLeft(initValues);
+		switch (leftVal)
+		{
+			case (eValue::UNDEFINED) :
+				return (false);
+			case (eValue::TRUE) :
+				m_rightExpr->setAll(eValue::TRUE, initValues);
+				return (true);
+			case (eValue::FALSE) :
+				m_rightExpr->setAll(eValue::FALSE, initValues);
+				return (true);
+			case (eValue::ERROR) :
+				return (false);
+		}
 	}
+	else if (m_link == eLinkExpr::IF_ONLY_IF)
+	{
+		auto	leftVal = _evalLeft(initValues);
+		auto	rightVal = _evalRight(initValues);
+		if (leftVal != eValue::UNDEFINED)
+		{
+			// Same case than implies
+			if (rightVal == eValue::UNDEFINED)
+			{
+				switch (leftVal)
+				{
+					case (eValue::UNDEFINED) :
+						return (false);
+					case (eValue::TRUE) :
+						m_rightExpr->setAll(eValue::TRUE, initValues);
+						return (true);
+					case (eValue::FALSE) :
+						m_rightExpr->setAll(eValue::FALSE, initValues);
+						return (true);
+					case (eValue::ERROR) :
+						return (false);
+				}
+			}
+			if (leftVal != rightVal)
+				err::raise_error(eErr::FATAL, "Incoherent rule !!!");
+			// HERE we set at TRUE or FALSE evolved expressions ( A | B ^ C & D)
+			switch (rightVal)
+			{
+				case (eValue::UNDEFINED) :
+					return (false);
+				case (eValue::TRUE) :
+					m_leftExpr->setAll(eValue::TRUE, initValues);
+					return (true);
+				case (eValue::FALSE) :
+					m_leftExpr->setAll(eValue::FALSE, initValues);
+					return (true);
+				case (eValue::ERROR) :
+					return (false);
+			}
+		}
+	}
+	return (false);
 }
 
 /*

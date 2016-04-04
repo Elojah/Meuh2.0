@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 09:44:47 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/04 13:14:07 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/04 15:00:17 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,18 @@ public :
 	{
 		bool	result = false;
 		result = _setOp(m_leftOp, Symbol::opposite(val, m_leftNegative), initVals);
-		if (m_operator != eOperator::NONE)
-			result = result && _setOp(m_rightOp, Symbol::opposite(val, m_rightNegative), initVals);
+		switch(m_operator)
+		{
+			case (eOperator::AND) :
+				result = result && _setOp(m_rightOp, Symbol::opposite(val, m_rightNegative), initVals);
+				break ;
+			case (eOperator::OR) : break ; // We dont care, first expr is ok. Complex stuff should be to choose...
+			case (eOperator::XOR) :
+				// We set at the opposite to be sure
+				result = result && _setOp(m_rightOp, Symbol::opposite(Symbol::opposite(val, m_rightNegative), false), initVals);
+				break ;
+			case (eOperator::NONE) : break ;
+		}
 		return (result);
 	}
 	inline static bool	_setOp(const char c, eValue val, state_ctr &initVals)

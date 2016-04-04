@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:45:24 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/04 14:29:17 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/04 15:00:59 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ public:
 	std::string		serializeEval(const state_ctr &initStates);
 
 	inline const std::string	&getSymbols(void) const {return (m_presentSymbols);};
-	inline eLinkExpr			getLink(void) const {return (m_link);};
 
 	bool						apply(state_ctr &initValues);
 

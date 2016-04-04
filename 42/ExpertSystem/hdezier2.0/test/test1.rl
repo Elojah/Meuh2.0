@@ -1,8 +1,7 @@
-K ^ L => O
-E => !H
-Y => E
-Z + B + Y => D
-Z => !Y
-G ^ !H => K + !L
-=ZYG
-?GVX
+F ^ D <=> A
+Q ^ R => F
+P => Q + !R
+O => P
+A => !O
+=A
+?FD
