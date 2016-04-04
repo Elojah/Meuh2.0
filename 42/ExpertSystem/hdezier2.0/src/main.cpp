@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:40:48 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/04 14:40:46 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/04 15:29:36 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void		exec(const std::string &filename)
 	Analyzer	a;
 
 	a.analyze_file(filename);
-	// a.printRules();
+	a.printRules();
 }
 
 int			main(int ac, char **av)

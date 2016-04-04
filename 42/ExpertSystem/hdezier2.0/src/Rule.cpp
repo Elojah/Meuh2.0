@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/20 10:08:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/04 15:03:19 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/04 16:50:53 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 const char												Rule::m_opSymbols[] = "+|^";
 const std::map<Rule::eLinkExpr, std::string>			Rule::m_linkSymbols =
 {
-	{Rule::eLinkExpr::IMPLIES, "=>"},
-	{Rule::eLinkExpr::IF_ONLY_IF, "<=>"}
+	{Rule::eLinkExpr::IF_ONLY_IF, "<=>"},
+	{Rule::eLinkExpr::IMPLIES, "=>"}
 };
 
 Rule::Rule(void)
@@ -90,24 +90,32 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 	return(result);
 }
 
-bool	Rule::apply(state_ctr &initValues)
+bool	Rule::_apply(state_ctr &initValues, eValue value, IExpr *expr)
 {
+	switch (value)
+	{
+		case (eValue::UNDEFINED) :
+			return (false);
+		case (eValue::TRUE) :
+			return (expr->setAll(eValue::TRUE, initValues));
+		case (eValue::FALSE) :
+			return (expr->setAll(eValue::FALSE, initValues));
+		case (eValue::ERROR) :
+			return (false);
+	}
+}
+
+bool	Rule::apply(state_ctr &initValues, const char c)
+{
+	if (m_presentSymbols.find(c) == std::string::npos)
+		return (false) ;
 	if (m_link == eLinkExpr::IMPLIES)
 	{
-		auto	leftVal = _evalLeft(initValues);
-		switch (leftVal)
-		{
-			case (eValue::UNDEFINED) :
-				return (false);
-			case (eValue::TRUE) :
-				m_rightExpr->setAll(eValue::TRUE, initValues);
-				return (true);
-			case (eValue::FALSE) :
-				m_rightExpr->setAll(eValue::FALSE, initValues);
-				return (true);
-			case (eValue::ERROR) :
-				return (false);
-		}
+		auto				separator = m_presentSymbols.find('=');
+		auto				rightSide = m_presentSymbols.substr(separator);
+		if (separator == std::string::npos)
+			return (false) ;
+		return (_apply(initValues, _evalLeft(initValues), m_rightExpr));
 	}
 	else if (m_link == eLinkExpr::IF_ONLY_IF)
 	{
@@ -115,40 +123,14 @@ bool	Rule::apply(state_ctr &initValues)
 		auto	rightVal = _evalRight(initValues);
 		if (leftVal != eValue::UNDEFINED)
 		{
-			// Same case than implies
 			if (rightVal == eValue::UNDEFINED)
-			{
-				switch (leftVal)
-				{
-					case (eValue::UNDEFINED) :
-						return (false);
-					case (eValue::TRUE) :
-						m_rightExpr->setAll(eValue::TRUE, initValues);
-						return (true);
-					case (eValue::FALSE) :
-						m_rightExpr->setAll(eValue::FALSE, initValues);
-						return (true);
-					case (eValue::ERROR) :
-						return (false);
-				}
-			}
+				return (_apply(initValues, leftVal, m_rightExpr));
 			if (leftVal != rightVal)
 				err::raise_error(eErr::FATAL, "Incoherent rule !!!");
-			// HERE we set at TRUE or FALSE evolved expressions ( A | B ^ C & D)
-			switch (rightVal)
-			{
-				case (eValue::UNDEFINED) :
-					return (false);
-				case (eValue::TRUE) :
-					m_leftExpr->setAll(eValue::TRUE, initValues);
-					return (true);
-				case (eValue::FALSE) :
-					m_leftExpr->setAll(eValue::FALSE, initValues);
-					return (true);
-				case (eValue::ERROR) :
-					return (false);
-			}
 		}
+		// HERE we set at TRUE or FALSE evolved expressions ( A | B ^ C & D)
+		if (rightVal != eValue::UNDEFINED)
+			return (_apply(initValues, rightVal, m_leftExpr));
 	}
 	return (false);
 }
@@ -165,6 +147,8 @@ eErr	Rule::set(const std::string &line)
 		separator = line.find(link.second);
 		if (separator != std::string::npos)
 		{
+			if (link.second.compare("=>") == 0 && separator > 0 && line[separator - 1] == '<')
+				continue ;
 			m_link = link.first;
 			linkSize = link.second.size();
 			goto sep_found;

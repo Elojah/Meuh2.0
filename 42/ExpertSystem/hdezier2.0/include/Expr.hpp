@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 09:44:47 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/04 15:00:17 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/04 16:53:30 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ public:
 	virtual ~IExpr(void) {};
 	virtual eValue		eval(const state_ctr &initStates) const = 0;
 	virtual std::string	getSymbols(void) const = 0;
-	virtual bool		setAll(const eValue val, state_ctr &initVals) = 0;
+	virtual bool		setAll(const eValue val, state_ctr &initVals) const = 0;
 	virtual std::string	serialize(void) const = 0;
 };
 
@@ -67,6 +67,10 @@ public :
 		if (m_operator != eOperator::NONE)
 			_deleteOp(m_rightOp);
 	};
+
+	/*
+	** Serialization
+	*/
 	inline virtual std::string	serialize(void) const override
 	{
 		std::string		result;
@@ -81,43 +85,26 @@ public :
 		result += _serialize(m_rightOp);
 		return (result);
 	};
-	inline static std::string	_serialize(const IExpr *op) {return ( "(" + op->serialize() + ')');};
-	inline static std::string	_serialize(const char op) {return (std::string(1, op));};
 
-	inline virtual bool	setAll(const eValue val, state_ctr &initVals) override
+	/*
+	** Set
+	*/
+	inline virtual bool	setAll(const eValue val, state_ctr &initVals) const override
 	{
-		bool	result = false;
-		result = _setOp(m_leftOp, Symbol::opposite(val, m_leftNegative), initVals);
 		switch(m_operator)
 		{
 			case (eOperator::AND) :
-				result = result && _setOp(m_rightOp, Symbol::opposite(val, m_rightNegative), initVals);
-				break ;
-			case (eOperator::OR) : break ; // We dont care, first expr is ok. Complex stuff should be to choose...
-			case (eOperator::XOR) :
-				// We set at the opposite to be sure
-				result = result && _setOp(m_rightOp, Symbol::opposite(Symbol::opposite(val, m_rightNegative), false), initVals);
-				break ;
-			case (eOperator::NONE) : break ;
+			{
+				return (_setOp(m_leftOp, Symbol::opposite(val, m_leftNegative), initVals)
+					&& _setOp(m_rightOp, Symbol::opposite(val, m_rightNegative), initVals));
+			}
+			case (eOperator::OR) : return (_setOr(initVals, val)); // We dont care, first expr is ok. Complex stuff should be to choose...
+			case (eOperator::XOR) : return (_setXor(initVals, val));
+			case (eOperator::NONE) :
+				return (_setOp(m_leftOp, Symbol::opposite(val, m_leftNegative), initVals));
+			return (false);
 		}
-		return (result);
 	}
-	inline static bool	_setOp(const char c, eValue val, state_ctr &initVals)
-	{
-		auto	initValue = initVals.find(c);
-		if (initValue == initVals.end())
-			return (false);
-		Symbol		symInitValue(initValue->second);
-		Symbol		symVal(val);
-		Symbol		symNotEqual(symInitValue != symVal);
-		if (initValue->second != eValue::UNDEFINED && symNotEqual.asBool())
-			return (false);
-		std::cout << "Set value by implication:" << c << " at " << Symbol::getName(val) << std::endl;
-		initValue->second = val;
-		return (true);
-	};
-	inline static bool	_setOp(IExpr *expr, eValue val, state_ctr &initVals) {return (expr->setAll(val, initVals));};
-
 	inline virtual void	setLeftOperand(const T op) {m_leftOp = op;};
 	inline virtual void	setRightOperand(const T op) {m_rightOp = op;};
 	inline virtual void	setLeftNegative(bool neg) {m_leftNegative = neg;};
@@ -134,20 +121,17 @@ public :
 		}
 	};
 
+	/*
+	** Get
+	*/
 	inline virtual std::string	getSymbols(void) const override
 	{
 		return (_getSymbol(m_leftOp) + _getSymbol(m_rightOp));
 	}
-	inline static std::string	_getSymbol(const char c)
-	{
-		return (std::string(1, c));
-	}
-	inline static std::string	_getSymbol(const IExpr *op)
-	{
-		return (op->getSymbols());
-	}
 
-
+	/*
+	** Eval
+	*/
 	inline virtual eValue	eval(const state_ctr &initStates) const override
 	{
 		if (m_operator == eOperator::NONE)
@@ -175,6 +159,74 @@ private:
 	inline static void		_deleteOp(const IExpr *op) {delete (op);}
 	inline static void		_deleteOp(const char op) {(void)op;}
 
+	inline static std::string	_serialize(const IExpr *op) {return ( "(" + op->serialize() + ')');};
+	inline static std::string	_serialize(const char op) {return (std::string(1, op));};
+
+	inline static bool	_setOp(const char c, eValue val, state_ctr &initVals)
+	{
+		auto	initValue = initVals.find(c);
+		if (initValue == initVals.end())
+			return (false);
+		if (initValue->second != eValue::UNDEFINED && initValue->second != val)
+		{
+			std::cout << "Trying to set value already set to another value:" << c << std::endl;
+			return (false);
+		}
+		std::cout << "Set value by implication:" << c << " at " << Symbol::getName(val) << std::endl;
+		initValue->second = val;
+		return (true);
+	};
+	inline static bool	_setOp(IExpr *expr, eValue val, state_ctr &initVals) {return (expr->setAll(val, initVals));};
+	inline bool			_setXor(state_ctr &initVals, eValue val) const
+	{
+		auto	leftVal = _evalLeft(initVals);
+		auto	rightVal = _evalRight(initVals);
+		if (leftVal != eValue::UNDEFINED && rightVal == eValue::UNDEFINED)
+		{
+			if (val == eValue::TRUE)
+				return (_setOp(m_rightOp, Symbol::opposite(leftVal, true), initVals));
+			else if (val == eValue::FALSE)
+				return (_setOp(m_rightOp, leftVal, initVals));
+		}
+		if (leftVal == eValue::UNDEFINED && rightVal != eValue::UNDEFINED)
+		{
+			if (val == eValue::TRUE)
+				return (_setOp(m_leftOp, Symbol::opposite(rightVal, true), initVals));
+			else if (val == eValue::FALSE)
+				return (_setOp(m_leftOp, rightVal, initVals));
+		}
+		return (false);
+	};
+	inline bool			_setOr(state_ctr &initVals, eValue val) const
+	{
+		auto	leftVal = _evalLeft(initVals);
+		auto	rightVal = _evalRight(initVals);
+		if ((val == eValue::TRUE && (leftVal == eValue::TRUE || rightVal == eValue::TRUE))
+			|| (val == eValue::FALSE && (leftVal == eValue::FALSE || rightVal == eValue::FALSE)))
+			return (false);
+		if (val == eValue::FALSE)
+			return (_setOp(m_leftOp, Symbol::opposite(val, m_leftNegative), initVals)
+				&& _setOp(m_rightOp, Symbol::opposite(val, m_rightNegative), initVals));
+		else if (leftVal == eValue::UNDEFINED && (rightVal == eValue::UNDEFINED || rightVal == eValue::FALSE))
+			return (_setOp(m_leftOp, Symbol::opposite(val, m_leftNegative), initVals));
+		else if (rightVal == eValue::UNDEFINED && (leftVal == eValue::UNDEFINED || leftVal == eValue::FALSE))
+			return (_setOp(m_rightOp, Symbol::opposite(val, m_rightNegative), initVals));
+		return (false);
+	};
+
+
+	inline static std::string	_getSymbol(const char c)
+	{
+		return (std::string(1, c));
+	}
+	inline static std::string	_getSymbol(const IExpr *op)
+	{
+		return (op->getSymbols());
+	}
+
+	/*
+	** Eval
+	*/
 	inline eValue			_evalLeft(const state_ctr &initStates) const
 	{
 		return (Symbol(_evalOp(m_leftOp, initStates))).getValNegative(m_leftNegative);

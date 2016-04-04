@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:41:26 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/04 14:05:54 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/04 15:19:20 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ private:
 	void	_setInitSymbols(void);
 	eErr	_add_rule(const std::string &line);
 	bool	_calcTest(const char c);
+	void	_initialSetValues(void);
+	void	_printResults(const std::string &line) const;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:41:26 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/04 14:42:49 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/04 16:39:09 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,31 +81,18 @@ bool	Analyzer::_calcTest(const char c)
 {
 	for (const auto &rule : m_rules)
 	{
-		// if symbol doesn't appear in that rule
-		if (rule->getSymbols().find(c) == std::string::npos)
-			continue ;
-		const std::string	&symbols = rule->getSymbols();
-		auto				separator = symbols.find('=');
-		// Should never happen
-		if (separator == std::string::npos)
-			continue ;
-		auto				rightSide = symbols.substr(separator);
-		if (rightSide.find(c) != std::string::npos)
+		if (rule->apply(m_initValues, c))
 		{
-			if (rule->apply(m_initValues))
-			{
-				std::cout << "On rule:" << rule->serialize() << std::endl;
-				return (true);
-			}
+			std::cout << "On rule:" << rule->serialize() << std::endl;
+			return (true);
 		}
 	}
 	return (false);
 }
 
-eErr	Analyzer::_calculus(const std::string &line)
+void	Analyzer::_initialSetValues(void)
 {
 	_setInitSymbols();
-	// Calc if initial values
 	restart : for (const auto &val : m_initValues)
 	{
 		if (val.second != eValue::UNDEFINED)
@@ -116,13 +103,31 @@ eErr	Analyzer::_calculus(const std::string &line)
 		if (_calcTest(val.first))
 			goto restart;
 	}
-	// else set them false
 	for (auto &val : m_initValues)
 	{
 		if (val.second == eValue::UNDEFINED)
 			val.second = eValue::FALSE;
 	}
-	// calc values
+}
+
+void	Analyzer::_printResults(const std::string &line) const
+{
+	std::cout << "Results:" << std::endl;
+	for (const auto c : line)
+	{
+		if (IS_SYMBOL(c))
+		{
+			auto	val = m_initValues.find(c);
+			if (val == m_initValues.end())
+				continue ;
+			std::cout << c << " = " << Symbol::getName(val->second) << std::endl;
+		}
+	}
+}
+
+eErr	Analyzer::_calculus(const std::string &line)
+{
+	_initialSetValues();
 	restart_calc : for (const auto c : line)
 	{
 		if (IS_SYMBOL(c))
@@ -139,13 +144,7 @@ eErr	Analyzer::_calculus(const std::string &line)
 			return (eErr::FATAL);
 		}
 	}
-	// Show results
-	std::cout << "Results:" << std::endl;
-	for (const auto c : line)
-	{
-		if (IS_SYMBOL(c))
-			std::cout << c << " = " << Symbol::getName(m_initValues[c]) << std::endl;
-	}
+	_printResults(line);
 	return (eErr::NONE);
 }
 
