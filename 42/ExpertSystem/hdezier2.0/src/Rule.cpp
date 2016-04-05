@@ -6,17 +6,19 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/20 10:08:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/03/29 14:53:14 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/05 13:44:03 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Rule.hpp"
 
+#include <algorithm>
+
 const char												Rule::m_opSymbols[] = "+|^";
 const std::map<Rule::eLinkExpr, std::string>			Rule::m_linkSymbols =
 {
-	{Rule::eLinkExpr::IMPLIES, "=>"},
-	{Rule::eLinkExpr::IF_ONLY_IF, "<=>"}
+	{Rule::eLinkExpr::IF_ONLY_IF, "<=>"},
+	{Rule::eLinkExpr::IMPLIES, "=>"}
 };
 
 Rule::Rule(void)
@@ -28,7 +30,10 @@ Rule::Rule(void)
 
 Rule::~Rule(void)
 {
-	;
+	// if (m_leftExpr != nullptr)
+	// 	delete (m_leftExpr);
+	// if (m_rightExpr != nullptr)
+	// 	delete (m_rightExpr);
 }
 
 std::string	Rule::serialize(void)
@@ -45,8 +50,7 @@ std::string	Rule::serialize(void)
 std::string	Rule::serializeEval(const state_ctr &initStates)
 {
 	std::string	result;
-	std::string	useless;
-	switch (m_leftExpr->eval(initStates, useless))
+	switch (m_leftExpr->eval(initStates))
 	{
 		case(eValue::UNDEFINED) :
 			result += "UNDEFINED";
@@ -68,7 +72,7 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 	else
 		link = "XXX";
 	result += link;
-	switch (m_rightExpr->eval(initStates, useless))
+	switch (m_rightExpr->eval(initStates))
 	{
 		case(eValue::UNDEFINED) :
 			result += "UNDEFINED";
@@ -86,14 +90,52 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 	return(result);
 }
 
-/*
-** Calc value
-*/
-eValue	Rule::isValid(const state_ctr &initStates, std::string &valuesRequired) const
+bool	Rule::_apply(state_ctr &initStates, eValue value, IExpr *expr)
 {
-	Symbol		leftVal(m_leftExpr->eval(initStates, valuesRequired));
-	Symbol		rightVal(m_rightExpr->eval(initStates, valuesRequired));
-	return (leftVal == rightVal);
+	switch (value)
+	{
+		case (eValue::UNDEFINED) :
+			return (false);
+		case (eValue::TRUE) :
+			return (expr->setAll(eValue::TRUE, initStates));
+		case (eValue::FALSE) :
+			return (expr->setAll(eValue::FALSE, initStates));
+		case (eValue::ERROR) :
+			return (false);
+	}
+}
+
+bool	Rule::apply(state_ctr &initStates, const char c)
+{
+	if (m_presentSymbols.find(c) == std::string::npos)
+		return (false) ;
+	if (m_link == eLinkExpr::IMPLIES)
+	{
+		auto				separator = m_presentSymbols.find('=');
+		auto				rightSide = m_presentSymbols.substr(separator);
+		if (separator == std::string::npos || rightSide.find(c) == std::string::npos)
+			return (false) ;
+		return (_apply(initStates, _evalLeft(initStates), m_rightExpr));
+	}
+	else if (m_link == eLinkExpr::IF_ONLY_IF)
+	{
+		auto	leftVal = _evalLeft(initStates);
+		auto	rightVal = _evalRight(initStates);
+		if (leftVal != eValue::UNDEFINED)
+		{
+			if (rightVal == eValue::UNDEFINED)
+				return (_apply(initStates, leftVal, m_rightExpr));
+			if (leftVal != rightVal)
+			{
+				err::raise_error(eErr::FATAL, "Incoherent rule !!!\t" + serialize());
+				return (false);
+			}
+		}
+		// HERE we set at TRUE or FALSE evolved expressions ( A | B ^ C & D)
+		if (rightVal != eValue::UNDEFINED)
+			return (_apply(initStates, rightVal, m_leftExpr));
+	}
+	return (false);
 }
 
 /*
@@ -108,6 +150,8 @@ eErr	Rule::set(const std::string &line)
 		separator = line.find(link.second);
 		if (separator != std::string::npos)
 		{
+			if (link.second.compare("=>") == 0 && separator > 0 && line[separator - 1] == '<')
+				continue ;
 			m_link = link.first;
 			linkSize = link.second.size();
 			goto sep_found;
@@ -118,6 +162,8 @@ eErr	Rule::set(const std::string &line)
 
 	sep_found:
 	m_leftExpr = _setExpr(line.substr(0, separator));
+	// Add separator to better side detection
+	m_presentSymbols += '=';
 	m_rightExpr = _setExpr(line.substr(separator + linkSize));
 
 	return (eErr::NONE);
@@ -142,6 +188,7 @@ IExpr	*Rule::_setExprAsChar(const std::string &s)
 			return (nullptr);
 		}
 		result->setLeftOperand(c);
+		m_presentSymbols += c;
 		return (result);
 	}
 	return (nullptr);
