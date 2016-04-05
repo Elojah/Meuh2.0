@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 15:44:11 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/05 13:19:02 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/05 13:54:47 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,7 @@ public:
 					case (eValue::FALSE) : return (eValue::UNDEFINED);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
-			case (eValue::TRUE) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::TRUE);
-					case (eValue::TRUE) : return (eValue::TRUE);
-					case (eValue::FALSE) : return (eValue::TRUE);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
+			case (eValue::TRUE) : return (eValue::TRUE);
 			case (eValue::FALSE) :
 				switch (rightOp.getVal())
 				{
