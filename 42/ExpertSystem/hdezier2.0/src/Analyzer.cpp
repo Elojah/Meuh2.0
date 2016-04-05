@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:41:26 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/04 16:39:09 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/05 13:22:00 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ eErr	Analyzer::_set_true(const std::string &line)
 		if (IS_SYMBOL(c))
 		{
 			std::cout << "Value:" << c << " set as TRUE" << std::endl;
-			m_initValues[c] = eValue::TRUE;
+			m_initStates[c] = eValue::TRUE;
 		}
 		else if (c != ' ' && c != '\t')
 		{
@@ -81,7 +81,7 @@ bool	Analyzer::_calcTest(const char c)
 {
 	for (const auto &rule : m_rules)
 	{
-		if (rule->apply(m_initValues, c))
+		if (rule->apply(m_initStates, c))
 		{
 			std::cout << "On rule:" << rule->serialize() << std::endl;
 			return (true);
@@ -90,10 +90,10 @@ bool	Analyzer::_calcTest(const char c)
 	return (false);
 }
 
-void	Analyzer::_initialSetValues(void)
+void	Analyzer::_initialSetValues(const std::string &except)
 {
 	_setInitSymbols();
-	restart : for (const auto &val : m_initValues)
+	restart : for (const auto &val : m_initStates)
 	{
 		if (val.second != eValue::UNDEFINED)
 			continue ;
@@ -103,9 +103,9 @@ void	Analyzer::_initialSetValues(void)
 		if (_calcTest(val.first))
 			goto restart;
 	}
-	for (auto &val : m_initValues)
+	for (auto &val : m_initStates)
 	{
-		if (val.second == eValue::UNDEFINED)
+		if (val.second == eValue::UNDEFINED && except.find(val.first) == std::string::npos)
 			val.second = eValue::FALSE;
 	}
 }
@@ -117,8 +117,8 @@ void	Analyzer::_printResults(const std::string &line) const
 	{
 		if (IS_SYMBOL(c))
 		{
-			auto	val = m_initValues.find(c);
-			if (val == m_initValues.end())
+			auto	val = m_initStates.find(c);
+			if (val == m_initStates.end())
 				continue ;
 			std::cout << c << " = " << Symbol::getName(val->second) << std::endl;
 		}
@@ -127,13 +127,13 @@ void	Analyzer::_printResults(const std::string &line) const
 
 eErr	Analyzer::_calculus(const std::string &line)
 {
-	_initialSetValues();
+	_initialSetValues(line);
 	restart_calc : for (const auto c : line)
 	{
 		if (IS_SYMBOL(c))
 		{
-			auto	val = m_initValues.find(c);
-			if (val != m_initValues.end() && val->second != eValue::UNDEFINED)
+			auto	val = m_initStates.find(c);
+			if (val != m_initStates.end() && val->second != eValue::UNDEFINED)
 				continue ;
 			if (_calcTest(c))
 				goto restart_calc;
@@ -162,9 +162,9 @@ void	Analyzer::_setInitSymbols(void)
 	}
 	for (const auto c : allSymbols)
 	{
-		auto val = m_initValues.find(c);
-		if (val == m_initValues.end())
-			m_initValues[c] = eValue::UNDEFINED;
+		auto val = m_initStates.find(c);
+		if (val == m_initStates.end())
+			m_initStates[c] = eValue::UNDEFINED;
 	}
 }
 
@@ -185,7 +185,7 @@ void	Analyzer::printRules(void)
 	for (const auto &rule : m_rules)
 		std::cout << rule->serialize() << std::endl;
 	std::cout << "Values:" << m_rules.size() << std::endl;
-	for (const auto &val : m_initValues)
+	for (const auto &val : m_initStates)
 		std::cout << val.first << " = " << Symbol::getName(val.second) << std::endl;
 	std::cout << "___" << std::endl;
 }

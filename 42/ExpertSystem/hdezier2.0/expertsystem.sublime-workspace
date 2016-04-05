@@ -4,36 +4,136 @@
 		"selected_items":
 		[
 			[
-				"get",
-				"getSymbols	(Expr.hpp)"
+				"getvl",
+				"getValNegative"
+			],
+			[
+				"getv",
+				"getValNegative"
+			],
+			[
+				"initv",
+				"initVals"
+			],
+			[
+				"_set",
+				"_setOr"
+			],
+			[
+				"exp",
+				"expr"
 			],
 			[
 				"ini",
-				"initStates"
+				"initVals"
 			],
 			[
 				"m_",
-				"m_initValues"
+				"m_presentSymbols"
 			],
 			[
-				"m_lef",
+				"_ini",
+				"_initialSetValues()	void"
+			],
+			[
+				"expr",
+				"expressions"
+			],
+			[
+				"err",
+				"err::	namespace"
+			],
+			[
+				"rest",
+				"restart_calc"
+			],
+			[
+				"_calc",
+				"_calcTest"
+			],
+			[
+				"FAL",
+				"FALSE_TEST	eValue"
+			],
+			[
+				"test",
+				"testCtr"
+			],
+			[
+				"rule",
+				"ruleEvaluation"
+			],
+			[
+				"mleft",
 				"m_leftNegative"
 			],
 			[
-				"set",
-				"setLeftOperand(IExpr *const op)	void"
+				"T",
+				"TRUE"
 			],
 			[
-				"setl",
-				"setLeftOperand(const char op)	void"
+				"get",
+				"getName(eValue val)	const std::string"
 			],
 			[
-				"ml",
-				"m_leftExpr	IExpr *"
+				"init",
+				"initStates"
 			],
 			[
-				"sep",
-				"sep_found"
+				"left",
+				"leftVal"
+			],
+			[
+				"mright",
+				"m_rightOp	T"
+			],
+			[
+				"state",
+				"state_ctr"
+			],
+			[
+				"e",
+				"eOperator"
+			],
+			[
+				"TRUE",
+				"TRUE_TEST"
+			],
+			[
+				"min",
+				"m_initValues"
+			],
+			[
+				"mrig",
+				"m_rightOp"
+			],
+			[
+				"value",
+				"valuesRequired"
+			],
+			[
+				"right",
+				"rightVal"
+			],
+			[
+				"lef",
+				"leftVal"
+			],
+			[
+				"values",
+				"valuesRequired	(Expr.hpp)"
+			],
+			[
+				"valu",
+				"valuesRequired"
+			],
+			[
+				"f",
+				"first"
+			],
+			[
+				"val",
+				"valuesRequired"
 			],
 			[
 				"tru",
@@ -46,6 +146,10 @@
 			[
 				"FA",
 				"FALSE	eValue"
+			],
+			[
+				"set",
+				"setOperator(const std::string &op)	void"
 			],
 			[
 				"sta",
@@ -76,10 +180,6 @@
 				"ERR_HPP"
 			],
 			[
-				"e",
-				"err"
-			],
-			[
 				"read",
 				"readToken"
 			],
@@ -92,10 +192,6 @@
 				"TokensDefinition"
 			],
 			[
-				"T",
-				"TOKEN_STRUCT_DETECT"
-			],
-			[
 				"TOKE",
 				"TOKEN_STRUCT_WORDS"
 			],
@@ -106,10 +202,6 @@
 			[
 				"symbo",
 				"symbolIm"
-			],
-			[
-				"min",
-				"min(const _Tp &__a, const _Tp &__b, _Compare __comp)	const _Tp &"
 			],
 			[
 				"find",
@@ -170,10 +262,6 @@
 			[
 				"errms",
 				"err_msgs_data"
-			],
-			[
-				"err",
-				"err_array	Typedef"
 			],
 			[
 				"SI",
@@ -426,104 +514,16 @@
 			[
 				"gl",
 				"glyphicon-chevron-right"
-			],
-			[
-				"inn",
-				"innerHTML"
-			],
-			[
-				"app",
-				"App"
-			],
-			[
-				"File",
-				"FileDir	(FileDir.cpp)"
-			],
-			[
-				"nu",
-				"ncurses	(Window.hpp)"
-			],
-			[
-				"colo",
-				"color_map	(Obj.frag)"
-			],
-			[
-				"IN",
-				"INT_MAX	(Node.hpp)"
-			],
-			[
-				"res",
-				"resetAlphaBeta	(Node.hpp)"
-			],
-			[
-				"W",
-				"PTS_WIN"
-			],
-			[
-				"BOA",
-				"BOARD_WIDTH"
-			],
-			[
-				"vert",
-				"vertexUV"
-			],
-			[
-				"fil",
-				"filename"
-			],
-			[
-				"refr",
-				"refresh"
-			],
-			[
-				"glEn",
-				"glEnable"
-			],
-			[
-				"forw",
-				"forward"
-			],
-			[
-				"pr",
-				"print_obj"
-			],
-			[
-				"glEna",
-				"glEnableVertexAttribArray"
-			],
-			[
-				"rev",
-				"revert_mat"
-			],
-			[
-				"mvp",
-				"mvp_id"
-			],
-			[
-				"refre",
-				"refresh_vp"
-			],
-			[
-				"norm",
-				"normal_buffer"
-			],
-			[
-				"VIE",
-				"VIEW_ASPECT"
-			],
-			[
-				"VIEWF",
-				"VIEW_FAR"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "include/Rule.hpp",
+			"file": "src/main.cpp",
 			"settings":
 			{
-				"buffer_size": 1862,
+				"buffer_size": 1217,
 				"line_ending": "Unix"
 			}
 		},
@@ -531,7 +531,7 @@
 			"file": "src/Analyzer.cpp",
 			"settings":
 			{
-				"buffer_size": 3614,
+				"buffer_size": 4599,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,15 +539,15 @@
 			"file": "src/Rule.cpp",
 			"settings":
 			{
-				"buffer_size": 5434,
+				"buffer_size": 6610,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/main.cpp",
+			"file": "include/Rule.hpp",
 			"settings":
 			{
-				"buffer_size": 2113,
+				"buffer_size": 2134,
 				"line_ending": "Unix"
 			}
 		},
@@ -555,15 +555,39 @@
 			"file": "include/Expr.hpp",
 			"settings":
 			{
-				"buffer_size": 4735,
+				"buffer_size": 7743,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "include/specialization.h",
+			"file": "test/test1.rl",
 			"settings":
 			{
-				"buffer_size": 1447,
+				"buffer_size": 76,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 1422,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/Analyzer.hpp",
+			"settings":
+			{
+				"buffer_size": 1604,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/Symbol.hpp",
+			"settings":
+			{
+				"buffer_size": 7629,
 				"line_ending": "Unix"
 			}
 		},
@@ -582,14 +606,6 @@
 				"buffer_size": 1206,
 				"line_ending": "Unix"
 			}
-		},
-		{
-			"file": "include/Analyzer.hpp",
-			"settings":
-			{
-				"buffer_size": 1534,
-				"line_ending": "Unix"
-			}
 		}
 	],
 	"build_system": "",
@@ -600,40 +616,72 @@
 	"command_palette":
 	{
 		"height": 354.0,
-		"last_filter": "pref",
+		"last_filter": "pref u",
 		"selected_items":
 		[
+			[
+				"pref u",
+				"Preferences: Settings - User"
+			],
 			[
 				"pref",
 				"Preferences: Settings - User"
 			],
 			[
-				"key us",
-				"Preferences: Key Bindings - User"
+				"pack rem",
+				"Package Control: Remove Package"
 			],
 			[
-				"lint",
-				"SublimeLinter: Next Error"
+				"linter",
+				"SublimeLinter: Disable Linter"
 			],
 			[
 				"pack remo",
 				"Package Control: Remove Package"
 			],
 			[
-				"pack lis",
-				"Package Control: List Packages"
+				"key de",
+				"Preferences: Key Bindings - Default"
 			],
 			[
 				"pack in",
 				"Package Control: Install Package"
 			],
 			[
-				"pack ins",
-				"Package Control: Install Package"
+				"defaut ",
+				"Preferences: Key Bindings - Default"
 			],
 			[
-				"pack re",
-				"Package Control: Remove Package"
+				"defua",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"key ",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"lin",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"sho",
+				"SublimeLinter: Show Errors on Save"
+			],
+			[
+				"mode",
+				"SublimeLinter: Choose Lint Mode"
+			],
+			[
+				"lint",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"pack li",
+				"Package Control: List Packages"
+			],
+			[
+				"pack ins",
+				"Package Control: Install Package"
 			],
 			[
 				"clang",
@@ -644,12 +692,12 @@
 				"Preferences: Package Control Settings – Default"
 			],
 			[
-				"linter",
-				"SublimeLinter: Enable Linter"
-			],
-			[
 				"key def",
 				"Preferences: Key Bindings - Default"
+			],
+			[
+				"key us",
+				"Preferences: Key Bindings - User"
 			],
 			[
 				"pref us",
@@ -662,10 +710,6 @@
 			[
 				"key u",
 				"Preferences: Key Bindings - User"
-			],
-			[
-				"pref u",
-				"Preferences: Settings - User"
 			],
 			[
 				"pack ",
@@ -682,10 +726,6 @@
 			[
 				"color",
 				"Color Picker"
-			],
-			[
-				"pack li",
-				"Package Control: List Packages"
 			],
 			[
 				"prefe",
@@ -738,10 +778,6 @@
 			[
 				"prefse",
 				"Preferences: Settings - User"
-			],
-			[
-				"pack rem",
-				"Package Control: Remove Package"
 			],
 			[
 				"keybn",
@@ -818,10 +854,6 @@
 			[
 				"show",
 				"SublimeLinter: Show All Errors"
-			],
-			[
-				"mode",
-				"SublimeLinter: Choose Lint Mode"
 			],
 			[
 				"next",
@@ -906,23 +938,28 @@
 	},
 	"expanded_folders":
 	[
-		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0"
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/include",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/src"
 	],
 	"file_history":
 	[
-		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/src/Analyzer.cpp",
-		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/Makefile",
-		"/home/leeios/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/Volumes/Storage/cache/library.hdezier/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/include/specialization.h",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/include/Symbol.hpp",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/include/Expr.hpp",
+		"/Volumes/Storage/cache/library.hdezier/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/expertsystem.sublime-project",
+		"/Volumes/Storage/cache/library.hdezier/Application Support/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
+		"/Volumes/Storage/cache/library.hdezier/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/Volumes/Storage/cache/library.hdezier/Application Support/Sublime Text 3/Packages/CTags/Default.sublime-keymap",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/include/Analyzer.hpp",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/src/Analyzer.cpp",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/include/Rule.hpp",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/src/Rule.cpp",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/src/main.cpp",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/Makefile",
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/expertsystem.sublime-project",
-		"/home/leeios/.config/sublime-text-3/Packages/Clang-Complete/cc.sublime-settings",
-		"/usr/lib/clang/3.6/include/xmmintrin.h",
-		"/usr/lib/llvm-3.6/lib/clang/3.6.0/include/xmmintrin.h",
-		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/include/Analyzer.hpp",
-		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/src/main.cpp",
-		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/src/Rule.cpp",
-		"/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
-		"/home/leeios/.config/sublime-text-3/Packages/Clang-Complete/makefile",
-		"/home/leeios/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/include/Expr.hpp",
 		"/home/leeios/.config/sublime-text-3/Packages/Package Control/Package Control.sublime-settings",
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/IToken.hpp",
@@ -940,6 +977,8 @@
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/TContextMark.hpp",
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Tokens/TContextMark.cpp",
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Tokens/TPriorities.cpp",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/TComment.hpp",
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Tokens/TComment.cpp",
 		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/test/test0.rl",
@@ -978,6 +1017,7 @@
 		"/home/leeios/.config/sublime-text-3/Packages/User/Package Control.sublime-settings",
 		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/error.cpp",
 		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/main.c",
+		"/home/leeios/.config/sublime-text-3/Packages/Clang-Complete/cc.sublime-settings",
 		"/home/leeios/code/rool/src/screens/Project.cpp",
 		"/home/leeios/code/rool/include/Project.hpp",
 		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/main.cpp",
@@ -1020,6 +1060,7 @@
 		"/home/leeios/code/meuh/util/roolv2.0/config/models/inc_parents.model",
 		"/home/leeios/code/meuh/util/roolv2.0/config/models/inherit_parents.model",
 		"/home/leeios/code/meuh/util/roolv2.0/include/ICommand.hpp",
+		"/home/leeios/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
 		"/home/leeios/code/meuh/util/roolv2.0/src/main.cpp",
 		"/home/leeios/code/meuh/util/roolv2.0/src/ncurse/Window.cpp",
 		"/home/leeios/code/meuh/util/roolv2.0/src/ncurse/Menu.cpp",
@@ -1030,14 +1071,7 @@
 		"/home/leeios/.config/sublime-text-3/Packages/ClangComplete/ClangComplete.sublime-settings",
 		"/home/leeios/code/meuh/util/roolv2.0/CMakeLists.txt",
 		"/home/leeios/code/meuh/util/roolv2.0/util/Makefile",
-		"/home/leeios/code/meuh/util/roolv2.0/CMakeLists",
-		"/usr/include/c++/4.8/bits/basic_string.h",
-		"/home/leeios/code/Wektiv/public/js/app.js",
-		"/home/leeios/code/meuh/util/Rool/lib/fileManip/src/fileManip.cpp",
-		"/home/leeios/code/meuh/util/roolv2.0/inc/Menu.hpp",
-		"/home/leeios/code/meuh/util/roolv2.0/inc/ICommand.hpp",
-		"/home/leeios/code/meuh/util/roolv2.0/inc/ClassMod.hpp",
-		"/home/leeios/code/meuh/util/roolv2.0/config/models/src.model"
+		"/home/leeios/code/meuh/util/roolv2.0/CMakeLists"
 	],
 	"find":
 	{
@@ -1048,6 +1082,7 @@
 		"height": 158.0,
 		"where_history":
 		[
+			"~/code/meuh/42/ExpertSystem/hdezier2.0/",
 			"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/",
 			"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/include",
 			"/home/leeios/code/meuh/42/ExpertSystem/hdezier, *.cpp, *.hpp",
@@ -1083,39 +1118,85 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
-			"str",
-			"static",
+			"oppos",
+			"Symbol",
+			"Symbol(val,",
+			"opposite",
+			"true",
+			"false",
+			"rightVal",
+			"result =",
+			"leftVal",
+			"m_rightOp",
+			"val",
+			"tv",
+			"rightEval",
+			"leftEval",
+			"Symbol",
+			"symbols",
+			"m_rightExpr",
+			"leftVal",
+			"const",
+			"Analyzer",
+			"setLeftNegative",
+			"getLink",
+			"getSymbols",
+			"case (eValue::UNDEFINED) : return (eValue::UNDEFINED);",
+			"break",
+			"m_initValues",
+			"}\n				s",
+			"FALSE_TEST",
+			"TRUE_TEST",
+			"C",
+			"#",
+			"A",
+			"m_initValues",
+			"eValue",
+			"_calcTest",
+			"val",
+			"valueNames",
+			"ERROR",
+			"FALSE_TEST",
+			",",
+			"ERROR",
+			"value",
+			"val",
+			"void",
+			"FALSE_TEST",
+			"\n			",
+			"\n",
+			"m_operator",
+			"return (eValue:",
+			"FALSE_TEST",
+			"TRUE_TEST",
+			"FALSE_TEST",
+			"TRUE_TEST",
+			"ERROR",
+			"return (eValue::FALSE_TEST);",
+			"TEST)",
+			" )",
+			"rule->isValid(initValues, valuesRequired)",
+			"calc",
 			"eval",
-			"valuesRequired",
-			"m_leftExpr",
-			"c",
-			"at",
-			"\n	",
-			"at(",
-			"at",
-			"at(",
-			"linkSymbols",
-			"opSymbols",
-			"print",
-			"first",
-			"print",
-			"_deleteOp",
-			"_deleteLeftOp",
-			"new Expr",
-			"Right",
-			"Left",
-			"auto",
-			"eLinkExpr",
-			"links",
-			"errLeft",
-			".",
-			"char",
-			"ExprSpe",
 			"_evalOp",
-			"alt+shift+c",
+			"initStates",
+			"super+y",
+			"ctrl",
+			"tab",
+			"ctrl+",
+			"keypad",
+			"ctrl+alt",
+			"alt+right",
+			"keypad8",
+			"Analyzer",
+			"super",
+			"test",
+			"alt",
+			"ctrl",
+			"a",
 			"\neErr	",
 			"eErr",
 			"raise_error",
@@ -1167,53 +1248,7 @@
 			"TOKEN_STRUCT_WORDS",
 			"sComment",
 			"sContextMark",
-			"sComment",
-			"sOperand",
-			"sEntity",
-			"TokensDefinitions",
-			"cerr",
-			"_isOperatorSymbol",
-			"TOperator",
-			"_isPrioritySymbol",
-			"TPriorities",
-			"_isPrioritySymbol",
-			"TPriorities",
-			"std::cer",
-			"return",
-			"size_t",
-			"_isOperatorSymbol",
-			"TOperator",
-			"_isOperatorSymbol",
-			"TOperator",
-			" {\n",
-			"TEntity",
-			"iToken",
-			"i",
-			"TEntity",
-			"virtual",
-			"= 0",
-			"initMask",
-			"tokens_list_t",
-			"I_TOKEN_HPP",
-			"<A...>",
-			"Token",
-			"TOKEN_HPP",
-			"A",
-			"template<class A, class... B>",
-			"T...",
-			"template<class... T>",
-			"err_msgs",
-			"TVarName",
-			"<T>",
-			"template",
-			" {\n",
-			"c",
-			"numline",
-			"} e",
-			"\n{",
-			"_globalTokens",
-			"iTok",
-			"{\n"
+			"sComment"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1238,7 +1273,7 @@
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": true,
+		"whole_word": false,
 		"wrap": true
 	},
 	"groups":
@@ -1249,290 +1284,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "include/Rule.hpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1862,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1304,
-								1304
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
-							],
-							"glsv_configured": true,
-							"glsv_enabled": 1,
-							"glsv_spec": 0,
-							"hasHeader": true,
-							"syntax": "Packages/Leeios/Leeios.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/Analyzer.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3614,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2480,
-								2480
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
-							],
-							"hasHeader": true,
-							"history_list_is_closing": true,
-							"syntax": "Packages/Leeios/Leeios.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 942.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/Rule.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5434,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2466,
-								2466
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
-							],
-							"hasHeader": true,
-							"syntax": "Packages/Leeios/Leeios.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 510.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "src/main.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2113,
+						"buffer_size": 1217,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1961,
-								1961
+								959,
+								959
 							]
 						],
 						"settings":
@@ -1596,386 +1360,6 @@
 								"bh_tag_close",
 								"bh_tag_content"
 							],
-							"hasHeader": true,
-							"syntax": "Packages/Leeios/Leeios.tmLanguage"
-						},
-						"translation.x": -0.0,
-						"translation.y": 270.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "include/Expr.hpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4735,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3987,
-								3987
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
-							],
-							"glsv_configured": true,
-							"glsv_enabled": 1,
-							"glsv_spec": 0,
-							"hasHeader": true,
-							"syntax": "Packages/Leeios/Leeios.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2014.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 5,
-					"file": "include/specialization.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1447,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1253,
-								1253
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
-							],
-							"hasHeader": true,
-							"syntax": "Packages/Objective-C/Objective-C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "test/test0.rl",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 761,
-						"regions":
-						{
-							"transition_sels":
-							{
-								"flags": 49,
-								"icon": "dot",
-								"regions":
-								[
-								],
-								"scope": "transition_cursor"
-							}
-						},
-						"selection":
-						[
-							[
-								20,
-								20
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
-							],
-							"hasHeader": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
-				{
-					"buffer": 7,
-					"file": "include/Error.hpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1206,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"glsv_configured": true,
-							"glsv_enabled": 1,
-							"glsv_spec": 0,
 							"hasHeader": true,
 							"syntax": "Packages/Leeios/Leeios.tmLanguage"
 						},
@@ -1987,12 +1371,12 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "include/Analyzer.hpp",
+					"buffer": 1,
+					"file": "src/Analyzer.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1534,
+						"buffer_size": 4599,
 						"regions":
 						{
 							"bookmarks":
@@ -2008,8 +1392,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								4309,
+								4309
 							]
 						],
 						"settings":
@@ -2017,6 +1401,758 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"hasHeader": true,
+							"history_list_is_closing": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1786.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/Rule.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6610,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2555,
+								2555
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"hasHeader": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1155.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "include/Rule.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2134,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1445,
+								1445
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"hasHeader": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 4,
+					"file": "include/Expr.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7743,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5645,
+								5645
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"hasHeader": true,
+							"history_list_is_closing": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2325.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "test/test1.rl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 76,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								76,
+								76
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"hasHeader": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1422,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								247,
+								247
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"hasHeader": false,
+							"history_list_is_closing": true,
+							"syntax": "Packages/Makefile Improved/Makefile Improved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "include/Analyzer.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1604,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1233,
+								1233
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"hasHeader": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "include/Symbol.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7629,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1210,
+								1210
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"hasHeader": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 98.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "test/test0.rl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 761,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								500,
+								500
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
@@ -2027,11 +2163,104 @@
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"hasHeader": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 10,
+					"file": "include/Error.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1206,
+						"regions":
+						{
+							"bookmarks":
+							{
+								"flags": 144,
+								"icon": "Packages/BetterBookmarks/icons/function.png",
+								"regions":
+								[
+								],
+								"scope": "comment"
+							}
+						},
+						"selection":
+						[
+							[
+								907,
+								907
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
@@ -2042,46 +2271,117 @@
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content"
 							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
 							"hasHeader": true,
-							"history_list_is_closing": true,
 							"syntax": "Packages/Leeios/Leeios.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1422,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								57,
+								57
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"hasHeader": false,
+							"history_list_is_closing": true,
+							"syntax": "Packages/Makefile Improved/Makefile Improved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
 					"type": "text"
 				}
 			]
@@ -2134,11 +2434,11 @@
 	"menu_visible": true,
 	"output.cc":
 	{
-		"height": 120.0
+		"height": 284.0
 	},
 	"output.clipboard_manager":
 	{
-		"height": 138.0
+		"height": 0.0
 	},
 	"output.find_results":
 	{
@@ -2158,40 +2458,40 @@
 		"selected_items":
 		[
 			[
-				"main",
-				"src/main.cpp"
+				"test1",
+				"test/test1.rl"
+			],
+			[
+				"symb",
+				"include/Symbol.hpp"
+			],
+			[
+				"anah",
+				"include/Analyzer.hpp"
 			],
 			[
 				"makef",
 				"Makefile"
 			],
 			[
-				"sublim",
-				"expertsystem.sublime-project"
-			],
-			[
-				"analyz",
-				"src/Analyzer.cpp"
-			],
-			[
-				"rulcp",
-				"src/Rule.cpp"
+				"te",
+				"test/test0.rl"
 			],
 			[
 				"ana",
 				"include/Analyzer.hpp"
 			],
 			[
-				"te",
-				"test/test0.rl"
+				"rulhp",
+				"include/Rule.hpp"
 			],
 			[
-				"spe",
-				"include/specialization.h"
+				"rulecp",
+				"src/Rule.cpp"
 			],
 			[
-				"mak",
-				"Makefile"
+				"main",
+				"src/main.cpp"
 			],
 			[
 				"make",
@@ -2202,12 +2502,20 @@
 				"include/Expr.hpp"
 			],
 			[
+				"exp",
+				"expertsystem.sublime-project"
+			],
+			[
 				"subl",
 				"expertsystem.sublime-project"
 			],
 			[
 				"exphpp",
 				"include/Expr.hpp"
+			],
+			[
+				"rulcp",
+				"src/Rule.cpp"
 			],
 			[
 				"er",
@@ -2240,6 +2548,10 @@
 			[
 				"iex",
 				"include/IExpr.hpp"
+			],
+			[
+				"spe",
+				"include/specialization.h"
 			],
 			[
 				"ex",
@@ -2428,6 +2740,10 @@
 			[
 				"add",
 				"src/add_piece_to_result.c"
+			],
+			[
+				"mak",
+				"Makefile"
 			],
 			[
 				"link",

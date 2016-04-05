@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:45:24 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/04 15:39:27 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/05 13:22:41 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ public:
 
 	inline const std::string	&getSymbols(void) const {return (m_presentSymbols);};
 
-	bool						apply(state_ctr &initValues, const char c);
+	bool						apply(state_ctr &initStates, const char c);
+	inline bool					isValid(const state_ctr &initStates) const {return (Symbol(_evalLeft(initStates)) == Symbol(_evalRight(initStates)));};
 
 protected:
 private:
@@ -54,10 +55,10 @@ private:
 	IExpr			*_setExprAsChar(const std::string &s);
 	IExpr			*_setExpr(const std::string &s);
 
-	inline eValue				_evalLeft(state_ctr &initStates) const {return (m_leftExpr->eval(initStates));}
-	inline eValue				_evalRight(state_ctr &initStates) const {return (m_rightExpr->eval(initStates));}
+	inline eValue				_evalLeft(const state_ctr &initStates) const {return (m_leftExpr->eval(initStates));}
+	inline eValue				_evalRight(const state_ctr &initStates) const {return (m_rightExpr->eval(initStates));}
 
-	bool						_apply(state_ctr &initValues, eValue value, IExpr *expr);
+	bool						_apply(state_ctr &initStates, eValue value, IExpr *expr);
 
 };
 

@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 15:44:11 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/04 14:36:49 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/05 13:19:02 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,14 @@ public:
 	{
 		switch (m_val)
 		{
-			case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
+			case (eValue::UNDEFINED) :
+				switch (rightOp.getVal())
+				{
+					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
+					case (eValue::TRUE) : return (eValue::UNDEFINED);
+					case (eValue::FALSE) : return (eValue::FALSE);
+					case (eValue::ERROR) : return (eValue::ERROR);
+				}
 			case (eValue::TRUE) :
 				switch (rightOp.getVal())
 				{
@@ -55,14 +62,7 @@ public:
 					case (eValue::FALSE) : return (eValue::FALSE);
 					case (eValue::ERROR) : return (eValue::ERROR);
 				}
-			case (eValue::FALSE) :
-				switch (rightOp.getVal())
-				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::FALSE);
-					case (eValue::FALSE) : return (eValue::FALSE);
-					case (eValue::ERROR) : return (eValue::ERROR);
-				}
+			case (eValue::FALSE) : return (eValue::FALSE);
 			case (eValue::ERROR) :
 				switch (rightOp.getVal())
 				{
@@ -78,11 +78,18 @@ public:
 	{
 		switch (m_val)
 		{
-			case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-			case (eValue::TRUE) :
+			case (eValue::UNDEFINED) :
 				switch (rightOp.getVal())
 				{
 					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
+					case (eValue::TRUE) : return (eValue::TRUE);
+					case (eValue::FALSE) : return (eValue::UNDEFINED);
+					case (eValue::ERROR) : return (eValue::ERROR);
+				}
+			case (eValue::TRUE) :
+				switch (rightOp.getVal())
+				{
+					case (eValue::UNDEFINED) : return (eValue::TRUE);
 					case (eValue::TRUE) : return (eValue::TRUE);
 					case (eValue::FALSE) : return (eValue::TRUE);
 					case (eValue::ERROR) : return (eValue::ERROR);
@@ -139,41 +146,41 @@ public:
 	};
 
 
-	inline eValue		operator==(const Symbol &rightOp) const
+	inline bool		operator==(const Symbol &rightOp) const
 	{
 		switch (m_val)
 		{
 			case (eValue::UNDEFINED) :
 				switch (rightOp.getVal())
 				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::UNDEFINED);
-					case (eValue::FALSE) : return (eValue::UNDEFINED);
-					case (eValue::ERROR) : return (eValue::ERROR);
+					case (eValue::UNDEFINED) : return (false);
+					case (eValue::TRUE) : return (false);
+					case (eValue::FALSE) : return (false);
+					case (eValue::ERROR) : return (false);
 				}
 			case (eValue::TRUE) :
 				switch (rightOp.getVal())
 				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::TRUE);
-					case (eValue::FALSE) : return (eValue::FALSE);
-					case (eValue::ERROR) : return (eValue::ERROR);
+					case (eValue::UNDEFINED) : return (false);
+					case (eValue::TRUE) : return (true);
+					case (eValue::FALSE) : return (false);
+					case (eValue::ERROR) : return (false);
 				}
 			case (eValue::FALSE) :
 				switch (rightOp.getVal())
 				{
-					case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-					case (eValue::TRUE) : return (eValue::FALSE);
-					case (eValue::FALSE) : return (eValue::TRUE);
-					case (eValue::ERROR) : return (eValue::ERROR);
+					case (eValue::UNDEFINED) : return (false);
+					case (eValue::TRUE) : return (false);
+					case (eValue::FALSE) : return (true);
+					case (eValue::ERROR) : return (false);
 				}
 			case (eValue::ERROR) :
 				switch (rightOp.getVal())
 				{
-					case (eValue::UNDEFINED) : return (eValue::ERROR);
-					case (eValue::TRUE) : return (eValue::ERROR);
-					case (eValue::FALSE) : return (eValue::ERROR);
-					case (eValue::ERROR) : return (eValue::ERROR);
+					case (eValue::UNDEFINED) : return (false);
+					case (eValue::TRUE) : return (false);
+					case (eValue::FALSE) : return (false);
+					case (eValue::ERROR) : return (false);
 				}
 		}
 	};
@@ -225,19 +232,6 @@ public:
 			case (eValue::TRUE) : return (true);
 			case (eValue::FALSE) : return (false);
 			case (eValue::ERROR) : return (false);
-		}
-	};
-
-	inline static eValue opposite(const eValue val, bool negative)
-	{
-		if (!negative)
-			return (val);
-		switch (val)
-		{
-			case (eValue::UNDEFINED) : return (eValue::UNDEFINED);
-			case (eValue::TRUE) : return (eValue::FALSE);
-			case (eValue::FALSE) : return (eValue::TRUE);
-			case (eValue::ERROR) : return (eValue::ERROR);
 		}
 	};
 

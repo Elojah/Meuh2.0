@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/20 10:08:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/04 16:50:53 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/05 13:22:39 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,22 +90,22 @@ std::string	Rule::serializeEval(const state_ctr &initStates)
 	return(result);
 }
 
-bool	Rule::_apply(state_ctr &initValues, eValue value, IExpr *expr)
+bool	Rule::_apply(state_ctr &initStates, eValue value, IExpr *expr)
 {
 	switch (value)
 	{
 		case (eValue::UNDEFINED) :
 			return (false);
 		case (eValue::TRUE) :
-			return (expr->setAll(eValue::TRUE, initValues));
+			return (expr->setAll(eValue::TRUE, initStates));
 		case (eValue::FALSE) :
-			return (expr->setAll(eValue::FALSE, initValues));
+			return (expr->setAll(eValue::FALSE, initStates));
 		case (eValue::ERROR) :
 			return (false);
 	}
 }
 
-bool	Rule::apply(state_ctr &initValues, const char c)
+bool	Rule::apply(state_ctr &initStates, const char c)
 {
 	if (m_presentSymbols.find(c) == std::string::npos)
 		return (false) ;
@@ -113,24 +113,24 @@ bool	Rule::apply(state_ctr &initValues, const char c)
 	{
 		auto				separator = m_presentSymbols.find('=');
 		auto				rightSide = m_presentSymbols.substr(separator);
-		if (separator == std::string::npos)
+		if (separator == std::string::npos || rightSide.find(c) == std::string::npos)
 			return (false) ;
-		return (_apply(initValues, _evalLeft(initValues), m_rightExpr));
+		return (_apply(initStates, _evalLeft(initStates), m_rightExpr));
 	}
 	else if (m_link == eLinkExpr::IF_ONLY_IF)
 	{
-		auto	leftVal = _evalLeft(initValues);
-		auto	rightVal = _evalRight(initValues);
+		auto	leftVal = _evalLeft(initStates);
+		auto	rightVal = _evalRight(initStates);
 		if (leftVal != eValue::UNDEFINED)
 		{
 			if (rightVal == eValue::UNDEFINED)
-				return (_apply(initValues, leftVal, m_rightExpr));
+				return (_apply(initStates, leftVal, m_rightExpr));
 			if (leftVal != rightVal)
 				err::raise_error(eErr::FATAL, "Incoherent rule !!!");
 		}
 		// HERE we set at TRUE or FALSE evolved expressions ( A | B ^ C & D)
 		if (rightVal != eValue::UNDEFINED)
-			return (_apply(initValues, rightVal, m_leftExpr));
+			return (_apply(initStates, rightVal, m_leftExpr));
 	}
 	return (false);
 }
@@ -162,10 +162,6 @@ eErr	Rule::set(const std::string &line)
 	// Add separator to better side detection
 	m_presentSymbols += '=';
 	m_rightExpr = _setExpr(line.substr(separator + linkSize));
-
-	// Remove duplicates
-	std::sort(m_presentSymbols.begin(), m_presentSymbols.end());
-	m_presentSymbols.erase(std::unique(m_presentSymbols.begin(), m_presentSymbols.end()), m_presentSymbols.end());
 
 	return (eErr::NONE);
 }

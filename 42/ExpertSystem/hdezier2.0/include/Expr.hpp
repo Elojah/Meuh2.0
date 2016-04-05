@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 09:44:47 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/04 16:53:30 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/05 13:21:12 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ public:
 	virtual ~IExpr(void) {};
 	virtual eValue		eval(const state_ctr &initStates) const = 0;
 	virtual std::string	getSymbols(void) const = 0;
-	virtual bool		setAll(const eValue val, state_ctr &initVals) const = 0;
+	virtual bool		setAll(const eValue val, state_ctr &initStates) const = 0;
 	virtual std::string	serialize(void) const = 0;
 };
 
@@ -89,19 +89,19 @@ public :
 	/*
 	** Set
 	*/
-	inline virtual bool	setAll(const eValue val, state_ctr &initVals) const override
+	inline virtual bool	setAll(const eValue val, state_ctr &initStates) const override
 	{
 		switch(m_operator)
 		{
 			case (eOperator::AND) :
 			{
-				return (_setOp(m_leftOp, Symbol::opposite(val, m_leftNegative), initVals)
-					&& _setOp(m_rightOp, Symbol::opposite(val, m_rightNegative), initVals));
+				return (_setOp(m_leftOp, Symbol(val).getValNegative(m_leftNegative), initStates)
+					&& _setOp(m_rightOp, Symbol(val).getValNegative(m_rightNegative), initStates));
 			}
-			case (eOperator::OR) : return (_setOr(initVals, val)); // We dont care, first expr is ok. Complex stuff should be to choose...
-			case (eOperator::XOR) : return (_setXor(initVals, val));
+			case (eOperator::OR) : return (_setOr(initStates, val)); // We dont care, first expr is ok. Complex stuff should be to choose...
+			case (eOperator::XOR) : return (_setXor(initStates, val));
 			case (eOperator::NONE) :
-				return (_setOp(m_leftOp, Symbol::opposite(val, m_leftNegative), initVals));
+				return (_setOp(m_leftOp, Symbol(val).getValNegative(m_leftNegative), initStates));
 			return (false);
 		}
 	}
@@ -162,10 +162,10 @@ private:
 	inline static std::string	_serialize(const IExpr *op) {return ( "(" + op->serialize() + ')');};
 	inline static std::string	_serialize(const char op) {return (std::string(1, op));};
 
-	inline static bool	_setOp(const char c, eValue val, state_ctr &initVals)
+	inline static bool	_setOp(const char c, eValue val, state_ctr &initStates)
 	{
-		auto	initValue = initVals.find(c);
-		if (initValue == initVals.end())
+		auto	initValue = initStates.find(c);
+		if (initValue == initStates.end())
 			return (false);
 		if (initValue->second != eValue::UNDEFINED && initValue->second != val)
 		{
@@ -176,41 +176,41 @@ private:
 		initValue->second = val;
 		return (true);
 	};
-	inline static bool	_setOp(IExpr *expr, eValue val, state_ctr &initVals) {return (expr->setAll(val, initVals));};
-	inline bool			_setXor(state_ctr &initVals, eValue val) const
+	inline static bool	_setOp(IExpr *expr, eValue val, state_ctr &initStates) {return (expr->setAll(val, initStates));};
+	inline bool			_setXor(state_ctr &initStates, eValue val) const
 	{
-		auto	leftVal = _evalLeft(initVals);
-		auto	rightVal = _evalRight(initVals);
+		auto	leftVal = _evalLeft(initStates);
+		auto	rightVal = _evalRight(initStates);
 		if (leftVal != eValue::UNDEFINED && rightVal == eValue::UNDEFINED)
 		{
 			if (val == eValue::TRUE)
-				return (_setOp(m_rightOp, Symbol::opposite(leftVal, true), initVals));
+				return (_setOp(m_rightOp, Symbol(leftVal).getValNegative(true), initStates));
 			else if (val == eValue::FALSE)
-				return (_setOp(m_rightOp, leftVal, initVals));
+				return (_setOp(m_rightOp, leftVal, initStates));
 		}
 		if (leftVal == eValue::UNDEFINED && rightVal != eValue::UNDEFINED)
 		{
 			if (val == eValue::TRUE)
-				return (_setOp(m_leftOp, Symbol::opposite(rightVal, true), initVals));
+				return (_setOp(m_leftOp, Symbol(rightVal).getValNegative(true), initStates));
 			else if (val == eValue::FALSE)
-				return (_setOp(m_leftOp, rightVal, initVals));
+				return (_setOp(m_leftOp, rightVal, initStates));
 		}
 		return (false);
 	};
-	inline bool			_setOr(state_ctr &initVals, eValue val) const
+	inline bool			_setOr(state_ctr &initStates, eValue val) const
 	{
-		auto	leftVal = _evalLeft(initVals);
-		auto	rightVal = _evalRight(initVals);
+		auto	leftVal = _evalLeft(initStates);
+		auto	rightVal = _evalRight(initStates);
 		if ((val == eValue::TRUE && (leftVal == eValue::TRUE || rightVal == eValue::TRUE))
 			|| (val == eValue::FALSE && (leftVal == eValue::FALSE || rightVal == eValue::FALSE)))
 			return (false);
 		if (val == eValue::FALSE)
-			return (_setOp(m_leftOp, Symbol::opposite(val, m_leftNegative), initVals)
-				&& _setOp(m_rightOp, Symbol::opposite(val, m_rightNegative), initVals));
+			return (_setOp(m_leftOp, Symbol(val).getValNegative(m_leftNegative), initStates)
+				&& _setOp(m_rightOp, Symbol(val).getValNegative(m_rightNegative), initStates));
 		else if (leftVal == eValue::UNDEFINED && (rightVal == eValue::UNDEFINED || rightVal == eValue::FALSE))
-			return (_setOp(m_leftOp, Symbol::opposite(val, m_leftNegative), initVals));
+			return (_setOp(m_leftOp, Symbol(val).getValNegative(m_leftNegative), initStates));
 		else if (rightVal == eValue::UNDEFINED && (leftVal == eValue::UNDEFINED || leftVal == eValue::FALSE))
-			return (_setOp(m_rightOp, Symbol::opposite(val, m_rightNegative), initVals));
+			return (_setOp(m_rightOp, Symbol(val).getValNegative(m_rightNegative), initStates));
 		return (false);
 	};
 
