@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 09:44:47 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/05 13:21:12 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/05 13:40:50 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,8 @@ private:
 			return (false);
 		if (initValue->second != eValue::UNDEFINED && initValue->second != val)
 		{
-			std::cout << "Trying to set value already set to another value:" << c << std::endl;
+			std::cerr << "Trying to set value " << c << " already set at " << Symbol::getName(initValue->second)
+					<< " to: " << Symbol::getName(val) << std::endl;
 			return (false);
 		}
 		std::cout << "Set value by implication:" << c << " at " << Symbol::getName(val) << std::endl;

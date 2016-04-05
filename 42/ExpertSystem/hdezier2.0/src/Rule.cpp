@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/20 10:08:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/05 13:22:39 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/05 13:44:03 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,10 @@ bool	Rule::apply(state_ctr &initStates, const char c)
 			if (rightVal == eValue::UNDEFINED)
 				return (_apply(initStates, leftVal, m_rightExpr));
 			if (leftVal != rightVal)
-				err::raise_error(eErr::FATAL, "Incoherent rule !!!");
+			{
+				err::raise_error(eErr::FATAL, "Incoherent rule !!!\t" + serialize());
+				return (false);
+			}
 		}
 		// HERE we set at TRUE or FALSE evolved expressions ( A | B ^ C & D)
 		if (rightVal != eValue::UNDEFINED)

@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:41:26 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/05 13:22:00 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/05 13:51:43 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	Analyzer::_initialSetValues(const std::string &except)
 		if (val.second != eValue::UNDEFINED)
 			continue ;
 
-		std::cout << "Testing value:" << val.first << std::endl;
+		std::cout << "Testing initial value:" << val.first << std::endl;
 
 		if (_calcTest(val.first))
 			goto restart;
@@ -132,6 +132,7 @@ eErr	Analyzer::_calculus(const std::string &line)
 	{
 		if (IS_SYMBOL(c))
 		{
+			std::cout << "Testing calculus value:" << c << std::endl;
 			auto	val = m_initStates.find(c);
 			if (val != m_initStates.end() && val->second != eValue::UNDEFINED)
 				continue ;
@@ -181,11 +182,16 @@ eErr	Analyzer::_add_rule(const std::string &line)
 
 void	Analyzer::printRules(void)
 {
-	std::cout << "N Rules:" << m_rules.size() << std::endl;
+	std::cout << "N Rules:\t" << m_rules.size() << std::endl;
 	for (const auto &rule : m_rules)
+	{
 		std::cout << rule->serialize() << std::endl;
-	std::cout << "Values:" << m_rules.size() << std::endl;
+		if (!rule->isValid(m_initStates))
+			std::cout << "INVALID !" << std::endl;
+
+	}
+	std::cout << "Values:\t" << m_rules.size() << std::endl;
 	for (const auto &val : m_initStates)
-		std::cout << val.first << " = " << Symbol::getName(val.second) << std::endl;
+		std::cout << val.first << " =\t" << Symbol::getName(val.second) << std::endl;
 	std::cout << "___" << std::endl;
 }
