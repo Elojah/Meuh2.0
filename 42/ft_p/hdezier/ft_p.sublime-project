@@ -12,9 +12,11 @@
         [
             "-D_DBG_",
             "-I${project_path}/include",
+            "-I${project_path}/libft/include",
              "-Wall",
              "-Werror",
              "-Wextra",
+             "-v"
         ]
     }
 }

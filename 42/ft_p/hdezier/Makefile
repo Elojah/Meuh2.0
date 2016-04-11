@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/06 13:12:27 by hdezier           #+#    #+#              #
-#    Updated: 2016/04/06 13:42:41 by hdezier          ###   ########.fr        #
+#    Updated: 2016/04/11 15:46:02 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 TARGET = serveur
@@ -25,8 +25,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		/Rule\
-		/Analyzer\
+		server\
 
 #List interfaces here
 INTERFACE = \
@@ -42,10 +41,12 @@ LFLAGS =
 
 #Libs
 LIB_LOCAL = \
+			libft\
 
 LIB_GLOBAL = \
 
 LIB_OTHER = \
+			-lft\
 
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
@@ -59,9 +60,11 @@ INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 all : dirbin $(BIN_DIR)/$(TARGET)
 
 clean :
+	make clean -C libft/
 	$(RM) $(BUILD_DIR)
 
 fclean :
+	make fclean -C libft/
 	$(RM) $(BUILD_DIR) $(TARGET) $(BIN_DIR)
 
 re : fclean all
@@ -75,6 +78,7 @@ dirbin:
 
 #Build rule
 $(BIN_DIR)/$(TARGET) : $(OBJ)
+	make -C libft/
 	@echo "\n\033[1;4;34mLINK:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
 	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 	@ln -sf $(BIN_DIR)/$(TARGET) $(TARGET)

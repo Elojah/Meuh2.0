@@ -6,10 +6,12 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/06 13:42:11 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/06 14:02:52 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/11 17:02:22 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "server.h"
+#include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/socket.h>
@@ -18,19 +20,60 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-static void		read_socket(int cs)
+static e_cmd	is_cmd(char *s)
 {
-	int		r;
-	char	buf[1024];
-
-	r = read(cs, buf, 1024);
-	if (r > 0)
+	static const char	*const cmds[] =
 	{
-		;
+		"ls",
+		"cd",
+		"get",
+		"put",
+		"pwd",
+		"quit",
+	};
+	int			i;
+
+	i = -1;
+	while (++i < NONE)
+	{
+		if (ft_strcmp(s, cmds[i]) == 0)
+			return ((e_cmd)i);
 	}
+	return (NONE);
 }
 
-static int		create_server(int port)
+static char		*read_socket(int cs)
+{
+	char	**result;
+
+	result = NULL;
+	ft_get_line(cs, result);
+	return (*result);
+}
+
+static int		process_msg(int cs)
+{
+	char		*msg;
+	char		**split_msg;
+	e_cmd		cmd;
+	msg = read_socket(cs);
+	close(cs);
+	if (msg == NULL)
+		return (1);
+	split_msg = ft_strsplit(msg, ' ');
+	free(msg);
+	cmd = is_cmd(split_msg[0]);
+	if (cmd = NONE)
+	{
+		write(2, msg, ft_strlen(msg));
+		write(2, " is not a valid command.\n", 25);
+	}
+	free_split :
+		exec_cmd(cmd, split_msg);
+		ft_free_array_str(split_msg);
+}
+
+static int		init_server(int port)
 {
 	int					sock;
 	struct protoent		*proto;
@@ -52,18 +95,26 @@ static int		create_server(int port)
 	return (sock);
 }
 
-void			listen(int port)
+void			listen_port(int port)
 {
 	int					sock;
 	int					cs;
 	unsigned int		cslen;
 	struct sockaddr_in	csin;
+	pid_t				child;
 
-	sock = create_server(port);
-	if (sock == -1){}
-	cs = accept(sock, (struct sockaddr *)&csin, &cslen);
-	read_socket(cs);
-	// Use cs here
-	close(cs);
+	sock = init_server(port);
+	if (sock == -1)
+		return ;
+	while (1)
+	{
+		cs = accept(sock, (struct sockaddr *)&csin, &cslen);
+		child = fork();
+		if (child == 0)
+		{
+			while (process_msg(cs))
+				;
+		}
+	}
 	close(sock);
 }

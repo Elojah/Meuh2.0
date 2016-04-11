@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/06 13:12:41 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/11 15:55:38 by hdezier          ###   ########.fr       */
+/*   Created: 2016/04/11 15:22:55 by hdezier           #+#    #+#             */
+/*   Updated: 2016/04/11 16:33:26 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "server.h"
-#include "libft.h"
-#include <unistd.h>
+#ifndef SERVER_H
+#define SERVER_H
 
-static void	exec(char *s)
+enum				e_bool
 {
-	int		port = ft_atoi(s);
-	if (port == 0)
-		write(2, "Port argument is not valid\n", 27);
-	else
-		listen_port(port);
-}
+	FALSE = 0,
+	TRUE
+};
 
-int		main(int ac, char **av)
+enum				e_cmd
 {
-	if (ac != 2)
-		write(2, "Please specify one argument\n", 28);
-	else
-		exec(av[1]);
-	return (0);
-}
+	LS = 0,
+	CD,
+	GET,
+	PUT,
+	PWD,
+	QUIT,
+	NONE
+};
+
+void			listen_port(int port);
+void			exec_cmd(e_cmd cmd, char **msg);
+
+
+#endif
