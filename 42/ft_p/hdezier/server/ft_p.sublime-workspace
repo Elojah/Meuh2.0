@@ -1,0 +1,3386 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ftmem",
+				"ft_memdel	(libft.h)"
+			],
+			[
+				"ret",
+				"ret_free"
+			],
+			[
+				"ft_str",
+				"ft_strncmp	(libft.h)"
+			],
+			[
+				"listen",
+				"listen_port	(server.c)"
+			],
+			[
+				"write",
+				"write_socket"
+			],
+			[
+				"create",
+				"create_client(int port)	int"
+			],
+			[
+				"socka",
+				"sockaddr_in"
+			],
+			[
+				"read",
+				"read(int, void *, size_t)	ssize_t"
+			],
+			[
+				"cre",
+				"create_server(int port)	int"
+			],
+			[
+				"INADD",
+				"INADDR_ANY	Macro"
+			],
+			[
+				"sin",
+				"sin_family	sa_family_t"
+			],
+			[
+				"SOCK",
+				"SOCK_STREAM	Macro"
+			],
+			[
+				"_eval",
+				"_evalRight"
+			],
+			[
+				"ini",
+				"initValues	const state_ctr &"
+			],
+			[
+				"getvl",
+				"getValNegative"
+			],
+			[
+				"getv",
+				"getValNegative"
+			],
+			[
+				"initv",
+				"initVals"
+			],
+			[
+				"_set",
+				"_setOr"
+			],
+			[
+				"exp",
+				"expr"
+			],
+			[
+				"m_",
+				"m_presentSymbols"
+			],
+			[
+				"_ini",
+				"_initialSetValues()	void"
+			],
+			[
+				"expr",
+				"expressions"
+			],
+			[
+				"err",
+				"err::	namespace"
+			],
+			[
+				"rest",
+				"restart_calc"
+			],
+			[
+				"_calc",
+				"_calcTest"
+			],
+			[
+				"FAL",
+				"FALSE_TEST	eValue"
+			],
+			[
+				"test",
+				"testCtr"
+			],
+			[
+				"rule",
+				"ruleEvaluation"
+			],
+			[
+				"mleft",
+				"m_leftNegative"
+			],
+			[
+				"T",
+				"TRUE"
+			],
+			[
+				"get",
+				"getName(eValue val)	const std::string"
+			],
+			[
+				"init",
+				"initStates"
+			],
+			[
+				"left",
+				"leftVal"
+			],
+			[
+				"mright",
+				"m_rightOp	T"
+			],
+			[
+				"state",
+				"state_ctr"
+			],
+			[
+				"e",
+				"eOperator"
+			],
+			[
+				"TRUE",
+				"TRUE_TEST"
+			],
+			[
+				"min",
+				"m_initValues"
+			],
+			[
+				"mrig",
+				"m_rightOp"
+			],
+			[
+				"value",
+				"valuesRequired"
+			],
+			[
+				"right",
+				"rightVal"
+			],
+			[
+				"lef",
+				"leftVal"
+			],
+			[
+				"values",
+				"valuesRequired	(Expr.hpp)"
+			],
+			[
+				"valu",
+				"valuesRequired"
+			],
+			[
+				"f",
+				"first"
+			],
+			[
+				"val",
+				"valuesRequired"
+			],
+			[
+				"tru",
+				"TRUE	eValue"
+			],
+			[
+				"prin",
+				"printEValue"
+			],
+			[
+				"FA",
+				"FALSE	eValue"
+			],
+			[
+				"set",
+				"setOperator(const std::string &op)	void"
+			],
+			[
+				"sta",
+				"state_ctr"
+			],
+			[
+				"eV",
+				"eValue"
+			],
+			[
+				"stat",
+				"state_ctr	(Expr.hpp)"
+			],
+			[
+				"m_rig",
+				"m_rightOp"
+			],
+			[
+				"m_le",
+				"m_leftOp"
+			],
+			[
+				"isal",
+				"isalpha(int)	int"
+			],
+			[
+				"E",
+				"ERR_HPP"
+			],
+			[
+				"Token",
+				"TokenDef"
+			],
+			[
+				"Tokend",
+				"TokensDefinition"
+			],
+			[
+				"TOKE",
+				"TOKEN_STRUCT_WORDS"
+			],
+			[
+				"_is",
+				"_isOperatorSymbol	(TOperator.hpp)"
+			],
+			[
+				"symbo",
+				"symbolIm"
+			],
+			[
+				"find",
+				"find_first_of(char __c) const	size_type"
+			],
+			[
+				"size",
+				"sizeToCompare"
+			],
+			[
+				"Toper",
+				"TOperand"
+			],
+			[
+				"TOpera",
+				"TOperand	(TOperand.cpp)"
+			],
+			[
+				"to",
+				"to_string(long double __val)	string"
+			],
+			[
+				"else",
+				"else if (condition) {\nstatements\n}	KeyWord"
+			],
+			[
+				"mall",
+				"m_allTokens	const IToken *[2]"
+			],
+			[
+				"back",
+				"back() const	const_reference"
+			],
+			[
+				"tok",
+				"tok_indexes	Typedef"
+			],
+			[
+				"uin",
+				"uint8_t	Typedef"
+			],
+			[
+				"curr",
+				"currentToken"
+			],
+			[
+				"N",
+				"N_TOKEN_TYPE	(Parser.hpp)"
+			],
+			[
+				"Toke",
+				"TokenCreator"
+			],
+			[
+				"stream",
+				"istringstream	Typedef"
+			],
+			[
+				"errms",
+				"err_msgs_data"
+			],
+			[
+				"SI",
+				"SIZE_PIECE	(tetris.h)"
+			],
+			[
+				"cons",
+				"consecutive_dead_blocks"
+			],
+			[
+				"cehc",
+				"check_array"
+			],
+			[
+				"printp",
+				"print_pieces(t_result *result)	void"
+			],
+			[
+				"err_",
+				"err_msgs"
+			],
+			[
+				"F",
+				"FALSE	(tetris.h)"
+			],
+			[
+				"add_piece",
+				"add_piece_to_result	(Makefile)"
+			],
+			[
+				"tre",
+				"t_result	Typedef"
+			],
+			[
+				"a",
+				"array	(file_to_pieces.c)"
+			],
+			[
+				"MA",
+				"MAX_PIECES"
+			],
+			[
+				"grow",
+				"grow_rect_with_piece	(calc_added_rows_cols.c)"
+			],
+			[
+				"X",
+				"X_AND_Y	(tetris.h)"
+			],
+			[
+				"gro",
+				"grow_rect(t_rect *rect, int new_x, int new_y, enum e_coord coord)	void"
+			],
+			[
+				"copy",
+				"copy(t_rect *orig, t_rect *dest)	void"
+			],
+			[
+				"calc",
+				"calc_added_rows_cols_point"
+			],
+			[
+				"poi",
+				"point_down_right	t_vec2"
+			],
+			[
+				"upda",
+				"update_limit_points(t_rect *rect, int new_x, int new_y)	void"
+			],
+			[
+				"new",
+				"new_frame"
+			],
+			[
+				"point_d",
+				"point_down_right"
+			],
+			[
+				"new_poin",
+				"new_point_ul	int [2]"
+			],
+			[
+				"poin",
+				"point_up_left	int [2]"
+			],
+			[
+				"point",
+				"point_down_right	int [2]"
+			],
+			[
+				"new_",
+				"new_x"
+			],
+			[
+				"minpo",
+				"min_position	int [2]"
+			],
+			[
+				"INT",
+				"INT_MAX"
+			],
+			[
+				"pri",
+				"printf	printf …"
+			],
+			[
+				"rea",
+				"reader"
+			],
+			[
+				"exit",
+				"exit_with_error	(main.c)"
+			],
+			[
+				"re",
+				"reader"
+			],
+			[
+				"isva",
+				"is_valid_bloc"
+			],
+			[
+				"ope",
+				"openLog()	bool"
+			],
+			[
+				"string",
+				"std::string::npos"
+			],
+			[
+				"par",
+				"parseDirectories	(util.hpp)"
+			],
+			[
+				"cst",
+				"c_str() const	const char *"
+			],
+			[
+				"findlast",
+				"find_last_of(char __c) const	size_type"
+			],
+			[
+				"touc",
+				"touchFile(const std::string &origin, const std::string &dest)	bool"
+			],
+			[
+				"du",
+				"duplicateString(const std::string &filename, const std::vector<std::map<std::string, std::string> > &vecMap)	const std::string"
+			],
+			[
+				"parse",
+				"parseParents	(util.hpp)"
+			],
+			[
+				"cs",
+				"c_str() const	const char *"
+			],
+			[
+				"touch",
+				"touchFileVariables	(FtFile.cpp)"
+			],
+			[
+				"touf",
+				"touchFileVariables	(FtFile.cpp)"
+			],
+			[
+				"ifs",
+				"ifstream	Typedef"
+			],
+			[
+				"strin",
+				"std::string"
+			],
+			[
+				"pro",
+				"project_path"
+			],
+			[
+				"std",
+				"std=c++11"
+			],
+			[
+				"ICOM",
+				"I_COMMAND_HPP"
+			],
+			[
+				"item",
+				"item_name"
+			],
+			[
+				"_me",
+				"_menuItems	(Menu.cpp)"
+			],
+			[
+				"paddin",
+				"padding-left"
+			],
+			[
+				"padding",
+				"padding-left"
+			],
+			[
+				"border",
+				"border-right"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/server.c",
+			"settings":
+			{
+				"buffer_size": 2658,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/nfs/2013/h/hdezier/code/correction/hdezier/test/tst.rl",
+			"settings":
+			{
+				"buffer_size": 17,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/nfs/2013/h/hdezier/code/correction/hdezier/include/Expr.hpp",
+			"settings":
+			{
+				"buffer_size": 7866,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Example input 1:\nB + C => A\nD ^ E => B\nB => C\n\n[INITIAL FACTS HERE]\n?A\n\nWith =, A should be false.\nWith =D, A should be true. ",
+			"settings":
+			{
+				"buffer_size": 126,
+				"line_ending": "Unix",
+				"name": "Example input 1:"
+			}
+		},
+		{
+			"file": "src/exec_cmd.c",
+			"settings":
+			{
+				"buffer_size": 956,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/nfs/2013/h/hdezier/code/correction/gb/test/test0.rl",
+			"settings":
+			{
+				"buffer_size": 19,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/nfs/2013/h/hdezier/code/correction/gb/src/Rule.cpp",
+			"settings":
+			{
+				"buffer_size": 6575,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "/*\nOn OS X, basic text manipulations (left, right, command+left, etc) make use of the system key bindings,\nand don't need to be repeated here. Anything listed here will take precedence, however.\n*/\n[\n	{ \"keys\": [\"super+shift+n\"], \"command\": \"new_window\" },\n	{ \"keys\": [\"super+shift+w\"], \"command\": \"close_window\" },\n	{ \"keys\": [\"super+o\"], \"command\": \"prompt_open\" },\n	{ \"keys\": [\"super+shift+t\"], \"command\": \"reopen_last_file\" },\n	{ \"keys\": [\"super+alt+up\"], \"command\": \"switch_file\", \"args\": {\"extensions\": [\"cpp\", \"cxx\", \"cc\", \"c\", \"hpp\", \"hxx\", \"hh\", \"h\", \"ipp\", \"inl\", \"m\", \"mm\"]} },\n	{ \"keys\": [\"super+n\"], \"command\": \"new_file\" },\n	{ \"keys\": [\"super+s\"], \"command\": \"save\" },\n	{ \"keys\": [\"super+shift+s\"], \"command\": \"prompt_save_as\" },\n	{ \"keys\": [\"super+alt+s\"], \"command\": \"save_all\" },\n	{ \"keys\": [\"super+w\"], \"command\": \"close\" },\n\n	{ \"keys\": [\"super+k\", \"super+b\"], \"command\": \"toggle_side_bar\" },\n	{ \"keys\": [\"super+ctrl+f\"], \"command\": \"toggle_full_screen\" },\n	{ \"keys\": [\"super+ctrl+shift+f\"], \"command\": \"toggle_distraction_free\" },\n\n	{ \"keys\": [\"super+z\"], \"command\": \"undo\" },\n	{ \"keys\": [\"super+shift+z\"], \"command\": \"redo\" },\n	{ \"keys\": [\"super+y\"], \"command\": \"redo_or_repeat\" },\n	{ \"keys\": [\"super+u\"], \"command\": \"soft_undo\" },\n	{ \"keys\": [\"super+shift+u\"], \"command\": \"soft_redo\" },\n\n	{ \"keys\": [\"super+x\"], \"command\": \"cut\" },\n	{ \"keys\": [\"super+c\"], \"command\": \"copy\" },\n	{ \"keys\": [\"super+v\"], \"command\": \"paste\" },\n	{ \"keys\": [\"super+shift+v\"], \"command\": \"paste_and_indent\" },\n	{ \"keys\": [\"super+k\", \"super+v\"], \"command\": \"paste_from_history\" },\n	{ \"keys\": [\"super+option+v\"], \"command\": \"paste_from_history\" },\n\n	{ \"keys\": [\"ctrl+alt+left\"], \"command\": \"move\", \"args\": {\"by\": \"subwords\", \"forward\": false} },\n	{ \"keys\": [\"ctrl+alt+right\"], \"command\": \"move\", \"args\": {\"by\": \"subword_ends\", \"forward\": true} },\n	{ \"keys\": [\"ctrl+alt+shift+left\"], \"command\": \"move\", \"args\": {\"by\": \"subwords\", \"forward\": false, \"extend\": true} },\n	{ \"keys\": [\"ctrl+alt+shift+right\"], \"command\": \"move\", \"args\": {\"by\": \"subword_ends\", \"forward\": true, \"extend\": true} },\n\n	{ \"keys\": [\"ctrl+left\"], \"command\": \"move\", \"args\": {\"by\": \"subwords\", \"forward\": false} },\n	{ \"keys\": [\"ctrl+right\"], \"command\": \"move\", \"args\": {\"by\": \"subword_ends\", \"forward\": true} },\n	{ \"keys\": [\"ctrl+shift+left\"], \"command\": \"move\", \"args\": {\"by\": \"subwords\", \"forward\": false, \"extend\": true} },\n	{ \"keys\": [\"ctrl+shift+right\"], \"command\": \"move\", \"args\": {\"by\": \"subword_ends\", \"forward\": true, \"extend\": true} },\n\n	{ \"keys\": [\"ctrl+alt+up\"], \"command\": \"scroll_lines\", \"args\": {\"amount\": 1.0} },\n	{ \"keys\": [\"ctrl+alt+down\"], \"command\": \"scroll_lines\", \"args\": {\"amount\": -1.0} },\n\n	{ \"keys\": [\"ctrl+shift+up\"], \"command\": \"select_lines\", \"args\": {\"forward\": false} },\n	{ \"keys\": [\"ctrl+shift+down\"], \"command\": \"select_lines\", \"args\": {\"forward\": true} },\n\n	{ \"keys\": [\"super+shift+[\"], \"command\": \"prev_view\" },\n	{ \"keys\": [\"super+shift+]\"], \"command\": \"next_view\" },\n	{ \"keys\": [\"super+alt+left\"], \"command\": \"prev_view\" },\n	{ \"keys\": [\"super+alt+right\"], \"command\": \"next_view\" },\n\n	{ \"keys\": [\"ctrl+tab\"], \"command\": \"next_view_in_stack\" },\n	{ \"keys\": [\"ctrl+shift+tab\"], \"command\": \"prev_view_in_stack\" },\n\n	{ \"keys\": [\"super+a\"], \"command\": \"select_all\" },\n	{ \"keys\": [\"super+shift+l\"], \"command\": \"split_selection_into_lines\" },\n	{ \"keys\": [\"escape\"], \"command\": \"single_selection\", \"context\":\n		[\n			{ \"key\": \"num_selections\", \"operator\": \"not_equal\", \"operand\": 1 }\n		]\n	},\n	{ \"keys\": [\"escape\"], \"command\": \"clear_fields\", \"context\":\n		[\n			{ \"key\": \"has_next_field\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"escape\"], \"command\": \"clear_fields\", \"context\":\n		[\n			{ \"key\": \"has_prev_field\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"escape\"], \"command\": \"hide_panel\", \"args\": {\"cancel\": true},\n		\"context\":\n		[\n			{ \"key\": \"panel_visible\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"escape\"], \"command\": \"hide_overlay\", \"context\":\n		[\n			{ \"key\": \"overlay_visible\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"escape\"], \"command\": \"hide_popup\", \"context\":\n		[\n			{ \"key\": \"popup_visible\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"escape\"], \"command\": \"hide_auto_complete\", \"context\":\n		[\n			{ \"key\": \"auto_complete_visible\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n\n	{ \"keys\": [\"super+]\"], \"command\": \"indent\" },\n	{ \"keys\": [\"super+[\"], \"command\": \"unindent\" },\n\n	{ \"keys\": [\"tab\"], \"command\": \"insert_best_completion\", \"args\": {\"default\": \"\\t\", \"exact\": true} },\n	{ \"keys\": [\"tab\"], \"command\": \"insert_best_completion\", \"args\": {\"default\": \"\\t\", \"exact\": false},\n		\"context\":\n		[\n			{ \"key\": \"setting.tab_completion\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"not_regex_match\", \"operand\": \".*\\\\b[0-9]+$\", \"match_all\": true },\n		]\n	},\n	{ \"keys\": [\"tab\"], \"command\": \"replace_completion_with_next_completion\", \"context\":\n		[\n			{ \"key\": \"last_command\", \"operator\": \"equal\", \"operand\": \"insert_best_completion\" },\n			{ \"key\": \"setting.tab_completion\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"tab\"], \"command\": \"reindent\", \"context\":\n		[\n			{ \"key\": \"setting.auto_indent\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_match\", \"operand\": \"^$\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_match\", \"operand\": \"^$\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"tab\"], \"command\": \"indent\", \"context\":\n		[\n			{ \"key\": \"text\", \"operator\": \"regex_contains\", \"operand\": \"\\n\" }\n		]\n	},\n	{ \"keys\": [\"tab\"], \"command\": \"next_field\", \"context\":\n		[\n			{ \"key\": \"has_next_field\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"tab\"], \"command\": \"commit_completion\", \"context\":\n		[\n			{ \"key\": \"auto_complete_visible\" },\n			{ \"key\": \"setting.auto_complete_commit_on_tab\" }\n		]\n	},\n\n	{ \"keys\": [\"shift+tab\"], \"command\": \"insert\", \"args\": {\"characters\": \"\\t\"} },\n	{ \"keys\": [\"shift+tab\"], \"command\": \"unindent\", \"context\":\n		[\n			{ \"key\": \"setting.shift_tab_unindent\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"shift+tab\"], \"command\": \"unindent\", \"context\":\n		[\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_match\", \"operand\": \"^[\\t ]*\" }\n		]\n	},\n	{ \"keys\": [\"shift+tab\"], \"command\": \"unindent\", \"context\":\n		[\n			{ \"key\": \"text\", \"operator\": \"regex_contains\", \"operand\": \"\\n\" }\n		]\n	},\n	{ \"keys\": [\"shift+tab\"], \"command\": \"prev_field\", \"context\":\n		[\n			{ \"key\": \"has_prev_field\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n\n	{ \"keys\": [\"super+l\"], \"command\": \"expand_selection\", \"args\": {\"to\": \"line\"} },\n	{ \"keys\": [\"super+d\"], \"command\": \"find_under_expand\" },\n	{ \"keys\": [\"super+k\", \"super+d\"], \"command\": \"find_under_expand_skip\" },\n	{ \"keys\": [\"super+shift+space\"], \"command\": \"expand_selection\", \"args\": {\"to\": \"scope\"} },\n	{ \"keys\": [\"ctrl+shift+m\"], \"command\": \"expand_selection\", \"args\": {\"to\": \"brackets\"} },\n	{ \"keys\": [\"ctrl+m\"], \"command\": \"move_to\", \"args\": {\"to\": \"brackets\"} },\n	{ \"keys\": [\"super+shift+j\"], \"command\": \"expand_selection\", \"args\": {\"to\": \"indentation\"} },\n	{ \"keys\": [\"super+shift+a\"], \"command\": \"expand_selection\", \"args\": {\"to\": \"tag\"} },\n\n	{ \"keys\": [\"super+alt+.\"], \"command\": \"close_tag\" },\n\n	{ \"keys\": [\"ctrl+q\"], \"command\": \"toggle_record_macro\" },\n	{ \"keys\": [\"ctrl+shift+q\"], \"command\": \"run_macro\" },\n\n	{ \"keys\": [\"super+enter\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Add Line.sublime-macro\"} },\n	{ \"keys\": [\"super+shift+enter\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Add Line Before.sublime-macro\"} },\n	{ \"keys\": [\"enter\"], \"command\": \"commit_completion\", \"context\":\n		[\n			{ \"key\": \"auto_complete_visible\" },\n			{ \"key\": \"setting.auto_complete_commit_on_tab\", \"operand\": false }\n		]\n	},\n\n	{ \"keys\": [\"super+t\"], \"command\": \"show_overlay\", \"args\": {\"overlay\": \"goto\", \"show_files\": true} },\n	{ \"keys\": [\"super+p\"], \"command\": \"show_overlay\", \"args\": {\"overlay\": \"goto\", \"show_files\": true} },\n	{ \"keys\": [\"super+shift+p\"], \"command\": \"show_overlay\", \"args\": {\"overlay\": \"command_palette\"} },\n	{ \"keys\": [\"super+ctrl+p\"], \"command\": \"prompt_select_workspace\" },\n	{ \"keys\": [\"super+r\"], \"command\": \"show_overlay\", \"args\": {\"overlay\": \"goto\", \"text\": \"@\"} },\n	{ \"keys\": [\"ctrl+g\"], \"command\": \"show_overlay\", \"args\": {\"overlay\": \"goto\", \"text\": \":\"} },\n	{ \"keys\": [\"f12\"], \"command\": \"goto_definition\" },\n	{ \"keys\": [\"super+alt+down\"], \"command\": \"goto_definition\" },\n	{ \"keys\": [\"super+shift+r\"], \"command\": \"goto_symbol_in_project\" },\n	{ \"keys\": [\"ctrl+minus\"], \"command\": \"jump_back\" },\n	{ \"keys\": [\"ctrl+shift+minus\"], \"command\": \"jump_forward\" },\n\n	{ \"keys\": [\"super+i\"], \"command\": \"show_panel\", \"args\": {\"panel\": \"incremental_find\", \"reverse\": false} },\n	{ \"keys\": [\"super+shift+i\"], \"command\": \"show_panel\", \"args\": {\"panel\": \"incremental_find\", \"reverse\": true} },\n	{ \"keys\": [\"super+f\"], \"command\": \"show_panel\", \"args\": {\"panel\": \"find\", \"reverse\": false} },\n	{ \"keys\": [\"super+alt+f\"], \"command\": \"show_panel\", \"args\": {\"panel\": \"replace\", \"reverse\": false} },\n	{ \"keys\": [\"super+alt+e\"], \"command\": \"replace_next\" },\n	{ \"keys\": [\"super+g\"], \"command\": \"find_next\" },\n	{ \"keys\": [\"super+shift+g\"], \"command\": \"find_prev\" },\n	{ \"keys\": [\"super+e\"], \"command\": \"slurp_find_string\" },\n	{ \"keys\": [\"super+shift+e\"], \"command\": \"slurp_replace_string\" },\n\n	{ \"keys\": [\"alt+super+g\"], \"command\": \"find_under\" },\n	{ \"keys\": [\"shift+alt+super+g\"], \"command\": \"find_under_prev\" },\n	{ \"keys\": [\"ctrl+super+g\"], \"command\": \"find_all_under\" },\n\n	{ \"keys\": [\"super+shift+f\"], \"command\": \"show_panel\", \"args\": {\"panel\": \"find_in_files\"} },\n	{ \"keys\": [\"f4\"], \"command\": \"next_result\" },\n	{ \"keys\": [\"shift+f4\"], \"command\": \"prev_result\" },\n\n	{ \"keys\": [\"f6\"], \"command\": \"toggle_setting\", \"args\": {\"setting\": \"spell_check\"} },\n	{ \"keys\": [\"ctrl+f6\"], \"command\": \"next_misspelling\" },\n	{ \"keys\": [\"ctrl+shift+f6\"], \"command\": \"prev_misspelling\" },\n\n	{ \"keys\": [\"ctrl+super+up\"], \"command\": \"swap_line_up\" },\n	{ \"keys\": [\"ctrl+super+down\"], \"command\": \"swap_line_down\" },\n\n	{ \"keys\": [\"ctrl+backspace\"], \"command\": \"delete_word\", \"args\": { \"forward\": false, \"sub_words\": true } },\n	{ \"keys\": [\"ctrl+delete\"], \"command\": \"delete_word\", \"args\": { \"forward\": true, \"sub_words\": true } },\n\n	{ \"keys\": [\"super+forward_slash\"], \"command\": \"toggle_comment\", \"args\": { \"block\": false } },\n	{ \"keys\": [\"super+alt+forward_slash\"], \"command\": \"toggle_comment\", \"args\": { \"block\": true } },\n\n	{ \"keys\": [\"super+j\"], \"command\": \"join_lines\" },\n	{ \"keys\": [\"super+shift+d\"], \"command\": \"duplicate_line\" },\n\n	{ \"keys\": [\"ctrl+backquote\"], \"command\": \"show_panel\", \"args\": {\"panel\": \"console\", \"toggle\": true} },\n\n	{ \"keys\": [\"ctrl+space\"], \"command\": \"auto_complete\" },\n	{ \"keys\": [\"ctrl+space\"], \"command\": \"replace_completion_with_auto_complete\", \"context\":\n		[\n			{ \"key\": \"last_command\", \"operator\": \"equal\", \"operand\": \"insert_best_completion\" },\n			{ \"key\": \"auto_complete_visible\", \"operator\": \"equal\", \"operand\": false },\n			{ \"key\": \"setting.tab_completion\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n\n	{ \"keys\": [\"super+alt+p\"], \"command\": \"show_scope_name\" },\n	{ \"keys\": [\"ctrl+shift+p\"], \"command\": \"show_scope_name\" },\n\n	{ \"keys\": [\"f7\"], \"command\": \"build\" },\n	{ \"keys\": [\"super+b\"], \"command\": \"build\" },\n	{ \"keys\": [\"super+shift+b\"], \"command\": \"build\", \"args\": {\"select\": true} },\n\n	{ \"keys\": [\"ctrl+c\"], \"command\": \"exec\", \"args\": {\"kill\": true} },\n\n	{ \"keys\": [\"ctrl+t\"], \"command\": \"transpose\" },\n\n	{ \"keys\": [\"f5\"], \"command\": \"sort_lines\", \"args\": {\"case_sensitive\": false} },\n	{ \"keys\": [\"ctrl+f5\"], \"command\": \"sort_lines\", \"args\": {\"case_sensitive\": true} },\n\n	// Auto-pair quotes\n	{ \"keys\": [\"\\\"\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"\\\"$0\\\"\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^(?:\\t| |\\\\)|]|\\\\}|>|$)\", \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"not_regex_contains\", \"operand\": \"[\\\"a-zA-Z0-9_]$\", \"match_all\": true },\n			{ \"key\": \"eol_selector\", \"operator\": \"not_equal\", \"operand\": \"string.quoted.double - punctuation.definition.string.end\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"\\\"\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"\\\"${0:$SELECTION}\\\"\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": false, \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"\\\"\"], \"command\": \"move\", \"args\": {\"by\": \"characters\", \"forward\": true}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\"\", \"match_all\": true },\n			{ \"key\": \"selector\", \"operator\": \"not_equal\", \"operand\": \"punctuation.definition.string.begin\", \"match_all\": true },\n			{ \"key\": \"eol_selector\", \"operator\": \"not_equal\", \"operand\": \"string.quoted.double - punctuation.definition.string.end\", \"match_all\": true },\n		]\n	},\n	{ \"keys\": [\"backspace\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete Left Right.sublime-macro\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_contains\", \"operand\": \"\\\"$\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\"\", \"match_all\": true },\n			{ \"key\": \"selector\", \"operator\": \"not_equal\", \"operand\": \"punctuation.definition.string.begin\", \"match_all\": true },\n			{ \"key\": \"eol_selector\", \"operator\": \"not_equal\", \"operand\": \"string.quoted.double - punctuation.definition.string.end\", \"match_all\": true },\n		]\n	},\n\n	// Auto-pair single quotes\n	{ \"keys\": [\"'\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"'$0'\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^(?:\\t| |\\\\)|]|\\\\}|>|$)\", \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"not_regex_contains\", \"operand\": \"['a-zA-Z0-9_]$\", \"match_all\": true },\n			{ \"key\": \"eol_selector\", \"operator\": \"not_equal\", \"operand\": \"string.quoted.single - punctuation.definition.string.end\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"'\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"'${0:$SELECTION}'\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": false, \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"'\"], \"command\": \"move\", \"args\": {\"by\": \"characters\", \"forward\": true}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^'\", \"match_all\": true },\n			{ \"key\": \"selector\", \"operator\": \"not_equal\", \"operand\": \"punctuation.definition.string.begin\", \"match_all\": true },\n			{ \"key\": \"eol_selector\", \"operator\": \"not_equal\", \"operand\": \"string.quoted.single - punctuation.definition.string.end\", \"match_all\": true },\n		]\n	},\n	{ \"keys\": [\"backspace\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete Left Right.sublime-macro\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_contains\", \"operand\": \"'$\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^'\", \"match_all\": true },\n			{ \"key\": \"selector\", \"operator\": \"not_equal\", \"operand\": \"punctuation.definition.string.begin\", \"match_all\": true },\n			{ \"key\": \"eol_selector\", \"operator\": \"not_equal\", \"operand\": \"string.quoted.single - punctuation.definition.string.end\", \"match_all\": true },\n		]\n	},\n\n	// Auto-pair brackets\n	{ \"keys\": [\"(\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"($0)\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^(?:\\t| |\\\\)|]|;|\\\\}|$)\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"(\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"(${0:$SELECTION})\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": false, \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\")\"], \"command\": \"move\", \"args\": {\"by\": \"characters\", \"forward\": true}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\)\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"backspace\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete Left Right.sublime-macro\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_contains\", \"operand\": \"\\\\($\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\)\", \"match_all\": true }\n		]\n	},\n\n	// Auto-pair square brackets\n	{ \"keys\": [\"[\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"[$0]\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^(?:\\t| |\\\\)|]|;|\\\\}|$)\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"[\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"[${0:$SELECTION}]\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": false, \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"]\"], \"command\": \"move\", \"args\": {\"by\": \"characters\", \"forward\": true}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\]\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"backspace\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete Left Right.sublime-macro\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_contains\", \"operand\": \"\\\\[$\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\]\", \"match_all\": true }\n		]\n	},\n\n	// Auto-pair curly brackets\n	{ \"keys\": [\"{\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"{$0}\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^(?:\\t| |\\\\)|]|\\\\}|$)\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"{\"], \"command\": \"wrap_block\", \"args\": {\"begin\": \"{\", \"end\": \"}\"}, \"context\":\n		[\n			{ \"key\": \"indented_block\", \"match_all\": true },\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_match\", \"operand\": \"^$\", \"match_all\": true },\n		]\n	},\n	{ \"keys\": [\"{\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"{${0:$SELECTION}}\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": false, \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"}\"], \"command\": \"move\", \"args\": {\"by\": \"characters\", \"forward\": true}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\}\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"backspace\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete Left Right.sublime-macro\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_match_enabled\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_contains\", \"operand\": \"\\\\{$\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\}\", \"match_all\": true }\n		]\n	},\n\n	{ \"keys\": [\"enter\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Add Line in Braces.sublime-macro\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_indent\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_contains\", \"operand\": \"\\\\{$\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\}\", \"match_all\": true }\n		]\n	},\n	{ \"keys\": [\"shift+enter\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Add Line in Braces.sublime-macro\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_indent\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_contains\", \"operand\": \"\\\\{$\", \"match_all\": true },\n			{ \"key\": \"following_text\", \"operator\": \"regex_contains\", \"operand\": \"^\\\\}\", \"match_all\": true }\n		]\n	},\n\n	{ \"keys\": [\"enter\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"\\n\\t$0\\n\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_indent\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selector\", \"operator\": \"equal\", \"operand\": \"meta.scope.between-tag-pair\", \"match_all\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n		]\n	},\n	{ \"keys\": [\"shift+enter\"], \"command\": \"insert_snippet\", \"args\": {\"contents\": \"\\n\\t$0\\n\"}, \"context\":\n		[\n			{ \"key\": \"setting.auto_indent\", \"operator\": \"equal\", \"operand\": true },\n			{ \"key\": \"selector\", \"operator\": \"equal\", \"operand\": \"meta.scope.between-tag-pair\", \"match_all\": true },\n			{ \"key\": \"selection_empty\", \"operator\": \"equal\", \"operand\": true, \"match_all\": true },\n		]\n	},\n\n	{\n		\"keys\": [\"super+alt+1\"],\n		\"command\": \"set_layout\",\n		\"args\":\n		{\n			\"cols\": [0.0, 1.0],\n			\"rows\": [0.0, 1.0],\n			\"cells\": [[0, 0, 1, 1]]\n		}\n	},\n	{\n		\"keys\": [\"super+alt+2\"],\n		\"command\": \"set_layout\",\n		\"args\":\n		{\n			\"cols\": [0.0, 0.5, 1.0],\n			\"rows\": [0.0, 1.0],\n			\"cells\": [[0, 0, 1, 1], [1, 0, 2, 1]]\n		}\n	},\n	{\n		\"keys\": [\"super+alt+3\"],\n		\"command\": \"set_layout\",\n		\"args\":\n		{\n			\"cols\": [0.0, 0.33, 0.66, 1.0],\n			\"rows\": [0.0, 1.0],\n			\"cells\": [[0, 0, 1, 1], [1, 0, 2, 1], [2, 0, 3, 1]]\n		}\n	},\n	{\n		\"keys\": [\"super+alt+4\"],\n		\"command\": \"set_layout\",\n		\"args\":\n		{\n			\"cols\": [0.0, 0.25, 0.5, 0.75, 1.0],\n			\"rows\": [0.0, 1.0],\n			\"cells\": [[0, 0, 1, 1], [1, 0, 2, 1], [2, 0, 3, 1], [3, 0, 4, 1]]\n		}\n	},\n	{\n		\"keys\": [\"super+alt+shift+2\"],\n		\"command\": \"set_layout\",\n		\"args\":\n		{\n			\"cols\": [0.0, 1.0],\n			\"rows\": [0.0, 0.5, 1.0],\n			\"cells\": [[0, 0, 1, 1], [0, 1, 1, 2]]\n		}\n	},\n	{\n		\"keys\": [\"super+alt+shift+3\"],\n		\"command\": \"set_layout\",\n		\"args\":\n		{\n			\"cols\": [0.0, 1.0],\n			\"rows\": [0.0, 0.33, 0.66, 1.0],\n			\"cells\": [[0, 0, 1, 1], [0, 1, 1, 2], [0, 2, 1, 3]]\n		}\n	},\n	{\n		\"keys\": [\"super+alt+5\"],\n		\"command\": \"set_layout\",\n		\"args\":\n		{\n			\"cols\": [0.0, 0.5, 1.0],\n			\"rows\": [0.0, 0.5, 1.0],\n			\"cells\":\n			[\n				[0, 0, 1, 1], [1, 0, 2, 1],\n				[0, 1, 1, 2], [1, 1, 2, 2]\n			]\n		}\n	},\n	{ \"keys\": [\"ctrl+1\"], \"command\": \"focus_group\", \"args\": { \"group\": 0 } },\n	{ \"keys\": [\"ctrl+2\"], \"command\": \"focus_group\", \"args\": { \"group\": 1 } },\n	{ \"keys\": [\"ctrl+3\"], \"command\": \"focus_group\", \"args\": { \"group\": 2 } },\n	{ \"keys\": [\"ctrl+4\"], \"command\": \"focus_group\", \"args\": { \"group\": 3 } },\n	{ \"keys\": [\"ctrl+5\"], \"command\": \"focus_group\", \"args\": { \"group\": 4 } },\n	{ \"keys\": [\"ctrl+6\"], \"command\": \"focus_group\", \"args\": { \"group\": 5 } },\n	{ \"keys\": [\"ctrl+7\"], \"command\": \"focus_group\", \"args\": { \"group\": 6 } },\n	{ \"keys\": [\"ctrl+8\"], \"command\": \"focus_group\", \"args\": { \"group\": 7 } },\n	{ \"keys\": [\"ctrl+9\"], \"command\": \"focus_group\", \"args\": { \"group\": 8 } },\n	{ \"keys\": [\"ctrl+shift+1\"], \"command\": \"move_to_group\", \"args\": { \"group\": 0 } },\n	{ \"keys\": [\"ctrl+shift+2\"], \"command\": \"move_to_group\", \"args\": { \"group\": 1 } },\n	{ \"keys\": [\"ctrl+shift+3\"], \"command\": \"move_to_group\", \"args\": { \"group\": 2 } },\n	{ \"keys\": [\"ctrl+shift+4\"], \"command\": \"move_to_group\", \"args\": { \"group\": 3 } },\n	{ \"keys\": [\"ctrl+shift+5\"], \"command\": \"move_to_group\", \"args\": { \"group\": 4 } },\n	{ \"keys\": [\"ctrl+shift+6\"], \"command\": \"move_to_group\", \"args\": { \"group\": 5 } },\n	{ \"keys\": [\"ctrl+shift+7\"], \"command\": \"move_to_group\", \"args\": { \"group\": 6 } },\n	{ \"keys\": [\"ctrl+shift+8\"], \"command\": \"move_to_group\", \"args\": { \"group\": 7 } },\n	{ \"keys\": [\"ctrl+shift+9\"], \"command\": \"move_to_group\", \"args\": { \"group\": 8 } },\n	{ \"keys\": [\"ctrl+0\"], \"command\": \"focus_side_bar\" },\n\n	{ \"keys\": [\"super+k\", \"super+up\"], \"command\": \"new_pane\" },\n	{ \"keys\": [\"super+k\", \"super+shift+up\"], \"command\": \"new_pane\", \"args\": {\"move\": false} },\n	{ \"keys\": [\"super+k\", \"super+down\"], \"command\": \"close_pane\" },\n	{ \"keys\": [\"super+k\", \"super+left\"], \"command\": \"focus_neighboring_group\", \"args\": {\"forward\": false} },\n	{ \"keys\": [\"super+k\", \"super+right\"], \"command\": \"focus_neighboring_group\" },\n	{ \"keys\": [\"super+k\", \"super+shift+left\"], \"command\": \"move_to_neighboring_group\", \"args\": {\"forward\": false} },\n	{ \"keys\": [\"super+k\", \"super+shift+right\"], \"command\": \"move_to_neighboring_group\" },\n\n	{ \"keys\": [\"super+1\"], \"command\": \"select_by_index\", \"args\": { \"index\": 0 } },\n	{ \"keys\": [\"super+2\"], \"command\": \"select_by_index\", \"args\": { \"index\": 1 } },\n	{ \"keys\": [\"super+3\"], \"command\": \"select_by_index\", \"args\": { \"index\": 2 } },\n	{ \"keys\": [\"super+4\"], \"command\": \"select_by_index\", \"args\": { \"index\": 3 } },\n	{ \"keys\": [\"super+5\"], \"command\": \"select_by_index\", \"args\": { \"index\": 4 } },\n	{ \"keys\": [\"super+6\"], \"command\": \"select_by_index\", \"args\": { \"index\": 5 } },\n	{ \"keys\": [\"super+7\"], \"command\": \"select_by_index\", \"args\": { \"index\": 6 } },\n	{ \"keys\": [\"super+8\"], \"command\": \"select_by_index\", \"args\": { \"index\": 7 } },\n	{ \"keys\": [\"super+9\"], \"command\": \"select_by_index\", \"args\": { \"index\": 8 } },\n	{ \"keys\": [\"super+0\"], \"command\": \"select_by_index\", \"args\": { \"index\": 9 } },\n\n	{ \"keys\": [\"f2\"], \"command\": \"next_bookmark\" },\n	{ \"keys\": [\"shift+f2\"], \"command\": \"prev_bookmark\" },\n	{ \"keys\": [\"super+f2\"], \"command\": \"toggle_bookmark\" },\n	{ \"keys\": [\"super+shift+f2\"], \"command\": \"clear_bookmarks\" },\n	{ \"keys\": [\"alt+f2\"], \"command\": \"select_all_bookmarks\" },\n\n	{ \"keys\": [\"super+k\", \"super+u\"], \"command\": \"upper_case\" },\n	{ \"keys\": [\"super+k\", \"super+l\"], \"command\": \"lower_case\" },\n	{ \"keys\": [\"super+k\", \"super+space\"], \"command\": \"set_mark\" },\n	{ \"keys\": [\"super+k\", \"super+a\"], \"command\": \"select_to_mark\" },\n	{ \"keys\": [\"super+k\", \"super+w\"], \"command\": \"delete_to_mark\" },\n	{ \"keys\": [\"super+k\", \"super+x\"], \"command\": \"swap_with_mark\" },\n	{ \"keys\": [\"super+k\", \"super+g\"], \"command\": \"clear_bookmarks\", \"args\": {\"name\": \"mark\"} },\n\n	{ \"keys\": [\"super+equals\"], \"command\": \"increase_font_size\" },\n	{ \"keys\": [\"super+plus\"], \"command\": \"increase_font_size\" },\n	{ \"keys\": [\"super+minus\"], \"command\": \"decrease_font_size\" },\n\n	{ \"keys\": [\"ctrl+shift+w\"], \"command\": \"insert_snippet\", \"args\": { \"name\": \"Packages/XML/long-tag.sublime-snippet\" } },\n\n	{ \"keys\": [\"ctrl+shift+k\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete Line.sublime-macro\"} },\n\n	{ \"keys\": [\"super+alt+q\"], \"command\": \"wrap_lines\" },\n\n	{ \"keys\": [\"super+alt+[\"], \"command\": \"fold\" },\n	{ \"keys\": [\"super+alt+]\"], \"command\": \"unfold\" },\n	{ \"keys\": [\"super+k\", \"super+1\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 1} },\n	{ \"keys\": [\"super+k\", \"super+2\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 2} },\n	{ \"keys\": [\"super+k\", \"super+3\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 3} },\n	{ \"keys\": [\"super+k\", \"super+4\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 4} },\n	{ \"keys\": [\"super+k\", \"super+5\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 5} },\n	{ \"keys\": [\"super+k\", \"super+6\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 6} },\n	{ \"keys\": [\"super+k\", \"super+7\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 7} },\n	{ \"keys\": [\"super+k\", \"super+8\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 8} },\n	{ \"keys\": [\"super+k\", \"super+9\"], \"command\": \"fold_by_level\", \"args\": {\"level\": 9} },\n	{ \"keys\": [\"super+k\", \"super+0\"], \"command\": \"unfold_all\" },\n	{ \"keys\": [\"super+k\", \"super+j\"], \"command\": \"unfold_all\" },\n	{ \"keys\": [\"super+k\", \"super+t\"], \"command\": \"fold_tag_attributes\" },\n\n	{ \"keys\": [\"super+alt+o\"], \"command\": \"toggle_overwrite\" },\n\n	{ \"keys\": [\"alt+f2\"], \"command\": \"context_menu\" },\n\n	{ \"keys\": [\"super+alt+c\"], \"command\": \"toggle_case_sensitive\", \"context\":\n		[\n			{ \"key\": \"setting.is_widget\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"super+alt+r\"], \"command\": \"toggle_regex\", \"context\":\n		[\n			{ \"key\": \"setting.is_widget\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"super+alt+w\"], \"command\": \"toggle_whole_word\", \"context\":\n		[\n			{ \"key\": \"setting.is_widget\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n	{ \"keys\": [\"super+alt+a\"], \"command\": \"toggle_preserve_case\", \"context\":\n		[\n			{ \"key\": \"setting.is_widget\", \"operator\": \"equal\", \"operand\": true }\n		]\n	},\n\n	// Find panel key bindings\n	{ \"keys\": [\"enter\"], \"command\": \"find_next\", \"context\":\n		[{\"key\": \"panel\", \"operand\": \"find\"}, {\"key\": \"panel_has_focus\"}]\n	},\n	{ \"keys\": [\"shift+enter\"], \"command\": \"find_prev\", \"context\":\n		[{\"key\": \"panel\", \"operand\": \"find\"}, {\"key\": \"panel_has_focus\"}]\n	},\n	{ \"keys\": [\"alt+enter\"], \"command\": \"find_all\", \"args\": {\"close_panel\": true},\n		 \"context\": [{\"key\": \"panel\", \"operand\": \"find\"}, {\"key\": \"panel_has_focus\"}]\n	},\n\n	// Replace panel key bindings\n	{ \"keys\": [\"enter\"], \"command\": \"find_next\", \"context\":\n		[{\"key\": \"panel\", \"operand\": \"replace\"}, {\"key\": \"panel_has_focus\"}]\n	},\n	{ \"keys\": [\"shift+enter\"], \"command\": \"find_prev\", \"context\":\n		[{\"key\": \"panel\", \"operand\": \"replace\"}, {\"key\": \"panel_has_focus\"}]\n	},\n	{ \"keys\": [\"alt+enter\"], \"command\": \"find_all\", \"args\": {\"close_panel\": true},\n		\"context\": [{\"key\": \"panel\", \"operand\": \"replace\"}, {\"key\": \"panel_has_focus\"}]\n	},\n	{ \"keys\": [\"ctrl+alt+enter\"], \"command\": \"replace_all\", \"args\": {\"close_panel\": true},\n		 \"context\": [{\"key\": \"panel\", \"operand\": \"replace\"}, {\"key\": \"panel_has_focus\"}]\n	},\n\n	// Incremental find panel key bindings\n	{ \"keys\": [\"enter\"], \"command\": \"hide_panel\", \"context\":\n		[{\"key\": \"panel\", \"operand\": \"incremental_find\"}, {\"key\": \"panel_has_focus\"}]\n	},\n	{ \"keys\": [\"shift+enter\"], \"command\": \"find_prev\", \"context\":\n		[{\"key\": \"panel\", \"operand\": \"incremental_find\"}, {\"key\": \"panel_has_focus\"}]\n	},\n	{ \"keys\": [\"alt+enter\"], \"command\": \"find_all\", \"args\": {\"close_panel\": true},\n		\"context\": [{\"key\": \"panel\", \"operand\": \"incremental_find\"}, {\"key\": \"panel_has_focus\"}]\n	},\n\n	{ \"keys\": [\"super+,\"], \"command\": \"open_file\", \"args\": {\"file\": \"${packages}/User/Preferences.sublime-settings\"} },\n\n	{ \"keys\": [\"super+k\", \"super+y\"], \"command\": \"yank\" },\n	{ \"keys\": [\"super+k\", \"super+k\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete to Hard EOL.sublime-macro\"} },\n	{ \"keys\": [\"super+k\", \"super+backspace\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete to Hard BOL.sublime-macro\"} },\n	{ \"keys\": [\"super+k\", \"super+c\"], \"command\": \"show_at_center\" },\n\n	// These are OS X built in commands, and don't need to be listed here, but\n	// doing so lets them show up in the menu\n	{ \"keys\": [\"ctrl+y\"], \"command\": \"yank\" },\n	{ \"keys\": [\"super+backspace\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete to Hard BOL.sublime-macro\"} },\n	// super+delete isn't a built in command, but makes sense anyway\n	{ \"keys\": [\"super+delete\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete to Hard EOL.sublime-macro\"} },\n	{ \"keys\": [\"ctrl+k\"], \"command\": \"run_macro_file\", \"args\": {\"file\": \"res://Packages/Default/Delete to Hard EOL.sublime-macro\"} },\n	{ \"keys\": [\"ctrl+l\"], \"command\": \"show_at_center\" },\n	{ \"keys\": [\"ctrl+o\"], \"command\": \"insert_snippet\", \"args\": { \"contents\": \"$0\\n\" } },\n	{ \"keys\": [\"ctrl+super+d\"], \"command\": \"noop\" },\n	{ \"keys\": [\"ctrl+super+shift+d\"], \"command\": \"noop\" },\n\n	// HTML, XML close tag\n	{ \"keys\": [\"/\"], \"command\": \"close_tag\", \"args\": { \"insert_slash\": true }, \"context\":\n		[\n			{ \"key\": \"selector\", \"operator\": \"equal\", \"operand\": \"(text.html, text.xml) - string - comment\", \"match_all\": true },\n			{ \"key\": \"preceding_text\", \"operator\": \"regex_match\", \"operand\": \".*<$\", \"match_all\": true },\n			{ \"key\": \"setting.auto_close_tags\" }\n		]\n	}\n]\n",
+			"file": "/Volumes/Storage/cache/library.hdezier/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 34338,
+				"line_ending": "Unix",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"file": "include/server.h",
+			"settings":
+			{
+				"buffer_size": 1110,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "ft_p.sublime-project",
+			"settings":
+			{
+				"buffer_size": 380,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "libft/include/libft.h",
+			"settings":
+			{
+				"buffer_size": 3909,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "libft/Makefile",
+			"settings":
+			{
+				"buffer_size": 2270,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "libft/src/ft_atoi.c",
+			"settings":
+			{
+				"buffer_size": 1561,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/client.c",
+			"settings":
+			{
+				"buffer_size": 1749,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main.c",
+			"settings":
+			{
+				"buffer_size": 1229,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 2367,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 207.0,
+		"last_filter": "key us",
+		"selected_items":
+		[
+			[
+				"key us",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"key de",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"keyus",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"key u",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"pref u",
+				"Preferences: Settings - User"
+			],
+			[
+				"pref",
+				"Preferences: Settings - User"
+			],
+			[
+				"pack rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"linter",
+				"SublimeLinter: Disable Linter"
+			],
+			[
+				"pack remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack in",
+				"Package Control: Install Package"
+			],
+			[
+				"defaut ",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"defua",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"key ",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"lin",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"sho",
+				"SublimeLinter: Show Errors on Save"
+			],
+			[
+				"mode",
+				"SublimeLinter: Choose Lint Mode"
+			],
+			[
+				"lint",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"pack li",
+				"Package Control: List Packages"
+			],
+			[
+				"pack ins",
+				"Package Control: Install Package"
+			],
+			[
+				"clang",
+				"Set Syntax: ClangErrorPanel"
+			],
+			[
+				"pack",
+				"Preferences: Package Control Settings – Default"
+			],
+			[
+				"key def",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"pref us",
+				"Preferences: Settings - User"
+			],
+			[
+				"pack install",
+				"Package Control: Install Package"
+			],
+			[
+				"pack ",
+				"Preferences: Package Control Settings – User"
+			],
+			[
+				"pack list",
+				"Package Control: List Packages"
+			],
+			[
+				"pre ",
+				"Preferences: Settings - User"
+			],
+			[
+				"color",
+				"Color Picker"
+			],
+			[
+				"prefe",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"clangc",
+				"Preferences: ClangComplete Settings – User"
+			],
+			[
+				"",
+				"42 : Add a header"
+			],
+			[
+				"clagcomp",
+				"Preferences: ClangComplete Settings – User"
+			],
+			[
+				"keybin",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"keyb",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"keybi",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"prefere",
+				"Preferences: Settings - User"
+			],
+			[
+				"pack remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack l",
+				"Package Control: List Packages"
+			],
+			[
+				"pack chann",
+				"Package Control: Add Channel"
+			],
+			[
+				"project",
+				"Project: Add Folder"
+			],
+			[
+				"prefse",
+				"Preferences: Settings - User"
+			],
+			[
+				"keybn",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"alignment",
+				"Preferences: Alignment Key Bindings – Default"
+			],
+			[
+				"align",
+				"Preferences: Alignment Key Bindings – User"
+			],
+			[
+				"prefre",
+				"Preferences: Settings - User"
+			],
+			[
+				"d def",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"delete",
+				"File: Delete"
+			],
+			[
+				"keybind",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"menu",
+				"View: Toggle Menu"
+			],
+			[
+				"sublimelinter",
+				"SublimeLinter: Next Error"
+			],
+			[
+				"me",
+				"View: Toggle Menu"
+			],
+			[
+				"remove pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"toggl",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"tog",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"toggle lin",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"warn",
+				"SublimeLinter: Don't Make Warnings Passive"
+			],
+			[
+				"warnin",
+				"SublimeLinter: Make Warnings Passive"
+			],
+			[
+				"gutter",
+				"SublimeLinter: Choose Gutter Theme"
+			],
+			[
+				"mark",
+				"SublimeLinter: Choose Mark Style"
+			],
+			[
+				"show",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"next",
+				"SublimeLinter: Next Error"
+			],
+			[
+				"pack i",
+				"Package Control: Install Package"
+			],
+			[
+				"Snippet: ",
+				"Snippet: Cpp-print"
+			],
+			[
+				"pac rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"remove pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"list pack",
+				"Package Control: List Packages"
+			],
+			[
+				"pac kin",
+				"Package Control: Install Package"
+			],
+			[
+				"parem",
+				"Package Control: Remove Package"
+			],
+			[
+				"remopa",
+				"Package Control: Remove Package"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"paki",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pak ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 503.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/nfs/2013/h/hdezier/code/meuh/42/ft_p/hdezier",
+		"/nfs/2013/h/hdezier/code/meuh/42/ft_p/hdezier/libft",
+		"/nfs/2013/h/hdezier/code/meuh/42/ft_p/hdezier/src"
+	],
+	"file_history":
+	[
+		"/nfs/2013/h/hdezier/code/correction/correc/test/test0.rl",
+		"/nfs/2013/h/hdezier/code/meuh/42/ft_p/hdezier/libft/src/ft_free_array_str.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/ft_p/hdezier/libft/src/ft_strsplit.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/ft_p/hdezier/libft/src/ft_get_line.c",
+		"/Volumes/Storage/cache/library.hdezier/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Volumes/Storage/cache/library.hdezier/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/nfs/2013/h/hdezier/code/meuh/42/ft_p/hdezier/libft/src/ft_lstadd.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/ft_p/hdezier/libft/Makefile",
+		"/nfs/2013/h/hdezier/code/meuh/42/ft_p/hdezier/libft/include/libft.h",
+		"/Volumes/Storage/cache/library.hdezier/Application Support/Sublime Text 3/Packages/Clang-Complete/cc.sublime-settings",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/test/test1.rl",
+		"/Volumes/Storage/cache/library.hdezier/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/include/specialization.h",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/include/Symbol.hpp",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/include/Expr.hpp",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/expertsystem.sublime-project",
+		"/Volumes/Storage/cache/library.hdezier/Application Support/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
+		"/Volumes/Storage/cache/library.hdezier/Application Support/Sublime Text 3/Packages/CTags/Default.sublime-keymap",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/include/Analyzer.hpp",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/src/Analyzer.cpp",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/include/Rule.hpp",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/src/Rule.cpp",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/src/main.cpp",
+		"/nfs/2013/h/hdezier/code/meuh/42/ExpertSystem/hdezier2.0/Makefile",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/expertsystem.sublime-project",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/include/Expr.hpp",
+		"/home/leeios/.config/sublime-text-3/Packages/Package Control/Package Control.sublime-settings",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/IToken.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/TokensDefinition.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Parser.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/Lexer.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Lexer.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/IExpr.hpp",
+		"/home/leeios/.config/sublime-text-3/Packages/Leeios/Leeios.tmLanguage",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/Parser.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/TokensDefinition.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Tokens/TEntity.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Tokens/TOperator.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Tokens/TOperand.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/TContextMark.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Tokens/TContextMark.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Tokens/TPriorities.cpp",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/TComment.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Tokens/TComment.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/test/test0.rl",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/TPriorities.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Tokens/TNegation.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/specialization.h",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/TNegation.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/TOperator.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Token/TOperand.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/TOperand.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/TEntity.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/main.cpp",
+		"/home/leeios/code/meuh/sandbox/hdezier/Parser/src/Parser.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/main.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/Makefile",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/Error.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Error.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/src/Token.cpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/Token.hpp",
+		"/home/leeios/code/meuh/sandbox/hdezier/Parser/include/IToken.hpp",
+		"/home/leeios/code/meuh/42/ExpertSystem/hdezier/include/Gate.hpp",
+		"/home/leeios/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/leeios/.config/sublime-text-3/Packages/Leeios/Symbol.tmPreferences",
+		"/home/leeios/.config/sublime-text-3/Packages/Leeios/SymbolHide.tmPreferences",
+		"/home/leeios/.config/sublime-text-3/Packages/Open-Include/Default (Linux).sublime-keymap",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/grow_rect_with_piece.c",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/print_pieces.c",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/add_piece_to_result.c",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/lib_rect.c",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/error.c",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/test/log.txt",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/test/test_00.p",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/Makefile",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/link_pieces.c",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/tetris.sublime-project",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Package Control.sublime-settings",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/error.cpp",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/main.c",
+		"/home/leeios/.config/sublime-text-3/Packages/Clang-Complete/cc.sublime-settings",
+		"/home/leeios/code/rool/src/screens/Project.cpp",
+		"/home/leeios/code/rool/include/Project.hpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/main.cpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/config/programs.conf",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/include/IModule.hpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/include/Master.hpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/Process.cpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/modules/MLog.cpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/include/MLog.hpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/Master.cpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/Log.cpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/UI/AWindow.cpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/taskmaster.sublime-project",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/include/Process.hpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/Makefile",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/include/Log.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/Makefile.model",
+		"/home/leeios/code/meuh/util/roolv2.0/Makefile",
+		"/home/leeios/code/meuh/util/roolv2.0/rool.sublime-project",
+		"/home/leeios/code/meuh/util/roolv2.0/include/MemberMod.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/include/ClassMod.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/include/IModule.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/mods/ClassMod.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/mods/MemberMod.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/utils/FtStr.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/utils/FtFile.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/include/config.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/commands/InterfaceCmd.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/commands/StandardCmd.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/main.model",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/interface.model",
+		"/home/leeios/code/meuh/util/roolv2.0/include/util.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/include/InterfaceCmd.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/inc.model",
+		"/home/leeios/code/meuh/util/roolv2.0/src/screens/Project.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/screens/Boot.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/proj_tree/classic.tree",
+		"/home/leeios/code/meuh/util/roolv2.0/config/.proj",
+		"/home/leeios/code/meuh/util/roolv2.0/include/StandardCmd.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/inc_parents.model",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/inherit_parents.model",
+		"/home/leeios/code/meuh/util/roolv2.0/include/ICommand.hpp",
+		"/home/leeios/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
+		"/home/leeios/code/meuh/util/roolv2.0/src/main.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/ncurse/Window.cpp"
+	],
+	"find":
+	{
+		"height": 48.0
+	},
+	"find_in_files":
+	{
+		"height": 158.0,
+		"where_history":
+		[
+			"~/code/meuh/42/ExpertSystem/hdezier2.0/",
+			"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/",
+			"/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0/include",
+			"/home/leeios/code/meuh/42/ExpertSystem/hdezier, *.cpp, *.hpp",
+			"/home/leeios/code/meuh/sandbox/hdezier/tetris",
+			"/home/leeios/code/meuh/util/roolv2.0",
+			"/home/leeios/code/meuh/util/Rool/src,/home/leeios/code/meuh/util/Rool/include",
+			"/home/leeios/code/meuh/sandbox/util/Rool",
+			"/home/leeios/code/meuh/42/Scop/hdezier/src",
+			"/home/leeios/code/meuh/42/scop/hdezier/src",
+			"/home/leeios/code/meuh/42/scop/hdezier",
+			"/home/leeios/code/meuh/util/project_ruler/test",
+			"/home/leeios/taf/Moods/moods/public/js/libs/moods",
+			"/home/leeios/taf/whibo-dev/app/",
+			"/home/leeios/taf/whibo-dev/app/controllers",
+			"/home/leeios/taf/whibo-dev/app/assets/javascripts/zen/app/docViewer/review",
+			"/home/leeios/taf/Review/js/libs/etherpad-lite/node_modules/ep_etherpad-lite",
+			"/home/leeios/taf/Review/js/libs/etherpad-lite/src",
+			"/home/leeios/taf/Review/js/libs/etherpad-lite/SRC",
+			"/home/leeios/taf/Review/js/libs/etherpad-lite",
+			"/home/leeios/taf/Review",
+			"/home/leeios/taf/tmp_taf/public/js/libs/feedy",
+			"/home/leeios/taf/tmp_taf/",
+			"/home/leeios/taf/tmp_taf/public/js/libs/feedy",
+			"/home/leeios/taf/tmp_taf/public/js/libs/comApp",
+			"/home/leeios/taf/tmp_taf/model",
+			"/home/leeios/taf/tmp_taf/public/js/libs/comApp",
+			"/home/leeios/taf/tmp_taf/public/js/libs/appComments",
+			"/home/leeios/taf/tmp_taf/public/js/libs/appcomments",
+			"/home/leeios/taf/tmp_taf/public/js/libs/appcoments",
+			"/home/leeios/taf/tmp_taf/public/js/libs",
+			"/home/leeios/code/C/grimly/include,/home/leeios/code/C/grimly/src,/home/leeios/code/C/grimly/test"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"free",
+			"ret_free",
+			"super+l",
+			"ctrl",
+			"shift+up",
+			":",
+			"create_server",
+			"new",
+			"super+g",
+			"ctrl+g",
+			"(",
+			"objs",
+			"incs",
+			"srcs",
+			"ctrl",
+			"m_initValues",
+			"initVals",
+			"initValues",
+			"return (eValue::FALSE);",
+			"return (eValue::TRUE)",
+			"return (eValue::ERROR);",
+			"return (eValue::UNDEFINED);",
+			"UNDEFINED",
+			"==",
+			"left",
+			"oppos",
+			"Symbol",
+			"Symbol(val,",
+			"opposite",
+			"true",
+			"false",
+			"rightVal",
+			"result =",
+			"leftVal",
+			"m_rightOp",
+			"val",
+			"tv",
+			"rightEval",
+			"leftEval",
+			"Symbol",
+			"symbols",
+			"m_rightExpr",
+			"leftVal",
+			"const",
+			"Analyzer",
+			"setLeftNegative",
+			"getLink",
+			"getSymbols",
+			"case (eValue::UNDEFINED) : return (eValue::UNDEFINED);",
+			"break",
+			"m_initValues",
+			"}\n				s",
+			"FALSE_TEST",
+			"TRUE_TEST",
+			"C",
+			"#",
+			"A",
+			"m_initValues",
+			"eValue",
+			"_calcTest",
+			"val",
+			"valueNames",
+			"ERROR",
+			"FALSE_TEST",
+			",",
+			"ERROR",
+			"value",
+			"val",
+			"void",
+			"FALSE_TEST",
+			"\n			",
+			"\n",
+			"m_operator",
+			"return (eValue:",
+			"FALSE_TEST",
+			"TRUE_TEST",
+			"FALSE_TEST",
+			"TRUE_TEST",
+			"ERROR",
+			"return (eValue::FALSE_TEST);",
+			"TEST)",
+			" )",
+			"rule->isValid(initValues, valuesRequired)",
+			"calc",
+			"eval",
+			"_evalOp",
+			"initStates",
+			"super+y",
+			"ctrl",
+			"tab",
+			"ctrl+",
+			"keypad",
+			"ctrl+alt",
+			"alt+right",
+			"keypad8",
+			"Analyzer",
+			"super",
+			"test",
+			"alt",
+			"ctrl",
+			"a",
+			"\neErr	",
+			"eErr",
+			"raise_error",
+			"ERR_HPP",
+			"eOperator",
+			"if",
+			"case",
+			"leftVal",
+			"_evalRight()",
+			"_evalLeft() ==",
+			"test",
+			"Result",
+			",",
+			";",
+			"bool",
+			"_evalValue",
+			"_eval",
+			"{",
+			"m_currentExpr",
+			"m_leftOp",
+			"false",
+			"true",
+			"bool",
+			";",
+			"break",
+			"ENTITY",
+			"sEntity"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"m_initStates",
+			"initStates",
+			"SYMBOL",
+			"sSymbol",
+			"t_error",
+			"nullptr",
+			"userInput",
+			"scop",
+			"suggestComment",
+			"preValid",
+			"addComment",
+			"id",
+			"r.Seed.",
+			"ViewFile",
+			"grimly"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/server.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2658,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1560,
+								1560
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"hasHeader": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 332.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/nfs/2013/h/hdezier/code/correction/hdezier/test/tst.rl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 17,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13,
+								13
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/nfs/2013/h/hdezier/code/correction/hdezier/include/Expr.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7866,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4021,
+								4021
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1502.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 126,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								126
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_name": "Example input 1:",
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"default_dir": "/nfs/2013/h/hdezier/code/meuh/42/ft_p/hdezier",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/exec_cmd.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 956,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								912,
+								912
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/nfs/2013/h/hdezier/code/correction/gb/test/test0.rl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								19,
+								19
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/nfs/2013/h/hdezier/code/correction/gb/src/Rule.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6575,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4408,
+								4408
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1367.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/Volumes/Storage/cache/library.hdezier/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 34338,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								28183,
+								28188
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 7967.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 8,
+					"file": "include/server.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1110,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1066,
+								1066
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Objective-C/Objective-C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "ft_p.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 380,
+						"regions":
+						{
+							"bookmarks":
+							{
+								"flags": 144,
+								"icon": "Packages/BetterBookmarks/icons/function.png",
+								"regions":
+								[
+								],
+								"scope": "comment"
+							}
+						},
+						"selection":
+						[
+							[
+								226,
+								226
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "libft/include/libft.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3909,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3900,
+								3900
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Objective-C/Objective-C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 902.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "libft/Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2270,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1801,
+								1801
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Makefile Improved/Makefile Improved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "libft/src/ft_atoi.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1561,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1559,
+								1559
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 80.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "src/client.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1749,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"hasHeader": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 14,
+					"file": "src/main.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1229,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1074,
+								1074
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"hasHeader": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2367,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1434,
+								1434
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"hasHeader": true,
+							"history_list_is_closing": true,
+							"syntax": "Packages/Makefile Improved/Makefile Improved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 420.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 63.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				2
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
+				1,
+				1,
+				2,
+				2
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			0.5,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.cc":
+	{
+		"height": 120.0
+	},
+	"output.clipboard_manager":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "ft_p.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ex",
+				"src/exec_cmd.c"
+			],
+			[
+				"make",
+				"libft/Makefile"
+			],
+			[
+				"libfh",
+				"libft/include/libft.h"
+			],
+			[
+				"freea",
+				"libft/src/ft_free_array_str.c"
+			],
+			[
+				"spli",
+				"libft/src/ft_strsplit.c"
+			],
+			[
+				"getne",
+				"libft/src/ft_get_line.c"
+			],
+			[
+				"lst",
+				"libft/src/ft_lstadd.c"
+			],
+			[
+				"fus",
+				"ft_p.sublime-project"
+			],
+			[
+				"atoi",
+				"libft/src/ft_atoi.c"
+			],
+			[
+				"libfth",
+				"libft/include/libft.h"
+			],
+			[
+				".h",
+				"include/server.h"
+			],
+			[
+				"cli",
+				"src/client.c"
+			],
+			[
+				"test1",
+				"test/test1.rl"
+			],
+			[
+				"symb",
+				"include/Symbol.hpp"
+			],
+			[
+				"anah",
+				"include/Analyzer.hpp"
+			],
+			[
+				"makef",
+				"Makefile"
+			],
+			[
+				"te",
+				"test/test0.rl"
+			],
+			[
+				"ana",
+				"include/Analyzer.hpp"
+			],
+			[
+				"rulhp",
+				"include/Rule.hpp"
+			],
+			[
+				"rulecp",
+				"src/Rule.cpp"
+			],
+			[
+				"main",
+				"src/main.cpp"
+			],
+			[
+				"expr",
+				"include/Expr.hpp"
+			],
+			[
+				"exp",
+				"expertsystem.sublime-project"
+			],
+			[
+				"subl",
+				"expertsystem.sublime-project"
+			],
+			[
+				"exphpp",
+				"include/Expr.hpp"
+			],
+			[
+				"rulcp",
+				"src/Rule.cpp"
+			],
+			[
+				"er",
+				"include/Error.hpp"
+			],
+			[
+				"ru",
+				"include/Rule.hpp"
+			],
+			[
+				"e",
+				"include/Expr.hpp"
+			],
+			[
+				"lexh",
+				"include/Lexer.hpp"
+			],
+			[
+				"lex",
+				"src/Lexer.cpp"
+			],
+			[
+				"itok",
+				"include/IToken.hpp"
+			],
+			[
+				"ie",
+				"include/IExpr.hpp"
+			],
+			[
+				"iex",
+				"include/IExpr.hpp"
+			],
+			[
+				"spe",
+				"include/specialization.h"
+			],
+			[
+				"lexc",
+				"src/Lexer.cpp"
+			],
+			[
+				"le",
+				"include/Lexer.hpp"
+			],
+			[
+				"err",
+				"src/Error.cpp"
+			],
+			[
+				"pars",
+				"include/Parser.hpp"
+			],
+			[
+				"ito",
+				"include/IToken.hpp"
+			],
+			[
+				"toper",
+				"src/Tokens/TOperator.cpp"
+			],
+			[
+				"top",
+				"src/Tokens/TOperand.cpp"
+			],
+			[
+				"tentcp",
+				"src/Tokens/TEntity.cpp"
+			],
+			[
+				"tcontecp",
+				"src/Tokens/TContextMark.cpp"
+			],
+			[
+				"tconte",
+				"include/TContextMark.hpp"
+			],
+			[
+				"t",
+				"include/TComment.hpp"
+			],
+			[
+				"token",
+				"include/TokensDefinition.hpp"
+			],
+			[
+				"toke",
+				"include/Token.hpp"
+			],
+			[
+				"makefi",
+				"Makefile"
+			],
+			[
+				"tneg",
+				"src/Tokens/TNegation.cpp"
+			],
+			[
+				"tnega",
+				"include/TNegation.hpp"
+			],
+			[
+				"topera",
+				"src/Token/TOperand.cpp"
+			],
+			[
+				"tprio",
+				"src/Tokens/TPriorities.cpp"
+			],
+			[
+				"tpio",
+				"include/TPriorities.hpp"
+			],
+			[
+				"test",
+				"test/test0.rl"
+			],
+			[
+				"tcon",
+				"src/Tokens/TContextMark.cpp"
+			],
+			[
+				"par",
+				"include/Parser.hpp"
+			],
+			[
+				"tcpp",
+				"src/Tokens/TEntity.cpp"
+			],
+			[
+				"tope",
+				"include/TOperator.hpp"
+			],
+			[
+				"tco",
+				"include/TComment.hpp"
+			],
+			[
+				"ten",
+				"include/TEntity.hpp"
+			],
+			[
+				"te0",
+				"test/test0.rl"
+			],
+			[
+				"tcom",
+				"src/Tokens/TComment.cpp"
+			],
+			[
+				"tenti",
+				"src/Tokens/TEntity.cpp"
+			],
+			[
+				"tcomm",
+				"include/TComment.hpp"
+			],
+			[
+				"tokencp",
+				"src/Token.cpp"
+			],
+			[
+				"gate",
+				"include/Gate.hpp"
+			],
+			[
+				"erro",
+				"src/Error.cpp"
+			],
+			[
+				"error",
+				"include/Error.hpp"
+			],
+			[
+				"dead",
+				"src/calculus_dead_blocks.c"
+			],
+			[
+				"pri",
+				"src/print_pieces.c"
+			],
+			[
+				"fill",
+				"src/fill_result_in_size.c"
+			],
+			[
+				"res",
+				"src/resolve.c"
+			],
+			[
+				"ma",
+				"Makefile"
+			],
+			[
+				"lo",
+				"test/log.txt"
+			],
+			[
+				"rec",
+				"src/lib_rect.c"
+			],
+			[
+				"calc",
+				"src/calc_added_rows_cols.c"
+			],
+			[
+				".p",
+				"test/test_00.p"
+			],
+			[
+				"libr",
+				"src/lib_rect.c"
+			],
+			[
+				"logt",
+				"test/log.txt"
+			],
+			[
+				"add",
+				"src/add_piece_to_result.c"
+			],
+			[
+				"mak",
+				"Makefile"
+			],
+			[
+				"link",
+				"src/link_pieces.c"
+			],
+			[
+				"prin",
+				"src/print_pieces.c"
+			],
+			[
+				"file_",
+				"src/file_to_pieces.c"
+			],
+			[
+				"tetris/main.c",
+				"meuh/sandbox/hdezier/tetris/src/main.c"
+			],
+			[
+				"pro",
+				"rool/include/Project.hpp"
+			],
+			[
+				"projec",
+				"rool/src/screens/Project.cpp"
+			],
+			[
+				"mas",
+				"include/Master.hpp"
+			],
+			[
+				"mlogc",
+				"src/modules/MLog.cpp"
+			],
+			[
+				"mlogh",
+				"include/MLog.hpp"
+			],
+			[
+				"co",
+				"config/programs.conf"
+			],
+			[
+				"proc",
+				"include/Process.hpp"
+			],
+			[
+				"fstr",
+				"src/utils/FtStr.cpp"
+			],
+			[
+				"strf",
+				"src/utils/FtFile.cpp"
+			],
+			[
+				"cmd",
+				"src/commands/InterfaceCmd.cpp"
+			],
+			[
+				"clasm",
+				"include/ClassMod.hpp"
+			],
+			[
+				"mem",
+				"src/mods/MemberMod.cpp"
+			],
+			[
+				"mod",
+				"src/mods/ClassMod.cpp"
+			],
+			[
+				"ftst",
+				"src/utils/FtStr.cpp"
+			],
+			[
+				"stan",
+				"src/commands/StandardCmd.cpp"
+			],
+			[
+				"util",
+				"include/util.hpp"
+			],
+			[
+				"uti",
+				"include/util.hpp"
+			],
+			[
+				"classmod",
+				"meuh/util/roolv2.0/inc/ClassMod.hpp"
+			],
+			[
+				"projecth",
+				"meuh/util/roolv2.0/inc/Project.hpp"
+			],
+			[
+				"projectc",
+				"meuh/util/roolv2.0/src/Project.cpp"
+			],
+			[
+				"window",
+				"meuh/util/roolv2.0/inc/Window.hpp"
+			],
+			[
+				"menuh",
+				"meuh/util/roolv2.0/inc/Menu.hpp"
+			],
+			[
+				".proj",
+				"meuh/util/roolv2.0/config/.proj"
+			],
+			[
+				"boot",
+				"meuh/util/Rool/src/menus/Boot.cpp"
+			],
+			[
+				"filedi",
+				"meuh/util/roolv2.0/inc/FileDir.hpp"
+			],
+			[
+				"rool2make",
+				"meuh/util/roolv2.0/Makefile"
+			],
+			[
+				"taskmastercon",
+				"meuh/42/Taskmaster/hdezier-rbernand/config/programs.conf"
+			],
+			[
+				"taskconfig",
+				"tools/VSCode-linux-x64/resources/app/client/vs/workbench/contrib/files/media/AddFolder_inverse.svg"
+			],
+			[
+				"master",
+				"meuh/42/Taskmaster/hdezier-rbernand/src/Master.cpp"
+			],
+			[
+				"bootcp",
+				"meuh/util/roolv2.0/src/menus/Boot.cpp"
+			],
+			[
+				"cppjson",
+				"meuh/util/roolv2.0/config/cpp-rool.json"
+			],
+			[
+				"classic",
+				"meuh/util/roolv2.0/config/proj_tree/classic.tree"
+			],
+			[
+				"rool2.0",
+				"meuh/util/roolv2.0/src/menus/Boot.cpp"
+			],
+			[
+				"filed",
+				"meuh/util/roolv2.0/inc/FileDir.hpp"
+			],
+			[
+				"filesc",
+				"Txt-index/src/FileScanner.cpp"
+			],
+			[
+				"trie",
+				"Txt-index/src/Trie.cpp"
+			],
+			[
+				"menucp",
+				"meuh/util/roolv2.0/src/Menu.cpp"
+			],
+			[
+				"b",
+				"local/cpp/cpp-event/obj/Bridge.d"
+			],
+			[
+				"gui",
+				"rool/src/GUI.cpp"
+			],
+			[
+				"roolmain",
+				"meuh/util/Rool/src/main.cpp"
+			],
+			[
+				"booth",
+				"meuh/util/roolv2.0/inc/Boot.hpp"
+			],
+			[
+				"sortic",
+				"rool/src/SortItems.cpp"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/code/meuh/sandbox/hdezier/test/MetaProgC++/metaprogc++.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 245.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
