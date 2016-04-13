@@ -3,41 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 16:32:34 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/12 18:49:32 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/13 17:19:12 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
+#include "libft.h"
 
-static void	exec_ls(char **param)
+static void	exec_ls(char **param, t_client_data *client_data)
 {
 	(void)param;
+	ft_putstr_fd(client_data->current_path, client_data->cs);
 }
 
-static void	exec_cd(char **param)
+static void	exec_cd(char **param, t_client_data *client_data)
 {
 	(void)param;
+	(void)client_data;
 }
 
-static void	exec_get(char **param)
+static void	exec_get(char **param, t_client_data *client_data)
 {
 	(void)param;
+	(void)client_data;
 }
 
-static void	exec_put(char **param)
+static void	exec_put(char **param, t_client_data *client_data)
 {
 	(void)param;
+	(void)client_data;
 }
 
-static void	exec_pwd(char **param)
+static void	exec_pwd(char **param, t_client_data *client_data)
 {
 	(void)param;
+	ft_putstr_fd(client_data->current_path, client_data->cs);
 }
 
-void		exec_cmd(e_cmd cmd, char **msg)
+void			exec_cmd(t_cmd cmd, char **msg, t_client_data *client_data)
 {
 	static const t_cmd_ft	cmd_dispatcher[] =
 	{
@@ -50,5 +56,5 @@ void		exec_cmd(e_cmd cmd, char **msg)
 
 	if (cmd == NONE || cmd == QUIT)
 		return ;
-	cmd_dispatcher[(int)cmd](msg);
+	cmd_dispatcher[(int)cmd](msg, client_data);
 }

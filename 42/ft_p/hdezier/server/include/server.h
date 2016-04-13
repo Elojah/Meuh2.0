@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 15:22:55 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/12 19:41:52 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/13 16:25:47 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,21 @@
 
 # include <unistd.h>
 
-typedef void	(*t_cmd_ft)(char **);
-
 typedef struct		s_client_data
 {
-	int				id;
-	pid_t			child;
+	int				cs;
 	char			current_path[MAX_LEN_PATH];
 }					t_client_data;
 
-enum				e_bool
+typedef void	(*t_cmd_ft)(char **, t_client_data*);
+
+typedef enum		e_bool
 {
 	FALSE = 0,
 	TRUE
-};
+}					t_bool;
 
-enum				e_cmd
+typedef enum		e_cmd
 {
 	LS = 0,
 	CD,
@@ -43,11 +42,11 @@ enum				e_cmd
 	PWD,
 	QUIT,
 	NONE
-};
+}					t_cmd;
 
 void			listen_port(int port);
-void			exec_cmd(e_cmd cmd, char **msg);
-e_bool			init_client(pid_t child);
+void			exec_cmd(t_cmd cmd, char **msg, t_client_data *client_data);
+void			new_client(int cs);
 
 
 #endif

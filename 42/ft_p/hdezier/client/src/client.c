@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/06 13:42:26 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/11 15:23:53 by hdezier          ###   ########.fr       */
+/*   Created: 2016/04/13 16:44:42 by leeios            #+#    #+#             */
+/*   Updated: 2016/04/13 17:02:22 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,13 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#include <string.h>
-
-static void		write_socket(char *msg, int sock)
-{
-	write(sock, msg, strlen(msg));
-}
+#include "client.h"
+#include "libft.h"
 
 static int		create_client(char *addr, int port)
 {
-	int sock;
-	struct protoent	*proto;
+	int					sock;
+	struct protoent		*proto;
 	struct sockaddr_in	sin;
 
 	proto = getprotobyname("tcp");
@@ -39,18 +35,20 @@ static int		create_client(char *addr, int port)
 	sin.sin_port = htons(port);
 	sin.sin_addr.s_addr = inet_addr(addr);
 	if (connect(sock, (const struct sockaddr *)&sin, sizeof(sin)) == -1)
-	{
-		write(2, "Connect error\n", 14);
-		exit(2);
-	}
+		sock = -1;
 	return (sock);
 }
 
-void		connect(char *addr, int port)
+void		connect_ftp(char *addr, int port)
 {
 	int						sock;
 
 	sock = create_client(addr, port);
-	write_socket("TEST", sock);
+	if (sock == -1)
+	{
+		ft_putstr_fd("Connection error\n", 2);
+		return ;
+	}
+	read_prompt(sock);
 	close(sock);
 }

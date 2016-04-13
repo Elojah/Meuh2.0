@@ -6,10 +6,10 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/06 13:12:27 by hdezier           #+#    #+#              #
-#    Updated: 2016/04/13 16:26:04 by leeios           ###   ########.fr        #
+#    Updated: 2016/04/13 17:01:20 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-TARGET = serveur
+TARGET = client
 
 #Directories
 BIN_DIR = bin
@@ -25,9 +25,8 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		server\
-		new_client\
-		exec_cmd\
+		client\
+		read_prompt\
 
 #List interfaces here
 INTERFACE = \

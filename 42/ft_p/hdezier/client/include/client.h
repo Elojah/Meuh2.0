@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.h                                           :+:      :+:    :+:   */
+/*   client.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/11 15:22:55 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/11 16:33:26 by hdezier          ###   ########.fr       */
+/*   Created: 2016/04/13 16:41:44 by leeios            #+#    #+#             */
+/*   Updated: 2016/04/13 16:56:47 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERVER_H
-#define SERVER_H
+#ifndef CLIENT_H
+# define CLIENT_H
 
-enum				e_bool
+# include <unistd.h>
+
+typedef enum		e_bool
 {
 	FALSE = 0,
 	TRUE
-};
+}					t_bool;
 
-enum				e_cmd
-{
-	LS = 0,
-	CD,
-	GET,
-	PUT,
-	PWD,
-	QUIT,
-	NONE
-};
-
-void			listen_port(int port);
-void			exec_cmd(e_cmd cmd, char **msg);
-
+void		connect_ftp(char *addr, int port);
+void		read_prompt(int sock);
 
 #endif
