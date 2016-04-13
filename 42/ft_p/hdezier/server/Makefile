@@ -6,7 +6,7 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/06 13:12:27 by hdezier           #+#    #+#              #
-#    Updated: 2016/04/13 16:26:04 by leeios           ###   ########.fr        #
+#    Updated: 2016/04/13 21:34:54 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 TARGET = serveur
@@ -28,6 +28,7 @@ CLASS = main\
 		server\
 		new_client\
 		exec_cmd\
+		log\
 
 #List interfaces here
 INTERFACE = \

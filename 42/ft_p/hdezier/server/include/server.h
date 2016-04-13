@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 15:22:55 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/13 16:25:47 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/13 21:31:22 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,15 @@ typedef enum		e_cmd
 	NONE
 }					t_cmd;
 
-void			listen_port(int port);
-void			exec_cmd(t_cmd cmd, char **msg, t_client_data *client_data);
-void			new_client(int cs);
 
+void			listen_port(int port);
+void			new_client(int cs);
+void			exec_cmd(t_cmd cmd, char **msg, t_client_data *client_data);
+
+/*
+** LOG
+*/
+void		init_log(void);
+void		write_log(char *s, const t_client_data *client_data);
 
 #endif
