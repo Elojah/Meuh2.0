@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 21:27:47 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/13 21:52:58 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/18 16:12:03 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void		init_log(void)
 	int		fd;
 
 	fd = open((char *)"./data/log.txt", O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
-	dup2(fd, 1);
+	dup2(fd, 2);
 }
 
 void		write_log(char *s, const t_client_data *client_data)
 {
-	return ;
-	write(1, "[", 1);
+	write(2, "[", 1);
 	if (client_data != NULL)
-		ft_putstr(client_data->current_path);
-	write(1, "]", 1);
-	ft_putstr(s);
+		ft_putstr_fd(client_data->current_path, 2);
+	write(2, "]", 1);
+	ft_putstr_fd(s, 2);
+	write(2, "\n", 1);
 }

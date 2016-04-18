@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:52:30 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/13 21:55:37 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/18 16:37:19 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,23 @@
 
 static char		*read_user(void)
 {
-	// char	*buf;
-	// int		r;
+	char	*str;
+	char	*tmp;
+	char	buf[2];
 
-	// buf = (char *)ft_memalloc((BUFF_SIZE + 1) * sizeof(char));
-	// r = read(0, buf, BUFF_SIZE);
-	// buf[r] = '\0';
-	// return (buf);
-	char		**msg;
-
-	msg = NULL;
-	ft_get_line(0, msg);
-	return (*msg);
+	str = (char *)ft_memalloc(sizeof(*str));
+	str[0] = '\0';
+	buf[0] = ' ';
+	buf[1] = '\0';
+	while (*buf != '\n' && *buf != '\0')
+	{
+		read(0, buf, 1);
+		tmp = str;
+		str = ft_strjoin(str, buf);
+		free(tmp);
+	}
+	str[ft_strlen(str) - 1] = '\0';
+	return (str);
 }
 
 static void	send_data(int sock, char *s)
@@ -42,8 +47,28 @@ static void	send_data(int sock, char *s)
 		return ;
 	}
 	ft_putnbr_fd(size_data, sock);
-	write(sock, (char *)"\n", 1);
+	write(sock, (char *)".", 1);
 	ft_putstr_fd(s, sock);
+}
+
+static char	*receive_data(int sock)
+{
+	char	*str;
+	char	*tmp;
+	char	buf[2];
+
+	str = (char *)ft_memalloc(sizeof(*str));
+	str[0] = '\0';
+	buf[0] = ' ';
+	buf[1] = '\0';
+	while (*buf != '\0')
+	{
+		read(sock, buf, 1);
+		tmp = str;
+		str = ft_strjoin(str, buf);
+		free(tmp);
+	}
+	return (str);
 }
 
 void		read_prompt(int sock)
@@ -55,8 +80,10 @@ void		read_prompt(int sock)
 		write(1, "$>", 2);
 		s = read_user();
 		send_data(sock, s);
-		// read(sock, s, BUFF_SIZE);
+		free(s);
+		s = receive_data(sock);
 		ft_putstr(s);
 		free(s);
+		write(1, "\n", 1);
 	}
 }
