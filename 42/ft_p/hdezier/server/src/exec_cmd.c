@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 16:32:34 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/18 16:31:58 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/19 19:52:06 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,13 @@ static void	exec_ls(char **paramTMP, t_client_data *client_data)
 	else if (pid > 0)
 	{
 		wait4(pid, NULL, 0, NULL);
-		write(client_data->cs, "\0", 1);
+		SUCCESS;
 	}
 }
 
 static void	exec_cd(char **param, t_client_data *client_data)
 {
-	(void)param;
-	(void)client_data;
+	builtin_cd(param[1], client_data);
 }
 
 static void	exec_get(char **param, t_client_data *client_data)
@@ -62,7 +61,8 @@ static void	exec_pwd(char **param, t_client_data *client_data)
 {
 	(void)param;
 	ft_putstr_fd(client_data->current_path, client_data->cs);
-	write(client_data->cs, "\0", 1);
+	write(client_data->cs, "\n", 1);
+	SUCCESS;
 }
 
 void			exec_cmd(t_cmd cmd, char **msg, t_client_data *client_data)
@@ -76,8 +76,10 @@ void			exec_cmd(t_cmd cmd, char **msg, t_client_data *client_data)
 		&exec_pwd
 	};
 
-	if (cmd == NONE || cmd == QUIT)
-		write(client_data->cs, "Unrecognized command\0", 21);
+	if (cmd == NONE)
+		write(client_data->cs, "Unrecognized command\nERROR\0", 27);
+	else if (cmd == QUIT)
+		write(client_data->cs, "QUIT\0", 21);
 	else
 		cmd_dispatcher[(int)cmd](msg, client_data);
 }

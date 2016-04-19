@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 15:22:55 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/13 21:31:22 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/19 19:59:46 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 # define MAX_CLIENT 1024
 # define MAX_LEN_PATH 1024
+# define MAX_LEN_ROOT_PATH 1024
 # define DEFAULT_PATH "."
+
+# define SUCCESS write(client_data->cs, "SUCCESS\0", 8)
 
 # include <unistd.h>
 
@@ -48,6 +51,11 @@ typedef enum		e_cmd
 void			listen_port(int port);
 void			new_client(int cs);
 void			exec_cmd(t_cmd cmd, char **msg, t_client_data *client_data);
+
+/*
+**BUILTINS
+*/
+t_bool			builtin_cd(char *param, t_client_data *client_data);
 
 /*
 ** LOG

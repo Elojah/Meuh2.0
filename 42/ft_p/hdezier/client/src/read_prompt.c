@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:52:30 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/18 16:37:19 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/19 18:04:29 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ void		read_prompt(int sock)
 		send_data(sock, s);
 		free(s);
 		s = receive_data(sock);
+		if (ft_strcmp(s, "QUIT") == 0)
+		{
+			free(s);
+			return ;
+		}
 		ft_putstr(s);
 		free(s);
 		write(1, "\n", 1);

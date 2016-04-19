@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/20 10:01:58 by erobert           #+#    #+#             */
-/*   Updated: 2016/04/11 16:32:01 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/19 18:17:30 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ int					ft_get_line(int const fd, char **line);
 int					ft_error(char const *s, int r);
 float				ft_atof(const char *str);
 void				ft_free_array_str(char **s);
+int					ft_find_last(const char *s, char c);
 
 #endif

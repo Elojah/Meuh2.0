@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:23:45 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/18 16:46:06 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/19 19:56:16 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static t_cmd	is_cmd(char *s)
+static t_cmd	is_cmd(const char *s)
 {
 	static const char	*const cmds[] =
 	{
@@ -96,10 +96,10 @@ void		new_client(int cs)
 
 	init_log();
 	client_data.cs = cs;
-	ft_strcpy(client_data.current_path, (char *)"./data");
+	ft_strcpy(client_data.current_path, (char *)"/data/");
 	write_log((char *)"Log initialization...", &client_data);
-	process_msg(cs, &client_data);
 	while (process_msg(cs, &client_data) == TRUE)
 		;
 	close(cs);
+	write_log((char *)"Client left", &client_data);
 }
