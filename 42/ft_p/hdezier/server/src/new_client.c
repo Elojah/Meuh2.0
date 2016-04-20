@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:23:45 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/19 19:56:16 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/20 01:41:25 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char		*read_socket(int cs)
 		r = read(cs, &(size_data[i]), 1);
 		if (size_data[i] == '.')
 		{
-			size_data[i + 1] = '\0';
+			size_data[i] = '\0';
 			i = ft_atoi(size_data);
 			msg = (char *)ft_memalloc(i);
 			r = read(cs, msg, i);
@@ -90,13 +90,24 @@ static t_bool		process_msg(int cs, t_client_data *client_data)
 	return (cmd == QUIT ? FALSE : TRUE);
 }
 
+static void			goto_initial_dir(void)
+{
+	char	full_path[MAX_LEN_PATH + MAX_LEN_ROOT_PATH];
+
+	getcwd(full_path, MAX_LEN_ROOT_PATH);
+	ft_strcpy(full_path + ft_strlen(full_path), (char *)DEFAULT_PATH);
+	if (chdir(full_path) == -1)
+		ft_putstr("Can't access initial directory...\n");
+}
+
 void		new_client(int cs)
 {
 	t_client_data	client_data;
 
 	init_log();
 	client_data.cs = cs;
-	ft_strcpy(client_data.current_path, (char *)"/data/");
+	ft_strcpy(client_data.current_path, (char *)"/");
+	goto_initial_dir();
 	write_log((char *)"Log initialization...", &client_data);
 	while (process_msg(cs, &client_data) == TRUE)
 		;

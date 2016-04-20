@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:52:30 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/19 18:04:29 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/20 00:43:43 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void	send_data(int sock, char *s)
 	ft_putnbr_fd(size_data, sock);
 	write(sock, (char *)".", 1);
 	ft_putstr_fd(s, sock);
+	send_file(s, sock);
 }
 
 static char	*receive_data(int sock)

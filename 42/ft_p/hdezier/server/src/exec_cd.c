@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/19 18:08:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/19 20:06:50 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/20 02:12:53 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ static t_bool	add_to_path(char *param, t_client_data *client_data)
 	len_orig_path = ft_strlen(client_data->current_path);
 	len_final_path = ft_strlen(param);
 	if (len_orig_path + len_final_path >= MAX_LEN_PATH)
+	{
+		ft_putstr_fd("Path too long\n", client_data->cs);
 		return (FALSE);
+	}
 	ft_strcpy(client_data->current_path + len_orig_path, param);
 	client_data->current_path[len_orig_path + len_final_path] = '/';
 	return (TRUE);
@@ -38,35 +41,34 @@ static t_bool	add_to_root(t_client_data *client_data)
 	if (chdir(full_path) == -1)
 	{
 		write(client_data->cs, "Can't access this directory\n", 28);
+		ft_putstr_fd(full_path , client_data->cs);
+		write(client_data->cs, "\n", 1);
 		return (FALSE);
 	}
 	return (TRUE);
 }
 
-t_bool			builtin_cd(char *param, t_client_data *client_data)
+void			exec_cd(char **param, t_client_data *client_data)
 {
 	char	save_path[MAX_LEN_PATH];
 
-	if (param == NULL || param[0] == '\0')
+	ft_putstr("EXEC:\tcd\n");
+	if (param == NULL || param[1] == NULL)
 	{
-		ft_strcpy(client_data->current_path, (char *)"/data/");
+		ft_strcpy(client_data->current_path, (char *)"/");
 		SUCCESS;
-		return (TRUE);
 	}
 	else
 	{
 		ft_strcpy(save_path, client_data->current_path);
-		if (add_to_path(param, client_data) == FALSE)
-			goto error;
-		if (add_to_root(client_data) == FALSE)
+		if (add_to_path(param[1], client_data) == FALSE)
+			ERROR;
+		else if (add_to_root(client_data) == FALSE)
 		{
 			ft_strcpy(client_data->current_path, save_path);
-			goto error;
+			ERROR;
 		}
-		SUCCESS;
-		return (TRUE);
+		else
+			SUCCESS;
 	}
-	error :
-	write(client_data->cs, "ERROR\nAccess denied\0", 20);
-	return (FALSE);
 }
