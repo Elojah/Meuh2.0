@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   ft_find_last.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 16:41:44 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/20 18:21:36 by hdezier          ###   ########.fr       */
+/*   Created: 2016/04/19 18:15:06 by leeios            #+#    #+#             */
+/*   Updated: 2016/04/19 18:16:59 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#include "libft.h"
 
-# include <unistd.h>
+int		ft_find_last(const char *s, char c)
+{
+	int		len;
 
-void		connect_ftp(char *addr, int port);
-void		read_prompt(int sock);
-void		send_file(char *s, int sock);
-
-#endif
+	len = ft_strlen(s);
+	while (--len >= 0)
+	{
+		if (s[len] == c)
+			return (len);
+	}
+	return (-1);
+}

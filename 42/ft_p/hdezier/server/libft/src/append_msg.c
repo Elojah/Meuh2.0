@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   append_msg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 16:41:44 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/20 18:21:36 by hdezier          ###   ########.fr       */
+/*   Created: 2016/04/20 17:14:30 by hdezier           #+#    #+#             */
+/*   Updated: 2016/04/20 17:57:12 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#include "libft.h"
 
-# include <unistd.h>
+void				append_msg(t_ret_msg *msg, char *s)
+{
+	int				i;
 
-void		connect_ftp(char *addr, int port);
-void		read_prompt(int sock);
-void		send_file(char *s, int sock);
-
-#endif
+	i = -1;
+	while (s[++i] != '\0')
+	{
+		if (msg->len >= MAX_SIZE_MSG - 1)
+			break ;
+		msg->msg[msg->len++] = s[i];
+	}
+	msg->msg[msg->len] = '\0';
+}

@@ -3,77 +3,92 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 16:32:34 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/20 02:03:39 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/20 19:07:06 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 #include "libft.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/time.h>
-#include <sys/resource.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
-#include <fcntl.h>
+#include <dirent.h>
 
-static void	exec_ls(char **paramTMP, t_client_data *client_data)
+static void	exec_ls(char **params, t_client_data *client_data, t_ret_msg *msg)
 {
-	static const char	*const param[] = {"/bin/ls", NULL};
+	DIR					*dirp;
+	struct dirent		*dp;
 
-	(void)paramTMP;
-	ft_putstr("EXEC:\tls\n");
-	pid_t pid = fork();
-	if (pid == 0)
-	{
-		dup2(client_data->cs, 1);
-		execl((char *)"/bin/ls", (const char *)param);
-		exit(0);
-	}
-	else if (pid > 0)
-	{
-		wait4(pid, NULL, 0, NULL);
-		SUCCESS;
-	}
-}
-
-static void	exec_get(char **param, t_client_data *client_data)
-{
-	(void)param;
+	(void)params;
 	(void)client_data;
+	dirp = opendir(".");
+	if (!dirp)
+	{
+		msg->ret = ERROR;
+		return ;
+	}
+	dp = readdir(dirp);
+	while (dp)
+	{
+		if (dp->d_name[0] != '.')
+		{
+			append_msg(msg, dp->d_name);
+			append_msg(msg, (char *)"\n");
+		}
+		dp = readdir(dirp);
+	}
 }
 
+static void	exec_get(char __attribute__((__unused__))**param
+	, t_client_data __attribute__((__unused__))*client_data
+	, t_ret_msg *msg)
+{
+	msg->ret = SUCCESS;
+}
 
-static void	exec_pwd(char **param, t_client_data *client_data)
+static void	exec_put(char __attribute__((__unused__))**param
+	, t_client_data __attribute__((__unused__))*client_data
+	, t_ret_msg *msg)
+{
+	msg->ret = SUCCESS;
+}
+
+static void	exec_pwd(char **param, t_client_data *client_data, t_ret_msg *msg)
 {
 	(void)param;
-	ft_putstr("EXEC:\tpwd\n");
-	ft_putstr_fd(client_data->current_path, client_data->cs);
-	write(client_data->cs, "\n", 1);
-	SUCCESS;
+	ft_putstr("Asking: pwd_builtin");
+	append_msg(msg, client_data->current_path);
+	append_msg(msg, (char *)"\n");
+	msg->ret = SUCCESS;
 }
 
 void			exec_cmd(t_cmd cmd, char **msg, t_client_data *client_data)
 {
 	static const t_cmd_ft	cmd_dispatcher[] =
 	{
-		&exec_ls,
-		&exec_cd,
-		&exec_get,
-		&exec_put,
-		&exec_pwd
+		&exec_ls, &exec_cd, &exec_get, &exec_put, &exec_pwd
+	};
+	static t_ret_msg		ret_msg =
+	{
+		"", 0, SUCCESS
 	};
 
-	ft_putstr("EXEC CMD\n");
-	ft_putnbr((int)cmd);
+	ret_msg.len = 0;
 	if (cmd == NONE)
-		write(client_data->cs, "Unrecognized command\nERROR\0", 27);
+	{
+		append_msg(&ret_msg, (char *)"Unrecognized command\n");
+		ret_msg.ret = ERROR;
+	}
 	else if (cmd == QUIT)
-		write(client_data->cs, "QUIT\0", 21);
+	{
+		append_msg(&ret_msg, (char *)"QUIT\n");
+		ret_msg.ret = SUCCESS;
+	}
 	else
-		cmd_dispatcher[(int)cmd](msg, client_data);
+		cmd_dispatcher[(int)cmd](msg, client_data, &ret_msg);
+	append_msg(&ret_msg, ret_msg.ret == SUCCESS ? (char *)"SUCCESS" : (char *)"ERROR");
+	ft_putstr((char *)"\nSend back\n");
+	ft_putstr(ret_msg.msg);
+	ft_putstr((char *)"\n");
+	send_data(client_data->cs, ret_msg.msg);
 }

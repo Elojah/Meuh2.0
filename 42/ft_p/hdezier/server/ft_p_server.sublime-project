@@ -13,6 +13,7 @@
             "-D_DBG_",
             "-I${project_path}/include",
             "-I${project_path}/libft/include",
+            "-I${project_path}/libptcl/include",
              "-Wall",
              "-Werror",
              "-Wextra",

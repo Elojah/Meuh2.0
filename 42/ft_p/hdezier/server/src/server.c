@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/06 13:42:11 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/13 21:20:45 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/20 18:29:28 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static int		init_server(int port)
 		return (-1);
 	}
 	listen(sock, 42);
+	ft_putstr("Server initialized\n");
 	return (sock);
 }
 

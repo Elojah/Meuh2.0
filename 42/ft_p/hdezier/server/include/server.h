@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 15:22:55 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/20 02:11:55 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/20 17:35:05 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,13 @@
 # define SERVER_H
 
 # define MAX_CLIENT 1024
-# define MAX_LEN_PATH 1024
 # define MAX_LEN_ROOT_PATH 1024
 # define DEFAULT_PATH "/data"
 
-# define SUCCESS write(client_data->cs, "SUCCESS\0", 8)
-# define ERROR write(client_data->cs, "ERROR\0", 6)
 # include <unistd.h>
+# include "libft.h"
 
-typedef struct		s_client_data
-{
-	int				cs;
-	char			current_path[MAX_LEN_PATH];
-}					t_client_data;
-
-typedef void	(*t_cmd_ft)(char **, t_client_data*);
-
-typedef enum		e_bool
-{
-	FALSE = 0,
-	TRUE
-}					t_bool;
+typedef void	(*t_cmd_ft)(char **, t_client_data *, t_ret_msg *);
 
 typedef enum		e_cmd
 {
@@ -55,13 +41,12 @@ void			exec_cmd(t_cmd cmd, char **msg, t_client_data *client_data);
 /*
 **BUILTINS
 */
-void			exec_cd(char **param, t_client_data *client_data);
-void			exec_put(char **param, t_client_data *client_data);
+void			exec_cd(char **param, t_client_data *client_data, t_ret_msg *msg);
 
 /*
 ** LOG
 */
-void		init_log(void);
-void		write_log(char *s, const t_client_data *client_data);
+void			init_log(void);
+void			write_log(char *s, const t_client_data *client_data);
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
+#    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/06 13:12:27 by hdezier           #+#    #+#              #
-#    Updated: 2016/04/20 00:38:01 by leeios           ###   ########.fr        #
+#    Updated: 2016/04/20 18:22:08 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 TARGET = client
@@ -19,7 +19,7 @@ BUILD_DIR = build
 LIB_DIR =
 
 #Options
-CC = clang-3.6
+CC = clang
 SRC_EXT = .c
 RM = rm -rf
 
@@ -27,7 +27,6 @@ RM = rm -rf
 CLASS = main\
 		client\
 		read_prompt\
-		send_file\
 
 #List interfaces here
 INTERFACE = \

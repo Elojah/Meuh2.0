@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
+#    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/06 13:12:27 by hdezier           #+#    #+#              #
-#    Updated: 2016/04/20 01:37:27 by leeios           ###   ########.fr        #
+#    Updated: 2016/04/20 18:05:14 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 TARGET = serveur
@@ -19,7 +19,7 @@ BUILD_DIR = build
 LIB_DIR =
 
 #Options
-CC = clang-3.6
+CC = clang
 SRC_EXT = .c
 RM = rm -rf
 
@@ -30,7 +30,6 @@ CLASS = main\
 		exec_cmd\
 		log\
 		exec_cd\
-		exec_put\
 
 #List interfaces here
 INTERFACE = \

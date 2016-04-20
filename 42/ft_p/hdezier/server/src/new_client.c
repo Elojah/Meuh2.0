@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_client.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:23:45 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/20 01:41:25 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/20 17:12:25 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,33 +38,6 @@ static t_cmd	is_cmd(const char *s)
 	return (NONE);
 }
 
-static char		*read_socket(int cs)
-{
-	char	*msg;
-	char	size_data[10];
-	int		i;
-	int		r;
-
-	i = -1;
-	r = 1;
-	while (++i < 9 && r > 0)
-	{
-		r = read(cs, &(size_data[i]), 1);
-		if (size_data[i] == '.')
-		{
-			size_data[i] = '\0';
-			i = ft_atoi(size_data);
-			msg = (char *)ft_memalloc(i);
-			r = read(cs, msg, i);
-			msg[r] = '\0';
-			return (msg);
-		}
-		else if (size_data[i] < '0' || size_data[i] > '9')
-			return (NULL);
-	}
-	return (NULL);
-}
-
 static t_bool		process_msg(int cs, t_client_data *client_data)
 {
 	char					*msg;
@@ -72,7 +45,7 @@ static t_bool		process_msg(int cs, t_client_data *client_data)
 	t_cmd					cmd;
 
 	write_log((char *)"Reading msg...", client_data);
-	msg = read_socket(cs);
+	msg = read_data(cs);
 	write_log((char *)"Received:", client_data);
 	write_log(msg, client_data);
 	if (msg == NULL)

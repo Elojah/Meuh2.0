@@ -23,12 +23,14 @@ FILES = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 		ft_putstr.c ft_putendl.c ft_putnbr.c ft_putchar_fd.c ft_putstr_fd.c \
 		ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
 		ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_lstlen.c ft_get_line.c \
-		ft_error.c ft_atof.c ft_free_array_str.c
+		ft_error.c ft_atof.c ft_free_array_str.c ft_find_last.c send_data.c \
+		read_data.c read_files.c send_data.c send_files.c append_msg.c \
+
 SRCS = $(addprefix src/, $(FILES))
 OBJS = $(SRCS:src/%.c=obj/%.o)
 TMPS = $(SRCS:.c=.c~) Makefile~ include/libft.h~
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CC = clang
+CFLAGS = -Wall -Wextra -Werror -arch x86_64
 IFLAGS = -I./include/
 
 .PHONY: all clean objs_dir fclean re
@@ -52,6 +54,6 @@ clean:
 	/bin/rm -rf obj
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	/bin/rm -f lib/$(NAME)
 
 re: fclean all

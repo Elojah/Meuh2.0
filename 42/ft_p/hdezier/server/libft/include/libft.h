@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/20 10:01:58 by erobert           #+#    #+#             */
-/*   Updated: 2016/04/20 00:14:04 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/20 17:22:35 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,33 @@
 # include <unistd.h>
 
 # define BUFF_SIZE 1
+# define MAX_LEN_PATH 1024
+# define MAX_SIZE_MSG 1024
+
+typedef enum		e_ret
+{
+	ERROR = 0,
+	SUCCESS
+}					t_ret;
+
+typedef struct		s_ret_msg
+{
+	char			msg[MAX_SIZE_MSG];
+	int				len;
+	t_ret			ret;
+}					t_ret_msg;
+
+typedef struct		s_client_data
+{
+	int				cs;
+	char			current_path[MAX_LEN_PATH];
+}					t_client_data;
+
+typedef enum		e_bool
+{
+	FALSE = 0,
+	TRUE
+}					t_bool;
 
 typedef struct		s_list
 {
@@ -87,5 +114,10 @@ int					ft_error(char const *s, int r);
 float				ft_atof(const char *str);
 void				ft_free_array_str(char **s);
 int					ft_find_last(const char *s, char c);
+void				send_data(int sock, char *s);
+char				*read_data(int sock);
+void				send_files(int sock, char *s);
+void				read_files(int sock, char *msg);
+void				append_msg(t_ret_msg *msg, char *s);
 
 #endif
