@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 16:16:04 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/20 18:41:35 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/20 19:27:27 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void			send_data(int sock, char *s)
 		ft_putstr((char *)"Message is too big\n");
 		return ;
 	}
-	ft_putstr("send:\t");
+	ft_putstr("\e[0;37msend:\t");
 	ft_putnbr(size_data);
-	ft_putstr(" bytes\n");
+	ft_putstr(" bytes\e[0m\n");
 	ft_putnbr_fd(size_data, sock);
 	write(sock, (char *)".", 1);
 	ft_putstr_fd(s, sock);

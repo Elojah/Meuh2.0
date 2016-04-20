@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 16:20:37 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/20 19:06:16 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/20 19:27:09 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ char		*read_msg(int sock)
 		{
 			size_data[i] = '\0';
 			i = ft_atoi(size_data);
-			ft_putstr("read:\t");
+			ft_putstr("\e[0;37mread:\t");
 			ft_putnbr(i);
-			ft_putstr(" bytes\n");
+			ft_putstr(" bytes\e[0m\n");
 			msg = (char *)ft_memalloc(i);
 			r = read(sock, msg, i);
 			msg[r] = '\0';

@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/19 18:08:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/20 18:02:52 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/20 19:44:49 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,28 @@
 #include "libft.h"
 
 #include <unistd.h>
+
+static void		resolve_path(char *path)
+{
+	int			i;
+	int			prev;
+
+	i = -1;
+	while (path[++i] != '\0')
+	{
+		if (ft_strncmp(path + i, "/..", 3) == 0)
+		{
+			prev = i;
+			while (--prev >= 0)
+			{
+				if (prev != '/')
+					continue ;
+				ft_strcpy(path + prev, path + i + 3);
+				i = prev;
+			}
+		}
+	}
+}
 
 static t_bool	add_to_path(char *param, t_client_data *client_data
 	, t_ret_msg *msg)
@@ -39,6 +61,7 @@ static t_bool	add_to_root(t_client_data *client_data, t_ret_msg *msg)
 
 	getcwd(full_path, MAX_LEN_ROOT_PATH);
 	ft_strcpy(full_path + ft_strlen(full_path), client_data->current_path);
+	resolve_path(full_path);
 	if (chdir(full_path) == -1)
 	{
 		append_msg(msg, (char *)"Can't access this directory\n");

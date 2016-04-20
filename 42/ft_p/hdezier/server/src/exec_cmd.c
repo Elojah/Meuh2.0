@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 16:32:34 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/20 19:07:06 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/20 19:30:19 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	exec_ls(char **params, t_client_data *client_data, t_ret_msg *msg)
 		}
 		dp = readdir(dirp);
 	}
+	msg->ret = SUCCESS;
 }
 
 static void	exec_get(char __attribute__((__unused__))**param
@@ -86,7 +87,7 @@ void			exec_cmd(t_cmd cmd, char **msg, t_client_data *client_data)
 	}
 	else
 		cmd_dispatcher[(int)cmd](msg, client_data, &ret_msg);
-	append_msg(&ret_msg, ret_msg.ret == SUCCESS ? (char *)"SUCCESS" : (char *)"ERROR");
+	append_msg(&ret_msg, ret_msg.ret == SUCCESS ? (char *)"\e[1;32mSUCCESS\e[0m" : (char *)"\e[1;31mERROR\e[0m");
 	ft_putstr((char *)"\nSend back\n");
 	ft_putstr(ret_msg.msg);
 	ft_putstr((char *)"\n");

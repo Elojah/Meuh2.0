@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:52:30 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/20 18:48:15 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/20 19:45:51 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,14 @@ void		read_prompt(int sock)
 
 	while (1)
 	{
-		write(1, "$>", 2);
+		ft_putstr("\e[1;34m$>\e[0m");
 		s = read_user();
 		send_data(sock, s);
-		ft_putstr((char *)"Sent:\t");
-		ft_putstr(s);
-		ft_putstr((char *)"\n");
 		free(s);
 		s = read_data(sock);
 		if (s == NULL)
 			continue ;
-		if (ft_strcmp(s, (char *)"QUIT") == 0)
+		if (ft_strncmp(s, (char *)"QUIT", 4) == 0)
 		{
 			free(s);
 			return ;
