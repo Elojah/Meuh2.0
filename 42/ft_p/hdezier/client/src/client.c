@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:44:42 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/13 17:02:22 by leeios           ###   ########.fr       */
+/*   Updated: 2016/04/26 15:54:43 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@ static int		create_client(char *addr, int port)
 	int					sock;
 	struct protoent		*proto;
 	struct sockaddr_in	sin;
+	static const char	localhost[] = "127.0.0.1";
 
 	proto = getprotobyname("tcp");
 	if (proto == 0)
 		return (-1);
+	if (ft_strcmp(addr, "localhost") == 0)
+		addr = (char *)localhost;
 	sock = socket(PF_INET, SOCK_STREAM, proto->p_proto);
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(port);

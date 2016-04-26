@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/20 10:01:58 by erobert           #+#    #+#             */
-/*   Updated: 2016/04/20 17:22:35 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/21 18:22:20 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # define BUFF_SIZE 1
 # define MAX_LEN_PATH 1024
+# define MAX_LEN_ROOT_PATH 1024
 # define MAX_SIZE_MSG 1024
 
 typedef enum		e_ret
@@ -35,6 +36,7 @@ typedef struct		s_client_data
 {
 	int				cs;
 	char			current_path[MAX_LEN_PATH];
+	char			original_path[MAX_LEN_ROOT_PATH];
 }					t_client_data;
 
 typedef enum		e_bool

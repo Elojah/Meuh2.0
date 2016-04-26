@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 15:22:55 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/20 17:35:05 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/21 18:19:37 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SERVER_H
 
 # define MAX_CLIENT 1024
-# define MAX_LEN_ROOT_PATH 1024
 # define DEFAULT_PATH "/data"
 
 # include <unistd.h>

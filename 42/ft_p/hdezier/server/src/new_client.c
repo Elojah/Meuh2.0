@@ -6,13 +6,14 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:23:45 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/20 17:12:25 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/21 18:24:54 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 #include "libft.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 static t_cmd	is_cmd(const char *s)
 {
@@ -78,9 +79,10 @@ void		new_client(int cs)
 	t_client_data	client_data;
 
 	init_log();
+	goto_initial_dir();
 	client_data.cs = cs;
 	ft_strcpy(client_data.current_path, (char *)"/");
-	goto_initial_dir();
+	getcwd(client_data.original_path, MAX_LEN_ROOT_PATH);
 	write_log((char *)"Log initialization...", &client_data);
 	while (process_msg(cs, &client_data) == TRUE)
 		;
