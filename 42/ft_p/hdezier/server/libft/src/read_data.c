@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 16:20:37 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/20 19:27:09 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/27 18:29:09 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ char		*read_msg(int sock)
 		}
 		else if (size_data[i] < '0' || size_data[i] > '9')
 		{
-			ft_putstr((char *)"Header is not valid\n");
+			ft_putstr((char *)"Header is not valid:\t");
+			size_data[i + 1] = '\0';
+			ft_putstr(size_data);
+			ft_putstr((char *)"\n");
 			return (NULL);
 		}
 	}
@@ -72,9 +75,9 @@ char		*read_data(int sock)
 	msg = read_msg(sock);
 	if (msg == NULL)
 		return (msg);
-	if (need_file_sending(msg))
-		send_files(sock, msg);
-	else if (need_file_receiving(msg))
-		read_files(sock, msg);
+	if (need_file_sending(msg) && send_files(sock, msg) == FALSE)
+		return (NULL);
+	else if (need_file_receiving(msg) && read_files(sock, msg) == FALSE)
+		return (NULL);
 	return (msg);
 }

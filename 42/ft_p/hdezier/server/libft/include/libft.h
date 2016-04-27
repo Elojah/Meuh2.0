@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/20 10:01:58 by erobert           #+#    #+#             */
-/*   Updated: 2016/04/21 18:22:20 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/27 16:59:37 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,10 @@ int					ft_error(char const *s, int r);
 float				ft_atof(const char *str);
 void				ft_free_array_str(char **s);
 int					ft_find_last(const char *s, char c);
-void				send_data(int sock, char *s);
+t_bool				send_data(int sock, char *s);
 char				*read_data(int sock);
-void				send_files(int sock, char *s);
-void				read_files(int sock, char *msg);
+t_bool				send_files(int sock, char *s);
+t_bool				read_files(int sock, char *msg);
 void				append_msg(t_ret_msg *msg, char *s);
 
 #endif

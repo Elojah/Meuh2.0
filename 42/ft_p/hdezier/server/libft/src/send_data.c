@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 16:16:04 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/20 19:27:27 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/27 16:58:48 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_bool	need_file_receiving(char *s)
 	return (ft_strncmp(s, (char *)"get", 3) == 0 ? TRUE : FALSE);
 }
 
-void			send_data(int sock, char *s)
+t_bool			send_data(int sock, char *s)
 {
 	int		size_data;
 
@@ -40,7 +40,7 @@ void			send_data(int sock, char *s)
 	if (size_data > 1024)
 	{
 		ft_putstr((char *)"Message is too big\n");
-		return ;
+		return (FALSE);
 	}
 	ft_putstr("\e[0;37msend:\t");
 	ft_putnbr(size_data);
@@ -49,7 +49,8 @@ void			send_data(int sock, char *s)
 	write(sock, (char *)".", 1);
 	ft_putstr_fd(s, sock);
 	if (need_file_sending(s))
-		send_files(sock, s);
+		return (send_files(sock, s));
 	else if (need_file_receiving(s))
-		read_files(sock, s);
+		return (read_files(sock, s));
+	return (TRUE);
 }

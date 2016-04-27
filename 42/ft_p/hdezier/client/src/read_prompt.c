@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:52:30 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/21 18:17:15 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/27 17:11:04 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void		read_prompt(int sock)
 		free(s);
 		s = read_data(sock);
 		if (s == NULL)
+		{
+			ft_putstr("Error occured server-side\n");
 			continue ;
+		}
 		if (ft_strncmp(s, (char *)"QUIT", 4) == 0)
 		{
 			free(s);

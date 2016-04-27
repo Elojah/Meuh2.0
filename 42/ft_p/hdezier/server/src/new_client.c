@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:23:45 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/21 18:24:54 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/27 18:32:19 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static t_bool		process_msg(int cs, t_client_data *client_data)
 	write_log(msg, client_data);
 	if (msg == NULL)
 	{
-		write_log((char *)"Message bad format", client_data);
+		write_log((char *)"Message error\n", client_data);
+		send_data(client_data->cs, (char *)"\e[1;31mERROR\e[0m");
 		return (TRUE);
 	}
 	split_msg = ft_strsplit(msg, ' ');

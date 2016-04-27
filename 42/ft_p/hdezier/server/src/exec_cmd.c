@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 16:32:34 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/20 19:30:19 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/27 18:17:49 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void			exec_cmd(t_cmd cmd, char **msg, t_client_data *client_data)
 		"", 0, SUCCESS
 	};
 
+	ft_putstr("Exec command...");
 	ret_msg.len = 0;
 	if (cmd == NONE)
 	{

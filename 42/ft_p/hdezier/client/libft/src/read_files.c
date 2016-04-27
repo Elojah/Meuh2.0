@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 16:47:29 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/20 17:04:55 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/27 18:35:02 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,23 @@ static t_bool	read_file(char *filename, int sock)
 			size_data[i] = '\0';
 			i = ft_atoi(size_data);
 			if (i == 0)
+			{
+				unlink(filename);
 				return (FALSE);
+			}
 			write_file(fd, sock, i);
+			write(sock, (char *)"OK", 2);
 		}
 		else if (size_data[i] < '0' || size_data[i] > '9')
+		{
+			ft_putstr("File header size not valid\n");
 			return (FALSE);
+		}
 	}
 	return (TRUE);
 }
 
-void			read_files(int sock, char *msg)
+t_bool			read_files(int sock, char *msg)
 {
 	int		i;
 	char	**params;
@@ -66,8 +73,12 @@ void			read_files(int sock, char *msg)
 		ft_putstr(params[i]);
 		ft_putstr("\treceiving...\n");
 		if (read_file(params[i], sock) == FALSE)
+		{
 			ft_putstr("Error receiving file \n");
+			return (FALSE);
+		}
 		else
 			ft_putstr("File received !\n");
 	}
+	return (TRUE);
 }

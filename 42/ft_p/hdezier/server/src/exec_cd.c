@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/19 18:08:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/04/26 16:36:02 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/27 16:22:37 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,46 +16,31 @@
 static t_bool		resolve_path_ex(char *path, int *i)
 {
 	int				prev;
-	int				depth;
+	t_bool			resolved;
 
 	prev = *i;
-	++depth;
+	resolved = FALSE;
 	while (--prev >= 0)
 	{
 		if (path[prev] != '/')
 			continue ;
-		ft_strcpy(path + prev, path + i + 3);
-		i = prev - 1;
-		--depth;
+		ft_strcpy(path + prev, path + *i + 3);
+		*i = prev - 1;
+		resolved = TRUE;
 		break ;
 	}
+	return (resolved);
 }
 
 static t_bool		resolve_path(char *path)
 {
 	int				i;
-	int				depth;
-	int				prev;
 
 	i = -1;
 	while (path[++i] != '\0')
 	{
-		depth = 0;
-		if (ft_strncmp(path + i, "/..", 3) == 0)
-		{
-			prev = i;
-			++depth;
-			while (--prev >= 0)
-			{
-				if (path[prev] != '/')
-					continue ;
-				ft_strcpy(path + prev, path + i + 3);
-				i = prev - 1;
-				--depth;
-				break ;
-			}
-		}
-		if (depth > 0)
+		if (ft_strncmp(path + i, "/..", 3) == 0
+			&& resolve_path_ex(path, &i) == FALSE)
 			return (FALSE);
 	}
 	return (TRUE);
