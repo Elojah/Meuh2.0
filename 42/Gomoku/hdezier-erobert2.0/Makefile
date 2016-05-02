@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/23 13:00:48 by hdezier           #+#    #+#              #
-#    Updated: 2016/05/02 20:36:17 by hdezier          ###   ########.fr        #
+#    Updated: 2016/05/03 00:30:13 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 TARGET = gomoku
@@ -24,7 +24,12 @@ SRC_EXT = .cpp
 RM = rm -rf
 
 #List classes here
-CLASS = main\
+CLASS = \
+		main\
+		GameManager\
+		Rules\
+		Board\
+		Player\
 
 #List interfaces here
 INTERFACE = \
@@ -35,7 +40,7 @@ OBJ = $(addsuffix .o, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3 -std=c++98 -Wno-unused-parameter
+CFLAGS =-MMD -Wall -Wextra -Werror -O3 -std=c++11
 LFLAGS =
 
 #Libs
