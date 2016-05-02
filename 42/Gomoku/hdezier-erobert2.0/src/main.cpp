@@ -6,37 +6,49 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:36:25 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/02 20:39:35 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/02 22:51:11 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "gomoku.h"
+#include "GameManager.h"
 
-static void		exec(unsigned int size)
+static void		exec(eSize size)
 {
-	GameManager	g;
-
-	g.init(size);
-	g.loop();
+	if (size == eSize::SMALL)
+	{
+		GameManager<common::small>	g;
+		g.loop();
+	}
+	else if (size == eSize::MEDIUM)
+	{
+		GameManager<common::medium>	g;
+		g.loop();
+	}
+	else if (size == eSize::LARGE)
+	{
+		GameManager<common::large>	g;
+		g.loop();
+	}
 }
 
 int				main(int ac, char **av)
 {
-	int			size(0);
+	eSize			size;
 
+	size = eSize::ERROR;
 	if (ac == 1)
-		size = 19;
+		size = eSize::LARGE;
 	else if (ac == 2)
 	{
 		if (!strcmp("-s", av[1]))
-			size = 9;
+			size = eSize::SMALL;
 		else if (!strcmp("-m", av[1]))
-			size = 13;
+			size = eSize::MEDIUM;
 		else if (!strcmp("-b", av[1]))
-			size = 19;
+			size = eSize::LARGE;
 	}
-	if (size)
+	if (size != eSize::ERROR)
 		exec(size);
 	else
 		std::cerr << "usage: " << av[0] << " [-s | -m | -b]" << std::endl;

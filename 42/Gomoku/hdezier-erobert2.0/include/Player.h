@@ -1,46 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GameManager.h                                      :+:      :+:    :+:   */
+/*   Player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/02 20:39:50 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/02 22:50:52 by hdezier          ###   ########.fr       */
+/*   Created: 2016/05/02 21:00:56 by hdezier           #+#    #+#             */
+/*   Updated: 2016/05/02 22:47:34 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_MANAGER_H
-# define GAME_MANAGER_H
+#ifndef PLAYER_H
+# define PLAYER_H
 
 # include "stdint.h"
+# include "common.h"
 
-# include "Board.h"
-# include "Rules.h"
-# include "Player.h"
+class IBoard;
+class Rules;
 
-enum class eSize
-{
-	SMALL,
-	MEDIUM,
-	LARGE,
-	ERROR
-};
-
-template <uint8_t N>
-class GameManager
+class Player
 {
 public:
-	GameManager(void) = default;
-	virtual ~GameManager(void) = default;
 
-	void	loop(void);
-private:
-	Board<N>		m_board;
-	Rules			m_rules;
-	Player			m_player_1;
-	Player			m_player_2;
-	common::eCell	m_turn;
+	Player(void) = default;
+	virtual ~Player(void) = default;
+
+	common::vec2		play(const IBoard &board, const Rules &rules);
 };
 
 #endif

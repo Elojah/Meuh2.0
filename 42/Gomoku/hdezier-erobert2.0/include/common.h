@@ -1,46 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GameManager.h                                      :+:      :+:    :+:   */
+/*   common.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/02 20:39:50 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/02 22:50:52 by hdezier          ###   ########.fr       */
+/*   Created: 2016/05/02 21:25:52 by hdezier           #+#    #+#             */
+/*   Updated: 2016/05/02 22:57:54 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_MANAGER_H
-# define GAME_MANAGER_H
+#ifndef COMMON_H
+# define COMMON_H
 
 # include "stdint.h"
 
-# include "Board.h"
-# include "Rules.h"
-# include "Player.h"
-
-enum class eSize
+namespace common
 {
-	SMALL,
-	MEDIUM,
-	LARGE,
-	ERROR
-};
 
-template <uint8_t N>
-class GameManager
-{
-public:
-	GameManager(void) = default;
-	virtual ~GameManager(void) = default;
+	static const uint8_t	small = 9;
+	static const uint8_t	medium = 13;
+	static const uint8_t	large = 19;
 
-	void	loop(void);
-private:
-	Board<N>		m_board;
-	Rules			m_rules;
-	Player			m_player_1;
-	Player			m_player_2;
-	common::eCell	m_turn;
+	enum class eCell
+	{
+		NONE = 0,
+		P1,
+		P2,
+		E_CELL
+	};
+
+	struct				vec2
+	{
+		uint8_t			x;
+		uint8_t			y;
+	};
+
 };
 
 #endif

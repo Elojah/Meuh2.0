@@ -1,46 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GameManager.h                                      :+:      :+:    :+:   */
+/*   Rules.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/02 20:39:50 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/02 22:50:52 by hdezier          ###   ########.fr       */
+/*   Created: 2016/05/02 20:55:33 by hdezier           #+#    #+#             */
+/*   Updated: 2016/05/02 22:49:19 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_MANAGER_H
-# define GAME_MANAGER_H
+#ifndef RULES_H
+# define RULES_H
 
-# include "stdint.h"
+# include "common.h"
 
-# include "Board.h"
-# include "Rules.h"
-# include "Player.h"
+class IBoard;
 
-enum class eSize
-{
-	SMALL,
-	MEDIUM,
-	LARGE,
-	ERROR
-};
-
-template <uint8_t N>
-class GameManager
+class Rules
 {
 public:
-	GameManager(void) = default;
-	virtual ~GameManager(void) = default;
 
-	void	loop(void);
-private:
-	Board<N>		m_board;
-	Rules			m_rules;
-	Player			m_player_1;
-	Player			m_player_2;
-	common::eCell	m_turn;
+	Rules(void) = default;
+	virtual ~Rules(void) = default;
+
+	static bool		isValid(const IBoard &board, const common::vec2 &stroke);
 };
 
 #endif
