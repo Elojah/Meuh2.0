@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/02 22:47:34 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/03 00:09:52 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ public:
 	Player(void) = default;
 	virtual ~Player(void) = default;
 
-	common::vec2		play(const IBoard &board, const Rules &rules);
+	common::vec2		play(const IBoard &board, const Rules &rules) const;
 };
 
 #endif

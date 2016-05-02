@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:50 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/02 22:50:52 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/03 00:11:08 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ private:
 	Player			m_player_1;
 	Player			m_player_2;
 	common::eCell	m_turn;
+
+	void	displayWin(common::eCell winner) const;
 };
 
 #endif
