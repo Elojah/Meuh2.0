@@ -13,10 +13,11 @@
             "-D_DBG_",
             "-I${project_path}/include",
             "-I${project_path}/lib/sfml/include",
-             "-Wall",
-             "-Werror",
-             "-Wextra",
-             "-v"
+            "-std=c++11",
+            "-Wall",
+            "-Werror",
+            "-Wextra",
+            "-v"
         ]
     }
 }

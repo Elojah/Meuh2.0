@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"RU",
+				"RULES_H"
+			],
+			[
 				"ftpu",
 				"ft_putstr_fd	(send_files.c)"
 			],
@@ -510,10 +514,6 @@
 			[
 				"parse",
 				"parseParents	(util.hpp)"
-			],
-			[
-				"cs",
-				"c_str() const	const char *"
 			]
 		]
 	},
@@ -523,15 +523,63 @@
 			"file": "Makefile",
 			"settings":
 			{
-				"buffer_size": 2930,
+				"buffer_size": 2869,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/AudioManager.cpp",
+			"file": "src/main.cpp",
 			"settings":
 			{
-				"buffer_size": 2025,
+				"buffer_size": 1359,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/GameManager.cpp",
+			"settings":
+			{
+				"buffer_size": 1044,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Rules.cpp",
+			"settings":
+			{
+				"buffer_size": 891,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/gomoku.h",
+			"settings":
+			{
+				"buffer_size": 935,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/GameManager.h",
+			"settings":
+			{
+				"buffer_size": 1100,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/Player.h",
+			"settings":
+			{
+				"buffer_size": 1083,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/Rules.h",
+			"settings":
+			{
+				"buffer_size": 1096,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,7 +587,15 @@
 			"file": "gomoku.sublime-project",
 			"settings":
 			{
-				"buffer_size": 393,
+				"buffer_size": 418,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/Board.h",
+			"settings":
+			{
+				"buffer_size": 1059,
 				"line_ending": "Unix"
 			}
 		}
@@ -890,10 +946,13 @@
 	},
 	"expanded_folders":
 	[
-		"/nfs/2013/h/hdezier/code/meuh/42/Gomoku/hdezier-erobert"
+		"/nfs/2013/h/hdezier/code/meuh/42/Gomoku/hdezier-erobert2.0"
 	],
 	"file_history":
 	[
+		"/nfs/2013/h/hdezier/code/meuh/42/Gomoku/hdezier-erobert2.0/gomoku.sublime-project",
+		"/nfs/2013/h/hdezier/code/meuh/42/Gomoku/hdezier-erobert2.0/src/GameManager.cpp",
+		"/nfs/2013/h/hdezier/code/meuh/42/Gomoku/hdezier-erobert2.0/src/AudioManager.cpp",
 		"/nfs/2013/h/hdezier/code/meuh/42/ft_p/hdezier/client/log.txt",
 		"/nfs/2013/h/hdezier/code/meuh/42/ft_p/hdezier/client/test.c",
 		"/nfs/2013/h/hdezier/code/meuh/42/ft_p/hdezier/client/auteur",
@@ -1018,10 +1077,7 @@
 		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/include/MLog.hpp",
 		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/Master.cpp",
 		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/Log.cpp",
-		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/UI/AWindow.cpp",
-		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/taskmaster.sublime-project",
-		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/include/Process.hpp",
-		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/Makefile"
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/UI/AWindow.cpp"
 	],
 	"find":
 	{
@@ -1072,6 +1128,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"unsigned int",
 			"Error receiv",
 			"Error",
 			"Error receiving",
@@ -1198,8 +1255,7 @@
 			"m_operator",
 			"return (eValue:",
 			"FALSE_TEST",
-			"TRUE_TEST",
-			"FALSE_TEST"
+			"TRUE_TEST"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1232,7 +1288,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -1241,15 +1297,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2930,
+						"buffer_size": 2869,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								999,
-								999
+								1146,
+								1146
 							]
 						],
 						"settings":
@@ -1313,30 +1369,31 @@
 								"bh_round_close",
 								"bh_round_content"
 							],
+							"history_list_is_closing": true,
 							"syntax": "Packages/Makefile Improved/Makefile Improved.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 285.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/AudioManager.cpp",
+					"file": "src/main.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2025,
+						"buffer_size": 1359,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1585,
-								1585
+								1056,
+								1056
 							]
 						],
 						"settings":
@@ -1407,30 +1464,224 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/GameManager.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1044,
+						"regions":
+						{
+							"bookmarks":
+							{
+								"flags": 144,
+								"icon": "Packages/BetterBookmarks/icons/todo.png",
+								"regions":
+								[
+								],
+								"scope": "comment"
+							}
+						},
+						"selection":
+						[
+							[
+								1038,
+								1038
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"history_list_is_closing": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/Rules.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 891,
+						"regions":
+						{
+							"bookmarks":
+							{
+								"flags": 144,
+								"icon": "bookmark",
+								"regions":
+								[
+								],
+								"scope": "string"
+							}
+						},
+						"selection":
+						[
+							[
+								891,
+								891
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"history_list_is_closing": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
-					"buffer": 2,
-					"file": "gomoku.sublime-project",
+					"buffer": 4,
+					"file": "include/gomoku.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 393,
+						"buffer_size": 935,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								276,
-								276
+								935,
+								935
 							]
 						],
 						"settings":
@@ -1494,6 +1745,453 @@
 								"bh_round_close",
 								"bh_round_content"
 							],
+							"history_list_is_closing": true,
+							"syntax": "Packages/Objective-C/Objective-C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 0,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2869,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1098,
+								1098
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
+							],
+							"history_list_is_closing": true,
+							"syntax": "Packages/Makefile Improved/Makefile Improved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "include/GameManager.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1100,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1092,
+								1092
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/Objective-C/Objective-C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "include/Player.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1083,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								992,
+								992
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/Objective-C/Objective-C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "include/Rules.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1096,
+						"regions":
+						{
+							"bookmarks":
+							{
+								"flags": 144,
+								"icon": "bookmark",
+								"regions":
+								[
+								],
+								"scope": "string"
+							}
+						},
+						"selection":
+						[
+							[
+								990,
+								990
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/Objective-C/Objective-C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "gomoku.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 418,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								382,
+								382
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
 							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
@@ -1502,14 +2200,198 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
 		},
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 1,
+					"file": "src/main.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1359,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								989,
+								989
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "include/Board.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1059,
+						"regions":
+						{
+							"bookmarks":
+							{
+								"flags": 144,
+								"icon": "bookmark",
+								"regions":
+								[
+								],
+								"scope": "string"
+							}
+						},
+						"selection":
+						[
+							[
+								963,
+								963
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/Objective-C/Objective-C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1562,6 +2444,10 @@
 	{
 		"height": 98.0
 	},
+	"output.clipboard_manager":
+	{
+		"height": 0.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
@@ -1579,6 +2465,50 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"gomo",
+				"gomoku.sublime-project"
+			],
+			[
+				"rul",
+				"include/Rules.h"
+			],
+			[
+				"play",
+				"include/Player.h"
+			],
+			[
+				"rulc",
+				"src/Rules.cpp"
+			],
+			[
+				"sub",
+				"gomoku.sublime-project"
+			],
+			[
+				"bo",
+				"include/Board.h"
+			],
+			[
+				"gammh",
+				"include/GameManager.h"
+			],
+			[
+				"mai",
+				"src/main.cpp"
+			],
+			[
+				"gamem",
+				"src/GameManager.cpp"
+			],
+			[
+				"gamm",
+				"src/GameManager.cpp"
+			],
+			[
+				"mak",
+				"Makefile"
+			],
 			[
 				"re",
 				"src/read_prompt.c"
@@ -1618,10 +2548,6 @@
 			[
 				"clih",
 				"include/client.h"
-			],
-			[
-				"mak",
-				"Makefile"
 			],
 			[
 				"conta",
@@ -2050,46 +2976,6 @@
 			[
 				"uti",
 				"include/util.hpp"
-			],
-			[
-				"classmod",
-				"meuh/util/roolv2.0/inc/ClassMod.hpp"
-			],
-			[
-				"projecth",
-				"meuh/util/roolv2.0/inc/Project.hpp"
-			],
-			[
-				"projectc",
-				"meuh/util/roolv2.0/src/Project.cpp"
-			],
-			[
-				"window",
-				"meuh/util/roolv2.0/inc/Window.hpp"
-			],
-			[
-				"menuh",
-				"meuh/util/roolv2.0/inc/Menu.hpp"
-			],
-			[
-				".proj",
-				"meuh/util/roolv2.0/config/.proj"
-			],
-			[
-				"boot",
-				"meuh/util/Rool/src/menus/Boot.cpp"
-			],
-			[
-				"filedi",
-				"meuh/util/roolv2.0/inc/FileDir.hpp"
-			],
-			[
-				"rool2make",
-				"meuh/util/roolv2.0/Makefile"
-			],
-			[
-				"taskmastercon",
-				"meuh/42/Taskmaster/hdezier-rbernand/config/programs.conf"
 			]
 		],
 		"width": 0.0
@@ -2102,7 +2988,7 @@
 		[
 			[
 				"",
-				"~/code/meuh/42/ft_p/hdezier/server/ft_p.sublime-workspace"
+				"~/code/meuh/42/Gomoku/hdezier-erobert/gomoku.sublime-project"
 			]
 		],
 		"width": 380.0
@@ -2116,7 +3002,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
