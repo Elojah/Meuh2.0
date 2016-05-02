@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 16:47:37 by hdezier           #+#    #+#             */
-/*   Updated: 2016/04/27 18:24:47 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/04/27 18:46:50 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_bool	write_file(char *filename, int sock)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr("File required doesn't exist\n");;
+		ft_putstr("File required doesn't exist\n");
 		write(sock, "0.", 2);
 		return (FALSE);
 	}
@@ -35,7 +35,7 @@ static t_bool	write_file(char *filename, int sock)
 		write(sock, buf, r);
 	ft_putstr("Wait response...\n");
 	r = read(sock, buf, 2);
-	buf[r] = 0;
+	buf[r] = '\0';
 	if (ft_strcmp(buf, (char *)"OK") != 0)
 	{
 		ft_putstr("Response is not valid\n");
