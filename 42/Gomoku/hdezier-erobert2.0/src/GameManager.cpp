@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:44 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 03:09:21 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/03 03:54:48 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	GameManager<N>::loop(void)
 
 	_loadMap("util/test.map");
 	turn = common::eCell::P1;
+	m_uI.init(N);
+	m_uI.render(m_board, m_player_1, m_player_2);
 	while (1)
 	{
 		if (turn == common::eCell::P1)
@@ -55,6 +57,8 @@ void	GameManager<N>::loop(void)
 		std::cout << "Player " << (int)turn << " in " << (int)stroke.x << "/" << (int)stroke.y << std::endl;
 		m_board.setCell(stroke, turn);
 		m_board.displayBoard();
+		m_uI.getEvent();
+		m_uI.render(m_board, m_player_1, m_player_2);
 		win = m_rules.gameEnded(m_board, stroke);
 		if (win != common::eCell::E_CELL)
 			break ;

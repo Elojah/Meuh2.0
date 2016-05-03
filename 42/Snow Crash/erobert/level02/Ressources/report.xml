@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dfxml xmloutputversion='1.0'>
+  <metadata 
+  xmlns='http://afflib.org/tcpflow/' 
+  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' 
+  xmlns:dc='http://purl.org/dc/elements/1.1/'>
+    <dc:type>Feature Extraction</dc:type>
+  </metadata>
+  <creator version='1.0'>
+    <program>TCPFLOW</program>
+    <version>1.4.5</version>
+    <build_environment>
+      <compiler>4.2.1 (4.2.1 Compatible Apple LLVM 7.0.2 (clang-700.1.81))</compiler>
+      <CPPFLAGS>-D_THREAD_SAFE -pthread -I/usr/local/include -I/usr/local/include  -DUTC_OFFSET=-0800 </CPPFLAGS>
+      <CFLAGS>-g   -D_THREAD_SAFE -pthread -g -O3 -MD -Wpointer-arith -Wmissing-declarations -Wmissing-prototypes -Wshadow -Wwrite-strings -Wcast-align -Waggregate-return -Wbad-function-cast -Wcast-qual -Wundef -Wredundant-decls -Wdisabled-optimization -Wfloat-equal -Wmultichar -Wc++-compat -Wmissing-noreturn -Wall -Wstrict-prototypes -MD -D_FORTIFY_SOURCE=2 -Wpointer-arith -Wmissing-declarations -Wmissing-prototypes -Wshadow -Wwrite-strings -Wcast-align -Waggregate-return -Wbad-function-cast -Wcast-qual -Wundef -Wredundant-decls -Wdisabled-optimization -Wfloat-equal -Wmultichar -Wc++-compat -Wmissing-noreturn -Wall -Wstrict-prototypes</CFLAGS>
+      <CXXFLAGS>-g -D_THREAD_SAFE -pthread -g -O3 -Wall -MD -D_FORTIFY_SOURCE=2 -Wpointer-arith -Wshadow -Wwrite-strings -Wcast-align -Wredundant-decls -Wdisabled-optimization -Wfloat-equal -Wmultichar -Wmissing-noreturn -Woverloaded-virtual -Wsign-promo -funit-at-a-time -Weffc++ -std=c++11 -Wall -MD -D_FORTIFY_SOURCE=2 -Wpointer-arith -Wshadow -Wwrite-strings -Wcast-align -Wredundant-decls -Wdisabled-optimization -Wfloat-equal -Wmultichar -Wmissing-noreturn -Woverloaded-virtual -Wsign-promo -funit-at-a-time -Weffc++ </CXXFLAGS>
+      <LDFLAGS>-L/usr/local/lib -L/usr/local/lib </LDFLAGS>
+      <LIBS>-lpcap -lbz2 -lexpat  -lsqlite3 -lssl -lcrypto -lssl -lcrypto -ldl -lz </LIBS>
+      <compilation_date>2015-12-31T04:18:07</compilation_date>
+      <library name="boost" version="105900"/>
+      <library name="sqlite" version="3.8.10.2" source_id="2015-05-20 18:17:19 2ef4f3a5b1d1d0c4338f8243d40a2452cc1f7fe4"/>
+    </build_environment>
+    <execution_environment>
+      <os_sysname>Darwin</os_sysname>
+      <os_release>15.4.0</os_release>
+      <os_version>Darwin Kernel Version 15.4.0: Fri Feb 26 22:08:05 PST 2016; root:xnu-3248.40.184~3/RELEASE_X86_64</os_version>
+      <host>e2r3p20.42.fr</host>
+      <arch>x86_64</arch>
+      <command_line>/nfs/2013/e/erobert/.brew/bin/tcpflow -CD -r level02.pcap</command_line>
+      <uid>6233</uid>
+      <start_time>2016-04-07T12:50:28Z</start_time>
+    </execution_environment>
+  </creator>
+  <configuration>
+  </configuration>
+  <tdelta>0</tdelta>
+  <configuration>
+    <fileobject>
+      <filesize>266</filesize>
+      <tcpflow startime='2011-07-20T07:23:12.267694Z' endtime='2011-07-20T07:23:54.377594Z' src_ipn='59.233.235.223' dst_ipn='59.233.235.218' mac_daddr='00:24:1d:0f:00:ad' mac_saddr='08:00:27:cc:8a:1e' packets='43' srcport='12121' dstport='39247' family='2' />
+    </fileobject>
+    <fileobject>
+      <filesize>206</filesize>
+      <tcpflow startime='2011-07-20T07:23:12.267566Z' endtime='2011-07-20T07:23:54.377802Z' src_ipn='59.233.235.218' dst_ipn='59.233.235.223' mac_daddr='08:00:27:cc:8a:1e' mac_saddr='00:24:1d:0f:00:ad' packets='52' srcport='39247' dstport='12121' family='2' />
+    </fileobject>
+  </configuration>
+  <summary />
+  <open_fds_at_end>0</open_fds_at_end>
+  <max_open_flows>0</max_open_flows>
+  <total_flows>2</total_flows>
+  <flow_map_size>2</flow_map_size>
+  <total_packets>95</total_packets>
+  <rusage>
+    <utime>0.002243</utime>
+    <stime>0.004111</stime>
+    <maxrss>1474560</maxrss>
+    <minflt>535</minflt>
+    <majflt>19</majflt>
+    <nswap>0</nswap>
+    <inblock>0</inblock>
+    <oublock>1</oublock>
+    <clocktime>0.822112</clocktime>
+  </rusage>
+</dfxml>
