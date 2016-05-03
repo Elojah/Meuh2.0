@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:47:10 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 05:10:59 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/03 07:50:02 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ public:
 	virtual void			setCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist, const common::eCell &player) = 0;
 	virtual common::eCell	getCell(const common::vec2 &coord) const = 0;
 	virtual common::eCell	getCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const = 0;
+	virtual uint8_t			getSize(void) const = 0;
+	virtual IBoard			*getCopy(void) const = 0;
+	virtual int8_t			countAlignFree(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player, bool permissive = true) const = 0;
 	virtual int8_t			countAlign(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player) const = 0;
 };
 
@@ -41,6 +44,17 @@ public:
 	inline Board(const IBoard &copy) {(void)copy;};
 
 	inline virtual ~Board(void) {};
+
+	inline virtual void				*getBoardPtr(void) const {return ((void *)&m_board);};
+	inline virtual uint8_t			getSize(void) const {return (N);};
+	inline virtual IBoard			*getCopy(void) const
+	{
+		Board<N>					*result;
+
+		result = new Board<N>;
+		memcpy(result->getBoardPtr(), m_board, sizeof(m_board));
+		return (result);
+	};
 
 	inline virtual void				setCell(const common::vec2 &stroke, const common::eCell &player)
 	{
@@ -83,9 +97,24 @@ public:
 			write(1, "\n", 1);
 		}
 	};
-	inline virtual int8_t	countAlign(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player) const
+
+	inline virtual int8_t			countAlign(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player) const
 	{
-		bool				permissive(true);
+		int					n;
+
+		n = 0;
+		while (++n < N)
+		{
+			auto	cell = getCell(stroke, dir, n);
+			if (cell == player)
+				continue ;
+			else
+				return (n - 1);
+		}
+		return (0);
+	};
+	inline virtual int8_t	countAlignFree(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player, bool permissive = true) const
+	{
 		int8_t				leftSide = _countAlignSide(stroke, dir, player, permissive);
 		int8_t				rightSide = _countAlignSide(stroke, common::opposite(dir), player, permissive);
 
@@ -111,8 +140,7 @@ private:
 				continue ;
 			else if (cell == common::eCell::NONE)
 			{
-				auto	nextCell = getCell(stroke, dir, n + 1);
-				if (permissive && nextCell == player)
+				if (permissive && getCell(stroke, dir, n + 1) == player)
 				{
 					permissive = false;
 					auto	nextCount = _countAlignSide(_convertCell(stroke, dir, n), dir, player, permissive);

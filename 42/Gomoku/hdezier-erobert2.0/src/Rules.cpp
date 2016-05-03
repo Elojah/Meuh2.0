@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:55:29 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 05:09:35 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/03 07:50:05 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,32 @@ void		Rules::addCapturedStones(const uint8_t &n, const common::eCell &player)
 		m_capturedStone_P2 += n;
 }
 
+bool			Rules::_alignFive(const IBoard &board, const common::vec2 &stroke)
+{
+	const common::eCell	player(board.getCell(stroke));
+
+	for (uint8_t i = 1; i < 5; ++i)
+	{
+		if (board.countAlign(stroke, (common::eDirection)i, player)
+			+ board.countAlign(stroke, common::opposite((common::eDirection)i), player) > 3)
+			return (true);
+	}
+	return (false);
+}
+
 common::eCell	Rules::gameEnded(const IBoard &board, const common::vec2 &stroke)
 {
-	(void)board;
-	(void)stroke;
 	if (m_capturedStone_P1 > 9)
 		return (common::eCell::P1);
 	else if (m_capturedStone_P2 > 9)
 		return (common::eCell::P2);
+	if (_alignFive(board, stroke))
+		return (board.getCell(stroke));
 	return (common::eCell::E_CELL);
 }
 
 bool		Rules::isValid(const IBoard &board, const common::vec2 &stroke, const common::eCell &turn)
 {
-	(void)board;
-	(void)stroke;
 	return (board.getCell(stroke) == common::eCell::NONE
 		&& !_insertDoubleFreeThree(board, stroke, turn));
 }
@@ -55,9 +66,8 @@ bool		Rules::_insertDoubleFreeThree(const IBoard &board, const common::vec2 &str
 
 	for (uint8_t i = 1; i < 5; ++i)
 	{
-		int8_t		align = board.countAlign(stroke, (common::eDirection)i, turn);
+		int8_t		align = board.countAlignFree(stroke, (common::eDirection)i, turn);
 
-		std::cout << "Alignment\t" << (int)i << "=\t" << (int)align << std::endl;
 		if (align >= 2)
 		{
 			++nFreeThree;
@@ -68,10 +78,10 @@ bool		Rules::_insertDoubleFreeThree(const IBoard &board, const common::vec2 &str
 	return (false);
 }
 
-uint8_t			Rules::applyCapture(IBoard &board, const common::vec2 &stroke)
+uint8_t			Rules::applyCapture(IBoard &board, const common::vec2 &stroke, uint16_t &saveState)
 {
-	common::eCell	player(board.getCell(stroke));
-	common::eCell	opponent(OPPONENT(player));
+	const common::eCell	player(board.getCell(stroke));
+	const common::eCell	opponent(OPPONENT(player));
 	uint8_t			result(0);
 
 	for (int8_t i = -4; i < 5; ++i)
@@ -85,7 +95,22 @@ uint8_t			Rules::applyCapture(IBoard &board, const common::vec2 &stroke)
 			board.setCell(stroke, (common::eDirection)i, 1, common::eCell::NONE);
 			board.setCell(stroke, (common::eDirection)i, 2, common::eCell::NONE);
 			result += 2;
+			saveState |= 1 << (i + 4);
 		}
 	}
 	return (result);
+}
+
+void			Rules::undoCapture(IBoard &board, const common::vec2 &stroke, uint16_t &saveState, const common::eCell &player)
+{
+	for (int8_t i = -4; i < 5; ++i)
+	{
+		if (i == 0)
+			continue ;
+		if ((saveState >> (i + 4)) & 1)
+		{
+			board.setCell(stroke, (common::eDirection)i, 1, player);
+			board.setCell(stroke, (common::eDirection)i, 2, player);
+		}
+	}
 }
