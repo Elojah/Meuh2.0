@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/23 13:00:48 by hdezier           #+#    #+#              #
-#    Updated: 2016/05/03 00:30:13 by hdezier          ###   ########.fr        #
+#    Updated: 2016/05/03 02:00:08 by erobert          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 TARGET = gomoku
@@ -30,6 +30,7 @@ CLASS = \
 		Rules\
 		Board\
 		Player\
+		UserInterface\
 
 #List interfaces here
 INTERFACE = \

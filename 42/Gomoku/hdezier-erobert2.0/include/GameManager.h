@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:50 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 00:11:08 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/03 01:17:56 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "Board.h"
 # include "Rules.h"
 # include "Player.h"
+# include "UserInterface.hpp"
 
 enum class eSize
 {
@@ -41,6 +42,7 @@ private:
 	Player			m_player_1;
 	Player			m_player_2;
 	common::eCell	m_turn;
+	UserInterface	m_uI;
 
 	void	displayWin(common::eCell winner) const;
 };

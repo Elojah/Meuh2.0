@@ -1,0 +1,5 @@
+nano /tmp/main.c
+cd /tmp/
+gcc main.c
+/tmp/a.out token
+su flag08

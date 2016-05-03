@@ -30,7 +30,7 @@ OBJ = $(addsuffix .o, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3 -std=c++98 -Wno-unused-parameter
+CFLAGS =-MMD -Wall -Wextra -Werror -O3 -std=c++11 -Wno-unused-parameter
 LFLAGS =
 
 #Libs

@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 00:09:52 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/03 00:55:29 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@ class Rules;
 class Player
 {
 public:
-
 	Player(void) = default;
 	virtual ~Player(void) = default;
 
+	bool				ai(void) const;
+
+	void				setAi(bool ai);
 	common::vec2		play(const IBoard &board, const Rules &rules) const;
+private:
+	bool				m_ai;
 };
 
 #endif
