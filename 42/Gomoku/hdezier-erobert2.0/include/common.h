@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:25:52 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/02 22:57:54 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/03 02:40:16 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define COMMON_H
 
 # include "stdint.h"
+
+# define OPPONENT(n) ((n) == common::eCell::P1 ? common::eCell::P2 : common::eCell::P1)
 
 namespace common
 {
@@ -35,6 +37,33 @@ namespace common
 		uint8_t			x;
 		uint8_t			y;
 	};
+
+	enum class eDirection
+	{
+		U = 1,
+		UR = 2,
+		R = 3,
+		DR = 4,
+		D = -1,
+		DL = -2,
+		L = -3,
+		UL = -4
+	};
+
+	inline eDirection		opposite(const eDirection &dir)
+	{
+		switch (dir)
+		{
+			case (eDirection::U) : return (eDirection::D);
+			case (eDirection::UR) : return (eDirection::DL);
+			case (eDirection::R) : return (eDirection::L);
+			case (eDirection::DR) : return (eDirection::UL);
+			case (eDirection::D) : return (eDirection::U);
+			case (eDirection::DL) : return (eDirection::UR);
+			case (eDirection::L) : return (eDirection::R);
+			case (eDirection::UL) : return (eDirection::DR);
+		}
+	}
 
 };
 

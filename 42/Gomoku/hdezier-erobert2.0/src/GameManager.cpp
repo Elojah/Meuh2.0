@@ -6,12 +6,13 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:44 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 00:26:40 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/03 03:09:21 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "GameManager.h"
 #include <iostream>
+#include <fstream>
 
 template <uint8_t N>
 void	GameManager<N>::displayWin(common::eCell winner) const
@@ -31,13 +32,15 @@ void	GameManager<N>::loop(void)
 	bool			valid;
 	common::vec2	stroke;
 	common::eCell	win;
+	common::eCell	turn;
 
-	m_turn = common::eCell::P1;
+	_loadMap("util/test.map");
+	turn = common::eCell::P1;
 	while (1)
 	{
-		if (m_turn == common::eCell::P1)
+		if (turn == common::eCell::P1)
 			current_player = &m_player_1;
-		else if (m_turn == common::eCell::P2)
+		else if (turn == common::eCell::P2)
 			current_player = &m_player_2;
 		else
 			std::cerr << "Player is not recognized" << std::endl;
@@ -45,18 +48,44 @@ void	GameManager<N>::loop(void)
 		while (!valid)
 		{
 			stroke = current_player->play(m_board, m_rules);
-			valid = m_rules.isValid(m_board, stroke);
+			valid = m_rules.isValid(m_board, stroke, turn);
+			if (!valid)
+				std::cout << "Unvalid stroke" << std::endl;
 		}
-		std::cout << "Player " << (int)m_turn << " in " << (int)stroke.x << "/" << (int)stroke.y << std::endl;
-		m_board.setCell(stroke, m_turn);
+		std::cout << "Player " << (int)turn << " in " << (int)stroke.x << "/" << (int)stroke.y << std::endl;
+		m_board.setCell(stroke, turn);
 		m_board.displayBoard();
-		win = m_rules.gameEnded(m_board, m_turn);
+		win = m_rules.gameEnded(m_board, stroke);
 		if (win != common::eCell::E_CELL)
 			break ;
-		m_turn = (m_turn == common::eCell::P1) ? common::eCell::P2 : common::eCell::P1;
+		turn = (turn == common::eCell::P1) ? common::eCell::P2 : common::eCell::P1;
 	}
 	displayWin(win);
 }
+
+template <uint8_t N>
+void	GameManager<N>::_loadMap(const std::string &file)
+{
+	std::ifstream		ifs(file.c_str());
+	std::string			line;
+	uint8_t				x;
+	uint8_t				y;
+
+	x = 0;
+	while (std::getline(ifs, line))
+	{
+		for (y = 0; y < line.size(); ++y)
+		{
+			const auto c = line[y];
+			if (c == '1')
+				m_board.setCell({x, y}, common::eCell::P1);
+			else if (c == '2')
+				m_board.setCell({x, y}, common::eCell::P2);
+		}
+		++x;
+	}
+}
+
 
 template class GameManager<common::small>;
 template class GameManager<common::medium>;
