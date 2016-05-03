@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:47:10 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 03:56:01 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/03 04:51:41 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "common.h"
 # include "Rules.h"
 # include <cstring>
+# include <utility>
 # include <unistd.h>
 
 class IBoard
@@ -24,6 +25,7 @@ class IBoard
 public:
 	virtual ~IBoard(void) {};
 	virtual void			setCell(const common::vec2 &stroke, const common::eCell &player) = 0;
+	virtual void			setCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist, const common::eCell &player) = 0;
 	virtual common::eCell	getCell(const common::vec2 &coord) const = 0;
 	virtual common::eCell	getCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const = 0;
 	virtual int8_t			countAlign(const common::vec2 &stroke, common::eDirection dir, common::eCell player) const = 0;
@@ -45,6 +47,10 @@ public:
 		if (_isValid(stroke))
 			m_board[stroke.x][stroke.y] = player;
 	};
+	inline virtual void				setCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist, const common::eCell &player)
+	{
+		setCell(_convertCell(origin, dir, dist), player);
+	};
 	inline virtual common::eCell	getCell(const common::vec2 &coord) const
 	{
 		if (_isValid(coord))
@@ -52,6 +58,11 @@ public:
 		else
 			return (common::eCell::E_CELL);
 	};
+	inline virtual common::eCell	getCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const
+	{
+		return (getCell(_convertCell(origin, dir, dist)));
+	};
+
 	inline virtual void				reset(void) {std::memset(m_board, (int)common::eCell::NONE, sizeof(m_board));};
 
 	inline virtual void				displayBoard(void) const
@@ -72,46 +83,6 @@ public:
 			write(1, "\n", 1);
 		}
 	};
-	inline virtual common::eCell	getCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const
-	{
-		common::vec2		dest;
-
-		dest.x = origin.x;
-		dest.y = origin.y;
-		switch (dir)
-		{
-			case (common::eDirection::U) :
-				dest.y -= dist;
-				break ;
-			case (common::eDirection::UR) :
-				dest.y -= dist;
-				dest.x += dist;
-				break ;
-			case (common::eDirection::R) :
-				dest.x += dist;
-				break ;
-			case (common::eDirection::DR) :
-				dest.y += dist;
-				dest.x += dist;
-				break ;
-			case (common::eDirection::D) :
-				dest.y += dist;
-				break ;
-			case (common::eDirection::DL) :
-				dest.y += dist;
-				dest.x -= dist;
-				break ;
-			case (common::eDirection::L) :
-				dest.x -= dist;
-				break ;
-			case (common::eDirection::UL) :
-				dest.y -= dist;
-				dest.x -= dist;
-				break ;
-		}
-		return (getCell(dest));
-	}
-
 	inline virtual int8_t	countAlign(const common::vec2 &stroke, common::eDirection dir, common::eCell player) const
 	{
 		bool				permissive(true);
@@ -154,6 +125,47 @@ private:
 		}
 		return (0);
 	}
+
+	inline virtual common::vec2		&&_convertCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const
+	{
+		common::vec2		dest;
+
+		dest.x = origin.x;
+		dest.y = origin.y;
+		switch (dir)
+		{
+			case (common::eDirection::U) :
+				dest.y -= dist;
+				break ;
+			case (common::eDirection::UR) :
+				dest.y -= dist;
+				dest.x += dist;
+				break ;
+			case (common::eDirection::R) :
+				dest.x += dist;
+				break ;
+			case (common::eDirection::DR) :
+				dest.y += dist;
+				dest.x += dist;
+				break ;
+			case (common::eDirection::D) :
+				dest.y += dist;
+				break ;
+			case (common::eDirection::DL) :
+				dest.y += dist;
+				dest.x -= dist;
+				break ;
+			case (common::eDirection::L) :
+				dest.x -= dist;
+				break ;
+			case (common::eDirection::UL) :
+				dest.y -= dist;
+				dest.x -= dist;
+				break ;
+		}
+		return (std::move(dest));
+	}
+
 
 };
 
