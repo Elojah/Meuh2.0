@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:47:10 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 03:56:01 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/03 05:10:59 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "common.h"
 # include "Rules.h"
 # include <cstring>
+# include <utility>
 # include <unistd.h>
 
 class IBoard
@@ -24,9 +25,10 @@ class IBoard
 public:
 	virtual ~IBoard(void) {};
 	virtual void			setCell(const common::vec2 &stroke, const common::eCell &player) = 0;
+	virtual void			setCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist, const common::eCell &player) = 0;
 	virtual common::eCell	getCell(const common::vec2 &coord) const = 0;
 	virtual common::eCell	getCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const = 0;
-	virtual int8_t			countAlign(const common::vec2 &stroke, common::eDirection dir, common::eCell player) const = 0;
+	virtual int8_t			countAlign(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player) const = 0;
 };
 
 template <uint8_t N>
@@ -45,6 +47,10 @@ public:
 		if (_isValid(stroke))
 			m_board[stroke.x][stroke.y] = player;
 	};
+	inline virtual void				setCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist, const common::eCell &player)
+	{
+		setCell(_convertCell(origin, dir, dist), player);
+	};
 	inline virtual common::eCell	getCell(const common::vec2 &coord) const
 	{
 		if (_isValid(coord))
@@ -52,6 +58,11 @@ public:
 		else
 			return (common::eCell::E_CELL);
 	};
+	inline virtual common::eCell	getCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const
+	{
+		return (getCell(_convertCell(origin, dir, dist)));
+	};
+
 	inline virtual void				reset(void) {std::memset(m_board, (int)common::eCell::NONE, sizeof(m_board));};
 
 	inline virtual void				displayBoard(void) const
@@ -72,7 +83,57 @@ public:
 			write(1, "\n", 1);
 		}
 	};
-	inline virtual common::eCell	getCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const
+	inline virtual int8_t	countAlign(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player) const
+	{
+		bool				permissive(true);
+		int8_t				leftSide = _countAlignSide(stroke, dir, player, permissive);
+		int8_t				rightSide = _countAlignSide(stroke, common::opposite(dir), player, permissive);
+
+		if (leftSide == -1 || rightSide == -1)
+			return (-1);
+		return (leftSide + rightSide);
+	}
+
+private:
+	common::eCell			m_board[N][N];
+
+	static inline bool		_isValid(const common::vec2 &stroke) {return (stroke.x >= 0 && stroke.x < N && stroke.y >= 0 && stroke.y < N);};
+
+	inline virtual int8_t	_countAlignSide(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player, bool &permissive) const
+	{
+		int					n;
+
+		n = 0;
+		while (++n < N)
+		{
+			auto	cell = getCell(stroke, dir, n);
+			if (cell == player)
+				continue ;
+			else if (cell == common::eCell::NONE)
+			{
+				auto	nextCell = getCell(stroke, dir, n + 1);
+				if (permissive && nextCell == player)
+				{
+					permissive = false;
+					auto	nextCount = _countAlignSide(_convertCell(stroke, dir, n), dir, player, permissive);
+					if (nextCount == -1)
+					{
+						permissive = true;
+						return (n - 1);
+					}
+					else
+						return (n + nextCount);
+				}
+				else
+					return (n - 1);
+			}
+			else // NONE || E_CELL (=out of range)
+				return (-1);
+		}
+		return (0);
+	}
+
+	inline virtual common::vec2		&&_convertCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const
 	{
 		common::vec2		dest;
 
@@ -109,51 +170,9 @@ public:
 				dest.x -= dist;
 				break ;
 		}
-		return (getCell(dest));
+		return (std::move(dest));
 	}
 
-	inline virtual int8_t	countAlign(const common::vec2 &stroke, common::eDirection dir, common::eCell player) const
-	{
-		bool				permissive(true);
-		int8_t				leftSide = _countAlignSide(stroke, dir, player, permissive);
-		int8_t				rightSide = _countAlignSide(stroke, common::opposite(dir), player, permissive);
-
-		if (leftSide == -1 || rightSide == -1)
-			return (-1);
-		return (leftSide + rightSide);
-	}
-
-private:
-	common::eCell			m_board[N][N];
-
-	static inline bool		_isValid(const common::vec2 &stroke) {return (stroke.x >= 0 && stroke.x < N && stroke.y >= 0 && stroke.y < N);};
-
-	inline virtual int8_t	_countAlignSide(const common::vec2 &stroke, common::eDirection dir, common::eCell player, bool &permissive) const
-	{
-		int					n;
-
-		n = 0;
-		while (++n < N)
-		{
-			auto	cell = getCell(stroke, dir, n);
-			if (cell == player)
-				continue ;
-			else if (cell == common::eCell::NONE)
-			{
-				auto	nextCell = getCell(stroke, dir, n + 1);
-				if (permissive && nextCell == player)
-				{
-					permissive = false;
-					++n;
-				}
-				else
-					return (n - 1);
-			}
-			else // NONE || E_CELL (=out of range)
-				return (-1);
-		}
-		return (0);
-	}
 
 };
 

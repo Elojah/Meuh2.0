@@ -64,7 +64,7 @@ UserInterface::sEvent const	&UserInterface::getEvent(void)
 	float					position[2];
 
 	_event.e = E_EVENT;
-	while (_window.pollEvent(event))
+	if (_window.waitEvent(event))
 	{
 		if (event.type == sf::Event::Closed
 			|| (event.type == sf::Event::KeyPressed
@@ -212,7 +212,7 @@ void						UserInterface::renderPlayers(Player const &p1,
 	{
 		_text.setString("WHITE TURN");
 		_window.draw(_text);
-	}		
+	}
 */	_text.setString("WHITE");
 	_text.setPosition(WIDTH - 162, HEIGHT + 76);
 	_window.draw(_text);

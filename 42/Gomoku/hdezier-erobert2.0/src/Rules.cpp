@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:55:29 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 03:15:33 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/03 05:09:35 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,32 @@
 #include "Board.h"
 
 #include <iostream>
+
+Rules::Rules(void)
+	: m_capturedStone_P1(0)
+	,m_capturedStone_P2(0)
+{
+	;
+}
+
+void		Rules::addCapturedStones(const uint8_t &n, const common::eCell &player)
+{
+	if (player == common::eCell::P1)
+		m_capturedStone_P1 += n;
+	else if (player == common::eCell::P2)
+		m_capturedStone_P2 += n;
+}
+
+common::eCell	Rules::gameEnded(const IBoard &board, const common::vec2 &stroke)
+{
+	(void)board;
+	(void)stroke;
+	if (m_capturedStone_P1 > 9)
+		return (common::eCell::P1);
+	else if (m_capturedStone_P2 > 9)
+		return (common::eCell::P2);
+	return (common::eCell::E_CELL);
+}
 
 bool		Rules::isValid(const IBoard &board, const common::vec2 &stroke, const common::eCell &turn)
 {
@@ -42,9 +68,24 @@ bool		Rules::_insertDoubleFreeThree(const IBoard &board, const common::vec2 &str
 	return (false);
 }
 
-common::eCell	Rules::gameEnded(const IBoard &board, const common::vec2 &stroke)
+uint8_t			Rules::applyCapture(IBoard &board, const common::vec2 &stroke)
 {
-	(void)board;
-	(void)stroke;
-	return (common::eCell::E_CELL);
+	common::eCell	player(board.getCell(stroke));
+	common::eCell	opponent(OPPONENT(player));
+	uint8_t			result(0);
+
+	for (int8_t i = -4; i < 5; ++i)
+	{
+		if (i == 0)
+			continue ;
+		if (board.getCell(stroke, (common::eDirection)i, 1) == opponent
+			&& board.getCell(stroke, (common::eDirection)i, 2) == opponent
+			&& board.getCell(stroke, (common::eDirection)i, 3) == player)
+		{
+			board.setCell(stroke, (common::eDirection)i, 1, common::eCell::NONE);
+			board.setCell(stroke, (common::eDirection)i, 2, common::eCell::NONE);
+			result += 2;
+		}
+	}
+	return (result);
 }

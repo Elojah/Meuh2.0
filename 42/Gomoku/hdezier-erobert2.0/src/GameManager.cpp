@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:44 by hdezier           #+#    #+#             */
-//   Updated: 2016/05/03 04:32:03 by erobert          ###   ########.fr       //
+/*   Updated: 2016/05/03 04:55:24 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,17 @@ void	GameManager<N>::loop(void)
 			if (!valid)
 				std::cout << "Unvalid stroke" << std::endl;
 		}
+
 		std::cout << "Player " << (int)turn << " in " << (int)stroke.x << "/" << (int)stroke.y << std::endl;
 		m_board.setCell(stroke, turn);
+
+		auto n = m_rules.applyCapture(m_board, stroke);
+		m_rules.addCapturedStones(n, turn);
+
 		m_board.displayBoard();
 		m_uI.getEvent();
 		m_uI.render(m_board, m_player_1, m_player_2);
+
 		win = m_rules.gameEnded(m_board, stroke);
 		if (win != common::eCell::E_CELL)
 			break ;
