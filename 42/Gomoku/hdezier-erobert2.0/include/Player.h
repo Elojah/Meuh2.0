@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 00:55:29 by erobert          ###   ########.fr       */
+/*   Updated: 2016/05/03 05:10:53 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 class IBoard;
 class Rules;
+class UserInterface;
 
 class Player
 {
@@ -25,12 +26,13 @@ public:
 	Player(void) = default;
 	virtual ~Player(void) = default;
 
-	bool				ai(void) const;
+	inline void				setAi(bool ai) {m_ai = ai;};
+	inline bool				ai(void) const {return (m_ai);};
 
-	void				setAi(bool ai);
-	common::vec2		play(const IBoard &board, const Rules &rules) const;
+	common::vec2	play(const IBoard &board, const Rules &rules,
+						 common::vec2 stroke) const;
 private:
-	bool				m_ai;
+	bool			m_ai;
 };
 
 #endif

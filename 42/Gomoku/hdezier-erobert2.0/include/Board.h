@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:47:10 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 04:51:41 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/03 05:10:59 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ public:
 	virtual void			setCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist, const common::eCell &player) = 0;
 	virtual common::eCell	getCell(const common::vec2 &coord) const = 0;
 	virtual common::eCell	getCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const = 0;
-	virtual int8_t			countAlign(const common::vec2 &stroke, common::eDirection dir, common::eCell player) const = 0;
+	virtual int8_t			countAlign(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player) const = 0;
 };
 
 template <uint8_t N>
@@ -83,7 +83,7 @@ public:
 			write(1, "\n", 1);
 		}
 	};
-	inline virtual int8_t	countAlign(const common::vec2 &stroke, common::eDirection dir, common::eCell player) const
+	inline virtual int8_t	countAlign(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player) const
 	{
 		bool				permissive(true);
 		int8_t				leftSide = _countAlignSide(stroke, dir, player, permissive);
@@ -99,7 +99,7 @@ private:
 
 	static inline bool		_isValid(const common::vec2 &stroke) {return (stroke.x >= 0 && stroke.x < N && stroke.y >= 0 && stroke.y < N);};
 
-	inline virtual int8_t	_countAlignSide(const common::vec2 &stroke, common::eDirection dir, common::eCell player, bool &permissive) const
+	inline virtual int8_t	_countAlignSide(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player, bool &permissive) const
 	{
 		int					n;
 
@@ -115,7 +115,14 @@ private:
 				if (permissive && nextCell == player)
 				{
 					permissive = false;
-					++n;
+					auto	nextCount = _countAlignSide(_convertCell(stroke, dir, n), dir, player, permissive);
+					if (nextCount == -1)
+					{
+						permissive = true;
+						return (n - 1);
+					}
+					else
+						return (n + nextCount);
 				}
 				else
 					return (n - 1);
