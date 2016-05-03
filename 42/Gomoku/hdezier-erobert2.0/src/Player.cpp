@@ -6,13 +6,18 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:51 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 00:29:05 by hdezier          ###   ########.fr       */
+//   Updated: 2016/05/03 00:56:38 by erobert          ###   ########.fr       //
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Player.h"
 
 #include <iostream>
+
+bool				Player::ai(void) const
+{
+	return (m_ai);
+}
 
 common::vec2		Player::play(const IBoard &board, const Rules &rules) const
 {
