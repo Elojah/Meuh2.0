@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:50 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 01:17:56 by erobert          ###   ########.fr       */
+/*   Updated: 2016/05/03 03:55:13 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define GAME_MANAGER_H
 
 # include "stdint.h"
+# include <string>
 
 # include "Board.h"
 # include "Rules.h"
@@ -41,10 +42,10 @@ private:
 	Rules			m_rules;
 	Player			m_player_1;
 	Player			m_player_2;
-	common::eCell	m_turn;
 	UserInterface	m_uI;
 
 	void	displayWin(common::eCell winner) const;
+	void	_loadMap(const std::string &file);
 };
 
 #endif

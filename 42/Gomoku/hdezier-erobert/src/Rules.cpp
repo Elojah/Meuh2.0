@@ -197,6 +197,7 @@ bool						Rules::canCaptureFive(Board &b,
 	}
 	return (result);
 }
+
 Rules::eValidity			Rules::captureStone(Board &b, Board::sCell &cell,
 																					Player &player)
 {
