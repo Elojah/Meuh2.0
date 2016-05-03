@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:44 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 04:55:24 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/03 07:47:02 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,12 @@ void	GameManager<N>::loop(void)
 	common::vec2	stroke;
 	common::eCell	win;
 	common::eCell	turn;
+	uint16_t		tmp;
 
 	_loadMap("util/test.map");
 	turn = common::eCell::P1;
+	m_player_1.setAi(false);
+	m_player_2.setAi(true);
 	m_uI.init(N);
 	m_uI.render(m_board, m_player_1, m_player_2);
 	while (1)
@@ -49,16 +52,18 @@ void	GameManager<N>::loop(void)
 		valid = false;
 		while (!valid)
 		{
-			stroke = current_player->play(m_board, m_rules, eventHandler());
+			stroke = current_player->play(m_board, m_rules, eventHandler(), turn);
 			valid = m_rules.isValid(m_board, stroke, turn);
-			if (!valid)
+			if (!valid && stroke.x != ERR_VAL)
 				std::cout << "Unvalid stroke" << std::endl;
+			if (!valid && current_player->ai() == true)
+				break ;
 		}
 
 		std::cout << "Player " << (int)turn << " in " << (int)stroke.x << "/" << (int)stroke.y << std::endl;
 		m_board.setCell(stroke, turn);
 
-		auto n = m_rules.applyCapture(m_board, stroke);
+		auto n = m_rules.applyCapture(m_board, stroke, tmp);
 		m_rules.addCapturedStones(n, turn);
 
 		m_board.displayBoard();
@@ -102,8 +107,8 @@ common::vec2 const					&GameManager<N>::eventHandler(void)
 	static common::vec2				stroke;
 	static UserInterface::sEvent	event;
 
-	stroke.x = -1;
-	stroke.y = -1;
+	stroke.x = ERR_VAL;
+	stroke.y = ERR_VAL;
 	event = m_uI.getEvent();
 /*	if (event.e == UserInterface::EXIT)
 		_exit = true;
