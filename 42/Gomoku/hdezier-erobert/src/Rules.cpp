@@ -24,7 +24,7 @@ void						Rules::reset(void)
 }
 
 
-int							Rules::captureStone(Cell &cell, Player &player)
+Rules::eValidity			Rules::captureStone(Cell &cell, Player &player)
 {
 	int						captures(cell.checkCapture());
 	int						i;
@@ -197,6 +197,7 @@ bool						Rules::canCaptureFive(Board &b,
 	}
 	return (result);
 }
+
 Rules::eValidity			Rules::captureStone(Board &b, Board::sCell &cell,
 																					Player &player)
 {
