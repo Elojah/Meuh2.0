@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:44 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 03:54:48 by hdezier          ###   ########.fr       */
+//   Updated: 2016/05/03 04:32:03 by erobert          ###   ########.fr       //
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	GameManager<N>::loop(void)
 		valid = false;
 		while (!valid)
 		{
-			stroke = current_player->play(m_board, m_rules);
+			stroke = current_player->play(m_board, m_rules, eventHandler());
 			valid = m_rules.isValid(m_board, stroke, turn);
 			if (!valid)
 				std::cout << "Unvalid stroke" << std::endl;
@@ -89,6 +89,41 @@ void	GameManager<N>::_loadMap(const std::string &file)
 		++x;
 	}
 }
+
+template <uint8_t N>
+common::vec2 const					&GameManager<N>::eventHandler(void)
+{
+	static common::vec2				stroke;
+	static UserInterface::sEvent	event;
+
+	stroke.x = -1;
+	stroke.y = -1;
+	event = m_uI.getEvent();
+/*	if (event.e == UserInterface::EXIT)
+		_exit = true;
+	else if (event.e == UserInterface::RESTART)
+	{
+		_restart = true;
+		_exit = true;
+	}
+*/	if (event.e == UserInterface::MOUSE)
+	{
+		stroke.x = event.x;
+		stroke.y = event.y;
+	}
+/*	else if (event.e == UserInterface::P1_AI)
+		_p1.switchAI();
+	else if (event.e == UserInterface::P2_AI)
+		_p2.switchAI();
+	else if (event.e == UserInterface::PLAY)
+		_audio.playMusic(AudioManager::HYMNE_A_LA_KRO);
+	else if (event.e == UserInterface::NEXT)
+		_audio.nextMusic();
+	else if (event.e == UserInterface::STOP)
+		_audio.stopMusic();
+*/	return (stroke);
+}
+
 
 
 template class GameManager<common::small>;
