@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:44 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/06 12:09:19 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/06 15:01:04 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	GameManager<N>::loop(void)
 
 	_loadMap("util/test.map");
 	turn = common::eCell::P1;
-	m_player_1.setAi(false);
+	m_player_1.setAi(true);
 	m_player_2.setAi(true);
 	m_uI.init(N);
 	m_uI.render(m_board, m_player_1, m_player_2);

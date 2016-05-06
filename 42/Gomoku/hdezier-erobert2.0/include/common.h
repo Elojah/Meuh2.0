@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:25:52 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 07:26:15 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/06 13:56:12 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # define ERR_VAL 255
 # define OPPONENT(n) ((n) == common::eCell::P1 ? common::eCell::P2 : common::eCell::P1)
+# define WHO_IS(n) std::cout << ((n) == common::eCell::P1 ? "P1" : "P2") << std::endl;
 
 namespace common
 {

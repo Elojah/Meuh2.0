@@ -6,14 +6,14 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/06 12:56:13 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/06 14:59:55 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
 
-# define MAX_DEPTH 1
+# define MAX_DEPTH 3
 
 # include "stdint.h"
 # include "common.h"
