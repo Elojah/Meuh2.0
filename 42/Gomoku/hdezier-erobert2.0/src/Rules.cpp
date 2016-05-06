@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:55:29 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 07:50:05 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/06 12:55:25 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,9 @@ uint8_t			Rules::applyCapture(IBoard &board, const common::vec2 &stroke, uint16_
 {
 	const common::eCell	player(board.getCell(stroke));
 	const common::eCell	opponent(OPPONENT(player));
-	uint8_t			result(0);
+	uint8_t				result(0);
 
+	saveState = 0;
 	for (int8_t i = -4; i < 5; ++i)
 	{
 		if (i == 0)
