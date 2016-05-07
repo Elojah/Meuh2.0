@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:51 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/06 15:00:57 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/07 14:29:28 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,155 +25,15 @@ common::vec2		Player::play(const IBoard &board, const Rules &rules
 
 common::vec2		Player::_calculusAI(const IBoard &board, const Rules &rules, const common::eCell &player) const
 {
+	sEval			evalFt;
 	common::vec2	result;
 	sMinMaxState	minmaxState{MAX_DEPTH, true, player, {0, 0}};
 	IBoard			*boardCopy;
 
 	boardCopy = board.getCopy();
-	result = _minmax(*boardCopy, rules, minmaxState).coord;
-	std::cout << "AI returned:\t" << (int)result.x << '/' << (int)result.y << std::endl;
-	return (result);
-}
 
-Player::sMinMaxResult		Player::_minmax(IBoard &board, const Rules &rules, const sMinMaxState &minmaxState) const
-{
-	uint8_t					nCaptures(0);
-	uint16_t				captures(0);
-
-	// board.displayBoard();
-	// char c; read(0, &c, 1);
-	if (minmaxState.depth == 0)
-		return ((sMinMaxResult){(common::vec2){ERR_VAL, ERR_VAL}
-			, _calculusValue(board, rules
-				, minmaxState.maximizing ? minmaxState.currentPlayer : OPPONENT(minmaxState.currentPlayer)
-				, minmaxState.captures)});
-	// Max
-	if (minmaxState.maximizing)
-	{
-		sMinMaxResult		maxValue = {(common::vec2){ERR_VAL, ERR_VAL}, 0};
-			std::cout << "SEARCH_________MAX___________" << std::endl;
-			WHO_IS(minmaxState.currentPlayer);
-
-		// Use iterator instead
-		uint8_t		size = board.getSize();
-		for (uint8_t i = 0; i < size; ++i)
-		{
-			for (uint8_t j = 0; j < size; ++j)
-			{
-				if (!rules.isValid(board, {i, j}, minmaxState.currentPlayer))
-					continue ;
-
-				board.setCell({i, j}, minmaxState.currentPlayer);
-				nCaptures = rules.applyCapture(board, {i, j}, captures);
-
-				uint8_t	capture_P1;
-				uint8_t	capture_P2;
-				if (minmaxState.currentPlayer == common::eCell::P1)
-				{
-					capture_P1 = minmaxState.captures[0] + nCaptures;
-					capture_P2 = minmaxState.captures[1];
-				}
-				else
-				{
-					capture_P1 = minmaxState.captures[0];
-					capture_P2 = minmaxState.captures[1] + nCaptures;
-				}
-				auto	nextValue = _minmax(
-					board, rules
-					, {(uint8_t)(minmaxState.depth - 1), false, OPPONENT(minmaxState.currentPlayer)
-					, {capture_P1, capture_P2}
-					});
-
-				rules.undoCapture(board, {i, j}, captures, OPPONENT(minmaxState.currentPlayer));
-				board.setCell({i, j}, common::eCell::NONE);
-
-				if (nextValue.value > maxValue.value)
-				{
-					maxValue.coord = {i, j};
-					maxValue.value = nextValue.value;
-				}
-			}
-		}
-		std::cout << "_________MAX" << std::endl;
-		maxValue.print();
-		return (maxValue);
-	}
-	else // Min
-	{
-		sMinMaxResult		minValue = {(common::vec2){ERR_VAL, ERR_VAL}, ERR_VAL};
-		// Use iterator instead
-			std::cout << "SEARCH_________Min___________" << std::endl;
-			WHO_IS(minmaxState.currentPlayer);
-		uint8_t		size = board.getSize();
-		for (uint8_t i = 0; i < size; ++i)
-		{
-			for (uint8_t j = 0; j < size; ++j)
-			{
-				if (!rules.isValid(board, {i, j}, minmaxState.currentPlayer))
-					continue ;
-
-				board.setCell({i, j}, minmaxState.currentPlayer);
-				nCaptures = rules.applyCapture(board, {i, j}, captures);
-
-				uint8_t	capture_P1;
-				uint8_t	capture_P2;
-				if (minmaxState.currentPlayer == common::eCell::P1)
-				{
-					capture_P1 = minmaxState.captures[0] + nCaptures;
-					capture_P2 = minmaxState.captures[1];
-				}
-				else
-				{
-					capture_P1 = minmaxState.captures[0];
-					capture_P2 = minmaxState.captures[1] + nCaptures;
-				}
-
-				auto	nextValue = _minmax(board, rules
-					, {(uint8_t)(minmaxState.depth - 1), true, OPPONENT(minmaxState.currentPlayer)
-					, {capture_P1, capture_P2}
-					});
-
-				rules.undoCapture(board, {i, j}, captures, OPPONENT(minmaxState.currentPlayer));
-				board.setCell({i, j}, common::eCell::NONE);
-
-				if (nextValue.value < minValue.value)
-				{
-					minValue.coord = {i, j};
-					minValue.value = nextValue.value;
-				}
-			}
-		}
-		std::cout << "____MIN" << std::endl;
-		minValue.print();
-		return (minValue);
-	}
-	return ((sMinMaxResult){(common::vec2){ERR_VAL, ERR_VAL}, 0});
-}
-
-uint8_t				Player::_calculusValue(const IBoard &board, const Rules &rules, const common::eCell &player, const uint8_t captures[2])
-{
-	uint8_t			result;
-
-	(void)rules;
-	(void)board;
-	(void)player;
-	result = 11;
-	uint8_t			size = board.getSize();
-	common::eCell	opponent = OPPONENT(player);
-
-	// Use iterator instead
-	for (uint8_t i = 0; i < size; ++i)
-	{
-		for (uint8_t j = 0; j < size; ++j)
-		{
-			if (board.getCell({i, j}) == player)
-				++result;
-			else if (board.getCell({i, j}) == opponent && result > 0)
-				--result;
-		}
-	}
-
-	result += player == common::eCell::P1 ? captures[0] - captures[1] :  captures[1] - captures[0];
-
+	std::cout << "________AI search________" << std::endl;
+	result = MinMax<sMax>::eval(*boardCopy, rules, minmaxState, evalFt).coord;
+	std::cout << "________AI returned:\t" << (int)result.x << '/' << (int)result.y << std::endl;
 	return (result);
 }
