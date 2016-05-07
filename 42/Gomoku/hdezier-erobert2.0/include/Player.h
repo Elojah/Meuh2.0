@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 07:16:04 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/07 14:34:34 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 
 # include "stdint.h"
 # include "common.h"
+# include "minmax.h"
+
+# include <iostream>
 
 class IBoard;
 class Rules;
@@ -33,25 +36,27 @@ public:
 
 	common::vec2			play(const IBoard &board, const Rules &rules,
 								const common::vec2 &stroke, const common::eCell &player) const;
+
+	struct					sEval : public IEval
+	{
+		inline virtual uint8_t		eval(const IBoard &board, const Rules &rules, const sMinMaxState &minMaxState) const
+		{
+			uint8_t			result;
+
+			(void)board;
+			(void)rules;
+			result = 11;
+			result += minMaxState.captures[0] - minMaxState.captures[1];
+
+			return (result);
+		}
+	};
+
 private:
 	bool					m_ai;
 
-	struct					sMinMaxState
-	{
-		const uint8_t		depth;
-		const bool			maximizing;
-		const common::eCell	currentPlayer;
-	};
-
-	struct					sMinMaxResult
-	{
-		common::vec2		coord;
-		uint8_t				value;
-	};
-
 	common::vec2			_calculusAI(const IBoard &board, const Rules &rules, const common::eCell &player) const;
-	sMinMaxResult			_minmax(IBoard &board, const Rules &rules, const sMinMaxState &minmaxState) const;
-	uint8_t					_calculusValue(IBoard &board, const Rules &rules, const common::vec2 &stroke, const common::eCell &player);
+
 
 };
 
