@@ -64,7 +64,7 @@ UserInterface::sEvent const	&UserInterface::getEvent(void)
 	float					position[2];
 
 	_event.e = E_EVENT;
-	if (_window.waitEvent(event))
+	if (_window.pollEvent(event))
 	{
 		if (event.type == sf::Event::Closed
 			|| (event.type == sf::Event::KeyPressed

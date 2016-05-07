@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 13:01:31 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/07 14:32:47 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/07 16:10:17 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ struct					sMinMaxState
 	const uint8_t		depth;
 	const bool			maximizing;
 	const common::eCell	currentPlayer;
+	const common::vec2	lastStroke;
 	uint8_t				captures[2];
 };
 
@@ -49,13 +50,13 @@ class		MinMax
 {
 
 public:
-
-	inline static sMinMaxResult	&&eval(IBoard &board, const Rules &rules, const sMinMaxState &minmaxState, const IEval &evalFunction)
+	inline static sMinMaxResult	&&eval(IBoard &board, const Rules &rules, const sMinMaxState &minMaxState, const IEval &evalFunction)
 	{
 
-		if (minmaxState.depth == 0)
+		if (minMaxState.depth == 0
+			|| rules.gameEnded(board, minMaxState.lastStroke, minMaxState.captures[0], minMaxState.captures[1]) != common::eCell::E_CELL)
 			return (std::move((sMinMaxResult){(common::vec2){ERR_VAL, ERR_VAL}
-				, evalFunction.eval(board, rules, minmaxState)}));
+				, evalFunction.eval(board, rules, minMaxState)}));
 
 		uint8_t					nCaptures(0);
 		uint16_t				captures(0);
@@ -67,32 +68,21 @@ public:
 		{
 			for (uint8_t j = 0; j < size; ++j)
 			{
-				if (!rules.isValid(board, {i, j}, minmaxState.currentPlayer))
+				if (!rules.isValid(board, {i, j}, minMaxState.currentPlayer))
 					continue ;
 
-				board.setCell({i, j}, minmaxState.currentPlayer);
+				board.setCell({i, j}, minMaxState.currentPlayer);
 				nCaptures = rules.applyCapture(board, {i, j}, captures);
-
-				uint8_t	capture_P1;
-				uint8_t	capture_P2;
-				if (minmaxState.currentPlayer == common::eCell::P1)
-				{
-					capture_P1 = minmaxState.captures[0] + nCaptures;
-					capture_P2 = minmaxState.captures[1];
-				}
-				else
-				{
-					capture_P1 = minmaxState.captures[0];
-					capture_P2 = minmaxState.captures[1] + nCaptures;
-				}
 
 				auto	nextValue = T::search(
 					board, rules
-					, {(uint8_t)(minmaxState.depth - 1), !minmaxState.maximizing, OPPONENT(minmaxState.currentPlayer)
-					, {capture_P1, capture_P2}}
+					, {(uint8_t)(minMaxState.depth - 1), !minMaxState.maximizing, OPPONENT(minMaxState.currentPlayer)
+					, {i, j}
+					, {(uint8_t)(minMaxState.currentPlayer == common::eCell::P1 ? minMaxState.captures[0] + nCaptures : minMaxState.captures[0])
+						, (uint8_t)(minMaxState.currentPlayer == common::eCell::P1 ? minMaxState.captures[1]: minMaxState.captures[1] + nCaptures)}}
 					, evalFunction);
 
-				rules.undoCapture(board, {i, j}, captures, OPPONENT(minmaxState.currentPlayer));
+				rules.undoCapture(board, {i, j}, captures, OPPONENT(minMaxState.currentPlayer));
 				board.setCell({i, j}, common::eCell::NONE);
 
 				if (T::compareValues(nextValue.value, initialValue.value))
@@ -103,28 +93,27 @@ public:
 			}
 		}
 
-		initialValue.print();
-		board.displayBoard();
+		// initialValue.print();
+		// board.displayBoard();
 		// DBG_BREAK
 
 		return (std::move(initialValue));
 	};
 
 private:
-
 };
 
 struct	sMin
 {
 	inline static bool			compareValues(const uint8_t nextValue, const uint8_t currentValue) {return (nextValue < currentValue);};
-	inline static sMinMaxResult	&&search(IBoard &board, const Rules &rules, const sMinMaxState &minmaxState, const IEval &evalFunction) {return (MinMax<sMax>::eval(board, rules, minmaxState, evalFunction));};
+	inline static sMinMaxResult	&&search(IBoard &board, const Rules &rules, const sMinMaxState &minMaxState, const IEval &evalFunction) {return (MinMax<sMax>::eval(board, rules, minMaxState, evalFunction));};
 	static const uint8_t		initialValue = ERR_VAL;
 };
 
 struct	sMax
 {
 	inline static bool			compareValues(const uint8_t nextValue, const uint8_t currentValue) {return (nextValue > currentValue);};
-	inline static sMinMaxResult	&&search(IBoard &board, const Rules &rules, const sMinMaxState &minmaxState, const IEval &evalFunction) {return (MinMax<sMin>::eval(board, rules, minmaxState, evalFunction));};
+	inline static sMinMaxResult	&&search(IBoard &board, const Rules &rules, const sMinMaxState &minMaxState, const IEval &evalFunction) {return (MinMax<sMin>::eval(board, rules, minMaxState, evalFunction));};
 	static const uint8_t		initialValue = 0;
 };
 
