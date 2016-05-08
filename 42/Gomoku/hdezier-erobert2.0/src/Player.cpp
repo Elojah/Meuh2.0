@@ -26,7 +26,7 @@ common::vec2		Player::play(const IBoard &board, const Rules &rules
 common::vec2		Player::_calculusAI(const IBoard &board, const Rules &rules, const common::eCell &player) const
 {
 	common::vec2	result;
-	sMinMaxState	minmaxState{MAX_DEPTH, true, player, {ERR_VAL, ERR_VAL}, {0, 0}};
+	sMinMaxState	minmaxState{MAX_DEPTH, true, player, {ERR_VAL, ERR_VAL}, {0, 0}, {0, ERR_VAL}};
 	IBoard			*boardCopy;
 
 	boardCopy = board.getCopy();
