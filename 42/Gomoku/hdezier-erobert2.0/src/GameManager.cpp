@@ -1,14 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   GameManager.cpp                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/02 20:39:44 by hdezier           #+#    #+#             */
-//   Updated: 2016/05/03 05:49:56 by erobert          ###   ########.fr       //
-/*                                                                            */
-/* ************************************************************************** */
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   GameManager.cpp                                    :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2016/05/10 12:09:18 by hdezier           #+#    #+#             //
+//   Updated: 2016/05/10 12:48:20 by erobert          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include "GameManager.h"
 #include <iostream>
@@ -33,30 +33,29 @@ void	GameManager<N>::loop(void)
 	common::vec2	stroke;
 	common::eCell	win;
 	common::eCell	turn;
+	uint16_t		tmp;
 
 	_loadMap("util/test.map");
 	m_exit = false;
 	turn = common::eCell::P1;
+//	m_player_1.switchAI();
+//	m_player_2.switchAI();
 	m_uI.init(N);
 	m_uI.render(m_board, m_player_1, m_player_2, turn);
 	while (!m_exit)
 	{
-		stroke = eventHandler();
 		if (turn == common::eCell::P1)
 			current_player = &m_player_1;
 		else if (turn == common::eCell::P2)
 			current_player = &m_player_2;
 		else
 			std::cerr << "Player is not recognized" << std::endl;
-//		valid = false;
-//		while (!valid && !m_exit)
-		{
-			stroke = current_player->play(m_board, m_rules, stroke);
-			valid = m_rules.isValid(m_board, stroke, turn);
-			if (!valid)
-				std::cout << "Unvalid stroke" << std::endl;
-		}
-
+		if (!current_player->ai())
+			stroke = eventHandler();
+		stroke = current_player->play(m_board, m_rules, stroke, turn);
+		valid = m_rules.isValid(m_board, stroke, turn);
+		if (!valid && stroke.x != ERR_VAL)
+			std::cout << "Unvalid stroke" << std::endl;
 		if (valid)
 		{
 			std::cout << "Player " << (int)turn
@@ -64,7 +63,7 @@ void	GameManager<N>::loop(void)
 					  << "/" << (int)stroke.y << std::endl;
 			m_board.setCell(stroke, turn);
 			
-			auto n = m_rules.applyCapture(m_board, stroke);
+			auto n = m_rules.applyCapture(m_board, stroke, tmp);
 			m_rules.addCapturedStones(n, turn);
 			
 			m_board.displayBoard();
@@ -109,8 +108,8 @@ common::vec2 const					&GameManager<N>::eventHandler(void)
 	static common::vec2				stroke;
 	static UserInterface::sEvent	event;
 
-	stroke.x = -1;
-	stroke.y = -1;
+	stroke.x = ERR_VAL;
+	stroke.y = ERR_VAL;
 	event = m_uI.getEvent();
 	if (event.e == UserInterface::EXIT)
 		m_exit = true;

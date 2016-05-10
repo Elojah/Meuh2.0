@@ -6,15 +6,20 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 05:42:34 by erobert          ###   ########.fr       */
+/*   Updated: 2016/05/10 12:25:17 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
 
+# define MAX_DEPTH 2
+
 # include "stdint.h"
 # include "common.h"
+# include "minmax.h"
+
+# include <iostream>
 
 class IBoard;
 class Rules;
@@ -29,10 +34,29 @@ public:
 	inline void				switchAI() {m_ai = !m_ai;};
 	inline bool				ai(void) const {return (m_ai);};
 
-	common::vec2	play(const IBoard &board, const Rules &rules,
-						 common::vec2 stroke) const;
+	common::vec2			play(const IBoard &board, const Rules &rules,
+								const common::vec2 &stroke, const common::eCell &player) const;
+
+	struct					sEval : public IEval
+	{
+		inline virtual uint8_t		eval(const IBoard &board, const Rules &rules, const sMinMaxState &minMaxState) const
+		{
+			uint8_t			result;
+
+			(void)board;
+			(void)rules;
+			result = 11;
+			result += minMaxState.captures[0] - minMaxState.captures[1];
+
+			return (result);
+		}
+	};
+
 private:
 	bool			m_ai = false;
+
+	common::vec2	_calculusAI(const IBoard &board, const Rules &rules,
+								const common::eCell &player) const;
 };
 
 #endif
