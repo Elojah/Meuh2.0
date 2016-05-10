@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2016/05/03 02:43:02 by erobert          ###   ########.fr       //
+//   Updated: 2016/05/03 05:35:10 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -36,18 +36,14 @@ void						UserInterface::init(int size)
 	initWindow();
 	initStone();
 }
-void						UserInterface::render(void)
-{
-	_window.clear(sf::Color(255, 212, 112));
-	_window.display();
-}
 void						UserInterface::render(IBoard const &b,
 												  Player const &p1,
-												  Player const &p2)
+												  Player const &p2,
+												  common::eCell turn)
 {
 	_window.clear(sf::Color(255, 212, 112));
 	renderBoard(b);
-	renderText(p1, p2);
+	renderText(p1, p2, turn);
 	if (_help)
 	{
 //		if (!p1.ai())
@@ -101,6 +97,8 @@ UserInterface::sEvent const	&UserInterface::getEvent(void)
 			else if (event.key.code == sf::Keyboard::R)
 				_event.e = RESTART;
 		}
+		else
+			getEvent();
 	}
 	return (_event);
 }
@@ -168,15 +166,17 @@ void						UserInterface::renderBoard(IBoard const &b)
 	}
 }
 void						UserInterface::renderText(Player const &p1,
-													  Player const &p2)
+													  Player const &p2,
+													  common::eCell turn)
 {
 	_text.setCharacterSize(32);
 	_text.setStyle(sf::Text::Bold);
-	renderPlayers(p1, p2);
+	renderPlayers(p1, p2, turn);
 	renderSwitch(p1, p2);
 }
 void						UserInterface::renderPlayers(Player const &p1,
-														 Player const &p2)
+														 Player const &p2,
+														 common::eCell turn)
 {
 	_text.setColor(sf::Color::Black);
 	_text.setPosition(64, 12);
@@ -190,12 +190,12 @@ void						UserInterface::renderPlayers(Player const &p1,
 			_text.setString("BLACK WIN");
 		_window.draw(_text);
 	}
-	else if (!p2.attribute().win && p1.attribute().turn)
+*/	if (turn == common::eCell::P1)
 	{
 		_text.setString("BLACK TURN");
 		_window.draw(_text);
 	}
-*/	_text.setPosition(64, HEIGHT + 76);
+	_text.setPosition(64, HEIGHT + 76);
 	_text.setString("BLACK");
 	_window.draw(_text);
 	_text.setColor(sf::Color::White);
@@ -208,12 +208,12 @@ void						UserInterface::renderPlayers(Player const &p1,
 			_text.setString("WHITE WIN");
 		_window.draw(_text);
 	}
-	else if (!p1.attribute().win && p2.attribute().turn)
+*/	if (turn == common::eCell::P2)
 	{
 		_text.setString("WHITE TURN");
 		_window.draw(_text);
 	}
-*/	_text.setString("WHITE");
+	_text.setString("WHITE");
 	_text.setPosition(WIDTH - 162, HEIGHT + 76);
 	_window.draw(_text);
 }
