@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:25:52 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/07 15:47:38 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/12 15:03:08 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define WHO_IS(n) std::cout << ((n) == common::eCell::P1 ? "P1" : "P2") << std::endl;
 
 // for uint8_t
-# define DIFF(a, b) ((a) >= (b) ? ((a) - (b)) : ((b) - (a)))
+# define DIFF(a, b) ((a) > (b) ? ((a) - (b)) : ((b) - (a)))
 
 namespace common
 {

@@ -1,14 +1,14 @@
-// ************************************************************************** //
-//                                                                            //
-//                                                        :::      ::::::::   //
-//   GameManager.cpp                                    :+:      :+:    :+:   //
-//                                                    +:+ +:+         +:+     //
-//   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
-//                                                +#+#+#+#+#+   +#+           //
-//   Created: 2016/05/10 12:09:18 by hdezier           #+#    #+#             //
-//   Updated: 2016/05/12 19:13:42 by erobert          ###   ########.fr       //
-//                                                                            //
-// ************************************************************************** //
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   GameManager.cpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/02 20:39:44 by hdezier           #+#    #+#             */
+//   Updated: 2016/05/12 19:59:31 by erobert          ###   ########.fr       //
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "GameManager.h"
 #include <iostream>
@@ -61,12 +61,12 @@ void	GameManager<N>::loop(void)
 					  << " in " << (int)stroke.x
 					  << "/" << (int)stroke.y << std::endl;
 			m_board.setCell(stroke, turn);
-			
+
 			auto n = m_rules.applyCapture(m_board, stroke, tmp);
 			m_rules.addCapturedStones(n, turn);
-			
+
 			m_board.displayBoard();
-			
+
 			win = m_rules.gameEnded(m_board, stroke);
 			if (win != common::eCell::E_CELL)
 				break ;
