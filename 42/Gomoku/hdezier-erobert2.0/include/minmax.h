@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 13:01:31 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/12 16:32:23 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/12 18:41:30 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ class		MinMax
 {
 
 public:
-	inline static sMinMaxResult	eval(IBoard &board, const Rules &rules, const sMinMaxState &minMaxState, const IEval &evalFunction)
+	inline static const sMinMaxResult	eval(IBoard &board, const Rules &rules, const sMinMaxState &minMaxState, const IEval &evalFunction)
 	{
 
 		if (minMaxState.depth == 0
@@ -77,13 +77,14 @@ public:
 		{
 			for (uint8_t j = 0; j < size; ++j)
 			{
-				if (!rules.isValid(board, {i, j}, minMaxState.currentPlayer))
+				if (board.getHitBoard({i, j}) == false
+					|| !rules.isValid(board, {i, j}, minMaxState.currentPlayer))
 					continue ;
 
 				board.setCell({i, j}, minMaxState.currentPlayer);
 				nCaptures = rules.applyCapture(board, {i, j}, captures);
 
-				auto next = T::search(
+				const auto &next = T::search(
 					board, rules
 					, {
 						(uint8_t)(minMaxState.depth - 1), !minMaxState.maximizing, OPPONENT(minMaxState.currentPlayer)
@@ -127,7 +128,7 @@ private:
 
 struct	sMin
 {
-	inline static sMinMaxResult	search(IBoard &board, const Rules &rules, const sMinMaxState &minMaxState, const IEval &evalFunction) {return (MinMax<sMax>::eval(board, rules, minMaxState, evalFunction));};
+	inline static const sMinMaxResult	search(IBoard &board, const Rules &rules, const sMinMaxState &minMaxState, const IEval &evalFunction) {return (MinMax<sMax>::eval(board, rules, minMaxState, evalFunction));};
 	inline static bool			compareValues(const uint8_t nextValue, const uint8_t currentValue) {return (nextValue < currentValue);};
 	inline static bool			alphaBetaComp(uint8_t value, uint8_t alpha, uint8_t __attribute__((unused))beta) {return (alpha >= value);};
 	inline static void			setAlphaBeta(uint8_t value, uint8_t __attribute__((unused))&alpha, uint8_t &beta) {beta = std::min(beta, value);};
@@ -136,7 +137,7 @@ struct	sMin
 
 struct	sMax
 {
-	inline static sMinMaxResult	search(IBoard &board, const Rules &rules, const sMinMaxState &minMaxState, const IEval &evalFunction) {return (MinMax<sMin>::eval(board, rules, minMaxState, evalFunction));};
+	inline static const sMinMaxResult	search(IBoard &board, const Rules &rules, const sMinMaxState &minMaxState, const IEval &evalFunction) {return (MinMax<sMin>::eval(board, rules, minMaxState, evalFunction));};
 	inline static bool			compareValues(const uint8_t nextValue, const uint8_t currentValue) {return (nextValue > currentValue);};
 	inline static bool			alphaBetaComp(uint8_t value, uint8_t __attribute__((unused))alpha, uint8_t beta) {return (value >= beta);};
 	inline static void			setAlphaBeta(uint8_t value, uint8_t &alpha, uint8_t __attribute__((unused))&beta) {alpha = std::max(alpha, value);};
