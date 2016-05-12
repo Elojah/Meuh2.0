@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:44 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/07 16:11:37 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/12 14:50:08 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@ void	GameManager<N>::loop(void)
 
 	// _loadMap("util/test.map");
 	turn = common::eCell::P1;
-	m_player_1.setAi(false);
-	m_player_2.setAi(true);
+	// m_player_1.switchAI();
+	m_player_2.switchAI();
+	m_exit = false;
 	m_uI.init(N);
-	m_uI.render(m_board, m_player_1, m_player_2);
-	while (1)
+	m_uI.render(m_board, m_player_1, m_player_2, turn);
+	while (!m_exit)
 	{
 		if (turn == common::eCell::P1)
 			current_player = &m_player_1;
@@ -49,32 +50,31 @@ void	GameManager<N>::loop(void)
 			current_player = &m_player_2;
 		else
 			std::cerr << "Player is not recognized" << std::endl;
-		valid = false;
-		while (!valid)
+		if (!current_player->ai())
+			stroke = eventHandler();
+		stroke = current_player->play(m_board, m_rules, stroke, turn);
+		valid = m_rules.isValid(m_board, stroke, turn);
+		if (!valid && stroke.x != ERR_VAL)
+			std::cout << "Unvalid stroke" << std::endl;
+		if (valid)
 		{
-			stroke = current_player->play(m_board, m_rules, eventHandler(), turn);
-			valid = m_rules.isValid(m_board, stroke, turn);
-			if (!valid && stroke.x != ERR_VAL)
-				std::cout << "Unvalid stroke" << std::endl;
-			if (!valid && current_player->ai() == true)
+			std::cout << "Player " << (int)turn
+					  << " in " << (int)stroke.x
+					  << "/" << (int)stroke.y << std::endl;
+			m_board.setCell(stroke, turn);
+
+			auto n = m_rules.applyCapture(m_board, stroke, tmp);
+			m_rules.addCapturedStones(n, turn);
+
+			m_board.displayBoard();
+
+			win = m_rules.gameEnded(m_board, stroke);
+			if (win != common::eCell::E_CELL)
 				break ;
+			turn = (turn == common::eCell::P1) ? common::eCell::P2 :
+				common::eCell::P1;
 		}
-
-		std::cout << "Player " << (int)turn << " in " << (int)stroke.x << "/" << (int)stroke.y << std::endl;
-		m_board.setCell(stroke, turn);
-
-		auto n = m_rules.applyCapture(m_board, stroke, tmp);
-		m_rules.addCapturedStones(n, turn);
-
-		m_board.displayBoard();
-		m_uI.getEvent();
-		m_uI.render(m_board, m_player_1, m_player_2);
-
-		win = m_rules.gameEnded(m_board, stroke);
-		if (win != common::eCell::E_CELL)
-			break ;
-		turn = (turn == common::eCell::P1) ? common::eCell::P2 : common::eCell::P1;
-		// DBG_BREAK;
+		m_uI.render(m_board, m_player_1, m_player_2, turn);
 	}
 	displayWin(win);
 }
@@ -111,9 +111,9 @@ common::vec2 const					&GameManager<N>::eventHandler(void)
 	stroke.x = ERR_VAL;
 	stroke.y = ERR_VAL;
 	event = m_uI.getEvent();
-/*	if (event.e == UserInterface::EXIT)
-		_exit = true;
-	else if (event.e == UserInterface::RESTART)
+	if (event.e == UserInterface::EXIT)
+		m_exit = true;
+/*	else if (event.e == UserInterface::RESTART)
 	{
 		_restart = true;
 		_exit = true;
@@ -123,11 +123,14 @@ common::vec2 const					&GameManager<N>::eventHandler(void)
 		stroke.x = event.x;
 		stroke.y = event.y;
 	}
-/*	else if (event.e == UserInterface::P1_AI)
-		_p1.switchAI();
+	else if (event.e == UserInterface::P1_AI)
+	{
+		std::cout << m_player_1.ai() << std::endl;
+		m_player_1.switchAI();
+	}
 	else if (event.e == UserInterface::P2_AI)
-		_p2.switchAI();
-	else if (event.e == UserInterface::PLAY)
+		m_player_2.switchAI();
+/*	else if (event.e == UserInterface::PLAY)
 		_audio.playMusic(AudioManager::HYMNE_A_LA_KRO);
 	else if (event.e == UserInterface::NEXT)
 		_audio.nextMusic();

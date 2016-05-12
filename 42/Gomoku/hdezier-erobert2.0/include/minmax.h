@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 13:01:31 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/08 14:40:44 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/12 15:32:06 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ class		MinMax
 {
 
 public:
-	inline static sMinMaxResult	&&eval(IBoard &board, const Rules &rules, const sMinMaxState &minMaxState, const IEval &evalFunction)
+	inline static sMinMaxResult	eval(IBoard &board, const Rules &rules, const sMinMaxState &minMaxState, const IEval &evalFunction)
 	{
 
 		if (minMaxState.depth == 0
 			|| rules.gameEnded(board, minMaxState.lastStroke, minMaxState.captures[0], minMaxState.captures[1]) != common::eCell::E_CELL)
-			return (std::move((sMinMaxResult)
+			return (((sMinMaxResult)
 				{
 					minMaxState.lastStroke
 					, evalFunction.eval(board, rules, minMaxState)
@@ -92,34 +92,34 @@ public:
 						, {i, j}
 						, {
 							(uint8_t)(minMaxState.currentPlayer == common::eCell::P1 ? minMaxState.captures[0] + nCaptures : minMaxState.captures[0])
-							, (uint8_t)(minMaxState.currentPlayer == common::eCell::P1 ? minMaxState.captures[1]: minMaxState.captures[1] + nCaptures)
+							, (uint8_t)(minMaxState.currentPlayer == common::eCell::P1 ? minMaxState.captures[1] : minMaxState.captures[1] + nCaptures)
 						}
 						, {alpha, beta}
 					}
 					, evalFunction);
+
+				alpha = next.alphaBeta[0];
+				beta = next.alphaBeta[1];
 
 				// next.print();
 				// board.displayBoard();
 				// std::cout << "Value:" << (int)next.value << "\tAlpha:" << (int)alpha << "\tBeta:" << (int)beta << std::endl;
 				// DBG_BREAK
 
-
 				rules.undoCapture(board, {i, j}, captures, OPPONENT(minMaxState.currentPlayer));
 				board.setCell({i, j}, common::eCell::NONE);
+
 
 				if (T::compareValues(next.value, result.value))
 				{
 					result.coord = {i, j};
 					result.value = next.value;
-					result.alphaBeta[0] = next.alphaBeta[0];
-					result.alphaBeta[1] = next.alphaBeta[1];
+					result.alphaBeta[0] = alpha;
+					result.alphaBeta[1] = beta;
 				}
 
-				alpha = result.alphaBeta[0];
-				beta = result.alphaBeta[1];
-
 				if (T::alphaBetaComp(result.value, alpha, beta))
-					return (std::move(result));
+					return (result);
 				T::setAlphaBeta(result.value, alpha, beta);
 			}
 		}
@@ -127,7 +127,7 @@ public:
 		// board.displayBoard();
 		// DBG_BREAK
 
-		return (std::move(result));
+		return (result);
 	};
 
 private:
@@ -135,7 +135,7 @@ private:
 
 struct	sMin
 {
-	inline static sMinMaxResult	&&search(IBoard &board, const Rules &rules, const sMinMaxState &minMaxState, const IEval &evalFunction) {return (MinMax<sMax>::eval(board, rules, minMaxState, evalFunction));};
+	inline static sMinMaxResult	search(IBoard &board, const Rules &rules, const sMinMaxState &minMaxState, const IEval &evalFunction) {return (MinMax<sMax>::eval(board, rules, minMaxState, evalFunction));};
 	inline static bool			compareValues(const uint8_t nextValue, const uint8_t currentValue) {return (nextValue < currentValue);};
 	inline static bool			alphaBetaComp(uint8_t value, uint8_t alpha, uint8_t __attribute__((unused))beta) {return (alpha >= value);};
 	inline static void			setAlphaBeta(uint8_t value, uint8_t __attribute__((unused))&alpha, uint8_t &beta) {beta = std::min(beta, value);};
@@ -144,7 +144,7 @@ struct	sMin
 
 struct	sMax
 {
-	inline static sMinMaxResult	&&search(IBoard &board, const Rules &rules, const sMinMaxState &minMaxState, const IEval &evalFunction) {return (MinMax<sMin>::eval(board, rules, minMaxState, evalFunction));};
+	inline static sMinMaxResult	search(IBoard &board, const Rules &rules, const sMinMaxState &minMaxState, const IEval &evalFunction) {return (MinMax<sMin>::eval(board, rules, minMaxState, evalFunction));};
 	inline static bool			compareValues(const uint8_t nextValue, const uint8_t currentValue) {return (nextValue > currentValue);};
 	inline static bool			alphaBetaComp(uint8_t value, uint8_t __attribute__((unused))alpha, uint8_t beta) {return (value >= beta);};
 	inline static void			setAlphaBeta(uint8_t value, uint8_t &alpha, uint8_t __attribute__((unused))&beta) {alpha = std::max(alpha, value);};

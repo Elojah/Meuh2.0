@@ -6,14 +6,14 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/08 14:40:03 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/12 15:31:55 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
 
-# define MAX_DEPTH 2
+# define MAX_DEPTH 3
 
 # include "stdint.h"
 # include "common.h"
@@ -31,7 +31,7 @@ public:
 	Player(void) = default;
 	virtual ~Player(void) = default;
 
-	inline void				setAi(bool ai) {m_ai = ai;};
+	inline void				switchAI() {m_ai = !m_ai;};
 	inline bool				ai(void) const {return (m_ai);};
 
 	common::vec2			play(const IBoard &board, const Rules &rules,
@@ -42,7 +42,7 @@ public:
 		inline virtual uint8_t		eval(const IBoard &board, const Rules &rules, const sMinMaxState &minMaxState) const
 		{
 			static const uint8_t	boardSize = board.getSize();
-			uint8_t			result(1);
+			uint8_t			result(100);
 
 			const common::eCell win = rules.gameEnded(board, minMaxState.lastStroke, minMaxState.captures[0], minMaxState.captures[1]);
 			if (win == common::eCell::P2)
@@ -67,13 +67,16 @@ public:
 						{
 							uint8_t playerMove = board.countAlignFree({i, j}, (common::eDirection)dir, common::eCell::P1);
 							uint8_t opponentMove = board.countAlignFree({i, j}, (common::eDirection)dir, common::eCell::P2);
+							if (opponentMove == 4)
+								return (1);
 							result += playerMove * playerMove;
 							result -= opponentMove * opponentMove;
 						}
 					}
 				}
 			}
-			result += (minMaxState.captures[1] - minMaxState.captures[0]) * 2;
+			result += (minMaxState.captures[0] - minMaxState.captures[1]) * 2;
+			result += 19 - DIFF(minMaxState.lastStroke.x, minMaxState.lastStroke.y);
 			return (result);
 		}
 	};
@@ -106,19 +109,24 @@ public:
 					{
 						for (uint8_t dir = 1; dir < 5; ++dir)
 						{
-							result += board.countAlignFree({i, j}, (common::eDirection)dir, common::eCell::P2);
-							result -= board.countAlignFree({i, j}, (common::eDirection)dir, common::eCell::P1);
+							uint8_t playerMove = board.countAlignFree({i, j}, (common::eDirection)dir, common::eCell::P2);
+							uint8_t opponentMove = board.countAlignFree({i, j}, (common::eDirection)dir, common::eCell::P1);
+							if (opponentMove == 4)
+								return (1);
+							result += playerMove;
+							result -= opponentMove;
 						}
 					}
 				}
 			}
 			result += (minMaxState.captures[1] - minMaxState.captures[0]) * 2;
+			result += (19 - DIFF(minMaxState.lastStroke.x, minMaxState.lastStroke.y));
 			return (result);
 		}
 	};
 
 private:
-	bool					m_ai;
+	bool					m_ai = false;
 
 	common::vec2			_calculusAI(const IBoard &board, const Rules &rules, const common::eCell &player) const;
 
