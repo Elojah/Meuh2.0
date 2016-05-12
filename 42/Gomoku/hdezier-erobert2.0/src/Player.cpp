@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:51 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/07 14:29:28 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/08 12:29:51 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,18 @@ common::vec2		Player::play(const IBoard &board, const Rules &rules
 
 common::vec2		Player::_calculusAI(const IBoard &board, const Rules &rules, const common::eCell &player) const
 {
-	sEval			evalFt;
 	common::vec2	result;
-	sMinMaxState	minmaxState{MAX_DEPTH, true, player, {0, 0}};
+	sMinMaxState	minmaxState{MAX_DEPTH, true, player, {ERR_VAL, ERR_VAL}, {0, 0}, {0, ERR_VAL}};
 	IBoard			*boardCopy;
 
 	boardCopy = board.getCopy();
 
 	std::cout << "________AI search________" << std::endl;
-	result = MinMax<sMax>::eval(*boardCopy, rules, minmaxState, evalFt).coord;
+	if (player == common::eCell::P1)
+		result = MinMax<sMax>::eval(*boardCopy, rules, minmaxState, m_eval_P1).coord;
+	else
+		result = MinMax<sMax>::eval(*boardCopy, rules, minmaxState, m_eval_P2).coord;
 	std::cout << "________AI returned:\t" << (int)result.x << '/' << (int)result.y << std::endl;
+	delete (boardCopy);
 	return (result);
 }

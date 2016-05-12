@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:55:29 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/06 12:55:25 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/07 15:17:24 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ bool			Rules::_alignFive(const IBoard &board, const common::vec2 &stroke)
 	return (false);
 }
 
-common::eCell	Rules::gameEnded(const IBoard &board, const common::vec2 &stroke)
+common::eCell	Rules::gameEnded(const IBoard &board, const common::vec2 &stroke, uint8_t capture_P1, uint8_t capture_P2) const
 {
-	if (m_capturedStone_P1 > 9)
+	if (m_capturedStone_P1 + capture_P1 > 9)
 		return (common::eCell::P1);
-	else if (m_capturedStone_P2 > 9)
+	else if (m_capturedStone_P2 + capture_P2 > 9)
 		return (common::eCell::P2);
 	if (_alignFive(board, stroke))
 		return (board.getCell(stroke));
