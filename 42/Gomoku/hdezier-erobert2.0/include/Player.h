@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/12 15:31:55 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/12 16:29:12 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,10 @@ public:
 							uint8_t opponentMove = board.countAlignFree({i, j}, (common::eDirection)dir, common::eCell::P2);
 							if (opponentMove == 4)
 								return (1);
-							result += playerMove * playerMove;
-							result -= opponentMove * opponentMove;
+							if (playerMove == 4)
+								return (255);
+							result += playerMove + board.countAlignFree({i, j}, (common::eDirection)dir, common::eCell::P1);
+							result -= opponentMove + board.countAlignFree({i, j}, (common::eDirection)dir, common::eCell::P2);;
 						}
 					}
 				}
@@ -91,13 +93,13 @@ public:
 			const common::eCell win = rules.gameEnded(board, minMaxState.lastStroke, minMaxState.captures[0], minMaxState.captures[1]);
 			if (win == common::eCell::P1)
 			{
-				// std::cout << "Loose incomin..." << std::endl;
+				std::cout << "Loose incomin..." << std::endl;
 				// board.displayBoard();
 				return (1);
 			}
 			else if (win == common::eCell::P2)
 			{
-				// std::cout << "WIN incomin..." << std::endl;
+				std::cout << "WIN incomin..." << std::endl;
 				// board.displayBoard();
 				return (255);
 			}
@@ -113,8 +115,10 @@ public:
 							uint8_t opponentMove = board.countAlignFree({i, j}, (common::eDirection)dir, common::eCell::P1);
 							if (opponentMove == 4)
 								return (1);
-							result += playerMove;
-							result -= opponentMove;
+							if (playerMove == 4)
+								return (255);
+							result += playerMove + board.countAlign({i, j}, (common::eDirection)dir, common::eCell::P2);
+							result -= opponentMove + board.countAlign({i, j}, (common::eDirection)dir, common::eCell::P1);
 						}
 					}
 				}

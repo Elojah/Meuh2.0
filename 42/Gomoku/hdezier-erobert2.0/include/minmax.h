@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 13:01:31 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/12 15:32:06 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/12 16:32:23 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ struct					sMinMaxResult
 {
 	common::vec2		coord;
 	uint8_t				value;
-	uint8_t				alphaBeta[2];
 	inline void			print(void) const {std::cout << "Coord:" << (int)coord.x << "/" << (int)coord.y << "=" << (int)value << std::endl;};
 };
 
@@ -61,7 +60,6 @@ public:
 				{
 					minMaxState.lastStroke
 					, evalFunction.eval(board, rules, minMaxState)
-					, {minMaxState.alphaBeta[0], minMaxState.alphaBeta[1]}
 				}));
 
 		uint8_t					nCaptures(0);
@@ -98,9 +96,6 @@ public:
 					}
 					, evalFunction);
 
-				alpha = next.alphaBeta[0];
-				beta = next.alphaBeta[1];
-
 				// next.print();
 				// board.displayBoard();
 				// std::cout << "Value:" << (int)next.value << "\tAlpha:" << (int)alpha << "\tBeta:" << (int)beta << std::endl;
@@ -109,13 +104,10 @@ public:
 				rules.undoCapture(board, {i, j}, captures, OPPONENT(minMaxState.currentPlayer));
 				board.setCell({i, j}, common::eCell::NONE);
 
-
 				if (T::compareValues(next.value, result.value))
 				{
 					result.coord = {i, j};
 					result.value = next.value;
-					result.alphaBeta[0] = alpha;
-					result.alphaBeta[1] = beta;
 				}
 
 				if (T::alphaBetaComp(result.value, alpha, beta))
