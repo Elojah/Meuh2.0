@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:07:12 by erobert           #+#    #+#             //
-//   Updated: 2016/05/03 01:56:34 by erobert          ###   ########.fr       //
+//   Updated: 2016/05/03 05:18:33 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -47,9 +47,8 @@ public:
 	~UserInterface(void);
 
 	void				init(int size);
-	void				render(void);
 	void				render(IBoard const &b, Player const &p1,
-							   Player const &p2);
+							   Player const &p2, common::eCell turn);
 	sEvent const		&getEvent(void);
 private:
 	enum eStone
@@ -78,8 +77,10 @@ private:
 	void				initWindow(void);
 	void				initStone(void);
 	void				renderBoard(IBoard const &b);
-	void				renderText(Player const &p1, Player const &p2);
-	void				renderPlayers(Player const &p1, Player const &p2);
+	void				renderText(Player const &p1, Player const &p2,
+								   common::eCell turn);
+	void				renderPlayers(Player const &p1, Player const &p2,
+									  common::eCell turn);
 	void				renderSwitch(Player const &p1, Player const &p2);
 	void				drawStone(int x, int y, eStone stone);
 };

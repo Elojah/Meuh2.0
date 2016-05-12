@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/07 14:34:34 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/10 12:25:17 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ public:
 	Player(void) = default;
 	virtual ~Player(void) = default;
 
-	inline void				setAi(bool ai) {m_ai = ai;};
+	inline void				switchAI() {m_ai = !m_ai;};
 	inline bool				ai(void) const {return (m_ai);};
 
 	common::vec2			play(const IBoard &board, const Rules &rules,
@@ -53,11 +53,10 @@ public:
 	};
 
 private:
-	bool					m_ai;
+	bool			m_ai = false;
 
-	common::vec2			_calculusAI(const IBoard &board, const Rules &rules, const common::eCell &player) const;
-
-
+	common::vec2	_calculusAI(const IBoard &board, const Rules &rules,
+								const common::eCell &player) const;
 };
 
 #endif
