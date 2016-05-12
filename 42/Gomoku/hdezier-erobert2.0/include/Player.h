@@ -6,14 +6,14 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/08 14:35:11 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/08 14:40:03 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
 
-# define MAX_DEPTH 3
+# define MAX_DEPTH 2
 
 # include "stdint.h"
 # include "common.h"
@@ -88,14 +88,14 @@ public:
 			const common::eCell win = rules.gameEnded(board, minMaxState.lastStroke, minMaxState.captures[0], minMaxState.captures[1]);
 			if (win == common::eCell::P1)
 			{
-				std::cout << "Loose incomin..." << std::endl;
-				board.displayBoard();
+				// std::cout << "Loose incomin..." << std::endl;
+				// board.displayBoard();
 				return (1);
 			}
 			else if (win == common::eCell::P2)
 			{
-				std::cout << "WIN incomin..." << std::endl;
-				board.displayBoard();
+				// std::cout << "WIN incomin..." << std::endl;
+				// board.displayBoard();
 				return (255);
 			}
 			for (uint8_t i = 0; i < boardSize; ++i)

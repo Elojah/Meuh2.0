@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 13:01:31 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/08 14:35:08 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/08 14:40:44 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,6 @@ public:
 					}
 					, evalFunction);
 
-				alpha = next.alphaBeta[0];
-				beta = next.alphaBeta[1];
-
 				// next.print();
 				// board.displayBoard();
 				// std::cout << "Value:" << (int)next.value << "\tAlpha:" << (int)alpha << "\tBeta:" << (int)beta << std::endl;
@@ -114,9 +111,12 @@ public:
 				{
 					result.coord = {i, j};
 					result.value = next.value;
-					result.alphaBeta[0] = alpha;
-					result.alphaBeta[1] = beta;
+					result.alphaBeta[0] = next.alphaBeta[0];
+					result.alphaBeta[1] = next.alphaBeta[1];
 				}
+
+				alpha = result.alphaBeta[0];
+				beta = result.alphaBeta[1];
 
 				if (T::alphaBetaComp(result.value, alpha, beta))
 					return (std::move(result));
