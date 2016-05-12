@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:44 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/12 19:47:19 by hdezier          ###   ########.fr       */
+//   Updated: 2016/05/12 19:59:31 by erobert          ###   ########.fr       //
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ void	GameManager<N>::loop(void)
 //	_loadMap("util/test.map");
 	m_exit = false;
 	turn = common::eCell::P1;
-//	m_player_1.switchAI();
-//	m_player_2.switchAI();
 	m_uI.init(N);
-	m_uI.render(m_board, m_player_1, m_player_2, turn);
+	m_uI.render(m_board, m_player_1, m_player_2, turn,
+				m_rules.capturedStones());
 	while (!m_exit)
 	{
 		if (turn == common::eCell::P1)
@@ -74,7 +73,8 @@ void	GameManager<N>::loop(void)
 			turn = (turn == common::eCell::P1) ? common::eCell::P2 :
 				common::eCell::P1;
 		}
-		m_uI.render(m_board, m_player_1, m_player_2, turn);
+		m_uI.render(m_board, m_player_1, m_player_2, turn,
+					m_rules.capturedStones());
 	}
 	displayWin(win);
 }
