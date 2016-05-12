@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:55:33 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/03 07:43:00 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/07 15:17:22 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ public:
 	virtual ~Rules(void) = default;
 
 	void					addCapturedStones(const uint8_t &n, const common::eCell &player);
-	common::eCell			gameEnded(const IBoard &board, const common::vec2 &stroke);
+	common::eCell			gameEnded(const IBoard &board, const common::vec2 &stroke, uint8_t capture_P1 = 0, uint8_t capture_P2 = 0) const;
 
 	static bool				isValid(const IBoard &board, const common::vec2 &stroke, const common::eCell &turn);
 	static uint8_t			applyCapture(IBoard &board, const common::vec2 &stroke, uint16_t &saveState);
