@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:44 by hdezier           #+#    #+#             */
-//   Updated: 2016/05/12 19:59:31 by erobert          ###   ########.fr       //
+//   Updated: 2016/05/18 17:11:59 by erobert          ###   ########.fr       //
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,20 @@ void	GameManager<N>::loop(void)
 	Player			*current_player;
 	bool			valid;
 	common::vec2	stroke;
+	common::vec2	help;
 	common::eCell	win;
 	common::eCell	turn;
 	uint16_t		tmp;
+	std::clock_t	c_start;
+	std::clock_t	c_end;
+	float			time(0);
 
 //	_loadMap("util/test.map");
 	m_exit = false;
 	turn = common::eCell::P1;
 	m_uI.init(N);
 	m_uI.render(m_board, m_player_1, m_player_2, turn,
-				m_rules.capturedStones());
+				m_rules.capturedStones(), 0., help);
 	while (!m_exit)
 	{
 		if (turn == common::eCell::P1)
@@ -50,8 +54,19 @@ void	GameManager<N>::loop(void)
 		else
 			std::cerr << "Player is not recognized" << std::endl;
 		if (!current_player->ai())
+		{
 			stroke = eventHandler();
+			if (m_help)
+			{
+				help = current_player->calculusAI(m_board, m_rules, turn);
+				m_help = false;
+			}
+		}
+		c_start = std::clock();
 		stroke = current_player->play(m_board, m_rules, stroke, turn);
+		c_end = std::clock();
+		if (current_player->ai())
+			time = 1000.0 * (c_end - c_start) / CLOCKS_PER_SEC;
 		valid = m_rules.isValid(m_board, stroke, turn);
 		if (!valid && stroke.x != ERR_VAL)
 			std::cout << "Unvalid stroke" << std::endl;
@@ -72,9 +87,10 @@ void	GameManager<N>::loop(void)
 				break ;
 			turn = (turn == common::eCell::P1) ? common::eCell::P2 :
 				common::eCell::P1;
+			help.x = 255;
 		}
 		m_uI.render(m_board, m_player_1, m_player_2, turn,
-					m_rules.capturedStones());
+					m_rules.capturedStones(), time, help);
 	}
 	displayWin(win);
 }
@@ -130,6 +146,8 @@ common::vec2 const					&GameManager<N>::eventHandler(void)
 	}
 	else if (event.e == UserInterface::P2_AI)
 		m_player_2.switchAI();
+	else if (event.e == UserInterface::HELP)
+		m_help = true;
 /*	else if (event.e == UserInterface::PLAY)
 		_audio.playMusic(AudioManager::HYMNE_A_LA_KRO);
 	else if (event.e == UserInterface::NEXT)

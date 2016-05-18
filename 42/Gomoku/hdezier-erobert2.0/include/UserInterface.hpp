@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:07:12 by erobert           #+#    #+#             //
-//   Updated: 2016/05/12 19:54:37 by erobert          ###   ########.fr       //
+//   Updated: 2016/05/18 17:15:13 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -34,6 +34,7 @@ public:
 		STOP,
 		P1_AI,
 		P2_AI,
+		HELP,
 		E_EVENT
 	};
 
@@ -50,7 +51,8 @@ public:
 	void				init(int size);
 	void				render(IBoard const &b, Player const &p1,
 							Player const &p2, common::eCell turn,
-							uint8_t const *capturedStones);
+							uint8_t const *capturedStones, float time,
+							common::vec2 help);
 	sEvent const		&getEvent(void);
 private:
 	enum eStone
@@ -70,7 +72,6 @@ private:
 	sf::Font			_font;
 	sf::Text			_text;
 	sEvent				_event;
-	bool				_help;
 
 	UserInterface(UserInterface const &src);
 
@@ -79,8 +80,8 @@ private:
 	void				initWindow(void);
 	void				initStone(void);
 	void				renderBoard(IBoard const &b);
-	void				renderText(Player const &p1, Player const &p2,
-							common::eCell turn, uint8_t const *capturedStones);
+	void				renderCapturedStones(uint8_t const *capturedStones);
+	void				renderTime(float time);
 	void				renderPlayers(Player const &p1, Player const &p2,
 							common::eCell turn);
 	void				renderSwitch(Player const &p1, Player const &p2);
