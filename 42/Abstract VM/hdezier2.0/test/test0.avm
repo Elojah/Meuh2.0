@@ -1,0 +1,6 @@
+push double(5)
+show
+add
+push 5.3
+sub
+show
