@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:44 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 19:17:41 by hdezier          ###   ########.fr       */
+//   Updated: 2016/05/18 19:24:18 by erobert          ###   ########.fr       //
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ bool	GameManager<N>::loop(void)
 		m_uI.render(m_board, m_player_1, m_player_2, turn,
 					m_rules.capturedStones(), time, help);
 	}
-	m_uI.renderWin(m_board, win);
+	m_uI.renderWin(m_board, win, m_rules.capturedStones());
 	m_exit = false;
 	while (!m_exit)
 		eventHandler();

@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2016/05/18 18:01:38 by erobert          ###   ########.fr       //
+//   Updated: 2016/05/18 19:27:36 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -59,10 +59,12 @@ void						UserInterface::render(IBoard const &b,
 	_window.display();
 }
 void						UserInterface::renderWin(IBoard const &b,
-								common::eCell win)
+								common::eCell win,
+								uint8_t const *capturedStones)
 {
 	_window.clear(sf::Color(255, 212, 112));
 	renderBoard(b);
+	renderCapturedStones(capturedStones);
 	_text.setPosition(64, 12);
 	(void)win;
 	if (win == common::eCell::P1)
@@ -197,13 +199,19 @@ void						UserInterface::renderCapturedStones(
 	std::stringstream		s1;
 	std::stringstream		s2;
 
-	s1 << static_cast<int>(capturedStones[0]);
+	if (capturedStones[0] > 9)
+		s1 << "X";
+	else
+		s1 << static_cast<int>(capturedStones[0]);
 	_stone[WHITE].setPosition(32, HEIGHT + 76);
 	_window.draw(_stone[WHITE]);
 	_text.setPosition(44, HEIGHT + 76);
 	_text.setString(s1.str());
 	_window.draw(_text);
-	s2 << static_cast<int>(capturedStones[1]);
+	if (capturedStones[1] > 9)
+		s1 << "X";
+	else
+		s2 << static_cast<int>(capturedStones[1]);
 	_stone[BLACK].setPosition(WIDTH - 70, HEIGHT + 76);
 	_window.draw(_stone[BLACK]);
 	_text.setPosition(WIDTH - 58, HEIGHT + 76);
