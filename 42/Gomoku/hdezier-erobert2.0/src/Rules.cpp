@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:55:29 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 16:50:54 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 18:34:55 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,41 @@ common::eCell	Rules::gameEnded(const IBoard &board, const common::vec2 &stroke, 
 		return (common::eCell::P1);
 	else if (m_capturedStones[1] + capture_P2 > 9)
 		return (common::eCell::P2);
-	if (_alignFive(board, stroke))
+	if (_alignFive(board, stroke) && _breakWin(board, stroke, capture_P1, capture_P2) == false)
 		return (board.getCell(stroke));
 	return (common::eCell::E_CELL);
+}
+
+bool		Rules::_breakWin(const IBoard &board, const common::vec2 &stroke, uint8_t capture_P1, uint8_t capture_P2)
+{
+	common::eCell	currentPlayer(board.getCell(stroke));
+	uint8_t			opponentCapture;
+
+	if (currentPlayer == common::eCell::P1)
+		opponentCapture = capture_P2;
+	else
+		opponentCapture = capture_P1;
+
+	for (uint8_t i = 1; i < 5; ++i)
+	{
+		auto leftAlign = board.countAlign(stroke, (common::eDirection)i, currentPlayer);
+		auto rightAlign = board.countAlign(stroke, common::opposite((common::eDirection)i), currentPlayer);
+		if (leftAlign + rightAlign > 3)
+		{
+			int8_t			n(0);
+
+			while (true)
+			{
+				if (board.getCell(stroke, (common::eDirection)i, n) == currentPlayer
+					&& board.isCaptPosition(stroke, (common::eDirection)i, n)
+					&& n + rightAlign < 5)
+					return (true);
+				++n;
+			}
+			return (0);
+		}
+	}
+	return (false);
 }
 
 bool		Rules::isValid(const IBoard &board, const common::vec2 &stroke, const common::eCell &turn)

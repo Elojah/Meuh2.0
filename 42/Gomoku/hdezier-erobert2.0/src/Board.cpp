@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:47:04 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 16:54:42 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 17:54:19 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int8_t			Board<N>::countAllAlign(const common::eCell &player) const
 				if (currentCell == common::eCell::NONE && count > 1)
 				{
 					count *= 2;
-					if (getCell({i, j}, (common::eDirection)(-dir), 1) == common::eCell::NONE)
+					if (getCell({i, j}, common::opposite((common::eDirection)dir), 1) == common::eCell::NONE)
 						count *= 2;
 				}
 				if (startCell == player)

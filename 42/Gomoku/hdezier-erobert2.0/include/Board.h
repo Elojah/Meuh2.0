@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:47:10 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 16:54:39 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 18:26:35 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ public:
 	virtual void			setCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist, const common::eCell &player) = 0;
 	virtual common::eCell	getCell(const common::vec2 &coord) const = 0;
 	virtual common::eCell	getCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const = 0;
+	virtual bool			isCaptPosition(const common::vec2 &position) const = 0;
+	virtual bool			isCaptPosition(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const = 0;
 	virtual bool			getHitBoard(const common::vec2 &coord) const = 0;
 	virtual uint8_t			getSize(void) const = 0;
 	virtual IBoard			*getCopy(void) const = 0;
@@ -76,6 +78,25 @@ public:
 		_setHitBoard((const common::vec2){(uint8_t)(stroke.x + 1),(uint8_t)(stroke.y + 1)}, player != common::eCell::NONE);
 	};
 
+	inline virtual bool				isCaptPosition(const common::vec2 &position) const
+	{
+		common::eCell				currentCell(m_board[position.x][position.y]);
+		for (uint8_t i = 1; i < 5; ++i)
+		{
+			if (i == 0)
+				continue ;
+			if (getCell(position, (common::eDirection)i, 1) == currentCell
+				&& getCell(position, (common::eDirection)i, 2) == OPPONENT(currentCell)
+				&& getCell(position, common::opposite((common::eDirection)i), 2) == common::eCell::NONE)
+				return (true);
+		}
+		return (false);
+	};
+	inline virtual bool			isCaptPosition(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const
+	{
+		return (isCaptPosition(_convertCell(origin, dir, dist)));
+	};
+
 	inline virtual bool				getHitBoard(const common::vec2 &coord) const {return (m_hitBoard[coord.x][coord.y]);};
 	inline virtual void				setCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist, const common::eCell &player)
 	{
@@ -111,9 +132,8 @@ public:
 
 	inline virtual int8_t			countAlign(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player) const
 	{
-		int					n;
+		int8_t				n(0);
 
-		n = 0;
 		while (++n < N)
 		{
 			auto	cell = getCell(stroke, dir, n);
@@ -141,9 +161,9 @@ private:
 	common::eCell			m_board[N][N];
 	bool					m_hitBoard[N][N];
 
-	static inline bool		_isValid(const common::vec2 &stroke) {return (stroke.x >= 0 && stroke.x < N && stroke.y >= 0 && stroke.y < N);};
+	static inline bool				_isValid(const common::vec2 &stroke) {return (stroke.x >= 0 && stroke.x < N && stroke.y >= 0 && stroke.y < N);};
 
-	virtual int8_t		_countAlignSide(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player, bool &permissive) const;
+	virtual int8_t					_countAlignSide(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player, bool &permissive) const;
 
 	inline virtual common::vec2		_convertCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const
 	{
