@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:55:29 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 18:34:55 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 19:13:06 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,10 @@ common::eCell	Rules::gameEnded(const IBoard &board, const common::vec2 &stroke, 
 	return (common::eCell::E_CELL);
 }
 
-bool		Rules::_breakWin(const IBoard &board, const common::vec2 &stroke, uint8_t capture_P1, uint8_t capture_P2)
+bool		Rules::_breakWin(const IBoard &board, const common::vec2 &stroke, uint8_t capture_P1, uint8_t capture_P2) const
 {
 	common::eCell	currentPlayer(board.getCell(stroke));
-	uint8_t			opponentCapture;
-
-	if (currentPlayer == common::eCell::P1)
-		opponentCapture = capture_P2;
-	else
-		opponentCapture = capture_P1;
+	bool			result;
 
 	for (uint8_t i = 1; i < 5; ++i)
 	{
@@ -69,17 +64,51 @@ bool		Rules::_breakWin(const IBoard &board, const common::vec2 &stroke, uint8_t 
 		auto rightAlign = board.countAlign(stroke, common::opposite((common::eDirection)i), currentPlayer);
 		if (leftAlign + rightAlign > 3)
 		{
-			int8_t			n(0);
+			result = false;
+			int8_t			n(-1);
 
-			while (true)
+			while (++n <= leftAlign)
 			{
-				if (board.getCell(stroke, (common::eDirection)i, n) == currentPlayer
-					&& board.isCaptPosition(stroke, (common::eDirection)i, n)
-					&& n + rightAlign < 5)
-					return (true);
-				++n;
+				if (board.isCaptPosition(stroke, (common::eDirection)i, n)
+					&& n + rightAlign < 5 && leftAlign - n < 5)
+				{
+					result = true;
+					break ;
+				}
 			}
-			return (0);
+			if (result == true)
+				continue ;
+			n = 0;
+			while (++n <= rightAlign)
+			{
+				if (board.isCaptPosition(stroke, common::opposite((common::eDirection)i), n)
+					&& n + leftAlign < 5 && rightAlign - n < 5)
+				{
+					result = true;
+					break ;
+				}
+			}
+		}
+	}
+	return (result || _breakWinByCapture(board, capture_P1, capture_P2, currentPlayer));
+}
+
+bool		Rules::_breakWinByCapture(const IBoard &board, uint8_t capture_P1, uint8_t capture_P2, const common::eCell player) const
+{
+	uint8_t		allCaptures;
+	if (player == common::eCell::P2)
+		allCaptures = m_capturedStones[0] + capture_P1;
+	else
+		allCaptures = m_capturedStones[1] + capture_P2;
+	if (allCaptures < 8)
+		return (false);
+	uint8_t		size = board.getSize();
+	for (uint8_t i = 0; i < size; ++i)
+	{
+		for (uint8_t j = 0; j < size; ++j)
+		{
+			if (board.getCell({i, j}) == player && board.isCaptPosition({i, j}))
+				return (true);
 		}
 	}
 	return (false);

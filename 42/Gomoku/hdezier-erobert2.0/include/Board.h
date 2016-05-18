@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:47:10 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 18:26:35 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 19:03:11 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,16 @@ public:
 		common::eCell				currentCell(m_board[position.x][position.y]);
 		for (uint8_t i = 1; i < 5; ++i)
 		{
-			if (i == 0)
-				continue ;
-			if (getCell(position, (common::eDirection)i, 1) == currentCell
-				&& getCell(position, (common::eDirection)i, 2) == OPPONENT(currentCell)
-				&& getCell(position, common::opposite((common::eDirection)i), 2) == common::eCell::NONE)
+			common::eCell		left1 = getCell(position, (common::eDirection)i, 1);
+			common::eCell		left2 = getCell(position, (common::eDirection)i, 2);
+			common::eCell		right1 = getCell(position, common::opposite((common::eDirection)i), 1);
+			common::eCell		right2 = getCell(position, common::opposite((common::eDirection)i), 2);
+			if ((left1 == currentCell
+					&& left2 == OPPONENT(currentCell)
+					&& right1 == common::eCell::NONE)
+				|| (right1 == currentCell
+					&& right2 == OPPONENT(currentCell)
+					&& left1 == common::eCell::NONE))
 				return (true);
 		}
 		return (false);
