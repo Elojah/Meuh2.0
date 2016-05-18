@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:44 by hdezier           #+#    #+#             */
-//   Updated: 2016/05/12 19:59:31 by erobert          ###   ########.fr       //
+/*   Updated: 2016/05/18 16:56:26 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,16 @@ void	GameManager<N>::loop(void)
 		else if (turn == common::eCell::P2)
 			current_player = &m_player_2;
 		else
-			std::cerr << "Player is not recognized" << std::endl;
+			return ;
 		if (!current_player->ai())
 			stroke = eventHandler();
 		stroke = current_player->play(m_board, m_rules, stroke, turn);
 		valid = m_rules.isValid(m_board, stroke, turn);
-		if (!valid && stroke.x != ERR_VAL)
-			std::cout << "Unvalid stroke" << std::endl;
 		if (valid)
 		{
-			std::cout << "Player " << (int)turn
-					  << " in " << (int)stroke.x
-					  << "/" << (int)stroke.y << std::endl;
 			m_board.setCell(stroke, turn);
-
 			auto n = m_rules.applyCapture(m_board, stroke, tmp);
 			m_rules.addCapturedStones(n, turn);
-
-			m_board.displayBoard();
-
 			win = m_rules.gameEnded(m_board, stroke);
 			if (win != common::eCell::E_CELL)
 				break ;
@@ -124,10 +115,7 @@ common::vec2 const					&GameManager<N>::eventHandler(void)
 		stroke.y = event.y;
 	}
 	else if (event.e == UserInterface::P1_AI)
-	{
-		std::cout << m_player_1.ai() << std::endl;
 		m_player_1.switchAI();
-	}
 	else if (event.e == UserInterface::P2_AI)
 		m_player_2.switchAI();
 /*	else if (event.e == UserInterface::PLAY)
