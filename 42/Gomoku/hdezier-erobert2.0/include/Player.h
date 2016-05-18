@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 16:50:29 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 17:16:52 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ public:
 
 	const common::vec2		play(const IBoard &board, const Rules &rules,
 								const common::vec2 &stroke, const common::eCell &player) const;
+	const common::vec2			calculusAI(const IBoard &board, const Rules &rules, const common::eCell &player) const;
 
 	struct					sEval_P1 : public IEval
 	{
@@ -71,7 +72,6 @@ public:
 
 private:
 	bool					m_ai = false;
-	const common::vec2			_calculusAI(const IBoard &board, const Rules &rules, const common::eCell &player) const;
 
 	sEval_P1		m_eval_P1;
 	sEval_P2		m_eval_P2;

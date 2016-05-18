@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:50 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/10 12:23:33 by erobert          ###   ########.fr       */
+/*   Updated: 2016/05/18 16:54:26 by erobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ private:
 	Player			m_player_2;
 	UserInterface	m_uI;
 	bool			m_exit;
+	bool			m_help;
 
 	void				displayWin(common::eCell winner) const;
 	void				_loadMap(const std::string &file);

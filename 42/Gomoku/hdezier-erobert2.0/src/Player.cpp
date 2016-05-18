@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:51 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 16:50:33 by hdezier          ###   ########.fr       */
+//   Updated: 2016/05/18 17:16:16 by erobert          ###   ########.fr       //
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ const common::vec2		Player::play(const IBoard &board, const Rules &rules
 								, const common::vec2 &stroke, const common::eCell &player) const
 {
 	if (m_ai)
-		return (_calculusAI(board, rules, player));
+		return (calculusAI(board, rules, player));
 	return (stroke);
 }
 
-const common::vec2		Player::_calculusAI(const IBoard &board, const Rules &rules, const common::eCell &player) const
+const common::vec2		Player::calculusAI(const IBoard &board, const Rules &rules, const common::eCell &player) const
 {
 	common::vec2	result;
 	sMinMaxState	minmaxState{MAX_DEPTH, true, player, {ERR_VAL, ERR_VAL}, {0, 0}, {0, ERR_VAL}};

@@ -6,14 +6,13 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2016/05/12 19:57:56 by erobert          ###   ########.fr       //
+//   Updated: 2016/05/18 17:18:49 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #include "UserInterface.hpp"
 
-UserInterface::UserInterface(void):
-	_help(false)
+UserInterface::UserInterface(void)
 {
 	_font.loadFromFile("./data/open_sans_light.ttf");
 	_text.setFont(_font);
@@ -39,17 +38,23 @@ void						UserInterface::init(int size)
 void						UserInterface::render(IBoard const &b,
 								Player const &p1, Player const &p2,
 								common::eCell turn,
-								uint8_t const *capturedStones)
+								uint8_t const *capturedStones,
+								float time, common::vec2 help)
 {
 	_window.clear(sf::Color(255, 212, 112));
 	renderBoard(b);
-	renderText(p1, p2, turn, capturedStones);
-	if (_help)
+	_text.setCharacterSize(32);
+	_text.setStyle(sf::Text::Bold);
+	renderCapturedStones(capturedStones);
+	renderTime(time);
+	renderPlayers(p1, p2, turn);
+	renderSwitch(p1, p2);
+	if (help.x != 255)
 	{
-//		if (!p1.ai())
-//			drawStone(p1.calculusMove().x, p1.calculusMove().y, P1_HELP);
-//		if (!p2.ai())
-//			drawStone(p2.calculusMove().x, p2.calculusMove().y, P2_HELP);
+		if (!p1.ai() && common::eCell::P1 == turn)
+			drawStone(help.x, help.y, P1_HELP);
+		if (!p2.ai() && common::eCell::P2 == turn)
+			drawStone(help.x, help.y, P2_HELP);
 	}
 	_window.display();
 }
@@ -83,7 +88,7 @@ UserInterface::sEvent const	&UserInterface::getEvent(void)
 				else if (position[0] < 810 && position[0] > 710)
 					_event.e = P2_AI;
 				else if (position[0] < 600 && position[0] > 430)
-					_help = !_help;
+					_event.e = HELP;
 			}
 		}
 		else if (event.type == sf::Event::KeyPressed)
@@ -165,16 +170,9 @@ void						UserInterface::renderBoard(IBoard const &b)
 		coord.x++;
 	}
 }
-void						UserInterface::renderText(Player const &p1,
-								Player const &p2, common::eCell turn,
+void						UserInterface::renderCapturedStones(
 								uint8_t const *capturedStones)
 {
-	_text.setCharacterSize(32);
-	_text.setStyle(sf::Text::Bold);
-//	renderCapturedStones(capturedStones);
-	renderPlayers(p1, p2, turn);
-	renderSwitch(p1, p2);
-
 	std::stringstream		s1;
 	std::stringstream		s2;
 
@@ -190,6 +188,17 @@ void						UserInterface::renderText(Player const &p1,
 	_text.setPosition(WIDTH - 58, HEIGHT + 76);
 	_text.setString(s2.str());
 	_window.draw(_text);
+}
+void						UserInterface::renderTime(float time)
+{
+	if (time)
+	{
+		std::stringstream		ss;
+		ss << time << "ms";
+		_text.setPosition(WIDTH - 256, 12);
+		_text.setString(ss.str());
+		_window.draw(_text);
+	}
 }
 void						UserInterface::renderPlayers(Player const &p1,
 								Player const &p2, common::eCell turn)
@@ -250,10 +259,8 @@ void						UserInterface::renderSwitch(Player const &p1,
 	_text.setPosition(WIDTH - 291, HEIGHT + 76);
 	_window.draw(_text);
 	_text.setColor(sf::Color::Color(95, 200, 160));
-	if (_help)
-		_text.setString("HELP ON");
-	else
-		_text.setString("HELP OFF");
-	_text.setPosition(435, HEIGHT + 76);
+	_text.setString("HELP");
+	_text.setString("HELP");
+	_text.setPosition(455, HEIGHT + 76);
 	_window.draw(_text);
 }
