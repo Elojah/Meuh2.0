@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:47:10 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 14:18:16 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 14:57:12 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,12 +179,10 @@ public:
 						count += (n + 1);
 						markMap[nextCellPosition.x][nextCellPosition.y] = true;
 					}
-					if (n > 4)
-						return (startCell == player ? 100 : -100);
 					if (currentCell == common::eCell::NONE)
 					{
 						count *= 2;
-						if (n > 3)
+						if (n > 4 && getCell({i, j}, (common::eDirection)(-dir), 1) == common::eCell::NONE)
 							return (startCell == player ? 100 : -100);
 					}
 					if (startCell == player)
