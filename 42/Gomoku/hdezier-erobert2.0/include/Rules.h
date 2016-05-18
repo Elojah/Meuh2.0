@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:55:33 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 16:47:11 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 19:08:24 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ private:
 
 	static bool				_insertDoubleFreeThree(const IBoard &board, const common::vec2 &stroke, const common::eCell &turn);
 	static bool				_alignFive(const IBoard &board, const common::vec2 &stroke);
+	bool					_breakWin(const IBoard &board, const common::vec2 &stroke, uint8_t capture_P1, uint8_t capture_P2) const;
+	bool					_breakWinByCapture(const IBoard &board, uint8_t capture_P1, uint8_t capture_P2, const common::eCell player) const;
 };
 
 #endif

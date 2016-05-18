@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:44 by hdezier           #+#    #+#             */
-//   Updated: 2016/05/18 18:13:28 by erobert          ###   ########.fr       //
+/*   Updated: 2016/05/18 19:17:41 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ bool	GameManager<N>::loop(void)
 	std::clock_t	c_end;
 	float			time(0);
 
-//	_loadMap("util/test.map");
 	turn = common::eCell::P1;
 	m_uI.init(N);
 	m_uI.render(m_board, m_player_1, m_player_2, turn,
