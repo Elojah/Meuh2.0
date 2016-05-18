@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/23 13:00:48 by hdezier           #+#    #+#              #
-#    Updated: 2016/05/07 14:36:20 by hdezier          ###   ########.fr        #
+#    Updated: 2016/05/18 13:47:25 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 TARGET = gomoku
@@ -31,6 +31,7 @@ CLASS = \
 		Board\
 		Player\
 		UserInterface\
+		minmax\
 
 #List interfaces here
 INTERFACE = \

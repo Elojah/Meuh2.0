@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:47:10 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/12 19:42:11 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 14:18:16 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,14 +153,15 @@ public:
 		for (uint8_t i = 0; i < N; ++i)
 		{
 			for (uint8_t j = 0; j < N; ++j)
-				markMap[i][j] = N;
+				markMap[i][j] = false;
 		}
 
 		for (uint8_t i = 0; i < N; ++i)
 		{
 			for (uint8_t j = 0; j < N; ++j)
 			{
-				if (m_board[i][j] == common::eCell::NONE)
+				if (m_board[i][j] == common::eCell::NONE
+					|| markMap[i][j] == true)
 					continue ;
 				common::eCell	startCell(m_board[i][j]);
 				for (int8_t dir = -4; dir < 5; ++dir)
@@ -171,13 +172,21 @@ public:
 					while (++n)
 					{
 						currentCell = getCell({i, j}, (common::eDirection)dir, n);
-						if (!_isValid(_convertCell({i, j}, (common::eDirection)dir, n))
+						const auto	nextCellPosition = _convertCell({i, j}, (common::eDirection)dir, n);
+						if (!_isValid(nextCellPosition)
 							|| currentCell != startCell)
 							break ;
-						count *= (n + 1);
+						count += (n + 1);
+						markMap[nextCellPosition.x][nextCellPosition.y] = true;
 					}
+					if (n > 4)
+						return (startCell == player ? 100 : -100);
 					if (currentCell == common::eCell::NONE)
+					{
 						count *= 2;
+						if (n > 3)
+							return (startCell == player ? 100 : -100);
+					}
 					if (startCell == player)
 						result += count;
 					else
