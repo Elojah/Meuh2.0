@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 13:42:47 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 15:06:46 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 15:27:50 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,13 @@ const sMinMaxResult		MinMax<T>::eval(IBoard &board, const Rules &rules, const sM
 			// 	DBG_BREAK;
 			// }
 
-			if (T::compareValues(next.value, result.value) || next.finalStroke == true)
+			if (T::compareValues(next.value, result.value))
 			{
 				result.coord = {i, j};
 				result.value = next.value;
 			}
 
-			if (next.finalStroke == true || T::alphaBetaComp(result.value, alpha, beta))
+			if (T::alphaBetaComp(result.value, alpha, beta))
 				return (result);
 			T::setAlphaBeta(result.value, alpha, beta);
 		}

@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:47:10 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 14:57:12 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 15:36:30 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,14 +176,14 @@ public:
 						if (!_isValid(nextCellPosition)
 							|| currentCell != startCell)
 							break ;
-						count += (n + 1);
+						count *= (n + 1);
 						markMap[nextCellPosition.x][nextCellPosition.y] = true;
 					}
 					if (currentCell == common::eCell::NONE)
 					{
 						count *= 2;
-						if (n > 4 && getCell({i, j}, (common::eDirection)(-dir), 1) == common::eCell::NONE)
-							return (startCell == player ? 100 : -100);
+						if (getCell({i, j}, (common::eDirection)(-dir), 1) == common::eCell::NONE)
+							count *= 2;
 					}
 					if (startCell == player)
 						result += count;
@@ -244,7 +244,7 @@ private:
 		return (0);
 	}
 
-	inline virtual common::vec2		&&_convertCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const
+	inline virtual common::vec2		_convertCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const
 	{
 		common::vec2		dest;
 
@@ -281,7 +281,7 @@ private:
 				dest.x -= dist;
 				break ;
 		}
-		return (std::move(dest));
+		return (dest);
 	}
 
 	inline virtual void				_setHitBoard(const common::vec2 &coord, const bool val)
