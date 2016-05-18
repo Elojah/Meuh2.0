@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2016/05/18 17:18:49 by erobert          ###   ########.fr       //
+//   Updated: 2016/05/18 18:01:38 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -58,6 +58,27 @@ void						UserInterface::render(IBoard const &b,
 	}
 	_window.display();
 }
+void						UserInterface::renderWin(IBoard const &b,
+								common::eCell win)
+{
+	_window.clear(sf::Color(255, 212, 112));
+	renderBoard(b);
+	_text.setPosition(64, 12);
+	(void)win;
+	if (win == common::eCell::P1)
+	{
+		_text.setColor(sf::Color::Black);
+		_text.setString("BLACK WIN");
+	}
+	else if (win == common::eCell::P2)
+	{
+		_text.setColor(sf::Color::White);
+		_text.setString("WHITE WIN");
+	}
+	_window.draw(_text);
+	_window.display();
+}
+
 
 UserInterface::sEvent const	&UserInterface::getEvent(void)
 {
@@ -207,15 +228,7 @@ void						UserInterface::renderPlayers(Player const &p1,
 	_text.setPosition(64, 12);
 	(void)p1;
 	(void)p2;
-/*	if (p1.attribute().win)
-	{
-		if (p1.attribute().captured > 4)
-			_text.setString("BLACK WIN BY CAPTURE");
-		else
-			_text.setString("BLACK WIN");
-		_window.draw(_text);
-	}
-*/	if (turn == common::eCell::P1)
+	if (turn == common::eCell::P1)
 	{
 		_text.setString("BLACK TURN");
 		_window.draw(_text);
@@ -225,15 +238,7 @@ void						UserInterface::renderPlayers(Player const &p1,
 	_window.draw(_text);
 	_text.setColor(sf::Color::White);
 	_text.setPosition(64, 12);
-/*	if (p2.attribute().win)
-	{
-		if (p2.attribute().captured > 4)
-			_text.setString("WHITE WIN BY CAPTURE");
-		else
-			_text.setString("WHITE WIN");
-		_window.draw(_text);
-	}
-*/	if (turn == common::eCell::P2)
+	if (turn == common::eCell::P2)
 	{
 		_text.setString("WHITE TURN");
 		_window.draw(_text);
