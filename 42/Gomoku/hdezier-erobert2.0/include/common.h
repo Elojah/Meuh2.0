@@ -6,12 +6,15 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:25:52 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/12 15:03:08 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 16:35:40 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COMMON_H
 # define COMMON_H
+
+
+# include <iostream>
 
 # include "stdint.h"
 

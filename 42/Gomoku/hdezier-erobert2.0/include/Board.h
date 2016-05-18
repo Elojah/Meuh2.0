@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:47:10 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 15:36:30 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 16:54:39 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ public:
 	virtual int8_t			countAlignFree(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player, bool permissive = true) const = 0;
 	virtual int8_t			countAlign(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player) const = 0;
 	virtual int8_t			countAllAlign(const common::eCell &player) const = 0;
-	virtual void			displayBoard(void) const = 0;
 };
 
 template <uint8_t N>
@@ -110,25 +109,6 @@ public:
 		}
 	};
 
-	inline virtual void				displayBoard(void) const
-	{
-		for (uint8_t i = 0; i < N; ++i)
-		{
-			for (uint8_t j = 0; j < N; ++j)
-			{
-				char	c;
-				if (m_board[i][j] == common::eCell::P1)
-					c = '1';
-				else if (m_board[i][j] == common::eCell::P2)
-					c = '2';
-				else if (m_board[i][j] == common::eCell::NONE)
-					c = '_';
-				write(1, &c, 1);
-			}
-			write(1, "\n", 1);
-		}
-	};
-
 	inline virtual int8_t			countAlign(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player) const
 	{
 		int					n;
@@ -145,55 +125,7 @@ public:
 		return (0);
 	};
 
-	inline virtual int8_t			countAllAlign(const common::eCell &player) const
-	{
-		bool			markMap[N][N];
-		int8_t			result(0);
-
-		for (uint8_t i = 0; i < N; ++i)
-		{
-			for (uint8_t j = 0; j < N; ++j)
-				markMap[i][j] = false;
-		}
-
-		for (uint8_t i = 0; i < N; ++i)
-		{
-			for (uint8_t j = 0; j < N; ++j)
-			{
-				if (m_board[i][j] == common::eCell::NONE
-					|| markMap[i][j] == true)
-					continue ;
-				common::eCell	startCell(m_board[i][j]);
-				for (int8_t dir = -4; dir < 5; ++dir)
-				{
-					uint8_t			count(1);
-					uint8_t			n(0);
-					common::eCell	currentCell;
-					while (++n)
-					{
-						currentCell = getCell({i, j}, (common::eDirection)dir, n);
-						const auto	nextCellPosition = _convertCell({i, j}, (common::eDirection)dir, n);
-						if (!_isValid(nextCellPosition)
-							|| currentCell != startCell)
-							break ;
-						count *= (n + 1);
-						markMap[nextCellPosition.x][nextCellPosition.y] = true;
-					}
-					if (currentCell == common::eCell::NONE)
-					{
-						count *= 2;
-						if (getCell({i, j}, (common::eDirection)(-dir), 1) == common::eCell::NONE)
-							count *= 2;
-					}
-					if (startCell == player)
-						result += count;
-					else
-						result -= count;
-				}
-			}
-		}
-		return (result);
-	};
+	virtual int8_t			countAllAlign(const common::eCell &player) const;
 
 	inline virtual int8_t	countAlignFree(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player, bool permissive = true) const
 	{
@@ -211,38 +143,7 @@ private:
 
 	static inline bool		_isValid(const common::vec2 &stroke) {return (stroke.x >= 0 && stroke.x < N && stroke.y >= 0 && stroke.y < N);};
 
-	inline virtual int8_t	_countAlignSide(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player, bool &permissive) const
-	{
-		int					n;
-
-		n = 0;
-		while (++n < N)
-		{
-			auto	cell = getCell(stroke, dir, n);
-			if (cell == player)
-				continue ;
-			else if (cell == common::eCell::NONE)
-			{
-				if (permissive && getCell(stroke, dir, n + 1) == player)
-				{
-					permissive = false;
-					auto	nextCount = _countAlignSide(_convertCell(stroke, dir, n), dir, player, permissive);
-					if (nextCount == -1)
-					{
-						permissive = true;
-						return (n - 1);
-					}
-					else
-						return (n + nextCount);
-				}
-				else
-					return (n - 1);
-			}
-			else // NONE || E_CELL (=out of range)
-				return (-1);
-		}
-		return (0);
-	}
+	virtual int8_t		_countAlignSide(const common::vec2 &stroke, const common::eDirection &dir, const common::eCell &player, bool &permissive) const;
 
 	inline virtual common::vec2		_convertCell(const common::vec2 &origin, common::eDirection dir, uint8_t dist) const
 	{

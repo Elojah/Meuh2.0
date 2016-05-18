@@ -6,14 +6,13 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2016/05/18 17:13:24 by erobert          ###   ########.fr       //
+//   Updated: 2016/05/18 17:18:49 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #include "UserInterface.hpp"
 
-UserInterface::UserInterface(void):
-	_help(false)
+UserInterface::UserInterface(void)
 {
 	_font.loadFromFile("./data/open_sans_light.ttf");
 	_text.setFont(_font);
