@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/12 19:59:51 by erobert          ###   ########.fr       */
+/*   Updated: 2016/05/18 14:19:38 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,13 @@ public:
 	{
 		inline virtual uint8_t		eval(const IBoard &board, const Rules &rules, const sMinMaxState &minMaxState) const
 		{
-			uint8_t					result(100);
+			uint8_t					result(112);
 
 			const common::eCell win = rules.gameEnded(board, minMaxState.lastStroke, minMaxState.captures[0], minMaxState.captures[1]);
 			if (win == common::eCell::P2)
-			{
-				// std::cout << "Loose incomin..." << std::endl;
-				// board.displayBoard();
-				return (1);
-			}
+				return (1 + minMaxState.depth);
 			else if (win == common::eCell::P1)
-			{
-				// std::cout << "WIN incomin !" << std::endl;
-				// board.displayBoard();
-				return (255);
-			}
+				return (255 - minMaxState.depth);
 			result += board.countAllAlign(common::eCell::P1);
 			result += (minMaxState.captures[0] - minMaxState.captures[1]);
 			return (result);
@@ -66,23 +58,15 @@ public:
 	{
 		inline virtual uint8_t		eval(const IBoard &board, const Rules &rules, const sMinMaxState &minMaxState) const
 		{
-			uint8_t			result(100);
+			uint8_t			result(112);
 
 			const common::eCell win = rules.gameEnded(board, minMaxState.lastStroke, minMaxState.captures[0], minMaxState.captures[1]);
 			if (win == common::eCell::P1)
-			{
-				// std::cout << "Loose incomin..." << std::endl;
-				// board.displayBoard();
-				return (1);
-			}
+				return (1 + minMaxState.depth);
 			else if (win == common::eCell::P2)
-			{
-				// std::cout << "WIN incomin..." << std::endl;
-				// board.displayBoard();
-				return (255);
-			}
+				return (255 - minMaxState.depth);
 			result += board.countAllAlign(common::eCell::P2);
-			result += (minMaxState.captures[1] - minMaxState.captures[0]) * 2;
+			result += (minMaxState.captures[1] - minMaxState.captures[0]);
 			return (result);
 		}
 	};
