@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 14:19:38 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 15:34:35 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ public:
 
 			const common::eCell win = rules.gameEnded(board, minMaxState.lastStroke, minMaxState.captures[0], minMaxState.captures[1]);
 			if (win == common::eCell::P2)
-				return (1 + minMaxState.depth);
+				return (1 + (MAX_DEPTH - minMaxState.depth));
 			else if (win == common::eCell::P1)
-				return (255 - minMaxState.depth);
-			result += board.countAllAlign(common::eCell::P1);
+				return (255 - (MAX_DEPTH - minMaxState.depth));
+			int8_t align = board.countAllAlign(common::eCell::P1);
+			result += align;
 			result += (minMaxState.captures[0] - minMaxState.captures[1]);
 			return (result);
 		}
@@ -62,10 +63,11 @@ public:
 
 			const common::eCell win = rules.gameEnded(board, minMaxState.lastStroke, minMaxState.captures[0], minMaxState.captures[1]);
 			if (win == common::eCell::P1)
-				return (1 + minMaxState.depth);
+				return (1 + (MAX_DEPTH - minMaxState.depth));
 			else if (win == common::eCell::P2)
-				return (255 - minMaxState.depth);
-			result += board.countAllAlign(common::eCell::P2);
+				return (255 - (MAX_DEPTH - minMaxState.depth));
+			int8_t align = board.countAllAlign(common::eCell::P2);
+			result += align;
 			result += (minMaxState.captures[1] - minMaxState.captures[0]);
 			return (result);
 		}

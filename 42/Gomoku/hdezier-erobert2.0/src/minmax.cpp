@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 13:42:47 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 13:47:07 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 15:27:50 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ const sMinMaxResult		MinMax<T>::eval(IBoard &board, const Rules &rules, const sM
 			{
 				minMaxState.lastStroke
 				, evalFunction.eval(board, rules, minMaxState)
+				, !(minMaxState.depth == 0)
 			}));
 
 	uint8_t					nCaptures(0);
@@ -29,6 +30,7 @@ const sMinMaxResult		MinMax<T>::eval(IBoard &board, const Rules &rules, const sM
 	sMinMaxResult			result;
 
 	result.value = T::initialValue;
+	result.finalStroke = false;
 
 	uint8_t		alpha(minMaxState.alphaBeta[0]);
 	uint8_t		beta(minMaxState.alphaBeta[1]);
@@ -66,6 +68,11 @@ const sMinMaxResult		MinMax<T>::eval(IBoard &board, const Rules &rules, const sM
 
 			rules.undoCapture(board, {i, j}, captures, OPPONENT(minMaxState.currentPlayer));
 			board.setCell({i, j}, common::eCell::NONE);
+
+			// if (next.finalStroke == true)
+			// {
+			// 	DBG_BREAK;
+			// }
 
 			if (T::compareValues(next.value, result.value))
 			{

@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 13:01:31 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 13:46:54 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 14:26:55 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ struct					sMinMaxResult
 {
 	common::vec2		coord;
 	uint8_t				value;
+	bool				finalStroke;
 	inline void			print(void) const {std::cout << "Coord:" << (int)coord.x << "/" << (int)coord.y << "=" << (int)value << std::endl;};
 };
 
