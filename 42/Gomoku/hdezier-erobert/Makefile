@@ -1,3 +1,14 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/03/23 13:00:48 by hdezier           #+#    #+#              #
+#    Updated: 2016/05/03 03:51:27 by hdezier          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 TARGET = gomoku
 
 #Directories
@@ -30,7 +41,7 @@ OBJ = $(addsuffix .o, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 
 #Flags
-CFLAGS =-MMD -Wall -Wextra -Werror -O3 -std=c++98 -Wno-unused-parameter
+CFLAGS =-MMD -Wall -Wextra -Werror -O3 -std=c++11 -Wno-unused-parameter
 LFLAGS =
 
 #Libs

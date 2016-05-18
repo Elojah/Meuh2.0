@@ -2,7 +2,7 @@
     "folders":
     [
         {
-            "path": "/home/leeios/code/meuh/42/ExpertSystem/hdezier2.0"
+            "path": "~/code/meuh/42/ExpertSystem/hdezier2.0"
         }
     ],
 
@@ -12,10 +12,9 @@
         [
             "-D_DBG_",
             "-I${project_path}/include",
-            "-isystem", "/usr/include",
-            "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed",
-            "-isystem", "/usr/lib/llvm-3.6/lib/clang/3.6.0/include",
-            "-isystem", "/usr/include"
+             "-Wall",
+             "-Werror",
+             "-Wextra",
         ]
     }
 }

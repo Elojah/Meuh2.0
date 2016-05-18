@@ -1,0 +1,22 @@
+{
+    "folders":
+    [
+        {
+            "path": "~/code/meuh/42/Gomoku/hdezier-erobert"
+        }
+    ],
+
+    "settings":
+    {
+        "cc_include_options":
+        [
+            "-D_DBG_",
+            "-I${project_path}/include",
+            "-I${project_path}/lib/sfml/include",
+             "-Wall",
+             "-Werror",
+             "-Wextra",
+             "-v"
+        ]
+    }
+}

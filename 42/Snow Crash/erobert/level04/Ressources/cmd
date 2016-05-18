@@ -1,0 +1,4 @@
+cat /etc/passwd
+cat > .john/john
+flag04:42hDRfypTqqnw:3004:3004::/home/flag/flag04:/bin/bash
+john .john/john

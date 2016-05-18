@@ -1,0 +1,2 @@
+ln -sf /home/user/level09/token /tmp/file
+./level09  /tmp/file

@@ -6,7 +6,7 @@
 (*   By: erobert <marvin@42.fr>                     +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2016/01/06 15:03:30 by erobert           #+#    #+#             *)
-(*   Updated: 2016/01/07 16:43:18 by erobert          ###   ########.fr       *)
+(*   Updated: 2016/01/07 20:44:22 by erobert          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -23,7 +23,7 @@ let read_result =
 		(0., 0.)
 	  )
   with _ ->
-	   print_endline (Sys.argv.(0) ^ " data.csv result");
+	   print_endline (Sys.argv.(0) ^ " result");
 	   (0., 0.)
 
 let () =

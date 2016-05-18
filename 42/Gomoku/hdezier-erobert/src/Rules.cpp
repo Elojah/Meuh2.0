@@ -6,7 +6,7 @@
 //   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/06/05 17:25:46 by hdezier           #+#    #+#             //
-//   Updated: 2015/06/29 18:20:58 by erobert          ###   ########.fr       //
+//   Updated: 2016/05/02 21:14:41 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -23,7 +23,7 @@ void						Rules::reset(void)
 		_winMove[i] = NULL;
 }
 
-
+/*
 int							Rules::captureStone(Cell &cell, Player &player)
 {
 	int						captures(cell.checkCapture());
@@ -85,7 +85,7 @@ int							Rules::simulateMove(Board &b, Player &p1, Player &p2)
 		return (result);
 	}
 }
-
+*/
 Rules::eValidity			Rules::makeMove(Board &b, Player &p1, Player &p2)
 {
 	Player					&player(p1.attribute().turn ? p1 : p2);
@@ -197,6 +197,7 @@ bool						Rules::canCaptureFive(Board &b,
 	}
 	return (result);
 }
+
 Rules::eValidity			Rules::captureStone(Board &b, Board::sCell &cell,
 																					Player &player)
 {
