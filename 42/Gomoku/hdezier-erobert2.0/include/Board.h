@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:47:10 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 15:55:12 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 16:21:21 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,14 +181,18 @@ public:
 						count += (n + 1);
 						markMap[nextCellPosition.x][nextCellPosition.y] = true;
 					}
+					if (dir > 0)
+					{
+						auto	alignFree = countAlignFree({i, j}, (common::eDirection)dir, startCell);
+						if (alignFree >= 2)
+						count += alignFree;
+					}
 					if (currentCell == common::eCell::NONE && count > 1)
 					{
 						count *= 2;
 						if (getCell({i, j}, (common::eDirection)(-dir), 1) == common::eCell::NONE)
 							count *= 2;
 					}
-					if (dir > 0)
-						count += countAlignFree({i, j}, (common::eDirection)dir, startCell);
 					if (startCell == player)
 						result += count;
 					else
@@ -231,7 +235,7 @@ private:
 				{
 					permissive = false;
 					auto	nextCount = _countAlignSide(_convertCell(stroke, dir, n), dir, player, permissive);
-					if (nextCount == -1)
+					if (nextCount < 2)
 					{
 						permissive = true;
 						return (n - 1);
