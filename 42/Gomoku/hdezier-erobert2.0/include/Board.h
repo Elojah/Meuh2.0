@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:47:10 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 15:36:30 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 15:55:12 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,8 @@ public:
 				common::eCell	startCell(m_board[i][j]);
 				for (int8_t dir = -4; dir < 5; ++dir)
 				{
+					if (dir == 0)
+						continue ;
 					uint8_t			count(1);
 					uint8_t			n(0);
 					common::eCell	currentCell;
@@ -176,15 +178,17 @@ public:
 						if (!_isValid(nextCellPosition)
 							|| currentCell != startCell)
 							break ;
-						count *= (n + 1);
+						count += (n + 1);
 						markMap[nextCellPosition.x][nextCellPosition.y] = true;
 					}
-					if (currentCell == common::eCell::NONE)
+					if (currentCell == common::eCell::NONE && count > 1)
 					{
 						count *= 2;
 						if (getCell({i, j}, (common::eDirection)(-dir), 1) == common::eCell::NONE)
 							count *= 2;
 					}
+					if (dir > 0)
+						count += countAlignFree({i, j}, (common::eDirection)dir, startCell);
 					if (startCell == player)
 						result += count;
 					else
