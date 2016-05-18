@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:39:44 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 19:04:51 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 19:17:41 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	GameManager<N>::displayWin(common::eCell winner) const
 }
 
 template <uint8_t N>
-void	GameManager<N>::loop(void)
+bool	GameManager<N>::loop(void)
 {
 	Player			*current_player;
 	bool			valid;
@@ -39,8 +39,6 @@ void	GameManager<N>::loop(void)
 	std::clock_t	c_end;
 	float			time(0);
 
-	// _loadMap("util/test.map");
-	m_exit = false;
 	turn = common::eCell::P1;
 	m_uI.init(N);
 	m_uI.render(m_board, m_player_1, m_player_2, turn,
@@ -51,8 +49,6 @@ void	GameManager<N>::loop(void)
 			current_player = &m_player_1;
 		else if (turn == common::eCell::P2)
 			current_player = &m_player_2;
-		else
-			return ;
 		if (!current_player->ai())
 		{
 			stroke = eventHandler();
@@ -83,7 +79,11 @@ void	GameManager<N>::loop(void)
 		m_uI.render(m_board, m_player_1, m_player_2, turn,
 					m_rules.capturedStones(), time, help);
 	}
-	displayWin(win);
+	m_uI.renderWin(m_board, win);
+	m_exit = false;
+	while (!m_exit)
+		eventHandler();
+	return (m_restart);
 }
 
 template <uint8_t N>
@@ -120,12 +120,12 @@ common::vec2 const					&GameManager<N>::eventHandler(void)
 	event = m_uI.getEvent();
 	if (event.e == UserInterface::EXIT)
 		m_exit = true;
-/*	else if (event.e == UserInterface::RESTART)
+	else if (event.e == UserInterface::RESTART)
 	{
-		_restart = true;
-		_exit = true;
+		m_restart = true;
+		m_exit = true;
 	}
-*/	if (event.e == UserInterface::MOUSE)
+	if (event.e == UserInterface::MOUSE)
 	{
 		stroke.x = event.x;
 		stroke.y = event.y;
@@ -136,13 +136,13 @@ common::vec2 const					&GameManager<N>::eventHandler(void)
 		m_player_2.switchAI();
 	else if (event.e == UserInterface::HELP)
 		m_help = true;
-/*	else if (event.e == UserInterface::PLAY)
-		_audio.playMusic(AudioManager::HYMNE_A_LA_KRO);
+	else if (event.e == UserInterface::PLAY)
+		m_audio.playMusic(AudioManager::HYMNE_A_LA_KRO);
 	else if (event.e == UserInterface::NEXT)
-		_audio.nextMusic();
+		m_audio.nextMusic();
 	else if (event.e == UserInterface::STOP)
-		_audio.stopMusic();
-*/	return (stroke);
+		m_audio.stopMusic();
+	return (stroke);
 }
 
 

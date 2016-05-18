@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:07:12 by erobert           #+#    #+#             //
-//   Updated: 2016/05/18 17:15:13 by erobert          ###   ########.fr       //
+//   Updated: 2016/05/18 17:54:37 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -53,6 +53,7 @@ public:
 							Player const &p2, common::eCell turn,
 							uint8_t const *capturedStones, float time,
 							common::vec2 help);
+	void				renderWin(IBoard const &b, common::eCell win);
 	sEvent const		&getEvent(void);
 private:
 	enum eStone

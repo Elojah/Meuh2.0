@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:36:25 by hdezier           #+#    #+#             */
-//   Updated: 2016/05/03 01:46:35 by erobert          ###   ########.fr       //
+//   Updated: 2016/05/18 18:11:30 by erobert          ###   ########.fr       //
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,25 @@
 
 static void		exec(eSize size)
 {
+	bool		restart(false);
+
 	if (size == eSize::SMALL)
 	{
 		GameManager<common::small>	g;
-		g.loop();
+		restart = g.loop();
 	}
 	else if (size == eSize::MEDIUM)
 	{
 		GameManager<common::medium>	g;
-		g.loop();
+		restart = g.loop();
 	}
 	else if (size == eSize::LARGE)
 	{
 		GameManager<common::large>	g;
-		g.loop();
+		restart = g.loop();
 	}
+	if (restart)
+		exec(size);
 }
 
 int				main(int ac, char **av)
