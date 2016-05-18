@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2016/05/03 05:35:10 by erobert          ###   ########.fr       //
+//   Updated: 2016/05/12 19:57:56 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -37,13 +37,13 @@ void						UserInterface::init(int size)
 	initStone();
 }
 void						UserInterface::render(IBoard const &b,
-												  Player const &p1,
-												  Player const &p2,
-												  common::eCell turn)
+								Player const &p1, Player const &p2,
+								common::eCell turn,
+								uint8_t const *capturedStones)
 {
 	_window.clear(sf::Color(255, 212, 112));
 	renderBoard(b);
-	renderText(p1, p2, turn);
+	renderText(p1, p2, turn, capturedStones);
 	if (_help)
 	{
 //		if (!p1.ai())
@@ -166,17 +166,33 @@ void						UserInterface::renderBoard(IBoard const &b)
 	}
 }
 void						UserInterface::renderText(Player const &p1,
-													  Player const &p2,
-													  common::eCell turn)
+								Player const &p2, common::eCell turn,
+								uint8_t const *capturedStones)
 {
 	_text.setCharacterSize(32);
 	_text.setStyle(sf::Text::Bold);
+//	renderCapturedStones(capturedStones);
 	renderPlayers(p1, p2, turn);
 	renderSwitch(p1, p2);
+
+	std::stringstream		s1;
+	std::stringstream		s2;
+
+	s1 << static_cast<int>(capturedStones[0]);
+	_stone[WHITE].setPosition(32, HEIGHT + 76);
+	_window.draw(_stone[WHITE]);
+	_text.setPosition(44, HEIGHT + 76);
+	_text.setString(s1.str());
+	_window.draw(_text);
+	s2 << static_cast<int>(capturedStones[1]);
+	_stone[BLACK].setPosition(WIDTH - 70, HEIGHT + 76);
+	_window.draw(_stone[BLACK]);
+	_text.setPosition(WIDTH - 58, HEIGHT + 76);
+	_text.setString(s2.str());
+	_window.draw(_text);
 }
 void						UserInterface::renderPlayers(Player const &p1,
-														 Player const &p2,
-														 common::eCell turn)
+								Player const &p2, common::eCell turn)
 {
 	_text.setColor(sf::Color::Black);
 	_text.setPosition(64, 12);
@@ -195,7 +211,7 @@ void						UserInterface::renderPlayers(Player const &p1,
 		_text.setString("BLACK TURN");
 		_window.draw(_text);
 	}
-	_text.setPosition(64, HEIGHT + 76);
+	_text.setPosition(80, HEIGHT + 76);
 	_text.setString("BLACK");
 	_window.draw(_text);
 	_text.setColor(sf::Color::White);
@@ -214,11 +230,11 @@ void						UserInterface::renderPlayers(Player const &p1,
 		_window.draw(_text);
 	}
 	_text.setString("WHITE");
-	_text.setPosition(WIDTH - 162, HEIGHT + 76);
+	_text.setPosition(WIDTH - 178, HEIGHT + 76);
 	_window.draw(_text);
 }
 void						UserInterface::renderSwitch(Player const &p1,
-														Player const &p2)
+								Player const &p2)
 {
 	_text.setColor(sf::Color::Color(205, 92, 92));
 	_text.setPosition(190, HEIGHT + 76);

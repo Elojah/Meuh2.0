@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 21:00:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 14:13:12 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/18 14:19:38 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ private:
 	bool					m_ai = false;
 	common::vec2			_calculusAI(const IBoard &board, const Rules &rules, const common::eCell &player) const;
 
-	sEval_P1				m_eval_P1;
-	sEval_P2				m_eval_P2;
+	sEval_P1		m_eval_P1;
+	sEval_P2		m_eval_P2;
 };
 
 #endif

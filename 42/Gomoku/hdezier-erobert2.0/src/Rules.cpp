@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:55:29 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/12 19:32:23 by hdezier          ###   ########.fr       */
+//   Updated: 2016/05/12 19:58:58 by erobert          ###   ########.fr       //
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,17 @@
 #include <iostream>
 
 Rules::Rules(void)
-	: m_capturedStone_P1(0)
-	,m_capturedStone_P2(0)
 {
-	;
+	m_capturedStones[0] = 0;
+	m_capturedStones[1] = 0;
 }
 
 void		Rules::addCapturedStones(const uint8_t &n, const common::eCell &player)
 {
 	if (player == common::eCell::P1)
-		m_capturedStone_P1 += n;
+		m_capturedStones[0] += n;
 	else if (player == common::eCell::P2)
-		m_capturedStone_P2 += n;
+		m_capturedStones[1] += n;
 }
 
 bool			Rules::_alignFive(const IBoard &board, const common::vec2 &stroke)
@@ -45,9 +44,9 @@ bool			Rules::_alignFive(const IBoard &board, const common::vec2 &stroke)
 
 common::eCell	Rules::gameEnded(const IBoard &board, const common::vec2 &stroke, uint8_t capture_P1, uint8_t capture_P2) const
 {
-	if (m_capturedStone_P1 + capture_P1 > 9)
+	if (m_capturedStones[0] + capture_P1 > 9)
 		return (common::eCell::P1);
-	else if (m_capturedStone_P2 + capture_P2 > 9)
+	else if (m_capturedStones[1] + capture_P2 > 9)
 		return (common::eCell::P2);
 	if (_alignFive(board, stroke))
 		return (board.getCell(stroke));

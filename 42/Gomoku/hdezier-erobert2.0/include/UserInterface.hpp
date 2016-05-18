@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:07:12 by erobert           #+#    #+#             //
-//   Updated: 2016/05/03 05:18:33 by erobert          ###   ########.fr       //
+//   Updated: 2016/05/12 19:54:37 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -16,6 +16,7 @@
 # define HEIGHT 1000
 # define WIDTH 1000
 
+# include <sstream>
 # include "SFML/Graphics.hpp"
 # include "Board.h"
 # include "Player.h"
@@ -48,7 +49,8 @@ public:
 
 	void				init(int size);
 	void				render(IBoard const &b, Player const &p1,
-							   Player const &p2, common::eCell turn);
+							Player const &p2, common::eCell turn,
+							uint8_t const *capturedStones);
 	sEvent const		&getEvent(void);
 private:
 	enum eStone
@@ -78,9 +80,9 @@ private:
 	void				initStone(void);
 	void				renderBoard(IBoard const &b);
 	void				renderText(Player const &p1, Player const &p2,
-								   common::eCell turn);
+							common::eCell turn, uint8_t const *capturedStones);
 	void				renderPlayers(Player const &p1, Player const &p2,
-									  common::eCell turn);
+							common::eCell turn);
 	void				renderSwitch(Player const &p1, Player const &p2);
 	void				drawStone(int x, int y, eStone stone);
 };
