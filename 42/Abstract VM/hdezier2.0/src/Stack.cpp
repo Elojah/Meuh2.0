@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* ************************************************************************* */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   Stack.cpp                                          :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 15:30:21 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/19 16:52:00 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/19 17:59:08 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,113 +14,120 @@
 #include "OperandFactory.h"
 #include <iostream>
 
-Stack::eResult		Stack::doOperation(const lexOperations::sPush &param)
+Stack::~Stack(void)
+{
+	for (auto operand : m_container)
+		delete (operand);
+}
+
+
+eErr		Stack::doOperation(const lexOperations::sPush &param)
 {
 	auto elem = OperandFactory::getInstance()->createOperand(param.type, param.elem);
 	m_container.push_back(elem);
-	return (eResult::OK);
+	return (eErr::NONE);
 }
-Stack::eResult		Stack::doOperation(const lexOperations::sPop &param)
+eErr		Stack::doOperation(const lexOperations::sPop &param)
 {
 	(void)param;
 	if (m_container.empty())
-		return (eResult::NOT_ENOUGH_VALUES);
-	m_container.pop_back();
-	return (eResult::OK);
+		return (eErr::POP_ON_EMPTY_STACK);
+	popBackAndRemove();
+	return (eErr::NONE);
 }
 
-Stack::eResult		Stack::doOperation(const lexOperations::sPrint &param) const
+eErr		Stack::doOperation(const lexOperations::sPrint &param) const
 {
 	(void)param;
 	std::cout << m_container.back()->toString() << std::endl;
-	return (eResult::OK);
+	return (eErr::NONE);
 }
-Stack::eResult		Stack::doOperation(const lexOperations::sAssert &param) const
+eErr		Stack::doOperation(const lexOperations::sAssert &param) const
 {
 	const auto lastElem = m_container.back();
 	if (param.type != lastElem->getType()
 		|| param.elem.compare(lastElem->toString()) != 0)
-		return (eResult::ASSERT_FALSE);
-	return (eResult::OK);
+		return (eErr::ASSERT_FALSE);
+	return (eErr::NONE);
 }
-Stack::eResult		Stack::doOperation(const lexOperations::sDump &param) const
+eErr		Stack::doOperation(const lexOperations::sDump &param) const
 {
 	(void)param;
-	for (const auto i : m_container)
-		std::cout << i->toString() << std::endl;
-	return (eResult::OK);
+	for (auto i = m_container.rbegin(); i != m_container.rend(); ++i)
+		std::cout << (*i)->toString() << std::endl;
+	return (eErr::NONE);
 }
 
-Stack::eResult		Stack::doOperation(const lexOperations::sAdd &param)
+eErr		Stack::doOperation(const lexOperations::sAdd &param)
 {
 	(void)param;
 	if (m_container.size() < 2)
-		return (eResult::NOT_ENOUGH_VALUES);
+		return (eErr::MISSING_OPERANDS);
 	const auto	lhs = m_container.back();
-	const auto	rhs = lhs - 1;
-	const auto	result = *lhs + *rhs;
-	m_container.pop_back();
-	m_container.pop_back();
+	const auto	rhs = m_container.at(m_container.size() - 2);
+	const IOperand	*result;
+	try {result = *lhs + *rhs;}
+	catch (eErr err) {return (err);}
+	popBackAndRemove();
+	popBackAndRemove();
 	m_container.push_back(result);
-	return (eResult::OK);
+	return (eErr::NONE);
 }
-Stack::eResult		Stack::doOperation(const lexOperations::sSub &param)
+eErr		Stack::doOperation(const lexOperations::sSub &param)
 {
 	(void)param;
 	if (m_container.size() < 2)
-		return (eResult::NOT_ENOUGH_VALUES);
+		return (eErr::MISSING_OPERANDS);
 	const auto	lhs = m_container.back();
-	const auto	rhs = lhs - 1;
+	const auto	rhs = m_container.at(m_container.size() - 2);
 	const auto	result = *lhs - *rhs;
-	m_container.pop_back();
-	m_container.pop_back();
+	popBackAndRemove();
+	popBackAndRemove();
 	m_container.push_back(result);
-	return (eResult::OK);
+	return (eErr::NONE);
 }
-Stack::eResult		Stack::doOperation(const lexOperations::sMul &param)
+eErr		Stack::doOperation(const lexOperations::sMul &param)
 {
 	(void)param;
 	if (m_container.size() < 2)
-		return (eResult::NOT_ENOUGH_VALUES);
+		return (eErr::MISSING_OPERANDS);
 	const auto	lhs = m_container.back();
-	const auto	rhs = lhs - 1;
-	const auto	result = *lhs * *rhs;
-	m_container.pop_back();
-	m_container.pop_back();
+	const auto	rhs = m_container.at(m_container.size() - 2);
+	const IOperand	*result;
+	try {result = *lhs * *rhs;}
+	catch (eErr err) {return (err);}
+	popBackAndRemove();
+	popBackAndRemove();
 	m_container.push_back(result);
-	return (eResult::OK);
+	return (eErr::NONE);
 }
-Stack::eResult		Stack::doOperation(const lexOperations::sDiv &param)
+eErr		Stack::doOperation(const lexOperations::sDiv &param)
 {
 	(void)param;
 	if (m_container.size() < 2)
-		return (eResult::NOT_ENOUGH_VALUES);
+		return (eErr::MISSING_OPERANDS);
 	const auto	lhs = m_container.back();
-	const auto	rhs = lhs - 1;
-	if (rhs->toString().compare("0") == 0
-		|| rhs->toString().compare("0.") == 0
-		|| rhs->toString().compare("0.0") == 0)
-		return (eResult::DIV_BY_ZERO);
-	const auto	result = *lhs / *rhs;
-	m_container.pop_back();
-	m_container.pop_back();
+	const auto	rhs = m_container.at(m_container.size() - 2);
+	const IOperand	*result;
+	try {result = *lhs / *rhs;}
+	catch (eErr err) {return (err);}
+	popBackAndRemove();
+	popBackAndRemove();
 	m_container.push_back(result);
-	return (eResult::OK);
+	return (eErr::NONE);
 }
-Stack::eResult		Stack::doOperation(const lexOperations::sMod &param)
+eErr		Stack::doOperation(const lexOperations::sMod &param)
 {
 	(void)param;
 	if (m_container.size() < 2)
-		return (eResult::NOT_ENOUGH_VALUES);
+		return (eErr::MISSING_OPERANDS);
 	const auto	lhs = m_container.back();
-	const auto	rhs = lhs - 1;
-	if (rhs->toString().compare("0") == 0
-		|| rhs->toString().compare("0.") == 0
-		|| rhs->toString().compare("0.0") == 0)
-		return (eResult::DIV_BY_ZERO);
-	const auto	result = *lhs % *rhs;
-	m_container.pop_back();
-	m_container.pop_back();
+	const auto	rhs = m_container.at(m_container.size() - 2);
+	const IOperand	*result;
+	try {result = *lhs % *rhs;}
+	catch (eErr err) {return (err);}
+	popBackAndRemove();
+	popBackAndRemove();
 	m_container.push_back(result);
-	return (eResult::OK);
+	return (eErr::NONE);
 }

@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 16:43:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/19 16:52:50 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/19 19:07:21 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ Operand<T>::Operand(const std::string &value)
 {
 }
 
-
 template<typename T>
 template<typename OperationType>
 IOperand const		*Operand<T>::_doOperation(IOperand const &rhs) const
 {
 	IOperand::eOperandType	resultType;
-	if (getPrecision() > rhs.getPrecision())
+	auto					lhsType(getType());
+	auto					rhsType(rhs.getType());
+	if ((int)lhsType > (int)rhsType)
 		resultType = getType();
 	else
 		resultType = rhs.getType();

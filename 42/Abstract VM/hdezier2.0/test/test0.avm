@@ -1,2 +1,5 @@
-push int8(5)
+push int32(0)
+push int32(75)
+div
 print
+exit

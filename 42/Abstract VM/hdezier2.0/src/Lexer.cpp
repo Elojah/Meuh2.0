@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:50:10 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/19 16:54:21 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/19 19:06:42 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,66 +17,72 @@
 #include <iostream>
 #include <map>
 
-Lexer::eResult		Lexer::read_line(const std::string &line, Stack &stack)
+eErr		Lexer::read_line(const std::string &line, Stack &stack)
 {
-	auto	type = _analyzeType(line);
+	std::string	cleanLine;
+	auto		commentDelim = line.find_first_of(';');
+	if (commentDelim != std::string::npos)
+		cleanLine = line.substr(0, commentDelim);
+	else
+		cleanLine = line;
+	if (cleanLine.empty())
+		return (eErr::NONE);
+	auto	type = _analyzeType(cleanLine);
 	if (type == eToken::PUSH)
 	{
 		lexOperations::sPush	typePush;
-		if (_setElem(typePush, line) == false) return (eResult::ERR);
-		stack.doOperation(typePush);
+		if (_setElem(typePush, cleanLine) == false) return (eErr::SYNTAX_ERROR);
+		return (stack.doOperation(typePush));
 	}
 	else if (type == eToken::POP)
 	{
 		lexOperations::sPop		typePop;
-		stack.doOperation(typePop);
+		return (stack.doOperation(typePop));
 	}
 	else if (type == eToken::PRINT)
 	{
 		lexOperations::sPrint	typePrint;
-		stack.doOperation(typePrint);
+		return (stack.doOperation(typePrint));
 	}
 	else if (type == eToken::DUMP)
 	{
 		lexOperations::sDump	typeDump;
-		stack.doOperation(typeDump);
+		return (stack.doOperation(typeDump));
 	}
 	else if (type == eToken::ASSERT)
 	{
 		lexOperations::sAssert	typeAssert;
-		if (_setElem(typeAssert, line) == false) return (eResult::ERR);
-		stack.doOperation(typeAssert);
+		if (_setElem(typeAssert, cleanLine) == false) return (eErr::SYNTAX_ERROR);
+		return (stack.doOperation(typeAssert));
 	}
 	else if (type == eToken::ADD)
 	{
 		lexOperations::sAdd		typeAdd;
-		stack.doOperation(typeAdd);
+		return (stack.doOperation(typeAdd));
 	}
 	else if (type == eToken::SUB)
 	{
 		lexOperations::sSub		typeSub;
-		stack.doOperation(typeSub);
+		return (stack.doOperation(typeSub));
 	}
 	else if (type == eToken::MUL)
 	{
 		lexOperations::sMul		typeMul;
-		stack.doOperation(typeMul);
+		return (stack.doOperation(typeMul));
 	}
 	else if (type == eToken::DIV)
 	{
 		lexOperations::sDiv		typeDiv;
-		stack.doOperation(typeDiv);
+		return (stack.doOperation(typeDiv));
 	}
 	else if (type == eToken::MOD)
 	{
 		lexOperations::sMod		typeMod;
-		stack.doOperation(typeMod);
+		return (stack.doOperation(typeMod));
 	}
-	else if (type == eToken::QUIT)
-		return (eResult::QUIT);
-	else
-		return (eResult::ERR);
-	return (eResult::OK);
+	else if (type == eToken::EXIT)
+		return (eErr::EXIT);
+	return (eErr::NONE);
 }
 
 eToken	Lexer::_analyzeType(const std::string &line)
@@ -93,9 +99,9 @@ eToken	Lexer::_analyzeType(const std::string &line)
 		{"mul", eToken::MUL},
 		{"div", eToken::DIV},
 		{"mod", eToken::MOD},
-		{"quit", eToken::QUIT}
+		{"exit", eToken::EXIT}
 	};
-	for (const auto compareElem : analyzeMap)
+	for (const auto &compareElem : analyzeMap)
 	{
 		const int		sizeTocompare(compareElem.first.size());
 		if (compareElem.first.compare(0, sizeTocompare
@@ -121,7 +127,7 @@ bool	Lexer::_setElem(lexOperations::sElem &elem, const std::string &line)
 		|| firstDelim == line.size() - 1)
 		return (false);
 	const auto	type = line.substr(firstDelim + 1);
-	for (const auto compareElem : analyzeMap)
+	for (const auto &compareElem : analyzeMap)
 	{
 		const int		sizeTocompare(compareElem.first.size());
 		if (compareElem.first.compare(0, sizeTocompare
@@ -136,7 +142,7 @@ bool	Lexer::_setElem(lexOperations::sElem &elem, const std::string &line)
 				|| closeParenthesis == 0
 				|| closeParenthesis < openParenthesis)
 				return (false);
-			elem.elem = type.substr(openParenthesis + 1, closeParenthesis - 1);
+			elem.elem = type.substr(openParenthesis + 1, closeParenthesis - openParenthesis - 1);
 			return (true);
 		}
 	}

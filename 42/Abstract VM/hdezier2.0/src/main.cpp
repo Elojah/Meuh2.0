@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:46:48 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/17 16:16:02 by leeios           ###   ########.fr       */
+/*   Updated: 2016/05/19 18:39:13 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,65 @@
 #include <iostream>
 #include <fstream>
 
+static void		print_error(eErr err, unsigned int nLine)
+{
+	if (err != eErr::NONE && err != eErr::EXIT)
+		std::cerr << "ERROR [line:" << nLine << "]-\t";
+	switch(err)
+	{
+		case (eErr::NONE) :
+			std::cerr << "No error" << std::endl;
+		break ;
+		case (eErr::EXIT) :
+			std::cerr << "Thanks for using me, see ya !" << std::endl;
+		break ;
+		case (eErr::SYNTAX_ERROR) :
+			std::cerr << "Syntax error" << std::endl;
+		break ;
+		case (eErr::UNKNOWN_INSTR) :
+			std::cerr << "Unknown instruction" << std::endl;
+		break ;
+		case (eErr::OVERFLOW) :
+			std::cerr << "Overflow" << std::endl;
+		break ;
+		case (eErr::UNDERFLOW) :
+			std::cerr << "Underflow" << std::endl;
+		break ;
+		case (eErr::POP_ON_EMPTY_STACK) :
+			std::cerr << "Pop on empty stack" << std::endl;
+		break ;
+		case (eErr::DIV_BY_ZERO) :
+			std::cerr << "Division by zero" << std::endl;
+		break ;
+		case (eErr::MISSING_OPERANDS) :
+			std::cerr << "Not enough operands for operation" << std::endl;
+		break ;
+		case (eErr::NO_EXIT_INSTR) :
+			std::cerr << "No exit instruction" << std::endl;
+		break ;
+		case (eErr::ASSERT_FALSE) :
+			std::cerr << "Assert returned false" << std::endl;
+		break ;
+	}
+}
+
 static void		exec(void)
 {
 	Stack	stack;
 	Lexer	lexer;
+	unsigned int	nLine(0);
+	eErr	error;
 
 	while (1)
 	{
 		std::string		line;
 		std::cin >> line;
-		auto lex_op = lexer.read_line(line, stack);
-		if (lex_op == Lexer::eResult::QUIT || lex_op == Lexer::eResult::ERR)
+		error = lexer.read_line(line, stack);
+		if (error != eErr::NONE)
 			break ;
+		++nLine;
 	}
+	print_error(error, nLine);
 }
 
 static void		exec(const char *filename)
@@ -37,13 +83,17 @@ static void		exec(const char *filename)
 	Lexer	lexer;
 	std::ifstream	ifs(filename);
 	std::string		line;
+	unsigned int	nLine(0);
+	eErr	error;
 
 	while (std::getline(ifs, line))
 	{
-		auto lex_op = lexer.read_line(line, stack);
-		if (lex_op == Lexer::eResult::QUIT || lex_op == Lexer::eResult::ERR)
+		error = lexer.read_line(line, stack);
+		if (error != eErr::NONE)
 			break ;
+		++nLine;
 	}
+	print_error(error, nLine);
 }
 
 int		main(int ac, char **av)

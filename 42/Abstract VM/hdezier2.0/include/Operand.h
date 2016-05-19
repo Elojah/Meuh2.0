@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 17:18:40 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/19 16:48:27 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/19 19:01:08 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,39 +27,22 @@ public:
 
 	inline virtual int			getPrecision(void) const override
 	{
-		return (sizeof(m_value));
+		return (sizeof(T));
 	};
 
-private:
-	inline static eOperandType	_getType(const int8_t &value)
-	{
-		(void)value;
-		return (IOperand::eOperandType::Int8);
-	}
-	inline static eOperandType	_getType(const int16_t &value)
-	{
-		(void)value;
-		return (IOperand::eOperandType::Int16);
-	}
-	inline static eOperandType	_getType(const int32_t &value)
-	{
-		(void)value;
-		return (IOperand::eOperandType::Int32);
-	}
-	inline static eOperandType	_getType(const float &value)
-	{
-		(void)value;
-		return (IOperand::eOperandType::Float);
-	}
-	inline static eOperandType	_getType(const double &value)
-	{
-		(void)value;
-		return (IOperand::eOperandType::Double);
-	}
-public:
 	inline virtual eOperandType	getType(void) const override
 	{
-		return (_getType(m_value));
+		if (std::is_same<T, int8_t>::value)
+			return (IOperand::eOperandType::Int8);
+		if (std::is_same<T, int16_t>::value)
+			return (IOperand::eOperandType::Int16);
+		if (std::is_same<T, int32_t>::value)
+			return (IOperand::eOperandType::Int32);
+		if (std::is_same<T, float>::value)
+			return (IOperand::eOperandType::Float);
+		if (std::is_same<T, double>::value)
+			return (IOperand::eOperandType::Double);
+		return (IOperand::eOperandType::E_TYPE);
 	};
 
 	inline virtual IOperand const		*operator+(IOperand const &rhs) const override

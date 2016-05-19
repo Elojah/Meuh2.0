@@ -6,12 +6,14 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 14:17:11 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/19 16:33:19 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/19 19:03:49 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPE_HELPER_H
 # define TYPE_HELPER_H
+
+# include "Tokens.h"
 
 # include <cmath>
 # include <iostream>
@@ -62,7 +64,13 @@ namespace	helper
 		template<typename U>
 		static inline U			operate(const std::string &lhs, const std::string &rhs)
 		{
-			return (_convertTo<U>(lhs) / _convertTo<U>(rhs));
+			auto	convertedRhs = _convertTo<U>(rhs);
+			if (convertedRhs == 0)
+			{
+				std::cerr << "Div by zero !" << std::endl;
+				throw (eErr::DIV_BY_ZERO);
+			}
+			return (_convertTo<U>(lhs) / convertedRhs);
 		}
 	};
 	struct			sMod
@@ -70,7 +78,10 @@ namespace	helper
 		template<typename U>
 		static inline U			operate(const std::string &lhs, const std::string &rhs)
 		{
-			return (std::fmod(_convertTo<U>(lhs), _convertTo<U>(rhs)));
+			auto	convertedRhs = _convertTo<U>(rhs);
+			if (convertedRhs == 0)
+				throw (eErr::DIV_BY_ZERO);
+			return (std::fmod(_convertTo<U>(lhs), convertedRhs));
 		}
 	};
 };
