@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Operand.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 17:18:40 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/17 19:14:39 by leeios           ###   ########.fr       */
+/*   Updated: 2016/05/19 14:21:14 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "IOperand.h"
 # include "OperandFactory.h"
+# include "type_helper.h"
 
 template<typename T>
 class		Operand : public IOperand
@@ -25,21 +26,7 @@ public:
 
 	inline bool					setValue(const std::string &value)
 	{
-		auto	type = getType();
-		switch (type)
-		{
-			case (IOperand::eOperandType::Int8) :
-			case (IOperand::eOperandType::Int16) :
-			case (IOperand::eOperandType::Int32) :
-				m_value = std::atoi(value.c_str());
-				break ;
-			case (IOperand::eOperandType::Float) :
-				m_value = std::atof(value.c_str());
-				break ;
-			case (IOperand::eOperandType::Double) :
-				m_value = std::atol(value.c_str());
-				break ;
-		}
+		m_value = helper::_convertTo<T>(value);
 		return (true);
 	};
 
@@ -80,15 +67,26 @@ public:
 		return (_getType(m_value));
 	};
 
-	virtual IOperand const		*operator+(IOperand const &rhs) const override
+	inline virtual IOperand const		*operator+(IOperand const &rhs) const override
 	{
-		if (getPrecision() > rhs.IOperand::getPrecision())
-			return (m_factory.createOperand(getType(), ))
-	}
-	virtual IOperand const		*operator-(IOperand const &rhs) const override;
-	virtual IOperand const		*operator*(IOperand const &rhs) const override;
-	virtual IOperand const		*operator/(IOperand const &rhs) const override;
-	virtual IOperand const		*operator%(IOperand const &rhs) const override;
+		return (_doOperation<helper::sAdd>(rhs));
+	};
+	inline virtual IOperand const		*operator-(IOperand const &rhs) const override
+	{
+		return (_doOperation<helper::sSub>(rhs));
+	};
+	inline virtual IOperand const		*operator*(IOperand const &rhs) const override
+	{
+		return (_doOperation<helper::sMul>(rhs));
+	};
+	inline virtual IOperand const		*operator/(IOperand const &rhs) const override
+	{
+		return (_doOperation<helper::sDiv>(rhs));
+	};
+	inline virtual IOperand const		*operator%(IOperand const &rhs) const override
+	{
+		return (_doOperation<helper::sMod>(rhs));
+	};
 
 	virtual std::string const	&toString(void) const override
 	{
@@ -96,8 +94,47 @@ public:
 	}
 
 private:
-	T				m_value;
-	OperandFactory	m_factory;
+	T							m_value;
+
+	template<typename OperationType>
+	IOperand const		*_doOperation(IOperand const &rhs) const
+	{
+		IOperand::eOperandType	resultType;
+		if (getPrecision() > rhs.getPrecision())
+			resultType = getType();
+		else
+			resultType = rhs.getType();
+		switch (resultType)
+		{
+			case (IOperand::eOperandType::Int8) :
+				return
+				(
+					OperandFactory::getInstance()->createOperand(resultType, std::to_string(OperationType::operate<int8_t>(toString(), rhs.toString())))
+				);
+			case (IOperand::eOperandType::Int16) :
+				return
+				(
+					OperandFactory::getInstance()->createOperand(resultType, std::to_string(OperationType::operate(toString(), rhs.toString())))
+				);
+			case (IOperand::eOperandType::Int32) :
+				return
+				(
+					OperandFactory::getInstance()->createOperand(resultType, std::to_string(OperationType::operate(toString(), rhs.toString())))
+				);
+			case (IOperand::eOperandType::Float) :
+				return
+				(
+					OperandFactory::getInstance()->createOperand(resultType, std::to_string(OperationType::operate(toString(), rhs.toString())))
+				);
+			case (IOperand::eOperandType::Double) :
+				return
+				(
+					OperandFactory::getInstance()->createOperand(resultType, std::to_string(OperationType::operate(toString(), rhs.toString())))
+				);
+			default : break ;
+		};
+	}
+
 };
 
 #endif

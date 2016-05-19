@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
+#    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/05/17 19:01:05 by leeios           ###   ########.fr        #
+#    Updated: 2016/05/19 12:48:00 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ BUILD_DIR = build
 LIB_DIR =
 
 #Options
-CC = clang++-3.6
+CC = clang++
 SRC_EXT = .cpp
 RM = rm -rf
 

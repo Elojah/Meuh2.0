@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Stack.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 15:30:16 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/17 19:00:41 by leeios           ###   ########.fr       */
+/*   Updated: 2016/05/19 13:00:22 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define STACK_H
 
 # include "Tokens.h"
-# include "OperandFactory.h"
 # include <vector>
 
 class Stack
@@ -48,7 +47,6 @@ public:
 private:
 
 	std::vector<const IOperand *>		m_container;
-	OperandFactory				m_factory;
 };
 
 #endif

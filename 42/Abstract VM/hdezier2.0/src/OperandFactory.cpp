@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   OperandFactory.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 17:38:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/17 19:12:35 by leeios           ###   ########.fr       */
+/*   Updated: 2016/05/19 14:12:56 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Operand.h"
 #include "OperandFactory.h"
+
+OperandFactory		*OperandFactory::m_instance = nullptr;
+
+OperandFactory		*OperandFactory::getInstance(void)
+{
+	if (m_instance == nullptr)
+		m_instance = new OperandFactory;
+	return (m_instance);
+}
+
 
 IOperand const		*OperandFactory::createOperand(IOperand::eOperandType type, std::string const & value) const
 {

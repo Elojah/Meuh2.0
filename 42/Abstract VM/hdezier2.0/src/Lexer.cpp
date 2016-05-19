@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Lexer.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:50:10 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/17 18:40:01 by leeios           ###   ########.fr       */
+/*   Updated: 2016/05/19 12:33:05 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,11 +124,13 @@ bool	Lexer::_setElem(lexOperations::sElem &elem, const std::string &line)
 			, type.c_str(), sizeTocompare) == 0)
 		{
 			elem.type = compareElem.second;
-			elem.elem = type.substr
-			(
-				line.find_first_of('(') + 1,
-				line.find_first_of(')')
-			);
+			const auto	openParenthesis = line.find_first_of('(');
+			const auto	closeParenthesis = line.find_first_of(')');
+			if (openParenthesis == std::string::npos
+				|| openParenthesis == line.size()
+				|| closeParenthesis == std::string::npos)
+				return (false);
+			elem.elem = type.substr(openParenthesis, closeParenthesis);
 			return (true);
 		}
 	}

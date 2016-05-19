@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   Stack.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 15:30:21 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/17 18:59:32 by leeios           ###   ########.fr       */
+/*   Updated: 2016/05/19 13:00:32 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Stack.h"
+#include "OperandFactory.h"
 #include <iostream>
 
 Stack::eResult		Stack::doOperation(const lexOperations::sPush &param)
 {
-	auto elem = m_factory.createOperand(param.type, param.elem);
+	auto elem = OperandFactory::getInstance()->createOperand(param.type, param.elem);
 	m_container.push_back(elem);
 	return (eResult::OK);
 }

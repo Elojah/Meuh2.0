@@ -2,7 +2,7 @@
     "folders":
     [
         {
-            "path": "/home/leeios/code/meuh/42/Abstract VM/hdezier2.0"
+            "path": "/nfs/2013/h/hdezier/code/meuh/42/Abstract VM/hdezier2.0"
         }
     ],
 
@@ -10,6 +10,7 @@
     {
         "cc_include_options":
         [
+            "-std=c++11",
             "-D_DBG_",
             "-I${project_path}/include",
             "-isystem", "/usr/include",
