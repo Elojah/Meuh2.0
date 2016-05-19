@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 16:43:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/19 19:07:21 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/19 19:12:02 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 template<typename T>
 Operand<T>::Operand(const std::string &value)
 	: m_value(helper::_convertTo<T>(value))
-	, m_strValue(value)
+	, m_strValue(std::to_string(m_value))
 {
 }
 

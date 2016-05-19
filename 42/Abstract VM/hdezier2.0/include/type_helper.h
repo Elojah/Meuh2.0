@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 14:17:11 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/19 19:03:49 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/19 19:09:56 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,7 @@ namespace	helper
 		{
 			auto	convertedRhs = _convertTo<U>(rhs);
 			if (convertedRhs == 0)
-			{
-				std::cerr << "Div by zero !" << std::endl;
 				throw (eErr::DIV_BY_ZERO);
-			}
 			return (_convertTo<U>(lhs) / convertedRhs);
 		}
 	};
