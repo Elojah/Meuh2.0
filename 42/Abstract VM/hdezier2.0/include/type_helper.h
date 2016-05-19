@@ -6,13 +6,14 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 14:17:11 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/19 14:18:27 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/19 16:33:19 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPE_HELPER_H
 # define TYPE_HELPER_H
 
+# include <cmath>
 # include <iostream>
 
 namespace	helper
@@ -32,44 +33,44 @@ namespace	helper
 		return (result);
 	};
 
-	template<typename U>
 	struct			sAdd
 	{
+		template<typename U>
 		static inline U			operate(const std::string &lhs, const std::string &rhs)
 		{
 			return (_convertTo<U>(lhs) + _convertTo<U>(rhs));
 		}
 	};
-	template<typename U>
 	struct			sSub
 	{
+		template<typename U>
 		static inline U			operate(const std::string &lhs, const std::string &rhs)
 		{
 			return (_convertTo<U>(lhs) - _convertTo<U>(rhs));
 		}
 	};
-	template<typename U>
 	struct			sMul
 	{
+		template<typename U>
 		static inline U			operate(const std::string &lhs, const std::string &rhs)
 		{
 			return (_convertTo<U>(lhs) * _convertTo<U>(rhs));
 		}
 	};
-	template<typename U>
 	struct			sDiv
 	{
+		template<typename U>
 		static inline U			operate(const std::string &lhs, const std::string &rhs)
 		{
 			return (_convertTo<U>(lhs) / _convertTo<U>(rhs));
 		}
 	};
-	template<typename U>
 	struct			sMod
 	{
+		template<typename U>
 		static inline U			operate(const std::string &lhs, const std::string &rhs)
 		{
-			return (_convertTo<U>(lhs) % _convertTo<U>(rhs));
+			return (std::fmod(_convertTo<U>(lhs), _convertTo<U>(rhs)));
 		}
 	};
 };

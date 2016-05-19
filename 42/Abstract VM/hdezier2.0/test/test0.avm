@@ -1,6 +1,2 @@
-push double(5)
-show
-add
-push 5.3
-sub
-show
+push int8(5)
+print

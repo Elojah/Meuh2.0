@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 15:30:21 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/19 13:00:32 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/19 16:52:00 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ Stack::eResult		Stack::doOperation(const lexOperations::sPop &param)
 Stack::eResult		Stack::doOperation(const lexOperations::sPrint &param) const
 {
 	(void)param;
-	std::cout << m_container.back() << std::endl;
+	std::cout << m_container.back()->toString() << std::endl;
 	return (eResult::OK);
 }
 Stack::eResult		Stack::doOperation(const lexOperations::sAssert &param) const

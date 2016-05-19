@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 17:18:40 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/19 14:21:14 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/19 16:48:27 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,8 @@ class		Operand : public IOperand
 {
 public:
 	Operand(void) = default;
+	Operand(const std::string &value);
 	virtual ~Operand(void) = default;
-
-	inline bool					setValue(const std::string &value)
-	{
-		m_value = helper::_convertTo<T>(value);
-		return (true);
-	};
 
 	inline virtual int			getPrecision(void) const override
 	{
@@ -90,51 +85,15 @@ public:
 
 	virtual std::string const	&toString(void) const override
 	{
-		std::to_string(m_value);
+		return (m_strValue);
 	}
 
 private:
-	T							m_value;
+	const T							m_value;
+	const std::string				m_strValue;
 
 	template<typename OperationType>
-	IOperand const		*_doOperation(IOperand const &rhs) const
-	{
-		IOperand::eOperandType	resultType;
-		if (getPrecision() > rhs.getPrecision())
-			resultType = getType();
-		else
-			resultType = rhs.getType();
-		switch (resultType)
-		{
-			case (IOperand::eOperandType::Int8) :
-				return
-				(
-					OperandFactory::getInstance()->createOperand(resultType, std::to_string(OperationType::operate<int8_t>(toString(), rhs.toString())))
-				);
-			case (IOperand::eOperandType::Int16) :
-				return
-				(
-					OperandFactory::getInstance()->createOperand(resultType, std::to_string(OperationType::operate(toString(), rhs.toString())))
-				);
-			case (IOperand::eOperandType::Int32) :
-				return
-				(
-					OperandFactory::getInstance()->createOperand(resultType, std::to_string(OperationType::operate(toString(), rhs.toString())))
-				);
-			case (IOperand::eOperandType::Float) :
-				return
-				(
-					OperandFactory::getInstance()->createOperand(resultType, std::to_string(OperationType::operate(toString(), rhs.toString())))
-				);
-			case (IOperand::eOperandType::Double) :
-				return
-				(
-					OperandFactory::getInstance()->createOperand(resultType, std::to_string(OperationType::operate(toString(), rhs.toString())))
-				);
-			default : break ;
-		};
-	}
-
+	IOperand const		*_doOperation(IOperand const &rhs) const;
 };
 
 #endif

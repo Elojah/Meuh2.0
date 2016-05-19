@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:50:10 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/19 12:33:05 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/19 16:54:21 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,11 @@ bool	Lexer::_setElem(lexOperations::sElem &elem, const std::string &line)
 		{"double", IOperand::eOperandType::Double}
 	};
 
-	auto	type = line.substr(line.find_first_of(' ') + 1);
+	const auto	firstDelim = line.find_first_of(' ');
+	if (firstDelim == std::string::npos
+		|| firstDelim == line.size() - 1)
+		return (false);
+	const auto	type = line.substr(firstDelim + 1);
 	for (const auto compareElem : analyzeMap)
 	{
 		const int		sizeTocompare(compareElem.first.size());
@@ -124,13 +128,15 @@ bool	Lexer::_setElem(lexOperations::sElem &elem, const std::string &line)
 			, type.c_str(), sizeTocompare) == 0)
 		{
 			elem.type = compareElem.second;
-			const auto	openParenthesis = line.find_first_of('(');
-			const auto	closeParenthesis = line.find_first_of(')');
+			const auto	openParenthesis = type.find_first_of('(');
+			const auto	closeParenthesis = type.find_first_of(')');
 			if (openParenthesis == std::string::npos
-				|| openParenthesis == line.size()
-				|| closeParenthesis == std::string::npos)
+				|| openParenthesis == line.size() - 1
+				|| closeParenthesis == std::string::npos
+				|| closeParenthesis == 0
+				|| closeParenthesis < openParenthesis)
 				return (false);
-			elem.elem = type.substr(openParenthesis, closeParenthesis);
+			elem.elem = type.substr(openParenthesis + 1, closeParenthesis - 1);
 			return (true);
 		}
 	}

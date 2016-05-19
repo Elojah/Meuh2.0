@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/05/19 12:48:00 by hdezier          ###   ########.fr        #
+#    Updated: 2016/05/19 16:44:06 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ RM = rm -rf
 CLASS = main\
 		Lexer\
 		Stack\
+		Operand\
 		OperandFactory\
 
 #List interfaces here
