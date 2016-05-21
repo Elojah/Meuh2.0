@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   OperandFactory.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 17:38:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/17 19:12:35 by leeios           ###   ########.fr       */
+/*   Updated: 2016/05/19 17:47:06 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Operand.h"
 #include "OperandFactory.h"
+
+OperandFactory		*OperandFactory::m_instance = nullptr;
+
+OperandFactory		*OperandFactory::getInstance(void)
+{
+	if (m_instance == nullptr)
+		m_instance = new OperandFactory;
+	return (m_instance);
+}
+
 
 IOperand const		*OperandFactory::createOperand(IOperand::eOperandType type, std::string const & value) const
 {
@@ -27,36 +37,21 @@ IOperand const		*OperandFactory::createOperand(IOperand::eOperandType type, std:
 }
 IOperand const		*OperandFactory::createInt8(std::string const & value) const
 {
-	auto result = new Operand<int8_t>;
-	if (result->setValue(value) == false)
-		return (nullptr);
-	return (result);
+	return (new Operand<int8_t>(value));
 }
 IOperand const		*OperandFactory::createInt16(std::string const & value) const
 {
-	auto result = new Operand<int16_t>;
-	if (result->setValue(value) == false)
-		return (nullptr);
-	return (result);
+	return (new Operand<int16_t>(value));
 }
 IOperand const		*OperandFactory::createInt32(std::string const & value) const
 {
-	auto result = new Operand<int32_t>;
-	if (result->setValue(value) == false)
-		return (nullptr);
-	return (result);
+	return (new Operand<int32_t>(value));
 }
 IOperand const		*OperandFactory::createFloat(std::string const & value) const
 {
-	auto result = new Operand<float>;
-	if (result->setValue(value) == false)
-		return (nullptr);
-	return (result);
+	return (new Operand<float>(value));
 }
 IOperand const		*OperandFactory::createDouble(std::string const & value) const
 {
-	auto result = new Operand<double>;
-	if (result->setValue(value) == false)
-		return (nullptr);
-	return (result);
+	return (new Operand<double>(value));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Operand.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 17:18:40 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/17 19:14:39 by leeios           ###   ########.fr       */
+/*   Updated: 2016/05/19 19:01:08 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,89 +15,68 @@
 
 # include "IOperand.h"
 # include "OperandFactory.h"
+# include "type_helper.h"
 
 template<typename T>
 class		Operand : public IOperand
 {
 public:
 	Operand(void) = default;
+	Operand(const std::string &value);
 	virtual ~Operand(void) = default;
-
-	inline bool					setValue(const std::string &value)
-	{
-		auto	type = getType();
-		switch (type)
-		{
-			case (IOperand::eOperandType::Int8) :
-			case (IOperand::eOperandType::Int16) :
-			case (IOperand::eOperandType::Int32) :
-				m_value = std::atoi(value.c_str());
-				break ;
-			case (IOperand::eOperandType::Float) :
-				m_value = std::atof(value.c_str());
-				break ;
-			case (IOperand::eOperandType::Double) :
-				m_value = std::atol(value.c_str());
-				break ;
-		}
-		return (true);
-	};
 
 	inline virtual int			getPrecision(void) const override
 	{
-		return (sizeof(m_value));
+		return (sizeof(T));
 	};
 
-private:
-	inline static eOperandType	_getType(const int8_t &value)
-	{
-		(void)value;
-		return (IOperand::eOperandType::Int8);
-	}
-	inline static eOperandType	_getType(const int16_t &value)
-	{
-		(void)value;
-		return (IOperand::eOperandType::Int16);
-	}
-	inline static eOperandType	_getType(const int32_t &value)
-	{
-		(void)value;
-		return (IOperand::eOperandType::Int32);
-	}
-	inline static eOperandType	_getType(const float &value)
-	{
-		(void)value;
-		return (IOperand::eOperandType::Float);
-	}
-	inline static eOperandType	_getType(const double &value)
-	{
-		(void)value;
-		return (IOperand::eOperandType::Double);
-	}
-public:
 	inline virtual eOperandType	getType(void) const override
 	{
-		return (_getType(m_value));
+		if (std::is_same<T, int8_t>::value)
+			return (IOperand::eOperandType::Int8);
+		if (std::is_same<T, int16_t>::value)
+			return (IOperand::eOperandType::Int16);
+		if (std::is_same<T, int32_t>::value)
+			return (IOperand::eOperandType::Int32);
+		if (std::is_same<T, float>::value)
+			return (IOperand::eOperandType::Float);
+		if (std::is_same<T, double>::value)
+			return (IOperand::eOperandType::Double);
+		return (IOperand::eOperandType::E_TYPE);
 	};
 
-	virtual IOperand const		*operator+(IOperand const &rhs) const override
+	inline virtual IOperand const		*operator+(IOperand const &rhs) const override
 	{
-		if (getPrecision() > rhs.IOperand::getPrecision())
-			return (m_factory.createOperand(getType(), ))
-	}
-	virtual IOperand const		*operator-(IOperand const &rhs) const override;
-	virtual IOperand const		*operator*(IOperand const &rhs) const override;
-	virtual IOperand const		*operator/(IOperand const &rhs) const override;
-	virtual IOperand const		*operator%(IOperand const &rhs) const override;
+		return (_doOperation<helper::sAdd>(rhs));
+	};
+	inline virtual IOperand const		*operator-(IOperand const &rhs) const override
+	{
+		return (_doOperation<helper::sSub>(rhs));
+	};
+	inline virtual IOperand const		*operator*(IOperand const &rhs) const override
+	{
+		return (_doOperation<helper::sMul>(rhs));
+	};
+	inline virtual IOperand const		*operator/(IOperand const &rhs) const override
+	{
+		return (_doOperation<helper::sDiv>(rhs));
+	};
+	inline virtual IOperand const		*operator%(IOperand const &rhs) const override
+	{
+		return (_doOperation<helper::sMod>(rhs));
+	};
 
 	virtual std::string const	&toString(void) const override
 	{
-		std::to_string(m_value);
+		return (m_strValue);
 	}
 
 private:
-	T				m_value;
-	OperandFactory	m_factory;
+	const T							m_value;
+	const std::string				m_strValue;
+
+	template<typename OperationType>
+	IOperand const		*_doOperation(IOperand const &rhs) const;
 };
 
 #endif

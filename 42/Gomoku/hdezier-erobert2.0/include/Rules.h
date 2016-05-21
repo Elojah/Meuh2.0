@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 20:55:33 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/18 19:08:24 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/20 20:23:10 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ public:
 	static uint8_t			applyCapture(IBoard &board, const common::vec2 &stroke, uint16_t &saveState);
 	static void				undoCapture(IBoard &board, const common::vec2 &stroke, uint16_t &saveState, const common::eCell &player);
 
-	inline uint8_t const			*capturedStones(void) const
+	inline uint8_t const	*capturedStones(void) const
 	{
 		return (m_capturedStones);
 	};
