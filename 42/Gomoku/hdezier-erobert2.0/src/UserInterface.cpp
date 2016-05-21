@@ -6,7 +6,7 @@
 //   By: erobert <erobert@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/05/28 12:13:37 by erobert           #+#    #+#             //
-//   Updated: 2016/05/18 19:27:36 by erobert          ###   ########.fr       //
+//   Updated: 2016/05/21 16:17:02 by erobert          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -204,16 +204,20 @@ void						UserInterface::renderCapturedStones(
 	else
 		s1 << static_cast<int>(capturedStones[0]);
 	_stone[WHITE].setPosition(32, HEIGHT + 76);
+	_stone[WHITE].setRadius(21);
 	_window.draw(_stone[WHITE]);
+	_stone[WHITE].setRadius(21 * 19. / _size);
 	_text.setPosition(44, HEIGHT + 76);
 	_text.setString(s1.str());
 	_window.draw(_text);
 	if (capturedStones[1] > 9)
-		s1 << "X";
+		s2 << "X";
 	else
 		s2 << static_cast<int>(capturedStones[1]);
 	_stone[BLACK].setPosition(WIDTH - 70, HEIGHT + 76);
+	_stone[BLACK].setRadius(21);
 	_window.draw(_stone[BLACK]);
+	_stone[BLACK].setRadius(21 * 19. / _size);
 	_text.setPosition(WIDTH - 58, HEIGHT + 76);
 	_text.setString(s2.str());
 	_window.draw(_text);
