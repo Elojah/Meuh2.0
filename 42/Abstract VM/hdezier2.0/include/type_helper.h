@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 14:17:11 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/23 02:29:32 by leeios           ###   ########.fr       */
+/*   Updated: 2016/05/23 02:43:41 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ namespace	helper
 			if (fetestexcept(FE_UNDERFLOW))
 				throw (eErr::UNDERFLOW_CALC);
 			else if (fetestexcept(FE_OVERFLOW)
-				|| (rhsValue != 0.0 && result / lhsValue != rhsValue))
+				|| (lhsValue != 0.0 && (std::numeric_limits<U>::max() / lhsValue) < rhsValue))
 				throw (eErr::OVERFLOW_CALC);
 			return (result);
 		}
