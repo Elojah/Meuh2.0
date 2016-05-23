@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_helper.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 14:17:11 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/19 19:09:56 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/23 02:29:32 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,45 @@
 # include "Tokens.h"
 
 # include <cmath>
+# include <fenv.h>
 # include <iostream>
+# include <limits>
+# include <sstream>
+# include <stdexcept>
 
 namespace	helper
 {
+
 	template<typename U>
-	static inline U					_convertTo(const std::string &value)
+	static inline std::string	_toStr(const U &value)
 	{
-		U						result;
 		if (std::is_same<U, int8_t>::value
 			|| std::is_same<U, int16_t>::value
 			|| std::is_same<U, int32_t>::value)
-			result = std::atoi(value.c_str());
-		else if (std::is_same<U, float>::value)
-			result = std::atof(value.c_str());
-		else if (std::is_same<U, double>::value)
-			result = std::atol(value.c_str());
+			return (std::to_string(value));
+		std::ostringstream	ss;
+		ss << value;
+		return (ss.str());
+	};
+
+	template<typename U>
+	static inline U				_toType(const std::string &value)
+	{
+		U						result;
+
+		try
+		{
+			if (std::is_same<U, int8_t>::value
+				|| std::is_same<U, int16_t>::value
+				|| std::is_same<U, int32_t>::value)
+				result = std::stoi(value);
+			else if (std::is_same<U, float>::value)
+				result = std::stof(value);
+			else if (std::is_same<U, double>::value)
+				result = std::stod(value);
+		}
+		catch (const std::invalid_argument &e) {throw (eErr::INVALID_ARG);}
+		catch (const std::out_of_range &e) {throw (eErr::OVERFLOW_INIT);}
 		return (result);
 	};
 
@@ -40,7 +63,19 @@ namespace	helper
 		template<typename U>
 		static inline U			operate(const std::string &lhs, const std::string &rhs)
 		{
-			return (_convertTo<U>(lhs) + _convertTo<U>(rhs));
+			U					result;
+			U					lhsValue;
+			U					rhsValue;
+
+			feclearexcept(FE_OVERFLOW);
+			lhsValue = _toType<U>(lhs);
+			rhsValue = _toType<U>(rhs);
+			result = lhsValue + rhsValue;
+			if (fetestexcept(FE_OVERFLOW)
+				|| (((lhsValue > 0) == (rhsValue > 0))
+					&& std::abs(lhsValue) > std::numeric_limits<U>::max() - std::abs(rhsValue)))
+				throw (eErr::OVERFLOW_CALC);
+			return (result);
 		}
 	};
 	struct			sSub
@@ -48,7 +83,19 @@ namespace	helper
 		template<typename U>
 		static inline U			operate(const std::string &lhs, const std::string &rhs)
 		{
-			return (_convertTo<U>(lhs) - _convertTo<U>(rhs));
+			U					result;
+			U					lhsValue;
+			U					rhsValue;
+
+			feclearexcept(FE_OVERFLOW);
+			lhsValue = _toType<U>(lhs);
+			rhsValue = _toType<U>(rhs);
+			result = lhsValue - rhsValue ;
+			if (fetestexcept(FE_OVERFLOW)
+				|| (((lhsValue > 0) != (rhsValue > 0))
+					&& std::abs(lhsValue) > std::numeric_limits<U>::max() - std::abs(rhsValue)))
+				throw (eErr::OVERFLOW_CALC);
+			return (result);
 		}
 	};
 	struct			sMul
@@ -56,7 +103,21 @@ namespace	helper
 		template<typename U>
 		static inline U			operate(const std::string &lhs, const std::string &rhs)
 		{
-			return (_convertTo<U>(lhs) * _convertTo<U>(rhs));
+			U					result;
+			U					lhsValue;
+			U					rhsValue;
+
+			feclearexcept(FE_OVERFLOW);
+			feclearexcept(FE_UNDERFLOW);
+			lhsValue = _toType<U>(lhs);
+			rhsValue = _toType<U>(rhs);
+			result = lhsValue * rhsValue ;
+			if (fetestexcept(FE_UNDERFLOW))
+				throw (eErr::UNDERFLOW_CALC);
+			else if (fetestexcept(FE_OVERFLOW)
+				|| (rhsValue != 0.0 && result / lhsValue != rhsValue))
+				throw (eErr::OVERFLOW_CALC);
+			return (result);
 		}
 	};
 	struct			sDiv
@@ -64,10 +125,24 @@ namespace	helper
 		template<typename U>
 		static inline U			operate(const std::string &lhs, const std::string &rhs)
 		{
-			auto	convertedRhs = _convertTo<U>(rhs);
-			if (convertedRhs == 0)
+			U					result;
+			U					lhsValue;
+			U					rhsValue;
+			U					nullValue(0);
+
+			feclearexcept(FE_OVERFLOW);
+			feclearexcept(FE_UNDERFLOW);
+			lhsValue = _toType<U>(lhs);
+			rhsValue = _toType<U>(rhs);
+			if (rhsValue == 0)
 				throw (eErr::DIV_BY_ZERO);
-			return (_convertTo<U>(lhs) / convertedRhs);
+			result = lhsValue / rhsValue ;
+			if (fetestexcept(FE_UNDERFLOW)
+				|| (result == nullValue && lhsValue != nullValue))
+				throw (eErr::UNDERFLOW_CALC);
+			else if (fetestexcept(FE_OVERFLOW))
+				throw (eErr::OVERFLOW_CALC);
+			return (result);
 		}
 	};
 	struct			sMod
@@ -75,10 +150,16 @@ namespace	helper
 		template<typename U>
 		static inline U			operate(const std::string &lhs, const std::string &rhs)
 		{
-			auto	convertedRhs = _convertTo<U>(rhs);
-			if (convertedRhs == 0)
+			U					result;
+			U					lhsValue;
+			U					rhsValue;
+
+			lhsValue = _toType<U>(lhs);
+			rhsValue = _toType<U>(rhs);
+			result = std::fmod(lhsValue, rhsValue);
+			if (fetestexcept(FE_INVALID))
 				throw (eErr::DIV_BY_ZERO);
-			return (std::fmod(_convertTo<U>(lhs), convertedRhs));
+			return (result);
 		}
 	};
 };

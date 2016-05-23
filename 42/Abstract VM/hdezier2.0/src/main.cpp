@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:46:48 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/19 18:39:13 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/23 01:32:17 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,17 @@ static void		print_error(eErr err, unsigned int nLine)
 		case (eErr::UNKNOWN_INSTR) :
 			std::cerr << "Unknown instruction" << std::endl;
 		break ;
-		case (eErr::OVERFLOW) :
-			std::cerr << "Overflow" << std::endl;
+		case (eErr::INVALID_ARG) :
+			std::cerr << "Argument invalid" << std::endl;
 		break ;
-		case (eErr::UNDERFLOW) :
-			std::cerr << "Underflow" << std::endl;
+		case (eErr::OVERFLOW_CALC) :
+			std::cerr << "Overflow at calculus" << std::endl;
+		break ;
+		case (eErr::OVERFLOW_INIT) :
+			std::cerr << "Overflow at variable initialization" << std::endl;
+		break ;
+		case (eErr::UNDERFLOW_CALC) :
+			std::cerr << "Underflow at calculus" << std::endl;
 		break ;
 		case (eErr::POP_ON_EMPTY_STACK) :
 			std::cerr << "Pop on empty stack" << std::endl;
@@ -70,9 +76,9 @@ static void		exec(void)
 		std::string		line;
 		std::cin >> line;
 		error = lexer.read_line(line, stack);
+		++nLine;
 		if (error != eErr::NONE)
 			break ;
-		++nLine;
 	}
 	print_error(error, nLine);
 }

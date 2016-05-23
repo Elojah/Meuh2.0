@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Operand.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 16:43:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/19 19:12:02 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/23 02:29:45 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 template<typename T>
 Operand<T>::Operand(const std::string &value)
-	: m_value(helper::_convertTo<T>(value))
-	, m_strValue(std::to_string(m_value))
+	: m_value(helper::_toType<T>(value))
+	, m_strValue(helper::_toStr(m_value))
 {
 }
 
@@ -35,27 +35,27 @@ IOperand const		*Operand<T>::_doOperation(IOperand const &rhs) const
 		case (IOperand::eOperandType::Int8) :
 			return
 			(
-				OperandFactory::getInstance()->createOperand(resultType, std::to_string(OperationType::template operate<int8_t>(toString(), rhs.toString())))
+				OperandFactory::getInstance()->createOperand(resultType, helper::_toStr(OperationType::template operate<int8_t>(toString(), rhs.toString())))
 			);
 		case (IOperand::eOperandType::Int16) :
 			return
 			(
-				OperandFactory::getInstance()->createOperand(resultType, std::to_string(OperationType::template operate<int16_t>(toString(), rhs.toString())))
+				OperandFactory::getInstance()->createOperand(resultType, helper::_toStr(OperationType::template operate<int16_t>(toString(), rhs.toString())))
 			);
 		case (IOperand::eOperandType::Int32) :
 			return
 			(
-				OperandFactory::getInstance()->createOperand(resultType, std::to_string(OperationType::template operate<int32_t>(toString(), rhs.toString())))
+				OperandFactory::getInstance()->createOperand(resultType, helper::_toStr(OperationType::template operate<int32_t>(toString(), rhs.toString())))
 			);
 		case (IOperand::eOperandType::Float) :
 			return
 			(
-				OperandFactory::getInstance()->createOperand(resultType, std::to_string(OperationType::template operate<float>(toString(), rhs.toString())))
+				OperandFactory::getInstance()->createOperand(resultType, helper::_toStr(OperationType::template operate<float>(toString(), rhs.toString())))
 			);
 		case (IOperand::eOperandType::Double) :
 			return
 			(
-				OperandFactory::getInstance()->createOperand(resultType, std::to_string(OperationType::template operate<double>(toString(), rhs.toString())))
+				OperandFactory::getInstance()->createOperand(resultType, helper::_toStr(OperationType::template operate<double>(toString(), rhs.toString())))
 			);
 		default : break ;
 	};

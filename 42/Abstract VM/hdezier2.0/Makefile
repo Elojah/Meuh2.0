@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
+#    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/05/19 18:10:37 by hdezier          ###   ########.fr        #
+#    Updated: 2016/05/23 00:26:01 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,16 @@ BUILD_DIR = build
 LIB_DIR =
 
 #Options
-CC = clang++
+UNAME := $(shell uname)
+
+ifeq ($(UNAME), Linux)
+	# do something Linux-y
+	CC = clang++-3.6
+endif
+ifeq ($(UNAME), Solaris)
+	# do something Solaris-y
+	CC = clang++
+endif
 SRC_EXT = .cpp
 RM = rm -rf
 

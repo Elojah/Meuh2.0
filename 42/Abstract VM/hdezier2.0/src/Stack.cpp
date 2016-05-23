@@ -23,7 +23,9 @@ Stack::~Stack(void)
 
 eErr		Stack::doOperation(const lexOperations::sPush &param)
 {
-	auto elem = OperandFactory::getInstance()->createOperand(param.type, param.elem);
+	const IOperand	*elem;
+	try {elem = OperandFactory::getInstance()->createOperand(param.type, param.elem);}
+	catch (eErr err) {return (err);}
 	m_container.push_back(elem);
 	return (eErr::NONE);
 }
@@ -80,7 +82,9 @@ eErr		Stack::doOperation(const lexOperations::sSub &param)
 		return (eErr::MISSING_OPERANDS);
 	const auto	lhs = m_container.back();
 	const auto	rhs = m_container.at(m_container.size() - 2);
-	const auto	result = *lhs - *rhs;
+	const IOperand	*result;
+	try {result = *lhs - *rhs;}
+	catch (eErr err) {return (err);}
 	popBackAndRemove();
 	popBackAndRemove();
 	m_container.push_back(result);

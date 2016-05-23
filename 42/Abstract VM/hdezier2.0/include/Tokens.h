@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Tokens.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:52:46 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/19 19:04:56 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/23 00:37:46 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ enum class	eErr
 	EXIT,
 	SYNTAX_ERROR,
 	UNKNOWN_INSTR,
-	OVERFLOW,
-	UNDERFLOW,
+	OVERFLOW_INIT,
+	OVERFLOW_CALC,
+	UNDERFLOW_CALC,
+	INVALID_ARG,
 	POP_ON_EMPTY_STACK,
 	DIV_BY_ZERO,
 	MISSING_OPERANDS,
