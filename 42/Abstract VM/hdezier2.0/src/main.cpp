@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:46:48 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/23 01:32:17 by leeios           ###   ########.fr       */
+/*   Updated: 2016/05/23 03:06:19 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 
 static void		print_error(eErr err, unsigned int nLine)
 {
-	if (err != eErr::NONE && err != eErr::EXIT)
+	if (err != eErr::EXIT)
 		std::cerr << "ERROR [line:" << nLine << "]-\t";
 	switch(err)
 	{
 		case (eErr::NONE) :
-			std::cerr << "No error" << std::endl;
+			std::cerr << "You forgot to explicitly exit !" << std::endl;
 		break ;
 		case (eErr::EXIT) :
 			std::cerr << "Thanks for using me, see ya !" << std::endl;
@@ -68,17 +68,17 @@ static void		exec(void)
 {
 	Stack	stack;
 	Lexer	lexer;
-	unsigned int	nLine(0);
+	unsigned int	nLine(1);
 	eErr	error;
 
 	while (1)
 	{
 		std::string		line;
-		std::cin >> line;
-		error = lexer.read_line(line, stack);
-		++nLine;
+		std::getline(std::cin, line);
+		error = lexer.read_line(line, stack, true);
 		if (error != eErr::NONE)
 			break ;
+		++nLine;
 	}
 	print_error(error, nLine);
 }
@@ -94,7 +94,7 @@ static void		exec(const char *filename)
 
 	while (std::getline(ifs, line))
 	{
-		error = lexer.read_line(line, stack);
+		error = lexer.read_line(line, stack, false);
 		if (error != eErr::NONE)
 			break ;
 		++nLine;

@@ -18,6 +18,7 @@ Stack::~Stack(void)
 {
 	for (auto operand : m_container)
 		delete (operand);
+	OperandFactory::deleteInstance();
 }
 
 

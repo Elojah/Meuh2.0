@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   OperandFactory.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 17:38:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/19 14:12:59 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/23 02:51:17 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ public:
 	~OperandFactory(void) = default;
 
 	static OperandFactory		*getInstance(void);
+	static void					deleteInstance(void);
 	IOperand const				*createOperand(IOperand::eOperandType type, std::string const & value) const;
 
 private:
