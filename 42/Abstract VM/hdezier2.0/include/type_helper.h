@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_helper.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 14:17:11 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/23 02:44:19 by leeios           ###   ########.fr       */
+/*   Updated: 2016/05/24 14:26:56 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,20 @@ namespace	helper
 			U					result;
 			U					lhsValue;
 			U					rhsValue;
+			U					lhsOverflowLimit;
+			static const U		nullValue(0.0);
 
 			feclearexcept(FE_OVERFLOW);
 			lhsValue = _toType<U>(lhs);
 			rhsValue = _toType<U>(rhs);
 			result = lhsValue + rhsValue;
+			if (lhsValue > nullValue)
+				lhsOverflowLimit = std::numeric_limits<U>::max() - std::abs(rhsValue);
+			else
+				lhsOverflowLimit = std::abs(std::numeric_limits<U>::min() + std::abs(rhsValue));
 			if (fetestexcept(FE_OVERFLOW)
-				|| (((lhsValue > 0) == (rhsValue > 0))
-					&& std::abs(lhsValue) > std::numeric_limits<U>::max() - std::abs(rhsValue)))
+				|| (((lhsValue > nullValue) == (rhsValue > nullValue))
+					&& std::abs(lhsValue) > lhsOverflowLimit))
 				throw (eErr::OVERFLOW_CALC);
 			return (result);
 		}
@@ -86,14 +92,20 @@ namespace	helper
 			U					result;
 			U					lhsValue;
 			U					rhsValue;
+			U					lhsOverflowLimit;
+			static const U		nullValue(0.0);
 
 			feclearexcept(FE_OVERFLOW);
 			lhsValue = _toType<U>(lhs);
 			rhsValue = _toType<U>(rhs);
 			result = lhsValue - rhsValue ;
+			if (lhsValue > nullValue)
+				lhsOverflowLimit = std::numeric_limits<U>::max() - std::abs(rhsValue);
+			else
+				lhsOverflowLimit = std::abs(std::numeric_limits<U>::min() + std::abs(rhsValue));
 			if (fetestexcept(FE_OVERFLOW)
-				|| (((lhsValue > 0) != (rhsValue > 0))
-					&& std::abs(lhsValue) > std::numeric_limits<U>::max() - std::abs(rhsValue)))
+				|| (((lhsValue > nullValue) != (rhsValue > nullValue))
+					&& std::abs(lhsValue) > lhsOverflowLimit))
 				throw (eErr::OVERFLOW_CALC);
 			return (result);
 		}
@@ -106,6 +118,7 @@ namespace	helper
 			U					result;
 			U					lhsValue;
 			U					rhsValue;
+			static const U		nullValue(0.0);
 
 			feclearexcept(FE_OVERFLOW);
 			feclearexcept(FE_UNDERFLOW);
@@ -115,7 +128,7 @@ namespace	helper
 			if (fetestexcept(FE_UNDERFLOW))
 				throw (eErr::UNDERFLOW_CALC);
 			else if (fetestexcept(FE_OVERFLOW)
-				|| (lhsValue != 0.0 && (std::numeric_limits<U>::max() / lhsValue) < rhsValue))
+				|| (lhsValue != nullValue && (std::numeric_limits<U>::max() / lhsValue) < rhsValue))
 				throw (eErr::OVERFLOW_CALC);
 			return (result);
 		}
@@ -128,17 +141,18 @@ namespace	helper
 			U					result;
 			U					lhsValue;
 			U					rhsValue;
-			U					nullValue(0);
+			static const U		nullValue(0.0);
 
 			feclearexcept(FE_OVERFLOW);
 			feclearexcept(FE_UNDERFLOW);
 			lhsValue = _toType<U>(lhs);
 			rhsValue = _toType<U>(rhs);
-			if (rhsValue == 0)
+			if (rhsValue == nullValue)
 				throw (eErr::DIV_BY_ZERO);
 			result = lhsValue / rhsValue ;
 			if (fetestexcept(FE_UNDERFLOW)
-				|| (result == nullValue && lhsValue != nullValue))
+				|| (result == nullValue && lhsValue != nullValue)
+				|| result * rhsValue != lhsValue)
 				throw (eErr::UNDERFLOW_CALC);
 			else if (fetestexcept(FE_OVERFLOW))
 				throw (eErr::OVERFLOW_CALC);

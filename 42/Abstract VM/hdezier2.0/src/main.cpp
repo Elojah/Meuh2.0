@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:46:48 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/23 03:06:19 by leeios           ###   ########.fr       */
+/*   Updated: 2016/05/24 14:32:26 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 static void		print_error(eErr err, unsigned int nLine)
 {
 	if (err != eErr::EXIT)
-		std::cerr << "ERROR [line:" << nLine << "]-\t";
+		std::cerr << "\033[31mERROR\033[30m[\033[0mLINE:\033[34m" << nLine << "\033[30m]\033[0m\t";
 	switch(err)
 	{
 		case (eErr::NONE) :
@@ -89,7 +89,7 @@ static void		exec(const char *filename)
 	Lexer	lexer;
 	std::ifstream	ifs(filename);
 	std::string		line;
-	unsigned int	nLine(0);
+	unsigned int	nLine(1);
 	eErr	error;
 
 	while (std::getline(ifs, line))
