@@ -42,7 +42,11 @@ eErr		Stack::doOperation(const lexOperations::sPop &param)
 eErr		Stack::doOperation(const lexOperations::sPrint &param) const
 {
 	(void)param;
-	std::cout << m_container.back()->toString() << std::endl;
+	auto	lastElem = m_container.back();
+	if (lastElem->getType() != IOperand::eOperandType::Int8)
+		return (eErr::ASSERT_FALSE);
+	char	c = std::stoi(lastElem->toString());
+	std::cout << c << std::endl;
 	return (eErr::NONE);
 }
 eErr		Stack::doOperation(const lexOperations::sAssert &param) const

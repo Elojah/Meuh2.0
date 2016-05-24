@@ -3,8 +3,7 @@
 ; -------------
 
 ; Test 0
-push int8(517)
+push int8(17)
 push int8(56)
 div
 dump
-exit
