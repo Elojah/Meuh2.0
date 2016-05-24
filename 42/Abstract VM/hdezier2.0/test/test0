@@ -3,15 +3,8 @@
 ; -------------
 
 ; Test 0
-push int32(65.6500005)
-push int32(6468.005)
-mul
-dump
-push int8(-100)
-push int8(-28)
-add
-push int8(100)
-push int8(27)
-add
+push int8(517)
+push int8(56)
+div
 dump
 exit

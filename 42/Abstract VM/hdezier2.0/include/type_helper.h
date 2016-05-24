@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 14:17:11 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/24 14:26:56 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/24 15:27:00 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,13 @@ namespace	helper
 			if (std::is_same<U, int8_t>::value
 				|| std::is_same<U, int16_t>::value
 				|| std::is_same<U, int32_t>::value)
-				result = std::stoi(value);
+			{
+				auto	convertedValue = std::stoi(value);
+				if (convertedValue < std::numeric_limits<U>::min()
+					|| convertedValue > std::numeric_limits<U>::max())
+					throw (std::out_of_range(""));
+				result = convertedValue;
+			}
 			else if (std::is_same<U, float>::value)
 				result = std::stof(value);
 			else if (std::is_same<U, double>::value)
@@ -66,20 +72,21 @@ namespace	helper
 			U					result;
 			U					lhsValue;
 			U					rhsValue;
-			U					lhsOverflowLimit;
 			static const U		nullValue(0.0);
+			U					lhsOverflowLimit(nullValue);
 
-			feclearexcept(FE_OVERFLOW);
 			lhsValue = _toType<U>(lhs);
 			rhsValue = _toType<U>(rhs);
+
 			result = lhsValue + rhsValue;
+
 			if (lhsValue > nullValue)
 				lhsOverflowLimit = std::numeric_limits<U>::max() - std::abs(rhsValue);
 			else
 				lhsOverflowLimit = std::abs(std::numeric_limits<U>::min() + std::abs(rhsValue));
-			if (fetestexcept(FE_OVERFLOW)
-				|| (((lhsValue > nullValue) == (rhsValue > nullValue))
-					&& std::abs(lhsValue) > lhsOverflowLimit))
+
+			if ((lhsValue > nullValue) == (rhsValue > nullValue)
+					&& std::abs(lhsValue) > lhsOverflowLimit)
 				throw (eErr::OVERFLOW_CALC);
 			return (result);
 		}
@@ -92,20 +99,21 @@ namespace	helper
 			U					result;
 			U					lhsValue;
 			U					rhsValue;
-			U					lhsOverflowLimit;
 			static const U		nullValue(0.0);
+			U					lhsOverflowLimit(nullValue);
 
-			feclearexcept(FE_OVERFLOW);
 			lhsValue = _toType<U>(lhs);
 			rhsValue = _toType<U>(rhs);
-			result = lhsValue - rhsValue ;
+
+			result = lhsValue - rhsValue;
+
 			if (lhsValue > nullValue)
 				lhsOverflowLimit = std::numeric_limits<U>::max() - std::abs(rhsValue);
 			else
 				lhsOverflowLimit = std::abs(std::numeric_limits<U>::min() + std::abs(rhsValue));
-			if (fetestexcept(FE_OVERFLOW)
-				|| (((lhsValue > nullValue) != (rhsValue > nullValue))
-					&& std::abs(lhsValue) > lhsOverflowLimit))
+
+			if ((lhsValue > nullValue) != (rhsValue > nullValue)
+					&& std::abs(lhsValue) > lhsOverflowLimit)
 				throw (eErr::OVERFLOW_CALC);
 			return (result);
 		}
@@ -119,16 +127,22 @@ namespace	helper
 			U					lhsValue;
 			U					rhsValue;
 			static const U		nullValue(0.0);
+			U					lhsOverflowLimit(nullValue);
 
-			feclearexcept(FE_OVERFLOW);
 			feclearexcept(FE_UNDERFLOW);
 			lhsValue = _toType<U>(lhs);
 			rhsValue = _toType<U>(rhs);
-			result = lhsValue * rhsValue ;
+
+			result = lhsValue * rhsValue;
+
+			if ((lhsValue > nullValue) == (rhsValue > nullValue))
+				lhsOverflowLimit = std::numeric_limits<U>::max() / std::abs(rhsValue);
+			else
+				lhsOverflowLimit = std::abs(std::numeric_limits<U>::min() / std::abs(rhsValue));
+
 			if (fetestexcept(FE_UNDERFLOW))
 				throw (eErr::UNDERFLOW_CALC);
-			else if (fetestexcept(FE_OVERFLOW)
-				|| (lhsValue != nullValue && (std::numeric_limits<U>::max() / lhsValue) < rhsValue))
+			else if (lhsOverflowLimit != nullValue && std::abs(lhsValue) > lhsOverflowLimit)
 				throw (eErr::OVERFLOW_CALC);
 			return (result);
 		}
@@ -142,20 +156,29 @@ namespace	helper
 			U					lhsValue;
 			U					rhsValue;
 			static const U		nullValue(0.0);
+			static const U		identity(1.0);
+			static const U		negIdentity(-1.0);
+			U					lhsOverflowLimit(nullValue);
 
-			feclearexcept(FE_OVERFLOW);
 			feclearexcept(FE_UNDERFLOW);
 			lhsValue = _toType<U>(lhs);
 			rhsValue = _toType<U>(rhs);
 			if (rhsValue == nullValue)
 				throw (eErr::DIV_BY_ZERO);
 			result = lhsValue / rhsValue ;
-			if (fetestexcept(FE_UNDERFLOW)
-				|| (result == nullValue && lhsValue != nullValue)
-				|| result * rhsValue != lhsValue)
-				throw (eErr::UNDERFLOW_CALC);
-			else if (fetestexcept(FE_OVERFLOW))
+
+			if (rhsValue > negIdentity && rhsValue < identity)
+			{
+				if (rhsValue > nullValue == lhsValue > nullValue)
+					lhsOverflowLimit = std::numeric_limits<U>::max() * std::abs(rhsValue);
+				else
+					lhsOverflowLimit = std::abs(std::numeric_limits<U>::min() * std::abs(rhsValue));
+			}
+
+			if (lhsOverflowLimit != nullValue && std::abs(lhsValue) > lhsOverflowLimit)
 				throw (eErr::OVERFLOW_CALC);
+			else if (fetestexcept(FE_UNDERFLOW))
+				throw (eErr::UNDERFLOW_CALC);
 			return (result);
 		}
 	};
