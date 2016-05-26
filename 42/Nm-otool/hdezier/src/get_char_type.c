@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   nm.h                                               :+:      :+:    :+:   */
+/*   get_char_type.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/26 16:15:40 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/26 17:35:13 by hdezier          ###   ########.fr       */
+/*   Created: 2016/05/26 17:32:24 by hdezier           #+#    #+#             */
+/*   Updated: 2016/05/26 17:37:02 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NM_H
-# define NM_H
+#include "nm.h"
+#include <mach-o/nlist.h>
 
-# include <stdint.h>
-
-typedef enum	e_err
+char		get_char_type(uint8_t type)
 {
-				NONE = 0,
-				ERR_MMAP,
-				ERR_ARG_NUMBER,
-				ERR_FILE_OPEN,
-				ERR_FILE_STAT,
-				ERR_ARCHITECTURE_NOT_FOUND,
-				E_ERR
-}				t_err;
+	if (type == N_UNDF)
+		type = 'U';
+	else if (type == N_ABS)
+		type = 'A';
+	else if (type == N_SECT)
+		type = 'T';
+	else if (type == N_PBUD)
+		type = 'D';
+	else if (type == N_INDR)
+		type = 'I';
 
-t_err		nm(const char *file);
-char		get_char_type(uint8_t type);
-
-#endif
+	(void)type;
+	return ('N');
+}

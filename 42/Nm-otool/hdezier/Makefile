@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/06 13:12:27 by hdezier           #+#    #+#              #
-#    Updated: 2016/05/26 16:51:22 by hdezier          ###   ########.fr        #
+#    Updated: 2016/05/26 17:32:33 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 TARGET = nm
@@ -26,6 +26,7 @@ RM = rm -rf
 #List classes here
 CLASS = main\
 		nm\
+		get_char_type\
 
 #List interfaces here
 INTERFACE = \

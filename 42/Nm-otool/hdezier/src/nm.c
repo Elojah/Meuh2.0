@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:49:04 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/26 17:16:54 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/26 17:36:58 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,32 @@
 #include <mach-o/nlist.h>
 #include <mach-o/loader.h>
 
-static void					print_elem(struct nlist_64 *elem, char *value)
+static void		ft_putstr_endl(const char *s)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (s[i++] != '\0')
+		;
+	write(1, s, i - 1);
+	write(1, "\n", 1);
+}
+
+static void					print_elem(struct nlist_64 *elem, const char *value)
 {
 	char					type;
 
-	if (elem->n_type == N_UNDF)
-		type = 'U';
-	else if (elem->n_type == N_ABS)
-		type = 'A';
-	else if (elem->n_type == N_SECT)
-		type = 'T';
-	else if (elem->n_type == N_PBUD)
-		type = 'D';
-	else if (elem->n_type == N_INDR)
-		type = 'I';
+	type = get_char_type(elem->n_type);
 	write(1, &type, 1);
-	printf(" %s\n", value);
-
+	write(1, " ", 1);
+	ft_putstr_endl(value);
 }
 
 static void					print_table(int nsyms, int symoff, int stroff
-	, char *file)
+	, const char *file)
 {
 	int						i;
-	char					*stringtable;
+	const char				*stringtable;
 	struct nlist_64			*elem;
 
 	elem = (struct nlist_64 *)(file + symoff);
@@ -49,7 +51,7 @@ static void					print_table(int nsyms, int symoff, int stroff
 		print_elem(elem, stringtable + elem[i].n_un.n_strx);
 }
 
-static t_err				handle_64(char *file)
+static t_err				handle_64(const char *file)
 {
 	int						ncmds;
 	int						i;
@@ -73,7 +75,7 @@ static t_err				handle_64(char *file)
 	return (NONE);
 }
 
-t_err						nm(char *file)
+t_err						nm(const char *file)
 {
 	unsigned int			magic_number;
 

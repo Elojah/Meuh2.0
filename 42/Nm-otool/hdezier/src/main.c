@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:15:11 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/26 17:16:25 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/26 18:37:38 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,22 @@
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <unistd.h>
+
+static void		ft_putstr_endl(const char *s)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (s[i++] != '\0')
+		;
+	write(1, s, i - 1);
+	write(1, "\n", 1);
+}
 
 static void		print_err(t_err err)
 {
-	const static char	*const err_msg[] =
+	const static char			*const err_msg[] =
 	{
 		"",
 		"ERR_MMAP",
@@ -26,10 +38,10 @@ static void		print_err(t_err err)
 		"ERR_FILE_STAT"
 	};
 	if (err > 0 && err < E_ERR)
-		printf("%s\n", err_msg[err]);
+		ft_putstr_endl(err_msg[err]);
 }
 
-static t_err		exec(char *filename)
+static t_err		exec(const char *filename)
 {
 	int				fd;
 	char			*file;
@@ -48,9 +60,15 @@ static t_err		exec(char *filename)
 
 int			main(int ac, char **av)
 {
-	if (ac != 2)
-		print_err(ERR_ARG_NUMBER);
+	int		i;
+
+	if (ac == 1)
+		print_err(exec("a.out"));
 	else
-		print_err(exec(av[1]));
+	{
+		i = 0;
+		while (++i < ac)
+			print_err(exec(av[i]));
+	}
 	return (0);
 }
