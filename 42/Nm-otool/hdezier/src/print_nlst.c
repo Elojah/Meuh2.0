@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 18:41:04 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/28 19:03:51 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/28 19:59:54 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,44 +45,21 @@ static void		putuint64_t(uint64_t n)
 {
 	static const char	symbols[] = "0123456789abcdef";
 	char				result[16 + 1];
-	uint64_t			quo;
-	uint64_t			mod;
 	uint32_t			i;
 
 	ft_strcpy("0000000000000000", result);
-	i = 0;
+	i = 1;
 	while (i < 16)
 	{
-		quo = n / 16;
-		mod = n % 16;
-		result[16 - i] = symbols[mod];
-		n = quo;
+		result[16 - i] = symbols[n % 16];
+		n /= 16;
 		++i;
 	}
 	write(1, result, 16);
 }
 
-// static void		putuint32_t(uint32_t n)
-// {
-// 	uint64_t	i;
-
-// 	if (!n)
-// 	{
-// 		write(1, "0000000000000000 ", 17);
-// 		return ;
-// 	}
-// 	i = ULLONG_MAX >> 4;
-// 	while (i && n / i == 0)
-// 	{
-// 		write(1, "0", 1);
-// 		i >>= 4;
-// 	}
-// 	putuint32_t(n);
-// 	write(1, " ", 1);
-// }
-
 void					print_nlst(const t_nlist_64 *nlst
-	, const char *symbol)
+	, const char *stringtable, const char *file)
 {
 	char					type;
 
@@ -91,8 +68,8 @@ void					print_nlst(const t_nlist_64 *nlst
 	else
 		write(1, "                ", 16);
 	write(1, " ", 1);
-	type = get_char_type(nlst->n_type);
+	type = get_char_type(nlst, file);
 	write(1, &type, 1);
 	write(1, " ", 1);
-	ft_putstr_endl(symbol);
+	ft_putstr_endl(stringtable + nlst->n_un.n_strx);
 }

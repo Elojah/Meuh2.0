@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:49:04 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/28 18:44:30 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/28 20:24:46 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void					print_table(int nsyms, int symoff, int stroff
 	i = -1;
 	while (++i < nsyms)
 		print_nlst(nlst + sorted_index[i]
-			, stringtable + (nlst + sorted_index[i])->n_un.n_strx);
+			, stringtable, file);
 	free(sorted_index);
 }
 
@@ -61,6 +61,9 @@ static t_err				handle_64(const char *file)
 t_err						nm(const char *file)
 {
 	unsigned int			magic_number;
+	struct segment_command_64 a;(void)a;
+	struct section_64 b;(void)b;
+	struct nlist_64 c;(void)c;
 
 	magic_number = *((unsigned int *)file);
 	if (magic_number == MH_MAGIC_64)
