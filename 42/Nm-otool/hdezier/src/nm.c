@@ -6,49 +6,32 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:49:04 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/26 17:36:58 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/28 18:44:30 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "nm.h"
 
-#include <unistd.h>
+#include <stdlib.h>
 #include <mach-o/nlist.h>
 #include <mach-o/loader.h>
-
-static void		ft_putstr_endl(const char *s)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (s[i++] != '\0')
-		;
-	write(1, s, i - 1);
-	write(1, "\n", 1);
-}
-
-static void					print_elem(struct nlist_64 *elem, const char *value)
-{
-	char					type;
-
-	type = get_char_type(elem->n_type);
-	write(1, &type, 1);
-	write(1, " ", 1);
-	ft_putstr_endl(value);
-}
 
 static void					print_table(int nsyms, int symoff, int stroff
 	, const char *file)
 {
 	int						i;
 	const char				*stringtable;
-	struct nlist_64			*elem;
+	const t_nlist_64		*nlst;
+	uint32_t				*sorted_index;
 
-	elem = (struct nlist_64 *)(file + symoff);
+	nlst = (t_nlist_64 *)(file + symoff);
 	stringtable = file + stroff;
+	sorted_index = sort_index_nlst(nlst, nsyms, stringtable);
 	i = -1;
 	while (++i < nsyms)
-		print_elem(elem, stringtable + elem[i].n_un.n_strx);
+		print_nlst(nlst + sorted_index[i]
+			, stringtable + (nlst + sorted_index[i])->n_un.n_strx);
+	free(sorted_index);
 }
 
 static t_err				handle_64(const char *file)
