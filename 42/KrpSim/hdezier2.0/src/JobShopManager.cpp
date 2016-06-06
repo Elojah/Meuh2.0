@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:06 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/06 05:50:46 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/06 06:06:29 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 
 e_err	JobShopManager::set_initial_resources(const std::string &resource_name, uint64_t n)
 {
-	(void)resource_name;
-	(void)n;
+	std::cout << "Set initial resources [" << resource_name << "] at " << (unsigned int)n << std::endl;
 	return (e_err::NONE);
 }
 
