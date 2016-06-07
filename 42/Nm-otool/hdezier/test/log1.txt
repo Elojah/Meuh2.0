@@ -3,15 +3,15 @@
 0000000100000000 T __mh_execute_header
                  U _free
                  U _fstat$INODE64
-0000000100000a30 T _get_char_type
-0000000100000790 T _main
+00000001000009a0 T _get_char_type
+0000000100000710 T _main
                  U _malloc
                  U _mmap
-0000000100000950 T _nm
+00000001000008d0 T _nm
                  U _open
-0000000100001050 t _print_err.err_msg
-0000000100000ca0 T _print_nlst
-0000000100000f60 t _putuint64_t.symbols
-0000000100000a90 T _sort_index_nlst
+0000000100001050 s _print_err.err_msg
+0000000100000c90 T _print_nlst
+0000000100000f60 s _putuint64_t.symbols
+0000000100000a80 T _sort_index_nlst
                  U _write
                  U dyld_stub_binder
