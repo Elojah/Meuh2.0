@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/06 13:12:27 by hdezier           #+#    #+#              #
-#    Updated: 2016/05/28 18:43:45 by hdezier          ###   ########.fr        #
+#    Updated: 2016/06/08 03:26:43 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 TARGET = nm
@@ -29,6 +29,7 @@ CLASS = main\
 		get_char_type\
 		sort_nlst\
 		print_nlst\
+		type_to_char\
 
 #List interfaces here
 INTERFACE = \

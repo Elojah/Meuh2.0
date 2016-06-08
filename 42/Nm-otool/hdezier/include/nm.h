@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:15:40 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/28 20:10:02 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/08 03:40:18 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdint.h>
 # include <stdio.h>
 
-# define BIT_CHECK(n, offset) ((n) >> (offset)) & 1
+# define BIT_CHECK(n, offset) ((n) & (1 << offset))
 
 typedef struct nlist_64		t_nlist_64;
 
@@ -40,6 +40,7 @@ t_err				nm(const char *file);
 ** Type search
 */
 char				get_char_type(const t_nlist_64 *nlst, const char *file);
+char				type_to_char(const char *type);
 
 /*
 ** Print list line

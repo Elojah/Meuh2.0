@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 18:41:04 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/07 09:16:23 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/08 03:58:30 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,6 @@ static void		ft_putstr_endl(const char *s)
 		;
 	write(1, s, i - 1);
 	write(1, "\n", 1);
-}
-
-static int		ft_strcmp(const char *s1, const char *s2)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
 }
 
 static void		ft_strcpy(const char *input, char *output)
@@ -73,7 +63,7 @@ void					print_nlst(const t_nlist_64 *nlst
 {
 	char					type;
 
-	if (nlst->n_value != 0 || ft_strcmp((char *)(stringtable + nlst->n_un.n_strx), "_main") == 0)
+	if (nlst->n_value != 0 || (nlst->n_type & N_TYPE) == N_SECT)
 		putuint64_t(nlst->n_value);
 	else
 		write(1, "                ", 16);

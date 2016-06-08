@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:15:11 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/07 09:07:15 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/08 03:59:38 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int			main(int ac, char **av)
 		{
 			if (ac > 2)
 			{
+				write(1, "\n", 1);
 				ft_putstr(av[i]);
 				ft_putstr(":\n");
 			}
