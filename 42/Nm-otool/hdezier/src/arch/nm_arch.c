@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:59:31 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/08 09:36:58 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/08 09:45:55 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_err					nm_arch(const char *file)
 	struct ranlib			*ranlib;
 	char					*offset;
 	int32_t					n_sym;
+	t_byte_to_int			*converter;
 	// char					*stringtable;
 	// uint32_t				n_string;
 	int32_t					i;
@@ -83,7 +84,8 @@ t_err					nm_arch(const char *file)
 	header = (void *)file + SARMAG;
 	offset = (void *)header + sizeof(struct ar_hdr) + display_header(header);
 
-	n_sym = READ_INT_4(offset);
+	converter = (t_byte_to_int *)offset;
+	n_sym = converter->n;
 	printf("\nn_sym: %d\n", n_sym);
 	offset = (void *)offset + 4;
 

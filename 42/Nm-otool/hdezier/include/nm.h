@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:15:40 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/08 09:33:25 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/08 09:43:40 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 # define READ_INT_4(n) ((uint32_t)n[0] + (uint32_t)(n[1] << 8)\
 					+ (uint32_t)(n[2] << 16) + (uint32_t)(n[3] << 24))
 # define READ_INT_4_END(n) n[3] + (n[2] << 8) + (n[1] << 16) + (n[0] << 24)
+
+typedef union				u_byte_to_int
+{
+	unsigned char			s[4];
+	uint32_t				n;
+}							t_byte_to_int;
 
 typedef struct nlist_64		t_nlist_64;
 typedef struct nlist		t_nlist_32;
