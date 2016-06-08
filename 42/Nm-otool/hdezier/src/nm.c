@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:49:04 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/08 03:49:22 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/08 04:36:33 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,9 @@ static t_err				handle_64(const char *file)
 t_err						nm(const char *file)
 {
 	unsigned int			magic_number;
-	struct segment_command_64 a;(void)a;
-	struct section_64 b;(void)b;
-	struct nlist_64 c;(void)c;
 
 	magic_number = *((unsigned int *)file);
+	printf("Magic nb:%u\n", magic_number);
 	if (magic_number == MH_MAGIC_64)
 		return (handle_64(file));
 	return (ERR_ARCHITECTURE_NOT_FOUND);
