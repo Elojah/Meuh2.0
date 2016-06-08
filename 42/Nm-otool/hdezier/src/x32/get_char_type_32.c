@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_char_type.c                                    :+:      :+:    :+:   */
+/*   get_char_type_32.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 17:32:24 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/08 03:46:07 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/08 06:36:23 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,57 +14,49 @@
 #include <mach-o/nlist.h>
 #include <mach-o/loader.h>
 
-#include <unistd.h>
-
-static char	to_lowercase(const char c)
+static char	to_case(const char c, int upper)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (c + ('a' - 'A'));
-	return (c);
-}
-
-static char	to_uppercase(const char c)
-{
-	if (c >= 'a' && c <= 'z')
+	if (upper && c >= 'a' && c <= 'z')
 		return (c + ('A' - 'a'));
+	else if (!upper && c >= 'A' && c <= 'Z')
+		return (c + ('a' - 'A'));
 	return (c);
 }
 
 static char						ft_getchar(const void *offset, const uint32_t n)
 {
-	struct segment_command_64	*seg_cmd;
-	struct section_64			*sect;
-	uint32_t						i;
+	struct segment_command		*seg_cmd;
+	struct section				*sect;
+	uint32_t					i;
 
-	seg_cmd = (struct segment_command_64 *)offset;
-	offset = (void *)offset + sizeof(struct segment_command_64);
+	seg_cmd = (struct segment_command *)offset;
+	offset = (void *)offset + sizeof(struct segment_command);
 	i = 0;
 	while (++i < seg_cmd->nsects + 1)
 	{
-		sect = (struct section_64 *)offset;
-		// printf("%d == %d\n", i, n);
+		sect = (struct section *)offset;
 		if (i == n)
 			return (type_to_char(sect->sectname));
-		offset = (void *)offset + sizeof(struct section_64);
+		offset = (void *)offset + sizeof(struct section);
 	}
 	return (0);
 }
 
 static char						get_section(uint32_t n, const char *file)
 {
-	struct mach_header_64		*header;
-	struct segment_command_64	*seg_cmd;
+	struct mach_header			*header;
+	struct segment_command		*seg_cmd;
 	void						*offset;
 	char						tmp;
 	int							ncmds;
 
-	header = (struct mach_header_64 *)file;
-	offset = (void *)file + sizeof(struct mach_header_64);
+	header = (struct mach_header *)file;
+	offset = (void *)file + sizeof(struct mach_header);
 	ncmds = header->ncmds;
 	while (ncmds-- > 0 && n > 0)
 	{
-		seg_cmd = (struct segment_command_64 *)offset;
-		if (seg_cmd->cmd != LC_SEGMENT_64)
+		seg_cmd = (struct segment_command *)offset;
+		if (seg_cmd->cmd != LC_SEGMENT)
 			return (' ');
 		tmp = ft_getchar(offset, n);
 		if (tmp != 0)
@@ -80,7 +72,7 @@ static char						get_section(uint32_t n, const char *file)
 ** section symbol), C (common symbol), - (for debugger symbol table entries; see -a below), S (symbol in a section other than those  above),
 ** or I (indirect symbol)
 */
-char		get_char_type(const t_nlist_64 *nlst, const char *file)
+char		get_char_type_32(const t_nlist_32 *nlst, const char *file)
 {
 	char	result;
 	char	type;
@@ -88,6 +80,7 @@ char		get_char_type(const t_nlist_64 *nlst, const char *file)
 	if ((nlst->n_type & N_STAB) != 0)
 		return('-');
 	type = nlst->n_type & N_TYPE;
+	result = ' ';
 	if (type == N_UNDF)
 		result = 'U';
 	else if (type == N_ABS)
@@ -96,9 +89,5 @@ char		get_char_type(const t_nlist_64 *nlst, const char *file)
 		result = get_section(nlst->n_sect, file);
 	else if (type == N_INDR)
 		result = 'I';
-	if ((nlst->n_type & N_EXT) != 0)
-		result = to_uppercase(result);
-	else
-		result = to_lowercase(result);
-	return (result);
+	return (to_case(result, (nlst->n_type & N_EXT) != 0));
 }

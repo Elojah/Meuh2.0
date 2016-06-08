@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:15:11 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/08 04:34:22 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/08 07:20:08 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ static void		print_err(t_err err)
 		"ERR_ARG_NUMBER",
 		"ERR_FILE_OPEN",
 		"ERR_FILE_STAT",
-		"ERR_ARCHITECTURE_NOT_FOUND"
+		"ERR_ARCHITECTURE_NOT_FOUND",
+		"ERR_ARCHITECTURE_UNRECOGNIZED_IN_FAT"
 	};
+	(void)err_msg;
 	if (err > 0 && err < E_ERR)
 	{
 		ft_putstr(err_msg[err]);
