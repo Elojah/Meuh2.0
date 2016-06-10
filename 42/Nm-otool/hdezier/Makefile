@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/06 13:12:27 by hdezier           #+#    #+#              #
-#    Updated: 2016/06/08 07:20:25 by hdezier          ###   ########.fr        #
+#    Updated: 2016/06/10 13:52:15 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 TARGET = ft_nm
@@ -34,6 +34,8 @@ CLASS = main\
 		x64/print_nlst_64\
 		FAT/nm_fat\
 		arch/nm_arch\
+		arch/print_header\
+		arch/sort_ranlib\
 		sort_nlst\
 		type_to_char\
 

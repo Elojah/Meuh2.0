@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:16:36 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/08 07:19:56 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/10 13:49:46 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void					print_table(int nsyms, int symoff, int stroff
 	nlst = (t_nlist_32 *)(file + symoff);
 	stringtable = file + stroff;
 	sorted_index = sort_index_nlst_32(nlst, nsyms, stringtable);
+	if (sorted_index == NULL)
+		return ;
 	i = -1;
 	while (++i < nsyms)
 		print_nlst_32(nlst + sorted_index[i]

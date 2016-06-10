@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 17:50:10 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/08 06:49:22 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/10 13:47:24 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ uint32_t			*sort_index_nlst_64(const t_nlist_64 *nlst
 	if (!result)
 		return (NULL);
 	i = 0;
-	while (i < nsyms - 1)
+	while (i < nsyms)
 	{
 		j = 0;
 		while (j < nsyms - 1)

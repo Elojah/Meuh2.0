@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:59:31 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/08 09:45:55 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/10 16:39:32 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,96 +14,65 @@
 
 #include <mach-o/ranlib.h>
 #include <ar.h>
+#include <mach-o/nlist.h>
+#include <stdlib.h>
 #include <unistd.h>
 
-static void		ft_putstr_endl(const char *s)
+static int		ft_strcmp(const char *s1, const char *s2)
 {
 	unsigned int	i;
 
 	i = 0;
-	while (s[i] != 0)
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
 		++i;
-	write(1, s, i);
-	write(1, "\n", 1);
-}
-
-static int		ft_strncmp(const char *s1, const char *s2, unsigned int n)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i]
-		&& i < n)
-		i++;
-	if (i == n)
-		return (0);
 	return (s1[i] - s2[i]);
 }
 
-static unsigned int			ft_uatoi(const char *s)
+static int				is_duplicate(struct ar_hdr *lhs, struct ar_hdr *rhs)
 {
-	unsigned int		i;
-	unsigned int		result;
-
-	i = 0;
-	result = 0;
-	while (s[i] >= '0' && s[i] <= '9')
-	{
-		result = (result * 10) + (s[i] - '0');
-		++i;
-	}
-	return (result);
+	return (ft_strcmp(lhs->ar_name, rhs->ar_name));
 }
 
-static uint32_t				display_header(const struct ar_hdr *header)
-{
-	unsigned int			name_size;
-
-	name_size = 0;
-	if (ft_strncmp(header->ar_name, AR_EFMT1, 3) == 0)
-	{
-		name_size = ft_uatoi(header->ar_name + 3);
-		ft_putstr_endl((void *)header + sizeof(struct ar_hdr));
-	}
-	else
-		ft_putstr_endl(header->ar_name);
-	return (name_size);
-}
-
-t_err					nm_arch(const char *file)
+static t_err			read_symbols(const char *file, const char *offset
+	, const char *filename, uint32_t n_sym)
 {
 	struct ar_hdr			*header;
 	struct ranlib			*ranlib;
-	char					*offset;
-	int32_t					n_sym;
-	t_byte_to_int			*converter;
-	// char					*stringtable;
-	// uint32_t				n_string;
-	int32_t					i;
+	uint32_t				i;
+	uint32_t				*sorted_index;
+	char					*sym_offset;
 
-	header = (void *)file + SARMAG;
-	offset = (void *)header + sizeof(struct ar_hdr) + display_header(header);
-
-	converter = (t_byte_to_int *)offset;
-	n_sym = converter->n;
-	printf("\nn_sym: %d\n", n_sym);
-	offset = (void *)offset + 4;
-
+	sorted_index = sort_ranlib(offset, n_sym);
 	i = 0;
 	while (i < n_sym)
 	{
-		printf("%d\n", (int)i);
-		ranlib = (struct ranlib *)offset;
+		ranlib = RANLIB_I(offset, sorted_index, i);
 		header = (void *)file + ranlib->ran_off;
-		display_header(header);
-		offset = (void *)offset + sizeof(struct ranlib);
+		if (i == 0 || is_duplicate(header
+			, (void *)file + RANLIB_I(offset, sorted_index, i - 1)->ran_off) != 0)
+		{
+			sym_offset = (void *)header + sizeof(struct ar_hdr)
+				+ print_header(header, filename, 1);
+			nm(sym_offset, filename);
+		}
 		++i;
 	}
-
-	// stringtable = (void *)offset + (n_sym * sizeof(struct ranlib));
-	// n_string = READ_INT_4(stringtable);
-	// stringtable = (void *)stringtable + 4;
-	// printf("n_string:%u\n", n_string);
-	// printf("%s\n", header);
+	free(sorted_index);
 	return (NONE);
+}
+
+t_err					nm_arch(const char *file, const char *filename)
+{
+	const struct ar_hdr		*header;
+	char					*offset;
+	int32_t					n_sym;
+	t_byte_to_int			*converter;
+
+	header = (void *)file + SARMAG;
+	offset = (void *)header + sizeof(struct ar_hdr) + print_header(header, filename, 0);
+
+	converter = (t_byte_to_int *)offset;
+	n_sym = converter->n / sizeof(struct ranlib);
+	offset = (void *)offset + 4;
+	return (read_symbols(file, offset, filename, n_sym));
 }

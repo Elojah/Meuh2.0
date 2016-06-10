@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:49:04 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/08 07:21:15 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/10 15:44:38 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static int		ft_strncmp(const char *s1, const char *s2, unsigned int n)
 	return (s1[i] - s2[i]);
 }
 
-
-t_err						nm(const char *file)
+t_err						nm(const char *file, const char *filename)
 {
 	unsigned int			magic_number;
 
@@ -43,6 +42,6 @@ t_err						nm(const char *file)
 	else if (magic_number == FAT_MAGIC || magic_number == FAT_CIGAM)
 		return (nm_fat(file, magic_number));
 	else if (ft_strncmp(file, ARMAG, SARMAG) == 0)
-		return (nm_arch(file));
+		return (nm_arch(file, filename));
 	return (ERR_ARCHITECTURE_NOT_FOUND);
 }

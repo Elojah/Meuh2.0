@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:16:25 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/08 07:10:04 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/10 17:13:43 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ t_err						nm_fat(const char *file, unsigned int magic_number)
 			else
 				return (nm_64((void *)file + reverse_uint32(arch->offset)));
 		}
-		else if (cputype == CPU_TYPE_X86)
-		{
-			if (magic_number == FAT_MAGIC)
-				return (nm_32((void *)file + arch->offset));
-			else
-				return (nm_32((void *)file + reverse_uint32(arch->offset)));
-		}
+		// else if (cputype == CPU_TYPE_X86)
+		// {
+		// 	if (magic_number == FAT_MAGIC)
+		// 		return (nm_32((void *)file + arch->offset));
+		// 	else
+		// 		return (nm_32((void *)file + reverse_uint32(arch->offset)));
+		// }
 		arch = (void *)arch + sizeof(struct fat_arch);
 		++i;
 	}

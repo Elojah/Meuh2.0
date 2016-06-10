@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:15:40 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/08 09:43:40 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/10 14:33:21 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@
 # include <stdint.h>
 # include <stdio.h>
 
-# define BIT_CHECK(n, offset) ((n) & (1 << offset))
-# define OFFSET_8(n) (8 - ((n) % 8))
-# define READ_INT_4(n) ((uint32_t)n[0] + (uint32_t)(n[1] << 8)\
-					+ (uint32_t)(n[2] << 16) + (uint32_t)(n[3] << 24))
-# define READ_INT_4_END(n) n[3] + (n[2] << 8) + (n[1] << 16) + (n[0] << 24)
+# define RANLIB_I(offset, sorted_index, i)\
+	((struct ranlib *)((offset) + ((sorted_index)[(i)] * sizeof(struct ranlib))))
+
+struct						ar_hdr;
 
 typedef union				u_byte_to_int
 {
-	unsigned char			s[4];
+	uint8_t					s[4];
 	uint32_t				n;
 }							t_byte_to_int;
 
@@ -46,7 +45,7 @@ typedef enum	e_err
 /*
 ** Entry point
 */
-t_err				nm(const char *file);
+t_err				nm(const char *file, const char *filename);
 
 /*
 ** File type dispatching
@@ -54,7 +53,7 @@ t_err				nm(const char *file);
 t_err				nm_32(const char *file);
 t_err				nm_64(const char *file);
 t_err				nm_fat(const char *file, unsigned int magic_number);
-t_err				nm_arch(const char *file);
+t_err				nm_arch(const char *file, const char *filename);
 
 /*
 ** Type search
@@ -75,10 +74,17 @@ void				print_nlst_32(const t_nlist_32 *nlst
 ** Create(malloc) array of nlist index sorted lexically; bubble sort
 */
 uint32_t			*sort_index_nlst_64(const t_nlist_64 *nlst
-					, uint32_t nsyms
+					, uint32_t n_sym
 					, const char *stringtable);
 uint32_t			*sort_index_nlst_32(const t_nlist_32 *nlst
-					, uint32_t nsyms
+					, uint32_t n_sym
 					, const char *stringtable);
+uint32_t			*sort_ranlib(const char *offset, uint32_t n_sym);
+
+/*
+** Archive internals
+*/
+uint32_t		print_header(const struct ar_hdr *header
+	, const char *filename, uint8_t print);
 
 #endif
