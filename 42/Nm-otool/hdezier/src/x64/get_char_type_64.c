@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_char_type.c                                    :+:      :+:    :+:   */
+/*   get_char_type_64.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 17:32:24 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/28 20:39:27 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/08 06:44:35 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,86 +14,80 @@
 #include <mach-o/nlist.h>
 #include <mach-o/loader.h>
 
-static char						ft_getchar(void *cursor, uint8_t n)
+static char	to_case(const char c, int upper)
+{
+	if (upper && c >= 'a' && c <= 'z')
+		return (c + ('A' - 'a'));
+	else if (!upper && c >= 'A' && c <= 'Z')
+		return (c + ('a' - 'A'));
+	return (c);
+}
+
+static char						ft_getchar(const void *offset, const uint32_t n)
 {
 	struct segment_command_64	*seg_cmd;
 	struct section_64			*sect;
-	uint8_t						i;
+	uint32_t					i;
 
-	seg_cmd = (struct segment_command_64 *)cursor;
-	cursor += sizeof(*seg_cmd);
+	seg_cmd = (struct segment_command_64 *)offset;
+	offset = (void *)offset + sizeof(struct segment_command_64);
 	i = 0;
-	while (++i <= seg_cmd->nsects)
+	while (++i < seg_cmd->nsects + 1)
 	{
-		printf("i=%d, n = %d\n", (int)i, (int)n);
-		sect = (struct section_64 *)cursor;
+		sect = (struct section_64 *)offset;
 		if (i == n)
-		{
-			printf("%s\n", sect->sectname);
-			return (sect->sectname[2]);
-		}
-		cursor += sect->size;
+			return (type_to_char(sect->sectname));
+		offset = (void *)offset + sizeof(struct section_64);
+	}
+	return (0);
+}
+
+static char						get_section(uint32_t n, const char *file)
+{
+	struct mach_header_64		*header;
+	struct segment_command_64	*seg_cmd;
+	void						*offset;
+	char						tmp;
+	int							ncmds;
+
+	header = (struct mach_header_64 *)file;
+	offset = (void *)file + sizeof(struct mach_header_64);
+	ncmds = header->ncmds;
+	while (ncmds-- > 0 && n > 0)
+	{
+		seg_cmd = (struct segment_command_64 *)offset;
+		if (seg_cmd->cmd != LC_SEGMENT_64)
+			return (' ');
+		tmp = ft_getchar(offset, n);
+		if (tmp != 0)
+			return (tmp);
+		n -= seg_cmd->nsects;
+		offset = (void *)offset + seg_cmd->cmdsize;
 	}
 	return (' ');
 }
 
-static char						get_section(uint8_t n, const char *file)
-{
-	struct mach_header_64		*header;
-	struct segment_command_64	*seg_cmd;
-	void						*cursor;
-	char						tmp;
-	int							i;
-
-	header = (struct mach_header_64 *)file;
-	cursor = (void *)file + sizeof(*header);
-	i = header->ncmds;
-	while (i-- > 0 && n > 0)
-	{
-		seg_cmd = (struct segment_command_64 *)file;
-		if (seg_cmd->cmd != LC_SEGMENT_64)
-			return ('U');
-		tmp = ft_getchar(cursor, n);
-		if (tmp != ' ')
-			return (tmp);
-		n -= seg_cmd->nsects;
-		file += seg_cmd->cmdsize;
-	}
-	return ('U');
-}
-
-static char	to_lowercase(const char c)
-{
-	if (c >= 'A' && c <= 'Z')
-		return (c + ('a' - 'A'));
-	return (c);
-}
 /*
 ** U (undefined), A (absolute), T (text section symbol), D (data section symbol), B (bss
 ** section symbol), C (common symbol), - (for debugger symbol table entries; see -a below), S (symbol in a section other than those  above),
 ** or I (indirect symbol)
 */
-char		get_char_type(const t_nlist_64 *nlst, const char *file)
+char		get_char_type_64(const t_nlist_64 *nlst, const char *file)
 {
 	char	result;
-	char	n_type;
+	char	type;
 
-	result = 'U';
-	if (nlst->n_type & N_PEXT)
-		return ('u');
-	else if ((nlst->n_type & N_STAB) != 0)
+	if ((nlst->n_type & N_STAB) != 0)
 		return('-');
-	n_type = nlst->n_type & N_TYPE;
-	printf("\nntype:%d\n", nlst->n_type);
-	if (n_type == N_UNDF)
+	type = nlst->n_type & N_TYPE;
+	result = ' ';
+	if (type == N_UNDF)
 		result = 'U';
-	else if (n_type == N_ABS)
+	else if (type == N_ABS)
 		result = 'A';
-	else if (n_type == N_SECT)
+	else if (type == N_SECT)
 		result = get_section(nlst->n_sect, file);
-	else if (n_type == N_INDR)
+	else if (type == N_INDR)
 		result = 'I';
-	if ((nlst->n_type & N_EXT) == 0)
-		result = to_lowercase(result);
-	return (result);
+	return (to_case(result, (nlst->n_type & N_EXT) != 0));
 }

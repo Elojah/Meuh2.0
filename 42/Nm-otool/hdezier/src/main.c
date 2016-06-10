@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:15:11 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/28 18:28:40 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/08 07:20:08 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-static void		ft_putstr_endl(const char *s)
+static void		ft_putstr(const char *s)
 {
 	unsigned int	i;
 
@@ -24,7 +24,6 @@ static void		ft_putstr_endl(const char *s)
 	while (s[i++] != '\0')
 		;
 	write(1, s, i - 1);
-	write(1, "\n", 1);
 }
 
 static void		print_err(t_err err)
@@ -35,10 +34,16 @@ static void		print_err(t_err err)
 		"ERR_MMAP",
 		"ERR_ARG_NUMBER",
 		"ERR_FILE_OPEN",
-		"ERR_FILE_STAT"
+		"ERR_FILE_STAT",
+		"ERR_ARCHITECTURE_NOT_FOUND",
+		"ERR_ARCHITECTURE_UNRECOGNIZED_IN_FAT"
 	};
+	(void)err_msg;
 	if (err > 0 && err < E_ERR)
-		ft_putstr_endl(err_msg[err]);
+	{
+		ft_putstr(err_msg[err]);
+		write(1, "\n", 1);
+	}
 }
 
 static t_err		exec(const char *filename)
@@ -68,7 +73,15 @@ int			main(int ac, char **av)
 	{
 		i = 0;
 		while (++i < ac)
+		{
+			if (ac > 2)
+			{
+				write(1, "\n", 1);
+				ft_putstr(av[i]);
+				ft_putstr(":\n");
+			}
 			print_err(exec(av[i]));
+		}
 	}
 	return (0);
 }

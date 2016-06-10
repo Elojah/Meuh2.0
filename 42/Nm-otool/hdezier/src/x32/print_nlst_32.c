@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_nlst.c                                       :+:      :+:    :+:   */
+/*   print_nlst_32.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 18:41:04 by hdezier           #+#    #+#             */
-/*   Updated: 2016/05/28 19:59:54 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/08 06:49:14 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,34 +41,36 @@ static void		ft_strcpy(const char *input, char *output)
 	output[i] = '\0';
 }
 
-static void		putuint64_t(uint64_t n)
+static void		putuint32_t(uint32_t n)
 {
 	static const char	symbols[] = "0123456789abcdef";
-	char				result[16 + 1];
+	char				result[8 + 1];
 	uint32_t			i;
 
-	ft_strcpy("0000000000000000", result);
+	ft_strcpy("00000000", result);
 	i = 1;
-	while (i < 16)
+	while (i < 8)
 	{
-		result[16 - i] = symbols[n % 16];
+		result[8 - i] = symbols[n % 16];
 		n /= 16;
 		++i;
 	}
-	write(1, result, 16);
+	write(1, result, 8);
 }
 
-void					print_nlst(const t_nlist_64 *nlst
+void					print_nlst_32(const t_nlist_32 *nlst
 	, const char *stringtable, const char *file)
 {
 	char					type;
 
-	if (nlst->n_value != 0)
-		putuint64_t(nlst->n_value);
+	if ((nlst->n_type & N_STAB) != 0)
+		return ;
+	if (nlst->n_value != 0 || (nlst->n_type & N_TYPE) == N_SECT)
+		putuint32_t(nlst->n_value);
 	else
-		write(1, "                ", 16);
+		write(1, "        ", 8);
 	write(1, " ", 1);
-	type = get_char_type(nlst, file);
+	type = get_char_type_32(nlst, file);
 	write(1, &type, 1);
 	write(1, " ", 1);
 	ft_putstr_endl(stringtable + nlst->n_un.n_strx);
