@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:50:10 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/06 06:04:56 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/10 02:48:16 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ e_err		Interpreter<T>::_read_resource_name(const std::string &line)
 		return (e_err::RESOURCE_NAME_NOT_FOUND);
 	const auto resource_name = line.substr(0, firstDelim);
 	if (resource_name.compare("optimize") == 0)
+	{
+		m_job_shop_manager.print_tasks();
 		return (e_err::TODO);
+	}
 	return (_read_resource_attributes(resource_name, line.substr(firstDelim + 1)));
 }
 
@@ -58,9 +61,14 @@ e_err	Interpreter<T>::_read_resource_attributes(const std::string &resource_name
 			, std::stoull(line.substr().c_str())));
 
 	// Needs for task
-	const auto	openParenthesisNeed = line.find_first_of('(');
-	const auto	closeParenthesisNeed = line.find_first_of(')');
-	if (openParenthesisNeed == std::string::npos
+	auto	openParenthesisNeed = line.find_first_of('(');
+	auto	closeParenthesisNeed = line.find_first_of(')');
+	if (line.at(0) == CURRENT_DELIM)
+	{
+		openParenthesisNeed = 0;
+		closeParenthesisNeed = 0;
+	}
+	else if (openParenthesisNeed == std::string::npos
 		|| openParenthesisNeed != 0
 		|| closeParenthesisNeed == std::string::npos
 		|| closeParenthesisNeed == line.size() - 1
@@ -69,9 +77,16 @@ e_err	Interpreter<T>::_read_resource_attributes(const std::string &resource_name
 		return (e_err::TASK_DEFINITION_SYNTAX_NEED);
 
 	// Products for task
-	const auto	openParenthesisProduct = line.find_first_of('(', closeParenthesisNeed + 1);
-	const auto	closeParenthesisProduct = line.find_first_of(')', closeParenthesisNeed + 1);
-	if (openParenthesisProduct == std::string::npos
+	auto		openParenthesisProduct = line.find_first_of('(', closeParenthesisNeed + 1);
+	auto		closeParenthesisProduct = line.find_first_of(')', closeParenthesisNeed + 1);
+	if (line.at(closeParenthesisNeed + 2) == CURRENT_DELIM
+		|| (openParenthesisNeed == closeParenthesisNeed
+			&& line.at(closeParenthesisNeed + 1) == CURRENT_DELIM))
+	{
+		openParenthesisProduct = closeParenthesisNeed + 1;
+		closeParenthesisProduct = closeParenthesisNeed + 1;
+	}
+	else if (openParenthesisProduct == std::string::npos
 		|| closeParenthesisProduct == std::string::npos
 		|| closeParenthesisProduct == line.size() - 1
 		|| closeParenthesisProduct < openParenthesisProduct
@@ -83,25 +98,36 @@ e_err	Interpreter<T>::_read_resource_attributes(const std::string &resource_name
 	if (!isNumber)
 		return (e_err::TASK_DEFINITION_SYNTAX_TIME);
 
-	// return (e_err::NONE);
+	auto		needs = _str_to_resource(openParenthesisNeed == closeParenthesisNeed ? "" :
+		line.substr(openParenthesisNeed + 1, closeParenthesisNeed - openParenthesisNeed - 1));
+	auto		products = _str_to_resource(openParenthesisProduct == closeParenthesisProduct ? "" :
+		line.substr(openParenthesisProduct + 1, closeParenthesisProduct - openParenthesisProduct - 1));
+
+	if (std::get<0>(needs) != e_err::NONE)
+		return (std::get<0>(needs));
+	if (std::get<0>(products) != e_err::NONE)
+		return (std::get<0>(products));
+
 	return (m_job_shop_manager.add_task(resource_name
-		, _str_to_resource(line.substr(openParenthesisNeed + 1, closeParenthesisNeed - openParenthesisNeed - 1))
-		, _str_to_resource(line.substr(openParenthesisProduct + 1, closeParenthesisProduct - openParenthesisProduct - 1))
+		, std::get<1>(needs)
+		, std::get<1>(products)
 		, std::stoll(line.substr(closeParenthesisProduct + 2))
 		));
 }
 
 template<class T>
-const std::tuple<e_err, t_resource_pack>	Interpreter<T>::_str_to_resource(const std::string &s) const
+const std::tuple<e_err, t_resource_pack_token>	Interpreter<T>::_str_to_resource(const std::string &s) const
 {
 	std::vector<t_resource_number>	result;
 
+	if (s.empty())
+		return(std::make_tuple(e_err::NONE, result));
 	size_t	startRes(0);
 	auto	endRes(s.find_first_of(RES_SEPARATOR));
 	while (startRes != std::string::npos)
 	{
 		const auto resource_def = _set_resource_number(s.substr(startRes
-			, endRes != std::string::npos ? endRes : s.size()));
+			, endRes != std::string::npos ? endRes - startRes : s.size()));
 		if (std::get<0>(resource_def) != e_err::NONE)
 			return (std::make_tuple(std::get<0>(resource_def), result));
 		result.push_back(std::get<1>(resource_def));

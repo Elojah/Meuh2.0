@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 00:45:43 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/06 05:42:55 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/10 02:28:48 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static int		err_exit(const e_err err, uint64_t line)
 		case (e_err::TASK_DEFINITION_SYNTAX_PRODUCT) : std::cerr << "Can't identify products for task" << std::endl;
 		break ;
 		case (e_err::TASK_DEFINITION_SYNTAX_TIME) : std::cerr << "Can't identify time for task" << std::endl;
+		break ;
+		case (e_err::TASK_DUPLICAT) : std::cerr << "This task name already exist" << std::endl;
 		break ;
 		case (e_err::RESOURCE_DEFINITION) : std::cerr << "Syntax error on resource definition" << std::endl;
 		break ;

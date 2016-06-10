@@ -6,7 +6,7 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/06/06 04:40:21 by leeios           ###   ########.fr        #
+#    Updated: 2016/06/10 01:11:33 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ RM = rm -rf
 CLASS = main\
 		Interpreter\
 		JobShopManager\
+		Task\
 
 #List interfaces here
 INTERFACE = \
