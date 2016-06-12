@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 13:21:36 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/10 15:44:36 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/12 17:57:07 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <mach-o/ranlib.h>
 #include <ar.h>
 
-static void		ft_putstr(const char *s)
+static void			ft_putstr(const char *s)
 {
 	unsigned int	i;
 
@@ -25,7 +25,7 @@ static void		ft_putstr(const char *s)
 	write(1, s, i);
 }
 
-static int		ft_strncmp(const char *s1, const char *s2, unsigned int n)
+static int			ft_strncmp(const char *s1, const char *s2, unsigned int n)
 {
 	unsigned int	i;
 
@@ -38,10 +38,10 @@ static int		ft_strncmp(const char *s1, const char *s2, unsigned int n)
 	return (s1[i] - s2[i]);
 }
 
-static unsigned int			ft_uatoi(const char *s)
+static unsigned int	ft_uatoi(const char *s)
 {
-	unsigned int		i;
-	unsigned int		result;
+	unsigned int	i;
+	unsigned int	result;
 
 	i = 0;
 	result = 0;
@@ -53,10 +53,18 @@ static unsigned int			ft_uatoi(const char *s)
 	return (result);
 }
 
-uint32_t		print_header(const struct ar_hdr *header
+const char			*get_header_name(const struct ar_hdr *header)
+{
+	if (ft_strncmp(header->ar_name, AR_EFMT1, 3) == 0)
+		return ((void *)header + sizeof(struct ar_hdr));
+	else
+		return (header->ar_name);
+}
+
+uint32_t			print_header(const struct ar_hdr *header
 	, const char *filename, uint8_t print)
 {
-	unsigned int			name_size;
+	unsigned int	name_size;
 
 	name_size = 0;
 	if (ft_strncmp(header->ar_name, AR_EFMT1, 3) == 0)
@@ -70,9 +78,7 @@ uint32_t		print_header(const struct ar_hdr *header
 		ft_putstr((void *)header + sizeof(struct ar_hdr));
 		write(1, "):\n", 3);
 	}
-	else if (print == 0)
-		return (0);
-	else
+	else if (print != 0)
 		ft_putstr(header->ar_name);
 	return (name_size);
 }

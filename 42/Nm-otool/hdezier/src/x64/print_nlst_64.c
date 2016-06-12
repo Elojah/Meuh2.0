@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 18:41:04 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/10 14:57:07 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/12 18:00:39 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include <mach-o/nlist.h>
 #include <limits.h>
 
-static void		ft_putstr_endl(const char *s)
+static void				ft_putstr_endl(const char *s)
 {
-	unsigned int	i;
+	unsigned int		i;
 
 	i = 0;
 	while (s[i++] != '\0')
@@ -26,9 +26,9 @@ static void		ft_putstr_endl(const char *s)
 	write(1, "\n", 1);
 }
 
-static void		ft_strcpy(const char *input, char *output)
+static void				ft_strcpy(const char *input, char *output)
 {
-	uint32_t	i;
+	uint32_t			i;
 
 	if (input == NULL || output == NULL)
 		return ;
@@ -41,7 +41,7 @@ static void		ft_strcpy(const char *input, char *output)
 	output[i] = '\0';
 }
 
-static void		putuint64_t(uint64_t n)
+static void				putuint64_t(uint64_t n)
 {
 	static const char	symbols[] = "0123456789abcdef";
 	char				result[16 + 1];
@@ -61,11 +61,12 @@ static void		putuint64_t(uint64_t n)
 void					print_nlst_64(const t_nlist_64 *nlst
 	, const char *stringtable, const char *file)
 {
-	char					type;
+	char				type;
 
 	if ((nlst->n_type & N_STAB) != 0)
 		return ;
-	if (nlst->n_value != 0 || (nlst->n_type & N_TYPE) == N_SECT)
+	if (nlst->n_value != 0 || (nlst->n_type & N_TYPE) == N_SECT
+		|| (nlst->n_type & N_TYPE) == N_ABS)
 		putuint64_t(nlst->n_value);
 	else
 		write(1, "                ", 16);

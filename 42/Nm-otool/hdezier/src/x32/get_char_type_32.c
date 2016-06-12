@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 17:32:24 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/08 06:36:23 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/12 17:59:41 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <mach-o/nlist.h>
 #include <mach-o/loader.h>
 
-static char	to_case(const char c, int upper)
+static char						to_case(const char c, int upper)
 {
 	if (upper && c >= 'a' && c <= 'z')
 		return (c + ('A' - 'a'));
@@ -67,21 +67,19 @@ static char						get_section(uint32_t n, const char *file)
 	return (' ');
 }
 
-/*
-** U (undefined), A (absolute), T (text section symbol), D (data section symbol), B (bss
-** section symbol), C (common symbol), - (for debugger symbol table entries; see -a below), S (symbol in a section other than those  above),
-** or I (indirect symbol)
-*/
-char		get_char_type_32(const t_nlist_32 *nlst, const char *file)
+char							get_char_type_32(const t_nlist_32 *nlst
+	, const char *file)
 {
-	char	result;
-	char	type;
+	char						result;
+	char						type;
 
 	if ((nlst->n_type & N_STAB) != 0)
-		return('-');
+		return ('-');
 	type = nlst->n_type & N_TYPE;
 	result = ' ';
-	if (type == N_UNDF)
+	if (type == N_UNDF && (nlst->n_type & N_EXT) != 0 && nlst->n_value != 0)
+		result = 'C';
+	else if (type == N_UNDF)
 		result = 'U';
 	else if (type == N_ABS)
 		result = 'A';

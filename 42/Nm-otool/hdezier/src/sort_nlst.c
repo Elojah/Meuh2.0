@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 17:50:10 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/10 13:47:24 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/12 17:47:19 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static int			ft_strcmp(const char *s1, const char *s2)
 	return (s1[i] - s2[i]);
 }
 
-static uint32_t	*ft_init_index_nlst(uint32_t nsyms)
+static uint32_t		*ft_init_index_nlst(uint32_t nsyms)
 {
-	uint32_t	*result;
-	uint32_t	i;
+	uint32_t		*result;
+	uint32_t		i;
 
 	result = (uint32_t *)malloc(sizeof(uint32_t) * nsyms);
 	if (!result)
@@ -44,7 +44,7 @@ static uint32_t	*ft_init_index_nlst(uint32_t nsyms)
 	return (result);
 }
 
-static void	switch_uint32_t(uint32_t *lhs, uint32_t *rhs)
+static void			switch_uint32_t(uint32_t *lhs, uint32_t *rhs)
 {
 	uint32_t		tmp;
 

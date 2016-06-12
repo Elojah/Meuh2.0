@@ -91,8 +91,7 @@ if [ $TESTNM != 0 ]; then
 	while IFS='' read -r -d '' filename; do
 		FILE1=$filename
 		[ $? == 1 ] && exit 0;
-		if [ "$FILE1" != "" -a "$FILE1" != "/usr/lib/libnetsnmp.5.2.1.dylib" -a "$FILE1" != "/usr/lib/libsqlite3.dylib" ]; then
-			nm $FILE1 2>/dev/null > their 
+			nm $FILE1 2>/dev/null > their
 			../ft_nm  $FILE1 2>/dev/null > mine
 			COUNT=$(cat their mine | sort | uniq -u | wc -l)
 			if [ $COUNT != 0 ]; then
@@ -101,7 +100,6 @@ if [ $TESTNM != 0 ]; then
 			else
 				echo "/usr/lib tests NM: SUCCESS! :"$FILE1
 			fi
-		fi
 	done
 
 	[ $? == 1 ] && exit 0;
@@ -112,7 +110,7 @@ if [ $TESTNM != 0 ]; then
 		FILE1=$filename
 		[ $? == 1 ] && exit 0;
 		if [ "$FILE1" != "/usr/lib/libnetsnmp.5.2.1.dylib" ]; then
-			nm $FILE1 2> their_err  > their  
+			nm $FILE1 2> their_err  > their
 			../ft_nm $FILE1  2> mine_err > mine
 			COUNT=$(cat their mine | sort | uniq -u | wc -l)
 			COUNTET=$(cat their_err | grep "Permission denied" | wc -l)
@@ -133,7 +131,7 @@ if [ $TESTNM != 0 ]; then
 	find "/usr/bin" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
 		FILE1=$filename
-		nm $FILE1 2> their_err  > their  
+		nm $FILE1 2> their_err  > their
 		../ft_nm $FILE1  2> mine_err > mine
 		COUNT=$(cat their mine | sort | uniq -u | wc -l)
 		if [ $COUNT != 0 ]; then
@@ -149,7 +147,7 @@ if [ $TESTNM != 0 ]; then
 	while IFS='' read -r -d '' filename; do
 		[ $? == 1 ] && exit 0;
 		FILE1=$filename
-		nm $FILE1 2> their_err  > their  
+		nm $FILE1 2> their_err  > their
 		../ft_nm $FILE1  2> mine_err  > mine
 		COUNT=$(cat their mine | sort | uniq -u | wc -l)
 		if [ $COUNT != 0 ]; then
@@ -248,7 +246,7 @@ if [ $TESTOTOOL != 0 ]; then
 		FILE1=$filename
 		[ $? == 1 ] && exit 0;
 		if [ "$FILE1" != "/usr/lib/libkmodc++.a" -a "$FILE1" != "/usr/lib/libnetsnmp.5.2.1.dylib" -a "$FILE1" != "/usr/lib/libsqlite3.dylib" ]; then
-			otool -t $FILE1 2>/dev/null > their 
+			otool -t $FILE1 2>/dev/null > their
 			../ft_otool  $FILE1 2>/dev/null > mine
 			COUNT=$(cat their mine | sort | uniq -u | wc -l)
 			if [ $COUNT != 0 ]; then
@@ -268,7 +266,7 @@ if [ $TESTOTOOL != 0 ]; then
 		FILE1=$filename
 		[ $? == 1 ] && exit 0;
 		if [ "$FILE1" != "/usr/lib/libnetsnmp.5.2.1.dylib" ]; then
-			otool -t $FILE1 2> their_err > their  
+			otool -t $FILE1 2> their_err > their
 			../ft_otool $FILE1  2> mine_err  > mine
 			COUNT=$(cat their mine | sort | uniq -u | wc -l)
 			COUNTET=$(cat their_err | grep "Permission denied" | wc -l)
@@ -289,7 +287,7 @@ if [ $TESTOTOOL != 0 ]; then
 	find "/usr/bin" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
 		FILE1=$filename
-		otool -t $FILE1 2> their_err  > their  
+		otool -t $FILE1 2> their_err  > their
 		../ft_otool $FILE1  2> mine_err  > mine
 		COUNT=$(cat their mine | sort | uniq -u | wc -l)
 		if [ $COUNT != 0 ]; then
@@ -305,7 +303,7 @@ if [ $TESTOTOOL != 0 ]; then
 	while IFS='' read -r -d '' filename; do
 		[ $? == 1 ] && exit 0;
 		FILE1=$filename
-		otool -t $FILE1 2> their_err  > their  
+		otool -t $FILE1 2> their_err  > their
 		../ft_otool $FILE1  2> mine_err  > mine
 		COUNT=$(cat their mine | sort | uniq -u | wc -l)
 		if [ $COUNT != 0 ]; then

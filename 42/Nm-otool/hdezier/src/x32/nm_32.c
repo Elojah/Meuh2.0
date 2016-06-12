@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:16:36 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/10 13:49:46 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/12 17:58:22 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void					print_table(int nsyms, int symoff, int stroff
 	free(sorted_index);
 }
 
-t_err				nm_32(const char *file)
+t_err						nm_32(const char *file)
 {
 	int						ncmds;
 	int						i;

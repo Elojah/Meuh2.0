@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:16:25 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/10 17:13:43 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/12 17:56:13 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 static uint32_t				reverse_uint32(const uint32_t n)
 {
-	unsigned char	in_byte_0;
-	unsigned char	in_byte_1;
-	unsigned char	in_byte_2;
-	unsigned char	in_byte_3;
+	unsigned char			in_byte_0;
+	unsigned char			in_byte_1;
+	unsigned char			in_byte_2;
+	unsigned char			in_byte_3;
 
 	in_byte_0 = (n & 0xFF);
 	in_byte_1 = (n & 0xFF00) >> 8;
@@ -28,12 +28,33 @@ static uint32_t				reverse_uint32(const uint32_t n)
 	| ((in_byte_2) << 8) | ((in_byte_3));
 }
 
-t_err						nm_fat(const char *file, unsigned int magic_number)
+static int					launch_nm(const char *file, const char *filename
+	, unsigned int magic_number, struct fat_arch *arch)
+{
+	cpu_subtype_t			cputype;
+
+	if (magic_number == FAT_MAGIC)
+		cputype = arch->cputype;
+	else
+		cputype = reverse_uint32(arch->cputype);
+	if (cputype == CPU_TYPE_X86_64)
+	{
+		if (magic_number == FAT_MAGIC)
+			nm((void *)file + arch->offset, filename);
+		else
+			nm((void *)file + reverse_uint32(arch->offset), filename);
+	}
+	else
+		return (0);
+	return (1);
+}
+
+t_err						nm_fat(const char *file, const char *filename
+	, unsigned int magic_number)
 {
 	struct fat_header		*header;
 	struct fat_arch			*arch;
 	unsigned int			i;
-	uint32_t				cputype;
 	uint32_t				nfat_arch;
 
 	header = (struct fat_header *)file;
@@ -45,24 +66,8 @@ t_err						nm_fat(const char *file, unsigned int magic_number)
 		nfat_arch = reverse_uint32(header->nfat_arch);
 	while (i < nfat_arch)
 	{
-		if (magic_number == FAT_MAGIC)
-			cputype = arch->cputype;
-		else
-			cputype = reverse_uint32(arch->cputype);
-		if (cputype == CPU_TYPE_X86_64)
-		{
-			if (magic_number == FAT_MAGIC)
-				return (nm_64((void *)file + arch->offset));
-			else
-				return (nm_64((void *)file + reverse_uint32(arch->offset)));
-		}
-		// else if (cputype == CPU_TYPE_X86)
-		// {
-		// 	if (magic_number == FAT_MAGIC)
-		// 		return (nm_32((void *)file + arch->offset));
-		// 	else
-		// 		return (nm_32((void *)file + reverse_uint32(arch->offset)));
-		// }
+		if (launch_nm(file, filename, magic_number, arch) == 1)
+			return (NONE);
 		arch = (void *)arch + sizeof(struct fat_arch);
 		++i;
 	}
