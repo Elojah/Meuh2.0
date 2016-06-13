@@ -6,14 +6,15 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:06 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/10 02:39:05 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/13 06:52:17 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "JobShopManager.h"
-#include <tuple>
 #include <iostream>
-# include <unordered_map>
+#include <limits>
+#include <tuple>
+#include <unordered_map>
 
 /**
  * @brief JobShopManager constructor
@@ -44,4 +45,26 @@ e_err	JobShopManager::add_task(const std::string &task_name
 			std::forward_as_tuple(task_name),
 			std::forward_as_tuple(needs, products, time));
 	return (e_err::NONE);
+}
+
+e_err	JobShopManager::optimize(const t_resources_name &to_opt) const
+{
+	t_resource_pack		resource_needed;
+	t_tasks_name		candidate_tasks;
+
+	for (const auto s : to_opt)
+	{
+		resource_needed.emplace(std::piecewise_construct,
+				std::forward_as_tuple(s),
+				std::forward_as_tuple(std::numeric_limits<uint64_t>::max()));
+	}
+	for (const auto t : m_tasks)
+	{
+		for (const auto res_need : resource_needed)
+		{
+			if (t.second.get_need(res_need.first) != 0)
+				candidate_tasks.push_back(t.first);
+		}
+	}
+	return (e_err::TODO);
 }

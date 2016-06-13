@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:50:10 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/10 02:48:16 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/13 06:35:47 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ e_err		Interpreter<T>::read_line(const std::string &line, const bool quickExit)
 	(void)quickExit;
 	const auto	commentDelim(line.find_first_of(COMMENT_DELIM));
 	if (commentDelim != std::string::npos)
-		return (_read_resource_name(line.substr(0, commentDelim)));
+		return (_read_task_name(line.substr(0, commentDelim)));
 	else
-		return (_read_resource_name(line));
+		return (_read_task_name(line));
 }
 
 template<class T>
-e_err		Interpreter<T>::_read_resource_name(const std::string &line)
+e_err		Interpreter<T>::_read_task_name(const std::string &line)
 {
 	if (line.empty())
 		return (e_err::NONE);
@@ -43,16 +43,18 @@ e_err		Interpreter<T>::_read_resource_name(const std::string &line)
 	if (firstDelim == std::string::npos)
 		return (e_err::RESOURCE_NAME_NOT_FOUND);
 	const auto resource_name = line.substr(0, firstDelim);
-	if (resource_name.compare("optimize") == 0)
+	if (resource_name.compare(OPTIMIZE_WORD) == 0)
 	{
-		m_job_shop_manager.print_tasks();
-		return (e_err::TODO);
+		auto	to_opt = _read_resource_name(resource_name.substr(std::string(OPTIMIZE_WORD).size()));
+		if (std::get<0>(to_opt) != e_err::NONE)
+			return (std::get<0>(to_opt));
+		return (m_job_shop_manager.optimize(std::get<1>(to_opt)));
 	}
-	return (_read_resource_attributes(resource_name, line.substr(firstDelim + 1)));
+	return (_read_task_attributes(resource_name, line.substr(firstDelim + 1)));
 }
 
 template<class T>
-e_err	Interpreter<T>::_read_resource_attributes(const std::string &resource_name, const std::string &line)
+e_err	Interpreter<T>::_read_task_attributes(const std::string &resource_name, const std::string &line)
 {
 	// Initial resource
 	auto	isNumber(line.find_first_not_of(DIGITS) == std::string::npos);
@@ -118,12 +120,12 @@ e_err	Interpreter<T>::_read_resource_attributes(const std::string &resource_name
 template<class T>
 const std::tuple<e_err, t_resource_pack_token>	Interpreter<T>::_str_to_resource(const std::string &s) const
 {
-	std::vector<t_resource_number>	result;
+	t_resource_pack_token	result;
 
 	if (s.empty())
 		return(std::make_tuple(e_err::NONE, result));
 	size_t	startRes(0);
-	auto	endRes(s.find_first_of(RES_SEPARATOR));
+	size_t	endRes(s.find_first_of(RES_SEPARATOR));
 	while (startRes != std::string::npos)
 	{
 		const auto resource_def = _set_resource_number(s.substr(startRes
@@ -160,6 +162,32 @@ const std::tuple<e_err, t_resource_number>	Interpreter<T>::_set_resource_number(
 					std::make_tuple(s.substr(0, separator), std::stoull(s.substr(separator + 1)))
 				)
 			);
+}
+
+template<class T>
+const std::tuple<e_err, t_resources_name>	Interpreter<T>::_read_resource_name(const std::string &s) const
+{
+	t_resources_name	result;
+	size_t				startRes(0);
+	size_t				endRes(s.find_first_of(RES_SEPARATOR));
+
+	while (startRes != std::string::npos)
+	{
+		if (endRes != std::string::npos)
+			result.push_back(s.substr(startRes, endRes - startRes));
+		else
+			result.push_back(s.substr(startRes));
+		if (endRes == std::string::npos)
+			startRes = std::string::npos;
+		else
+		{
+			startRes = endRes + 1;
+			endRes = s.find_first_of(RES_SEPARATOR, endRes + 1);
+		}
+	}
+	if (result.empty())
+		return (std::make_tuple(e_err::OPTIMIZE_NOT_DEFINED, result));
+	return (std::make_tuple(e_err::NONE, result));
 }
 
 template class Interpreter<JobShopManager>;

@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:12 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/10 02:43:04 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/13 06:52:16 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ public:
 private:
 
 	typedef std::unordered_map<std::string, Task>			t_tasks;
+	typedef std::vector<std::string>						t_tasks_name;
 
 	t_resource_pack		m_resources;
 	t_tasks				m_tasks;

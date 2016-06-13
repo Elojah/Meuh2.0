@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:21 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/10 02:53:40 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/13 06:40:29 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ public:
 	Task(const t_resource_pack_token &needs
 		, const t_resource_pack_token &products, uint64_t time);
 	~Task(void) = default;
+
+	uint64_t		get_need(const std::string &resource) const;
+	uint64_t		get_product(const std::string &resource) const;
 
 	// DEBUG
 	inline void		print(void) const

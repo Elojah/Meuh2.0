@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 00:48:24 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/10 02:25:57 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/13 06:33:36 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ enum class e_err
 	TASK_DEFINITION_SYNTAX_TIME,
 	TASK_DUPLICAT,
 	RESOURCE_DEFINITION,
+	OPTIMIZE_NOT_DEFINED,
 	DEBUG,
 	TODO,
 	E_ERR
