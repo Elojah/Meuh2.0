@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   resource_type.h                                    :+:      :+:    :+:   */
+/*   task_type.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/06 04:23:04 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 07:29:05 by leeios           ###   ########.fr       */
+/*   Created: 2016/06/13 07:26:17 by leeios            #+#    #+#             */
+/*   Updated: 2016/06/13 09:54:02 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RESOURCE_TYPE_H
-# define RESOURCE_TYPE_H
+#ifndef TASK_TYPE_H
+# define TASK_TYPE_H
 
 # include <string>
 # include <vector>
 # include <unordered_map>
 
-typedef std::vector<std::string>						t_resources_name;
-typedef std::tuple<std::string, uint64_t>				t_resource_number;
-typedef std::vector<std::tuple<std::string, uint64_t>>	t_resource_pack_token;
-typedef std::unordered_map<std::string, uint64_t>		t_resource_pack;
+class Task;
+
+typedef std::unordered_map<std::string, Task>			t_tasks;
+typedef std::vector<std::string>						t_tasks_name;
+typedef std::vector<std::tuple<std::string, uint64_t>>	t_task_exec;
 
 #endif

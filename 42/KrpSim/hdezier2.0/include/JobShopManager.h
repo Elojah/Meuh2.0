@@ -6,16 +6,19 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:12 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 06:52:16 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/13 07:27:30 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef JOB_SHOP_MANAGER
 # define JOB_SHOP_MANAGER
 
+# define TIME_WORD (const char *)"time"
+
 # include "krpsim.h"
 # include "resource_type.h"
 # include "Task.h"
+# include "task_type.h"
 
 # include <iostream>
 
@@ -29,7 +32,6 @@ public:
 		, const t_resource_pack_token &needs
 		, const t_resource_pack_token &products
 		, uint64_t time);
-
 	// DEBUG
 	inline void	print_tasks(void) const
 	{
@@ -41,14 +43,15 @@ public:
 	};
 
 	e_err	optimize(const t_resources_name &to_opt) const;
-
 private:
-
-	typedef std::unordered_map<std::string, Task>			t_tasks;
-	typedef std::vector<std::string>						t_tasks_name;
 
 	t_resource_pack		m_resources;
 	t_tasks				m_tasks;
+
+	e_err	_optimize_production(const t_resource_pack &resource_to_max) const;
+	e_err	_optimize_time(const t_resource_pack &resource_to_max) const;
+
+
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:50:10 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 06:35:47 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/13 07:44:39 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ const std::tuple<e_err, t_resource_pack_token>	Interpreter<T>::_str_to_resource(
 			, endRes != std::string::npos ? endRes - startRes : s.size()));
 		if (std::get<0>(resource_def) != e_err::NONE)
 			return (std::make_tuple(std::get<0>(resource_def), result));
-		result.push_back(std::get<1>(resource_def));
+		result.emplace_back(std::get<1>(resource_def));
 		if (endRes == std::string::npos)
 			startRes = std::string::npos;
 		else
@@ -174,9 +174,9 @@ const std::tuple<e_err, t_resources_name>	Interpreter<T>::_read_resource_name(co
 	while (startRes != std::string::npos)
 	{
 		if (endRes != std::string::npos)
-			result.push_back(s.substr(startRes, endRes - startRes));
+			result.emplace_back(s.substr(startRes, endRes - startRes));
 		else
-			result.push_back(s.substr(startRes));
+			result.emplace_back(s.substr(startRes));
 		if (endRes == std::string::npos)
 			startRes = std::string::npos;
 		else
