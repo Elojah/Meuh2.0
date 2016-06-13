@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:12 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 13:58:32 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/13 17:28:27 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ public:
 		, const t_resource_pack_token &products
 		, uint64_t time);
 
-	e_err	optimize(const t_resources_name &to_opt) const;
+	e_err	optimize(const t_resources_name &to_opt);
 
 	// DEBUG
 	inline void	print_tasks(void) const
 	{
-		for (const auto t : m_tasks)
+		for (const auto &t : m_tasks)
 		{
 			std::cerr << t.first << "=" << std::endl;
 			t.second.print();

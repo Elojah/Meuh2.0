@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:21 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 13:58:49 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/13 17:35:18 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,26 @@ public:
 		, const t_resource_pack_token &products, uint64_t time);
 	~Task(void) = default;
 
-	void						set_sub_tasks(const t_tasks &all_tasks);
 	uint64_t					get_need(const std::string &resource) const;
 	uint64_t					get_product(const std::string &resource) const;
 	t_tasks_pack_ratio			get_prod_ratio(const t_resource_pack &resources_to_max
 								, const t_resource_pack &resources_init
 								, const std::string &task_name) const;
 
+	void						set_sub_tasks(const t_tasks &all_tasks, const std::string &task_name);
+
 	// DEBUG
 	inline void		print(void) const
 	{
 		std::cerr << "\t_Needs_" << std::endl;
-		for (const auto n : m_needs)
+		for (const auto &n : m_needs)
 			std::cerr << "\t\t" << n.first << ":" << (unsigned int)n.second << std::endl;
 		std::cerr << "\t_Products_" << std::endl;
-		for (const auto n : m_products)
+		for (const auto &n : m_products)
 			std::cerr << "\t\t" << n.first << ":" << (unsigned int)n.second << std::endl;
 		std::cerr << "\tTime:" << (unsigned int)m_time << std::endl;
 		std::cerr << "\tSubstasks:" << std::endl;
-		for (const auto sub_task : m_sub_tasks)
+		for (const auto &sub_task : m_sub_tasks)
 			std::cerr << ":" << sub_task.first << std::endl;
 
 	};

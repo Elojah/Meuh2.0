@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:06 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 14:00:59 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/13 18:01:58 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,19 @@ e_err	JobShopManager::add_task(const std::string &task_name
 	return (e_err::NONE);
 }
 
-e_err	JobShopManager::optimize(const t_resources_name &to_opt) const
+e_err	JobShopManager::optimize(const t_resources_name &to_opt)
 {
 	t_resource_pack		resources_to_max;
 
-	for (const auto s : to_opt)
+	for (const auto &s : to_opt)
 	{
 		resources_to_max.emplace(std::piecewise_construct,
 				std::forward_as_tuple(s),
 				std::forward_as_tuple(1));
 	}
-	// for (auto task : m_tasks)
-	// {
-	// 	std::cerr << "Link sub_tasks to " << task.first << std::endl;
-	// 	task.second.set_sub_tasks(m_tasks);
-	// }
+
+	for (auto &t : m_tasks)
+		t.second.set_sub_tasks(m_tasks, t.first);
 
 //	if (resources_to_max.find(TIME_WORD) == resources_to_max.cend())
 //		return (_optimize_production(resources_to_max));
@@ -81,14 +79,8 @@ e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max) co
 	t_task_exec			tasks_exec;
 
 	std::cout << "Start optimization..." << std::endl;
-	for (auto t : m_tasks)
-	{
-		std::cerr << "Link sub_tasks to " << t.first << std::endl;
-		t.second.set_sub_tasks(m_tasks);
-		t.second.print();
-	}
 
-	for (auto t : m_tasks)
+	for (const auto &t : m_tasks)
 	{
 		std::cout << "\tProduction task tested:" << t.first << std::endl;
 		for (const auto res_need : resources_to_max)
@@ -102,11 +94,12 @@ e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max) co
 			}
 		}
 	}
-	for (const auto task_to_ex : tasks_exec)
+
+	for (const auto &task_to_ex : tasks_exec)
 	{
 		std::cout << "Ratio:\t" << task_to_ex.first << std::endl;
-		for (const auto tasks_n : task_to_ex.second)
-			std::cout << std::get<0>(tasks_n) << "\t x" << std::get<1>(tasks_n) << std::endl;
+		for (const auto &tasks_n : task_to_ex.second)
+			std::cout << std::get<0>(tasks_n) << "\t\tx\t" << std::get<1>(tasks_n) << std::endl;
 	}
 	return (e_err::DEBUG);
 }
