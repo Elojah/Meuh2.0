@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   JobShopManager.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:12 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 07:27:30 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/13 13:58:32 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,15 @@ class JobShopManager
 public:
 	JobShopManager(void);
 	~JobShopManager(void) = default;
+
 	e_err	set_initial_resources(const std::string &resource_name, uint64_t n);
 	e_err	add_task(const std::string &task_name
 		, const t_resource_pack_token &needs
 		, const t_resource_pack_token &products
 		, uint64_t time);
+
+	e_err	optimize(const t_resources_name &to_opt) const;
+
 	// DEBUG
 	inline void	print_tasks(void) const
 	{
@@ -41,8 +45,6 @@ public:
 			t.second.print();
 		}
 	};
-
-	e_err	optimize(const t_resources_name &to_opt) const;
 private:
 
 	t_resource_pack		m_resources;

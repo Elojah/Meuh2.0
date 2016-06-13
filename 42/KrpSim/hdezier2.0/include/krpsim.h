@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   krpsim.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 00:48:24 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 06:33:36 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/13 13:03:45 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ enum class e_err
 	TASK_DUPLICAT,
 	RESOURCE_DEFINITION,
 	OPTIMIZE_NOT_DEFINED,
+	OPTIMIZE_SYNTAX_ERR,
 	DEBUG,
 	TODO,
 	E_ERR

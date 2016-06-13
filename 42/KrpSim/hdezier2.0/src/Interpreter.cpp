@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Interpreter.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:50:10 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 07:44:39 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/13 13:10:13 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ e_err		Interpreter<T>::_read_task_name(const std::string &line)
 	if (firstDelim == std::string::npos)
 		return (e_err::RESOURCE_NAME_NOT_FOUND);
 	const auto resource_name = line.substr(0, firstDelim);
-	if (resource_name.compare(OPTIMIZE_WORD) == 0)
+	if (resource_name == OPTIMIZE_WORD)
 	{
-		auto	to_opt = _read_resource_name(resource_name.substr(std::string(OPTIMIZE_WORD).size()));
+		auto	to_opt = _read_resource_name(line.substr(std::string(OPTIMIZE_WORD).size()));
 		if (std::get<0>(to_opt) != e_err::NONE)
 			return (std::get<0>(to_opt));
 		return (m_job_shop_manager.optimize(std::get<1>(to_opt)));
@@ -168,15 +168,17 @@ template<class T>
 const std::tuple<e_err, t_resources_name>	Interpreter<T>::_read_resource_name(const std::string &s) const
 {
 	t_resources_name	result;
-	size_t				startRes(0);
+	size_t				startRes(2);
 	size_t				endRes(s.find_first_of(RES_SEPARATOR));
 
+	if (s.size() < 3 || s.at(0) != ':' || s.at(1) != '(' || s.back() != ')')
+		return (std::make_tuple(e_err::OPTIMIZE_SYNTAX_ERR, result));
 	while (startRes != std::string::npos)
 	{
 		if (endRes != std::string::npos)
 			result.emplace_back(s.substr(startRes, endRes - startRes));
 		else
-			result.emplace_back(s.substr(startRes));
+			result.emplace_back(s.substr(startRes, s.size() - startRes - 1));
 		if (endRes == std::string::npos)
 			startRes = std::string::npos;
 		else

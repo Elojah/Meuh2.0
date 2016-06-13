@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 00:45:43 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/10 02:28:48 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/13 13:04:26 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ static int		err_exit(const e_err err, uint64_t line)
 		case (e_err::TASK_DUPLICAT) : std::cerr << "This task name already exist" << std::endl;
 		break ;
 		case (e_err::RESOURCE_DEFINITION) : std::cerr << "Syntax error on resource definition" << std::endl;
+		break ;
+		case (e_err::OPTIMIZE_NOT_DEFINED) : std::cerr << "Can't optimize this resource" << std::endl;
+		break ;
+		case (e_err::OPTIMIZE_SYNTAX_ERR) : std::cerr << "Syntax error on optimization definition" << std::endl;
 		break ;
 		case (e_err::DEBUG) : std::cerr << "DEBUG" << std::endl;
 		break ;

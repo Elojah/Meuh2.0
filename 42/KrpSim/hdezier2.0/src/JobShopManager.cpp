@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   JobShopManager.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:06 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 09:07:05 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/13 14:00:59 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,50 +55,58 @@ e_err	JobShopManager::optimize(const t_resources_name &to_opt) const
 	{
 		resources_to_max.emplace(std::piecewise_construct,
 				std::forward_as_tuple(s),
-				std::forward_as_tuple(std::numeric_limits<uint64_t>::max()));
+				std::forward_as_tuple(1));
 	}
-	if (resources_to_max.find(TIME_WORD) == resources_to_max.cend())
-		return (_optimize_production(resources_to_max));
-	else
+	// for (auto task : m_tasks)
+	// {
+	// 	std::cerr << "Link sub_tasks to " << task.first << std::endl;
+	// 	task.second.set_sub_tasks(m_tasks);
+	// }
+
+//	if (resources_to_max.find(TIME_WORD) == resources_to_max.cend())
+//		return (_optimize_production(resources_to_max));
+//	else
 		return (_optimize_time(resources_to_max));
 }
 
 e_err	JobShopManager::_optimize_production(const t_resource_pack &resources_to_max) const
 {
-	t_tasks_name		candidate_tasks;
-
-	for (const auto t : m_tasks)
-	{
-		for (const auto res_need : resources_to_max)
-		{
-			if (t.second.get_need(res_need.first) != 0)
-				candidate_tasks.emplace_back(t.first);
-		}
-	}
+	(void)resources_to_max;
 	return (e_err::TODO);
 }
 
 e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max) const
 {
 	t_tasks_name		candidate_tasks;
-	double				max_ratio(0.0);
-	std::string			max_task;
+	t_task_exec			tasks_exec;
 
-	for (const auto t : m_tasks)
+	std::cout << "Start optimization..." << std::endl;
+	for (auto t : m_tasks)
 	{
+		std::cerr << "Link sub_tasks to " << t.first << std::endl;
+		t.second.set_sub_tasks(m_tasks);
+		t.second.print();
+	}
+
+	for (auto t : m_tasks)
+	{
+		std::cout << "\tProduction task tested:" << t.first << std::endl;
 		for (const auto res_need : resources_to_max)
 		{
+			std::cout << "\t\tLookin resource:" << res_need.first << std::endl;
 			if (t.second.get_product(res_need.first) != 0)
 			{
-				auto	task_ratio = t.second.get_prod_ratio(max_ratio, resources_to_max);
-				if (task_ratio > max_ratio)
-				{
-					max_ratio = task_ratio;
-					max_task = t.first;
-				}
-
+				std::cout << "\t\t\tStart depth search..." << std::endl;
+				tasks_exec.emplace(t.second.get_prod_ratio(resources_to_max, m_resources, t.first));
+				break ;
 			}
 		}
 	}
-	return (e_err::TODO);
+	for (const auto task_to_ex : tasks_exec)
+	{
+		std::cout << "Ratio:\t" << task_to_ex.first << std::endl;
+		for (const auto tasks_n : task_to_ex.second)
+			std::cout << std::get<0>(tasks_n) << "\t x" << std::get<1>(tasks_n) << std::endl;
+	}
+	return (e_err::DEBUG);
 }
