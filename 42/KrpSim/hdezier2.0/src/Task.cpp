@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:16 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/14 17:10:11 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/14 18:56:04 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,10 @@ uint64_t	Task::get_product(const std::string &resource) const
 t_tasks_pack_ratio	Task::get_prod_ratio(const t_resource_pack &resources_to_max
 	, const t_resource_pack &resources_init, const std::string &task_name) const
 {
-	auto					current_prod(_n_executable(resources_init));
 	t_tasks_pack_ratio		result(t_tasks_pack_ratio{0, {}});
 
 	(void)resources_to_max;
-	if (current_prod > 0)
-	{
-		std::cout << "\t\t\t\tBasic production found:" << task_name << std::endl;
-		result.first = (double)_calc_ratio_according_prod(current_prod, resources_to_max) / m_time;
-		result.second.emplace_back(t_task_number{task_name, current_prod});
-		return (result);
-	}
+	t_resource_pack			sub_resources_prod;
 	for (const auto &sub_task : m_sub_tasks)
 	{
 		std::cout << "\t\t\t\tLookin for sub tasks:" << sub_task.first << std::endl;
@@ -91,6 +84,15 @@ t_tasks_pack_ratio	Task::get_prod_ratio(const t_resource_pack &resources_to_max
 			, task_result.second.begin(), task_result.second.end());
 		// return (task_result);
 	}
+	// Calc current_prod last to use result as accumulator for sub_tasks
+	auto					current_prod(_n_executable(resources_init));
+	if (current_prod > 0)
+	{
+		std::cout << "\t\t\t\tBasic production found:" << task_name << std::endl;
+		result.first += (double)current_prod / m_time;
+		result.second.emplace_back(t_task_number{task_name, current_prod});
+	}
+
 	return (result);
 }
 

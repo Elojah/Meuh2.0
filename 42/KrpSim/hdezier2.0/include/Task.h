@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Task.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:21 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 17:35:18 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/14 19:10:58 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ public:
 
 	uint64_t					get_need(const std::string &resource) const;
 	uint64_t					get_product(const std::string &resource) const;
+	t_resource_pack				get_product(uint64_t n) const;
 	t_tasks_pack_ratio			get_prod_ratio(const t_resource_pack &resources_to_max
 								, const t_resource_pack &resources_init
 								, const std::string &task_name) const;
