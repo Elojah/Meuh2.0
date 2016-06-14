@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Interpreter.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:50:10 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 13:10:13 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/14 16:58:20 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "JobShopManager.h"
 
 #include <iostream>
-#include <tuple>
 #include <utility>
 
 template<class T>
@@ -118,12 +117,12 @@ e_err	Interpreter<T>::_read_task_attributes(const std::string &resource_name, co
 }
 
 template<class T>
-const std::tuple<e_err, t_resource_pack_token>	Interpreter<T>::_str_to_resource(const std::string &s) const
+const std::pair<e_err, t_resource_pack_token>	Interpreter<T>::_str_to_resource(const std::string &s) const
 {
 	t_resource_pack_token	result;
 
 	if (s.empty())
-		return(std::make_tuple(e_err::NONE, result));
+		return(std::make_pair(e_err::NONE, result));
 	size_t	startRes(0);
 	size_t	endRes(s.find_first_of(RES_SEPARATOR));
 	while (startRes != std::string::npos)
@@ -131,7 +130,7 @@ const std::tuple<e_err, t_resource_pack_token>	Interpreter<T>::_str_to_resource(
 		const auto resource_def = _set_resource_number(s.substr(startRes
 			, endRes != std::string::npos ? endRes - startRes : s.size()));
 		if (std::get<0>(resource_def) != e_err::NONE)
-			return (std::make_tuple(std::get<0>(resource_def), result));
+			return (std::make_pair(std::get<0>(resource_def), result));
 		result.emplace_back(std::get<1>(resource_def));
 		if (endRes == std::string::npos)
 			startRes = std::string::npos;
@@ -142,37 +141,37 @@ const std::tuple<e_err, t_resource_pack_token>	Interpreter<T>::_str_to_resource(
 		}
 	}
 
-	return(std::make_tuple(e_err::NONE, result));
+	return(std::make_pair(e_err::NONE, result));
 }
 
 template<class T>
-const std::tuple<e_err, t_resource_number>	Interpreter<T>::_set_resource_number(const std::string &s) const
+const std::pair<e_err, t_resource_number>	Interpreter<T>::_set_resource_number(const std::string &s) const
 {
 	const auto	separator(s.find_first_of(CURRENT_DELIM));
 
 	if (separator == std::string::npos
 		|| s.find_first_not_of(DIGITS, separator + 1) != std::string::npos)
-		return (std::make_tuple(
+		return (std::make_pair(
 						e_err::RESOURCE_DEFINITION,
-						std::make_tuple("", 0)
+						std::make_pair("", 0)
 					)
 				);
-	return (std::make_tuple(
+	return (std::make_pair(
 					e_err::NONE,
-					std::make_tuple(s.substr(0, separator), std::stoull(s.substr(separator + 1)))
+					std::make_pair(s.substr(0, separator), std::stoull(s.substr(separator + 1)))
 				)
 			);
 }
 
 template<class T>
-const std::tuple<e_err, t_resources_name>	Interpreter<T>::_read_resource_name(const std::string &s) const
+const std::pair<e_err, t_resources_name>	Interpreter<T>::_read_resource_name(const std::string &s) const
 {
 	t_resources_name	result;
 	size_t				startRes(2);
 	size_t				endRes(s.find_first_of(RES_SEPARATOR));
 
 	if (s.size() < 3 || s.at(0) != ':' || s.at(1) != '(' || s.back() != ')')
-		return (std::make_tuple(e_err::OPTIMIZE_SYNTAX_ERR, result));
+		return (std::make_pair(e_err::OPTIMIZE_SYNTAX_ERR, result));
 	while (startRes != std::string::npos)
 	{
 		if (endRes != std::string::npos)
@@ -188,8 +187,8 @@ const std::tuple<e_err, t_resources_name>	Interpreter<T>::_read_resource_name(co
 		}
 	}
 	if (result.empty())
-		return (std::make_tuple(e_err::OPTIMIZE_NOT_DEFINED, result));
-	return (std::make_tuple(e_err::NONE, result));
+		return (std::make_pair(e_err::OPTIMIZE_NOT_DEFINED, result));
+	return (std::make_pair(e_err::NONE, result));
 }
 
 template class Interpreter<JobShopManager>;

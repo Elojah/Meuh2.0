@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:38:52 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 06:27:32 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/14 16:57:40 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ private:
 	e_err	_read_task_name(const std::string &line);
 	e_err	_read_task_attributes(const std::string &resource_name
 		, const std::string &line);
-	const std::tuple<e_err, t_resource_pack_token>	_str_to_resource(const std::string &s) const;
-	const std::tuple<e_err, t_resource_number>		_set_resource_number(const std::string &s) const;
-	const std::tuple<e_err, t_resources_name>		_read_resource_name(const std::string &s) const;
+	const std::pair<e_err, t_resource_pack_token>	_str_to_resource(const std::string &s) const;
+	const std::pair<e_err, t_resource_number>		_set_resource_number(const std::string &s) const;
+	const std::pair<e_err, t_resources_name>		_read_resource_name(const std::string &s) const;
 };
 
 #endif

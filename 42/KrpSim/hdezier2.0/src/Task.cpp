@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Task.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:16 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 18:09:38 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/14 17:10:11 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Task.h"
 #include <iostream>
+#include <limits>
 
 Task::Task(const t_resource_pack_token &needs
 	, const t_resource_pack_token &products, uint64_t time)
@@ -21,17 +22,17 @@ Task::Task(const t_resource_pack_token &needs
 		m_time = 1;
 	for (const auto &n : needs)
 	{
-		if (m_needs.find(std::get<0>(n)) == m_needs.cend())
-			m_needs.emplace(std::get<0>(n), std::get<1>(n));
+		if (m_needs.find(n.first) == m_needs.cend())
+			m_needs.emplace(n.first, n.second);
 		else
-			m_needs.at(std::get<0>(n)) += std::get<1>(n);
+			m_needs.at(n.first) += n.second;
 	}
 	for (const auto &p : products)
 	{
-		if (m_products.find(std::get<0>(p)) == m_products.cend())
-			m_products.emplace(std::get<0>(p), std::get<1>(p));
+		if (m_products.find(p.first) == m_products.cend())
+			m_products.emplace(p.first, p.second);
 		else
-			m_products.at(std::get<0>(p)) += std::get<1>(p);
+			m_products.at(p.first) += p.second;
 	}
 }
 
@@ -43,9 +44,7 @@ void		Task::set_sub_tasks(const t_tasks &all_tasks, const std::string &task_name
 		{
 			if (task.first != task_name && task.second.get_product(res_need.first) > 0)
 			{
-				m_sub_tasks.emplace(std::piecewise_construct,
-					std::forward_as_tuple(task.first),
-					std::forward_as_tuple(&task.second));
+				m_sub_tasks.emplace(task.first, &task.second);
 				break ;
 			}
 		}
@@ -76,20 +75,20 @@ t_tasks_pack_ratio	Task::get_prod_ratio(const t_resource_pack &resources_to_max
 	if (current_prod > 0)
 	{
 		std::cout << "\t\t\t\tBasic production found:" << task_name << std::endl;
-		std::get<0>(result) = (double)_calc_ratio_according_prod(current_prod, resources_to_max) / m_time;
-		std::get<1>(result).emplace_back(t_task_number{task_name, current_prod});
+		result.first = (double)_calc_ratio_according_prod(current_prod, resources_to_max) / m_time;
+		result.second.emplace_back(t_task_number{task_name, current_prod});
 		return (result);
 	}
 	for (const auto &sub_task : m_sub_tasks)
 	{
 		std::cout << "\t\t\t\tLookin for sub tasks:" << sub_task.first << std::endl;
 		auto	task_result = sub_task.second->get_prod_ratio(m_needs, resources_init, sub_task.first);
-		if (std::get<0>(task_result) == 0)
+		if (task_result.first == 0)
 			continue ;
-		std::get<0>(task_result) /= m_time;
-		std::cout << "\t\t\t\t\tFound prod ratio:" << std::get<0>(task_result) << "\t" << task_name << std::endl;
-		std::get<1>(result).insert(std::get<1>(result).end()
-			, std::get<1>(task_result).begin(), std::get<1>(task_result).end());
+		task_result.first /= m_time;
+		std::cout << "\t\t\t\t\tFound prod ratio:" << task_result.first << "\t" << task_name << std::endl;
+		result.second.insert(result.second.end()
+			, task_result.second.begin(), task_result.second.end());
 		// return (task_result);
 	}
 	return (result);

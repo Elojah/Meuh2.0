@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resource_type.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 04:23:04 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 10:45:05 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/14 16:56:21 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unordered_map>
 
 typedef std::vector<std::string>						t_resources_name;
-typedef std::tuple<std::string, uint64_t>				t_resource_number;
+typedef std::pair<std::string, uint64_t>				t_resource_number;
 typedef std::vector<t_resource_number>					t_resource_pack_token;
 typedef std::unordered_map<std::string, uint64_t>		t_resource_pack;
 

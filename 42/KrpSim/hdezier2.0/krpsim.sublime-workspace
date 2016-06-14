@@ -531,7 +531,7 @@
 			"file": "src/main.cpp",
 			"settings":
 			{
-				"buffer_size": 3028,
+				"buffer_size": 3145,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,7 +539,7 @@
 			"file": "src/JobShopManager.cpp",
 			"settings":
 			{
-				"buffer_size": 2915,
+				"buffer_size": 3423,
 				"line_ending": "Unix"
 			}
 		},
@@ -547,7 +547,7 @@
 			"file": "src/Task.cpp",
 			"settings":
 			{
-				"buffer_size": 3777,
+				"buffer_size": 4348,
 				"line_ending": "Unix"
 			}
 		},
@@ -573,7 +573,7 @@
 			"file": "include/JobShopManager.h",
 			"settings":
 			{
-				"buffer_size": 1845,
+				"buffer_size": 1842,
 				"line_ending": "Unix"
 			}
 		},
@@ -589,7 +589,7 @@
 			"file": "include/Task.h",
 			"settings":
 			{
-				"buffer_size": 2245,
+				"buffer_size": 2418,
 				"line_ending": "Unix"
 			}
 		}
@@ -892,7 +892,7 @@
 	},
 	"expanded_folders":
 	[
-		"/nfs/2013/h/hdezier/code/meuh/42/KrpSim/hdezier2.0"
+		"/home/leeios/code/meuh/42/KrpSim/hdezier2.0"
 	],
 	"file_history":
 	[
@@ -1027,7 +1027,7 @@
 	],
 	"find":
 	{
-		"height": 48.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -1309,6 +1309,9 @@
 								"bh_curly_close",
 								"bh_curly_content"
 							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
 							"syntax": "Packages/Makefile Improved/Makefile Improved.tmLanguage"
 						},
 						"translation.x": 0.0,
@@ -1324,28 +1327,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3028,
+						"buffer_size": 3145,
 						"regions":
 						{
-							"bookmarks":
-							{
-								"flags": 144,
-								"icon": "bookmark",
-								"regions":
-								[
-								],
-								"scope": "string"
-							}
 						},
 						"selection":
 						[
 							[
-								2191,
-								2191
-							],
-							[
-								2288,
-								2288
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1409,6 +1399,9 @@
 								"bh_curly_close",
 								"bh_curly_content"
 							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
 							"syntax": "Packages/Leeios/Leeios.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
@@ -1425,15 +1418,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2915,
+						"buffer_size": 3423,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1775,
-								1775
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1497,6 +1490,9 @@
 								"bh_curly_close",
 								"bh_curly_content"
 							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
 							"history_list_is_closing": true,
 							"syntax": "Packages/Leeios/Leeios.tmLanguage",
 							"translate_tabs_to_spaces": false
@@ -1514,15 +1510,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3777,
+						"buffer_size": 4348,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2874,
-								2874
+								2268,
+								2268
 							]
 						],
 						"settings":
@@ -1586,6 +1582,9 @@
 								"bh_round_close",
 								"bh_round_content"
 							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
 							"syntax": "Packages/Leeios/Leeios.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
@@ -1695,6 +1694,9 @@
 							],
 							"default_dir": "/nfs/2013/h/hdezier/code/meuh/42/KrpSim/hdezier2.0",
 							"detect_indentation": false,
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
 							"line_numbers": false,
 							"output_tag": 1,
 							"result_base_dir": "",
@@ -1803,6 +1805,9 @@
 								"bh_curly_close",
 								"bh_curly_content"
 							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
 							"history_list_is_closing": true,
 							"syntax": "Packages/Leeios/Leeios.tmLanguage"
 						},
@@ -1819,15 +1824,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1845,
+						"buffer_size": 1842,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1687,
-								1687
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1891,6 +1896,9 @@
 								"bh_curly_close",
 								"bh_curly_content"
 							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
 							"syntax": "Packages/Leeios/Leeios.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
@@ -1994,6 +2002,9 @@
 								"bh_round_close",
 								"bh_round_content"
 							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
 							"history_list_is_closing": true,
 							"syntax": "Packages/Leeios/Leeios.tmLanguage"
 						},
@@ -2010,15 +2021,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2245,
+						"buffer_size": 2418,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2064,
-								2064
+								0,
+								0
 							]
 						],
 						"settings":
@@ -2082,6 +2093,9 @@
 								"bh_curly_close",
 								"bh_curly_content"
 							],
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
 							"history_list_is_closing": true,
 							"syntax": "Packages/Leeios/Leeios.tmLanguage",
 							"translate_tabs_to_spaces": false
@@ -2098,7 +2112,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -2157,7 +2171,7 @@
 	"project": "krpsim.sublime-project",
 	"replace":
 	{
-		"height": 46.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":

@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   JobShopManager.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:06 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 18:01:58 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/14 17:05:02 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "JobShopManager.h"
 #include <iostream>
 #include <limits>
-#include <tuple>
 #include <unordered_map>
 
 /**
@@ -52,11 +51,7 @@ e_err	JobShopManager::optimize(const t_resources_name &to_opt)
 	t_resource_pack		resources_to_max;
 
 	for (const auto &s : to_opt)
-	{
-		resources_to_max.emplace(std::piecewise_construct,
-				std::forward_as_tuple(s),
-				std::forward_as_tuple(1));
-	}
+		resources_to_max.emplace(s, 1);
 
 	for (auto &t : m_tasks)
 		t.second.set_sub_tasks(m_tasks, t.first);
