@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:06 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/14 17:05:02 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/17 19:07:06 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ e_err	JobShopManager::_optimize_production(const t_resource_pack &resources_to_m
 e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max) const
 {
 	t_tasks_name		candidate_tasks;
-	t_task_exec			tasks_exec;
 
 	std::cout << "Start optimization..." << std::endl;
 
@@ -81,20 +80,16 @@ e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max) co
 		for (const auto res_need : resources_to_max)
 		{
 			std::cout << "\t\tLookin resource:" << res_need.first << std::endl;
-			if (t.second.get_product(res_need.first) != 0)
+			auto	n_coef(t.second.get_product(res_need.first));
+			if (n_coef > 0)
 			{
 				std::cout << "\t\t\tStart depth search..." << std::endl;
-				tasks_exec.emplace(t.second.get_prod_ratio(resources_to_max, m_resources, t.first));
-				break ;
+				auto	task_path = t.second.get_task_path(t.first, n_coef);
+				for (const auto &t : task_path)
+					std::cerr << t.first << "\tx " << t.second << std::endl;
 			}
 		}
 	}
 
-	for (const auto &task_to_ex : tasks_exec)
-	{
-		std::cout << "Ratio:\t" << task_to_ex.first << std::endl;
-		for (const auto &tasks_n : task_to_ex.second)
-			std::cout << std::get<0>(tasks_n) << "\t\tx\t" << std::get<1>(tasks_n) << std::endl;
-	}
 	return (e_err::DEBUG);
 }

@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:16 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/14 18:56:04 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/17 20:05:22 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,28 @@ Task::Task(const t_resource_pack_token &needs
 	if (m_time == 0)
 		m_time = 1;
 	for (const auto &n : needs)
-	{
-		if (m_needs.find(n.first) == m_needs.cend())
-			m_needs.emplace(n.first, n.second);
-		else
-			m_needs.at(n.first) += n.second;
-	}
+		_add_or_accumulate(m_needs, n.first, n.second);
 	for (const auto &p : products)
-	{
-		if (m_products.find(p.first) == m_products.cend())
-			m_products.emplace(p.first, p.second);
-		else
-			m_products.at(p.first) += p.second;
-	}
+		_add_or_accumulate(m_products, p.first, p.second);
 }
 
 void		Task::set_sub_tasks(const t_tasks &all_tasks, const std::string &task_name)
 {
+	// Different ways to optimize here
+	// We assume for this one n resources need < n task
+	for (const auto &res_need : m_needs)
+		m_sub_tasks.emplace(std::piecewise_construct
+			, std::forward_as_tuple(res_need.first)
+			, std::forward_as_tuple());
 	for (const auto &task : all_tasks)
 	{
+		if (task.first == task_name)
+			continue ;
 		for (const auto &res_need : m_needs)
 		{
-			if (task.first != task_name && task.second.get_product(res_need.first) > 0)
+			if (task.second.get_product(res_need.first) > 0)
 			{
-				m_sub_tasks.emplace(task.first, &task.second);
+				m_sub_tasks.at(res_need.first).emplace(task.first, &task.second);
 				break ;
 			}
 		}
@@ -65,34 +63,35 @@ uint64_t	Task::get_product(const std::string &resource) const
 	return (m_products.at(resource));
 }
 
-t_tasks_pack_ratio	Task::get_prod_ratio(const t_resource_pack &resources_to_max
-	, const t_resource_pack &resources_init, const std::string &task_name) const
+t_resource_pack		Task::get_product(uint64_t n) const
 {
-	t_tasks_pack_ratio		result(t_tasks_pack_ratio{0, {}});
+	if (n == 0)
+		return (t_resource_pack());
+	t_resource_pack	prod(m_products);
+	if (n == 1)
+		return (prod);
+	for (auto &p : prod)
+		p.second *= n;
+	return (prod);
+}
 
-	(void)resources_to_max;
-	t_resource_pack			sub_resources_prod;
-	for (const auto &sub_task : m_sub_tasks)
-	{
-		std::cout << "\t\t\t\tLookin for sub tasks:" << sub_task.first << std::endl;
-		auto	task_result = sub_task.second->get_prod_ratio(m_needs, resources_init, sub_task.first);
-		if (task_result.first == 0)
-			continue ;
-		task_result.first /= m_time;
-		std::cout << "\t\t\t\t\tFound prod ratio:" << task_result.first << "\t" << task_name << std::endl;
-		result.second.insert(result.second.end()
-			, task_result.second.begin(), task_result.second.end());
-		// return (task_result);
-	}
-	// Calc current_prod last to use result as accumulator for sub_tasks
-	auto					current_prod(_n_executable(resources_init));
-	if (current_prod > 0)
-	{
-		std::cout << "\t\t\t\tBasic production found:" << task_name << std::endl;
-		result.first += (double)current_prod / m_time;
-		result.second.emplace_back(t_task_number{task_name, current_prod});
-	}
+t_task_pack				Task::get_task_path(
+							const std::string &task_name
+							, uint64_t n_coef) const
+{
+	t_task_pack				result;
 
+	result.emplace(task_name, n_coef);
+	for (const auto &sub_task_res : m_sub_tasks)
+	{
+		const auto		n_sub_coef(get_need(sub_task_res.first));
+		for (const auto &sub_task : sub_task_res.second)
+		{
+			auto	sub_task_path(sub_task.second->get_task_path(sub_task.first, n_sub_coef));
+			for (const auto &task_path : sub_task_path)
+				_add_or_accumulate(result, task_path.first, task_path.second);
+		}
+	}
 	return (result);
 }
 

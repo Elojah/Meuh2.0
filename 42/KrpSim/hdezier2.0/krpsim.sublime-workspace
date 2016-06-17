@@ -520,52 +520,10 @@
 	"buffers":
 	[
 		{
-			"file": "Makefile",
-			"settings":
-			{
-				"buffer_size": 2487,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main.cpp",
-			"settings":
-			{
-				"buffer_size": 3145,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/JobShopManager.cpp",
-			"settings":
-			{
-				"buffer_size": 3423,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "src/Task.cpp",
 			"settings":
 			{
-				"buffer_size": 4348,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Searching 10 files for \"compare\"\n\n/nfs/2013/h/hdezier/code/meuh/42/KrpSim/hdezier2.0/src/Interpreter.cpp:\n   44  		return (e_err::RESOURCE_NAME_NOT_FOUND);\n   45  	const auto resource_name = line.substr(0, firstDelim);\n   46: 	if (resource_name.compare(OPTIMIZE_WORD) == 0)\n   47  	{\n   48  		auto	to_opt = _read_resource_name(resource_name.substr(std::string(OPTIMIZE_WORD).size()));\n\n/nfs/2013/h/hdezier/code/meuh/42/KrpSim/hdezier2.0/src/Task.cpp:\n  103  		for (const auto res_available : resources_init)\n  104  		{\n  105: 			if (res_need.first.compare(res_available.first) == 0)\n  106  			{\n  107  				uint64_t	n_prod(res_available.second / res_need.second);\n  ...\n  125  	for (const auto product : m_products)\n  126  	{\n  127: 		if (product.first.compare)\n  128  	}\n  129  }\n\n3 matches across 2 files\n",
-			"settings":
-			{
-				"buffer_size": 806,
-				"line_ending": "Unix",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "include/resource_type.h",
-			"settings":
-			{
-				"buffer_size": 1269,
+				"buffer_size": 4352,
 				"line_ending": "Unix"
 			}
 		},
@@ -573,15 +531,7 @@
 			"file": "include/JobShopManager.h",
 			"settings":
 			{
-				"buffer_size": 1842,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "include/task_type.h",
-			"settings":
-			{
-				"buffer_size": 1451,
+				"buffer_size": 1840,
 				"line_ending": "Unix"
 			}
 		},
@@ -589,7 +539,31 @@
 			"file": "include/Task.h",
 			"settings":
 			{
-				"buffer_size": 2418,
+				"buffer_size": 2446,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/resource_type.h",
+			"settings":
+			{
+				"buffer_size": 1268,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/task_type.h",
+			"settings":
+			{
+				"buffer_size": 1336,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/leeios/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 1496,
 				"line_ending": "Unix"
 			}
 		}
@@ -602,9 +576,29 @@
 	"command_palette":
 	{
 		"height": 354.0,
-		"last_filter": "key",
+		"last_filter": "preu",
 		"selected_items":
 		[
+			[
+				"preu",
+				"Preferences: Settings - User"
+			],
+			[
+				"pack re",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack in",
+				"Package Control: Install Package"
+			],
+			[
+				"pre u",
+				"Preferences: Settings - User"
+			],
+			[
+				"pre",
+				"Preferences: Settings - User"
+			],
 			[
 				"key",
 				"Preferences: Key Bindings - User"
@@ -636,10 +630,6 @@
 			[
 				"pref u",
 				"Preferences: Settings - User"
-			],
-			[
-				"pack in",
-				"Package Control: Install Package"
 			],
 			[
 				"linter",
@@ -870,7 +860,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 503.0
+		"width": 467.0
 	},
 	"console":
 	{
@@ -896,6 +886,12 @@
 	],
 	"file_history":
 	[
+		"/home/leeios/code/meuh/42/KrpSim/hdezier2.0/src/JobShopManager.cpp",
+		"/home/leeios/code/meuh/42/KrpSim/hdezier2.0/include/Interpreter.h",
+		"/home/leeios/code/meuh/42/KrpSim/hdezier2.0/src/Interpreter.cpp",
+		"/home/leeios/code/meuh/42/KrpSim/hdezier2.0/Makefile",
+		"/home/leeios/code/meuh/42/KrpSim/hdezier2.0/src/main.cpp",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/nfs/2013/h/hdezier/code/meuh/42/KrpSim/hdezier2.0/src/Interpreter.cpp",
 		"/nfs/2013/h/hdezier/code/meuh/42/KrpSim/hdezier2.0/include/krpsim.h",
 		"/home/leeios/code/meuh/42/KrpSim/hdezier/krpsim.sublime-project~",
@@ -934,7 +930,6 @@
 		"/nfs/2013/h/hdezier/code/meuh/sandbox/hdezier/tetris/include/tetris.h",
 		"/nfs/2013/h/hdezier/code/meuh/sandbox/hdezier/tetris/tetris.sublime-project",
 		"/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
-		"/home/leeios/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/grow_rect_with_piece.c",
 		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/print_pieces.c",
 		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/add_piece_to_result.c",
@@ -1018,16 +1013,11 @@
 		"/home/leeios/code/meuh/util/roolv2.0/inc/Project.hpp",
 		"/home/leeios/code/meuh/util/Rool/include/IModule.hpp",
 		"/home/leeios/code/meuh/util/roolv2.0/inc/Boot.hpp",
-		"/home/leeios/code/meuh/util/roolv2.0/src/menus/Boot.cpp",
-		"/home/leeios/code/meuh/util/roolv2.0/inc/Window.hpp",
-		"/home/leeios/code/meuh/util/roolv2.0/src/Menu.cpp",
-		"/home/leeios/code/meuh/util/roolv2.0/src/Project.cpp",
-		"/home/leeios/code/rool/src/Project.cpp",
-		"/home/leeios/code/meuh/util/roolv2.0/config/cpp-rool.json"
+		"/home/leeios/code/meuh/util/roolv2.0/src/menus/Boot.cpp"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 70.0
 	},
 	"find_in_files":
 	{
@@ -1071,6 +1061,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"t_tasks_pack",
+			"_n_executable",
+			"result",
+			"std::get<1>",
+			"std::get<0>",
+			"std::get<1>",
+			"std::get<0>",
+			"pair",
+			"tuple",
+			"make_tuple",
+			"tuple",
 			"std",
 			"result",
 			"compare",
@@ -1187,18 +1188,7 @@
 			"_log",
 			"LIB_DIR",
 			"line",
-			"src",
-			"UTIL_HPP",
-			"/include",
-			"NULL",
-			"std::std",
-			"class",
-			"MemberList",
-			"StandardCmd",
-			"virtual",
-			" = 0",
-			"pathToMake",
-			"str"
+			"src"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1206,6 +1196,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"pair",
 			"t_err",
 			"t_error",
 			"nullptr",
@@ -1228,24 +1219,24 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Makefile",
+					"file": "src/Task.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2487,
+						"buffer_size": 4352,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2799,
+								2799
 							]
 						],
 						"settings":
@@ -1258,11 +1249,16 @@
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
@@ -1278,126 +1274,31 @@
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
-								"bh_curly_content"
-							],
-							"glsv_configured": true,
-							"glsv_enabled": 1,
-							"glsv_spec": 0,
-							"syntax": "Packages/Makefile Improved/Makefile Improved.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/main.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3145,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
+								"bh_curly_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content"
+								"bh_round_content"
 							],
 							"glsv_configured": true,
 							"glsv_enabled": 1,
@@ -1406,27 +1307,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1140.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "src/JobShopManager.cpp",
+					"buffer": 1,
+					"file": "include/JobShopManager.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3423,
+						"buffer_size": 1840,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1512,
+								1512
 							]
 						],
 						"settings":
@@ -1498,137 +1399,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 300.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "src/Task.cpp",
+					"buffer": 2,
+					"file": "include/Task.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4348,
+						"buffer_size": 2446,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2268,
-								2268
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content"
-							],
-							"glsv_configured": true,
-							"glsv_enabled": 1,
-							"glsv_spec": 0,
-							"syntax": "Packages/Leeios/Leeios.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 852.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 806,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										245,
-										252
-									],
-									[
-										548,
-										555
-									],
-									[
-										752,
-										759
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								273,
-								273
+								1489,
+								1489
 							]
 						],
 						"settings":
@@ -1692,24 +1483,18 @@
 								"bh_curly_close",
 								"bh_curly_content"
 							],
-							"default_dir": "/nfs/2013/h/hdezier/code/meuh/42/KrpSim/hdezier2.0",
-							"detect_indentation": false,
 							"glsv_configured": true,
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
-							"line_numbers": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ 	].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+							"history_list_is_closing": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 220.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -1719,12 +1504,12 @@
 			"sheets":
 			[
 				{
-					"buffer": 5,
+					"buffer": 3,
 					"file": "include/resource_type.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1269,
+						"buffer_size": 1268,
 						"regions":
 						{
 							"bookmarks":
@@ -1740,8 +1525,8 @@
 						"selection":
 						[
 							[
-								1261,
-								1261
+								1192,
+								1192
 							]
 						],
 						"settings":
@@ -1812,27 +1597,27 @@
 							"syntax": "Packages/Leeios/Leeios.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 70.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 1,
 					"file": "include/JobShopManager.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1842,
+						"buffer_size": 1840,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1840,
+								1840
 							]
 						],
 						"settings":
@@ -1899,11 +1684,12 @@
 							"glsv_configured": true,
 							"glsv_enabled": 1,
 							"glsv_spec": 0,
+							"history_list_is_closing": true,
 							"syntax": "Packages/Leeios/Leeios.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 295.0,
+						"translation.y": 511.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
@@ -1912,16 +1698,16 @@
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
-					"buffer": 7,
+					"buffer": 4,
 					"file": "include/task_type.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1451,
+						"buffer_size": 1336,
 						"regions":
 						{
 							"bookmarks":
@@ -1937,8 +1723,8 @@
 						"selection":
 						[
 							[
-								1250,
-								1250
+								1321,
+								1321
 							]
 						],
 						"settings":
@@ -2009,19 +1795,51 @@
 							"syntax": "Packages/Leeios/Leeios.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 124.0,
+						"translation.y": 143.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 5,
+					"file": "/home/leeios/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1496,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								846,
+								846
+							]
+						],
+						"settings":
+						{
+							"glsv_configured": true,
+							"glsv_enabled": 1,
+							"glsv_spec": 0,
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 563.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
 					"file": "include/Task.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2418,
+						"buffer_size": 2446,
 						"regions":
 						{
 						},
@@ -2104,7 +1922,7 @@
 						"translation.y": 294.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -2112,7 +1930,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 23.0
+		"height": 25.0
 	},
 	"input":
 	{
@@ -2157,7 +1975,7 @@
 	"menu_visible": true,
 	"output.cc":
 	{
-		"height": 190.0
+		"height": 128.0
 	},
 	"output.clipboard_manager":
 	{
@@ -2171,7 +1989,7 @@
 	"project": "krpsim.sublime-project",
 	"replace":
 	{
-		"height": 42.0
+		"height": 46.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -2180,6 +1998,26 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"josh",
+				"include/JobShopManager.h"
+			],
+			[
+				"jobsh",
+				"src/JobShopManager.cpp"
+			],
+			[
+				"task",
+				"include/Task.h"
+			],
+			[
+				"inteph",
+				"include/Interpreter.h"
+			],
+			[
+				"inte",
+				"src/Interpreter.cpp"
+			],
 			[
 				"inter",
 				"src/Interpreter.cpp"
@@ -2191,10 +2029,6 @@
 			[
 				"jobshh",
 				"include/JobShopManager.h"
-			],
-			[
-				"task",
-				"include/Task.h"
 			],
 			[
 				"type",
@@ -2565,7 +2399,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 2,
 	"settings":
 	{
 	},
