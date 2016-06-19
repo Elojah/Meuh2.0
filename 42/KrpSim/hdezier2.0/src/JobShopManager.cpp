@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:06 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/17 19:07:06 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/18 17:33:08 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max) co
 		std::cout << "\tProduction task tested:" << t.first << std::endl;
 		for (const auto res_need : resources_to_max)
 		{
-			std::cout << "\t\tLookin resource:" << res_need.first << std::endl;
+			if (res_need.first == TIME_WORD)
+				continue ;
+			std::cout << "\t\tLookin for final resource:" << res_need.first << std::endl;
 			auto	n_coef(t.second.get_product(res_need.first));
 			if (n_coef > 0)
 			{

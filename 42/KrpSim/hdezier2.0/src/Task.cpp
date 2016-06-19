@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:16 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/17 20:05:22 by leeios           ###   ########.fr       */
+/*   Updated: 2016/06/18 18:02:35 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,20 @@
 Task::Task(const t_resource_pack_token &needs
 	, const t_resource_pack_token &products, uint64_t time)
 	: m_time(time)
+	, m_lock_investing(false)
 {
+	uint64_t	n_resources_needed(0);
+
 	if (m_time == 0)
 		m_time = 1;
 	for (const auto &n : needs)
+	{
 		_add_or_accumulate(m_needs, n.first, n.second);
+		n_resources_needed += n.second;
+	}
 	for (const auto &p : products)
 		_add_or_accumulate(m_products, p.first, p.second);
+	m_n_resources_needed = n_resources_needed;
 }
 
 void		Task::set_sub_tasks(const t_tasks &all_tasks, const std::string &task_name)
@@ -77,21 +84,25 @@ t_resource_pack		Task::get_product(uint64_t n) const
 
 t_task_pack				Task::get_task_path(
 							const std::string &task_name
-							, uint64_t n_coef) const
+							, double n_coef) const
 {
 	t_task_pack				result;
 
+	if (m_lock_investing == true)
+		return (result);
 	result.emplace(task_name, n_coef);
+	m_lock_investing = true;
 	for (const auto &sub_task_res : m_sub_tasks)
 	{
-		const auto		n_sub_coef(get_need(sub_task_res.first));
 		for (const auto &sub_task : sub_task_res.second)
 		{
-			auto	sub_task_path(sub_task.second->get_task_path(sub_task.first, n_sub_coef));
+			auto		sub_task_path(sub_task.second->get_task_path(sub_task.first
+				, (double)sub_task.second->get_product(sub_task_res.first) / (double)m_n_resources_needed));
 			for (const auto &task_path : sub_task_path)
 				_add_or_accumulate(result, task_path.first, task_path.second);
 		}
 	}
+	m_lock_investing = false;
 	return (result);
 }
 
