@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:50:17 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/19 18:28:42 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/24 14:00:35 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ public:
 
 	Lexer(void) = default;
 	virtual ~Lexer(void) = default;
-	static eErr			read_line(const std::string &line, Stack &stack);
+	static eErr			read_line(const std::string &line, Stack &stack, const bool quickExit);
 private:
 	static eToken		_analyzeType(const std::string &line);
 	static bool			_setElem(lexOperations::sElem &elem, const std::string &line);

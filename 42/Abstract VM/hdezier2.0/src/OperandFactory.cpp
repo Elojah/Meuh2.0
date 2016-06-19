@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   OperandFactory.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 17:38:13 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/19 17:47:06 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/23 02:52:57 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ OperandFactory		*OperandFactory::getInstance(void)
 	return (m_instance);
 }
 
+void		OperandFactory::deleteInstance(void)
+{
+	if (m_instance != nullptr)
+		delete (m_instance);
+}
 
 IOperand const		*OperandFactory::createOperand(IOperand::eOperandType type, std::string const & value) const
 {

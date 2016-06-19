@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:46:48 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/19 18:39:13 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/24 14:32:26 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 
 static void		print_error(eErr err, unsigned int nLine)
 {
-	if (err != eErr::NONE && err != eErr::EXIT)
-		std::cerr << "ERROR [line:" << nLine << "]-\t";
+	if (err != eErr::EXIT)
+		std::cerr << "\033[31mERROR\033[30m[\033[0mLINE:\033[34m" << nLine << "\033[30m]\033[0m\t";
 	switch(err)
 	{
 		case (eErr::NONE) :
-			std::cerr << "No error" << std::endl;
+			std::cerr << "You forgot to explicitly exit !" << std::endl;
 		break ;
 		case (eErr::EXIT) :
 			std::cerr << "Thanks for using me, see ya !" << std::endl;
@@ -34,11 +34,17 @@ static void		print_error(eErr err, unsigned int nLine)
 		case (eErr::UNKNOWN_INSTR) :
 			std::cerr << "Unknown instruction" << std::endl;
 		break ;
-		case (eErr::OVERFLOW) :
-			std::cerr << "Overflow" << std::endl;
+		case (eErr::INVALID_ARG) :
+			std::cerr << "Argument invalid" << std::endl;
 		break ;
-		case (eErr::UNDERFLOW) :
-			std::cerr << "Underflow" << std::endl;
+		case (eErr::OVERFLOW_CALC) :
+			std::cerr << "Overflow at calculus" << std::endl;
+		break ;
+		case (eErr::OVERFLOW_INIT) :
+			std::cerr << "Overflow at variable initialization" << std::endl;
+		break ;
+		case (eErr::UNDERFLOW_CALC) :
+			std::cerr << "Underflow at calculus" << std::endl;
 		break ;
 		case (eErr::POP_ON_EMPTY_STACK) :
 			std::cerr << "Pop on empty stack" << std::endl;
@@ -62,14 +68,14 @@ static void		exec(void)
 {
 	Stack	stack;
 	Lexer	lexer;
-	unsigned int	nLine(0);
+	unsigned int	nLine(1);
 	eErr	error;
 
 	while (1)
 	{
 		std::string		line;
-		std::cin >> line;
-		error = lexer.read_line(line, stack);
+		std::getline(std::cin, line);
+		error = lexer.read_line(line, stack, true);
 		if (error != eErr::NONE)
 			break ;
 		++nLine;
@@ -83,12 +89,12 @@ static void		exec(const char *filename)
 	Lexer	lexer;
 	std::ifstream	ifs(filename);
 	std::string		line;
-	unsigned int	nLine(0);
+	unsigned int	nLine(1);
 	eErr	error;
 
 	while (std::getline(ifs, line))
 	{
-		error = lexer.read_line(line, stack);
+		error = lexer.read_line(line, stack, false);
 		if (error != eErr::NONE)
 			break ;
 		++nLine;

@@ -18,12 +18,15 @@ Stack::~Stack(void)
 {
 	for (auto operand : m_container)
 		delete (operand);
+	OperandFactory::deleteInstance();
 }
 
 
 eErr		Stack::doOperation(const lexOperations::sPush &param)
 {
-	auto elem = OperandFactory::getInstance()->createOperand(param.type, param.elem);
+	const IOperand	*elem;
+	try {elem = OperandFactory::getInstance()->createOperand(param.type, param.elem);}
+	catch (eErr err) {return (err);}
 	m_container.push_back(elem);
 	return (eErr::NONE);
 }
@@ -39,7 +42,11 @@ eErr		Stack::doOperation(const lexOperations::sPop &param)
 eErr		Stack::doOperation(const lexOperations::sPrint &param) const
 {
 	(void)param;
-	std::cout << m_container.back()->toString() << std::endl;
+	auto	lastElem = m_container.back();
+	if (lastElem->getType() != IOperand::eOperandType::Int8)
+		return (eErr::ASSERT_FALSE);
+	char	c = std::stoi(lastElem->toString());
+	std::cout << c << std::endl;
 	return (eErr::NONE);
 }
 eErr		Stack::doOperation(const lexOperations::sAssert &param) const
@@ -80,7 +87,9 @@ eErr		Stack::doOperation(const lexOperations::sSub &param)
 		return (eErr::MISSING_OPERANDS);
 	const auto	lhs = m_container.back();
 	const auto	rhs = m_container.at(m_container.size() - 2);
-	const auto	result = *lhs - *rhs;
+	const IOperand	*result;
+	try {result = *lhs - *rhs;}
+	catch (eErr err) {return (err);}
 	popBackAndRemove();
 	popBackAndRemove();
 	m_container.push_back(result);

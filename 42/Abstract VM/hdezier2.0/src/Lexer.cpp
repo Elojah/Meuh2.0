@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:50:10 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/19 19:06:42 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/24 14:00:37 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,18 @@
 #include <iostream>
 #include <map>
 
-eErr		Lexer::read_line(const std::string &line, Stack &stack)
+eErr		Lexer::read_line(const std::string &line, Stack &stack, const bool quickExit)
 {
 	std::string	cleanLine;
 	auto		commentDelim = line.find_first_of(';');
 	if (commentDelim != std::string::npos)
+	{
+		if (quickExit
+			&& commentDelim != line.size() - 1
+			&& line.at(commentDelim + 1) == ';')
+			return (eErr::EXIT);
 		cleanLine = line.substr(0, commentDelim);
+	}
 	else
 		cleanLine = line;
 	if (cleanLine.empty())
@@ -82,7 +88,7 @@ eErr		Lexer::read_line(const std::string &line, Stack &stack)
 	}
 	else if (type == eToken::EXIT)
 		return (eErr::EXIT);
-	return (eErr::NONE);
+	return (eErr::UNKNOWN_INSTR);
 }
 
 eToken	Lexer::_analyzeType(const std::string &line)
