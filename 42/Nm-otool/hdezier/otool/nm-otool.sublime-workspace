@@ -1,0 +1,3443 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sortin",
+				"sorted_index	(nm_arch.c)"
+			],
+			[
+				"Print",
+				"print_header"
+			],
+			[
+				"launc",
+				"launch_nm(const char *file, const char *filename, unsigned int magic_number, struct fat_arch *arch)	t_err"
+			],
+			[
+				"ar",
+				"ar_hdr"
+			],
+			[
+				"print",
+				"printf(const char *, ...)	int"
+			],
+			[
+				"uint",
+				"uint32_t"
+			],
+			[
+				"in_b",
+				"in_byte_0	(nm_fat.c)"
+			],
+			[
+				"uin",
+				"uint8_t"
+			],
+			[
+				"u_",
+				"uint32_t"
+			],
+			[
+				"prin",
+				"printf(const char *, ...)	int"
+			],
+			[
+				"cpus",
+				"cpu_subtype_t	(fat.h)"
+			],
+			[
+				"pri",
+				"printf	(nm_64.c)"
+			],
+			[
+				"ar_",
+				"ar_name"
+			],
+			[
+				"RAB",
+				"RANLIB_I(offset, sorted_index, i)	Macro"
+			],
+			[
+				"is",
+				"is_duplicate(struct ranlib *lhs, struct ranlib *rhs, const char *stringtable)	int"
+			],
+			[
+				"sizeof",
+				"sizeof(expression-or-type)	KeyWord"
+			],
+			[
+				"isdu",
+				"is_duplicate(const uint32_t *sorted_index, uint32_t val, uint32_t n_pos)	int"
+			],
+			[
+				"sorted",
+				"sorted_index"
+			],
+			[
+				"sorte",
+				"sorted_index"
+			],
+			[
+				"printf",
+				"printf(const char *, ...)	int"
+			],
+			[
+				"sym",
+				"sym_offset"
+			],
+			[
+				"nm",
+				"nm_64	(Makefile)"
+			],
+			[
+				"stringt",
+				"stringtable_size"
+			],
+			[
+				"get_char_type",
+				"get_char_type_64(const t_nlist_64 *nlst, const char *file)	char"
+			],
+			[
+				"getch",
+				"get_char_type_32	(print_nlst_32.c)"
+			],
+			[
+				"n",
+				"n_type	(print_nlst_32.c)"
+			],
+			[
+				"sizeo",
+				"sizeof(expression-or-type)	KeyWord"
+			],
+			[
+				"ran",
+				"ran_off"
+			],
+			[
+				"ft_putstr_n",
+				"ft_putstr_n(const char *s, uint32_t n)	void"
+			],
+			[
+				"ftput",
+				"ft_putstr_n"
+			],
+			[
+				"str",
+				"struct"
+			],
+			[
+				"sort",
+				"sort_ranlib	(sort_ranlib.c)"
+			],
+			[
+				"rhs",
+				"rhs_ranlib	struct ranlib *"
+			],
+			[
+				"reads",
+				"read_symbols(const char *file, const char *filename, uint32_t n_sym)	t_err"
+			],
+			[
+				"read",
+				"read_symbols	(read_symbols.c)"
+			],
+			[
+				"READ",
+				"READ_INT_4(n)	Macro"
+			],
+			[
+				"tby",
+				"t_byte_to_int	(nm.h)"
+			],
+			[
+				"displ",
+				"display_header(const struct ar_hdr *header)	void"
+			],
+			[
+				"ftpu",
+				"ft_putstr(const char *s)	void"
+			],
+			[
+				"n_s",
+				"n_sym"
+			],
+			[
+				"string",
+				"stringtable"
+			],
+			[
+				"ui",
+				"uint32_t"
+			],
+			[
+				"OF",
+				"OFFSET_8(n)	Macro"
+			],
+			[
+				"nsym",
+				"n_sym"
+			],
+			[
+				"names",
+				"name_size"
+			],
+			[
+				"tlis",
+				"t_nlist_32	(nm_32.c)"
+			],
+			[
+				"machh",
+				"mach_header_64"
+			],
+			[
+				"MH_C",
+				"MH_CIGAM	(loader.h)"
+			],
+			[
+				"FA",
+				"FAT_CIGAM"
+			],
+			[
+				"fat",
+				"fat_arch"
+			],
+			[
+				"fa",
+				"fat_header	(fat.h)"
+			],
+			[
+				"magic",
+				"magic_number"
+			],
+			[
+				"nls",
+				"nlst	const t_nlist_64 *"
+			],
+			[
+				"type",
+				"type_to_char.c"
+			],
+			[
+				"sec",
+				"sectname	char [16]"
+			],
+			[
+				"s",
+				"size	uint64_t"
+			],
+			[
+				"n_",
+				"n_un"
+			],
+			[
+				"segcm",
+				"seg_cmd	struct segment_command_64 *"
+			],
+			[
+				"se",
+				"segname	char [16]"
+			],
+			[
+				"get",
+				"get_section"
+			],
+			[
+				"seg",
+				"segment_command_64	struct"
+			],
+			[
+				"tn",
+				"t_nlist_64"
+			],
+			[
+				"t_",
+				"t_nlist_64	(nm.c)"
+			],
+			[
+				"NS",
+				"N_STAB	(nlist.h)"
+			],
+			[
+				"nlist",
+				"nlist_64"
+			],
+			[
+				"swit",
+				"switch_uint32_t(uint32_t *lhs, uint32_t *rhs)	void"
+			],
+			[
+				"sortle",
+				"sort_elem"
+			],
+			[
+				"sortel",
+				"sort_elem	(nm.c)"
+			],
+			[
+				"uns",
+				"unsorted_elem"
+			],
+			[
+				"nl",
+				"nlist_64"
+			],
+			[
+				"print_err",
+				"print_err(e_err err)	void"
+			],
+			[
+				"setget",
+				"set_get_data	(show_alloc_mem.c)"
+			],
+			[
+				"SI",
+				"SIZE_PIECE	(tetris.h)"
+			],
+			[
+				"cons",
+				"consecutive_dead_blocks"
+			],
+			[
+				"cehc",
+				"check_array"
+			],
+			[
+				"printp",
+				"print_pieces(t_result *result)	void"
+			],
+			[
+				"err_",
+				"err_msgs"
+			],
+			[
+				"F",
+				"FALSE	(tetris.h)"
+			],
+			[
+				"write",
+				"write_piece_to_result"
+			],
+			[
+				"add_piece",
+				"add_piece_to_result	(Makefile)"
+			],
+			[
+				"tre",
+				"t_result	Typedef"
+			],
+			[
+				"a",
+				"array	(file_to_pieces.c)"
+			],
+			[
+				"MA",
+				"MAX_PIECES"
+			],
+			[
+				"grow",
+				"grow_rect_with_piece	(calc_added_rows_cols.c)"
+			],
+			[
+				"X",
+				"X_AND_Y	(tetris.h)"
+			],
+			[
+				"gro",
+				"grow_rect(t_rect *rect, int new_x, int new_y, enum e_coord coord)	void"
+			],
+			[
+				"copy",
+				"copy(t_rect *orig, t_rect *dest)	void"
+			],
+			[
+				"calc",
+				"calc_added_rows_cols_point"
+			],
+			[
+				"poi",
+				"point_down_right	t_vec2"
+			],
+			[
+				"upda",
+				"update_limit_points(t_rect *rect, int new_x, int new_y)	void"
+			],
+			[
+				"new",
+				"new_frame"
+			],
+			[
+				"point_d",
+				"point_down_right"
+			],
+			[
+				"new_poin",
+				"new_point_ul	int [2]"
+			],
+			[
+				"poin",
+				"point_up_left	int [2]"
+			],
+			[
+				"point",
+				"point_down_right	int [2]"
+			],
+			[
+				"new_",
+				"new_x"
+			],
+			[
+				"minpo",
+				"min_position	int [2]"
+			],
+			[
+				"INT",
+				"INT_MAX"
+			],
+			[
+				"rea",
+				"reader"
+			],
+			[
+				"exit",
+				"exit_with_error	(main.c)"
+			],
+			[
+				"re",
+				"reader"
+			],
+			[
+				"isva",
+				"is_valid_bloc"
+			],
+			[
+				"ope",
+				"openLog()	bool"
+			],
+			[
+				"par",
+				"parseDirectories	(util.hpp)"
+			],
+			[
+				"cst",
+				"c_str() const	const char *"
+			],
+			[
+				"findlast",
+				"find_last_of(char __c) const	size_type"
+			],
+			[
+				"touc",
+				"touchFile(const std::string &origin, const std::string &dest)	bool"
+			],
+			[
+				"du",
+				"duplicateString(const std::string &filename, const std::vector<std::map<std::string, std::string> > &vecMap)	const std::string"
+			],
+			[
+				"parse",
+				"parseParents	(util.hpp)"
+			],
+			[
+				"cs",
+				"c_str() const	const char *"
+			],
+			[
+				"touch",
+				"touchFileVariables	(FtFile.cpp)"
+			],
+			[
+				"touf",
+				"touchFileVariables	(FtFile.cpp)"
+			],
+			[
+				"size",
+				"size_t	(FtStr.cpp)"
+			],
+			[
+				"ifs",
+				"ifstream	Typedef"
+			],
+			[
+				"strin",
+				"std::string"
+			],
+			[
+				"pro",
+				"project_path"
+			],
+			[
+				"std",
+				"std=c++11"
+			],
+			[
+				"ICOM",
+				"I_COMMAND_HPP"
+			],
+			[
+				"item",
+				"item_name"
+			],
+			[
+				"_me",
+				"_menuItems	(Menu.cpp)"
+			],
+			[
+				"paddin",
+				"padding-left"
+			],
+			[
+				"padding",
+				"padding-left"
+			],
+			[
+				"border",
+				"border-right"
+			],
+			[
+				"height",
+				"min-height"
+			],
+			[
+				"datas",
+				"dateStart"
+			],
+			[
+				"glyp",
+				"glyphicon-calendar"
+			],
+			[
+				"inpu",
+				"input-group-addon"
+			],
+			[
+				"form",
+				"form-control"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/arch/nm_arch.c",
+			"settings":
+			{
+				"buffer_size": 2584,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "nm-otool.sublime-project",
+			"settings":
+			{
+				"buffer_size": 367,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/usr/lib/libkmodc++.a",
+			"settings":
+			{
+				"buffer_size": 24940,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/usr/include/mach-o/ranlib.h",
+			"settings":
+			{
+				"buffer_size": 3001,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/arch/print_header.c",
+			"settings":
+			{
+				"buffer_size": 2226,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/usr/include/mach/machine.h",
+			"settings":
+			{
+				"buffer_size": 13438,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/usr/include/mach/i386/vm_types.h",
+			"settings":
+			{
+				"buffer_size": 4710,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/nm.h",
+			"settings":
+			{
+				"buffer_size": 2698,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main.c",
+			"settings":
+			{
+				"buffer_size": 1728,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/x32/nm_32.c",
+			"settings":
+			{
+				"buffer_size": 1954,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 2499,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "testext/mine",
+			"settings":
+			{
+				"buffer_size": 1010813,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 354.0,
+		"last_filter": "pack ins",
+		"selected_items":
+		[
+			[
+				"pack ins",
+				"Package Control: Install Package"
+			],
+			[
+				"prefu",
+				"Preferences: Settings - User"
+			],
+			[
+				"pref",
+				"Preferences: Settings - User"
+			],
+			[
+				"key u",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"pref u",
+				"Preferences: Settings - User"
+			],
+			[
+				"key",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"pack install",
+				"Package Control: Install Package"
+			],
+			[
+				"pack remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"key us",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"pref us",
+				"Preferences: Settings - User"
+			],
+			[
+				"pack in",
+				"Package Control: Install Package"
+			],
+			[
+				"linter",
+				"SublimeLinter: Disable Linter"
+			],
+			[
+				"pack ",
+				"Preferences: Package Control Settings – User"
+			],
+			[
+				"pack list",
+				"Package Control: List Packages"
+			],
+			[
+				"pre ",
+				"Preferences: Settings - User"
+			],
+			[
+				"color",
+				"Color Picker"
+			],
+			[
+				"pack li",
+				"Package Control: List Packages"
+			],
+			[
+				"prefe",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"clangc",
+				"Preferences: ClangComplete Settings – User"
+			],
+			[
+				"",
+				"42 : Add a header"
+			],
+			[
+				"clagcomp",
+				"Preferences: ClangComplete Settings – User"
+			],
+			[
+				"keybin",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"keyb",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"keybi",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"prefere",
+				"Preferences: Settings - User"
+			],
+			[
+				"pack remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack l",
+				"Package Control: List Packages"
+			],
+			[
+				"pack chann",
+				"Package Control: Add Channel"
+			],
+			[
+				"project",
+				"Project: Add Folder"
+			],
+			[
+				"prefse",
+				"Preferences: Settings - User"
+			],
+			[
+				"pack rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"keybn",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"alignment",
+				"Preferences: Alignment Key Bindings – Default"
+			],
+			[
+				"align",
+				"Preferences: Alignment Key Bindings – User"
+			],
+			[
+				"prefre",
+				"Preferences: Settings - User"
+			],
+			[
+				"d def",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"delete",
+				"File: Delete"
+			],
+			[
+				"keybind",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"menu",
+				"View: Toggle Menu"
+			],
+			[
+				"sublimelinter",
+				"SublimeLinter: Next Error"
+			],
+			[
+				"me",
+				"View: Toggle Menu"
+			],
+			[
+				"remove pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"toggl",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"tog",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"toggle lin",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"warn",
+				"SublimeLinter: Don't Make Warnings Passive"
+			],
+			[
+				"warnin",
+				"SublimeLinter: Make Warnings Passive"
+			],
+			[
+				"gutter",
+				"SublimeLinter: Choose Gutter Theme"
+			],
+			[
+				"mark",
+				"SublimeLinter: Choose Mark Style"
+			],
+			[
+				"show",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"mode",
+				"SublimeLinter: Choose Lint Mode"
+			],
+			[
+				"next",
+				"SublimeLinter: Next Error"
+			],
+			[
+				"pack i",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"Snippet: ",
+				"Snippet: Cpp-print"
+			],
+			[
+				"pac rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"remove pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"list pack",
+				"Package Control: List Packages"
+			],
+			[
+				"pac kin",
+				"Package Control: Install Package"
+			],
+			[
+				"parem",
+				"Package Control: Remove Package"
+			],
+			[
+				"remopa",
+				"Package Control: Remove Package"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"paki",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pak ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/arch",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/FAT",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/x32",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/x64",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/testext"
+	],
+	"file_history":
+	[
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/nm-otool.sublime-project",
+		"/usr/include/ar.h",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/testext/ar/libftprintf32.a",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/nm.c",
+		"/usr/include/mach-o/ranlib.h",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/arch/sort_ranlib.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/x32/nm_32.c",
+		"/Volumes/Storage/cache/library.hdezier/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/FAT/nm_fat.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/include/nm.h",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/x32/print_nlst_32.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/x32/get_char_type_32.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/x64/get_char_type_64.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/x64/print_nlst_64.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/main.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/type_to_char.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/sort_nlst.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/arch/print_header.c",
+		"/usr/include/mach-o/fat.h",
+		"/usr/lib/libkmodc++.a",
+		"/usr/include/mach-o/nlist.h",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/testext/test.sh",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/x64/nm_64.c",
+		"/usr/include/mach-o/loader.h",
+		"/usr/lib/libkmod.a",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/testext/mine",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/testext/their",
+		"/usr/lib/dylib1.o",
+		"/Volumes/Storage/cache/library.hdezier/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/nfs/2013/h/hdezier/code/Misc/dash/black_jack_hand.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/log.txt",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/get_char_type.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/testext/ar/libft.a",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/Makefile",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/arch/read_symbols.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/test.txt",
+		"/usr/include/mach/machine.h",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/get_char_type_64.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/get_char_type_32.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/print_nlst.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/nm_32.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/nm_64.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/nm_fat.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/test/cmp_script.sh",
+		"/nfs/2013/h/hdezier/code/meuh/42/Nm-otool/hdezier/src/sort_elem.c",
+		"/usr/include/mach-o/stab.h",
+		"/nfs/2013/h/hdezier/code/meuh/42/ft_p/hdezier/server/Makefile",
+		"/nfs/2013/h/hdezier/code/meuh/42/malloc/hdezier/src/ft_malloc.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/malloc/hdezier/include/ft_malloc.h",
+		"/nfs/2013/h/hdezier/code/meuh/42/malloc/hdezier/src/ft_realloc.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/malloc/hdezier/Makefile",
+		"/nfs/2013/h/hdezier/code/meuh/42/malloc/hdezier/src/show_alloc_mem.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/malloc/hdezier/main.c",
+		"/nfs/2013/h/hdezier/code/meuh/42/malloc/hdezier/main.cpp",
+		"/nfs/2013/h/hdezier/code/meuh/42/malloc/hdezier/src/ft_free.c",
+		"/nfs/2013/h/hdezier/code/meuh/sandbox/hdezier/tetris/src/fill_result_in_size.c",
+		"/nfs/2013/h/hdezier/code/meuh/sandbox/hdezier/tetris/src/calculus_dead_blocks.c",
+		"/nfs/2013/h/hdezier/code/meuh/sandbox/hdezier/tetris/src/error.c",
+		"/nfs/2013/h/hdezier/code/meuh/sandbox/hdezier/tetris/src/file_to_pieces.c",
+		"/nfs/2013/h/hdezier/code/meuh/sandbox/hdezier/tetris/src/print_pieces.c",
+		"/nfs/2013/h/hdezier/code/meuh/sandbox/hdezier/tetris/src/resolve.c",
+		"/nfs/2013/h/hdezier/code/meuh/sandbox/hdezier/tetris/src/main.c",
+		"/nfs/2013/h/hdezier/code/meuh/sandbox/hdezier/tetris/test/test_00.p",
+		"/nfs/2013/h/hdezier/code/meuh/sandbox/hdezier/tetris/Makefile",
+		"/nfs/2013/h/hdezier/code/meuh/sandbox/hdezier/tetris/include/tetris.h",
+		"/nfs/2013/h/hdezier/code/meuh/sandbox/hdezier/tetris/tetris.sublime-project",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/grow_rect_with_piece.c",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/print_pieces.c",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/add_piece_to_result.c",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/lib_rect.c",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/error.c",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/test/log.txt",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/test/test_00.p",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/Makefile",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/link_pieces.c",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/tetris.sublime-project",
+		"/home/leeios/.config/sublime-text-3/Packages/User/Package Control.sublime-settings",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/error.cpp",
+		"/home/leeios/code/meuh/sandbox/hdezier/tetris/src/main.c",
+		"/home/leeios/.config/sublime-text-3/Packages/Clang-Complete/cc.sublime-settings",
+		"/home/leeios/code/rool/src/screens/Project.cpp",
+		"/home/leeios/code/rool/include/Project.hpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/main.cpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/config/programs.conf",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/include/IModule.hpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/include/Master.hpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/Process.cpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/modules/MLog.cpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/include/MLog.hpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/Master.cpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/Log.cpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/src/UI/AWindow.cpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/taskmaster.sublime-project",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/include/Process.hpp",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/Makefile",
+		"/home/leeios/code/meuh/42/Taskmaster/hdezier-rbernand/include/Log.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/Makefile.model",
+		"/home/leeios/code/meuh/util/roolv2.0/Makefile",
+		"/home/leeios/code/meuh/util/roolv2.0/rool.sublime-project",
+		"/home/leeios/code/meuh/util/roolv2.0/include/MemberMod.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/include/ClassMod.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/include/IModule.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/mods/ClassMod.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/mods/MemberMod.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/utils/FtStr.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/utils/FtFile.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/include/config.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/commands/InterfaceCmd.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/commands/StandardCmd.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/main.model",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/interface.model",
+		"/home/leeios/code/meuh/util/roolv2.0/include/util.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/include/InterfaceCmd.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/inc.model",
+		"/home/leeios/code/meuh/util/roolv2.0/src/screens/Project.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/screens/Boot.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/proj_tree/classic.tree",
+		"/home/leeios/code/meuh/util/roolv2.0/config/.proj",
+		"/home/leeios/code/meuh/util/roolv2.0/include/StandardCmd.hpp",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/inc_parents.model",
+		"/home/leeios/code/meuh/util/roolv2.0/config/models/inherit_parents.model",
+		"/home/leeios/code/meuh/util/roolv2.0/include/ICommand.hpp",
+		"/home/leeios/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
+		"/home/leeios/code/meuh/util/roolv2.0/src/main.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/ncurse/Window.cpp",
+		"/home/leeios/code/meuh/util/roolv2.0/src/ncurse/Menu.cpp"
+	],
+	"find":
+	{
+		"height": 48.0
+	},
+	"find_in_files":
+	{
+		"height": 158.0,
+		"where_history":
+		[
+			"<open folders>, *.c, *.h",
+			"/home/leeios/code/meuh/sandbox/hdezier/tetris",
+			"/home/leeios/code/meuh/util/roolv2.0",
+			"/home/leeios/code/meuh/util/Rool/src,/home/leeios/code/meuh/util/Rool/include",
+			"/home/leeios/code/meuh/sandbox/util/Rool",
+			"/home/leeios/code/meuh/42/Scop/hdezier/src",
+			"/home/leeios/code/meuh/42/scop/hdezier/src",
+			"/home/leeios/code/meuh/42/scop/hdezier",
+			"/home/leeios/code/meuh/util/project_ruler/test",
+			"/home/leeios/taf/Moods/moods/public/js/libs/moods",
+			"/home/leeios/taf/whibo-dev/app/",
+			"/home/leeios/taf/whibo-dev/app/controllers",
+			"/home/leeios/taf/whibo-dev/app/assets/javascripts/zen/app/docViewer/review",
+			"/home/leeios/taf/Review/js/libs/etherpad-lite/node_modules/ep_etherpad-lite",
+			"/home/leeios/taf/Review/js/libs/etherpad-lite/src",
+			"/home/leeios/taf/Review/js/libs/etherpad-lite/SRC",
+			"/home/leeios/taf/Review/js/libs/etherpad-lite",
+			"/home/leeios/taf/Review",
+			"/home/leeios/taf/tmp_taf/public/js/libs/feedy",
+			"/home/leeios/taf/tmp_taf/",
+			"/home/leeios/taf/tmp_taf/public/js/libs/feedy",
+			"/home/leeios/taf/tmp_taf/public/js/libs/comApp",
+			"/home/leeios/taf/tmp_taf/model",
+			"/home/leeios/taf/tmp_taf/public/js/libs/comApp",
+			"/home/leeios/taf/tmp_taf/public/js/libs/appComments",
+			"/home/leeios/taf/tmp_taf/public/js/libs/appcomments",
+			"/home/leeios/taf/tmp_taf/public/js/libs/appcoments",
+			"/home/leeios/taf/tmp_taf/public/js/libs",
+			"/home/leeios/code/C/grimly/include,/home/leeios/code/C/grimly/src,/home/leeios/code/C/grimly/test"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"ranlib",
+			"uint32_t",
+			"array",
+			"sorted_index",
+			"offset",
+			"ar_hdr",
+			"header",
+			"ar_hdr",
+			"6370 6c75 735f 7374",
+			"AR_EFMT1",
+			"0177 555",
+			"\"TEST\"",
+			"t_decomp_uint32_t",
+			"32",
+			"in_byte_",
+			"0",
+			"uint32_t",
+			"Filter.o",
+			"Filter",
+			"//",
+			"ar_name",
+			"XpcPathView",
+			"ATCSRouterIPCDriver",
+			"[",
+			"Filter",
+			"ran_un.ran_strx",
+			"ranlib",
+			"n",
+			"testext",
+			"\nT\n",
+			"T\n",
+			"ft_putstr_n",
+			"nsyms",
+			"offset",
+			"ft_putstr_endl",
+			"unsigned char",
+			"char",
+			"void",
+			"uint32_t",
+			"READ_INT_4",
+			"EH_frame1",
+			"testext",
+			"offset",
+			"bytes",
+			"unsigned int",
+			"t_err::",
+			"e_err",
+			"ERR_",
+			"ERR",
+			"file",
+			"32",
+			"16",
+			"mach_header_64",
+			"section_64",
+			"segment_command_64",
+			"t_nlist_64",
+			"handle",
+			"handle_64",
+			"_64",
+			"reverse_bits",
+			"u",
+			"CPU_TYPE_X86_64",
+			"FAT_MAGIC",
+			"FAT_",
+			"arch",
+			"cputype",
+			"Nfat",
+			"reverseBits",
+			"inByte",
+			"toReverse",
+			"inByte",
+			"inByte3",
+			"char",
+			"inByte3",
+			"Byte",
+			"n",
+			"val",
+			"reverse_uint32",
+			"ERR_ARCHITECTURE_UNRECOGNIZED_IN_FAT",
+			"CPU_TYPE_X86_64",
+			"(nlst->n_type & N_TYPE)",
+			"printf",
+			"LC_VERSION_MIN_MACOSX",
+			"printf",
+			"LC_VERSION_MIN_MACOSX",
+			"ft_putstr_endl",
+			"uint8_t",
+			"cursor",
+			"result->n_type",
+			"result",
+			"n_type &",
+			"n_type",
+			"if",
+			"& ",
+			"==",
+			" & ",
+			" &",
+			"&",
+			"int",
+			"i",
+			"printf",
+			"n_type",
+			"file",
+			"ptr",
+			"nlst",
+			"type",
+			"	type =",
+			"pe =",
+			"tab",
+			"ft_putnbr",
+			"t)lhs",
+			"struct nlist_64",
+			"ft_init_nlst",
+			"sorted_nlst",
+			"elem",
+			"s",
+			"nlst",
+			"strintable",
+			"str",
+			"ft_init_tab",
+			"tab",
+			"tmp[2]",
+			"tab",
+			"tmp[1]",
+			"tmp[0]",
+			"elem",
+			"elem->n_type",
+			"ft_putstr"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"n_sym",
+			"",
+			"t_err",
+			"t_error",
+			"nullptr",
+			"userInput",
+			"scop",
+			"suggestComment",
+			"preValid",
+			"addComment",
+			"id",
+			"r.Seed.",
+			"ViewFile",
+			"grimly"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/arch/nm_arch.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2584,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2434,
+								2434
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content"
+							],
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 42.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "nm-otool.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 367,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								143,
+								143
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content"
+							],
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/usr/lib/libkmodc++.a",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 24940,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/usr/include/mach-o/ranlib.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3001,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2828,
+								2828
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 268.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/arch/print_header.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2226,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1967,
+								1967
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 72.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "/usr/include/mach/machine.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13438,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2758,
+								2758
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content"
+							],
+							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 755.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/usr/include/mach/i386/vm_types.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4710,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3554,
+								3554
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content"
+							],
+							"syntax": "Packages/Leeios/Leeios.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1115.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "include/nm.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2698,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								969,
+								969
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"history_list_is_closing": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/main.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1728,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								891,
+								891
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"history_list_is_closing": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "src/x32/nm_32.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1954,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								81,
+								81
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content"
+							],
+							"history_list_is_closing": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2499,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1296,
+								1296
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content"
+							],
+							"history_list_is_closing": true,
+							"syntax": "Packages/Makefile Improved/Makefile Improved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 315.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "testext/mine",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1010813,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"bracket_highlighter.busy": false,
+							"history_list_is_closing": true,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 8,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 75.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 7,
+					"file": "include/nm.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2698,
+						"regions":
+						{
+							"bookmarks":
+							{
+								"flags": 144,
+								"icon": "Packages/BetterBookmarks/icons/function.png",
+								"regions":
+								[
+								],
+								"scope": "comment"
+							}
+						},
+						"selection":
+						[
+							[
+								1041,
+								1041
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"history_list_is_closing": true,
+							"syntax": "Packages/Leeios/Leeios.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 63.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				2
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
+				1,
+				1,
+				2,
+				2
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			0.5,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.cc":
+	{
+		"height": 190.0
+	},
+	"output.clipboard_manager":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "nm-otool.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"subl",
+				"nm-otool.sublime-project"
+			],
+			[
+				"libftp",
+				"testext/ar/libftprintf32.a"
+			],
+			[
+				"sortran",
+				"src/arch/sort_ranlib.c"
+			],
+			[
+				"nm",
+				"src/nm.c"
+			],
+			[
+				"sort",
+				"src/arch/sort_ranlib.c"
+			],
+			[
+				"nmh",
+				"include/nm.h"
+			],
+			[
+				"nm32",
+				"src/x32/nm_32.c"
+			],
+			[
+				"nmf",
+				"src/FAT/nm_fat.c"
+			],
+			[
+				"prinh",
+				"src/arch/print_header.c"
+			],
+			[
+				".h",
+				"include/nm.h"
+			],
+			[
+				"ar",
+				"src/arch/nm_arch.c"
+			],
+			[
+				"prinn",
+				"src/x64/print_nlst_64.c"
+			],
+			[
+				"getch",
+				"src/x64/get_char_type_64.c"
+			],
+			[
+				"prinl",
+				"src/x32/print_nlst_32.c"
+			],
+			[
+				"nmar",
+				"src/arch/nm_arch.c"
+			],
+			[
+				"rinh",
+				"src/arch/print_header.c"
+			],
+			[
+				"ran",
+				"src/arch/sort_ranlib.c"
+			],
+			[
+				"nmfa",
+				"src/FAT/nm_fat.c"
+			],
+			[
+				"nl",
+				"src/sort_nlst.c"
+			],
+			[
+				"typ",
+				"src/type_to_char.c"
+			],
+			[
+				"main",
+				"src/main.c"
+			],
+			[
+				"prin",
+				"src/arch/print_header.c"
+			],
+			[
+				"fat",
+				"src/FAT/nm_fat.c"
+			],
+			[
+				"get",
+				"src/x64/get_char_type_64.c"
+			],
+			[
+				"te",
+				"testext/test.sh"
+			],
+			[
+				"print",
+				"src/arch/print_header.c"
+			],
+			[
+				"printh",
+				"src/arch/print_header.c"
+			],
+			[
+				"nm64",
+				"src/x64/nm_64.c"
+			],
+			[
+				"mi",
+				"testext/mine"
+			],
+			[
+				"sortra",
+				"src/arch/sort_ranlib.c"
+			],
+			[
+				"mai",
+				"src/main.c"
+			],
+			[
+				"their",
+				"testext/their"
+			],
+			[
+				"min",
+				"testext/mine"
+			],
+			[
+				"the",
+				"testext/their"
+			],
+			[
+				"nmfat",
+				"src/FAT/nm_fat.c"
+			],
+			[
+				"log",
+				"log.txt"
+			],
+			[
+				"pr",
+				"src/x64/print_nlst_64.c"
+			],
+			[
+				"make",
+				"Makefile"
+			],
+			[
+				"libf",
+				"testext/ar/libft.a"
+			],
+			[
+				"read",
+				"src/arch/read_symbols.c"
+			],
+			[
+				"li",
+				"testext/ar/libft.a"
+			],
+			[
+				"sortn",
+				"src/sort_nlst.c"
+			],
+			[
+				"mak",
+				"Makefile"
+			],
+			[
+				"pri",
+				"src/x64/print_nlst_64.c"
+			],
+			[
+				"ma",
+				"src/main.c"
+			],
+			[
+				"s",
+				"src/sort_nlst.c"
+			],
+			[
+				"getc",
+				"src/get_char_type_32.c"
+			],
+			[
+				"m",
+				"Makefile"
+			],
+			[
+				"type",
+				"src/type_to_char.c"
+			],
+			[
+				"nm.c",
+				"src/nm.c"
+			],
+			[
+				"show",
+				"src/show_alloc_mem.c"
+			],
+			[
+				"err",
+				"src/error.c"
+			],
+			[
+				"calc",
+				"src/calculus_dead_blocks.c"
+			],
+			[
+				"fill",
+				"src/fill_result_in_size.c"
+			],
+			[
+				"file",
+				"src/file_to_pieces.c"
+			],
+			[
+				"res",
+				"src/resolve.c"
+			],
+			[
+				"dead",
+				"src/calculus_dead_blocks.c"
+			],
+			[
+				"lo",
+				"test/log.txt"
+			],
+			[
+				"rec",
+				"src/lib_rect.c"
+			],
+			[
+				".p",
+				"test/test_00.p"
+			],
+			[
+				"libr",
+				"src/lib_rect.c"
+			],
+			[
+				"logt",
+				"test/log.txt"
+			],
+			[
+				"test",
+				"test/test_00.p"
+			],
+			[
+				"add",
+				"src/add_piece_to_result.c"
+			],
+			[
+				"link",
+				"src/link_pieces.c"
+			],
+			[
+				"makef",
+				"Makefile"
+			],
+			[
+				"error",
+				"src/error.cpp"
+			],
+			[
+				"file_",
+				"src/file_to_pieces.c"
+			],
+			[
+				"tetris/main.c",
+				"meuh/sandbox/hdezier/tetris/src/main.c"
+			],
+			[
+				"pro",
+				"rool/include/Project.hpp"
+			],
+			[
+				"projec",
+				"rool/src/screens/Project.cpp"
+			],
+			[
+				"mas",
+				"include/Master.hpp"
+			],
+			[
+				"mlogc",
+				"src/modules/MLog.cpp"
+			],
+			[
+				"mlogh",
+				"include/MLog.hpp"
+			],
+			[
+				"co",
+				"config/programs.conf"
+			],
+			[
+				"proc",
+				"include/Process.hpp"
+			],
+			[
+				"fstr",
+				"src/utils/FtStr.cpp"
+			],
+			[
+				"strf",
+				"src/utils/FtFile.cpp"
+			],
+			[
+				"cmd",
+				"src/commands/InterfaceCmd.cpp"
+			],
+			[
+				"clasm",
+				"include/ClassMod.hpp"
+			],
+			[
+				"mem",
+				"src/mods/MemberMod.cpp"
+			],
+			[
+				"mod",
+				"src/mods/ClassMod.cpp"
+			],
+			[
+				"ftst",
+				"src/utils/FtStr.cpp"
+			],
+			[
+				"stan",
+				"src/commands/StandardCmd.cpp"
+			],
+			[
+				"util",
+				"include/util.hpp"
+			],
+			[
+				"uti",
+				"include/util.hpp"
+			],
+			[
+				"classmod",
+				"meuh/util/roolv2.0/inc/ClassMod.hpp"
+			],
+			[
+				"projecth",
+				"meuh/util/roolv2.0/inc/Project.hpp"
+			],
+			[
+				"projectc",
+				"meuh/util/roolv2.0/src/Project.cpp"
+			],
+			[
+				"window",
+				"meuh/util/roolv2.0/inc/Window.hpp"
+			],
+			[
+				"menuh",
+				"meuh/util/roolv2.0/inc/Menu.hpp"
+			],
+			[
+				".proj",
+				"meuh/util/roolv2.0/config/.proj"
+			],
+			[
+				"boot",
+				"meuh/util/Rool/src/menus/Boot.cpp"
+			],
+			[
+				"filedi",
+				"meuh/util/roolv2.0/inc/FileDir.hpp"
+			],
+			[
+				"rool2make",
+				"meuh/util/roolv2.0/Makefile"
+			],
+			[
+				"taskmastercon",
+				"meuh/42/Taskmaster/hdezier-rbernand/config/programs.conf"
+			],
+			[
+				"taskconfig",
+				"tools/VSCode-linux-x64/resources/app/client/vs/workbench/contrib/files/media/AddFolder_inverse.svg"
+			],
+			[
+				"master",
+				"meuh/42/Taskmaster/hdezier-rbernand/src/Master.cpp"
+			],
+			[
+				"bootcp",
+				"meuh/util/roolv2.0/src/menus/Boot.cpp"
+			],
+			[
+				"cppjson",
+				"meuh/util/roolv2.0/config/cpp-rool.json"
+			],
+			[
+				"classic",
+				"meuh/util/roolv2.0/config/proj_tree/classic.tree"
+			],
+			[
+				"rool2.0",
+				"meuh/util/roolv2.0/src/menus/Boot.cpp"
+			],
+			[
+				"filed",
+				"meuh/util/roolv2.0/inc/FileDir.hpp"
+			],
+			[
+				"filesc",
+				"Txt-index/src/FileScanner.cpp"
+			],
+			[
+				"trie",
+				"Txt-index/src/Trie.cpp"
+			],
+			[
+				"menucp",
+				"meuh/util/roolv2.0/src/Menu.cpp"
+			],
+			[
+				"b",
+				"local/cpp/cpp-event/obj/Bridge.d"
+			],
+			[
+				"gui",
+				"rool/src/GUI.cpp"
+			],
+			[
+				"roolmain",
+				"meuh/util/Rool/src/main.cpp"
+			],
+			[
+				"booth",
+				"meuh/util/roolv2.0/inc/Boot.hpp"
+			],
+			[
+				"sortic",
+				"rool/src/SortItems.cpp"
+			],
+			[
+				"sorti",
+				"rool/include/SortItems.hpp"
+			],
+			[
+				"menhp",
+				"meuh/util/roolv2.0/inc/Menu.hpp"
+			],
+			[
+				"v2.0makefile",
+				"meuh/util/roolv2.0/Makefile"
+			],
+			[
+				"winhp",
+				"meuh/util/roolv2.0/inc/Window.hpp"
+			],
+			[
+				"win",
+				"meuh/util/roolv2.0/src/Window.cpp"
+			],
+			[
+				"windo",
+				"meuh/util/roolv2.0/src/Window.cpp"
+			],
+			[
+				"roolv2.0",
+				"meuh/util/roolv2.0/src/Menu.cpp"
+			],
+			[
+				"gomoku/m",
+				"meuh/42/Gomoku/hdezier-erobert/Makefile"
+			],
+			[
+				"",
+				"code/cpp/XoX/src/main.cpp"
+			],
+			[
+				"ver",
+				"public/js/libs/comApp/VersionPicker.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/code/meuh/util/roolv2.0/rool.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 245.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
