@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:16:36 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/23 15:16:07 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/23 16:22:23 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void					print_table(int nsyms, int symoff, int stroff
 	free(sorted_index);
 }
 
-t_err						otool_32(const char *file)
+t_err						otool_32(const char *file, const char *filename)
 {
 	int						ncmds;
 	int						i;
@@ -43,6 +43,7 @@ t_err						otool_32(const char *file)
 	struct load_command		*lc;
 	struct symtab_command	*sym;
 
+	(void)filename;
 	header = (struct mach_header *)file;
 	ncmds = header->ncmds;
 	i = -1;

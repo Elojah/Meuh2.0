@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:49:04 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/23 15:16:01 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/23 16:21:39 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ t_err						otool(const char *file, const char *filename)
 	if (ft_strncmp(file, ARMAG, SARMAG) == 0)
 		return (otool_arch(file, filename));
 	else if (magic_number == MH_MAGIC_64 || magic_number == MH_CIGAM_64)
-		return (otool_64(file));
+		return (otool_64(file, filename));
 	else if (magic_number == MH_MAGIC || magic_number == MH_CIGAM)
-		return (otool_32(file));
+		return (otool_32(file, filename));
 	else if (magic_number == FAT_MAGIC || magic_number == FAT_CIGAM)
 		return (otool_fat(file, filename, magic_number));
 	return (ERR_ARCHITECTURE_NOT_FOUND);

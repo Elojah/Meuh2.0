@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/06 13:12:27 by hdezier           #+#    #+#              #
-#    Updated: 2016/06/23 15:17:44 by hdezier          ###   ########.fr        #
+#    Updated: 2016/06/23 16:07:44 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 TARGET = ft_otool
@@ -31,7 +31,7 @@ CLASS = main\
 		x32/get_char_type_32\
 		x64/get_char_type_64\
 		x32/print_nlst_32\
-		x64/print_nlst_64\
+		x64/print_segment_64\
 		FAT/otool_fat\
 		arch/otool_arch\
 		arch/print_header\

@@ -6,40 +6,39 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:16:32 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/23 15:16:08 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/23 16:22:56 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "otool.h"
 #include <stdlib.h>
-#include <mach-o/nlist.h>
 #include <mach-o/loader.h>
 
-static void					print_table(int nsyms, int symoff, int stroff
-	, const char *file)
+static int					ft_strcmp(const char *s1, const char *s2)
 {
-	int						i;
-	const char				*stringtable;
-	const t_nlist_64		*nlst;
-	uint32_t				*sorted_index;
+	unsigned int			i;
 
-	nlst = (t_nlist_64 *)(file + symoff);
-	stringtable = file + stroff;
-	sorted_index = sort_index_nlst_64(nlst, nsyms, stringtable);
-	i = -1;
-	while (++i < nsyms)
-		print_nlst_64(nlst + sorted_index[i]
-			, stringtable, file);
-	free(sorted_index);
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+		++i;
+	return (s1[i] - s2[i]);
 }
 
-t_err						otool_64(const char *file)
+static void					print_table(const struct segment_command_64 *seg
+	, const char *file, const char *filename)
+{
+	if (ft_strcmp(seg->segname, SEG_TEXT) != 0)
+		return ;
+	print_segment_64(seg, file, filename);
+}
+
+t_err						otool_64(const char *file, const char *filename)
 {
 	int						ncmds;
 	int						i;
 	struct mach_header_64	*header;
 	struct load_command		*lc;
-	struct symtab_command	*sym;
+	struct segment_command_64	*seg;
 
 	header = (struct mach_header_64 *)file;
 	ncmds = header->ncmds;
@@ -47,10 +46,10 @@ t_err						otool_64(const char *file)
 	lc = (struct load_command *)(file + sizeof(struct mach_header_64));
 	while (++i < ncmds)
 	{
-		if (lc->cmd == LC_SYMTAB)
+		if (lc->cmd == LC_SEGMENT_64)
 		{
-			sym = (struct symtab_command *)lc;
-			print_table(sym->nsyms, sym->symoff, sym->stroff, file);
+			seg = (struct segment_command_64 *)lc;
+			print_table(seg, file, filename);
 		}
 		lc = (void *)lc + lc->cmdsize;
 	}

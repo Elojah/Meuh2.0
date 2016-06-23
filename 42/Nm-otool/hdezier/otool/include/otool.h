@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:15:40 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/23 15:15:57 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/23 16:22:54 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define RANLIB_I(p, a, i) CAST_RL((p) + ((a)[(i)] * sizeof(struct ranlib)))
 
 struct ar_hdr;
+struct segment_command_64;
 
 typedef struct nlist_64		t_nlist_64;
 typedef struct nlist		t_nlist_32;
@@ -48,8 +49,8 @@ t_err						otool(const char *file, const char *filename);
 /*
 ** File type dispatching
 */
-t_err						otool_32(const char *file);
-t_err						otool_64(const char *file);
+t_err						otool_32(const char *file, const char *filename);
+t_err						otool_64(const char *file, const char *filename);
 t_err						otool_fat(const char *file, const char *filename
 	, unsigned int magic_number);
 t_err						otool_arch(const char *file, const char *filename);
@@ -66,8 +67,8 @@ char						type_to_char(const char *type);
 /*
 ** Print list line
 */
-void						print_nlst_64(const t_nlist_64 *nlst
-	, const char *stringtable, const char *file);
+void						print_segment_64(const struct segment_command_64 *seg
+	, const char *file, const char *filename);
 void						print_nlst_32(const t_nlist_32 *nlst
 	, const char *stringtable, const char *file);
 
