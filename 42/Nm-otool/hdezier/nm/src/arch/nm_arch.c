@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:59:31 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/24 17:57:31 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/24 18:21:09 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,26 @@ t_err					nm_arch(const char *file, const char *filename)
 	char				*offset;
 	uint32_t			n_sym;
 
+	for (int i = 0; i < 50; ++i)
+	{
+		if (i % 4 == 0)
+			printf("\n");
+		printf("%x ", *((unsigned char *)((void *)file + i)));
+	}
+
+
 	header = (void *)file + SARMAG;
 	offset = (void *)header + sizeof(struct ar_hdr)
 		+ print_header(header, filename, 0);
 	n_sym = *(uint32_t *)offset / sizeof(struct ranlib);
 	offset = (void *)offset + sizeof(uint32_t);
+
+	for (int i = 0; i < 50; ++i)
+	{
+		if (i % 4 == 0)
+			printf("\n");
+		printf("%x ", *((unsigned char *)((void *)offset + i)));
+	}
+
 	return (read_symbols(file, offset, filename, n_sym));
 }
