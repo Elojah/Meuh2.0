@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:59:31 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/23 15:00:46 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/24 17:57:31 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,5 @@ t_err					nm_arch(const char *file, const char *filename)
 		+ print_header(header, filename, 0);
 	n_sym = *(uint32_t *)offset / sizeof(struct ranlib);
 	offset = (void *)offset + sizeof(uint32_t);
-
-	offset = (void *)offset + sizeof(uint32_t);
-	uint32_t n = print_header((void *)offset + 0, filename, 1);
-	(void)n;
-	offset = (void *)offset + sizeof(struct ar_hdr);
-	print_header((void *)offset, filename, 1);
-
 	return (read_symbols(file, offset, filename, n_sym));
 }

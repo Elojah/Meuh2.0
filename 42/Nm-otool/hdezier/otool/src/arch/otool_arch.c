@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:59:31 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/24 16:44:05 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/24 17:36:08 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@
 #include <mach-o/nlist.h>
 #include <stdlib.h>
 
+static void			ft_putstr(const char *s)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (s[i] != 0)
+		++i;
+	write(1, s, i);
+}
 
 static int				ft_strcmp(const char *s1, const char *s2)
 {
@@ -55,7 +64,7 @@ static t_err			read_symbols(const char *file, const char *offset
 		{
 			sym_offset = (void *)header + sizeof(struct ar_hdr)
 				+ print_header(header, filename, 1);
-			otool(sym_offset, filename);
+			otool(sym_offset, NULL);
 		}
 		++i;
 	}
@@ -70,6 +79,9 @@ t_err					otool_arch(const char *file, const char *filename)
 	char				*offset;
 	uint32_t			n_sym;
 
+	write(1, "Archive : ", 10);
+	ft_putstr(filename);
+	write(1, "\n", 1);
 	header = (void *)file + SARMAG;
 	offset = (void *)header + sizeof(struct ar_hdr)
 		+ print_header(header, filename, 0);

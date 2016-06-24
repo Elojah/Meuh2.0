@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:16:32 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/24 16:36:06 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/24 17:27:11 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,18 @@ static void				print_segment_64(const struct segment_command_64 *seg
 	uint32_t			i;
 	struct section_64	*section;
 
-	if (ft_strcmp(seg->segname, SEG_TEXT) != 0)
-		return ;
 	i = 0;
 	section = (void *)seg + sizeof(struct segment_command_64);
 	while (i < seg->nsects)
 	{
 		if (ft_strcmp(section->sectname, SECT_TEXT) == 0)
 		{
-			ft_putstr(filename);
-			write(1, ":\n(__TEXT,__text) section\n", 26);
+			if (filename != NULL)
+			{
+				ft_putstr(filename);
+				write(1, ":\n", 2);
+			}
+			write(1, "(__TEXT,__text) section\n", 24);
 			print_section_64(section, file);
 		}
 		section = (void *)section + sizeof(struct section_64);

@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 13:21:36 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/22 17:32:46 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/24 17:34:30 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ uint32_t			print_header(const struct ar_hdr *header
 		name_size = ft_uatoi(header->ar_name + 3);
 		if (print == 0)
 			return (name_size);
-		write(1, "\n", 1);
 		ft_putstr(filename);
 		write(1, "(", 1);
 		ft_putstr((void *)header + sizeof(struct ar_hdr));
