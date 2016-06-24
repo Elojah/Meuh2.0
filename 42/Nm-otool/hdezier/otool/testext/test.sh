@@ -160,38 +160,38 @@ if [ $TESTNM != 0 ]; then
 fi
 
 if [ $TESTOTOOL != 0 ]; then
-	echo "Test OTOOL 32bits on 32/:"
-	find "./32" -type f -print0 | \
-	while IFS='' read -r -d '' filename; do
-		[ $? == 1 ] && exit 0;
-		FILE1=$filename
-		otool -t $FILE1 > their ; ../ft_otool $FILE1 > mine
-		COUNT=$(diff their mine | wc -l)
-		if [ $COUNT != 0 ]; then
-			echo "32bits test OTOOL : FAILED! : "$FILE1": see their, mine."
-			exit 1
-		else
-			echo "32bits test OTOOL : SUCCESS! : "$FILE1
-		fi
-	done
-	[ $? == 1 ] && exit 0;
-	#without fat files
-	echo "Test OTOOL 64bits binary on /bin:"
-	find "/bin" -type f -print0 | \
-	while IFS='' read -r -d '' filename; do
-		FILE1=$filename
-		[ $? == 1 ] && exit 0;
-		if [ "$FILE1" != "/bin/bash" -a "$FILE1" != "/bin/sh" -a "$FILE1" != "/bin/sync" ]; then
-			otool -t $FILE1 > their ; ../ft_otool $FILE1 > mine
-			COUNT=$(diff their mine | wc -l)
-			if [ $COUNT != 0 ]; then
-				echo "Standard tests OTOOL: FAILED! : "$FILE1": see their, mine."
-				exit 1
-			else
-				echo "Standard tests OTOOL: SUCCESS! :"$FILE1
-			fi
-		fi
-	done
+	# echo "Test OTOOL 32bits on 32/:"
+	# find "./32" -type f -print0 | \
+	# while IFS='' read -r -d '' filename; do
+	# 	[ $? == 1 ] && exit 0;
+	# 	FILE1=$filename
+	# 	otool -t $FILE1 > their ; ../ft_otool $FILE1 > mine
+	# 	COUNT=$(diff their mine | wc -l)
+	# 	if [ $COUNT != 0 ]; then
+	# 		echo "32bits test OTOOL : FAILED! : "$FILE1": see their, mine."
+	# 		exit 1
+	# 	else
+	# 		echo "32bits test OTOOL : SUCCESS! : "$FILE1
+	# 	fi
+	# done
+	# [ $? == 1 ] && exit 0;
+	# #without fat files
+	# echo "Test OTOOL 64bits binary on /bin:"
+	# find "/bin" -type f -print0 | \
+	# while IFS='' read -r -d '' filename; do
+	# 	FILE1=$filename
+	# 	[ $? == 1 ] && exit 0;
+	# 	if [ "$FILE1" != "/bin/bash" -a "$FILE1" != "/bin/sh" -a "$FILE1" != "/bin/sync" ]; then
+	# 		otool -t $FILE1 > their ; ../ft_otool $FILE1 > mine
+	# 		COUNT=$(diff their mine | wc -l)
+	# 		if [ $COUNT != 0 ]; then
+	# 			echo "Standard tests OTOOL: FAILED! : "$FILE1": see their, mine."
+	# 			exit 1
+	# 		else
+	# 			echo "Standard tests OTOOL: SUCCESS! :"$FILE1
+	# 		fi
+	# 	fi
+	# done
 	[ $? == 1 ] && exit 0;
 	echo "Test OTOOL fat files on /bin:"
 	otool -t /bin/bash > their ; ../ft_otool /bin/bash > mine

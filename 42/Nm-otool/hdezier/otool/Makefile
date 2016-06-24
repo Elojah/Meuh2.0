@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/06 13:12:27 by hdezier           #+#    #+#              #
-#    Updated: 2016/06/23 16:07:44 by hdezier          ###   ########.fr        #
+#    Updated: 2016/06/24 16:39:05 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 TARGET = ft_otool
@@ -28,16 +28,12 @@ CLASS = main\
 		otool\
 		x32/otool_32\
 		x64/otool_64\
-		x32/get_char_type_32\
-		x64/get_char_type_64\
-		x32/print_nlst_32\
-		x64/print_segment_64\
+		x32/print_section_32\
+		x64/print_section_64\
 		FAT/otool_fat\
 		arch/otool_arch\
-		arch/print_header\
 		arch/sort_ranlib\
-		sort_nlst\
-		type_to_char\
+		arch/print_header\
 
 #List interfaces here
 INTERFACE = \

@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:16:32 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/23 16:22:56 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/24 16:36:06 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,19 @@
 #include <stdlib.h>
 #include <mach-o/loader.h>
 
-static int					ft_strcmp(const char *s1, const char *s2)
+static void				ft_putstr(const char *s)
 {
-	unsigned int			i;
+	unsigned int		i;
+
+	i = 0;
+	while (s[i++] != '\0')
+		;
+	write(1, s, i - 1);
+}
+
+static int				ft_strcmp(const char *s1, const char *s2)
+{
+	unsigned int		i;
 
 	i = 0;
 	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
@@ -24,20 +34,35 @@ static int					ft_strcmp(const char *s1, const char *s2)
 	return (s1[i] - s2[i]);
 }
 
-static void					print_table(const struct segment_command_64 *seg
+static void				print_segment_64(const struct segment_command_64 *seg
 	, const char *file, const char *filename)
 {
+	uint32_t			i;
+	struct section_64	*section;
+
 	if (ft_strcmp(seg->segname, SEG_TEXT) != 0)
 		return ;
-	print_segment_64(seg, file, filename);
+	i = 0;
+	section = (void *)seg + sizeof(struct segment_command_64);
+	while (i < seg->nsects)
+	{
+		if (ft_strcmp(section->sectname, SECT_TEXT) == 0)
+		{
+			ft_putstr(filename);
+			write(1, ":\n(__TEXT,__text) section\n", 26);
+			print_section_64(section, file);
+		}
+		section = (void *)section + sizeof(struct section_64);
+		++i;
+	}
 }
 
-t_err						otool_64(const char *file, const char *filename)
+t_err					otool_64(const char *file, const char *filename)
 {
-	int						ncmds;
-	int						i;
-	struct mach_header_64	*header;
-	struct load_command		*lc;
+	int							ncmds;
+	int							i;
+	struct mach_header_64		*header;
+	struct load_command			*lc;
 	struct segment_command_64	*seg;
 
 	header = (struct mach_header_64 *)file;
@@ -49,7 +74,7 @@ t_err						otool_64(const char *file, const char *filename)
 		if (lc->cmd == LC_SEGMENT_64)
 		{
 			seg = (struct segment_command_64 *)lc;
-			print_table(seg, file, filename);
+			print_segment_64(seg, file, filename);
 		}
 		lc = (void *)lc + lc->cmdsize;
 	}

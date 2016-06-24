@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:59:31 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/23 15:16:04 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/24 16:44:05 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <ar.h>
 #include <mach-o/nlist.h>
 #include <stdlib.h>
+
 
 static int				ft_strcmp(const char *s1, const char *s2)
 {
@@ -74,12 +75,5 @@ t_err					otool_arch(const char *file, const char *filename)
 		+ print_header(header, filename, 0);
 	n_sym = *(uint32_t *)offset / sizeof(struct ranlib);
 	offset = (void *)offset + sizeof(uint32_t);
-
-	offset = (void *)offset + sizeof(uint32_t);
-	uint32_t n = print_header((void *)offset + 0, filename, 1);
-	(void)n;
-	offset = (void *)offset + sizeof(struct ar_hdr);
-	print_header((void *)offset, filename, 1);
-
 	return (read_symbols(file, offset, filename, n_sym));
 }

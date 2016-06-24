@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:15:11 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/23 15:16:23 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/24 16:24:03 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,21 @@ static void			ft_putstr(const char *s)
 	while (s[i++] != '\0')
 		;
 	write(1, s, i - 1);
+}
+
+static void			print_err(const char *filename, t_err err)
+{
+	if (err == ERR_FILE_OPEN)
+	{
+		write(1, "./nm: ", 6);
+		ft_putstr(filename);
+		write(1, ": No such file or directory.\n", 29);
+	}
+	else if (err == ERR_ARCHITECTURE_NOT_FOUND)
+	{
+		ft_putstr(filename);
+		write(1, ": is not an object file\n", 24);
+	}
 }
 
 static t_err		exec(const char *filename)
@@ -48,7 +63,7 @@ int					main(int ac, char **av)
 	int				i;
 
 	if (ac == 1)
-		exec("a.out");
+		print_err("a.out", exec("a.out"));
 	else
 	{
 		i = 0;
@@ -60,7 +75,7 @@ int					main(int ac, char **av)
 				ft_putstr(av[i]);
 				ft_putstr(":\n");
 			}
-			exec(av[i]);
+			print_err(av[i], exec(av[i]));
 		}
 	}
 	return (0);

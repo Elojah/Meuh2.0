@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:15:40 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/23 16:22:54 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/24 16:39:43 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 # define RANLIB_I(p, a, i) CAST_RL((p) + ((a)[(i)] * sizeof(struct ranlib)))
 
 struct ar_hdr;
-struct segment_command_64;
+struct section;
+struct section_64;
 
 typedef struct nlist_64		t_nlist_64;
 typedef struct nlist		t_nlist_32;
@@ -56,32 +57,12 @@ t_err						otool_fat(const char *file, const char *filename
 t_err						otool_arch(const char *file, const char *filename);
 
 /*
-** Type search
-*/
-char						get_char_type_32(const t_nlist_32 *nlst
-	, const char *file);
-char						get_char_type_64(const t_nlist_64 *nlst
-	, const char *file);
-char						type_to_char(const char *type);
-
-/*
 ** Print list line
 */
-void						print_segment_64(const struct segment_command_64 *seg
-	, const char *file, const char *filename);
-void						print_nlst_32(const t_nlist_32 *nlst
-	, const char *stringtable, const char *file);
-
-/*
-** Create(malloc) array of nlist index sorted lexically; bubble sort
-*/
-uint32_t					*sort_index_nlst_64(const t_nlist_64 *nlst
-					, uint32_t n_sym
-					, const char *stringtable);
-uint32_t					*sort_index_nlst_32(const t_nlist_32 *nlst
-					, uint32_t n_sym
-					, const char *stringtable);
-uint32_t					*sort_ranlib(const char *offset, uint32_t n_sym);
+void						print_section_64(const struct section_64 *seg
+	, const char *file);
+void						print_section_32(const struct section *seg
+	, const char *file);
 
 /*
 ** Archive internals
@@ -89,5 +70,6 @@ uint32_t					*sort_ranlib(const char *offset, uint32_t n_sym);
 uint32_t					print_header(const struct ar_hdr *header
 	, const char *filename, uint8_t print);
 const char					*get_header_name(const struct ar_hdr *header);
+uint32_t					*sort_ranlib(const char *offset, uint32_t n_sym);
 
 #endif
