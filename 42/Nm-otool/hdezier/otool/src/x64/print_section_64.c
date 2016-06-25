@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 18:41:04 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/24 17:29:15 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/25 16:19:58 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ static void				putuint64_t(uint64_t n)
 	write(1, result, 16);
 }
 
-void						print_section_64(const struct section_64 *section
+void					print_section_64(const struct section_64 *section
 	, const char *file)
 {
-	void					*offset;
-	uint64_t				i;
+	void				*offset;
+	uint64_t			i;
 
 	i = 0;
 	offset = (void *)file + section->offset;

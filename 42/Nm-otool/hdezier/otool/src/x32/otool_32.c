@@ -6,17 +6,18 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:16:32 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/24 17:32:38 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/25 16:21:25 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "otool.h"
+#include <unistd.h>
 #include <stdlib.h>
 #include <mach-o/loader.h>
 
-static void				ft_putstr(const char *s)
+static void					ft_putstr(const char *s)
 {
-	unsigned int		i;
+	unsigned int			i;
 
 	i = 0;
 	while (s[i++] != '\0')
@@ -37,8 +38,8 @@ static int					ft_strcmp(const char *s1, const char *s2)
 static void					print_segment_32(const struct segment_command *seg
 	, const char *file, const char *filename)
 {
-	uint32_t			i;
-	struct section		*section;
+	uint32_t				i;
+	struct section			*section;
 
 	i = 0;
 	section = (void *)seg + sizeof(struct segment_command);
@@ -63,7 +64,7 @@ t_err						otool_32(const char *file, const char *filename)
 {
 	int						ncmds;
 	int						i;
-	struct mach_header	*header;
+	struct mach_header		*header;
 	struct load_command		*lc;
 	struct segment_command	*seg;
 

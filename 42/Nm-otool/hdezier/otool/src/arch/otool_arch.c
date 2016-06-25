@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:59:31 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/24 17:36:08 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/25 18:03:04 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 #include <mach-o/ranlib.h>
 #include <ar.h>
 #include <mach-o/nlist.h>
+#include <unistd.h>
 #include <stdlib.h>
 
-static void			ft_putstr(const char *s)
+static void				ft_putstr(const char *s)
 {
 	unsigned int	i;
 

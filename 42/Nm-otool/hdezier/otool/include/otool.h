@@ -6,22 +6,16 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:15:40 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/24 16:39:43 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/25 16:20:27 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OTOOL_H
 # define OTOOL_H
-
-# include <stdint.h>
-
-// DBG
-# include <stdio.h>
-# include <unistd.h>
-// !DBG
-
 # define CAST_RL(n) ((struct ranlib *)(n))
 # define RANLIB_I(p, a, i) CAST_RL((p) + ((a)[(i)] * sizeof(struct ranlib)))
+
+# include <stdint.h>
 
 struct ar_hdr;
 struct section;

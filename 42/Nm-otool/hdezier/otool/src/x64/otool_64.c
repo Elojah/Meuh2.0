@@ -6,12 +6,13 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 06:16:32 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/24 17:27:11 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/25 16:21:41 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "otool.h"
 #include <stdlib.h>
+#include <unistd.h>
 #include <mach-o/loader.h>
 
 static void				ft_putstr(const char *s)

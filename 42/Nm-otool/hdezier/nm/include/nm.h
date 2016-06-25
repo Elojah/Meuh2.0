@@ -6,22 +6,16 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:15:40 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/22 17:39:25 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/25 17:50:18 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NM_H
 # define NM_H
-
-# include <stdint.h>
-
-// DBG
-# include <stdio.h>
-# include <unistd.h>
-// !DBG
-
 # define CAST_RL(n) ((struct ranlib *)(n))
 # define RANLIB_I(p, a, i) CAST_RL((p) + ((a)[(i)] * sizeof(struct ranlib)))
+
+# include <stdint.h>
 
 struct ar_hdr;
 

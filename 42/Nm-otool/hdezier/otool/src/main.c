@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:15:11 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/24 16:24:03 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/25 16:26:15 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ static void			print_err(const char *filename, t_err err)
 	{
 		ft_putstr(filename);
 		write(1, ": is not an object file\n", 24);
+	}
+	else if (err == ERR_FILE_STAT)
+	{
+		ft_putstr(filename);
+		write(1, ": Permission denied\n", 20);
 	}
 }
 
