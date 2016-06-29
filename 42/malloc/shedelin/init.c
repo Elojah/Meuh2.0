@@ -18,19 +18,26 @@ int		init_glob(void)
 {
 	ssize_t	size;
 	void	*ptr;
+	void	*ptr2;
 
-	size = ((TINY * 100) + (SMALL * 100) + (200 * sizeof(t_malloc)));
+	size = ((TINY * NB_TINY) + (NB_TINY * sizeof(t_malloc)));
 	size = (size / getpagesize() + 1) * getpagesize();
 	ptr = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0);
 	if (ptr == MAP_FAILED)
 		return (1);
+	size = ((SMALL * NB_SMALL) + (NB_SMALL * sizeof(t_malloc)));
+	size = (size / getpagesize() + 1) * getpagesize();
+	ptr2 = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0);
+	if (ptr2 == MAP_FAILED)
+		return (1);
 	g_glob.tiny = ptr;
-	g_glob.small = init_tiny(ptr);
-	init_small(g_glob.small);
+	init_tiny(ptr);
+	g_glob.small = ptr2;
+	init_small(ptr2);
 	return (0);
 }
 
-void		*init_tiny(void *ptr)
+void		init_tiny(void *ptr)
 {
 	int			i;
 	void		*tmp;
@@ -39,12 +46,12 @@ void		*init_tiny(void *ptr)
 	i = 0;
 	tmp = ptr;
 	tt = (t_malloc *)tmp;
-	while (i++ < 100)
+	while (i++ < NB_TINY)
 	{
 		tt->size = 0;
 		tt->empty = 0;
 		tt->data = tt + 1;
-		if (i == 100)
+		if (i == NB_TINY)
 			tt->next = NULL;
 		else
 		{
@@ -53,7 +60,6 @@ void		*init_tiny(void *ptr)
 		}
 
 	}
-	return ((void *)tt + sizeof(t_malloc) + TINY);
 }
 
 void		init_small(void *ptr)
@@ -63,12 +69,12 @@ void		init_small(void *ptr)
 
 	i = 0;
 	tt = (t_malloc *)ptr;
-	while (i++ < 100)
+	while (i++ < NB_SMALL)
 	{		
 		tt->size = 0;
 		tt->empty = 0;
 		tt->data = tt + 1;
-		if (i == 100)
+		if (i == NB_SMALL)
 			tt->next = NULL;
 		else
 		{

@@ -15,8 +15,10 @@
 
 # include <sys/types.h>
 
-# define TINY			(size_t)(getpagesize() / 32)
-# define SMALL			(size_t)(getpagesize() - sizeof(t_malloc))
+# define TINY			(size_t)(1024)
+# define SMALL			(size_t)(4096)
+# define NB_TINY		300
+# define NB_SMALL		300
 
 #include <stdlib.h>
 #include <sys/mman.h>
@@ -41,7 +43,7 @@ extern t_glob			g_glob;
 void					free(void *ptr);
 int						test_list(t_malloc *list, void *ptr);
 int						init_glob(void);
-void					*init_tiny(void *ptr);
+void					init_tiny(void *ptr);
 void					init_small(void *ptr);
 void					*malloc(size_t size);
 void					*malloc_tiny(size_t size);
