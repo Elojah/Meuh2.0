@@ -6,18 +6,18 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/05 14:58:56 by hdezier           #+#    #+#             */
-/*   Updated: 2015/02/05 14:58:56 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/25 17:03:44 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 #include <unistd.h>
 
-static void			ft_putnbr(unsigned long n, unsigned int base)
+static void				ft_putnbr(unsigned long n, unsigned int base)
 {
-	const char		tab[] = "0123456789ABCDEF";
-	unsigned long	quo;
-	unsigned long	mod;
+	static const char	tab[] = "0123456789ABCDEF";
+	unsigned long		quo;
+	unsigned long		mod;
 
 	if (!n)
 		return ;
@@ -32,35 +32,35 @@ static void			ft_putnbr(unsigned long n, unsigned int base)
 		write(1, &tab[n], 1);
 }
 
-static size_t		show_heap(t_heap *heap)
+static size_t			show_heap(t_heap *heap)
 {
-	t_mem	*current_mem;
-	size_t	result;
+	t_mem				*current_mem;
+	size_t				result;
 
 	current_mem = heap->mem;
 	result = 0;
 	ft_putnbr((unsigned long)heap->mem, 16);
-	write (1, "\n", 1);
+	write(1, "\n", 1);
 	while (current_mem && (current_mem = current_mem->next))
 	{
 		if (current_mem->size == 0 || current_mem->free == 1)
 			continue ;
-		write (1, "0x", 3);
+		write(1, "0x", 3);
 		ft_putnbr((unsigned long)(current_mem + sizeof(t_mem)), 16);
-		write (1, " - 0x", 5);
+		write(1, " - 0x", 5);
 		ft_putnbr((unsigned long)(current_mem
 			+ sizeof(t_mem) + current_mem->size), 16);
-		write (1, " : ", 3);
+		write(1, " : ", 3);
 		ft_putnbr((unsigned long)(current_mem->size), 10);
 		result += current_mem->size;
-		write (1, " octets\n", 8);
+		write(1, " octets\n", 8);
 	}
 	return (result);
 }
 
-t_data				*set_get_data(t_data *data)
+t_data					*set_get_data(t_data *data)
 {
-	static t_data	*data_save = NULL;
+	static t_data		*data_save = NULL;
 
 	if (!data)
 		return (data_save);
@@ -68,10 +68,10 @@ t_data				*set_get_data(t_data *data)
 	return (NULL);
 }
 
-void				show_alloc_mem(void)
+void					show_alloc_mem(void)
 {
-	t_data			*data;
-	size_t			total;
+	t_data				*data;
+	size_t				total;
 
 	if (!(data = set_get_data(NULL)))
 		return ;

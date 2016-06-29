@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/09 16:49:05 by hdezier           #+#    #+#             */
-/*   Updated: 2015/02/09 16:49:06 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/25 16:35:18 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void		*realloc(void *ptr, size_t size)
 	void	*tmp;
 
 	tmp = malloc(size);
-	ft_memcpy(tmp, ptr + sizeof(t_mem), ((t_mem *)(ptr))->size);
+	ft_memcpy(tmp, (unsigned char *)ptr + sizeof(t_mem)
+		, ((t_mem *)(ptr))->size);
 	free(ptr);
 	return (tmp);
 }
