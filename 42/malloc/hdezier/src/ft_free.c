@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/09 13:21:51 by hdezier           #+#    #+#             */
-/*   Updated: 2015/02/09 13:21:52 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/25 16:34:43 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void		free(void *ptr)
 		data = set_get_data(NULL);
 	if (!ptr)
 		return ;
-	if (free_heap(&(data->tiny), ptr))
+	if (free_heap(&(data->tiny), (t_mem *)ptr))
 		return ;
-	if (free_heap(&(data->small), ptr))
+	if (free_heap(&(data->small), (t_mem *)ptr))
 		return ;
-	free_heap(&(data->large), ptr);
+	free_heap(&(data->large), (t_mem *)ptr);
 }

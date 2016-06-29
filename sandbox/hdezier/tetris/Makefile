@@ -1,4 +1,16 @@
-TARGET = bin/runner
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/05/25 15:21:48 by hdezier           #+#    #+#              #
+#    Updated: 2016/05/25 15:21:51 by hdezier          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+TARGET = fillit
 
 #Directories
 SRC_DIR = src
@@ -7,18 +19,18 @@ BUILD_DIR = build
 LIB_DIR =
 
 #Options
-CC = clang-3.6
+CC = clang
 SRC_EXT = .c
 RM = rm -rf
 
 #List classes here
 CLASS = main\
-				error\
-				file_to_pieces\
-				resolve\
-				fill_result_in_size\
-				calculus_dead_blocks\
-				print_pieces\
+		error\
+		file_to_pieces\
+		resolve\
+		fill_result_in_size\
+		calculus_dead_blocks\
+		print_pieces\
 
 #List interfaces here
 INTERFACE = \
@@ -49,7 +61,7 @@ INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 
 #RULES
-all : dirbin $(TARGET)
+all : $(TARGET)
 
 clean :
 	$(RM) $(BUILD_DIR)

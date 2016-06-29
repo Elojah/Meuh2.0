@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculus_dead_blocks.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/31 17:50:59 by leeios            #+#    #+#             */
-/*   Updated: 2015/12/31 19:29:45 by leeios           ###   ########.fr       */
+/*   Updated: 2016/05/25 15:52:02 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static int	consecutive_dead_blocks(t_result *result, int i, int j)
 		+ consecutive_dead_blocks(result, i + 1, j)
 		+ consecutive_dead_blocks(result, i, j + 1)
 		+ consecutive_dead_blocks(result, i - 1, j)
-		+ consecutive_dead_blocks(result, i, j - 1)
-	);
+		+ consecutive_dead_blocks(result, i, j - 1));
 }
 
 static void	init_check_data(t_result *result)
@@ -46,12 +45,12 @@ static void	init_check_data(t_result *result)
 	}
 }
 
-int		calculus_dead_blocks(t_result *result)
+int			calculus_dead_blocks(t_result *result)
 {
-	int				i;
-	int				j;
-	int				nb_dead_blocks;
-	int				n;
+	int		i;
+	int		j;
+	int		nb_dead_blocks;
+	int		n;
 
 	i = -1;
 	nb_dead_blocks = 0;

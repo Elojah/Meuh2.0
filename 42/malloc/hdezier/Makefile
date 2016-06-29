@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/03/23 13:00:56 by hdezier           #+#    #+#              #
+#    Updated: 2016/06/29 14:19:12 by hdezier          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 ifeq ($(HOSTTYPE),)
 	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 endif
@@ -21,7 +33,6 @@ CLASS = ft_malloc\
 		ft_free\
 		ft_realloc\
 		show_alloc_mem\
-# main\
 
 #List interfaces here
 INTERFACE =
@@ -32,7 +43,7 @@ OBJ = $(addsuffix .o, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS = -Wall -Wextra -Werror -O3 -g
+CFLAGS = -fpic -Wall -Wextra -Werror -O3
 LFLAGS =
 
 #Libs
@@ -71,7 +82,7 @@ dirbuild:
 #Build rules
 $(TARGET) : $(OBJ)
 	@echo "\n\033[1;4;34mDEP:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
-	ar -rc $@ $^
+	$(CC) -fpic -shared -o $@ -Wl $^
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)
 	@echo "\n\033[1;4;34mSRC:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"

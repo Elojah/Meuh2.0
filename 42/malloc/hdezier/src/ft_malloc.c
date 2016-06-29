@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/04 12:31:02 by hdezier           #+#    #+#             */
-/*   Updated: 2015/02/04 12:31:03 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/29 13:54:25 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,14 @@ static void			*calculus(t_heap *heap, size_t size)
 void				*malloc(size_t size)
 {
 	void				*current;
-	static t_data		data = {{(void *)0, sizeof(t_mem), TINY_PAGE}
-	, {(void *)0, sizeof(t_mem), SMALL_PAGE}
-	, {(void *)0, sizeof(t_mem), LARGE_PAGE}
-	, {0, 0}
-	, 0};
+	static t_data		data =
+	{
+		{(t_mem *)0, sizeof(t_mem), TINY_PAGE}
+		, {(t_mem *)0, sizeof(t_mem), SMALL_PAGE}
+		, {(t_mem *)0, sizeof(t_mem), LARGE_PAGE}
+		, {0, 0}
+		, 0
+	};
 
 	set_get_data(&data);
 	getrlimit(RLIMIT_AS, &(data.limit));
