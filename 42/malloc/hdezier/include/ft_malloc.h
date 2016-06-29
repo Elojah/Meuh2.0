@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/04 12:30:54 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/29 15:43:31 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/29 17:45:13 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define FT_MALLOC_H
 
 # define N_ALLOC 100
-# define TINY_PAGE 4
-# define SMALL_PAGE 16
-# define LARGE_PAGE 64
+# define TINY_PAGE 64
+# define SMALL_PAGE 128
+# define LARGE_PAGE 512
+
+# define NORM_RESPECT(n) (n + sizeof(t_mem) + n->size)
 
 # include <stdlib.h>
 
@@ -49,22 +51,22 @@ typedef struct		s_data
 /*
 **Malloc
 */
-extern void				*malloc(size_t len);
+extern void			*malloc(size_t len);
 
 /*
 **Show alloc mem
 */
-extern void				show_alloc_mem(void);
-t_data					*set_get_data(t_data *data);
+extern void			show_alloc_mem(void);
+t_data				*set_get_data(t_data *data);
 
 /*
 **Free
 */
-extern void				free(void *ptr);
+extern void			free(void *ptr);
 
 /*
 **Realloc
 */
-extern void				*ft_realloc(void *ptr, size_t size);
+extern void			*ft_realloc(void *ptr, size_t size);
 
 #endif

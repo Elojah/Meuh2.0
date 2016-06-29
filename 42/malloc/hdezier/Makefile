@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/23 13:00:56 by hdezier           #+#    #+#              #
-#    Updated: 2016/06/29 14:54:11 by hdezier          ###   ########.fr        #
+#    Updated: 2016/06/29 18:29:23 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,10 +59,10 @@ INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 
 #RULES
-testmake: all
-	gcc -L. -o a.out test/main.c -lft_malloc
+test: all
+	gcc -L. -o a.out test_malloc/main.c -lft_malloc
 
-all : dirbuild $(TARGET) link_hosttype
+all : dirbuild $(TARGET_HOST) link_hosttype
 
 clean :
 	$(RM) $(BUILD_DIR)
@@ -73,7 +73,7 @@ fclean :
 re : fclean all
 
 link_hosttype :
-	@ln -sF $(TARGET) $(TARGET_HOST)
+	@ln -sF $(TARGET_HOST) $(TARGET)
 
 dirbuild:
 	mkdir -p build
@@ -83,7 +83,7 @@ dirbuild:
 .SILENT: dirbuild
 
 #Build rules
-$(TARGET) : $(OBJ)
+$(TARGET_HOST) : $(OBJ)
 	@echo "\n\033[1;4;34mDEP:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
 	$(CC) -fpic -shared -o $@ -Wl $^
 
