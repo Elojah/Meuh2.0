@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/04 12:31:02 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/29 13:54:25 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/29 15:54:12 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_mem		*ft_alloc(size_t nb_pages)
 {
 	t_mem		*mem;
 
-	if ((mem = (t_mem *)mmap(0, nb_pages * getpagesize() * sizeof(t_mem)
+	if ((mem = (t_mem *)mmap(0, nb_pages * getpagesize()
 		, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON
 		, -1, 0)) != MAP_FAILED)
 	{
@@ -53,8 +53,7 @@ static void			*calculus(t_heap *heap, size_t size)
 	if (heap->head >= heap->stock * getpagesize())
 	{
 		current_mem->next = ft_alloc(heap->stock);
-		current_mem = current_mem->next;
-		heap->head = sizeof(t_mem);
+		heap->head = size + sizeof(t_mem);
 	}
 	current_mem->next = current_mem + sizeof(t_mem) + current_mem->size;
 	new_local_mem(current_mem->next, size);
@@ -63,12 +62,11 @@ static void			*calculus(t_heap *heap, size_t size)
 
 void				*malloc(size_t size)
 {
-	void				*current;
-	static t_data		data =
-	{
-		{(t_mem *)0, sizeof(t_mem), TINY_PAGE}
-		, {(t_mem *)0, sizeof(t_mem), SMALL_PAGE}
-		, {(t_mem *)0, sizeof(t_mem), LARGE_PAGE}
+	void				*result;
+	static t_data		data = {
+		{(t_mem *)0, 0, TINY_PAGE}
+		, {(t_mem *)0, 0, SMALL_PAGE}
+		, {(t_mem *)0, 0, LARGE_PAGE}
 		, {0, 0}
 		, 0
 	};
@@ -77,11 +75,11 @@ void				*malloc(size_t size)
 	getrlimit(RLIMIT_AS, &(data.limit));
 	if (data.total > (size_t)data.limit.rlim_max || size == 0)
 		return (NULL);
-	if ((size + sizeof(t_mem)) * 101 < (size_t)TINY_PAGE * getpagesize())
-		current = calculus(&(data.tiny), size);
-	else if ((size + sizeof(t_mem)) * 101 < (size_t)SMALL_PAGE * getpagesize())
-		current = calculus(&(data.small), size);
+	if ((size + sizeof(t_mem)) * N_ALLOC < (size_t)TINY_PAGE * getpagesize())
+		result = calculus(&(data.tiny), size);
+	else if ((size + sizeof(t_mem)) * N_ALLOC < (size_t)SMALL_PAGE * getpagesize())
+		result = calculus(&(data.small), size);
 	else
-		current = calculus(&(data.large), size);
-	return (current);
+		result = calculus(&(data.large), size);
+	return (result);
 }
