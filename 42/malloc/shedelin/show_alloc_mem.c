@@ -23,7 +23,7 @@ void		show_alloc_mem(void)
 	ml_print(tmp, "SMALL");
 	tmp = g_glob.large;
 	ml_print(tmp, "LARGE");
-	ft_putendl("\n\n");
+	ft_putendl("\n");
 }
 
 void		ml_print(t_malloc *list, char *type)

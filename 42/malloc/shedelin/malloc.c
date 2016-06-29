@@ -23,7 +23,7 @@ void		*malloc(size_t size)
 	if (g_glob.tiny == NULL)
 		if (init_glob())
 			return (NULL);
-	if (size < TINY)
+	if (size <= TINY)
 		ptr = malloc_tiny(size);
 	else if (size <= SMALL)
 		ptr = malloc_small(size);

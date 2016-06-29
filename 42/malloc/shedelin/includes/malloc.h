@@ -17,8 +17,8 @@
 
 # define TINY			(size_t)(1024)
 # define SMALL			(size_t)(4096)
-# define NB_TINY		300
-# define NB_SMALL		300
+# define NB_TINY		760
+# define NB_SMALL		760
 
 #include <stdlib.h>
 #include <sys/mman.h>
