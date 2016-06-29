@@ -12,6 +12,7 @@
 
 #include "includes/malloc.h"
 #include <libft.h>
+#include <stdio.h> //////////////////////
 
 void	free(void *ptr)
 {
@@ -28,13 +29,14 @@ void	free(void *ptr)
 	tmp = g_glob.large;
 	if (test_list(tmp, ptr))
 		return ;
-	ft_putendl("pointer being free was not allocated");
+	//ft_putendl("pointer being free was not allocated");
 }
 
 int		test_list(t_malloc *list, void *ptr)
 {
 	while (list)
 	{
+		//print("to free : %p |||| add in memory %p\n", ptr, list->data)
 		if (list->data == ptr)
 		{
 			list->empty = 0;
