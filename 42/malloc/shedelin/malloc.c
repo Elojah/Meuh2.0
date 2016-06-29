@@ -72,15 +72,13 @@ void		*malloc_large(size_t size)
 {
 	void		*ptr;
 	t_malloc	*tmp;
-	size_t		gsize;
 
 	tmp = g_glob.large;
 	if (tmp)
 		return ((void *)new_malloc(tmp, size));
 	else
 	{
-		gsize = (size / getpagesize() + 1) * getpagesize();
-		ptr = mmap(0, gsize, PROT_READ | PROT_WRITE,
+		ptr = mmap(0, size, PROT_READ | PROT_WRITE,
 		MAP_ANON | MAP_SHARED, -1, 0);
 		if (ptr == MAP_FAILED)
 			return (NULL);
@@ -95,12 +93,10 @@ void		*malloc_large(size_t size)
 
 t_malloc	*new_malloc(t_malloc *tmp, size_t size)
 {
-	size_t		gsize;
 
 	while (tmp && tmp->next)
 		tmp = tmp->next;
-	gsize = (size / getpagesize() + 1) * getpagesize();
-	tmp->next = mmap(0, gsize, PROT_READ | PROT_WRITE,
+	tmp->next = mmap(0, size, PROT_READ | PROT_WRITE,
 	MAP_ANON | MAP_SHARED, -1, 0);
 	if (tmp->next == MAP_FAILED)
 		return (NULL);
