@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/23 13:00:56 by hdezier           #+#    #+#              #
-#    Updated: 2016/06/29 14:54:11 by hdezier          ###   ########.fr        #
+#    Updated: 2016/06/29 16:08:10 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,8 @@ INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 
 #RULES
-testmake: all
-	gcc -L. -o a.out test/main.c -lft_malloc
+test: all
+	gcc -L. -o a.out test_malloc/main.c -lft_malloc
 
 all : dirbuild $(TARGET) link_hosttype
 

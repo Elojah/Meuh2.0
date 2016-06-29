@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/05 14:58:56 by hdezier           #+#    #+#             */
-/*   Updated: 2016/06/29 14:49:49 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/29 17:44:55 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,22 @@ static size_t			show_heap(t_heap *heap)
 	result = 0;
 	ft_putnbr((unsigned long)heap->mem, 16);
 	write(1, "\n", 1);
-	while (current_mem && (current_mem = current_mem->next))
+	while (current_mem != NULL)
 	{
 		if (current_mem->size == 0 || current_mem->free == 1)
+		{
+			current_mem = current_mem->next;
 			continue ;
+		}
 		write(1, "0x", 3);
 		ft_putnbr((unsigned long)(current_mem + sizeof(t_mem)), 16);
 		write(1, " - 0x", 5);
-		ft_putnbr((unsigned long)(current_mem
-			+ sizeof(t_mem) + current_mem->size), 16);
+		ft_putnbr((unsigned long)(NORM_RESPECT(current_mem)), 16);
 		write(1, " : ", 3);
 		ft_putnbr((unsigned long)(current_mem->size), 10);
 		result += current_mem->size;
 		write(1, " octets\n", 8);
+		current_mem = current_mem->next;
 	}
 	return (result);
 }
