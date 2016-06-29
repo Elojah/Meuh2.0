@@ -1,0 +1,67 @@
+build/UserInterface.o: src/UserInterface.cpp include/UserInterface.hpp \
+  lib/sfml/include/SFML/Graphics.hpp lib/sfml/include/SFML/Window.hpp \
+  lib/sfml/include/SFML/System.hpp lib/sfml/include/SFML/Config.hpp \
+  lib/sfml/include/SFML/System/Clock.hpp \
+  lib/sfml/include/SFML/System/Export.hpp \
+  lib/sfml/include/SFML/System/Time.hpp \
+  lib/sfml/include/SFML/System/Err.hpp \
+  lib/sfml/include/SFML/System/InputStream.hpp \
+  lib/sfml/include/SFML/System/Lock.hpp \
+  lib/sfml/include/SFML/System/NonCopyable.hpp \
+  lib/sfml/include/SFML/System/Mutex.hpp \
+  lib/sfml/include/SFML/System/Sleep.hpp \
+  lib/sfml/include/SFML/System/String.hpp \
+  lib/sfml/include/SFML/System/Utf.hpp \
+  lib/sfml/include/SFML/System/Utf.inl \
+  lib/sfml/include/SFML/System/String.inl \
+  lib/sfml/include/SFML/System/Thread.hpp \
+  lib/sfml/include/SFML/System/Thread.inl \
+  lib/sfml/include/SFML/System/ThreadLocal.hpp \
+  lib/sfml/include/SFML/System/ThreadLocalPtr.hpp \
+  lib/sfml/include/SFML/System/ThreadLocalPtr.inl \
+  lib/sfml/include/SFML/System/Vector2.hpp \
+  lib/sfml/include/SFML/System/Vector2.inl \
+  lib/sfml/include/SFML/System/Vector3.hpp \
+  lib/sfml/include/SFML/System/Vector3.inl \
+  lib/sfml/include/SFML/Window/Context.hpp \
+  lib/sfml/include/SFML/Window/Export.hpp \
+  lib/sfml/include/SFML/Window/GlResource.hpp \
+  lib/sfml/include/SFML/Window/ContextSettings.hpp \
+  lib/sfml/include/SFML/Window/Event.hpp \
+  lib/sfml/include/SFML/Window/Joystick.hpp \
+  lib/sfml/include/SFML/Window/Keyboard.hpp \
+  lib/sfml/include/SFML/Window/Mouse.hpp \
+  lib/sfml/include/SFML/Window/Sensor.hpp \
+  lib/sfml/include/SFML/Window/Touch.hpp \
+  lib/sfml/include/SFML/Window/VideoMode.hpp \
+  lib/sfml/include/SFML/Window/Window.hpp \
+  lib/sfml/include/SFML/Window/WindowHandle.hpp \
+  lib/sfml/include/SFML/Window/WindowStyle.hpp \
+  lib/sfml/include/SFML/Graphics/BlendMode.hpp \
+  lib/sfml/include/SFML/Graphics/Export.hpp \
+  lib/sfml/include/SFML/Graphics/Color.hpp \
+  lib/sfml/include/SFML/Graphics/Font.hpp \
+  lib/sfml/include/SFML/Graphics/Glyph.hpp \
+  lib/sfml/include/SFML/Graphics/Rect.hpp \
+  lib/sfml/include/SFML/Graphics/Rect.inl \
+  lib/sfml/include/SFML/Graphics/Texture.hpp \
+  lib/sfml/include/SFML/Graphics/Image.hpp \
+  lib/sfml/include/SFML/Graphics/RenderStates.hpp \
+  lib/sfml/include/SFML/Graphics/Transform.hpp \
+  lib/sfml/include/SFML/Graphics/RenderTexture.hpp \
+  lib/sfml/include/SFML/Graphics/RenderTarget.hpp \
+  lib/sfml/include/SFML/Graphics/View.hpp \
+  lib/sfml/include/SFML/Graphics/PrimitiveType.hpp \
+  lib/sfml/include/SFML/Graphics/Vertex.hpp \
+  lib/sfml/include/SFML/Graphics/RenderWindow.hpp \
+  lib/sfml/include/SFML/Graphics/Shader.hpp \
+  lib/sfml/include/SFML/Graphics/Shape.hpp \
+  lib/sfml/include/SFML/Graphics/Drawable.hpp \
+  lib/sfml/include/SFML/Graphics/Transformable.hpp \
+  lib/sfml/include/SFML/Graphics/VertexArray.hpp \
+  lib/sfml/include/SFML/Graphics/CircleShape.hpp \
+  lib/sfml/include/SFML/Graphics/RectangleShape.hpp \
+  lib/sfml/include/SFML/Graphics/ConvexShape.hpp \
+  lib/sfml/include/SFML/Graphics/Sprite.hpp \
+  lib/sfml/include/SFML/Graphics/Text.hpp include/Board.h \
+  include/common.h include/Rules.h include/Player.h include/minmax.h

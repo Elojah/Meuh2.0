@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_to_pieces.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/23 18:49:43 by leeios            #+#    #+#             */
-/*   Updated: 2015/12/31 17:53:37 by leeios           ###   ########.fr       */
+/*   Updated: 2016/05/25 15:18:48 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-static int	consecutive_bloc(t_piece *piece, int i, int j, long *check_mask)
+static int		consecutive_bloc(t_piece *piece, int i, int j, long *check_mask)
 {
 	if (i < 0 || i >= SIZE_PIECE
 		|| j < 0 || j >= SIZE_PIECE
@@ -26,19 +26,18 @@ static int	consecutive_bloc(t_piece *piece, int i, int j, long *check_mask)
 		|| piece->data[i][j] != BLOC)
 		return (0);
 	*check_mask |= (1 << (i * SIZE_PIECE + j));
-	return(1
+	return (1
 		+ consecutive_bloc(piece, i + 1, j, check_mask)
 		+ consecutive_bloc(piece, i, j + 1, check_mask)
 		+ consecutive_bloc(piece, i - 1, j, check_mask)
-		+ consecutive_bloc(piece, i, j - 1, check_mask)
-		);
+		+ consecutive_bloc(piece, i, j - 1, check_mask));
 }
 
 static t_error	is_valid_piece_four_consecutive(t_piece *piece)
 {
-	int		i;
-	int		j;
-	long	check_mask;
+	int			i;
+	int			j;
+	long		check_mask;
 
 	i = -1;
 	while (++i < SIZE_PIECE)
@@ -61,9 +60,9 @@ static t_error	is_valid_piece_four_consecutive(t_piece *piece)
 
 static t_error	convert_piece(t_piece *piece, char *s)
 {
-	int		i;
-	int		j;
-	int		n;
+	int			i;
+	int			j;
+	int			n;
 
 	i = -1;
 	while (++i < SIZE_PIECE)
@@ -85,11 +84,12 @@ static t_error	convert_piece(t_piece *piece, char *s)
 
 static t_error	read_loop(t_array_piece *array, int fd)
 {
-	int		reader;
-	int		buf_size = SIZE_PIECE * (SIZE_PIECE + 1) + 1;
-	char	buffer[SIZE_PIECE * (SIZE_PIECE + 1) + 1];
-	int		n;
+	int			reader;
+	int			buf_size;
+	char		buffer[SIZE_PIECE * (SIZE_PIECE + 1) + 1];
+	int			n;
 
+	buf_size = SIZE_PIECE * (SIZE_PIECE + 1) + 1;
 	n = 0;
 	while ((reader = read(fd, buffer, buf_size)) != 0)
 	{
@@ -100,9 +100,9 @@ static t_error	read_loop(t_array_piece *array, int fd)
 	return (NONE);
 }
 
-t_error		file_to_pieces(t_array_piece *array, char *file_name)
+t_error			file_to_pieces(t_array_piece *array, char *file_name)
 {
-	int		fd;
+	int			fd;
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)

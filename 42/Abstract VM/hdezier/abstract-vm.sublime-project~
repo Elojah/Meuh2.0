@@ -1,0 +1,20 @@
+{
+    "folders":
+    [
+        {
+            "path": "~/code/meuh/42/Abstract\ VM/hdezier"
+        }
+    ],
+
+    "settings":
+    {
+        "cc_include_options":
+        [
+            "-D_DBG_",
+            "-I${project_path}/include",
+             "-Wall",
+             "-Werror",
+             "-Wextra",
+        ]
+    }
+}

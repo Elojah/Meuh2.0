@@ -1,0 +1,13 @@
+#le programme applique la fonction crypt avec le pid du programme et une chaine de caractere
+#on creer un fichier qui appelle la fonction avec le pid suivant pour le passer en parametre du programe
+
+vi /tmp/boo.py
+>>
+import os, crypt
+print crypt.crypt(str(os.getpid() + 1), "$1$awesome")
+<<
+
+./ch21 `python /tmp/boo.py`
+
+cat .passwd
+

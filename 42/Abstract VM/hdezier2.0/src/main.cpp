@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 16:46:48 by leeios            #+#    #+#             */
-/*   Updated: 2016/05/24 14:32:26 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/05/24 19:15:37 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,10 @@ static void		exec(void)
 		std::string		line;
 		std::getline(std::cin, line);
 		error = lexer.read_line(line, stack, true);
-		if (error != eErr::NONE)
+		if (error == eErr::EXIT)
 			break ;
+		if (error != eErr::NONE)
+			print_error(error, nLine);
 		++nLine;
 	}
 	print_error(error, nLine);
@@ -95,8 +97,10 @@ static void		exec(const char *filename)
 	while (std::getline(ifs, line))
 	{
 		error = lexer.read_line(line, stack, false);
-		if (error != eErr::NONE)
+		if (error == eErr::EXIT)
 			break ;
+		if (error != eErr::NONE)
+			print_error(error, nLine);
 		++nLine;
 	}
 	print_error(error, nLine);

