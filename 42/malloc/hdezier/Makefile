@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/23 13:00:56 by hdezier           #+#    #+#              #
-#    Updated: 2016/06/29 18:29:23 by hdezier          ###   ########.fr        #
+#    Updated: 2016/06/29 19:04:13 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ OBJ = $(addsuffix .o, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS = -fpic -Wall -Wextra -Werror -O3
+CFLAGS = -Wall -Wextra -Werror -O3
 LFLAGS =
 
 #Libs
@@ -85,7 +85,7 @@ dirbuild:
 #Build rules
 $(TARGET_HOST) : $(OBJ)
 	@echo "\n\033[1;4;34mDEP:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
-	$(CC) -fpic -shared -o $@ -Wl $^
+	$(CC) -o $@ --shared $^
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)
 	@echo "\n\033[1;4;34mSRC:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"
