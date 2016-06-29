@@ -63,3 +63,7 @@ GitHub.sublime-settings
 *.exe
 *.out
 *.app
+
+#Mac
+.DS_STORE
+._.DS_STORE
