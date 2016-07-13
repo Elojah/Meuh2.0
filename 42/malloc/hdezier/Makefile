@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/03/23 13:00:56 by hdezier           #+#    #+#              #
+#    Updated: 2016/06/29 19:04:13 by hdezier          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 ifeq ($(HOSTTYPE),)
 	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 endif
@@ -21,7 +33,6 @@ CLASS = ft_malloc\
 		ft_free\
 		ft_realloc\
 		show_alloc_mem\
-# main\
 
 #List interfaces here
 INTERFACE =
@@ -32,7 +43,7 @@ OBJ = $(addsuffix .o, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 LIBS = $(addprefix -L,$(LIB_DIR))
 
 #Flags
-CFLAGS = -Wall -Wextra -Werror -O3 -g
+CFLAGS = -Wall -Wextra -Werror -O3
 LFLAGS =
 
 #Libs
@@ -48,7 +59,10 @@ INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 
 #RULES
-all : dirbuild $(TARGET) link_hosttype
+test: all
+	gcc -L. -o a.out test_malloc/main.c -lft_malloc
+
+all : dirbuild $(TARGET_HOST) link_hosttype
 
 clean :
 	$(RM) $(BUILD_DIR)
@@ -59,7 +73,7 @@ fclean :
 re : fclean all
 
 link_hosttype :
-	@ln -sF $(TARGET) $(TARGET_HOST)
+	@ln -sF $(TARGET_HOST) $(TARGET)
 
 dirbuild:
 	mkdir -p build
@@ -69,9 +83,9 @@ dirbuild:
 .SILENT: dirbuild
 
 #Build rules
-$(TARGET) : $(OBJ)
+$(TARGET_HOST) : $(OBJ)
 	@echo "\n\033[1;4;34mDEP:\033[0m\n"$^"\n\033[36mLinking objects ...\033[0m\n"
-	ar -rc $@ $^
+	$(CC) -o $@ --shared $^
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%$(SRC_EXT)
 	@echo "\n\033[1;4;34mSRC:\033[0m\n"$<"\n\033[36mCompiling src ...\033[0m"

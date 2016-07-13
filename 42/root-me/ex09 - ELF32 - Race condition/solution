@@ -1,0 +1,5 @@
+#le mdp est ecrit dans le fichier /tmp/tmp_file.txt et est detruit assez vite
+#il nous suffit de le regarder avant qu'il soit detruit
+
+cat /tmp/tmp_file.txt & ./ch12
+

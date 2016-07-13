@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_result_in_size.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/31 16:27:48 by leeios            #+#    #+#             */
-/*   Updated: 2015/12/31 19:31:48 by leeios           ###   ########.fr       */
+/*   Updated: 2016/05/25 15:21:54 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static t_bool		is_next_to_other_piece(t_result *result, int x, int y)
 
 static t_bool		is_valid_position(t_result *result, int x, int y)
 {
-
 	int		i;
 	int		j;
 	t_bool	next_to_other_piece;
@@ -102,7 +101,8 @@ t_error				fill_result_in_size(t_result *result)
 				continue ;
 			write_piece_to_result(result, i, j);
 			++result->current_piece;
-			if (calculus_dead_blocks(result) <= (result->fit_size * result->fit_size) - (result->pieces.size * SIZE_PIECE)
+			if (calculus_dead_blocks(result) <= (result->fit_size
+				* result->fit_size) - (result->pieces.size * SIZE_PIECE)
 				&& fill_result_in_size(result) == NONE)
 				return (NONE);
 			--result->current_piece;

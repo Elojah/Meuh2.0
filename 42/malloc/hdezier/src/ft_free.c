@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/09 13:21:51 by hdezier           #+#    #+#             */
-/*   Updated: 2015/02/09 13:21:52 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/06/29 17:38:53 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 #include <sys/mman.h>
 #include <sys/stat.h>
 
-static int	free_heap(t_heap *heap, t_mem *ptr)
+static int			free_heap(t_heap *heap, void *ptr)
 {
-	t_mem	*tmp;
+	t_mem			*tmp;
 
 	if (!heap->mem)
 		return (0);
-	tmp = heap->mem->next;
-	while (tmp)
+	tmp = heap->mem;
+	while (tmp != NULL)
 	{
-		if (tmp + sizeof(t_mem) == ptr)
+		if ((void *)tmp + sizeof(t_mem) == ptr)
 		{
 			munmap(ptr, tmp->size);
 			tmp->free = 1;
@@ -34,7 +34,7 @@ static int	free_heap(t_heap *heap, t_mem *ptr)
 	return (0);
 }
 
-void		free(void *ptr)
+void				free(void *ptr)
 {
 	static t_data	*data = NULL;
 
@@ -46,5 +46,6 @@ void		free(void *ptr)
 		return ;
 	if (free_heap(&(data->small), ptr))
 		return ;
-	free_heap(&(data->large), ptr);
+	if (free_heap(&(data->large), ptr))
+		return ;
 }
