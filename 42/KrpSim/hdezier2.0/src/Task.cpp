@@ -6,13 +6,14 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:16 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/18 18:02:35 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/12 19:29:51 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Task.h"
 #include <iostream>
 #include <limits>
+#include <algorithm>
 
 Task::Task(const t_resource_pack_token &needs
 	, const t_resource_pack_token &products, uint64_t time)
@@ -52,6 +53,27 @@ void		Task::set_sub_tasks(const t_tasks &all_tasks, const std::string &task_name
 				m_sub_tasks.at(res_need.first).emplace(task.first, &task.second);
 				break ;
 			}
+		}
+	}
+}
+
+void		Task::set_task_comb(void)
+{
+	for (const auto &res_need : m_needs)
+	{
+		const auto &sub_tasks = m_sub_tasks.find(res_need.first);
+		if (sub_tasks == m_sub_tasks.cend())
+			return ;
+		for (const auto &sub_task : sub_tasks->second)
+		{
+			t_task_pack		current_comb;
+			uint64_t		n_prod(sub_task.second->get_product(res_need.first));
+			uint64_t		n_ratio(res_need.second / n_prod);
+
+			if (n_ratio * n_prod < res_need.second)
+				++n_ratio;
+			current_comb.emplace(sub_task.first, n_ratio);
+			m_task_comb.push_back(current_comb);
 		}
 	}
 }

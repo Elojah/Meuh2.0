@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:21 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/18 17:52:37 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/12 18:22:57 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ public:
 								, double n_coef) const;
 
 	void						set_sub_tasks(const t_tasks &all_tasks, const std::string &task_name);
+	void						set_task_comb(void);
 
 	// DEBUG
 	inline void		print(void) const
@@ -52,10 +53,14 @@ public:
 
 private:
 	uint64_t			m_n_resources_needed;
+
 	t_resource_pack		m_needs;
 	t_resource_pack		m_products;
 	uint64_t			m_time;
+
 	t_tasks_link_by_res	m_sub_tasks;
+	t_task_comb			m_task_comb;
+
 	mutable bool		m_lock_investing;
 
 	uint64_t			_n_executable(const t_resource_pack &resources_init) const;
