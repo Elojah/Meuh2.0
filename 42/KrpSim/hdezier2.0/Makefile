@@ -6,7 +6,7 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/07/13 17:55:11 by leeios           ###   ########.fr        #
+#    Updated: 2016/07/14 15:11:31 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ CLASS = main\
 		Interpreter\
 		JobShopManager\
 		Task\
-		Combination\
+		ResourceShop\
 
 #List interfaces here
 INTERFACE = \

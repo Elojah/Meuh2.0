@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/14 11:54:14 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/14 15:26:10 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,29 @@
 class ResourceShop
 {
 public:
+	ResourceShop(const t_tasks &tasks);
 	~ResourceShop(void) = default;
 
-	static const t_task_comb		&get_n_resources(const std::string &resource
-		, const uint32_t n, const t_tasks_sorted &tasks);
+	const t_task_comb		&get_n_resources(const std::string &resource
+		, const uint32_t n);
 private:
-	ResourceShop(void);
 
-	static t_task_comb_by_res		m_cache;
+	const t_tasks			&m_tasks;
+	t_task_comb_by_res		m_cache;
+
+	struct						param_rec_comb
+	{
+		const t_tasks_sorted	&tasks;
+		uint64_t				size;
+		t_task_comb				&result;
+	};
+
+	void						_set_sorted_tasks(const std::string &resource
+		, t_tasks_sorted &tasks);
+	void						_set_task_comb_by_n(const t_tasks_sorted &tasks
+		, const uint32_t n, t_task_comb &result);
+	void						_get_comb_rec(t_task_pack current_pack
+		, uint32_t i, uint32_t n, const param_rec_comb &p);
 };
 
 #endif

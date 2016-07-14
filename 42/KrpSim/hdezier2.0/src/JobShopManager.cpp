@@ -6,11 +6,12 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:06 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/14 09:22:48 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/14 16:30:47 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "JobShopManager.h"
+#include "ResourceShop.h"
 #include <iostream>
 #include <limits>
 #include <unordered_map>
@@ -49,19 +50,15 @@ e_err	JobShopManager::add_task(const std::string &task_name
 e_err	JobShopManager::optimize(const t_resources_name &to_opt)
 {
 	t_resource_pack		resources_to_max;
+	ResourceShop		resource_shop(m_tasks);
 
 	for (const auto &s : to_opt)
 		resources_to_max.emplace(s, 1);
 
-	for (auto &t : m_tasks)
-	{
-		t.second.set_sub_tasks(m_tasks, t.first);
-		t.second.set_task_comb();
-	}
 //	if (resources_to_max.find(TIME_WORD) == resources_to_max.cend())
 //		return (_optimize_production(resources_to_max));
 //	else
-	return (_optimize_time(resources_to_max));
+	return (_optimize_time(resources_to_max, resource_shop));
 }
 
 e_err	JobShopManager::_optimize_production(const t_resource_pack &resources_to_max) const
@@ -70,28 +67,22 @@ e_err	JobShopManager::_optimize_production(const t_resource_pack &resources_to_m
 	return (e_err::TODO);
 }
 
-e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max) const
+e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max
+	, ResourceShop &resource_shop) const
 {
 	t_tasks_name		candidate_tasks;
 
 	std::cout << "Start optimization..." << std::endl;
 
-	(void)resources_to_max;
-	for (const auto &t : m_tasks)
+	for (const auto &res : resources_to_max)
 	{
-		std::cout << "Production task tested:" << t.first << std::endl;
-		t.second.print();
-		// for (const auto res_need : resources_to_max)
-		// {
-		// 	if (res_need.first == TIME_WORD)
-		// 		continue ;
-		// 	std::cout << "\t\tLookin for final resource:" << res_need.first << std::endl;
-		// 	auto	n_coef(t.second.get_product(res_need.first));
-		// 	if (n_coef > 0)
-		// 	{
-		// 		std::cout << "\t\t\tStart depth search..." << std::endl;
-		// 	}
-		// }
+		const auto &path = resource_shop.get_n_resources(res.first, 8);
+		for (const auto &task_pack : path)
+		{
+			for (const auto &task : task_pack)
+				std::cout << "\t" << task.first << " x" << task.second << " - ";
+			std::cout << std::endl;
+		}
 	}
 
 	return (e_err::TODO);

@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:12 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/16 18:38:28 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/14 16:07:49 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include "task_type.h"
 
 # include <iostream>
+
+class ResourceShop;
 
 class JobShopManager
 {
@@ -51,7 +53,8 @@ private:
 	t_tasks				m_tasks;
 
 	e_err	_optimize_production(const t_resource_pack &resource_to_max) const;
-	e_err	_optimize_time(const t_resource_pack &resource_to_max) const;
+	e_err	_optimize_time(const t_resource_pack &resource_to_max
+		, ResourceShop &resource_shop) const;
 };
 
 #endif
