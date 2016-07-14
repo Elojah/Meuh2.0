@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 07:26:17 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/14 14:33:04 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/14 19:47:20 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <vector>
 # include <queue>
 # include <unordered_map>
+
 
 class Task;
 
@@ -32,6 +33,12 @@ typedef std::vector<t_task_pack>								t_task_comb;
 typedef std::unordered_map<uint32_t, t_task_comb>				t_task_comb_by_n;
 typedef std::pair<t_tasks_sorted, t_task_comb_by_n>				t_task_comb_with_sort;
 typedef std::unordered_map<std::string, t_task_comb_with_sort>	t_task_comb_by_res;
+// Paths
+// first = index of combination. second = n of resource used
+typedef std::pair<uint32_t, uint32_t>							t_node;
+typedef std::queue<t_node>										t_path;
+typedef std::vector<t_path>										t_path_mult;
+typedef std::unordered_map<std::string, t_path_mult>			t_path_origin_mult;
 
 namespace map_options
 {

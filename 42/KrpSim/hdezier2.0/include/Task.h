@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:21 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/14 15:11:45 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/14 19:57:16 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 # include <iostream>
 
+class ResourceShop;
+
 class Task
 {
 public:
@@ -26,8 +28,26 @@ public:
 		, const t_resource_pack_token &products, uint32_t time);
 	~Task(void) = default;
 
+
+	struct					task_context
+	{
+		const std::string	&origin;
+		const t_tasks		&tasks;
+	};
+	struct					task_state
+	{
+		t_resource_pack		res_available;
+		t_path				current_path;
+	};
+
 	uint32_t					get_need(const std::string &resource) const;
 	uint32_t					get_product(const std::string &resource) const;
+
+	void						get_achievable_paths(
+		const task_state &state
+		, ResourceShop &resource_shop
+		, t_path_mult &result
+		, const task_context &task_ctx) const;
 
 	// DEBUG
 	inline void		print(void) const
@@ -49,7 +69,7 @@ private:
 	t_resource_pack		m_products;
 	uint32_t			m_time;
 
-	// mutable bool		m_lock_investing;
+	mutable bool		m_lock_investing;
 };
 
 #endif
