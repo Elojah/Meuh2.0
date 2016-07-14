@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:06 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/18 17:33:08 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/14 09:22:48 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,14 @@ e_err	JobShopManager::optimize(const t_resources_name &to_opt)
 		resources_to_max.emplace(s, 1);
 
 	for (auto &t : m_tasks)
+	{
 		t.second.set_sub_tasks(m_tasks, t.first);
-
+		t.second.set_task_comb();
+	}
 //	if (resources_to_max.find(TIME_WORD) == resources_to_max.cend())
 //		return (_optimize_production(resources_to_max));
 //	else
-		return (_optimize_time(resources_to_max));
+	return (_optimize_time(resources_to_max));
 }
 
 e_err	JobShopManager::_optimize_production(const t_resource_pack &resources_to_max) const
@@ -74,24 +76,23 @@ e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max) co
 
 	std::cout << "Start optimization..." << std::endl;
 
+	(void)resources_to_max;
 	for (const auto &t : m_tasks)
 	{
-		std::cout << "\tProduction task tested:" << t.first << std::endl;
-		for (const auto res_need : resources_to_max)
-		{
-			if (res_need.first == TIME_WORD)
-				continue ;
-			std::cout << "\t\tLookin for final resource:" << res_need.first << std::endl;
-			auto	n_coef(t.second.get_product(res_need.first));
-			if (n_coef > 0)
-			{
-				std::cout << "\t\t\tStart depth search..." << std::endl;
-				auto	task_path = t.second.get_task_path(t.first, n_coef);
-				for (const auto &t : task_path)
-					std::cerr << t.first << "\tx " << t.second << std::endl;
-			}
-		}
+		std::cout << "Production task tested:" << t.first << std::endl;
+		t.second.print();
+		// for (const auto res_need : resources_to_max)
+		// {
+		// 	if (res_need.first == TIME_WORD)
+		// 		continue ;
+		// 	std::cout << "\t\tLookin for final resource:" << res_need.first << std::endl;
+		// 	auto	n_coef(t.second.get_product(res_need.first));
+		// 	if (n_coef > 0)
+		// 	{
+		// 		std::cout << "\t\t\tStart depth search..." << std::endl;
+		// 	}
+		// }
 	}
 
-	return (e_err::DEBUG);
+	return (e_err::TODO);
 }

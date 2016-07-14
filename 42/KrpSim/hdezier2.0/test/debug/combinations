@@ -1,0 +1,7 @@
+a:20
+prod1:(a:2):(r:1):2
+prod2:(a:2):(r:2):3
+prod3:(a:2):(r:3):5
+prod4:(a:2):(r:4):7
+finalprod:(r:8):(final:1):10
+optimize:(final)

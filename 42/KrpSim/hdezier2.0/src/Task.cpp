@@ -6,11 +6,12 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:16 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/12 19:29:51 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/14 09:25:22 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Task.h"
+#include "Combination.h"
 #include <iostream>
 #include <limits>
 #include <algorithm>
@@ -18,20 +19,13 @@
 Task::Task(const t_resource_pack_token &needs
 	, const t_resource_pack_token &products, uint64_t time)
 	: m_time(time)
-	, m_lock_investing(false)
 {
-	uint64_t	n_resources_needed(0);
-
 	if (m_time == 0)
 		m_time = 1;
 	for (const auto &n : needs)
-	{
-		_add_or_accumulate(m_needs, n.first, n.second);
-		n_resources_needed += n.second;
-	}
+		map_options::_add_or_accumulate(m_needs, n.first, n.second);
 	for (const auto &p : products)
-		_add_or_accumulate(m_products, p.first, p.second);
-	m_n_resources_needed = n_resources_needed;
+		map_options::_add_or_accumulate(m_products, p.first, p.second);
 }
 
 void		Task::set_sub_tasks(const t_tasks &all_tasks, const std::string &task_name)
@@ -62,19 +56,20 @@ void		Task::set_task_comb(void)
 	for (const auto &res_need : m_needs)
 	{
 		const auto &sub_tasks = m_sub_tasks.find(res_need.first);
-		if (sub_tasks == m_sub_tasks.cend())
-			return ;
-		for (const auto &sub_task : sub_tasks->second)
+		if (sub_tasks == m_sub_tasks.cend() || sub_tasks->second.empty())
+			continue ;
+		t_tasks_sorted		sorted_task_by_res;
+		for (const auto &task : sub_tasks->second)
 		{
-			t_task_pack		current_comb;
-			uint64_t		n_prod(sub_task.second->get_product(res_need.first));
-			uint64_t		n_ratio(res_need.second / n_prod);
-
-			if (n_ratio * n_prod < res_need.second)
-				++n_ratio;
-			current_comb.emplace(sub_task.first, n_ratio);
-			m_task_comb.push_back(current_comb);
+			sorted_task_by_res.emplace_back(task.first
+				, task.second->get_product(res_need.first));
 		}
+		std::sort(sorted_task_by_res.begin(), sorted_task_by_res.end(),
+			[](const t_task_number &lhs, const t_task_number &rhs) -> bool
+			{
+				return (lhs.second > rhs.second);
+			});
+		m_task_combs.emplace(res_need.first, Combination::get_all(sorted_task_by_res, res_need.second));
 	}
 }
 
@@ -102,30 +97,6 @@ t_resource_pack		Task::get_product(uint64_t n) const
 	for (auto &p : prod)
 		p.second *= n;
 	return (prod);
-}
-
-t_task_pack				Task::get_task_path(
-							const std::string &task_name
-							, double n_coef) const
-{
-	t_task_pack				result;
-
-	if (m_lock_investing == true)
-		return (result);
-	result.emplace(task_name, n_coef);
-	m_lock_investing = true;
-	for (const auto &sub_task_res : m_sub_tasks)
-	{
-		for (const auto &sub_task : sub_task_res.second)
-		{
-			auto		sub_task_path(sub_task.second->get_task_path(sub_task.first
-				, (double)sub_task.second->get_product(sub_task_res.first) / (double)m_n_resources_needed));
-			for (const auto &task_path : sub_task_path)
-				_add_or_accumulate(result, task_path.first, task_path.second);
-		}
-	}
-	m_lock_investing = false;
-	return (result);
 }
 
 uint64_t		Task::_n_executable(const t_resource_pack &resources_init) const

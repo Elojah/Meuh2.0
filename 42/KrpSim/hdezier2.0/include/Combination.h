@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/12 19:21:56 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/13 16:14:53 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/13 18:03:27 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,19 @@ public:
 
 	static t_task_comb		get_all(const t_tasks_sorted &tasks, const uint64_t n);
 private:
-	static void				_get_comb_start(uint64_t start, const t_tasks_sorted &tasks
-		, uint64_t n, t_task_comb &result);
 
-	static uint64_t			_get_ratio(uint64_t need, uint64_t prod);
+	struct	param_rec_comb
+	{
+		const t_tasks_sorted	&tasks;
+		uint64_t				size;
+		t_task_comb				&result;
+	};
+
+	static void				_get_comb_rec(
+		t_task_pack current_pack
+		, uint64_t i
+		, uint64_t n
+		, const param_rec_comb &p);
 
 };
 
