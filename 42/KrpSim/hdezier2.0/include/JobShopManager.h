@@ -28,11 +28,11 @@ public:
 	JobShopManager(void);
 	~JobShopManager(void) = default;
 
-	e_err	set_initial_resources(const std::string &resource_name, uint64_t n);
+	e_err	set_initial_resources(const std::string &resource_name, uint32_t n);
 	e_err	add_task(const std::string &task_name
 		, const t_resource_pack_token &needs
 		, const t_resource_pack_token &products
-		, uint64_t time);
+		, uint32_t time);
 
 	e_err	optimize(const t_resources_name &to_opt);
 

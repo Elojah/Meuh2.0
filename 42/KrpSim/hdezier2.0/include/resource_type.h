@@ -18,8 +18,8 @@
 # include <unordered_map>
 
 typedef std::vector<std::string>						t_resources_name;
-typedef std::pair<std::string, uint64_t>				t_resource_number;
+typedef std::pair<std::string, uint32_t>				t_resource_number;
 typedef std::vector<t_resource_number>					t_resource_pack_token;
-typedef std::unordered_map<std::string, uint64_t>		t_resource_pack;
+typedef std::unordered_map<std::string, uint32_t>		t_resource_pack;
 
 #endif

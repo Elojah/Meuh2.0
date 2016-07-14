@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:21 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/14 09:24:10 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/14 11:47:12 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ class Task
 {
 public:
 	Task(const t_resource_pack_token &needs
-		, const t_resource_pack_token &products, uint64_t time);
+		, const t_resource_pack_token &products, uint32_t time);
 	~Task(void) = default;
 
-	uint64_t					get_need(const std::string &resource) const;
-	uint64_t					get_product(const std::string &resource) const;
-	t_resource_pack				get_product(uint64_t n) const;
+	uint32_t					get_need(const std::string &resource) const;
+	uint32_t					get_product(const std::string &resource) const;
+	t_resource_pack				get_product(uint32_t n) const;
 
 	void						set_sub_tasks(const t_tasks &all_tasks, const std::string &task_name);
 	void						set_task_comb(void);
@@ -61,13 +61,12 @@ public:
 private:
 	t_resource_pack		m_needs;
 	t_resource_pack		m_products;
-	uint64_t			m_time;
+	uint32_t			m_time;
 
 	t_tasks_link_by_res	m_sub_tasks;
 	t_task_comb_by_res	m_task_combs;
 
-	uint64_t			_n_executable(const t_resource_pack &resources_init) const;
-	uint64_t			_calc_ratio_according_prod(uint64_t current_prod, const t_resource_pack &resources_to_max) const;
+	mutable bool		m_lock_investing;
 };
 
 #endif

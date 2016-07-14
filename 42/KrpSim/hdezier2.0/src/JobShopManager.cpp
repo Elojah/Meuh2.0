@@ -24,7 +24,7 @@ JobShopManager::JobShopManager(void)
 	m_tasks.reserve(1);
 }
 
-e_err	JobShopManager::set_initial_resources(const std::string &resource_name, uint64_t n)
+e_err	JobShopManager::set_initial_resources(const std::string &resource_name, uint32_t n)
 {
 	if (m_resources.find(resource_name) == m_resources.cend())
 		m_resources.emplace(resource_name, n);
@@ -36,7 +36,7 @@ e_err	JobShopManager::set_initial_resources(const std::string &resource_name, ui
 e_err	JobShopManager::add_task(const std::string &task_name
 	, const t_resource_pack_token &needs
 	, const t_resource_pack_token &products
-	, uint64_t time)
+	, uint32_t time)
 {
 	if (m_tasks.find(task_name) != m_tasks.cend())
 		return (e_err::TASK_DUPLICAT);
