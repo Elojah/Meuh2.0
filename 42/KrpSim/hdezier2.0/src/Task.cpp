@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:16 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/14 20:06:29 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/15 19:29:31 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,14 @@ void				Task::get_achievable_paths(
 		uint32_t	n_res_available = 0;
 		if (state.res_available.find(res_need.first) != state.res_available.end())
 			n_res_available = state.res_available.at(res_need.first);
-		for (uint32_t i = 0; i < n_res_available; ++i)
+		// Still effect if no resources available !!!
+		for (uint32_t i = 0; i <= n_res_available && i < res_need.second; ++i)
 		{
-			const auto	&comb_resources = resource_shop.get_n_resources(res_need, i);
-			for (const auto &comb : )
+			const auto	&comb_resources = resource_shop.get_n_resources(res_need.first, i);
+			for (const auto &comb : comb_resources)
+			{
+				task_ctx.tasks.
+			}
 			task_state		next_state;
 
 			next_state.res_available = state.res_available;
