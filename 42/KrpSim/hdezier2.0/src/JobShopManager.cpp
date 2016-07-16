@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:06 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/16 09:55:58 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/16 12:26:25 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,10 @@ e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max
 		std::cout << "Examining resource:\033[34m" << res.first << "\033[0m..." << std::endl;
 		for (const auto &task : m_tasks)
 		{
-			if (task.second.get_product(res.first) - task.second.get_need(res.first) > 0)
+			if (task.second.get_product(res.first) > task.second.get_need(res.first))
 			{
 				Task::task_state	state;
 				t_path_mult			result;
-				// Task::task_context	task_ctx {task.first, m_tasks};
 
 				state.res_available = m_resources;
 				bool possible = task.second.get_achievable_paths(state, resource_shop, result, m_tasks);

@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:21 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/16 09:45:37 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/16 12:25:46 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,16 @@ public:
 		, const t_resource_pack_token &products, uint32_t time);
 	~Task(void) = default;
 
-
-	// struct					task_context
-	// {
-	// 	const std::string	&origin;
-	// 	const t_tasks		&tasks;
-	// };
-
 	struct					task_state
 	{
-		task_state(void) = default;
+		inline task_state(void) : last_requirement(true) {};
 		inline task_state(const task_state &state)
 			: res_available(state.res_available)
-			, current_path(state.current_path) {};
+			, current_path(state.current_path)
+			, last_requirement(state.last_requirement) {};
 		t_resource_pack		res_available;
 		t_path				current_path;
+		bool				last_requirement;
 	};
 
 
@@ -51,7 +46,7 @@ public:
 	uint32_t					get_product(const std::string &resource) const;
 
 	bool						get_achievable_paths(
-		const task_state &state
+		task_state &state
 		, ResourceShop &resource_shop
 		, t_path_mult &result
 		, const t_tasks &tasks) const;
