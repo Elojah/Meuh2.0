@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:16 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/16 13:09:30 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/16 13:59:37 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ bool				Task::get_achievable_paths(
 				task_state		next_state(state);
 
 				next_state.current_path.push(std::make_pair(index_comb, i));
-				next_state.last_requirement = next_state.last_requirement && (i_needs == need_size - 1);
 				if (next_state.res_available.find(res_need.first) != next_state.res_available.end())
 					next_state.res_available.at(res_need.first) -= i;
 				// Launch one combination ex:11222
@@ -100,6 +99,7 @@ bool				Task::get_achievable_paths(
 					for (uint32_t i = 0; i < task.second && comb_achievable; ++i)
 					{
 						std::cout << "\tDepth +1:" << task.first << std::endl;
+						next_state.last_requirement = next_state.last_requirement && (i_needs == need_size - 1) && (i == task.second - 1);
 						comb_achievable = comb_achievable && tasks.at(task.first).get_achievable_paths(next_state, resource_shop, result, tasks);
 						std::cout << "\tDepth -1:" << task.first << std::endl;
 					}
