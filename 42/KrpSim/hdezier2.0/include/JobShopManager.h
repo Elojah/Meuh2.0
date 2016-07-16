@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:12 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/14 16:07:49 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/16 08:36:34 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ private:
 	e_err	_optimize_production(const t_resource_pack &resource_to_max) const;
 	e_err	_optimize_time(const t_resource_pack &resource_to_max
 		, ResourceShop &resource_shop) const;
+	void	_print_path_mult(const std::string &first_task_name, t_path_mult &path, ResourceShop &res_shop) const;
+
 };
 
 #endif

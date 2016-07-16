@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:14 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/14 20:14:05 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/16 08:14:52 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ const t_task_comb		&ResourceShop::get_n_resources(const std::string &resource
 			, task_comb.first->second);
 	}
 	return (m_cache.at(resource).second.at(n));
+}
+
+// USE CAREFULLY
+const t_tasks_sorted	&ResourceShop::get_tasks_order(const std::string &res) const
+{
+	// MAY THROW AN EXCEPTION
+	return (m_cache.at(res).first);
 }
 
 void					ResourceShop::_set_sorted_tasks(const std::string &resource

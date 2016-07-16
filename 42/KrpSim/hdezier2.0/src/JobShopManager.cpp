@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:06 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/14 16:30:47 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/16 08:42:47 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,52 @@ e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max
 {
 	t_tasks_name		candidate_tasks;
 
-	std::cout << "Start optimization..." << std::endl;
+	std::cout << "_______Start optimization..." << std::endl;
 
 	for (const auto &res : resources_to_max)
 	{
-		const auto &path = resource_shop.get_n_resources(res.first, 8);
-		for (const auto &task_pack : path)
+		std::cout << "Examining resource:\033[34m" << res.first << "\033[0m..." << std::endl;
+		for (const auto &task : m_tasks)
 		{
-			for (const auto &task : task_pack)
-				std::cout << "\t" << task.first << " x" << task.second << " - ";
-			std::cout << std::endl;
+			if (task.second.get_product(res.first) - task.second.get_need(res.first) > 0)
+			{
+				Task::task_state	state;
+				t_path_mult			result;
+				// Task::task_context	task_ctx {task.first, m_tasks};
+
+				state.res_available = m_resources;
+				bool possible = task.second.get_achievable_paths(state, resource_shop, result, m_tasks);
+				if (possible == true)
+				{
+					_print_path_mult(task.first, result, resource_shop);
+				}
+			}
 		}
 	}
 
 	return (e_err::TODO);
+}
+
+void	JobShopManager::_print_path_mult(const std::string &first_task_name, t_path_mult &path, ResourceShop &resource_shop) const
+{
+	std::cout << "\033[31mPath(s) found !\033[0m" << std::endl;
+	std::string	task_name(first_task_name);
+	for (auto &single_path : path)
+	{
+		std::cout << '[' << task_name << ']' << std::endl;
+		const auto &resources(m_tasks.at(first_task_name).get_needs());
+		for (const auto &res : resources)
+		{
+			std::cout << '{' << res.second << '}' << res.first << "------|" << std::endl;
+			while (single_path.empty() == false)
+			{
+				const auto	node(single_path.front());
+				const auto	&combs = resource_shop.get_n_resources(res.first, res.second - node.second);
+				const auto	&next_paths = combs.at(node.first);
+				for (const auto &task : next_paths)
+					std::cout << task.first << " x " << task.second << std::endl;
+				single_path.pop();
+			}
+		}
+	}
 }

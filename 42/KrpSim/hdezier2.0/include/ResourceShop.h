@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/14 15:26:10 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/16 08:13:47 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ public:
 
 	const t_task_comb		&get_n_resources(const std::string &resource
 		, const uint32_t n);
+	// USE CAREFULLY !!!
+	const t_tasks_sorted	&get_tasks_order(const std::string &res) const;
+
 private:
 
 	const t_tasks			&m_tasks;
