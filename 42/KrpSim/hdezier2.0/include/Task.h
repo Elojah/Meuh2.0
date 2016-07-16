@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:21 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/16 08:25:48 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/16 09:45:37 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ public:
 	};
 
 
-	const t_resource_pack		&get_needs(void) const {return (m_needs);}
+	// const t_resource_pack		&get_needs(void) const {return (m_needs);}
 	uint32_t					get_need(const std::string &resource) const;
 	uint32_t					get_product(const std::string &resource) const;
 
@@ -56,20 +56,7 @@ public:
 		, t_path_mult &result
 		, const t_tasks &tasks) const;
 
-	// DEBUG
-	inline void		print(void) const
-	{
-		// std::cerr << "\t_Needs_" << std::endl;
-		// for (const auto &n : m_needs)
-		// 	std::cerr << "\t\t" << n.first << ":" << (unsigned int)n.second << std::endl;
-		// std::cerr << "\t_Products_" << std::endl;
-		// for (const auto &n : m_products)
-		// 	std::cerr << "\t\t" << n.first << ":" << (unsigned int)n.second << std::endl;
-		// std::cerr << "\tTime:" << (unsigned int)m_time << std::endl;
-		// std::cerr << "\tSubstasks:" << std::endl;
-		// for (const auto &sub_task : m_sub_tasks)
-		// 	std::cerr << ":" << sub_task.first << std::endl;
-	};
+	void			print_path(t_path &path, ResourceShop &resource_shop, const t_tasks &tasks) const;
 
 private:
 	t_resource_pack		m_needs;

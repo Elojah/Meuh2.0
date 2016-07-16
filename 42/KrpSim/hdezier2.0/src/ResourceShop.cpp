@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:14 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/16 08:14:52 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/16 09:26:49 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void					ResourceShop::_set_sorted_tasks(const std::string &resource
 void				ResourceShop::_set_task_comb_by_n(const t_tasks_sorted &tasks
 	, const uint32_t n, t_task_comb &result)
 {
+	if (n == 0)
+		return ;
 	const param_rec_comb	p{tasks, tasks.size(), result};
 	t_task_pack				empty_task;
 
