@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:21 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/16 12:25:46 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/19 17:05:00 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,10 @@ public:
 		, const t_resource_pack_token &products, uint32_t time);
 	~Task(void) = default;
 
-	struct					task_state
-	{
-		inline task_state(void) : last_requirement(true) {};
-		inline task_state(const task_state &state)
-			: res_available(state.res_available)
-			, current_path(state.current_path)
-			, last_requirement(state.last_requirement) {};
-		t_resource_pack		res_available;
-		t_path				current_path;
-		bool				last_requirement;
-	};
-
-
-	// const t_resource_pack		&get_needs(void) const {return (m_needs);}
 	uint32_t					get_need(const std::string &resource) const;
 	uint32_t					get_product(const std::string &resource) const;
-
-	bool						get_achievable_paths(
-		task_state &state
-		, ResourceShop &resource_shop
-		, t_path_mult &result
-		, const t_tasks &tasks) const;
-
-	void			print_path(t_path &path, ResourceShop &resource_shop, const t_tasks &tasks) const;
+	inline void					lock(void) const {m_lock_investing = true;};
+	inline void					unlock(void) const {m_lock_investing = false;};
 
 private:
 	t_resource_pack		m_needs;

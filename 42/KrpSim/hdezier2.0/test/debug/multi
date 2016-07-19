@@ -4,11 +4,12 @@
 # stock      name:quantity
 euro:10
 dollar:2
-yen:5
+yen:20
 #
 # process   name:(need1:qty1;need2:qty2;[...]):(result1:qty1;result2:qty2;[...]):delay
 #
-achat_materiel:(euro:8;dollar:2;yen:5):(materiel:1):10
+yen_to_balls:(yen:10):(balls:3):10
+achat_materiel:(euro:8;dollar:2;balls:5):(materiel:1):10
 realisation_produit:(materiel:1):(produit:1):30
 livraison:(produit:1):(client_content:1):20
 #
