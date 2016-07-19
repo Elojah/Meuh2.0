@@ -83,7 +83,7 @@ void				ResourceShop::_get_comb_rec(t_task_pack current_pack
 {
 	map_options::_add_or_accumulate(current_pack, p.tasks.at(i).first, (uint32_t)1);
 	if (n <= p.tasks.at(i).second)
-		p.result.push_back(current_pack);
+		p.result.push_back(current_pack); // std::move here ?
 	else
 	{
 		n -= p.tasks.at(i).second;
