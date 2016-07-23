@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:14 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/16 09:26:49 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/22 15:36:30 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void				ResourceShop::_get_comb_rec(t_task_pack current_pack
 {
 	map_options::_add_or_accumulate(current_pack, p.tasks.at(i).first, (uint32_t)1);
 	if (n <= p.tasks.at(i).second)
-		p.result.push_back(current_pack);
+		p.result.emplace_back(std::move(current_pack));
 	else
 	{
 		n -= p.tasks.at(i).second;

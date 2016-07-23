@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:16 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/16 13:59:37 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/23 13:37:48 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,34 @@ uint32_t			Task::get_product(const std::string &resource) const
 	return (m_products.at(resource));
 }
 
+bool				Task::_consume_res(t_resource_pack &resources) const
+{
+	for (const auto &res_consumed : m_needs)
+	{
+		bool	consumed(false);
+		for (auto &res : resources)
+		{
+			if (res_consumed.first == res.first
+				&& res.second > res_consumed.second)
+			{
+				consumed = true;
+				res.second -= res_consumed.second;
+				break ;
+			}
+		}
+		if (consumed == false)
+			return (false);
+	}
+	return (true);
+}
+
 bool				Task::get_achievable_paths(
-	task_state &state
+	const task_state &state
 	, ResourceShop &resource_shop
 	, t_path_mult &result
 	, const t_tasks &tasks) const
 {
+	// Lock checking/setting
 	if (m_lock_investing == true)
 	{
 		std::cout << "Cancelled loop" << std::endl;
@@ -53,68 +75,62 @@ bool				Task::get_achievable_paths(
 	}
 	m_lock_investing = true;
 
-	const uint32_t	need_size = m_needs.size();
-	uint32_t		i_needs = 0;
+	// Check each resource. last one has last_requirement at true
 	for (const auto &res_need : m_needs)
 	{
+		// Resources available test
 		uint32_t	n_res_available = 0;
-		bool		res_achievable(false);
-
 		if (state.res_available.find(res_need.first) != state.res_available.end())
 			n_res_available = state.res_available.at(res_need.first);
-		// Fill with available resources
-		for (uint32_t i = 0; i <= n_res_available && i <= res_need.second; ++i)
+		bool	res_achievable(false);
+		for (uint32_t i_res_used = 0; i_res_used <= n_res_available && i_res_used <= res_need.second; ++i_res_used)
 		{
-			std::cout << res_need.first << " used " << i << " initials" << std::endl;
-			const auto		&comb_tasks = resource_shop.get_n_resources(res_need.first, res_need.second - i);
-			uint32_t		index_comb(0);
-
-			if (i >= res_need.second)
+			std::cout << res_need.first << " used " << i_res_used << " initials" << std::endl;
+			if (i_res_used == res_need.second)
 			{
-				res_achievable = true;
-				state.current_path.push(std::make_pair(0, i));
-				std::cout << "Add leaf" << std::endl;
-				if (state.last_requirement && (i_needs == need_size - 1))
-				{
-					std::cerr << "Add final path:" << res_need.first << std::endl;
-					result.push_back(state.current_path);
-				}
-				continue ;
-			}
-			// Complete with task combinations. ex:11222/3311/...
-			for (const auto &comb_task : comb_tasks)
-			{
+				// New "leaf"
 				task_state		next_state(state);
 
-				next_state.current_path.push(std::make_pair(index_comb, i));
-				if (next_state.res_available.find(res_need.first) != next_state.res_available.end())
-					next_state.res_available.at(res_need.first) -= i;
-				// Launch one combination ex:11222
-				std::cout << "Test combination" << std::endl;
-				bool	comb_achievable(true);
-				for (const auto &task : comb_task)
+				next_state.res_available.at(res_need.first) -= i_res_used;
+				next_state.current_path.push_back(std::make_pair(0, i_res_used));
+				res_achievable = true;
+				std::cout << "Add leaf" << std::endl;
+				if (next_state.task_todo.empty())
 				{
-					std::cout << task.first << " x" << task.second << std::endl;
-					// Launch one task. ex:1
-					for (uint32_t i = 0; i < task.second && comb_achievable; ++i)
-					{
-						std::cout << "\tDepth +1:" << task.first << std::endl;
-						next_state.last_requirement = next_state.last_requirement && (i_needs == need_size - 1) && (i == task.second - 1);
-						comb_achievable = comb_achievable && tasks.at(task.first).get_achievable_paths(next_state, resource_shop, result, tasks);
-						std::cout << "\tDepth -1:" << task.first << std::endl;
-					}
+					std::cout << "Add final path" << std::endl;
+					result.emplace_back(std::move(next_state.current_path));
 				}
-				res_achievable = res_achievable || comb_achievable;
-				++index_comb;
+			}
+			else
+			{
+				const auto		&tasks_comb = resource_shop.get_n_resources(res_need.first, res_need.second - i_res_used);
+				if (tasks_comb.empty())
+					continue ;
+				// Complete with task combinations. ex:11222/3311/...
+				uint32_t	i_comb(0);
+				bool		combinations_achievable(false);
+				for (const auto &comb_task : tasks_comb)
+				{
+					// New "node"
+					task_state		next_state(state);
+
+					next_state.current_path.push_back(std::make_pair(i_comb, i_res_used));
+					std::cout << "Add combination" << std::endl;
+					bool	comb_achievable(true);
+					for (const auto &task : comb_task)
+						next_state.task_todo.emplace(task);
+					combinations_achievable = combinations_achievable || comb_achievable;
+					++i_comb;
+				}
+				res_achievable = res_achievable || combinations_achievable;
 			}
 		}
-		if (res_achievable == false)
+		if (!res_achievable)
 		{
-			std::cout << "Cancelled impossible" << std::endl;
 			return (false);
+			std::cout << "Resource IMPOSSIBLE to get:" << res_need.first << std::endl;
 		}
 		std::cout << "Resource OK:" << res_need.first << std::endl;
-		++i_needs;
 	}
 	m_lock_investing = false;
 	return (true);
@@ -130,8 +146,9 @@ void			Task::print_path(t_path &path, ResourceShop &resource_shop, const t_tasks
 	for (const auto &res : m_needs)
 	{
 		std::cout << res.second << 'x' << res.first << ':' << std::endl;
+// Queue behavior, change with i !!!!
 		const auto	node(path.front());
-		path.pop();
+		path.erase(path.begin());
 		const auto	&combs = resource_shop.get_n_resources(res.first, res.second - node.second);
 		std::cout << "Node:" << node.first << " - res used:" << node.second << std::endl;
 		if (combs.empty() || node.second >= res.second)
@@ -140,8 +157,12 @@ void			Task::print_path(t_path &path, ResourceShop &resource_shop, const t_tasks
 			continue ;
 		}
 		if (node.first >= combs.size())
+		{
+			std::cout << "Overflow on node..." << std::endl;
 			continue ;
+		}
 		const auto	&next_paths = combs.at(node.first);
+		std::cout << node.second << " initials resources used" << std::endl;
 		for (const auto &task : next_paths)
 		{
 			for (uint32_t i = 0; i < task.second; ++i)
@@ -150,6 +171,5 @@ void			Task::print_path(t_path &path, ResourceShop &resource_shop, const t_tasks
 				tasks.at(task.first).print_path(path, resource_shop, tasks);
 			}
 		}
-		path.pop();
 	}
 }

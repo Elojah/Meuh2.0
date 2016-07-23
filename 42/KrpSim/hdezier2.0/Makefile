@@ -6,7 +6,7 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/07/14 15:11:31 by leeios           ###   ########.fr        #
+#    Updated: 2016/07/23 11:22:29 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,11 @@ OBJ = $(addsuffix .o, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 
 #Flags
-CFLAGS = -Wall -Wextra -Werror -O3 -std=c++11
+CFLAGS = -Wall -Wextra -Werror\
+		-fno-exceptions -fno-unwind-tables -DREQUIRES_RTTI=0\
+		-O3\
+		-std=c++11\
+
 LFLAGS =
 
 #Libs
