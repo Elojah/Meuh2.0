@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:21 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/23 13:39:17 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/24 13:37:06 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ private:
 
 	mutable bool		m_lock_investing;
 
-	bool				_consume_res(t_resource_pack &resources) const;
 };
 
 #endif

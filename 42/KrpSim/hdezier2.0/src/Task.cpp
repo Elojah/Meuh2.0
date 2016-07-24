@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:16 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/23 13:37:48 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/24 13:37:08 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,6 @@ uint32_t			Task::get_product(const std::string &resource) const
 	if (m_products.find(resource) == m_products.end())
 		return (0);
 	return (m_products.at(resource));
-}
-
-bool				Task::_consume_res(t_resource_pack &resources) const
-{
-	for (const auto &res_consumed : m_needs)
-	{
-		bool	consumed(false);
-		for (auto &res : resources)
-		{
-			if (res_consumed.first == res.first
-				&& res.second > res_consumed.second)
-			{
-				consumed = true;
-				res.second -= res_consumed.second;
-				break ;
-			}
-		}
-		if (consumed == false)
-			return (false);
-	}
-	return (true);
 }
 
 bool				Task::get_achievable_paths(
