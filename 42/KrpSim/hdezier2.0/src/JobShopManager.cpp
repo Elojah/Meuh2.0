@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:06 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/22 15:37:31 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/24 15:37:13 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,29 +77,7 @@ e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max
 	for (const auto &res : resources_to_max)
 	{
 		std::cout << "Examining resource:\033[34m" << res.first << "\033[0m..." << std::endl;
-		for (const auto &task : m_tasks)
-		{
-			if (task.second.get_product(res.first) > task.second.get_need(res.first))
-			{
-				Task::task_state	state;
-				t_path_mult			result;
-
-				state.res_available = m_resources;
-				bool possible = task.second.get_achievable_paths(state, resource_shop, result, m_tasks);
-				if (possible == true)
-				{
-					std::cout << "\033[31mPath(s) found !\033[0m" << std::endl;
-					for (auto &path : result)
-					{
-						std::cout << "______Path:_________" << std::endl;
-						std::cout << '[' << task.first << ']' << std::endl;
-						(void)path;
-						task.second.print_path(path, resource_shop, m_tasks);
-						std::cout << "_____________________" << std::endl;
-					}
-				}
-			}
-		}
+		(void)resource_shop;
 	}
 
 	return (e_err::TODO);

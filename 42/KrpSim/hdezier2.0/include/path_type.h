@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/19 16:43:49 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/24 13:37:03 by leeios           ###   ########.fr       */
+/*   Created: 2016/07/24 18:30:28 by leeios            #+#    #+#             */
+/*   Updated: 2016/07/24 20:05:27 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,28 @@
 // Paths
 // first = index of combination. second = n of resource used
 typedef std::pair<uint32_t, uint32_t>							t_node;
-typedef std::vector<t_node>										t_path;
+typedef std::queue<t_node>										t_path;
 typedef std::vector<t_path>										t_path_mult;
-// Starting task name
-typedef std::unordered_map<std::string, t_path_mult>			t_path_origin_mult;
-// Resource name
-typedef std::unordered_map<std::string, t_path_origin_mult>		t_path_resource;
+
+namespace numeric_helper
+{
+	template<typename T>
+	T	ft_gcd(T a, T b)
+	{
+		for (;;)
+		{
+			if (a == 0) return b;
+			b %= a;
+			if (b == 0) return a;
+			a %= b;
+		}
+	}
+	template<typename T>
+	T	ft_lcm(T a, T b)
+	{
+		T	tmp = ft_gcd<T>(a, b);
+		return (tmp ? (a / tmp * b) : 0);
+	}
+};
 
 #endif

@@ -6,7 +6,7 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/07/24 13:34:47 by leeios           ###   ########.fr        #
+#    Updated: 2016/07/24 16:23:42 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ CLASS = main\
 		JobShopManager\
 		Task\
 		ResourceShop\
-		PathShop\
 
 #List interfaces here
 INTERFACE = \
@@ -53,7 +52,7 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 
 #Flags
 CFLAGS = -Wall -Wextra -Werror\
-		-fno-exceptions -fno-unwind-tables -DREQUIRES_RTTI=0\
+		-fno-exceptions -fno-unwind-tables -fno-rtti\
 		-O3\
 		-std=c++11\
 

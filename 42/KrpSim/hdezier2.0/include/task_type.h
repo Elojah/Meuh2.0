@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 07:26:17 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/24 13:36:40 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/24 18:48:12 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef std::unordered_map<uint32_t, t_task_comb>				t_task_comb_by_n;
 typedef std::pair<t_tasks_sorted, t_task_comb_by_n>				t_task_comb_with_sort;
 typedef std::unordered_map<std::string, t_task_comb_with_sort>	t_task_comb_by_res;
 
-namespace map_options
+namespace map_helpers
 {
 	template<typename TFirst, typename TSecond>
 	inline bool	_add_or_accumulate(std::unordered_map<TFirst, TSecond> &dest
