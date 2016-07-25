@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/24 18:30:28 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/24 20:05:27 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/25 14:46:48 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 typedef std::pair<uint32_t, uint32_t>							t_node;
 typedef std::queue<t_node>										t_path;
 typedef std::vector<t_path>										t_path_mult;
+
+struct				path_stack
+{
+	t_path			current_path;
+	t_path_mult		&valid_paths;
+};
 
 namespace numeric_helper
 {

@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/25 11:51:17 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/25 15:29:42 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ public:
 	ResourceShop(const t_tasks &tasks);
 	~ResourceShop(void) = default;
 
-	const t_path_mult		&get_paths(const std::string &resource_name
+	const t_path_mult		&get_paths(
+		const t_path &current
+		, const t_resource_number &resource
 		, const t_resource_pack &res_pack);
-	const t_task_comb		&get_combinations(const std::string &resource_name
-		, const uint32_t n);
 
-	// USE CAREFULLY !!!
-	const t_tasks_sorted	&get_tasks_order(const std::string &res) const;
+	// // USE CAREFULLY !!!
+	// const t_tasks_sorted		&get_tasks_order(const std::string &res) const;
+
 
 private:
 
@@ -44,15 +45,24 @@ private:
 	};
 
 // Paths
-	void						_set_paths_by_pack(const std::string &resource_name
-		, const t_resource_pack &res_pack, t_path_mult &result);
-	uint32_t					_get_resource_lcm_prod(const std::string &resource_name);
-	bool						_search_paths(const std::string &resource_name
-		, const uint32_t n, const t_resource_pack &res_pack, t_path_mult &result);
-	bool						_search_paths_comb_only(const std::string &resource_name
-		, const uint32_t n, const t_resource_pack &res_pack, t_path_mult &result);
+	void					_set_paths_by_pack(
+		const t_path &current
+		, const t_resource_number &resource
+		, const t_resource_pack &res_pack);
+	bool					_search_paths(
+		const t_path &current
+		, const t_resource_number &resource
+		, const t_resource_pack &res_pack);
+	bool					_search_paths_comb_only(
+		const t_path &current
+		, const t_resource_number &resource
+		, const t_resource_pack &res_pack);
+
+	uint32_t					_get_resource_lcm_prod(const std::string &resource_name) const;
 
 // Combinations
+	const t_task_comb			&_get_combinations(const t_resource_number &resource);
+
 	void						_set_sorted_tasks(const std::string &resource_name
 		, t_tasks_sorted &tasks);
 	void						_set_task_comb_by_n(const t_tasks_sorted &tasks
