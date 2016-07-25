@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/25 15:29:42 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/25 16:49:43 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,16 @@ public:
 	ResourceShop(const t_tasks &tasks);
 	~ResourceShop(void) = default;
 
-	const t_path_mult		&get_paths(
-		const t_path &current
-		, const t_resource_number &resource
+	inline bool	search_max_resource(const std::string &resource_name, const t_resource_pack &res_pack)
+	{
+		t_resource_stack	res_stack;
+
+		res_stack.emplace(resource_name, _get_resource_lcm_prod(resource_name));
+		return (get_paths(res_stack, res_pack));
+	};
+
+	bool		get_paths(
+		const t_resource_stack &res_stack
 		, const t_resource_pack &res_pack);
 
 	// // USE CAREFULLY !!!
@@ -45,17 +52,11 @@ private:
 	};
 
 // Paths
-	void					_set_paths_by_pack(
-		const t_path &current
-		, const t_resource_number &resource
-		, const t_resource_pack &res_pack);
 	bool					_search_paths(
-		const t_path &current
-		, const t_resource_number &resource
+		const t_resource_stack &res_stack
 		, const t_resource_pack &res_pack);
 	bool					_search_paths_comb_only(
-		const t_path &current
-		, const t_resource_number &resource
+		const t_resource_stack &res_stack
 		, const t_resource_pack &res_pack);
 
 	uint32_t					_get_resource_lcm_prod(const std::string &resource_name) const;

@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:14 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/25 15:31:25 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/25 16:50:53 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,22 @@ ResourceShop::ResourceShop(const t_tasks &tasks)
 	;
 }
 
-const t_path_mult		&ResourceShop::get_paths(
-	const t_path &current
-	, const t_resource_number &resource
+bool		ResourceShop::get_paths(
+	const t_resource_stack		&res_stack
 	, const t_resource_pack &res_pack)
 {
 	auto		paths_by_res = m_paths.emplace(
 		std::piecewise_construct
-		, std::forward_as_tuple(resource.first)
+		, std::forward_as_tuple(res_stack.top().first)
 		, std::forward_as_tuple());
 	auto		paths_by_pack = paths_by_res.first->second.emplace(
 		std::piecewise_construct
 		, std::forward_as_tuple(res_pack)
 		, std::forward_as_tuple());
 	if (paths_by_pack.second == false)
-		_set_paths_by_pack(current, resource, res_pack);
-	return (m_paths.at(resource.first).at(ResourcePack(res_pack)));
+		_search_paths(res_stack, res_pack);
+	return (true);
+	// return (m_paths.at(resource.first).at(ResourcePack(res_pack)));
 }
 
 uint32_t			ResourceShop::_get_resource_lcm_prod(const std::string &resource_name) const
@@ -47,27 +47,13 @@ uint32_t			ResourceShop::_get_resource_lcm_prod(const std::string &resource_name
 	return (lcm);
 }
 
-void					ResourceShop::_set_paths_by_pack(
-	const t_path &current
-	, const t_resource_number &resource
-	, const t_resource_pack &res_pack)
-{
-	if (resource.second == 0)
-		_search_paths(current
-			, std::make_pair(resource.first, _get_resource_lcm_prod(resource.first))
-			, res_pack);
-	else
-		_search_paths(current, resource, res_pack);
-}
-
 bool					ResourceShop::_search_paths(
-	const t_path &current
-	, const t_resource_number &resource
+	const t_resource_stack		&res_stack
 	, const t_resource_pack &res_pack)
 {
 	uint32_t	initial_resource = 0;
-	if (res_pack.find(resource.first) != res_pack.end())
-		initial_resource = res_pack.at(resource.first);
+	if (res_pack.find(res_stack.top().first) != res_pack.end())
+		initial_resource = res_pack.at(res_stack.top().first);
 	for (uint32_t i = 0; i <= initial_resource; ++i)
 	{
 		if (i == initial_resource)
@@ -76,10 +62,17 @@ bool					ResourceShop::_search_paths(
 		}
 		else
 		{
+			// DISPATCH Stack + Res
 			t_resource_pack		next_res_pack = res_pack;
-			next_res_pack.at(resource.first) -= i;
-			_search_paths_comb_only(current
-				, std::make_pair(resource.first, resource.second - i)
+			next_res_pack.at(res_stack.top().first) -= i;
+			t_resource_stack	next_res_stack = res_stack;
+			next_res_stack.pop();
+			auto				last_resource = res_stack.top();
+			last_resource.second -= i;
+			next_res_stack.emplace(std::move(last_resource));
+
+			_search_paths_comb_only(
+				next_res_stack
 				, next_res_pack);
 		}
 	}
@@ -87,17 +80,25 @@ bool					ResourceShop::_search_paths(
 }
 
 bool					ResourceShop::_search_paths_comb_only(
-	const t_path &current
-	, const t_resource_number &resource
+	const t_resource_stack &res_stack
 	, const t_resource_pack &res_pack)
 {
-	const auto	&combinations = _get_combinations(resource);
+	const auto	&combinations = _get_combinations(res_stack.top());
 	for (const auto &comb : combinations)
 	{
 		for (const auto &task : comb)
 		{
-			;
+			t_resource_stack	next_stack = res_stack;
+			const auto		&resources_need = m_tasks.at(task.first).get_need();
+			for (uint32_t i = 0; i < task.second; ++i)
+			{
+				m_tasks.at(task.first).lock();
+				for (const auto &res : resources_need)
+					next_stack.emplace(res);
+				m_tasks.at(task.first).unlock();
+			}
 		}
+		// Unstack and return and resolve and get_paths
 	}
 	return (false);
 }
