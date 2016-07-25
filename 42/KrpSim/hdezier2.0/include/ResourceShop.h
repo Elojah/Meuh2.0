@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/24 20:15:01 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/25 11:51:17 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ private:
 	t_task_comb_by_res		m_combinations;
 	t_resource_paths		m_paths;
 
-	struct						param_rec_comb
+	struct						comb_rec_ctx
 	{
 		const t_tasks_sorted	&tasks;
 		uint64_t				size;
@@ -47,6 +47,10 @@ private:
 	void						_set_paths_by_pack(const std::string &resource_name
 		, const t_resource_pack &res_pack, t_path_mult &result);
 	uint32_t					_get_resource_lcm_prod(const std::string &resource_name);
+	bool						_search_paths(const std::string &resource_name
+		, const uint32_t n, const t_resource_pack &res_pack, t_path_mult &result);
+	bool						_search_paths_comb_only(const std::string &resource_name
+		, const uint32_t n, const t_resource_pack &res_pack, t_path_mult &result);
 
 // Combinations
 	void						_set_sorted_tasks(const std::string &resource_name
@@ -54,8 +58,7 @@ private:
 	void						_set_task_comb_by_n(const t_tasks_sorted &tasks
 		, const uint32_t n, t_task_comb &result);
 	void						_get_comb_rec(t_task_pack current_pack
-		, uint32_t i, uint32_t n, const param_rec_comb &p);
-	_search_paths()
+		, uint32_t i, uint32_t n, const comb_rec_ctx &p);
 };
 
 #endif

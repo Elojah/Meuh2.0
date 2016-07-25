@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:14 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/24 20:13:38 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/25 11:53:57 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,37 @@ void					ResourceShop::_set_paths_by_pack(const std::string &resource_name
 	, const t_resource_pack &res_pack, t_path_mult &result)
 {
 	const uint32_t	res_lcm_prod = _get_resource_lcm_prod(resource_name);
-	_search_paths(resource_name, res_lcm_prod);
+	_search_paths(resource_name, res_lcm_prod, res_pack, result);
 }
 
+bool					ResourceShop::_search_paths(const std::string &resource_name
+	, const uint32_t n, const t_resource_pack &res_pack, t_path_mult &result)
+{
+	uint32_t	initial_resource(0);
+	if (res_pack.find(resource_name) != res_pack.end())
+		initial_resource = res_pack.at(resource_name);
+	for (uint32_t i = 0; i <= initial_resource; ++i)
+	{
+		if (i == initial_resource)
+		{
+			// TODO: Resource complete
+		}
+		else
+		{
+			t_resource_pack		next_res_pack(res_pack);
+			_search_paths_comb_only(resource_name, n - i, res_pack, result);
+		}
+	}
+	return (false);
+}
+
+bool					ResourceShop::_search_paths_comb_only(const std::string &resource_name
+	, const uint32_t n, const t_resource_pack &res_pack, t_path_mult &result)
+{
+
+	for (const auto	)
+	return (false);
+}
 
 const t_task_comb		&ResourceShop::get_combinations(const std::string &resource_name
 	, const uint32_t n)
@@ -106,7 +134,7 @@ void				ResourceShop::_set_task_comb_by_n(const t_tasks_sorted &tasks
 {
 	if (n == 0)
 		return ;
-	const param_rec_comb	p{tasks, tasks.size(), result};
+	const comb_rec_ctx	p{tasks, tasks.size(), result};
 	t_task_pack				empty_task;
 
 	for (uint32_t i = 0; i < p.size; ++i)
@@ -114,7 +142,7 @@ void				ResourceShop::_set_task_comb_by_n(const t_tasks_sorted &tasks
 }
 
 void				ResourceShop::_get_comb_rec(t_task_pack current_pack
-	, uint32_t i, uint32_t n, const param_rec_comb &p)
+	, uint32_t i, uint32_t n, const comb_rec_ctx &p)
 {
 	map_helpers::_add_or_accumulate(current_pack, p.tasks.at(i).first, (uint32_t)1);
 	if (n <= p.tasks.at(i).second)
