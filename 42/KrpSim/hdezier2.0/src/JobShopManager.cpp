@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:06 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/25 17:46:48 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/25 22:57:22 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,20 @@ e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max
 	for (const auto &res : resources_to_max)
 	{
 		std::cout << "Examining resource:\033[34m" << res.first << "\033[0m..." << std::endl;
-		resource_shop.search_max_resource(res.first, m_resources);
+		t_paths		paths;
+		if (resource_shop.search_max_resource(res.first, m_resources, paths) == false)
+			continue ;
+		print_paths(paths);
 	}
 	return (e_err::TODO);
+}
+
+void	JobShopManager::print_paths(const t_paths &paths) const
+{
+	for (const auto &path : paths)
+	{
+		std::cout << "___________Path" << std::endl;
+		for (const auto &node : path)
+			std::cout << "Combination:" << node.first << "/Res used:" << node.second << std::endl;
+	}
 }

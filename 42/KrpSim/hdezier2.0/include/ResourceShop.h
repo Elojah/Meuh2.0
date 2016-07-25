@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/25 17:45:23 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/25 21:02:41 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@ public:
 	ResourceShop(const t_tasks &tasks);
 	~ResourceShop(void) = default;
 
-	inline bool	search_max_resource(const std::string &resource_name, const t_resource_pack &res_pack)
+	inline bool			search_max_resource(const std::string &resource_name
+		, const t_resource_pack &res_pack, t_paths &result)
 	{
-		t_resource_stack_pair	res_stack;
+		t_resource_stack	res_stack;
+		t_path				path;
 
-		res_stack.first.emplace(resource_name, _get_resource_lcm_prod(resource_name));
-		return (_get_paths(res_stack, res_pack));
+		res_stack.emplace(resource_name, _get_resource_lcm_prod(resource_name));
+		return (_search_paths(res_stack, path, res_pack, result));
 	};
 
 static void				print_stack(const t_resource_stack &res_stack);
 
 private:
-
 	const t_tasks			&m_tasks;
 	t_task_comb_by_res		m_combinations;
 	t_resource_paths		m_paths;
@@ -45,17 +46,17 @@ private:
 		t_task_comb				&result;
 	};
 
-
 // Paths
-	bool		_get_paths(
-		const t_resource_stack_pair &res_stack
-		, const t_resource_pack &res_pack);
 	bool					_search_paths(
-		const t_resource_stack_pair &res_stack
-		, const t_resource_pack &res_pack);
+		const t_resource_stack &res_stack
+		, const t_path &current_path
+		, const t_resource_pack &res_pack
+		, t_paths &result);
 	bool					_search_paths_comb_only(
-		const t_resource_stack_pair &res_stack
-		, const t_resource_pack &res_pack);
+		const t_resource_stack &res_stack
+		, const t_path &current_path
+		, const t_resource_pack &res_pack
+		, t_paths &result);
 
 	uint32_t					_get_resource_lcm_prod(const std::string &resource_name);
 

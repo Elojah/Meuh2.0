@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 04:23:04 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/25 17:08:35 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/25 20:21:10 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef std::vector<t_resource_number>					t_resource_pack_token;
 typedef std::unordered_map<std::string, uint32_t>		t_resource_pack;
 
 typedef std::stack<t_resource_number>					t_resource_stack;
-typedef std::pair<t_resource_stack, t_resource_stack>	t_resource_stack_pair;
 
 struct ResourcePack
 {
@@ -57,7 +56,7 @@ struct		ResourcePackHash
 
 # include "path_type.h"
 
-typedef std::unordered_map<ResourcePack, t_nodes_by_consumed, ResourcePackHash>		t_paths_by_pack;
-typedef std::unordered_map<std::string, t_paths_by_pack>							t_resource_paths;
+typedef std::unordered_map<ResourcePack, t_paths, ResourcePackHash>		t_paths_by_pack;
+typedef std::unordered_map<std::string, t_paths_by_pack>				t_resource_paths;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:14 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/25 17:56:26 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/25 22:46:22 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,94 +32,108 @@ uint32_t			ResourceShop::_get_resource_lcm_prod(const std::string &resource_name
 	return (lcm);
 }
 
-bool		ResourceShop::_get_paths(
-	const t_resource_stack_pair &res_stacks
-	, const t_resource_pack &res_pack)
-{
-	std::cerr << "_get_paths" << std::endl;
-	// auto		paths_by_res = m_paths.emplace(
-	// 	std::piecewise_construct
-	// 	, std::forward_as_tuple(res_stacks.first.top().first)
-	// 	, std::forward_as_tuple());
-	// auto		paths_by_pack = paths_by_res.first->second.emplace(
-	// 	std::piecewise_construct
-	// 	, std::forward_as_tuple(res_pack)
-	// 	, std::forward_as_tuple());
-	// if (paths_by_pack.second == false)
-		return (_search_paths(res_stacks, res_pack));
-	// return (true);
-	// return (m_paths.at(resource.first).at(ResourcePack(res_pack)));
-}
-
 bool					ResourceShop::_search_paths(
-	const t_resource_stack_pair &res_stacks
-	, const t_resource_pack &res_pack)
+	const t_resource_stack &res_stack
+	, const t_path &current_path
+	, const t_resource_pack &res_pack
+	, t_paths &result)
 {
 	std::cerr << "_search_paths" << std::endl;
 	uint32_t	initial_resource = 0;
-	if (res_pack.find(res_stacks.first.top().first) != res_pack.end())
-		initial_resource = res_pack.at(res_stacks.first.top().first);
+	if (res_pack.find(res_stack.top().first) != res_pack.end())
+		initial_resource = res_pack.at(res_stack.top().first);
 	bool		achievable(false);
-	for (uint32_t i = 0; i <= initial_resource && i <= res_stacks.first.top().second; ++i)
+	for (uint32_t i = 0; i <= initial_resource && i <= res_stack.top().second; ++i)
 	{
-		if (i == res_stacks.first.top().second)
+		std::cerr << "Consuming " << i << " resource " << res_stack.top().first << std::endl;
+		if (i == res_stack.top().second)
 		{
-			auto		next_res_stacks = res_stacks;
-			next_res_stacks.second.emplace(std::move(next_res_stacks.first.top()));
-			next_res_stacks.first.pop();
-			if (next_res_stacks.first.empty())
+			auto		next_res_stack = res_stack;
+			next_res_stack.pop();
+
+			auto		next_current_path = std::move(current_path);
+			next_current_path.emplace_back(std::make_pair(0, i));
+
+			if (next_res_stack.empty())
 			{
-				print_stack(next_res_stacks.second);
+				result.emplace_back(std::move(current_path));
 				return (true);
 			}
+			return (_search_paths(next_res_stack, current_path, res_pack, result));
 		}
 		else
 		{
 			// DISPATCH Stack + Res
 			auto		next_res_pack = res_pack;
 			if (i != 0)
-				next_res_pack.at(res_stacks.first.top().first) -= i;
-			auto		next_res_stacks = res_stacks;
-			next_res_stacks.second.emplace(std::move(next_res_stacks.first.top()));
-			next_res_stacks.first.pop();
-			auto				last_resource = res_stacks.first.top();
+				next_res_pack.at(res_stack.top().first) -= i;
+
+			auto		next_res_stack = res_stack;
+			next_res_stack.pop();
+			auto				last_resource = res_stack.top();
 			last_resource.second -= i;
-			next_res_stacks.first.emplace(std::move(last_resource));
+			next_res_stack.emplace(std::move(last_resource));
+
+			// Add node with comb 0 (default) && i res used
+			auto		next_current_path = current_path;
+			next_current_path.emplace_back(std::make_pair(0, i));
 
 			achievable = achievable || _search_paths_comb_only(
-				next_res_stacks
-				, next_res_pack);
+				next_res_stack
+				, next_current_path
+				, next_res_pack
+				, result);
 		}
 	}
 	return (achievable);
 }
 
 bool					ResourceShop::_search_paths_comb_only(
-	const t_resource_stack_pair &res_stacks
-	, const t_resource_pack &res_pack)
+	const t_resource_stack &res_stack
+	, const t_path &current_path
+	, const t_resource_pack &res_pack
+	, t_paths &result)
 {
 	std::cerr << "_search_paths_comb_only" << std::endl;
-	const auto	&combinations = _get_combinations(res_stacks.first.top());
+	const auto	&combinations = _get_combinations(res_stack.top());
 	if (combinations.empty())
 		return (false);
 	bool		res_achievable = false;
+	uint32_t	i_comb = 0;
 	for (const auto &comb : combinations)
 	{
-		auto	next_res_stacks = res_stacks;
-		next_res_stacks.second.emplace(std::move(next_res_stacks.first.top()));
-		next_res_stacks.first.pop();
+		if (comb.empty())
+			continue ;
+		std::cerr << "Test combination: " << i_comb << std::endl;
+		auto	next_res_stack = res_stack;
+		next_res_stack.pop();
+
+		auto	next_current_path = current_path;
+		next_current_path.back().first = i_comb;
+
+		bool		task_loop(false);
 		for (const auto &task : comb)
 		{
+			std::cerr << "Test task: " << task.first << std::endl;
+			if (m_tasks.at(task.first).isLock())
+			{
+				task_loop = true;
+				break ;
+			}
+			m_tasks.at(task.first).lock();
 			const auto		&resources_need = m_tasks.at(task.first).get_need();
 			for (uint32_t i = 0; i < task.second; ++i)
 			{
-				m_tasks.at(task.first).lock();
 				for (const auto &res : resources_need)
-					next_res_stacks.first.emplace(res);
-				m_tasks.at(task.first).unlock();
+					next_res_stack.emplace(res);
 			}
 		}
-		res_achievable = res_achievable || _get_paths(next_res_stacks, res_pack);
+		if (task_loop == false)
+			res_achievable = res_achievable
+				|| _search_paths(next_res_stack, next_current_path, res_pack, result);
+		for (const auto &task : comb)
+			m_tasks.at(task.first).unlock();
+		++i_comb;
 	}
 	return (res_achievable);
 }
@@ -193,6 +207,7 @@ void				ResourceShop::_get_comb_rec(t_task_pack current_pack
 void				ResourceShop::print_stack(const t_resource_stack &res_stack)
 {
 	t_resource_stack	toprint = res_stack;
+	std::cout << "Result =" << std::endl;
 	while (!toprint.empty())
 	{
 		std::cout << toprint.top().first << " : " << toprint.top().second << std::endl;

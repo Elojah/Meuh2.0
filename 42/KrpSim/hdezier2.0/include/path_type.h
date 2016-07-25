@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/24 18:30:28 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/25 16:18:22 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/25 22:20:52 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 
 // Paths
 typedef uint32_t												t_index_comb;
-typedef std::vector<t_index_comb>								t_nodes;
-// First => n of resources used
-typedef std::unordered_map<uint32_t, t_nodes>					t_nodes_by_consumed;
+typedef uint32_t												t_n_resources_used;
+typedef std::pair<t_index_comb, t_n_resources_used>				t_path_node;
+typedef std::vector<t_path_node>								t_path;
+typedef std::vector<t_path>										t_paths;
 
 namespace numeric_helper
 {

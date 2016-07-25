@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:12 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/16 09:46:58 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/25 22:55:43 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ private:
 	e_err	_optimize_production(const t_resource_pack &resource_to_max) const;
 	e_err	_optimize_time(const t_resource_pack &resource_to_max
 		, ResourceShop &resource_shop) const;
+
+	void	print_paths(const t_paths &paths) const;
 
 };
 
