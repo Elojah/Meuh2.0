@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:14 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/26 11:04:40 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/26 14:23:51 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ bool					ResourceShop::_search_paths(
 	if (res_pack.find(res_stack.top().first) != res_pack.end())
 		initial_resource = res_pack.at(res_stack.top().first);
 	bool		achievable(false);
+	std::cerr << "Investing resource: " << res_stack.top().first << " x" << res_stack.top().second << std::endl;
 	for (uint32_t i = 0; i <= initial_resource && i <= res_stack.top().second; ++i)
 	{
+		std::cerr << "Res consumed: " << i << std::endl;
 		if (i == res_stack.top().second)
 		{
 			auto		next_res_stack = res_stack;
@@ -115,6 +117,7 @@ bool					ResourceShop::_search_paths_comb_only(
 				task_loop = true;
 				break ;
 			}
+			std::cerr << "Add resources needed for task: " << task.first << " x" << task.second << std::endl;
 			m_tasks.at(task.first).lock();
 			const auto		&resources_need = m_tasks.at(task.first).get_need();
 			for (uint32_t i = 0; i < task.second; ++i)
@@ -124,8 +127,10 @@ bool					ResourceShop::_search_paths_comb_only(
 			}
 		}
 		if (task_loop == false)
+		{
 			res_achievable = res_achievable
 				|| _search_paths(next_res_stack, next_current_path, res_pack, result);
+		}
 		for (const auto &task : comb)
 			m_tasks.at(task.first).unlock();
 		++i_comb;

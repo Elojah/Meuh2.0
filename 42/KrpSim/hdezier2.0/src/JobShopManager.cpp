@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:06 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/26 10:42:54 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/26 12:04:18 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ e_err	JobShopManager::_optimize_production(const t_resource_pack &resources_to_m
 e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max
 	, ResourceShop &resource_shop) const
 {
-	t_tasks_name		candidate_tasks;
-
 	std::cout << "_______Start optimization..." << std::endl;
 
 	for (const auto &res : resources_to_max)
@@ -80,6 +78,7 @@ e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max
 		t_paths		paths;
 		if (resource_shop.search_max_resource(res.first, m_resources, paths) == false)
 			continue ;
+		std::cout << "PATHS FOUND !!!" << std::endl;
 		for (const auto &path : paths)
 			resource_shop.print_path(path, res.first);
 	}
