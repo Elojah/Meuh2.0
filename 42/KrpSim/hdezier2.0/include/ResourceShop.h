@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/25 21:02:41 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/26 10:29:51 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include "task_type.h"
 # include "resource_type.h"
+
+// DBG
+# include <iostream>
 
 class ResourceShop
 {
@@ -25,14 +28,15 @@ public:
 	inline bool			search_max_resource(const std::string &resource_name
 		, const t_resource_pack &res_pack, t_paths &result)
 	{
-		t_resource_stack	res_stack;
-		t_path				path;
+		t_resource_stack	res_stack; // empty
+		t_path				path; // empty
 
 		res_stack.emplace(resource_name, _get_resource_lcm_prod(resource_name));
 		return (_search_paths(res_stack, path, res_pack, result));
 	};
 
 static void				print_stack(const t_resource_stack &res_stack);
+void					print_path(const t_path &path, const std::string &resource);
 
 private:
 	const t_tasks			&m_tasks;

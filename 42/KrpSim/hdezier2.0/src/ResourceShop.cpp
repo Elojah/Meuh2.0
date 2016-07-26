@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:14 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/25 22:46:22 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/26 11:04:40 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,26 @@ bool					ResourceShop::_search_paths(
 	, const t_resource_pack &res_pack
 	, t_paths &result)
 {
-	std::cerr << "_search_paths" << std::endl;
 	uint32_t	initial_resource = 0;
 	if (res_pack.find(res_stack.top().first) != res_pack.end())
 		initial_resource = res_pack.at(res_stack.top().first);
 	bool		achievable(false);
 	for (uint32_t i = 0; i <= initial_resource && i <= res_stack.top().second; ++i)
 	{
-		std::cerr << "Consuming " << i << " resource " << res_stack.top().first << std::endl;
 		if (i == res_stack.top().second)
 		{
 			auto		next_res_stack = res_stack;
 			next_res_stack.pop();
 
 			auto		next_current_path = std::move(current_path);
-			next_current_path.emplace_back(std::make_pair(0, i));
+			next_current_path.emplace_back(std::make_pair(0, i)); // Result path add
 
 			if (next_res_stack.empty())
 			{
-				result.emplace_back(std::move(current_path));
+				result.emplace_back(std::move(next_current_path));
 				return (true);
 			}
-			return (_search_paths(next_res_stack, current_path, res_pack, result));
+			return (_search_paths(next_res_stack, next_current_path, res_pack, result));
 		}
 		else
 		{
@@ -76,7 +74,7 @@ bool					ResourceShop::_search_paths(
 
 			// Add node with comb 0 (default) && i res used
 			auto		next_current_path = current_path;
-			next_current_path.emplace_back(std::make_pair(0, i));
+			next_current_path.emplace_back(std::make_pair(0, i)); // Result path add
 
 			achievable = achievable || _search_paths_comb_only(
 				next_res_stack
@@ -94,7 +92,6 @@ bool					ResourceShop::_search_paths_comb_only(
 	, const t_resource_pack &res_pack
 	, t_paths &result)
 {
-	std::cerr << "_search_paths_comb_only" << std::endl;
 	const auto	&combinations = _get_combinations(res_stack.top());
 	if (combinations.empty())
 		return (false);
@@ -104,7 +101,6 @@ bool					ResourceShop::_search_paths_comb_only(
 	{
 		if (comb.empty())
 			continue ;
-		std::cerr << "Test combination: " << i_comb << std::endl;
 		auto	next_res_stack = res_stack;
 		next_res_stack.pop();
 
@@ -114,7 +110,6 @@ bool					ResourceShop::_search_paths_comb_only(
 		bool		task_loop(false);
 		for (const auto &task : comb)
 		{
-			std::cerr << "Test task: " << task.first << std::endl;
 			if (m_tasks.at(task.first).isLock())
 			{
 				task_loop = true;
@@ -214,3 +209,39 @@ void				ResourceShop::print_stack(const t_resource_stack &res_stack)
 		toprint.pop();
 	}
 }
+
+void				ResourceShop::print_path(const t_path &path, const std::string &resource)
+{
+	t_resource_stack		res_stack;
+
+	uint32_t	lcm = _get_resource_lcm_prod(resource);
+	res_stack.emplace(resource, lcm);
+	std::cout << "[Path]" << resource << " / lcm: " << lcm << std::endl;
+	for (const auto &node : path)
+	{
+		const auto	current_place = res_stack.top();
+		res_stack.pop();
+		if (node.second >= current_place.second)
+		{
+			std::cout << "Consumed ONLY:\t" << node.second << std::endl;
+			continue ;
+		}
+		std::cout << "Combination:" << node.first << "/Consumed:" << node.second << std::endl;
+		const auto	&current_comb = m_combinations.at(current_place.first).second.at(current_place.second).at(node.first);
+		if (current_comb.empty())
+		{
+			std::cerr << "Combination bad indexed" << std::endl;
+			return ;
+		}
+		for (const auto &task : current_comb)
+		{
+			std::cout << "\tProcess task:\t" << task.first << " x" << task.second << std::endl;
+			const auto		&resources_need = m_tasks.at(task.first).get_need();
+			for (uint32_t i = 0; i < task.second; ++i)
+			{
+				for (const auto &res : resources_need)
+					res_stack.emplace(res);
+			}
+		}
+	}
+};
