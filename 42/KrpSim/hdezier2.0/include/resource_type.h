@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 04:23:04 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/25 20:21:10 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/26 21:21:08 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,32 @@ typedef std::pair<std::string, uint32_t>				t_resource_number;
 typedef std::vector<t_resource_number>					t_resource_pack_token;
 typedef std::unordered_map<std::string, uint32_t>		t_resource_pack;
 
-typedef std::stack<t_resource_number>					t_resource_stack;
+enum	e_trade
+{
+	NEED = false,
+	PRODUCT = true
+};
+
+struct	resource_trade
+{
+	inline	resource_trade(const std::string &name_p, const uint32_t n_p, const e_trade trade_p)
+	: name(name_p)
+	, n(n_p)
+	, trade(trade_p)
+	{};
+	inline	resource_trade(const t_resource_number &res_number, const e_trade trade_p)
+	: name(res_number.first)
+	, n(res_number.second)
+	, trade(trade_p)
+	{};
+	const std::string	name;
+	uint32_t			n;
+	const e_trade		trade;
+};
+
+typedef std::stack<resource_trade>					t_resource_stack;
+
+typedef std::unordered_map<std::string, bool>			t_resource_lock;
 
 struct ResourcePack
 {

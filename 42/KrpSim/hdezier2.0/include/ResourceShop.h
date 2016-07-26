@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/26 10:29:51 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/26 22:20:34 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ public:
 		t_resource_stack	res_stack; // empty
 		t_path				path; // empty
 
-		res_stack.emplace(resource_name, _get_resource_lcm_prod(resource_name));
+		res_stack.emplace(resource_name, _get_resource_lcm_prod(resource_name), NEED);
 		return (_search_paths(res_stack, path, res_pack, result));
 	};
 
@@ -39,9 +39,11 @@ static void				print_stack(const t_resource_stack &res_stack);
 void					print_path(const t_path &path, const std::string &resource);
 
 private:
+
 	const t_tasks			&m_tasks;
 	t_task_comb_by_res		m_combinations;
 	t_resource_paths		m_paths;
+	t_resource_lock			m_res_lock;
 
 	struct						comb_rec_ctx
 	{
@@ -50,6 +52,31 @@ private:
 		t_task_comb				&result;
 	};
 
+// Lock
+	inline void			_lock_resource(const std::string &resource_name)
+	{
+		std::cerr << "[LOCK]" << "lock " << resource_name << std::endl;
+		if (m_res_lock.find(resource_name) == m_res_lock.end())
+			m_res_lock.emplace(resource_name, true);
+		else
+			m_res_lock.at(resource_name) = true;
+	};
+	inline void			_unlock_resource(const std::string &resource_name)
+	{
+		std::cerr << "[LOCK]" << "unlock " << resource_name << std::endl;
+		if (m_res_lock.find(resource_name) == m_res_lock.end())
+			m_res_lock.emplace(resource_name, false);
+		else
+			m_res_lock.at(resource_name) = false;
+	};
+	inline bool			_is_lock_resource(const std::string &resource_name)
+	{
+		std::cerr << "[LOCK]" << "check lock " << resource_name << std::endl;
+		if (m_res_lock.find(resource_name) == m_res_lock.end())
+			return (false);
+		else
+			return (m_res_lock.at(resource_name));
+	};
 // Paths
 	bool					_search_paths(
 		const t_resource_stack &res_stack

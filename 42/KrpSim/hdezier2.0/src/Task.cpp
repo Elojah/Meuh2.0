@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 01:11:16 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/24 18:48:08 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/26 19:06:01 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 Task::Task(const t_resource_pack_token &needs
 	, const t_resource_pack_token &products, uint32_t time)
 	: m_time(time)
-	, m_lock_investing(false)
 {
 	if (m_time == 0)
 		m_time = 1;

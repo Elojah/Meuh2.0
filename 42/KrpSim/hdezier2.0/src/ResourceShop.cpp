@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:14 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/26 14:23:51 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/26 22:26:38 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,35 @@ bool					ResourceShop::_search_paths(
 	, const t_resource_pack &res_pack
 	, t_paths &result)
 {
-	uint32_t	initial_resource = 0;
-	if (res_pack.find(res_stack.top().first) != res_pack.end())
-		initial_resource = res_pack.at(res_stack.top().first);
-	bool		achievable(false);
-	std::cerr << "Investing resource: " << res_stack.top().first << " x" << res_stack.top().second << std::endl;
-	for (uint32_t i = 0; i <= initial_resource && i <= res_stack.top().second; ++i)
+	if (res_stack.empty())
+		return (true);
+	if (res_stack.top().trade == PRODUCT)
 	{
-		std::cerr << "Res consumed: " << i << std::endl;
-		if (i == res_stack.top().second)
+		std::cerr << "[Investing] Get a prod: " << res_stack.top().name << " x" << res_stack.top().n << std::endl;
+		auto	next_res_pack = std::move(res_pack);
+		map_helpers::_add_or_accumulate(next_res_pack, res_stack.top().name, res_stack.top().n);
+		auto		next_res_stack = std::move(res_stack);
+		next_res_stack.pop();
+		return (_search_paths(next_res_stack, current_path, next_res_pack, result));
+	}
+
+	uint32_t	initial_resource = 0;
+	if (res_pack.find(res_stack.top().name) != res_pack.end())
+		initial_resource = res_pack.at(res_stack.top().name);
+	bool		achievable(false);
+	std::cerr << "[Investing] resource: " << res_stack.top().name << " x" << res_stack.top().n << std::endl;
+
+	if (_is_lock_resource(res_stack.top().name))
+	{
+		std::cerr << "[LOCK]" << res_stack.top().name << " is already locked !" << std::endl;
+		return (false);
+	}
+	_lock_resource(res_stack.top().name);
+
+	for (uint32_t i = 0; i <= initial_resource && i <= res_stack.top().n; ++i)
+	{
+		std::cerr << "[NODE]" << "Res consumed: " << i << std::endl;
+		if (i == res_stack.top().n)
 		{
 			auto		next_res_stack = res_stack;
 			next_res_stack.pop();
@@ -54,9 +74,12 @@ bool					ResourceShop::_search_paths(
 			auto		next_current_path = std::move(current_path);
 			next_current_path.emplace_back(std::make_pair(0, i)); // Result path add
 
+			_unlock_resource(res_stack.top().name);
+
 			if (next_res_stack.empty())
 			{
 				result.emplace_back(std::move(next_current_path));
+				std::cerr << "[NODE]" <<"Add final path" << std::endl;
 				return (true);
 			}
 			return (_search_paths(next_res_stack, next_current_path, res_pack, result));
@@ -66,12 +89,12 @@ bool					ResourceShop::_search_paths(
 			// DISPATCH Stack + Res
 			auto		next_res_pack = res_pack;
 			if (i != 0)
-				next_res_pack.at(res_stack.top().first) -= i;
+				next_res_pack.at(res_stack.top().name) -= i;
 
 			auto		next_res_stack = res_stack;
 			next_res_stack.pop();
 			auto				last_resource = res_stack.top();
-			last_resource.second -= i;
+			last_resource.n -= i;
 			next_res_stack.emplace(std::move(last_resource));
 
 			// Add node with comb 0 (default) && i res used
@@ -85,6 +108,7 @@ bool					ResourceShop::_search_paths(
 				, result);
 		}
 	}
+	_unlock_resource(res_stack.top().name);
 	return (achievable);
 }
 
@@ -94,7 +118,7 @@ bool					ResourceShop::_search_paths_comb_only(
 	, const t_resource_pack &res_pack
 	, t_paths &result)
 {
-	const auto	&combinations = _get_combinations(res_stack.top());
+	const auto	&combinations = _get_combinations(std::make_pair(res_stack.top().name, res_stack.top().n));
 	if (combinations.empty())
 		return (false);
 	bool		res_achievable = false;
@@ -109,30 +133,29 @@ bool					ResourceShop::_search_paths_comb_only(
 		auto	next_current_path = current_path;
 		next_current_path.back().first = i_comb;
 
-		bool		task_loop(false);
 		for (const auto &task : comb)
 		{
-			if (m_tasks.at(task.first).isLock())
-			{
-				task_loop = true;
-				break ;
-			}
-			std::cerr << "Add resources needed for task: " << task.first << " x" << task.second << std::endl;
-			m_tasks.at(task.first).lock();
+			std::cerr << "[NODE]" << "Add resources needed for task: " << task.first << " x" << task.second << std::endl;
 			const auto		&resources_need = m_tasks.at(task.first).get_need();
+			const auto		&resources_product = m_tasks.at(task.first).get_product();
 			for (uint32_t i = 0; i < task.second; ++i)
 			{
+				for (const auto &res : resources_product)
+				{
+					if (res.first == res_stack.top().name)
+					{
+						if (res.second > res_stack.top().n)
+							next_res_stack.emplace(res.first, res.second - res_stack.top().n, PRODUCT);
+					}
+					else
+						next_res_stack.emplace(res, PRODUCT);
+				}
 				for (const auto &res : resources_need)
-					next_res_stack.emplace(res);
+					next_res_stack.emplace(res, NEED);
 			}
 		}
-		if (task_loop == false)
-		{
-			res_achievable = res_achievable
-				|| _search_paths(next_res_stack, next_current_path, res_pack, result);
-		}
-		for (const auto &task : comb)
-			m_tasks.at(task.first).unlock();
+		res_achievable = res_achievable
+			|| _search_paths(next_res_stack, next_current_path, res_pack, result);
 		++i_comb;
 	}
 	return (res_achievable);
@@ -210,7 +233,7 @@ void				ResourceShop::print_stack(const t_resource_stack &res_stack)
 	std::cout << "Result =" << std::endl;
 	while (!toprint.empty())
 	{
-		std::cout << toprint.top().first << " : " << toprint.top().second << std::endl;
+		std::cout << toprint.top().name << " : " << toprint.top().n << std::endl;
 		toprint.pop();
 	}
 }
@@ -220,19 +243,19 @@ void				ResourceShop::print_path(const t_path &path, const std::string &resource
 	t_resource_stack		res_stack;
 
 	uint32_t	lcm = _get_resource_lcm_prod(resource);
-	res_stack.emplace(resource, lcm);
+	res_stack.emplace(resource, lcm, NEED);
 	std::cout << "[Path]" << resource << " / lcm: " << lcm << std::endl;
 	for (const auto &node : path)
 	{
+		std::cout << "Resources:\t" << res_stack.top().name << std::endl;
 		const auto	current_place = res_stack.top();
 		res_stack.pop();
-		if (node.second >= current_place.second)
+		if (node.second >= current_place.n)
 		{
 			std::cout << "Consumed ONLY:\t" << node.second << std::endl;
 			continue ;
 		}
-		std::cout << "Combination:" << node.first << "/Consumed:" << node.second << std::endl;
-		const auto	&current_comb = m_combinations.at(current_place.first).second.at(current_place.second).at(node.first);
+		const auto	&current_comb = m_combinations.at(current_place.name).second.at(current_place.n).at(node.first);
 		if (current_comb.empty())
 		{
 			std::cerr << "Combination bad indexed" << std::endl;
@@ -245,7 +268,7 @@ void				ResourceShop::print_path(const t_path &path, const std::string &resource
 			for (uint32_t i = 0; i < task.second; ++i)
 			{
 				for (const auto &res : resources_need)
-					res_stack.emplace(res);
+					res_stack.emplace(res, NEED);
 			}
 		}
 	}
