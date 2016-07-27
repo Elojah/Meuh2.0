@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:14 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/27 13:28:42 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/27 14:55:53 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ bool					ResourceShop::_search_paths(
 {
 	if (res_stack.empty())
 	{
+		std::cerr << "[NODE]" << "Stack empty !" << std::endl;
 		result.emplace_back(std::move(current_path));
 		return (true);
 	}
@@ -73,8 +74,9 @@ bool					ResourceShop::_search_paths(
 	}
 	_lock_resource(res_stack.top().name);
 
-	uint32_t	n_res_max_used = std::min(initial_resource, res_stack.top().n);
-	for (uint32_t i = n_res_max_used; i <= n_res_max_used; --i) // Condition on overflow, this is bad i know...
+	const uint32_t	n_res_max_used = std::min(initial_resource, res_stack.top().n);
+	const uint32_t	n_step = n_res_max_used < m_max_steps_res_used ? 1 : n_res_max_used / m_max_steps_res_used;
+	for (uint32_t i = 0; i <= n_res_max_used; i += n_step) // Condition on overflow, this is bad i know...
 	{
 		std::cerr << "[NODE]" << "Res consumed: " << i << std::endl;
 		if (i == res_stack.top().n)
@@ -96,10 +98,7 @@ bool					ResourceShop::_search_paths(
 				next_res_pack.at(res_stack.top().name) -= i;
 
 			auto		next_res_stack = res_stack;
-			next_res_stack.pop();
-			auto				last_resource = res_stack.top();
-			last_resource.n -= i;
-			next_res_stack.emplace(std::move(last_resource));
+			next_res_stack.top().n -= i;
 
 			// Add node with comb 0 (default) && i res used
 			auto		next_current_path = current_path;
