@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:14 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/26 22:26:38 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/27 13:28:42 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ bool					ResourceShop::_search_paths(
 	, t_paths &result)
 {
 	if (res_stack.empty())
+	{
+		result.emplace_back(std::move(current_path));
 		return (true);
-	if (res_stack.top().trade == PRODUCT)
+	}
+	if (res_stack.top().trade == e_trade::PRODUCT)
 	{
 		std::cerr << "[Investing] Get a prod: " << res_stack.top().name << " x" << res_stack.top().n << std::endl;
 		auto	next_res_pack = std::move(res_pack);
@@ -48,6 +51,13 @@ bool					ResourceShop::_search_paths(
 		auto		next_res_stack = std::move(res_stack);
 		next_res_stack.pop();
 		return (_search_paths(next_res_stack, current_path, next_res_pack, result));
+	}
+	if (res_stack.top().trade == e_trade::DONE)
+	{
+		_unlock_resource(res_stack.top().name);
+		auto		next_res_stack = std::move(res_stack);
+		next_res_stack.pop();
+		return (_search_paths(next_res_stack, current_path, res_pack, result));
 	}
 
 	uint32_t	initial_resource = 0;
@@ -63,7 +73,8 @@ bool					ResourceShop::_search_paths(
 	}
 	_lock_resource(res_stack.top().name);
 
-	for (uint32_t i = 0; i <= initial_resource && i <= res_stack.top().n; ++i)
+	uint32_t	n_res_max_used = std::min(initial_resource, res_stack.top().n);
+	for (uint32_t i = n_res_max_used; i <= n_res_max_used; --i) // Condition on overflow, this is bad i know...
 	{
 		std::cerr << "[NODE]" << "Res consumed: " << i << std::endl;
 		if (i == res_stack.top().n)
@@ -75,13 +86,6 @@ bool					ResourceShop::_search_paths(
 			next_current_path.emplace_back(std::make_pair(0, i)); // Result path add
 
 			_unlock_resource(res_stack.top().name);
-
-			if (next_res_stack.empty())
-			{
-				result.emplace_back(std::move(next_current_path));
-				std::cerr << "[NODE]" <<"Add final path" << std::endl;
-				return (true);
-			}
 			return (_search_paths(next_res_stack, next_current_path, res_pack, result));
 		}
 		else
@@ -128,7 +132,7 @@ bool					ResourceShop::_search_paths_comb_only(
 		if (comb.empty())
 			continue ;
 		auto	next_res_stack = res_stack;
-		next_res_stack.pop();
+		next_res_stack.top().trade = e_trade::DONE;
 
 		auto	next_current_path = current_path;
 		next_current_path.back().first = i_comb;
@@ -145,13 +149,13 @@ bool					ResourceShop::_search_paths_comb_only(
 					if (res.first == res_stack.top().name)
 					{
 						if (res.second > res_stack.top().n)
-							next_res_stack.emplace(res.first, res.second - res_stack.top().n, PRODUCT);
+							next_res_stack.emplace(res.first, res.second - res_stack.top().n, e_trade::PRODUCT);
 					}
 					else
-						next_res_stack.emplace(res, PRODUCT);
+						next_res_stack.emplace(res, e_trade::PRODUCT);
 				}
 				for (const auto &res : resources_need)
-					next_res_stack.emplace(res, NEED);
+					next_res_stack.emplace(res, e_trade::NEED);
 			}
 		}
 		res_achievable = res_achievable
@@ -243,7 +247,7 @@ void				ResourceShop::print_path(const t_path &path, const std::string &resource
 	t_resource_stack		res_stack;
 
 	uint32_t	lcm = _get_resource_lcm_prod(resource);
-	res_stack.emplace(resource, lcm, NEED);
+	res_stack.emplace(resource, lcm, e_trade::NEED);
 	std::cout << "[Path]" << resource << " / lcm: " << lcm << std::endl;
 	for (const auto &node : path)
 	{
@@ -268,7 +272,7 @@ void				ResourceShop::print_path(const t_path &path, const std::string &resource
 			for (uint32_t i = 0; i < task.second; ++i)
 			{
 				for (const auto &res : resources_need)
-					res_stack.emplace(res, NEED);
+					res_stack.emplace(res, e_trade::NEED);
 			}
 		}
 	}

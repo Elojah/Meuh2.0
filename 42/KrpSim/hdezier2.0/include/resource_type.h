@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 04:23:04 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/26 21:21:08 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/27 13:26:28 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ typedef std::pair<std::string, uint32_t>				t_resource_number;
 typedef std::vector<t_resource_number>					t_resource_pack_token;
 typedef std::unordered_map<std::string, uint32_t>		t_resource_pack;
 
-enum	e_trade
+enum class	e_trade
 {
-	NEED = false,
-	PRODUCT = true
+	NEED,
+	PRODUCT,
+	DONE
 };
 
 struct	resource_trade
@@ -43,7 +44,7 @@ struct	resource_trade
 	{};
 	const std::string	name;
 	uint32_t			n;
-	const e_trade		trade;
+	e_trade				trade;
 };
 
 typedef std::stack<resource_trade>					t_resource_stack;

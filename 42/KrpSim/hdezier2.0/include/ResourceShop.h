@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/26 22:20:34 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/27 13:25:48 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ public:
 		t_resource_stack	res_stack; // empty
 		t_path				path; // empty
 
-		res_stack.emplace(resource_name, _get_resource_lcm_prod(resource_name), NEED);
+		res_stack.emplace(resource_name, _get_resource_lcm_prod(resource_name), e_trade::NEED);
 		return (_search_paths(res_stack, path, res_pack, result));
 	};
 
@@ -71,7 +71,6 @@ private:
 	};
 	inline bool			_is_lock_resource(const std::string &resource_name)
 	{
-		std::cerr << "[LOCK]" << "check lock " << resource_name << std::endl;
 		if (m_res_lock.find(resource_name) == m_res_lock.end())
 			return (false);
 		else
