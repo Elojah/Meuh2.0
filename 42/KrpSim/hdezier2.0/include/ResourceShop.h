@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/27 13:56:52 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/30 16:23:48 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void					print_path(const t_path &path, const std::string &resource);
 
 private:
 
-	static const uint32_t	m_max_steps_res_used = 100;
+	static const uint32_t	m_max_steps_res_used = 127;
 
 	const t_tasks			&m_tasks;
 	t_task_comb_by_res		m_combinations;
@@ -80,6 +80,26 @@ private:
 	};
 // Paths
 	bool					_search_paths(
+		const t_resource_stack &res_stack
+		, const t_path &current_path
+		, const t_resource_pack &res_pack
+		, t_paths &result);
+	bool					_search_paths_prod(
+		const t_resource_stack &res_stack
+		, const t_path &current_path
+		, const t_resource_pack &res_pack
+		, t_paths &result);
+	bool					_search_paths_resource_done(
+		const t_resource_stack &res_stack
+		, const t_path &current_path
+		, const t_resource_pack &res_pack
+		, t_paths &result);
+	bool					_search_paths_need(
+		const t_resource_stack &res_stack
+		, const t_path &current_path
+		, const t_resource_pack &res_pack
+		, t_paths &result);
+	bool					_search_paths_empty_stack(
 		const t_resource_stack &res_stack
 		, const t_path &current_path
 		, const t_resource_pack &res_pack
