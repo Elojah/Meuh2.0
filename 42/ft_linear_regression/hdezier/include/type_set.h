@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_csv.h                                         :+:      :+:    :+:   */
+/*   type_set.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/10 19:04:06 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/13 21:05:25 by leeios           ###   ########.fr       */
+/*   Created: 2016/08/14 12:28:00 by leeios            #+#    #+#             */
+/*   Updated: 2016/08/14 21:31:18 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPE_CSV_H
-# define TYPE_CSV_H
+#ifndef TYPE_SET_H
+# define TYPE_SET_H
 
-# include <array>
-# include <stdint.h>
+# include <tuple>
+# include <vector>
 
-namespace type_csv
+namespace type_set
 {
-	template<uint8_t NDimension>
-	using csv_params = std::array<double, NDimension>;
+	template<typename...Ts>
+	using t_features = std::tuple<Ts...>;
+
+	template<typename...Ts>
+	using t_features_set = std::vector<t_features<Ts...>>;
 };
 
 #endif

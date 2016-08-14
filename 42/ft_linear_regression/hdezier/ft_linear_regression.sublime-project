@@ -10,15 +10,13 @@
     {
         "cc_include_options":
         [
-            "-std=c++11",
-            "-Wno-unused-parameter",
-            "-D_DBG_",
+            "-std=c++14",
             "-I${project_path}/include",
-            "-I${project_path}/util/ogdf/include",
             "-isystem", "/usr/include",
+            "-isystem", "/usr/include/c++/5.4.0",
             "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed",
             "-isystem", "/usr/lib/llvm-3.6/lib/clang/3.6.0/include",
-            "-isystem", "/usr/include"
+            "-isystem", "/usr/lib/clang/3.6.2/include",
         ]
     }
 }

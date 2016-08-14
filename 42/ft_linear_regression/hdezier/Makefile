@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
+#    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/08/10 22:47:50 by hdezier          ###   ########.fr        #
+#    Updated: 2016/08/15 00:20:50 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 CFLAGS = -Wall -Wextra -Werror\
 		-fno-unwind-tables -fno-rtti\
 		-O3\
-		-std=c++11\
+		-std=c++14\
 
 LFLAGS =
 
@@ -67,17 +67,17 @@ LIB_OTHER = -Lutil/ogdf\
 
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
-LIBS += $(LIB_OTHER)
+# LIBS += $(LIB_OTHER)
 
 #Includes
 INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
-INC += -Iutil/ogdf/include
+# INC += -Iutil/ogdf/include
 
 OGDF_DIR = "util/ogdf"
 
 #RULES
-all : make_lib dirbin $(BIN_DIR)/$(TARGET)
+all : dirbin $(BIN_DIR)/$(TARGET)
 
 make_lib :
 	mkdir -p util
