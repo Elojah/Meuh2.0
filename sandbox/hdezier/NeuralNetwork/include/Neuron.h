@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:19:18 by leeios            #+#    #+#             */
-/*   Updated: 2016/08/17 17:17:07 by leeios           ###   ########.fr       */
+/*   Updated: 2016/08/20 14:10:53 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 namespace	Functors
 {
+// Basics operators
 	struct	Add
 	{
 		template<typename T>
@@ -35,15 +36,30 @@ namespace	Functors
 	};
 };
 
+namespace	ErrorComputing
+{
+	template<typename...Ts>
+	struct	SquaredError;
+	template<typename TError, typename...TOutputs>
+	struct	SquaredError<TError, std::tuple<TOutputs...>>
+	{
+		inline static TError	apply(const std::tuple<TOutputs...> &out
+			, const std::tuple<TOutputs...> &target)
+		{
+			(void)out;
+			(void)target;
+		};
+	};
+};
+
 namespace	NeuronTypes
 {
-
 // General type with 2 functors
 	template<typename TInputFunctor, typename TOutputFunctor>
 	struct	Parametrable
 	{
 		template<typename TOutput, typename...TInputs>
-		inline static TOutput		apply(const std::tuple<TInputs...> &input
+		inline static TOutput		compute_forward(const std::tuple<TInputs...> &input
 			, const std::tuple<TInputs...> &parameters)
 		{
 			TOutput		result(0);
@@ -57,13 +73,20 @@ namespace	NeuronTypes
 			});
 			return (result);
 		};
+		// template<typename TInput, typename...TOutput>
+		// inline static TInput		compute_error(
+		// 	const std::tuple<TOutput...> &error_delta
+		// 	, )
+		// {
+		// 	;
+		// };
 	};
 };
 
 template<typename...Ts>
-class	Neuron;
+class		Neuron;
 template<typename TType, typename...TInputs, typename...TOutputs>
-class	Neuron<TType, std::tuple<TInputs...>, std::tuple<TOutputs...>>
+class		Neuron<TType, std::tuple<TInputs...>, std::tuple<TOutputs...>>
 {
 public:
 	Neuron(void) = default;
@@ -72,27 +95,36 @@ public:
 	inline void						set_initial_params(const std::tuple<TInputs...> &params)
 	{
 		for (uint32_t i = 0; i < sizeof...(TOutputs); ++i)
-			m_parameters[i] = params;
+			m_parameters.at(i) = params;
 	};
 
 	inline std::tuple<TOutputs...>	forward(const std::tuple<TInputs...> &input_values) const
 	{
+		// Simple matrix multiplication
 		std::tuple<TOutputs...>		result;
 		tuple::for_each(result, [this, &input_values](auto &value, const std::size_t i)
 		{
-			value = TType::template apply<typename std::remove_reference<decltype(value)>::type, TInputs...>
-				(input_values, m_parameters[i]);
+			value = TType::template compute_forward<typename std::remove_reference<decltype(value)>::type, TInputs...>
+				(input_values, m_parameters.at(i));
 		});
 		return (result);
 	};
 
+	inline std::tuple<TInputs...>	backward(const std::tuple<TOutputs...> &output_values)
+	{
+		(void)output_values;
+		return (std::tuple<TInputs...>());
+	};
+
 private:
+	typedef std::tuple<TInputs...>									t_parameter_col;// Add bias here ?
 
-	typedef std::tuple<TInputs...>		t_parameter_col;
+	template<typename T, std::size_t N>
+	using	t_tuple_container = std::array<T, N>;
 
-	t_parameter_col		m_parameters[sizeof...(TOutputs)];
+	typedef t_tuple_container<t_parameter_col, sizeof...(TOutputs)>	t_matrix_params;
+
+	t_matrix_params													m_parameters;
 };
-
-
 
 #endif
