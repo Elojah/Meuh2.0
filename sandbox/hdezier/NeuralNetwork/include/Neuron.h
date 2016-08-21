@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:19:18 by leeios            #+#    #+#             */
-/*   Updated: 2016/08/20 14:10:53 by leeios           ###   ########.fr       */
+/*   Updated: 2016/08/21 13:42:17 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ namespace	Functors
 	struct	Add
 	{
 		template<typename T>
-		inline static T	apply(const T &lhs, const T &rhs)
+		inline T	operator()(const T &lhs, const T &rhs)
 		{
 			return (lhs + rhs);
 		};
@@ -29,7 +29,7 @@ namespace	Functors
 	struct	Mult
 	{
 		template<typename T>
-		inline static T	apply(const T &lhs, const T &rhs)
+		inline T	operator()(const T &lhs, const T &rhs)
 		{
 			return (lhs * rhs);
 		};

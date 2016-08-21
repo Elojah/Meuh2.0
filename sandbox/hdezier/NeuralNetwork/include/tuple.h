@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 19:21:54 by leeios            #+#    #+#             */
-/*   Updated: 2016/08/20 23:13:12 by leeios           ###   ########.fr       */
+/*   Updated: 2016/08/21 15:46:16 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,32 +125,53 @@ namespace	tuple
 
 // Apply
 	template <class Tuple, class F>
-	constexpr auto	apply(Tuple t, F f) {
+	inline constexpr auto	apply(const Tuple &t, F f)
+	{
 		return (detail::index_apply<std::tuple_size<Tuple>{}>(
 			[&](auto...Is) {return f(std::get<Is>(t)...); }));
 	}
 
+
+	namespace	detail
+	{
+		struct	sink
+		{
+			template<typename...Args>
+			explicit sink(Args const &...) {};
+		};
+
+		template<class F, class CurrentVal, class... TupleVal>
+		inline constexpr auto	foldl_impl(F &f, CurrentVal &val, TupleVal... ts
+			, typename std::enable_if<(sizeof...(TupleVal) > 0)>::type* = nullptr)
+		{
+			return (f(val, foldl_impl(f, ts...)));
+		};
+		template<class F, class CurrentVal, class... TupleVal>
+		inline constexpr auto	foldl_impl(F &f, CurrentVal &val, TupleVal&...ts
+			, typename std::enable_if<(sizeof...(TupleVal) == 0)>::type* = nullptr)
+		{
+			detail::sink {f, ts...};
+			return (val);
+		};
+	};
+
 // Foldl
 	template <class Tuple, class F>
-	constexpr auto	fold(Tuple t, F f) {
-		return (detail::index_apply<std::tuple_size<Tuple>{}>(
-			[&](auto...Is)
-			{
-				if (sizeof...(Is) == 1)
-					return (std::get<Is>(t)...);
-				else
-					return (f(std::get<Is>(t)...));
-			}));
+	constexpr auto	foldl(const Tuple &t, F f)
+	{
+		return apply(t, [&f](auto... ts) { return (detail::foldl_impl(f, ts...)); });
 	}
 
 // Transpose
 	template <class Tuple>
-	constexpr auto	transpose(Tuple t) {
-		return apply(t, [](auto... ts) { return zip(ts...); });
+	inline constexpr auto	transpose(const Tuple &t)
+	{
+		return (apply(t, [](auto... ts) { return zip(ts...); }));
 	}
 	template <class... Tuples>
-	constexpr auto	zip(Tuples... ts) {
-		constexpr size_t len = min({std::tuple_size<Tuples>{}...});
+	inline constexpr auto	zip(Tuples... ts)
+	{
+		constexpr size_t len = std::min({std::tuple_size<Tuples>{}...});
 		auto row =
 		[&](auto I)
 		{
@@ -180,28 +201,28 @@ namespace	tuple
 	template<std::size_t N, typename...Ts>
 	using	tuple_repeat = repeat<std::tuple<Ts...>, N>;
 
-	template<class MergeF, class ExpandF, class TupleLhs, class TupleRhs>
-	inline auto		matrix_mult_tuple(const TupleLhs &lhs, const TupleRhs &rhs)
-	{
-		auto	do_calcul =
-		[](const auto &lhs, const auto &rhs)
-		{
-			;
-		};
-		// return (detail::index_apply<std::tuple_size<TupleLhs>{}>([&](auto...Is)
-		// {
-		// 	return (detail::index_apply<std::tuple_size<TupleRhs>{}>([&](auto...Js)
-		// 	{
-		// 		return (detail::index_apply<std::tuple_size<TupleLhs>{}>([&](auto...IIs)
-		// 		{
-		// 			return (detail::index_apply<std::tuple_size<TupleRhs>{}>([&](auto...JJs)
-		// 			{
-		// 				;
-		// 			}));
-		// 		}));
-		// 	}));
-		// }));
-	};
+	// template<class MergeF, class ExpandF, class TupleLhs, class TupleRhs>
+	// inline auto		matrix_mult_tuple(const TupleLhs &lhs, const TupleRhs &rhs)
+	// {
+	// 	auto	do_calcul =
+	// 	[](const auto &lhs, const auto &rhs)
+	// 	{
+	// 		;
+	// 	};
+	// 	// return (detail::index_apply<std::tuple_size<TupleLhs>{}>([&](auto...Is)
+	// 	// {
+	// 	// 	return (detail::index_apply<std::tuple_size<TupleRhs>{}>([&](auto...Js)
+	// 	// 	{
+	// 	// 		return (detail::index_apply<std::tuple_size<TupleLhs>{}>([&](auto...IIs)
+	// 	// 		{
+	// 	// 			return (detail::index_apply<std::tuple_size<TupleRhs>{}>([&](auto...JJs)
+	// 	// 			{
+	// 	// 				;
+	// 	// 			}));
+	// 	// 		}));
+	// 	// 	}));
+	// 	// }));
+	// };
 
 };
 
