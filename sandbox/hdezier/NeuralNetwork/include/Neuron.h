@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:19:18 by leeios            #+#    #+#             */
-/*   Updated: 2016/08/21 13:42:17 by leeios           ###   ########.fr       */
+/*   Updated: 2016/08/21 16:18:40 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ namespace	Functors
 		{
 			return (lhs + rhs);
 		};
+		template<typename T>
+		inline T	operator()(const T &val)
+		{
+			return (val);
+		};
 	};
 	struct	Mult
 	{
@@ -32,6 +37,11 @@ namespace	Functors
 		inline T	operator()(const T &lhs, const T &rhs)
 		{
 			return (lhs * rhs);
+		};
+		template<typename T>
+		inline T	operator()(const T &val)
+		{
+			return (val);
 		};
 	};
 };
@@ -68,8 +78,8 @@ namespace	NeuronTypes
 				[&result](const auto &value_input, const auto &value_param, const std::size_t i)
 			{
 				(void)i;
-				result = TOutputFunctor::apply(result
-					, TOutput(TInputFunctor::apply(value_input, value_param)));
+				result = TOutputFunctor(result
+					, TOutput(TInputFunctor(value_input, value_param)));
 			});
 			return (result);
 		};

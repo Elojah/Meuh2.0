@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 19:21:54 by leeios            #+#    #+#             */
-/*   Updated: 2016/08/21 15:46:16 by leeios           ###   ########.fr       */
+/*   Updated: 2016/08/21 18:06:19 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ namespace	tuple
 		constexpr auto index_apply(F &&f)
 		{
 			return (index_apply_impl(f, make_index_range<Begin, End>{}));
+
 		}
 	};
 
@@ -106,7 +107,7 @@ namespace	tuple
 
 // Map
 	template <class Tuple, class F>
-	inline constexpr auto	mapM(const Tuple &t, F f)
+	inline constexpr auto	mapM(const Tuple &t, F &&f)
 	{
 		detail::index_apply<std::tuple_size<Tuple>{}>([&](auto...Is)
 		{
@@ -115,7 +116,7 @@ namespace	tuple
 		});
 	}
 	template <class Tuple, class F>
-	inline constexpr auto	map(const Tuple &t, F f)
+	inline constexpr auto	map(const Tuple &t, F &&f)
 	{
 		return (detail::index_apply<std::tuple_size<Tuple>{}>([&](auto...Is)
 		{
@@ -125,12 +126,11 @@ namespace	tuple
 
 // Apply
 	template <class Tuple, class F>
-	inline constexpr auto	apply(const Tuple &t, F f)
+	inline constexpr auto	apply(const Tuple &t, F &&f)
 	{
 		return (detail::index_apply<std::tuple_size<Tuple>{}>(
 			[&](auto...Is) {return f(std::get<Is>(t)...); }));
 	}
-
 
 	namespace	detail
 	{
@@ -140,26 +140,50 @@ namespace	tuple
 			explicit sink(Args const &...) {};
 		};
 
-		template<class F, class CurrentVal, class... TupleVal>
-		inline constexpr auto	foldl_impl(F &f, CurrentVal &val, TupleVal... ts
-			, typename std::enable_if<(sizeof...(TupleVal) > 0)>::type* = nullptr)
-		{
-			return (f(val, foldl_impl(f, ts...)));
-		};
-		template<class F, class CurrentVal, class... TupleVal>
-		inline constexpr auto	foldl_impl(F &f, CurrentVal &val, TupleVal&...ts
-			, typename std::enable_if<(sizeof...(TupleVal) == 0)>::type* = nullptr)
+	// Foldl impl
+		template<class F, class CurrentVal, class... TupleVal
+			, typename std::enable_if<(sizeof...(TupleVal) == 0), int>::type = 0>
+		inline constexpr auto	foldl_impl(F &&f, CurrentVal &&val, TupleVal&&...ts)
 		{
 			detail::sink {f, ts...};
 			return (val);
 		};
+		template<class F, class CurrentVal, class... TupleVal
+			, typename std::enable_if<(sizeof...(TupleVal) > 0), int>::type = 0>
+		inline constexpr auto	foldl_impl(F &&f, CurrentVal &&val, TupleVal&&... ts)
+		{
+			return (f(detail::foldl_impl(f, ts...), val));
+		};
+
+	// Foldr impl
+		template<class F, class CurrentVal, class... TupleVal
+			, typename std::enable_if<(sizeof...(TupleVal) == 0), int>::type = 0>
+		inline constexpr auto	foldr_impl(F &&f, CurrentVal &&val, TupleVal&&...ts)
+		{
+			detail::sink {f, ts...};
+			return (val);
+		};
+		template<class F, class CurrentVal, class... TupleVal
+			, typename std::enable_if<(sizeof...(TupleVal) > 0), int>::type = 0>
+		inline constexpr auto	foldr_impl(F &&f, CurrentVal &&val, TupleVal&&... ts)
+		{
+			return (f(detail::foldr_impl(f, ts...), val));
+		};
+
 	};
 
 // Foldl
 	template <class Tuple, class F>
-	constexpr auto	foldl(const Tuple &t, F f)
+	inline constexpr auto	foldl(Tuple &&t, F &&f)
 	{
-		return apply(t, [&f](auto... ts) { return (detail::foldl_impl(f, ts...)); });
+		return (apply(t, [&f](auto&&... ts) { return (detail::foldl_impl(f, ts...)); }));
+	}
+
+// Foldr
+	template <class Tuple, class F>
+	inline constexpr auto	foldr(Tuple &&t, F &&f)
+	{
+		return apply(t, [&f](auto&&... ts) { return (detail::foldr_impl(f, ts...)); });
 	}
 
 // Transpose
