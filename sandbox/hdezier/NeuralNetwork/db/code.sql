@@ -1,20 +1,96 @@
-DROP TABLE IF EXISTS person;
-DROP TABLE IF EXISTS person_pet;
-DROP TABLE IF EXISTS pet;
-CREATE TABLE person (
-    id INTEGER PRIMARY KEY,
-    first_name TEXT,
-    last_name TEXT,
-    age INTEGER
+DROP TABLE IF EXISTS PLAYERS;
+DROP TABLE IF EXISTS GOALS;
+CREATE TABLE PLAYERS (
+    player_id INTEGER PRIMARY KEY,
+    team TEXT,
+    ethnicity TEXT,
+    market_value FLOAT
 );
-CREATE TABLE person_pet (
-    person_id INTEGER,
-    pet_id INTEGER
+CREATE TABLE GOALS (
+    goal_id INTEGER PRIMARY KEY,
+    player_id INT,
+    timestamp DATE,
+    beauty FLOAT
 );
-CREATE TABLE pet (
-    id INTEGER PRIMARY KEY,
-    name TEXT,
-    breed TEXT,
-    age INTEGER,
-    dead INTEGER
-);
+
+INSERT INTO PLAYERS
+VALUES(0, 'fcb', 'black', '3.14');
+INSERT INTO PLAYERS
+VALUES(1, 'psg', 'white', '614.2');
+
+INSERT INTO PLAYERS
+VALUES(2, 'fcb', 'white', '3.14');
+INSERT INTO PLAYERS
+VALUES(3, 'fcb', 'white', '614.2');
+
+INSERT INTO GOALS
+VALUES(0, 0, '2012-06-18', 0.65);
+INSERT INTO GOALS
+VALUES(1, 1, '2012-06-18', 0.65);
+INSERT INTO GOALS
+VALUES(2, 0, '2012-06-18', 0.65);
+INSERT INTO GOALS
+VALUES(3, 0, '2012-06-18', 0.65);
+INSERT INTO GOALS
+VALUES(4, 0, '2012-06-18', 0.65);
+INSERT INTO GOALS
+VALUES(5, 0, '2012-06-18', 0.65);
+INSERT INTO GOALS
+VALUES(6, 0, '2012-06-18', 0.65);
+INSERT INTO GOALS
+VALUES(7, 2, '2012-06-18', 0.65);
+INSERT INTO GOALS
+VALUES(8, 0, '2014-06-18', 0.65);
+INSERT INTO GOALS
+VALUES(9, 0, '2012-06-18', 0.65);
+INSERT INTO GOALS
+VALUES(10, 0, '2012-06-18', 0.65);
+INSERT INTO GOALS
+VALUES(11, 1, '2012-06-18', 0.92);
+INSERT INTO GOALS
+VALUES(12, 1, '2012-06-18', 0.02);
+INSERT INTO GOALS
+VALUES(13, 1, '2012-06-18', 0.02);
+
+
+-- SELECT goal_id FROM GOALS
+-- WHERE   GOALS.beauty > 0.9
+-- OR      GOALS.beauty < 0.1;
+
+-- SELECT PLAYERS.player_id
+-- FROM PLAYERS
+-- INNER JOIN GOALS
+-- ON PLAYERS.player_id = GOALS.player_id
+-- WHERE PLAYERS.team == "fcb"
+-- GROUP BY GOALS.player_id
+-- HAVING COUNT(GOALS.player_id) >= 2;
+
+
+-- SELECT PLAYERS.player_id
+-- FROM PLAYERS
+-- INNER JOIN GOALS
+-- ON PLAYERS.player_id = GOALS.player_id
+-- WHERE PLAYERS.team == "fcb"
+-- AND PLAYERS.market_value < 8
+-- GROUP BY GOALS.player_id
+-- HAVING COUNT(GOALS.player_id) >= 10;
+
+
+-- SELECT AVG(GOALS.beauty)
+-- FROM GOALS
+-- INNER JOIN PLAYERS
+-- ON GOALS.player_id = PLAYERS.player_id
+-- WHERE PLAYERS.team == "fcb";
+
+-- SELECT team, ethnicity, COUNT(*)
+-- FROM PLAYERS INNER JOIN GOALS
+-- ON PLAYERS.player_id = GOALS.player_id
+-- WHERE DATE_FORMAT(GOALS.timestamp, '%m-%d') == DATE_FORMAT('06-18', '%m-%d')
+-- GROUP BY team, ethnicity;
+
+SELECT COUNT(*), team
+FROM PLAYERS as A
+LEFT JOIN GOALS AS B
+ON A.player_id = B.player_id
+WHERE B.player_id IS NULL
+GROUP BY team;
