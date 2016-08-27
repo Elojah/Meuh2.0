@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/08/10 22:47:50 by hdezier          ###   ########.fr        #
+#    Updated: 2016/08/27 17:53:26 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,9 +61,7 @@ LIB_LOCAL = \
 
 LIB_GLOBAL = \
 
-LIB_OTHER = -Lutil/ogdf\
-			-lOGDF\
-			-lCOIN\
+LIB_OTHER =
 
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
@@ -72,22 +70,10 @@ LIBS += $(LIB_OTHER)
 #Includes
 INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
-INC += -Iutil/ogdf/include
-
-OGDF_DIR = "util/ogdf"
+INC +=
 
 #RULES
-all : make_lib dirbin $(BIN_DIR)/$(TARGET)
-
-make_lib :
-	mkdir -p util
-	if [ ! -d "./$(OGDF_DIR)" ];then						\
-		cd util												\
-		&& git clone https://github.com/ogdf/ogdf			\
-		&& cd ogdf											\
-		&& cmake .											\
-		&& make -j8;										\
-	fi
+all : dirbin $(BIN_DIR)/$(TARGET)
 
 clean :
 	$(RM) $(BUILD_DIR)
