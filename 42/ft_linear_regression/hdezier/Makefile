@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/08/27 19:50:02 by hdezier          ###   ########.fr        #
+#    Updated: 2016/08/27 20:58:01 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ RM = rm -rf
 CLASS = main\
 		CsvLineParser\
 		LinearRegression2D\
+		SDL_linear\
 
 #List interfaces here
 INTERFACE = \
@@ -72,6 +73,8 @@ INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
 INC += -Iutil/SDL2-2.0.4/include
 
+SDL_DIR = util/SDL2-2.0.4
+
 #RULES
 all : make_sdl dirbin $(BIN_DIR)/$(TARGET)
 
@@ -94,7 +97,7 @@ clean :
 	$(RM) $(BUILD_DIR)
 
 fclean :
-	$(RM) $(BUILD_DIR) $(TARGET) $(BIN_DIR)
+	$(RM) $(BUILD_DIR) $(TARGET) $(BIN_DIR) $(SDL_DIR)
 
 re : fclean all
 

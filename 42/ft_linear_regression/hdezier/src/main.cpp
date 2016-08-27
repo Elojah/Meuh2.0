@@ -6,14 +6,14 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 18:35:24 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/27 20:09:17 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/08/27 20:55:03 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "err.h"
-#include "SDL.h"
 #include "CsvLineParser.h"
 #include "LinearRegression2D.h"
+#include "SDL_linear.h"
 
 #include <iostream>
 #include <fstream>
@@ -34,46 +34,11 @@ static int		print_err(e_err err)
 		case (e_err::BAD_CSV_INT_NUMBER) :
 			std::cout << "Bad number of coordinates" << std::endl;
 			break ;
+		case (e_err::SDL_WINDOW) :
+			std::cout << "SDL window error" << std::endl;
+			break ;
 	}
 	return (0);
-}
-static void		print_estimation(int input, int output)
-{
-	std::cout << input << ": " << output << std::endl;
-}
-
-static void		print_estimation_sdl(int input, int output)
-{
-	(void)input;
-	(void)output;
-	SDL_Init(SDL_INIT_VIDEO);
-	auto	*window = SDL_CreateWindow(
-			"ft_linear_regression",                  // window title
-			SDL_WINDOWPOS_UNDEFINED,           // initial x position
-			SDL_WINDOWPOS_UNDEFINED,           // initial y position
-			640,                               // width, in pixels
-			480,                               // height, in pixels
-			SDL_WINDOW_SHOWN                  // flags - see below
-	);
-	if (window == nullptr)
-		return ;
-	auto	*renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	SDL_RenderClear(renderer);
-	bool		end = false;
-	SDL_Event	event;
-	SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
-	SDL_RenderDrawLine(renderer, 0, 0, 400, 400);
-	SDL_RenderPresent(renderer);
-	while (!end)
-	{
-		SDL_WaitEvent(&event);
-		if(event.window.event == SDL_WINDOWEVENT_CLOSE)
-			end = true;
-	}
-	// Close and destroy the window
-	SDL_DestroyWindow(window);
-	// Clean up
-	SDL_Quit();
 }
 
 static e_err	exec(const char *filename)
@@ -99,10 +64,14 @@ static e_err	exec(const char *filename)
 	}
 	linear_reg.learn_from_data();
 	// TEST
+	SDL_linear		draw(640, 400);
+	draw.open_window();
+	draw.draw_points(linear_reg.get_data_points());
 	for (uint32_t i = 0; i < 600; i += 30)
-		print_estimation(i, linear_reg.current_estimation(i));
+		draw.draw_function(i, linear_reg.current_estimation(i));
+	draw.loop();
 	// !TEST
-	print_estimation_sdl(0, 0);
+
 	return (e_err::NO_ERR);
 }
 

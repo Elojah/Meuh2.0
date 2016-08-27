@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 18:37:22 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/10 19:42:20 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/08/27 20:40:18 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ enum class	e_err
 	NO_ERR,
 	BAD_ARG_NUMBER,
 	BAD_FORMAT_CSV_INT,
-	BAD_CSV_INT_NUMBER
+	BAD_CSV_INT_NUMBER,
+	SDL_WINDOW,
 };
 
 #endif

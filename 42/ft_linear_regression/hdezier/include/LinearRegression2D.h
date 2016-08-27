@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   LinearRegression2D.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 20:00:46 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/13 21:05:52 by leeios           ###   ########.fr       */
+/*   Updated: 2016/08/27 20:53:51 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 class LinearRegression2D
 {
 public:
+
+	typedef std::array<double, 2>			t_coordinates;
+	typedef std::vector<t_coordinates>		t_graph;
+
 	inline LinearRegression2D(void)
 	: m_theta0(0)
 	, m_theta1(0)
@@ -29,6 +33,7 @@ public:
 	void			_learn_from_data(void);
 	inline double	current_estimation(const double input) const {return (m_theta0 + (m_theta1 * input));};
 	inline void		add_to_data(const type_csv::csv_params<2> &csv_params) {m_all_points.emplace_back(csv_params);};
+	inline const t_graph	&get_data_points(void) const {return (m_all_points);};
 
 private:
 
@@ -38,9 +43,6 @@ private:
 	double			m_theta0;
 	double			m_theta1;
 	double			m_current_epsilon;
-
-	typedef std::array<double, 2>			t_coordinates;
-	typedef std::vector<t_coordinates>		t_graph;
 
 	t_graph		m_all_points;
 
