@@ -1,0 +1,1161 @@
+In file included from src/main.cpp:14:
+In file included from include/tuple.h:16:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: error: implicit instantiation of undefined template 'std::tuple_element<0, std::tuple<> >'
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<1, std::tuple<char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<2, std::tuple<float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<3, std::tuple<char, float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:769:5: note: in instantiation of template class 'std::tuple_element<4, std::tuple<int, char, float, char> >' requested here
+    using __tuple_element_t = typename tuple_element<__i, _Tp>::type;
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:831:15: note: in instantiation of template type alias '__tuple_element_t' requested here
+    constexpr __tuple_element_t<__i, tuple<_Elements...>>&
+              ^
+include/tuple.h:49:28: note: (skipping 2 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:748:12: note: template is declared here
+    struct tuple_element;
+           ^
+In file included from src/main.cpp:14:
+include/tuple.h:49:28: error: no matching function for call to 'get'
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^~~~~~~~~~~
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<4, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:147:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:152:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>&& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:157:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(const std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:280:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:832:5: note: candidate template ignored: substitution failure [with __i = 4, _Elements = <int, char, float, char>]
+    get(tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:838:5: note: candidate template ignored: substitution failure [with __i = 4, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<4, std::tuple<int, char, float, char> >'
+    get(const tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:844:5: note: candidate template ignored: substitution failure [with __i = 4, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<4, std::tuple<int, char, float, char> >'
+    get(tuple<_Elements...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:289:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>&& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:297:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(const array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:166:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:171:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:176:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:181:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:186:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:191:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:867:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:873:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:879:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: error: implicit instantiation of undefined template 'std::tuple_element<1, std::tuple<> >'
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<2, std::tuple<char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<3, std::tuple<float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<4, std::tuple<char, float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:769:5: note: in instantiation of template class 'std::tuple_element<5, std::tuple<int, char, float, char> >' requested here
+    using __tuple_element_t = typename tuple_element<__i, _Tp>::type;
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:831:15: note: in instantiation of template type alias '__tuple_element_t' requested here
+    constexpr __tuple_element_t<__i, tuple<_Elements...>>&
+              ^
+include/tuple.h:49:28: note: (skipping 3 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:748:12: note: template is declared here
+    struct tuple_element;
+           ^
+In file included from src/main.cpp:14:
+include/tuple.h:49:28: error: no matching function for call to 'get'
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^~~~~~~~~~~
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<5, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<4, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:147:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:152:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>&& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:157:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(const std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:280:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:832:5: note: candidate template ignored: substitution failure [with __i = 5, _Elements = <int, char, float, char>]
+    get(tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:838:5: note: candidate template ignored: substitution failure [with __i = 5, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<5, std::tuple<int, char, float, char> >'
+    get(const tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:844:5: note: candidate template ignored: substitution failure [with __i = 5, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<5, std::tuple<int, char, float, char> >'
+    get(tuple<_Elements...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:289:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>&& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:297:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(const array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:166:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:171:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:176:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:181:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:186:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:191:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:867:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:873:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:879:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: error: implicit instantiation of undefined template 'std::tuple_element<2, std::tuple<> >'
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<3, std::tuple<char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<4, std::tuple<float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<5, std::tuple<char, float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:769:5: note: in instantiation of template class 'std::tuple_element<6, std::tuple<int, char, float, char> >' requested here
+    using __tuple_element_t = typename tuple_element<__i, _Tp>::type;
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:831:15: note: in instantiation of template type alias '__tuple_element_t' requested here
+    constexpr __tuple_element_t<__i, tuple<_Elements...>>&
+              ^
+include/tuple.h:49:28: note: (skipping 4 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:748:12: note: template is declared here
+    struct tuple_element;
+           ^
+In file included from src/main.cpp:14:
+include/tuple.h:49:28: error: no matching function for call to 'get'
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^~~~~~~~~~~
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<6, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<5, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<4, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:147:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:152:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>&& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:157:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(const std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:280:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:832:5: note: candidate template ignored: substitution failure [with __i = 6, _Elements = <int, char, float, char>]
+    get(tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:838:5: note: candidate template ignored: substitution failure [with __i = 6, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<6, std::tuple<int, char, float, char> >'
+    get(const tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:844:5: note: candidate template ignored: substitution failure [with __i = 6, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<6, std::tuple<int, char, float, char> >'
+    get(tuple<_Elements...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:289:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>&& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:297:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(const array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:166:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:171:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:176:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:181:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:186:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:191:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:867:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:873:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:879:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: error: implicit instantiation of undefined template 'std::tuple_element<3, std::tuple<> >'
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<4, std::tuple<char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<5, std::tuple<float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<6, std::tuple<char, float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:769:5: note: in instantiation of template class 'std::tuple_element<7, std::tuple<int, char, float, char> >' requested here
+    using __tuple_element_t = typename tuple_element<__i, _Tp>::type;
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:831:15: note: in instantiation of template type alias '__tuple_element_t' requested here
+    constexpr __tuple_element_t<__i, tuple<_Elements...>>&
+              ^
+include/tuple.h:49:28: note: (skipping 5 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:748:12: note: template is declared here
+    struct tuple_element;
+           ^
+In file included from src/main.cpp:14:
+include/tuple.h:49:28: error: no matching function for call to 'get'
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^~~~~~~~~~~
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<7, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<6, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<5, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<4, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:147:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:152:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>&& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:157:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(const std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:280:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:832:5: note: candidate template ignored: substitution failure [with __i = 7, _Elements = <int, char, float, char>]
+    get(tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:838:5: note: candidate template ignored: substitution failure [with __i = 7, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<7, std::tuple<int, char, float, char> >'
+    get(const tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:844:5: note: candidate template ignored: substitution failure [with __i = 7, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<7, std::tuple<int, char, float, char> >'
+    get(tuple<_Elements...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:289:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>&& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:297:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(const array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:166:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:171:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:176:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:181:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:186:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:191:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:867:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:873:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:879:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: error: implicit instantiation of undefined template 'std::tuple_element<4, std::tuple<> >'
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<5, std::tuple<char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<6, std::tuple<float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<7, std::tuple<char, float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:769:5: note: in instantiation of template class 'std::tuple_element<8, std::tuple<int, char, float, char> >' requested here
+    using __tuple_element_t = typename tuple_element<__i, _Tp>::type;
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:831:15: note: in instantiation of template type alias '__tuple_element_t' requested here
+    constexpr __tuple_element_t<__i, tuple<_Elements...>>&
+              ^
+include/tuple.h:49:28: note: (skipping 6 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:748:12: note: template is declared here
+    struct tuple_element;
+           ^
+In file included from src/main.cpp:14:
+include/tuple.h:49:28: error: no matching function for call to 'get'
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^~~~~~~~~~~
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<8, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<7, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<6, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<5, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<4, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:147:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:152:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>&& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:157:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(const std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:280:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:832:5: note: candidate template ignored: substitution failure [with __i = 8, _Elements = <int, char, float, char>]
+    get(tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:838:5: note: candidate template ignored: substitution failure [with __i = 8, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<8, std::tuple<int, char, float, char> >'
+    get(const tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:844:5: note: candidate template ignored: substitution failure [with __i = 8, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<8, std::tuple<int, char, float, char> >'
+    get(tuple<_Elements...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:289:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>&& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:297:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(const array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:166:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:171:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:176:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:181:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:186:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:191:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:867:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:873:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:879:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: error: implicit instantiation of undefined template 'std::tuple_element<5, std::tuple<> >'
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<6, std::tuple<char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<7, std::tuple<float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<8, std::tuple<char, float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:769:5: note: in instantiation of template class 'std::tuple_element<9, std::tuple<int, char, float, char> >' requested here
+    using __tuple_element_t = typename tuple_element<__i, _Tp>::type;
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:831:15: note: in instantiation of template type alias '__tuple_element_t' requested here
+    constexpr __tuple_element_t<__i, tuple<_Elements...>>&
+              ^
+include/tuple.h:49:28: note: (skipping 7 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:748:12: note: template is declared here
+    struct tuple_element;
+           ^
+In file included from src/main.cpp:14:
+include/tuple.h:49:28: error: no matching function for call to 'get'
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^~~~~~~~~~~
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<9, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<8, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<7, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<6, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<5, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: (skipping 1 context in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:147:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:152:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>&& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:157:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(const std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:280:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:832:5: note: candidate template ignored: substitution failure [with __i = 9, _Elements = <int, char, float, char>]
+    get(tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:838:5: note: candidate template ignored: substitution failure [with __i = 9, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<9, std::tuple<int, char, float, char> >'
+    get(const tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:844:5: note: candidate template ignored: substitution failure [with __i = 9, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<9, std::tuple<int, char, float, char> >'
+    get(tuple<_Elements...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:289:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>&& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:297:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(const array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:166:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:171:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:176:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:181:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:186:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:191:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:867:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:873:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:879:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: error: implicit instantiation of undefined template 'std::tuple_element<6, std::tuple<> >'
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<7, std::tuple<char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<8, std::tuple<float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<9, std::tuple<char, float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:769:5: note: in instantiation of template class 'std::tuple_element<10, std::tuple<int, char, float, char> >' requested here
+    using __tuple_element_t = typename tuple_element<__i, _Tp>::type;
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:831:15: note: in instantiation of template type alias '__tuple_element_t' requested here
+    constexpr __tuple_element_t<__i, tuple<_Elements...>>&
+              ^
+include/tuple.h:49:28: note: (skipping 8 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:748:12: note: template is declared here
+    struct tuple_element;
+           ^
+In file included from src/main.cpp:14:
+include/tuple.h:49:28: error: no matching function for call to 'get'
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^~~~~~~~~~~
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<10, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<9, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<8, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<7, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<6, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: (skipping 2 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:147:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:152:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>&& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:157:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(const std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:280:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:832:5: note: candidate template ignored: substitution failure [with __i = 10, _Elements = <int, char, float, char>]
+    get(tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:838:5: note: candidate template ignored: substitution failure [with __i = 10, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<10, std::tuple<int, char, float, char> >'
+    get(const tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:844:5: note: candidate template ignored: substitution failure [with __i = 10, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<10, std::tuple<int, char, float, char> >'
+    get(tuple<_Elements...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:289:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>&& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:297:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(const array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:166:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:171:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:176:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:181:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:186:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:191:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:867:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:873:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:879:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: error: implicit instantiation of undefined template 'std::tuple_element<7, std::tuple<> >'
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<8, std::tuple<char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<9, std::tuple<float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<10, std::tuple<char, float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:769:5: note: in instantiation of template class 'std::tuple_element<11, std::tuple<int, char, float, char> >' requested here
+    using __tuple_element_t = typename tuple_element<__i, _Tp>::type;
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:831:15: note: in instantiation of template type alias '__tuple_element_t' requested here
+    constexpr __tuple_element_t<__i, tuple<_Elements...>>&
+              ^
+include/tuple.h:49:28: note: (skipping 9 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:748:12: note: template is declared here
+    struct tuple_element;
+           ^
+In file included from src/main.cpp:14:
+include/tuple.h:49:28: error: no matching function for call to 'get'
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^~~~~~~~~~~
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<11, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<10, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<9, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<8, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<7, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: (skipping 3 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:147:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:152:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>&& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:157:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(const std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:280:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:832:5: note: candidate template ignored: substitution failure [with __i = 11, _Elements = <int, char, float, char>]
+    get(tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:838:5: note: candidate template ignored: substitution failure [with __i = 11, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<11, std::tuple<int, char, float, char> >'
+    get(const tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:844:5: note: candidate template ignored: substitution failure [with __i = 11, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<11, std::tuple<int, char, float, char> >'
+    get(tuple<_Elements...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:289:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>&& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:297:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(const array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:166:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:171:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:176:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:181:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:186:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:191:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:867:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:873:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:879:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: error: implicit instantiation of undefined template 'std::tuple_element<8, std::tuple<> >'
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<9, std::tuple<char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<10, std::tuple<float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<11, std::tuple<char, float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:769:5: note: in instantiation of template class 'std::tuple_element<12, std::tuple<int, char, float, char> >' requested here
+    using __tuple_element_t = typename tuple_element<__i, _Tp>::type;
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:831:15: note: in instantiation of template type alias '__tuple_element_t' requested here
+    constexpr __tuple_element_t<__i, tuple<_Elements...>>&
+              ^
+include/tuple.h:49:28: note: (skipping 10 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:748:12: note: template is declared here
+    struct tuple_element;
+           ^
+In file included from src/main.cpp:14:
+include/tuple.h:49:28: error: no matching function for call to 'get'
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^~~~~~~~~~~
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<12, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<11, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<10, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<9, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<8, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: (skipping 4 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:147:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:152:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(std::pair<_Tp1, _Tp2>&& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:157:5: note: candidate template ignored: could not match 'pair' against 'tuple'
+    get(const std::pair<_Tp1, _Tp2>& __in) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:280:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:832:5: note: candidate template ignored: substitution failure [with __i = 12, _Elements = <int, char, float, char>]
+    get(tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:838:5: note: candidate template ignored: substitution failure [with __i = 12, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<12, std::tuple<int, char, float, char> >'
+    get(const tuple<_Elements...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:844:5: note: candidate template ignored: substitution failure [with __i = 12, _Elements = <int, char, float, char>]: no type named 'type' in 'std::tuple_element<12, std::tuple<int, char, float, char> >'
+    get(tuple<_Elements...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:289:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(array<_Tp, _Nm>&& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/array:297:5: note: candidate template ignored: could not match 'array' against 'tuple'
+    get(const array<_Tp, _Nm>& __arr) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:166:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:171:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Tp, _Up>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:176:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Tp, _Up>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:181:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:186:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const pair<_Up, _Tp>& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/utility:191:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(pair<_Up, _Tp>&& __p) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:867:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:873:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(tuple<_Types...>&& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:879:5: note: candidate template ignored: invalid explicitly-specified argument for template parameter '_Tp'
+    get(const tuple<_Types...>& __t) noexcept
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: error: implicit instantiation of undefined template 'std::tuple_element<9, std::tuple<> >'
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<10, std::tuple<char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<11, std::tuple<float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:756:7: note: in instantiation of template class 'std::tuple_element<12, std::tuple<char, float, char> >' requested here
+    : tuple_element<__i - 1, tuple<_Tail...> > { };
+      ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:769:5: note: in instantiation of template class 'std::tuple_element<13, std::tuple<int, char, float, char> >' requested here
+    using __tuple_element_t = typename tuple_element<__i, _Tp>::type;
+    ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:831:15: note: in instantiation of template type alias '__tuple_element_t' requested here
+    constexpr __tuple_element_t<__i, tuple<_Elements...>>&
+              ^
+include/tuple.h:49:28: note: (skipping 11 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+                        return (std::make_tuple(std::get<I>(t)));
+                                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<3, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<2, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:51:12: note: in instantiation of function template specialization 'tuple::split_tuple_impl<1, 1, 1, int, char, float, char>' requested here
+                        return (split_tuple_impl<I + 1, First, NLength, Ts...>(t));
+                                ^
+include/tuple.h:59:11: note: in instantiation of function template specialization 'tuple::split_tuple_impl<0, 1, 1, int, char, float, char>' requested here
+                return (split_tuple_impl<0, First, NLength, Ts...>(t));
+                        ^
+src/main.cpp:31:37: note: in instantiation of function template specialization 'tuple::split_tuple<1, 1, int, char, float, char>' requested here
+        const auto tuple_splitted = tuple::split_tuple<1, 1>(test_tuple);
+                                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0/tuple:748:12: note: template is declared here
+    struct tuple_element;
+           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+make: *** [build/main.o] Erreur 1

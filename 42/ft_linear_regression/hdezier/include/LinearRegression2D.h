@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   LinearRegression2D.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 20:00:46 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/10 21:42:34 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/08/13 21:05:52 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,25 @@ public:
 	{}
 	~LinearRegression2D(void) = default;
 
-	void		learn_from_data(void);
-	inline int	current_estimation(const int input) const {return (m_theta0 + (m_theta1 * input));};
-	inline void	add_to_data(const type_csv::csv_params<2> &csv_params) {m_all_points.emplace_back(csv_params);};
+	void			learn_from_data(void);
+	void			_learn_from_data(void);
+	inline double	current_estimation(const double input) const {return (m_theta0 + (m_theta1 * input));};
+	inline void		add_to_data(const type_csv::csv_params<2> &csv_params) {m_all_points.emplace_back(csv_params);};
 
 private:
 
-	static const float	m_learning_rate;
+	double			m_learning_rate;
+	double			m_precision;
 
-	float			m_theta0;
-	float			m_theta1;
+	double			m_theta0;
+	double			m_theta1;
+	double			m_current_epsilon;
 
-	typedef std::array<float, 2>			t_coordinates;
+	typedef std::array<double, 2>			t_coordinates;
 	typedef std::vector<t_coordinates>		t_graph;
 
 	t_graph		m_all_points;
+
 };
 
 #endif

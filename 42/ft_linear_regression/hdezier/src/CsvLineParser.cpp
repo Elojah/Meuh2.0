@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   CsvLineParser.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 18:47:47 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/10 20:17:23 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/08/14 12:19:46 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ e_err		CsvLineParser<NDimension>::read_csv_line(const std::string &line, local_c
 			i_end = i_final;
 		try
 		{
-			result[i] = std::stof(line.substr(i_begin, i_end - i_begin));
+			result[i] = std::stod(line.substr(i_begin, i_end - i_begin));
 		}
 		catch (...)
 		{

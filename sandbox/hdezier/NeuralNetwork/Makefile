@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
+#    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/08/27 17:54:16 by hdezier          ###   ########.fr        #
+#    Updated: 2016/08/20 23:11:53 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-TARGET = ft_linear_regression
+TARGET = neural_network
 
 #Directories
 BIN_DIR = bin
@@ -37,8 +37,6 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		CsvLineParser\
-		LinearRegression2D\
 
 #List interfaces here
 INTERFACE = \
@@ -50,7 +48,7 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 
 #Flags
 CFLAGS = -Wall -Wextra -Werror\
-		-fno-unwind-tables -fno-rtti\
+		-fno-exceptions -fno-unwind-tables\
 		-O3\
 		-std=c++14\
 
@@ -61,16 +59,15 @@ LIB_LOCAL = \
 
 LIB_GLOBAL = \
 
-LIB_OTHER =
+LIB_OTHER = \
 
 LIBS += $(addsuffix /lib, $(addprefix -L, $(LIB_LOCAL)))
 LIBS += $(addprefix -l,$(LIB_GLOBAL))
-# LIBS += $(LIB_OTHER)
+LIBS += $(LIB_OTHER)
 
 #Includes
 INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
-INC +=
 
 #RULES
 all : dirbin $(BIN_DIR)/$(TARGET)
@@ -88,7 +85,7 @@ dirbin:
 
 .PHONY: all clean fclean re
 
-.SILENT: dirlib dirbuild dirbin make_lib
+.SILENT: dirlib dirbuild dirbin
 
 #Build rule
 $(BIN_DIR)/$(TARGET) : $(OBJ)
