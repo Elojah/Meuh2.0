@@ -6,11 +6,12 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 02:43:06 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/18 17:33:08 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/30 16:33:59 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "JobShopManager.h"
+#include "ResourceShop.h"
 #include <iostream>
 #include <limits>
 #include <unordered_map>
@@ -24,7 +25,7 @@ JobShopManager::JobShopManager(void)
 	m_tasks.reserve(1);
 }
 
-e_err	JobShopManager::set_initial_resources(const std::string &resource_name, uint64_t n)
+e_err	JobShopManager::set_initial_resources(const std::string &resource_name, uint32_t n)
 {
 	if (m_resources.find(resource_name) == m_resources.cend())
 		m_resources.emplace(resource_name, n);
@@ -36,7 +37,7 @@ e_err	JobShopManager::set_initial_resources(const std::string &resource_name, ui
 e_err	JobShopManager::add_task(const std::string &task_name
 	, const t_resource_pack_token &needs
 	, const t_resource_pack_token &products
-	, uint64_t time)
+	, uint32_t time)
 {
 	if (m_tasks.find(task_name) != m_tasks.cend())
 		return (e_err::TASK_DUPLICAT);
@@ -49,17 +50,15 @@ e_err	JobShopManager::add_task(const std::string &task_name
 e_err	JobShopManager::optimize(const t_resources_name &to_opt)
 {
 	t_resource_pack		resources_to_max;
+	ResourceShop		resource_shop(m_tasks);
 
 	for (const auto &s : to_opt)
 		resources_to_max.emplace(s, 1);
 
-	for (auto &t : m_tasks)
-		t.second.set_sub_tasks(m_tasks, t.first);
-
 //	if (resources_to_max.find(TIME_WORD) == resources_to_max.cend())
 //		return (_optimize_production(resources_to_max));
 //	else
-		return (_optimize_time(resources_to_max));
+	return (_optimize_time(resources_to_max, resource_shop));
 }
 
 e_err	JobShopManager::_optimize_production(const t_resource_pack &resources_to_max) const
@@ -68,30 +67,20 @@ e_err	JobShopManager::_optimize_production(const t_resource_pack &resources_to_m
 	return (e_err::TODO);
 }
 
-e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max) const
+e_err	JobShopManager::_optimize_time(const t_resource_pack &resources_to_max
+	, ResourceShop &resource_shop) const
 {
-	t_tasks_name		candidate_tasks;
-
-	std::cout << "Start optimization..." << std::endl;
-
-	for (const auto &t : m_tasks)
+	for (const auto &res : resources_to_max)
 	{
-		std::cout << "\tProduction task tested:" << t.first << std::endl;
-		for (const auto res_need : resources_to_max)
-		{
-			if (res_need.first == TIME_WORD)
-				continue ;
-			std::cout << "\t\tLookin for final resource:" << res_need.first << std::endl;
-			auto	n_coef(t.second.get_product(res_need.first));
-			if (n_coef > 0)
-			{
-				std::cout << "\t\t\tStart depth search..." << std::endl;
-				auto	task_path = t.second.get_task_path(t.first, n_coef);
-				for (const auto &t : task_path)
-					std::cerr << t.first << "\tx " << t.second << std::endl;
-			}
-		}
+		if (res.first == TIME_WORD)
+			continue ;
+		std::cout << "\033[34mExamining resource:\033[0m" << res.first << "..." << std::endl;
+		t_paths		paths;
+		if (resource_shop.search_max_resource(res.first, m_resources, paths) == false)
+			continue ;
+		std::cout << "\033[34mPaths found !\033[0m" << std::endl;
+		for (const auto &path : paths)
+			resource_shop.print_path(path, res.first);
 	}
-
-	return (e_err::DEBUG);
+	return (e_err::TODO);
 }

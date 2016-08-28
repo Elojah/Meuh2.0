@@ -1,0 +1,72 @@
+8
+=
+a b c d
+4 2 1 3
+=
+[
+aa
+bbbb
+cccccccc
+ddd
+]
+[
+abb
+abcc
+abcd
+acccc
+acccd // remove
+accd // remove
+acd
+add
+]
+[
+bbbcc
+bbbd
+bbcccc
+bbdd
+bcccccc
+bcccccd // remove
+bccccd // remove
+bcccd
+bdd
+]
+[
+cccccccd // remove
+ccccccd // remove
+cccccd
+ccccdd // remove
+cccdd // remove
+ccdd
+cddd
+]
+_______________________________________________
+8
+=
+e f g h
+4 3 2 1
+=
+[
+ee
+eff
+efg
+efh
+]
+[
+fff
+ffg
+ffhh
+fggg
+fggh
+fghhh
+fhhhhh
+]
+[
+gggg
+ggghh
+gghhhh
+ghhhhhh
+]
+[
+hhhhhhhh
+]
+// No remove when sorted

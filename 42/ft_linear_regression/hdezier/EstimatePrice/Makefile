@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
+#    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/07/24 16:23:42 by leeios           ###   ########.fr        #
+#    Updated: 2016/08/28 18:39:49 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-TARGET = krpsim
+TARGET = estimate
 
 #Directories
 BIN_DIR = bin
@@ -37,10 +37,7 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		Interpreter\
-		JobShopManager\
-		Task\
-		ResourceShop\
+		CsvLineParser\
 
 #List interfaces here
 INTERFACE = \
@@ -52,7 +49,7 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 
 #Flags
 CFLAGS = -Wall -Wextra -Werror\
-		-fno-exceptions -fno-unwind-tables -fno-rtti\
+		-fno-unwind-tables -fno-rtti\
 		-O3\
 		-std=c++11\
 
@@ -72,6 +69,7 @@ LIBS += $(LIB_OTHER)
 #Includes
 INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
+INC +=
 
 #RULES
 all : dirbin $(BIN_DIR)/$(TARGET)
@@ -80,7 +78,7 @@ clean :
 	$(RM) $(BUILD_DIR)
 
 fclean :
-	$(RM) $(BUILD_DIR) $(TARGET) $(BIN_DIR)
+	$(RM) $(BUILD_DIR) $(TARGET) $(BIN_DIR) $(SDL_DIR)
 
 re : fclean all
 
@@ -89,7 +87,7 @@ dirbin:
 
 .PHONY: all clean fclean re
 
-.SILENT: dirlib dirbuild dirbin
+.SILENT: dirlib dirbuild dirbin make_sdl
 
 #Build rule
 $(BIN_DIR)/$(TARGET) : $(OBJ)

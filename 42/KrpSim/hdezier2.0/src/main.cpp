@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 00:45:43 by leeios            #+#    #+#             */
-/*   Updated: 2016/06/13 13:04:26 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/07/14 10:02:55 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "Interpreter.h"
 #include "JobShopManager.h"
 
-static int		err_exit(const e_err err, uint64_t line)
+static int		err_exit(const e_err err, uint32_t line)
 {
 	if (err != e_err::NONE)
 		std::cerr << "\033[31mERROR\033[30m[\033[0mLINE:\033[34m" << (unsigned int)line << "\033[30m]\033[0m\t";
@@ -60,7 +60,7 @@ static int	exec(const char *filename)
 	Interpreter<decltype(jsm)>	reader(jsm);
 	std::string					line;
 	std::ifstream				ifs(filename);
-	uint64_t					nLine(1);
+	uint32_t					nLine(1);
 
 	if (ifs.fail())
 		return (err_exit(e_err::OPEN_FAILED, 0));

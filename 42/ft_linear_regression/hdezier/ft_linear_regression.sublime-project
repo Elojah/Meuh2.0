@@ -1,0 +1,27 @@
+{
+    "folders":
+    [
+        {
+            "path": "~/code/meuh/42/ft_linear_regression/hdezier/"
+        }
+    ],
+    "folders":
+    [
+        {
+            "path": "."
+        }
+    ],
+    "settings":
+    {
+        "clang_flags":
+        [
+            "-std=c++11",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Iinclude",
+            "-IDrawData/include",
+            "-Iutil/SDL2-2.0.4/include"
+        ]
+    }
+}

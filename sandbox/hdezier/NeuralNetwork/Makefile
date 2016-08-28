@@ -6,11 +6,11 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/07/24 16:23:42 by leeios           ###   ########.fr        #
+#    Updated: 2016/08/20 23:11:53 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-TARGET = krpsim
+TARGET = neural_network
 
 #Directories
 BIN_DIR = bin
@@ -37,10 +37,6 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		Interpreter\
-		JobShopManager\
-		Task\
-		ResourceShop\
 
 #List interfaces here
 INTERFACE = \
@@ -52,9 +48,9 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 
 #Flags
 CFLAGS = -Wall -Wextra -Werror\
-		-fno-exceptions -fno-unwind-tables -fno-rtti\
+		-fno-exceptions -fno-unwind-tables\
 		-O3\
-		-std=c++11\
+		-std=c++14\
 
 LFLAGS =
 
