@@ -1,2 +1,5 @@
 -Iinclude
--Iutil/SDL2-2.0.4/include
+-IDrawData/include
+-IEstimatePrice/include
+-ILinearRegression/include
+-IDrawData/util/SDL2-2.0.4/include

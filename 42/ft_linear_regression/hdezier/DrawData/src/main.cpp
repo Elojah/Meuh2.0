@@ -6,13 +6,12 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 18:35:24 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/27 20:55:03 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/08/28 19:41:14 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "err.h"
 #include "CsvLineParser.h"
-#include "LinearRegression2D.h"
 #include "SDL_linear.h"
 
 #include <iostream>
@@ -26,7 +25,7 @@ static int		print_err(e_err err)
 			std::cout << "Execution OK" << std::endl;
 			break ;
 		case (e_err::BAD_ARG_NUMBER) :
-			std::cout << "Usage: ./ft_linear_regression filename" << std::endl;
+			std::cout << "Usage: ./draw_data filename" << std::endl;
 			break ;
 		case (e_err::BAD_FORMAT_CSV_INT) :
 			std::cout << "Coordinate can't be read" << std::endl;
@@ -41,15 +40,22 @@ static int		print_err(e_err err)
 	return (0);
 }
 
+static const std::string	get_file_name_only(const std::string &filename)
+{
+	const auto	split_pos = filename.find_last_of("/");
+	if (split_pos == std::string::npos)
+		return (filename);
+	return (filename.substr(split_pos));
+}
+
 static e_err	exec(const char *filename)
 {
 	const static uint8_t	n_dimension = 2;
 
-	LinearRegression2D		linear_reg;
-
 	std::ifstream			file_stream(filename, std::ifstream::in);
 	std::string				line;
 
+	SDL_linear::t_graph		points;
 	while (std::getline(file_stream, line))
 	{
 		type_csv::csv_params<n_dimension>	csv_line;
@@ -60,17 +66,23 @@ static e_err	exec(const char *filename)
 			print_err(check_err);
 			continue ;
 		}
-		linear_reg.add_to_data(csv_line);
+		points.push_back(std::make_pair(csv_line.at(0), csv_line.at(1)));
 	}
-	linear_reg.learn_from_data();
-	// TEST
+
+	std::ifstream			data_stream("../internal/" + get_file_name_only(filename), std::ifstream::in);
+	std::getline(data_stream, line);
+	type_csv::csv_params<n_dimension>	csv_line;
+	const auto		check_err = CsvLineParser<n_dimension>::read_csv_line(line, csv_line);
+	if (check_err != e_err::NO_ERR)
+		return (check_err);
+
 	SDL_linear		draw(640, 400);
 	draw.open_window();
-	draw.draw_points(linear_reg.get_data_points());
-	for (uint32_t i = 0; i < 600; i += 30)
-		draw.draw_function(i, linear_reg.current_estimation(i));
+	draw.draw_points(points);
+	double theta0 = csv_line.at(0);
+	double theta1 = csv_line.at(1);
+	draw.draw_function(theta0, theta1);
 	draw.loop();
-	// !TEST
 
 	return (e_err::NO_ERR);
 }

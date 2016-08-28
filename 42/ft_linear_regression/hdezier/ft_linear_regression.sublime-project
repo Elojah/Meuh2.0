@@ -20,6 +20,7 @@
             "-Wextra",
             "-Werror",
             "-Iinclude",
+            "-IDrawData/include",
             "-Iutil/SDL2-2.0.4/include"
         ]
     }

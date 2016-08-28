@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/27 20:10:03 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/27 20:49:09 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/08/28 19:39:31 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 
 #include "SDL.h"
 #include "err.h"
-#include "LinearRegression2D.h"
 # include <stdint.h>
+# include <vector>
 
 class SDL_linear
 {
 public:
+
+	typedef std::pair<double, double>		t_coordinates;
+	typedef std::vector<t_coordinates>		t_graph;
+
 	inline SDL_linear(uint16_t width, uint16_t height)
 		: m_width(width)
 		, m_height(height) {};
@@ -28,7 +32,7 @@ public:
 	e_err	open_window(void);
 	void	loop(void);
 	void	draw_function(double x, double y);
-	void	draw_points(const LinearRegression2D::t_graph &graph);
+	void	draw_points(const t_graph &graph);
 
 private:
 	SDL_Window		*m_window;

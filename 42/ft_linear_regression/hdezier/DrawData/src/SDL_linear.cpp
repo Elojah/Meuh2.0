@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/27 20:09:54 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/27 20:53:24 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/08/28 19:40:23 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	SDL_linear::draw_function(double x, double y)
 	SDL_RenderDrawLine(m_renderer, 0, m_height - x, m_width, m_height - (x + y * m_width));
 }
 
-void	SDL_linear::draw_points(const LinearRegression2D::t_graph &graph)
+void	SDL_linear::draw_points(const t_graph &graph)
 {
 	SDL_SetRenderDrawColor(m_renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
 	for (const auto &point : graph)
-		SDL_RenderDrawPoint(m_renderer, point.at(0),  m_height - point.at(1));
+		SDL_RenderDrawPoint(m_renderer, std::get<0>(point),  m_height - std::get<1>(point));
 }
 
 void	SDL_linear::loop(void)

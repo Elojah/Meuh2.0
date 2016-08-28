@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 20:00:46 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/27 20:53:51 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/08/28 19:08:02 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ public:
 	{}
 	~LinearRegression2D(void) = default;
 
-	void			learn_from_data(void);
-	void			_learn_from_data(void);
-	inline double	current_estimation(const double input) const {return (m_theta0 + (m_theta1 * input));};
-	inline void		add_to_data(const type_csv::csv_params<2> &csv_params) {m_all_points.emplace_back(csv_params);};
-	inline const t_graph	&get_data_points(void) const {return (m_all_points);};
+	void						learn_from_data(void);
+	double						_learn_from_data(void);
+	inline double				current_estimation(const double input) const {return (m_theta0 + (m_theta1 * input));};
+	inline void					add_to_data(const type_csv::csv_params<2> &csv_params) {m_all_points.emplace_back(csv_params);};
+	inline const t_graph		&get_data_points(void) const {return (m_all_points);};
+	inline const t_coordinates	get_function(void) const {return (t_coordinates{{m_theta0, m_theta1}});};
 
 private:
 

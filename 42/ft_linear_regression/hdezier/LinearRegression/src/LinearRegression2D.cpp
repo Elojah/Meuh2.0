@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 20:00:38 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/27 18:41:46 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/08/28 19:10:30 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ void			LinearRegression2D::learn_from_data(void)
 	m_learning_rate = 0.0001;
 	m_precision = 0.0001;
 	m_current_epsilon = m_precision + 1;
-	while (m_current_epsilon > m_precision || m_current_epsilon < -m_precision)
-		_learn_from_data();
+	while ((m_current_epsilon > m_precision || m_current_epsilon < -m_precision)
+		&& _learn_from_data() != 0)
+		;
 }
 
-void			LinearRegression2D::_learn_from_data(void)
+double			LinearRegression2D::_learn_from_data(void)
 {
 	double		tmp_theta_0 = 0;
 	double		tmp_theta_1 = 0;
@@ -43,6 +44,9 @@ void			LinearRegression2D::_learn_from_data(void)
 		tmp_theta_1 += point_epsilon * point.at(0);
 	}
 	m_current_epsilon = tmp_epsilon;
-	m_theta0 -= (m_learning_rate * tmp_theta_0) / m_all_points.size();
-	m_theta1 -= (m_learning_rate * tmp_theta_1) / m_all_points.size();
+	double delta_theta0 = (m_learning_rate * tmp_theta_0) / m_all_points.size();
+	double delta_theta1 = (m_learning_rate * tmp_theta_1) / m_all_points.size();
+	m_theta0 -= delta_theta0;
+	m_theta1 -= delta_theta1;
+	return (delta_theta0 + delta_theta1);
 }
