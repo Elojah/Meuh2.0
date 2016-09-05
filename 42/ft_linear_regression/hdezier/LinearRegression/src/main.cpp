@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 18:35:24 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/28 19:17:28 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/09/05 20:15:09 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int		print_err(e_err err)
 static const std::string	get_file_name_only(const std::string &filename)
 {
 	const auto	split_pos = filename.find_last_of("/");
-	if (split_pos == std::string::npos)
+	if (split_pos == std::string::npos || split_pos == filename.size() - 1)
 		return (filename);
 	return (filename.substr(split_pos));
 }
@@ -72,6 +72,8 @@ static e_err	exec(const char *filename)
 	linear_reg.learn_from_data();
 	std::ofstream			data_stream;
 	data_stream.open("../internal/" + get_file_name_only(filename), std::ofstream::out);
+	if (data_stream.fail())
+		data_stream.open("internal/" + get_file_name_only(filename), std::ofstream::out);
 	const auto	function = linear_reg.get_function();
 	data_stream << function.at(0) << ", " << function.at(1) << std::endl;
 

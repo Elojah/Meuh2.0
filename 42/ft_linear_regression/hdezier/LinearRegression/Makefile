@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/08/28 19:17:19 by hdezier          ###   ########.fr        #
+#    Updated: 2016/09/05 19:47:25 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		CsvLineParser\
 		LinearRegression2D\
 
 #List interfaces here
@@ -70,7 +69,7 @@ LIBS += $(LIB_OTHER)
 #Includes
 INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
-INC += -Iutil/SDL2-2.0.4/include
+INC += -Iutil/SDL2-2.0.4/include -I../include
 
 #RULES
 all : dirbin $(BIN_DIR)/$(TARGET)

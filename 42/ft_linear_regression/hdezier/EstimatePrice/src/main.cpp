@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 18:35:24 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/28 19:06:09 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/09/05 20:16:04 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int		print_err(e_err err)
 			std::cout << "Execution OK" << std::endl;
 			break ;
 		case (e_err::BAD_ARG_NUMBER) :
-			std::cout << "Usage: ./ft_linear_regression filename" << std::endl;
+			std::cout << "Usage: ./estimate filename" << std::endl;
 			break ;
 		case (e_err::BAD_FORMAT_CSV_INT) :
 			std::cout << "Coordinate can't be read" << std::endl;
@@ -43,7 +43,7 @@ static int		print_err(e_err err)
 static const std::string	get_file_name_only(const std::string &filename)
 {
 	const auto	split_pos = filename.find_last_of("/");
-	if (split_pos == std::string::npos)
+	if (split_pos == std::string::npos || split_pos == filename.size() - 1)
 		return (filename);
 	return (filename.substr(split_pos));
 }
@@ -52,16 +52,16 @@ static e_err	exec(const char *filename)
 {
 	const static uint8_t	n_dimension = 2;
 
-	std::ifstream			file_stream(
-		"../internal/" + get_file_name_only(filename)
-		, std::ifstream::in);
+	std::ifstream			file_stream;
+	file_stream.open("../internal/" + get_file_name_only(filename), std::ifstream::in);
 	if (file_stream.fail())
-		return (e_err::BAD_ARG_NUMBER);
+		file_stream.open("internal/" + get_file_name_only(filename), std::ifstream::in);
+	if (file_stream.fail())
+		return (e_err::BAD_CSV_INT_NUMBER);
 	std::string				line;
 
 	type_csv::csv_params<n_dimension>	csv_line;
 	std::getline(file_stream, line);
-	std::cerr << line << std::endl;
 	const auto		check_err = CsvLineParser<n_dimension>::read_csv_line(line, csv_line);
 	if (check_err != e_err::NO_ERR)
 		return (check_err);
