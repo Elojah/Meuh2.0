@@ -6,7 +6,7 @@
 #    By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/08/28 18:39:49 by hdezier          ###   ########.fr        #
+#    Updated: 2016/09/05 19:44:53 by hdezier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		CsvLineParser\
 
 #List interfaces here
 INTERFACE = \
@@ -69,7 +68,7 @@ LIBS += $(LIB_OTHER)
 #Includes
 INC += $(addprefix -I,$(INC_DIR))
 INC += $(addsuffix /include, $(addprefix -I, $(LIB_LOCAL)))
-INC +=
+INC += -I../include
 
 #RULES
 all : dirbin $(BIN_DIR)/$(TARGET)

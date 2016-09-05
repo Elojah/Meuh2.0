@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 18:35:24 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/28 19:41:14 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/09/05 20:14:51 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static int		print_err(e_err err)
 static const std::string	get_file_name_only(const std::string &filename)
 {
 	const auto	split_pos = filename.find_last_of("/");
-	if (split_pos == std::string::npos)
+	if (split_pos == std::string::npos || split_pos == filename.size() - 1)
 		return (filename);
-	return (filename.substr(split_pos));
+	return (filename.substr(split_pos + 1));
 }
 
 static e_err	exec(const char *filename)
@@ -69,7 +69,10 @@ static e_err	exec(const char *filename)
 		points.push_back(std::make_pair(csv_line.at(0), csv_line.at(1)));
 	}
 
-	std::ifstream			data_stream("../internal/" + get_file_name_only(filename), std::ifstream::in);
+	std::ifstream			data_stream;
+	data_stream.open("../internal/" + get_file_name_only(filename), std::ifstream::in);
+	if (data_stream.fail())
+		data_stream.open("internal/" + get_file_name_only(filename), std::ifstream::in);
 	std::getline(data_stream, line);
 	type_csv::csv_params<n_dimension>	csv_line;
 	const auto		check_err = CsvLineParser<n_dimension>::read_csv_line(line, csv_line);

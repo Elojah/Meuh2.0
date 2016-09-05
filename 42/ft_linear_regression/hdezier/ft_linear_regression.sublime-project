@@ -21,6 +21,8 @@
             "-Werror",
             "-Iinclude",
             "-IDrawData/include",
+            "-ILinearRegression/include",
+            "-IEstimatePrice/include",
             "-Iutil/SDL2-2.0.4/include"
         ]
     }
