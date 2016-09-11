@@ -1,0 +1,216 @@
+[
+	//Misc
+	{ "keys": ["f5"], "command": "refresh_folder_list" },
+	{ "keys": ["super+i"], "command": "copy_path" },
+	// Misc
+	{ "keys": ["super+/"], "command": "toggle_comment", "args": { "block": false } },
+	{ "keys": ["super+shift+/"], "command": "toggle_comment", "args": { "block": true } },
+	{ "keys": ["alt+/"], "command": "insert", "args": {"characters": "/**"} },
+	{ "keys": ["alt+shift+a"], "command": "align_tab", "args" : {"user_input" : "\t"}},
+	//_______________________Navigate in file_______________________
+	// [B/E] of line
+	{ "keys": ["alt+left"], "command": "move_to", "args": {"to": "bol", "extend": false} },
+	{ "keys": ["alt+right"], "command": "move_to", "args": {"to": "eol", "extend": false} },
+	{ "keys": ["alt+delete"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete to Hard EOL.sublime-macro"} },
+	{ "keys": ["alt+backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete to Hard BOL.sublime-macro"} },
+	{ "keys": ["home"], "command": "move_to", "args": {"to": "bof"} },
+	{ "keys": ["end"], "command": "move_to", "args": {"to": "eof"} },
+	{ "keys": ["shift+home"], "command": "move_to", "args": {"to": "bof", "extend":true} },
+	{ "keys": ["shift+end"], "command": "move_to", "args": {"to": "eof", "extend":true} },
+	{ "keys": ["alt+shift+left"], "command": "move_to", "args": {"to": "bol", "extend": true} },
+	{ "keys": ["alt+shift+right"], "command": "move_to", "args": {"to": "eol", "extend": true} },
+	// [Forward/backward] words
+	{ "keys": ["super+up"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": false} },
+	{ "keys": ["super+down"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": true} },
+	{ "keys": ["super+shift+up"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": false, "extend": true} },
+	{ "keys": ["super+shift+down"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": true, "extend": true} },
+	{ "keys": ["super+left"], "command": "move", "args": {"by": "subwords", "forward": false} },
+	{ "keys": ["super+right"], "command": "move", "args": {"by": "subword_ends", "forward": true} },
+	{ "keys": ["super+backspace"], "command": "delete_word", "args": { "forward": false, "sub_words": true } },
+	{ "keys": ["super+delete"], "command": "delete_word", "args": { "forward": true, "sub_words": true } },
+	{ "keys": ["super+shift+left"], "command": "move", "args": {"by": "subwords", "forward": false, "extend": true} },
+	{ "keys": ["super+shift+right"], "command": "move", "args": {"by": "subword_ends", "forward": true, "extend": true} },
+	// Cursor special moves
+	{"keys": ["alt+up"], "command": "swap_line_up"},
+	{"keys": ["alt+down"],"command": "swap_line_down"},
+	{ "keys": ["super+shift+z"], "command": "jump_back"},
+	{ "keys": ["super+shift+y"], "command": "jump_forward"},
+	{ "keys": ["super+shift+a"], "command": "expand_selection_to_paragraph" },
+	{ "keys": ["super+shift+d"], "command": "find_all_under" },
+	{ "keys": ["alt+r"], "command": "open_include"},
+	{ "keys": ["alt+shift+c"], "command": "copy_path" },
+	//{ "keys": ["alt+shift+c"], "command": "copy_file_name" },
+	//_______________________Bookmarks_______________________
+	{ "keys": ["super+shift+f2"], "command": "prev_bookmark" },
+	{ "keys": ["shift+f2"], "command": "next_bookmark" },
+	{ "keys": ["f2"], "command": "better_bookmarks_mark_line"},
+	{ "keys": ["alt+f2"], "command": "better_bookmarks_clear_all_marks"},
+	//_______________________Power cursor_______________________
+	{ "keys": ["super+\\"], "command": "power_cursor_add" },
+	{ "keys": ["super+shift+\\"], "command": "power_cursor_activate" },
+	{ "keys": ["super+shift+q"], "command": "power_cursor_remove" },
+	{ "keys": ["super+."], "command": "power_cursor_select", "args": {"forward": true}},
+	{ "keys": ["super+,"], "command": "power_cursor_select", "args": {"forward": false}},
+	{ "keys": ["super+q"], "command": "single_selection"},
+	//_______________________Navigate between files_______________________
+	{ "keys": ["super+tab"], "command": "next_view_in_stack" },
+	{ "keys": ["super+shift+tab"], "command": "prev_view_in_stack" },
+	{ "keys": ["super+pageup"], "command": "prev_view" },
+	{ "keys": ["super+pagedown"], "command": "next_view" },
+	// Origami panels
+	{ "keys": ["super+keypad8"], "command": "travel_to_pane", "args": {"direction": "up"} },
+	{ "keys": ["super+keypad6"], "command": "travel_to_pane", "args": {"direction": "right"} },
+	{ "keys": ["super+keypad2"], "command": "travel_to_pane", "args": {"direction": "down"} },
+	{ "keys": ["super+keypad4"], "command": "travel_to_pane", "args": {"direction": "left"} },
+	{ "keys": ["super+alt+keypad8"], "command": "carry_file_to_pane", "args": {"direction": "up"} },
+	{ "keys": ["super+alt+keypad6"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
+	{ "keys": ["super+alt+keypad4"], "command": "carry_file_to_pane", "args": {"direction": "left"} },
+	{ "keys": ["super+alt+keypad2"], "command": "carry_file_to_pane", "args": {"direction": "down"} },
+	{ "keys": ["super+keypad0"], "command": "focus_side_bar" },
+	// Diffy
+	{ "keys": ["super+k", "super+d"], "command": "diffy" },
+	{ "keys": ["super+k", "super+c"], "command": "diffy", "args": {"action": "clear"} },
+	// Scope hunter
+	{ "keys" : ["super+k", "super+p"], "command": "get_selection_scope"},
+	// Fold Comments
+//	{ "keys": ["alt+shift+c"],  "command": "toggle_fold_comments" },
+	// Linter
+	// { "keys": ["super+e"], "command": "sublimelinter_goto_error", "args": {"direction": "next"} },
+	// { "keys": ["super+shift+e"], "command": "sublimelinter_goto_error", "args": {"direction": "previous"} },
+	// Open whole function
+	{
+	"keys": ["alt+]"], "command": "run_multiple_commands",
+	"args": {
+	"commands":
+	[{"context": "window",
+		"command": "expand_selection",
+		"args": {"to": "brackets"} },
+	{"context": "window",
+		"command": "unfold"}
+	]}},
+	{
+	"keys": ["alt+["], "command": "run_multiple_commands",
+	"args": {
+	"commands":
+	[{"context": "window",
+		"command": "expand_selection",
+		"args": {"to": "brackets"} },
+	{"context": "window",
+		"command": "fold"}
+	]}},
+	// Insert EOL previous
+	{ "keys": ["super+enter"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Add Line Before.sublime-macro"} },
+	// ; at eol
+	{
+	"keys": ["super+;"], "command": "run_multiple_commands",
+	"args": {
+	"commands":
+	[{"context": "window",
+		"command": "move_to",
+		"args": {"to": "eol", "extend": false}},
+	{"context": "window",
+		"command": "insert",
+		"args": {"characters": ";"}}
+	]}},
+	// Fold all
+	{ "keys": ["super+k", "super+l"],
+	"command": "run_multiple_commands",
+	"args": {
+	"commands": [
+		{"command": "fold_by_level", "args": {"level": 1}, "context": "window"},
+		{"command": "toggle_fold_comments", "context": "window"},
+	]}},
+	// Special select
+	{"keys": ["alt+d"], "command": "select_until", "args": { "extend": true }},
+	{"keys": ["alt+shift+d"], "command": "reverse_select"},
+	// _______________________Screen managing_______________________
+	{ "keys": ["super+k", "super+b"], "command": "toggle_side_bar" },
+	{ "keys": ["f11"], "command": "toggle_full_screen" },
+	{ "keys": ["shift+f11"], "command": "toggle_distraction_free" },
+	// _______________________Clipboard Manager_______________________
+	{ "keys": ["super+x"], "command": "clipboard_manager_cut" },
+	{ "keys": ["super+c"], "command": "clipboard_manager_copy" },
+
+	{ "keys": ["super+v"], "command": "clipboard_manager_paste", "args": { "indent": true } },
+	{ "keys": ["alt+home"], "command": "clipboard_manager_show" },
+	
+	{ "keys": ["alt+pageup"], "command": "clipboard_manager_next" },
+	{ "keys": ["alt+pagedown"], "command": "clipboard_manager_previous" },
+	{ "keys": ["alt+end"], "command": "clipboard_manager_show_registers" },
+
+	// Registers
+	{ "keys": ["super+shift+c", "keypad0"], "command": "clipboard_manager_copy_to_register", "args": { "register": "0" } },
+	{ "keys": ["super+shift+c", "keypad1"], "command": "clipboard_manager_copy_to_register", "args": { "register": "1" } },
+	{ "keys": ["super+shift+c", "keypad2"], "command": "clipboard_manager_copy_to_register", "args": { "register": "2" } },
+	{ "keys": ["super+shift+c", "keypad3"], "command": "clipboard_manager_copy_to_register", "args": { "register": "3" } },
+	{ "keys": ["super+shift+c", "keypad4"], "command": "clipboard_manager_copy_to_register", "args": { "register": "4" } },
+	{ "keys": ["super+shift+c", "keypad5"], "command": "clipboard_manager_copy_to_register", "args": { "register": "5" } },
+	{ "keys": ["super+shift+c", "keypad6"], "command": "clipboard_manager_copy_to_register", "args": { "register": "6" } },
+	{ "keys": ["super+shift+c", "keypad7"], "command": "clipboard_manager_copy_to_register", "args": { "register": "7" } },
+	{ "keys": ["super+shift+c", "keypad8"], "command": "clipboard_manager_copy_to_register", "args": { "register": "8" } },
+	{ "keys": ["super+shift+c", "keypad9"], "command": "clipboard_manager_copy_to_register", "args": { "register": "9" } },
+	{ "keys": ["super+shift+c", "a"], "command": "clipboard_manager_copy_to_register", "args": { "register": "a" } },
+	{ "keys": ["super+shift+c", "b"], "command": "clipboard_manager_copy_to_register", "args": { "register": "b" } },
+	{ "keys": ["super+shift+c", "c"], "command": "clipboard_manager_copy_to_register", "args": { "register": "c" } },
+	{ "keys": ["super+shift+c", "d"], "command": "clipboard_manager_copy_to_register", "args": { "register": "d" } },
+	{ "keys": ["super+shift+c", "e"], "command": "clipboard_manager_copy_to_register", "args": { "register": "e" } },
+	{ "keys": ["super+shift+c", "f"], "command": "clipboard_manager_copy_to_register", "args": { "register": "f" } },
+	{ "keys": ["super+shift+c", "g"], "command": "clipboard_manager_copy_to_register", "args": { "register": "g" } },
+	{ "keys": ["super+shift+c", "h"], "command": "clipboard_manager_copy_to_register", "args": { "register": "h" } },
+	{ "keys": ["super+shift+c", "i"], "command": "clipboard_manager_copy_to_register", "args": { "register": "i" } },
+	{ "keys": ["super+shift+c", "j"], "command": "clipboard_manager_copy_to_register", "args": { "register": "j" } },
+	{ "keys": ["super+shift+c", "k"], "command": "clipboard_manager_copy_to_register", "args": { "register": "k" } },
+	{ "keys": ["super+shift+c", "l"], "command": "clipboard_manager_copy_to_register", "args": { "register": "l" } },
+	{ "keys": ["super+shift+c", "m"], "command": "clipboard_manager_copy_to_register", "args": { "register": "m" } },
+	{ "keys": ["super+shift+c", "n"], "command": "clipboard_manager_copy_to_register", "args": { "register": "n" } },
+	{ "keys": ["super+shift+c", "o"], "command": "clipboard_manager_copy_to_register", "args": { "register": "o" } },
+	{ "keys": ["super+shift+c", "p"], "command": "clipboard_manager_copy_to_register", "args": { "register": "p" } },
+	{ "keys": ["super+shift+c", "q"], "command": "clipboard_manager_copy_to_register", "args": { "register": "q" } },
+	{ "keys": ["super+shift+c", "r"], "command": "clipboard_manager_copy_to_register", "args": { "register": "r" } },
+	{ "keys": ["super+shift+c", "s"], "command": "clipboard_manager_copy_to_register", "args": { "register": "s" } },
+	{ "keys": ["super+shift+c", "t"], "command": "clipboard_manager_copy_to_register", "args": { "register": "t" } },
+	{ "keys": ["super+shift+c", "u"], "command": "clipboard_manager_copy_to_register", "args": { "register": "u" } },
+	{ "keys": ["super+shift+c", "v"], "command": "clipboard_manager_copy_to_register", "args": { "register": "v" } },
+	{ "keys": ["super+shift+c", "w"], "command": "clipboard_manager_copy_to_register", "args": { "register": "w" } },
+	{ "keys": ["super+shift+c", "x"], "command": "clipboard_manager_copy_to_register", "args": { "register": "x" } },
+	{ "keys": ["super+shift+c", "y"], "command": "clipboard_manager_copy_to_register", "args": { "register": "y" } },
+	{ "keys": ["super+shift+c", "z"], "command": "clipboard_manager_copy_to_register", "args": { "register": "z" } },
+
+	{ "keys": ["super+shift+v", "keypad1"], "command": "clipboard_manager_paste_from_register", "args": { "register": "1" } },
+	{ "keys": ["super+shift+v", "keypad2"], "command": "clipboard_manager_paste_from_register", "args": { "register": "2" } },
+	{ "keys": ["super+shift+v", "keypad3"], "command": "clipboard_manager_paste_from_register", "args": { "register": "3" } },
+	{ "keys": ["super+shift+v", "keypad4"], "command": "clipboard_manager_paste_from_register", "args": { "register": "4" } },
+	{ "keys": ["super+shift+v", "keypad5"], "command": "clipboard_manager_paste_from_register", "args": { "register": "5" } },
+	{ "keys": ["super+shift+v", "keypad6"], "command": "clipboard_manager_paste_from_register", "args": { "register": "6" } },
+	{ "keys": ["super+shift+v", "keypad7"], "command": "clipboard_manager_paste_from_register", "args": { "register": "7" } },
+	{ "keys": ["super+shift+v", "keypad8"], "command": "clipboard_manager_paste_from_register", "args": { "register": "8" } },
+	{ "keys": ["super+shift+v", "keypad9"], "command": "clipboard_manager_paste_from_register", "args": { "register": "9" } },
+	{ "keys": ["super+shift+v", "keypad0"], "command": "clipboard_manager_paste_from_register", "args": { "register": "0" } },
+
+	{ "keys": ["super+shift+v", "a"], "command": "clipboard_manager_paste_from_register", "args": { "register": "a" } },
+	{ "keys": ["super+shift+v", "b"], "command": "clipboard_manager_paste_from_register", "args": { "register": "b" } },
+	{ "keys": ["super+shift+v", "c"], "command": "clipboard_manager_paste_from_register", "args": { "register": "c" } },
+	{ "keys": ["super+shift+v", "d"], "command": "clipboard_manager_paste_from_register", "args": { "register": "d" } },
+	{ "keys": ["super+shift+v", "e"], "command": "clipboard_manager_paste_from_register", "args": { "register": "e" } },
+	{ "keys": ["super+shift+v", "f"], "command": "clipboard_manager_paste_from_register", "args": { "register": "f" } },
+	{ "keys": ["super+shift+v", "g"], "command": "clipboard_manager_paste_from_register", "args": { "register": "g" } },
+	{ "keys": ["super+shift+v", "h"], "command": "clipboard_manager_paste_from_register", "args": { "register": "h" } },
+	{ "keys": ["super+shift+v", "i"], "command": "clipboard_manager_paste_from_register", "args": { "register": "i" } },
+	{ "keys": ["super+shift+v", "j"], "command": "clipboard_manager_paste_from_register", "args": { "register": "j" } },
+	{ "keys": ["super+shift+v", "k"], "command": "clipboard_manager_paste_from_register", "args": { "register": "k" } },
+	{ "keys": ["super+shift+v", "l"], "command": "clipboard_manager_paste_from_register", "args": { "register": "l" } },
+	{ "keys": ["super+shift+v", "m"], "command": "clipboard_manager_paste_from_register", "args": { "register": "m" } },
+	{ "keys": ["super+shift+v", "n"], "command": "clipboard_manager_paste_from_register", "args": { "register": "n" } },
+	{ "keys": ["super+shift+v", "o"], "command": "clipboard_manager_paste_from_register", "args": { "register": "o" } },
+	{ "keys": ["super+shift+v", "p"], "command": "clipboard_manager_paste_from_register", "args": { "register": "p" } },
+	{ "keys": ["super+shift+v", "q"], "command": "clipboard_manager_paste_from_register", "args": { "register": "q" } },
+	{ "keys": ["super+shift+v", "r"], "command": "clipboard_manager_paste_from_register", "args": { "register": "r" } },
+	{ "keys": ["super+shift+v", "s"], "command": "clipboard_manager_paste_from_register", "args": { "register": "s" } },
+	{ "keys": ["super+shift+v", "t"], "command": "clipboard_manager_paste_from_register", "args": { "register": "t" } },
+	{ "keys": ["super+shift+v", "u"], "command": "clipboard_manager_paste_from_register", "args": { "register": "u" } },
+	{ "keys": ["super+shift+v", "v"], "command": "clipboard_manager_paste_from_register", "args": { "register": "v" } },
+	{ "keys": ["super+shift+v", "w"], "command": "clipboard_manager_paste_from_register", "args": { "register": "w" } },
+	{ "keys": ["super+shift+v", "x"], "command": "clipboard_manager_paste_from_register", "args": { "register": "x" } },
+	{ "keys": ["super+shift+v", "y"], "command": "clipboard_manager_paste_from_register", "args": { "register": "y" } },
+	{ "keys": ["super+shift+v", "z"], "command": "clipboard_manager_paste_from_register", "args": { "register": "z" } }
+]
