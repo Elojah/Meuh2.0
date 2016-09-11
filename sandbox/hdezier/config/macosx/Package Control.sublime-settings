@@ -1,0 +1,42 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"42 Headers",
+		"AlignTab",
+		"All Autocomplete",
+		"Better Bookmarks",
+		"BetterFindBuffer",
+		"BracketHighlighter",
+		"Clipboard Manager",
+		"Diffy",
+		"DoxyDoc",
+		"EasyClangComplete",
+		"Fold Comments",
+		"ImprovedMacros",
+		"JSON Reindent",
+		"LoremIpsum",
+		"Makefile Improved",
+		"Material Theme",
+		"Open-Include",
+		"Origami",
+		"Package Control",
+		"PackageResourceViewer",
+		"PowerCursors",
+		"ScopeHunter",
+		"SelectUntil",
+		"SideBarEnhancements",
+		"SublimeLinter",
+		"SublimeLinter-cppcheck",
+		"SublimeLinter-cpplint",
+		"Text Pastry",
+		"Ublime Color Schemes"
+	],
+	"repositories":
+	[
+		"https://github.com/skuroda/ImprovedMacros"
+	]
+}
