@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:19:18 by leeios            #+#    #+#             */
-/*   Updated: 2016/08/21 16:18:40 by leeios           ###   ########.fr       */
+/*   Updated: 2016/09/16 18:50:12 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ namespace	NeuronTypes
 		{
 			TOutput		result(0);
 
-			tuple::for_each_both_const(input, parameters,
+			tuple::for_each_both(input, parameters,
 				[&result](const auto &value_input, const auto &value_param, const std::size_t i)
 			{
 				(void)i;
