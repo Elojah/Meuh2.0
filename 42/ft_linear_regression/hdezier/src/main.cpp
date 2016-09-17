@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 18:35:24 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/15 01:18:13 by leeios           ###   ########.fr       */
+/*   Updated: 2016/08/15 20:24:38 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,22 @@ static int		print_err(e_err err)
 	return (0);
 }
 
-static void		print_estimation(int input, int output)
-{
-	std::cout << input << ": " << output << std::endl;
-}
+// static void		print_estimation(int input, int output)
+// {
+// 	std::cout << input << ": " << output << std::endl;
+// }
 
-#include "tuple_helper.h"
-#include "GradientDescent.h"
+#include <typeinfo>
+#include "meta.h"
 static e_err	exec(const char *filename)
 {
 	(void)filename;
-	typedef tuple_helper::types<uint32_t, float, char> feature_types;
-	GradientDescent<feature_types>::iter(data, {0, 0}, 0.001);
+
+	using vec = typename meta::type::types<int, float>::type;
+	std::tuple<vec>	tuple_test;
+	std::cout << typeid(std::get<0>(tuple_test)).name() << typeid(std::get<1>(tuple_test)).name() << std::endl;
+	// typedef type_helper::types<uint32_t, float, char> feature_types;
+	// GradientDescent<feature_types>::iter(data, {0, 0}, 0.001);
 	return (e_err::NO_ERR);
 }
 // static e_err	exec(const char *filename)

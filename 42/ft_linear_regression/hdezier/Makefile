@@ -6,7 +6,7 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/08/15 00:20:50 by leeios           ###   ########.fr        #
+#    Updated: 2016/08/15 20:18:43 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ DEP = $(addsuffix .d, $(addprefix $(BUILD_DIR)/, $(CLASS)))
 
 #Flags
 CFLAGS = -Wall -Wextra -Werror\
-		-fno-unwind-tables -fno-rtti\
+		-fno-unwind-tables\
 		-O3\
 		-std=c++14\
 

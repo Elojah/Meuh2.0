@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 20:00:38 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/14 12:25:35 by leeios           ###   ########.fr       */
+/*   Updated: 2016/08/15 20:05:30 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
  * IN -> Vector Data, t0 initial = 0, t1 initial = 0, precision
  * OUT -> t0, t1, n iterations, precision
  */
+
+#include <tuple>
+
 
 void			LinearRegression2D::learn_from_data(void)
 {
