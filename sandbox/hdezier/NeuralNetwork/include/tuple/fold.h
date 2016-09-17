@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 19:26:42 by leeios            #+#    #+#             */
-/*   Updated: 2016/09/16 20:27:12 by leeios           ###   ########.fr       */
+/*   Updated: 2016/09/17 15:20:58 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "tuple/detail.h"
 #include "tuple/apply.h"
 
-namespace	detail
+namespace	tuple
 {
 	namespace	detail
 	{

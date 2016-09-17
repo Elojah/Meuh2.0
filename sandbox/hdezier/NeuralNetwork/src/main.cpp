@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/16 14:58:38 by leeios            #+#    #+#             */
-/*   Updated: 2016/09/16 20:31:06 by leeios           ###   ########.fr       */
+/*   Updated: 2016/09/17 15:20:22 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ static void	exec(void)
 	// neuron.set_initial_params(init_params);
 
 	auto test_apply = tuple::apply(init_params
-		, [](auto a, auto b, auto...args)
+		, [](auto&&...args)
 		{
-			(void)a;
-			(void)b;
 			return (sizeof...(args));
 		});
 	std::cout << "Test_apply: " << test_apply << std::endl;
@@ -40,7 +38,7 @@ static void	exec(void)
 	(void)tuple_splitted;
 
 	auto	result = tuple::foldl((init_params)
-		, [](auto &a, auto &b)
+		, [](const auto &a, const auto &b)
 		{
 			return (a / b);
 		});

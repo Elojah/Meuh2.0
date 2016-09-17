@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 19:27:38 by leeios            #+#    #+#             */
-/*   Updated: 2016/09/16 20:37:22 by leeios           ###   ########.fr       */
+/*   Updated: 2016/09/17 15:09:10 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 namespace tuple
 {
 	// Helpers
-	//http://stackoverflow.com/questions/20874388/error-spliting-an-stdindex-sequence
 	namespace	detail
 	{
 

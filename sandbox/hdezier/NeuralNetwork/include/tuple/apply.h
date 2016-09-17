@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 19:26:42 by leeios            #+#    #+#             */
-/*   Updated: 2016/09/16 20:26:54 by leeios           ###   ########.fr       */
+/*   Updated: 2016/09/17 15:20:06 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define TUPLE_APPLY_H
 
 # include "tuple/detail.h"
+# include <tuple>
 
 namespace tuple
 {
