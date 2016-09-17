@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple.h                                            :+:      :+:    :+:   */
+/*   fold2D.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/15 19:21:54 by leeios            #+#    #+#             */
-/*   Updated: 2016/09/17 16:43:33 by leeios           ###   ########.fr       */
+/*   Created: 2016/09/17 15:52:40 by leeios            #+#    #+#             */
+/*   Updated: 2016/09/17 16:47:29 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TUPLE_H
-# define TUPLE_H
+#ifndef TUPLE_FOLD2D_H
+# define TUPLE_FOLD2D_H
 
-# include "tuple/apply.h"
 # include "tuple/detail.h"
 # include "tuple/fold.h"
-# include "tuple/for_each.h"
-# include "tuple/map.h"
-# include "tuple/repeat.h"
-# include "tuple/split.h"
-# include "tuple/transpose.h"
 # include "tuple/zip.h"
-# include "tuple/fold2D.h"
 
+namespace tuple
+{
+// Matrix mult
+	template <typename Lhs, typename Rhs, typename FRow, typename FCol>
+	inline constexpr auto	fold2D(const Lhs &lhs, const Rhs &rhs
+		, FRow && f_row, FCol && f_col)
+	{
+		return (map(rhs, [&](const auto &value) {
+			return (foldl(zipWith(lhs, value, f_row), f_col));
+		}));
+	}
+}
 #endif
