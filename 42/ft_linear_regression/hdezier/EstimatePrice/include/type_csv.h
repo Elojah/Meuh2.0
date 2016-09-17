@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   err.h                                              :+:      :+:    :+:   */
+/*   type_csv.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/10 18:37:22 by hdezier           #+#    #+#             */
-/*   Updated: 2016/08/10 19:42:20 by hdezier          ###   ########.fr       */
+/*   Created: 2016/08/10 19:04:06 by hdezier           #+#    #+#             */
+/*   Updated: 2016/08/13 21:05:25 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERR_H
-# define ERR_H
+#ifndef TYPE_CSV_H
+# define TYPE_CSV_H
 
-enum class	e_err
+# include <array>
+# include <stdint.h>
+
+namespace type_csv
 {
-	NO_ERR,
-	BAD_ARG_NUMBER,
-	BAD_FORMAT_CSV_INT,
-	BAD_CSV_INT_NUMBER
+	template<uint8_t NDimension>
+	using csv_params = std::array<double, NDimension>;
 };
 
 #endif

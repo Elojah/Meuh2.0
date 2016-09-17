@@ -5,18 +5,25 @@
             "path": "~/code/meuh/42/ft_linear_regression/hdezier/"
         }
     ],
-
+    "folders":
+    [
+        {
+            "path": "."
+        }
+    ],
     "settings":
     {
-        "cc_include_options":
+        "clang_flags":
         [
-            "-std=c++14",
-            "-I${project_path}/include",
-            "-isystem", "/usr/include",
-            "-isystem", "/usr/include/c++/5.4.0",
-            "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed",
-            "-isystem", "/usr/lib/llvm-3.6/lib/clang/3.6.0/include",
-            "-isystem", "/usr/lib/clang/3.6.2/include",
+            "-std=c++11",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Iinclude",
+            "-IDrawData/include",
+            "-ILinearRegression/include",
+            "-IEstimatePrice/include",
+            "-Iutil/SDL2-2.0.4/include"
         ]
     }
 }
