@@ -1,0 +1,85 @@
+src/main.cpp:25:2: error: call to 'map' is ambiguous
+        tuple::map(seed, [](auto &value)->void {value = 1;});
+        ^~~~~~~~~~
+include/tuple/map.h:24:24: note: candidate function [with Tuple = std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>, F = (lambda at src/main.cpp:25:19), $2 = void]
+        inline constexpr auto   map(Tuple &t, F &&f)
+                                ^
+include/tuple/map.h:53:24: note: candidate function [with Tuple = std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>, F = (lambda at src/main.cpp:25:19)]
+        inline constexpr auto   map(Tuple &t, F &&f)
+                                ^
+include/tuple/map.h:61:24: note: candidate function [with Tuple = std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double> &, F = (lambda at src/main.cpp:25:19)]
+        inline constexpr auto   map(Tuple &&t, F &&f)
+                                ^
+include/tuple/map.h:44:24: note: candidate function [with Tuple = std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>, F = (lambda at src/main.cpp:25:19), $2 = void]
+        inline constexpr auto   map(const Tuple &t, F &&f)
+                                ^
+include/tuple/map.h:69:24: note: candidate function [with Tuple = std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>, F = (lambda at src/main.cpp:25:19)]
+        inline constexpr auto   map(const Tuple &t, F &&f)
+                                ^
+src/main.cpp:27:2: error: call to 'map' is ambiguous
+        tuple::map(input, [](auto &value)->void {value = 2.5;});
+        ^~~~~~~~~~
+include/tuple/map.h:24:24: note: candidate function [with Tuple = std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>, F = (lambda at src/main.cpp:27:20), $2 = void]
+        inline constexpr auto   map(Tuple &t, F &&f)
+                                ^
+include/tuple/map.h:53:24: note: candidate function [with Tuple = std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>, F = (lambda at src/main.cpp:27:20)]
+        inline constexpr auto   map(Tuple &t, F &&f)
+                                ^
+include/tuple/map.h:61:24: note: candidate function [with Tuple = std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double> &, F = (lambda at src/main.cpp:27:20)]
+        inline constexpr auto   map(Tuple &&t, F &&f)
+                                ^
+include/tuple/map.h:44:24: note: candidate function [with Tuple = std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>, F = (lambda at src/main.cpp:27:20), $2 = void]
+        inline constexpr auto   map(const Tuple &t, F &&f)
+                                ^
+include/tuple/map.h:69:24: note: candidate function [with Tuple = std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>, F = (lambda at src/main.cpp:27:20)]
+        inline constexpr auto   map(const Tuple &t, F &&f)
+                                ^
+In file included from src/main.cpp:14:
+In file included from include/tuple.h:25:
+include/tuple/fold2D.h:28:18: error: no matching function for call to 'zipWith'
+                        return (foldl(zipWith(lhs, value, f_row), f_col));
+                                      ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/type_traits:3531:17: note: in instantiation of function template specialization 'tuple::fold2D(const std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double> &, const std::__1::tuple<std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>, std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double> > &, Functors::Mult &&, Functors::Add &&)::(anonymous class)::operator()<int>' requested here
+    -> decltype(_VSTD::forward<_Fp>(__f)(_VSTD::forward<_Args>(__args)...));
+                ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__config:387:15: note: expanded from macro '_VSTD'
+#define _VSTD std::_LIBCPP_NAMESPACE
+              ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/type_traits:3540:13: note: while substituting deduced template arguments into function template '__invoke' [with _Fp = (lambda at include/tuple/fold2D.h:27:20), _Args = <int &>]
+            __invoke(_VSTD::declval<_Fp>(), _VSTD::declval<_Args>()...)
+            ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/type_traits:3548:11: note: in instantiation of template class 'std::__1::__invokable_imp<(lambda at include/tuple/fold2D.h:27:20), int &>' requested here
+          __invokable_imp<_Fp, _Args...>::value>
+          ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/type_traits:3567:30: note: in instantiation of template class 'std::__1::__invokable<(lambda at include/tuple/fold2D.h:27:20), int &>' requested here
+    : public __invoke_of_imp<__invokable<_Fp, _Args...>::value, _Fp, _Args...>
+                             ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/type_traits:3573:14: note: in instantiation of template class 'std::__1::__invoke_of<(lambda at include/tuple/fold2D.h:27:20), int &>' requested here
+    : public __invoke_of<_Fp, _Args...>
+             ^
+include/tuple/map.h:23:68: note: in instantiation of template class 'std::__1::result_of<(lambda at include/tuple/fold2D.h:27:20) (int &)>' requested here
+                        , typename = typename std::enable_if<std::is_void<typename std::result_of<F(int&)>::type>::value>::type>
+                                                                                        ^
+include/tuple/map.h:24:24: note: in instantiation of default argument for 'map<const std::__1::tuple<std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>, std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double> >, (lambda at include/tuple/fold2D.h:27:20)>' required here
+        inline constexpr auto   map(Tuple &t, F &&f)
+                                ^~~~~~~~~~~~~~~~~~~~
+include/tuple/fold2D.h:27:11: note: while substituting deduced template arguments into function template 'map' [with Tuple = const std::__1::tuple<std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>, std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double> >, F = (lambda at include/tuple/fold2D.h:27:20), $2 = (no value)]
+                return (map(rhs, [&](const auto &value) {
+                        ^
+include/Neuron.h:115:18: note: in instantiation of function template specialization 'tuple::fold2D<std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>, std::__1::tuple<std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>, std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double> >, Functors::Mult, Functors::Add>' requested here
+                return (tuple::fold2D(input_values, m_parameters, Functors::Mult(), Functors::Add()));
+                               ^
+src/main.cpp:29:29: note: in instantiation of member function 'Neuron<char, std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>, std::__1::tuple<float, float> >::forward' requested here
+        const auto output = neuron.forward(input);
+                                   ^
+include/tuple/zip.h:71:24: note: candidate template ignored: deduced conflicting types for parameter 'Tuple' ('const std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>' vs. 'const int')
+        inline constexpr auto   zipWith(Tuple &lhs, Tuple &rhs, F &&f)
+                                ^
+include/tuple/zip.h:79:24: note: candidate template ignored: deduced conflicting types for parameter 'Tuple' ('const std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double> &' vs. 'const int &')
+        inline constexpr auto   zipWith(Tuple &&lhs, Tuple &&rhs, F &&f)
+                                ^
+include/tuple/zip.h:87:24: note: candidate template ignored: deduced conflicting types for parameter 'Tuple' ('std::__1::tuple<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double>' vs. 'int')
+        inline constexpr auto   zipWith(const Tuple &lhs, const Tuple &rhs, F &&f)
+                                ^
+3 errors generated.
+make: *** [build/main.o] Error 1

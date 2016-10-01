@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fold.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 19:26:42 by leeios            #+#    #+#             */
-/*   Updated: 2016/09/17 15:20:58 by leeios           ###   ########.fr       */
+/*   Updated: 2016/10/02 01:35:03 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,19 +111,27 @@ namespace	tuple
 	};
 
 // Foldl
+	#include <iostream>
+	#include "tuple/for_each.h"
 	template <class Tuple, class F>
 	inline constexpr auto	foldl(Tuple &t, F &&f)
 	{
+		for_each(t, [](const auto &elem, const auto &key){(void)key;std::cerr << elem.get() << "  /  ";});
+		std::cerr << std::endl;
 		return (apply(t, [&f](auto&...ts) { return (detail::foldl_impl(f, ts...)); }));
 	}
 	template <class Tuple, class F>
 	inline constexpr auto	foldl(Tuple &&t, F &&f)
 	{
+		for_each(t, [](const auto &elem, const auto &key){(void)key;std::cerr << elem.get() << "  /  ";});
+		std::cerr << std::endl;
 		return (apply(std::move(t), [&f](auto&&...ts) { return (detail::foldl_impl(f, ts...)); }));
 	}
 	template <class Tuple, class F>
 	inline constexpr auto	foldl(const Tuple &t, F &&f)
 	{
+		for_each(t, [](const auto &elem, const auto &key){(void)key;std::cerr << elem.get() << "  /  ";});
+		std::cerr << std::endl;
 		return (apply(t, [&f](const auto&...ts) { return (detail::foldl_impl(f, ts...)); }));
 	}
 

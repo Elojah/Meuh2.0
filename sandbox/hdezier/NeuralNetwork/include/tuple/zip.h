@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zip.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/17 16:40:32 by leeios            #+#    #+#             */
-/*   Updated: 2016/09/17 16:43:21 by leeios           ###   ########.fr       */
+/*   Updated: 2016/10/02 01:40:02 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "tuple/detail.h"
 # include <tuple>
+# include <algorithm>
 
 namespace tuple
 {
@@ -66,10 +67,14 @@ namespace tuple
 	}
 	inline constexpr auto	zip() { return (std::make_tuple()); }
 
+	#include <iostream>
+	#include "tuple/for_each.h"
 	// zipWith
 	template<class Tuple, class F>
 	inline constexpr auto	zipWith(Tuple &lhs, Tuple &rhs, F &&f)
 	{
+		for_each(lhs, [](const auto &elem, const auto &key){(void)key;std::cerr << elem.get() << "  |-  ";});
+		std::cerr << std::endl;
 		return (detail::index_apply<std::tuple_size<Tuple>{}>([&](auto...Is)
 		{
 			return (std::make_tuple(f(std::get<Is>(lhs), std::get<Is>(rhs))...));
@@ -78,6 +83,8 @@ namespace tuple
 	template<class Tuple, class F>
 	inline constexpr auto	zipWith(Tuple &&lhs, Tuple &&rhs, F &&f)
 	{
+		for_each(lhs, [](const auto &elem, const auto &key){(void)key;std::cerr << elem.get() << "  |-  ";});
+		std::cerr << std::endl;
 		return (detail::index_apply<std::tuple_size<Tuple>{}>([&](auto...Is)
 		{
 			return (std::make_tuple(f(std::get<Is>(lhs), std::get<Is>(rhs))...));
@@ -86,6 +93,8 @@ namespace tuple
 	template<class Tuple, class F>
 	inline constexpr auto	zipWith(const Tuple &lhs, const Tuple &rhs, F &&f)
 	{
+		for_each(lhs, [](const auto &elem, const auto &key){(void)key;std::cerr << elem.get() << "  |-  ";});
+		std::cerr << std::endl;
 		return (detail::index_apply<std::tuple_size<Tuple>{}>([&](auto...Is)
 		{
 			return (std::make_tuple(f(std::get<Is>(lhs), std::get<Is>(rhs))...));

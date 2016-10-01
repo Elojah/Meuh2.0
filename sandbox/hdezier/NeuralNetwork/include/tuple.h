@@ -6,7 +6,7 @@
 /*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 19:21:54 by leeios            #+#    #+#             */
-/*   Updated: 2016/10/01 20:39:38 by hdezier          ###   ########.fr       */
+/*   Updated: 2016/10/02 01:18:32 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "tuple/apply.h"
 # include "tuple/detail.h"
-# include "tuple/fold.h"
 # include "tuple/for_each.h"
+# include "tuple/fold.h"
 # include "tuple/map.h"
 # include "tuple/repeat.h"
 # include "tuple/split.h"

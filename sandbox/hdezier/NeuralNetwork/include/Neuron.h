@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Neuron.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hdezier <hdezier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:19:18 by leeios            #+#    #+#             */
-/*   Updated: 2016/09/17 16:51:35 by leeios           ###   ########.fr       */
+/*   Updated: 2016/10/02 01:41:37 by hdezier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ namespace	Functors
 		{
 			return (lhs + rhs);
 		};
-		template<typename T>
-		inline T	operator()(const T &val)
-		{
-			return (val);
-		};
+		// template<typename T>
+		// inline T	operator()(const T &val)
+		// {
+		// 	return (val);
+		// };
 	};
 	struct	Mult
 	{
@@ -38,11 +38,11 @@ namespace	Functors
 		{
 			return (lhs * rhs);
 		};
-		template<typename T>
-		inline T	operator()(const T &val)
-		{
-			return (val);
-		};
+		// template<typename T>
+		// inline T	operator()(const T &val)
+		// {
+		// 	return (val);
+		// };
 	};
 };
 
@@ -104,14 +104,15 @@ public:
 
 	inline void						set_initial_params(const std::tuple<TInputs...> &params)
 	{
-		tuple::for_each(m_parameters, [&](auto &value, auto key) {
-			value = tuple::map(params, [&](const auto &value_j) {return (value_j + key);});
+		tuple::for_each(m_parameters, [&](auto &value, const auto &key) { (void)key;
+			value = tuple::map(params, [&](const auto &value_j) {return (value_j);});
 		});
 	};
 
 	inline std::tuple<TOutputs...>	forward(const std::tuple<TInputs...> &input_values) const
 	{
 		// Simple matrix multiplication
+		tuple::for_each(input_values, [](const auto &elem, const auto &key){(void)key;std::cerr << elem.get() << "  --  ";});std::cerr << std::endl;
 		return (tuple::fold2D(input_values, m_parameters, Functors::Mult(), Functors::Add()));
 	};
 
