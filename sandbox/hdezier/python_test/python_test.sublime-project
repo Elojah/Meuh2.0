@@ -1,0 +1,31 @@
+{
+	"build_systems":
+	[
+		{
+			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+			"name": "Anaconda Python Builder",
+			"selector": "source.python",
+			"shell_cmd": "\"/usr/local/bin/python3\" -u \"$file\""
+		}
+	],
+	"folders":
+	[
+		{
+			"path": "~/code/meuh/sandbox/hdezier/python_test"
+		}
+	],
+	"settings":
+	{
+		"clang_flags":
+		[
+			"-std=c++14",
+			"-Iinclude",
+			"-I${project_path}/include",
+			"-I/usr/include",
+			"-I/usr/include/c++/5.4.0",
+			"-I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed",
+			"-I/usr/lib/llvm-3.6/lib/clang/3.6.0/include",
+			"-I/usr/lib/clang/3.6.2/include"
+		]
+	}
+}
