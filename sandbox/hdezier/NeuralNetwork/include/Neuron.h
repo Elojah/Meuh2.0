@@ -6,14 +6,16 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:19:18 by leeios            #+#    #+#             */
-/*   Updated: 2016/09/17 16:51:35 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/24 15:42:44 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NEURON_H
 # define NEURON_H
 
+# include <iostream>
 # include "tuple.h"
+
 
 namespace	Functors
 {
@@ -21,12 +23,12 @@ namespace	Functors
 	struct	Add
 	{
 		template<typename T, typename U>
-		inline T	operator()(const T &lhs, const U &rhs)
+		inline const T	operator()(const T &lhs, const U &rhs) const
 		{
 			return (lhs + rhs);
 		};
 		template<typename T>
-		inline T	operator()(const T &val)
+		inline const T	operator()(const T &val) const
 		{
 			return (val);
 		};
@@ -34,12 +36,12 @@ namespace	Functors
 	struct	Mult
 	{
 		template<typename T, typename U>
-		inline T	operator()(const T &lhs, const U &rhs)
+		inline const T	operator()(const T &lhs, const U &rhs) const
 		{
 			return (lhs * rhs);
 		};
 		template<typename T>
-		inline T	operator()(const T &val)
+		inline const T	operator()(const T &val) const
 		{
 			return (val);
 		};
@@ -64,33 +66,13 @@ namespace	ErrorComputing
 
 namespace	NeuronTypes
 {
-// General type with 2 functors
-	template<typename TInputFunctor, typename TOutputFunctor>
-	struct	Parametrable
+	struct classic_test
 	{
-		template<typename TOutput, typename...TInputs>
-		inline static TOutput		compute_forward(const std::tuple<TInputs...> &input
-			, const std::tuple<TInputs...> &parameters)
-		{
-			TOutput		result(0);
-
-			tuple::for_each_both(input, parameters,
-				[&result](const auto &value_input, const auto &value_param, const std::size_t i)
-			{
-				(void)i;
-				result = TOutputFunctor(result
-					, TOutput(TInputFunctor(value_input, value_param)));
-			});
-			return (result);
-		};
-		// template<typename TInput, typename...TOutput>
-		// inline static TInput		compute_error(
-		// 	const std::tuple<TOutput...> &error_delta
-		// 	, )
-		// {
-		// 	;
-		// };
+		constexpr static auto	coef_fn = Functors::Mult();
+		constexpr static auto	merge_fn = Functors::Add();
+		constexpr static float	sigma = 0.01;
 	};
+
 };
 
 template<typename...Ts>
@@ -104,15 +86,25 @@ public:
 
 	inline void						set_initial_params(const std::tuple<TInputs...> &params)
 	{
-		tuple::for_each(m_parameters, [&](auto &value, auto key) {
-			value = tuple::map(params, [&](const auto &value_j) {return (value_j + key);});
-		});
+		(void)params;
+		// tuple::for_each(m_parameters, [&](auto &value, auto key) {
+		// 	(void)key;
+		// 	value = tuple::map(params, [&](const auto &value_j) {return (value_j);});
+		// });
+	};
+	inline void						print_params(void)
+	{
+		// tuple::for_each(m_parameters, [&](auto &value, auto key) {
+		// 	tuple::for_each(value, [&](auto &value_in, auto key_in) {
+		// 		std::cout << "Value_" << key << "_" << key_in << " : " << value_in << std::endl;
+		// 	});
+		// });
 	};
 
 	inline std::tuple<TOutputs...>	forward(const std::tuple<TInputs...> &input_values) const
 	{
 		// Simple matrix multiplication
-		return (tuple::fold2D(input_values, m_parameters, Functors::Mult(), Functors::Add()));
+		return (tuple::fold2D(input_values, m_parameters, TType::coef_fn, TType::merge_fn));
 	};
 
 	inline std::tuple<TInputs...>	backward(const std::tuple<TOutputs...> &output_values)

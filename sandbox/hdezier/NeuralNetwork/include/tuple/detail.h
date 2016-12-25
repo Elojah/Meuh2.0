@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 19:27:38 by leeios            #+#    #+#             */
-/*   Updated: 2016/09/17 15:09:10 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/24 15:37:19 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ namespace tuple
 	// Helpers
 	namespace	detail
 	{
-
 		// Range index
 		template <typename T, typename Seq, T Begin>
 		struct make_integer_range_impl;
@@ -48,16 +47,14 @@ namespace tuple
 		template <std::size_t N, class F>
 		constexpr auto index_apply(F &&f)
 		{
-			return (index_apply_impl(f, std::make_index_sequence<N>{}));
+			return (index_apply_impl(std::move(f), std::make_index_sequence<N>{}));
 		}
 		template <std::size_t Begin, std::size_t End, class F>
 		constexpr auto index_apply(F &&f)
 		{
-			return (index_apply_impl(f, make_index_range<Begin, End>{}));
-
+			return (index_apply_impl(std::move(f), make_index_range<Begin, End>{}));
 		}
 	};
-
 };
 
 #endif

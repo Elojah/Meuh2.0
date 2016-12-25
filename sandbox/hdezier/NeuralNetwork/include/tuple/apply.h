@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 19:26:42 by leeios            #+#    #+#             */
-/*   Updated: 2016/09/17 15:20:06 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/24 15:37:06 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,10 @@ namespace tuple
 {
 // Apply
 	template <class Tuple, class F>
-	inline constexpr auto	apply(Tuple &t, F &&f)
-	{
-		return (detail::index_apply<std::tuple_size<Tuple>{}>(
-			[&](auto...Is) {return f(std::get<Is>(t)...); }));
-	}
-	template <class Tuple, class F>
 	inline constexpr auto	apply(Tuple &&t, F &&f)
 	{
 		return (detail::index_apply<std::tuple_size<Tuple>{}>(
 			[&](auto...Is) {return f(std::get<Is>(std::move(t))...); }));
-	}
-	template <class Tuple, class F>
-	inline constexpr auto	apply(const Tuple &t, F &&f)
-	{
-		return (detail::index_apply<std::tuple_size<Tuple>{}>(
-			[&](auto...Is) {return f(std::get<Is>(t)...); }));
 	}
 };
 
