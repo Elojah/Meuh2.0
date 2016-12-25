@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:05:52 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/24 15:34:23 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/25 23:13:55 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,43 @@
 # define MAIN_H
 
 #include <iostream>
+
+
+namespace Feature
+{
+	class	Test
+	{
+	public:
+		inline explicit Test(int value) {/*std::cerr << "Constructed with value " << value << std::endl;*/m_value = value;};
+		inline Test(void) : m_value(-1) {/*std::cerr << "Constructed" << std::endl;*/};
+		inline Test(Test &&rhs) {m_value = rhs.get();/*std::cerr << "Copy by lvalue" << std::endl;*/};
+		inline Test(const Test &&rhs) {m_value = rhs.get();/*std::cerr << "Copy by lvalue" << std::endl;*/};
+		inline Test(Test &rhs) {m_value = rhs.get();/*std::cerr << "Copy by reference" << std::endl;*/};
+		inline Test(const Test &rhs) {m_value = rhs.get();/*std::cerr << "Copy by const reference" << std::endl;*/};
+		inline ~Test(void) {/*std::cerr << "Destructed" << std::endl;*/};
+
+		inline Test&	operator=(const Test &rhs)
+		{
+			m_value = rhs.get();
+			return (*this);
+		};
+		// inline Test&	operator=(Test &&rhs)
+		// {
+		// 	m_value = rhs.get();
+		// 	return (*this);
+		// };
+		inline Test		operator+(const Test &rhs) const {std::cerr << m_value << " + " << rhs.get() << std::endl;return (Test(m_value + rhs.get()));};
+		inline Test		operator*(const Test &rhs) const {std::cerr << m_value << " * " << rhs.get() << std::endl;return (Test(m_value * rhs.get()));};
+		inline operator	float(void) {return (m_value);};
+		// inline int		operator*(const Test &rhs) const {return (m_value * rhs.get());};
+
+		inline int	get(void) const {return (m_value);};
+		// inline void	set(int value) {m_value = value;};
+	private:
+		int		m_value;
+	};
+};
+inline std::ostream& operator<<(std::ostream& stream, const Feature::Test& test) {stream << test.get(); return (stream);};
 
 
 // int i0, double d0

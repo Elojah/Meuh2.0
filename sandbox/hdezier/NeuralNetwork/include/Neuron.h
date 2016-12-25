@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:19:18 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/24 15:42:44 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/25 23:19:51 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ namespace	Functors
 		{
 			return (lhs + rhs);
 		};
-		template<typename T>
-		inline const T	operator()(const T &val) const
-		{
-			return (val);
-		};
+		// template<typename T>
+		// inline T	operator()(const T &val)
+		// {
+		// 	return (val);
+		// };
 	};
 	struct	Mult
 	{
@@ -40,11 +40,11 @@ namespace	Functors
 		{
 			return (lhs * rhs);
 		};
-		template<typename T>
-		inline const T	operator()(const T &val) const
-		{
-			return (val);
-		};
+		// template<typename T>
+		// inline T	operator()(const T &val)
+		// {
+		// 	return (val);
+		// };
 	};
 };
 
@@ -99,12 +99,17 @@ public:
 		// 		std::cout << "Value_" << key << "_" << key_in << " : " << value_in << std::endl;
 		// 	});
 		// });
+		// tuple::for_each(m_parameters, [&](auto &value, const auto &key) { (void)key;
+		// 	value = tuple::map(params, [&](const auto &value_j) {return (value_j);});
+		// });
 	};
 
 	inline std::tuple<TOutputs...>	forward(const std::tuple<TInputs...> &input_values) const
 	{
 		// Simple matrix multiplication
 		return (tuple::fold2D(input_values, m_parameters, TType::coef_fn, TType::merge_fn));
+		tuple::for_each(input_values, [](const auto &elem, const auto &key){(void)key;std::cerr << elem.get() << "  --  ";});std::cerr << std::endl;
+		return (tuple::fold2D(input_values, m_parameters, Functors::Mult(), Functors::Add()));
 	};
 
 	inline std::tuple<TInputs...>	backward(const std::tuple<TOutputs...> &output_values)
