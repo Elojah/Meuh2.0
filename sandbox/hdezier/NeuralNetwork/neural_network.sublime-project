@@ -10,7 +10,7 @@
     {
         "cc_include_options":
         [
-            "-std=c++14",
+            "-std=c++1z",
             "-I${project_path}/include",
             "-isystem", "/usr/include",
             "-isystem", "/usr/include/c++/5.4.0",

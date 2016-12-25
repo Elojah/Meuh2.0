@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/17 16:40:32 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/25 18:25:48 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/25 20:57:50 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 namespace tuple
 {
-
 	// zip_with
 	template<typename F, typename Tuple, typename...Tuples>
 	inline constexpr auto	zip_with(F &&f, Tuple &&t, Tuples&&...ts)
@@ -33,6 +32,15 @@ namespace tuple
 		{
 			return (std::make_tuple(row(Is)...));
 		}));
+	}
+	// zip
+	template<typename Tuple, typename...Tuples>
+	inline constexpr auto	zip(Tuple &&t, Tuples&&...ts)
+	{
+		return (zip_with([](auto&&...ts)
+		{
+			return (std::make_tuple(std::move(ts)...));
+		}, std::move(t), std::move(ts)...));
 	}
 
 };
