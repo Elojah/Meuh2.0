@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/16 14:58:38 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/25 23:15:19 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/26 13:15:11 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,19 @@ static void	test_exec(void)
 	{
 		return (std::make_tuple(std::get<0>(lhs) + std::get<0>(rhs), std::get<1>(lhs) - std::get<1>(rhs)));
 	});
-	//
-	printf("%d ___ %d\n", std::get<0>(tf), std::get<1>(tf));
+	assert(std::get<0>(tf) == 10 && std::get<1>(tf) == -8);
+	const auto tg = std::make_tuple(ta, tb, tc);
+	const auto th = tuple::transpose(tg);
+	const auto ti = tuple::mult_tuple(std::move(ta), std::move(tg), tuple::add, tuple::mult);
+	tuple::for_each([](auto &&t)
+	{
+		tuple::print(std::move(t));
+	}, std::move(tg));
+	tuple::for_each([](auto &&t)
+	{
+		tuple::print(std::move(t));
+	}, std::move(th));
+	tuple::print(std::move(ti));
 }
 
 int			main(int ac, char **av)

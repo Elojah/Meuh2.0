@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transpose.h                                        :+:      :+:    :+:   */
+/*   print.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/16 19:38:34 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/26 11:52:35 by leeios           ###   ########.fr       */
+/*   Created: 2016/12/26 11:57:12 by leeios            #+#    #+#             */
+/*   Updated: 2016/12/26 12:13:54 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TUPLE_TRANSPOSE_H
-# define TUPLE_TRANSPOSE_H
+#ifndef TUPLE_PRINT_H
+# define TUPLE_PRINT_H
 
-# include "tuple/detail.h"
-# include "tuple/zip.h"
+# include "tuple/for_each.h"
+# include <iostream>
 
 namespace tuple
 {
-// Transpose
-	template <class Tuple>
-	inline constexpr auto	transpose(Tuple &&t)
-	{
-		return (apply(std::move(t), [](auto&&...ts) { return zip(std::move(ts)...); }));
-	}
 
+// TODO print_tuple rec with
+// is_specialization_of<Type, std::tuple>::value
+	template<typename Tuple>
+	void		print(Tuple &&t)
+	{
+		for_each([](auto &&v)
+		{
+				std::cout << v << ',';
+		}, std::move(t));
+		std::cout << std::endl;
+	}
 };
 
 #endif

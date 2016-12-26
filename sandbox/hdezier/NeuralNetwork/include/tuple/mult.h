@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transpose.h                                        :+:      :+:    :+:   */
+/*   mult.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/16 19:38:34 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/26 11:52:35 by leeios           ###   ########.fr       */
+/*   Created: 2016/12/26 12:46:26 by leeios            #+#    #+#             */
+/*   Updated: 2016/12/26 13:11:09 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TUPLE_TRANSPOSE_H
-# define TUPLE_TRANSPOSE_H
+#ifndef TUPLE_MULT_H
+# define TUPLE_MULT_H
 
-# include "tuple/detail.h"
-# include "tuple/zip.h"
+# include "tuple/fold.h"
 
 namespace tuple
 {
-// Transpose
-	template <class Tuple>
-	inline constexpr auto	transpose(Tuple &&t)
-	{
-		return (apply(std::move(t), [](auto&&...ts) { return zip(std::move(ts)...); }));
-	}
+
+template<typename TLhs, typename TRhs, typename FFold, typename FZip>
+inline constexpr auto	mult_tuple(TLhs &&lhs, TRhs &&rhs, FFold &&fnFold, FZip &&fnZip)
+{
+	return	(map
+				(std::move(rhs), [&](auto &&v)
+					{
+						return	(foldl
+									(zip_with
+										(fnZip, std::move(lhs), std::move(v))
+									, fnFold));
+					}
+				)
+			);
+}
 
 };
 

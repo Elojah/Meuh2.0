@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:19:18 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/25 23:19:51 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/26 13:10:47 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,8 @@ public:
 	inline std::tuple<TOutputs...>	forward(const std::tuple<TInputs...> &input_values) const
 	{
 		// Simple matrix multiplication
-		return (tuple::fold2D(input_values, m_parameters, TType::coef_fn, TType::merge_fn));
-		tuple::for_each(input_values, [](const auto &elem, const auto &key){(void)key;std::cerr << elem.get() << "  --  ";});std::cerr << std::endl;
-		return (tuple::fold2D(input_values, m_parameters, Functors::Mult(), Functors::Add()));
+		(void)input_values;
+		return (std::tuple<TOutputs...>{});
 	};
 
 	inline std::tuple<TInputs...>	backward(const std::tuple<TOutputs...> &output_values)

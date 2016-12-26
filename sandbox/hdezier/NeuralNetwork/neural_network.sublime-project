@@ -14,12 +14,24 @@
             "-Iinclude",
             "-I${project_path}/include",
             "-I/usr/include",
-            "-I/usr/include/c++/5.4.0",
             "-I/usr/include/c++/*",
+            "-I/usr/include/c++/5.4.0",
+            "-I/usr/lib/clang/3.7/include",
             "-I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed",
             "-I/usr/lib/llvm-3.6/lib/clang/3.6.0/include",
             "-I/usr/lib/clang/3.6.2/include",
-            "-I/usr/lib/clang/3.7/include"
+            "-I/usr/lib/clang/3.7/include",
+        ],
+        "cc_include_options":
+        [
+            "-isystem", "/usr/include",
+            "-isystem", "/usr/include/c++/*",
+            "-isystem", "/usr/include/c++/5.4.0",
+            "-isystem", "/usr/lib/clang/3.7/include",
+            "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed",
+            "-isystem", "/usr/lib/llvm-3.6/lib/clang/3.6.0/include",
+            "-isystem", "/usr/lib/clang/3.6.2/include",
+            "-isystem", "/usr/lib/clang/3.7/include",
         ]
     }
 }

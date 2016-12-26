@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 19:21:54 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/25 23:13:02 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/26 13:09:28 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "tuple/transpose.h"
 # include "tuple/zip.h"
 # include "tuple/lambda.h"
-# include "tuple/fold2D.h"
+# include "tuple/print.h"
+# include "tuple/mult.h"
 
 #endif
