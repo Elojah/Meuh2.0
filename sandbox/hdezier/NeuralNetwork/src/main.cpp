@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/16 14:58:38 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/26 13:15:11 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/26 13:46:06 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static void	test_exec(void)
 	const auto tg = std::make_tuple(ta, tb, tc);
 	const auto th = tuple::transpose(tg);
 	const auto ti = tuple::mult_tuple(std::move(ta), std::move(tg), tuple::add, tuple::mult);
+	const auto tj = tuple::mult_tuple(std::make_tuple(1, 2, 3), std::move(th), tuple::add, tuple::mult);
 	tuple::for_each([](auto &&t)
 	{
 		tuple::print(std::move(t));
@@ -85,6 +86,7 @@ static void	test_exec(void)
 		tuple::print(std::move(t));
 	}, std::move(th));
 	tuple::print(std::move(ti));
+	tuple::print(std::move(tj));
 }
 
 int			main(int ac, char **av)
