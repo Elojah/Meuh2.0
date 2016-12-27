@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/17 16:40:32 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/26 11:52:27 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/27 13:49:45 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ namespace tuple
 {
 	// zip_with
 	template<typename F, typename Tuple, typename...Tuples>
-	inline constexpr auto	zip_with(F &&f, Tuple &&t, Tuples&&...ts)
+	static inline constexpr auto	zip_with(F &&f, Tuple const &&t, Tuples const&&...ts)
 	{
 		const auto row =
 		[&](auto I)
@@ -35,7 +35,7 @@ namespace tuple
 	}
 	// zip
 	template<typename Tuple, typename...Tuples>
-	inline constexpr auto	zip(Tuple &&t, Tuples&&...ts)
+	static inline constexpr auto	zip(Tuple const &&t, Tuples const&&...ts)
 	{
 		return (zip_with([](auto&&...ts)
 		{

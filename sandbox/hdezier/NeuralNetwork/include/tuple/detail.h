@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 19:27:38 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/24 15:37:19 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/27 12:57:51 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,17 @@ namespace tuple
 
 		// http://aherrmann.github.io/programming/2016/02/28/unpacking-tuples-in-cpp14/
 		template <class F, std::size_t... Is>
-		constexpr auto index_apply_impl(F &&f, std::index_sequence<Is...>)
+		static inline constexpr auto index_apply_impl(F &&f, std::index_sequence<Is...>)
 		{
 			return f(std::integral_constant<std::size_t, Is> {}...);
 		}
 		template <std::size_t N, class F>
-		constexpr auto index_apply(F &&f)
+		static inline constexpr auto index_apply(F &&f)
 		{
 			return (index_apply_impl(std::move(f), std::make_index_sequence<N>{}));
 		}
 		template <std::size_t Begin, std::size_t End, class F>
-		constexpr auto index_apply(F &&f)
+		static inline constexpr auto index_apply(F &&f)
 		{
 			return (index_apply_impl(std::move(f), make_index_range<Begin, End>{}));
 		}

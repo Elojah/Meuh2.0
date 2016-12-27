@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/16 14:58:38 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/26 13:46:06 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/27 13:50:57 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,49 @@
 #include <typeinfo>
 #include <cassert>
 
-static void	test_exec(void)
+#ifdef TEST
+
+static void	exec(void)
 {
 	// typedef std::tuple<int, float, double>				t_inputs;
 	// typedef typename tuple::repeat<double, 4>::type		t_inputs;
 	// typedef typename tuple::repeat<double, 2>::type		t_outputs;
 
-	const auto	ta = std::make_tuple(1, 2, 3, 4);
-	const auto	tb = std::make_tuple(1, 2, 3, 4);
-	const auto	tc = std::make_tuple(1, 2, 3, 4);
+	const auto	tb = std::make_tuple(Feature::Test(1), Feature::Test(2)
+		, Feature::Test(3), Feature::Test(4));
+	const auto	ta = std::make_tuple(Feature::Test(1), Feature::Test(2)
+		, Feature::Test(3), Feature::Test(4));
+	const auto	tc = std::make_tuple(Feature::Test(1), Feature::Test(2)
+		, Feature::Test(3), Feature::Test(4));
+	std::cout << "_________________________ FOR_EACH" << std::endl;
 	tuple::for_each([](auto &&a, auto &&b, auto &&c) -> auto
 	{
 		assert(a == b);
 		assert(a == c);
-		return (a + b - c);
+		std::cout << a << std::endl;
+		// return (std::move(a));
 	}, std::move(ta), std::move(tb), std::move(tc));
 	int		i = 1;
 	tuple::for_each([&](auto &&a) -> auto
 	{
 		assert(a == i);
 		i++;
-		return (a);
+		// return (a);
 	}, std::move(ta));
+	std::cout << "_________________________ MAP" << std::endl;
 	const auto td = tuple::map(std::move(ta), [](auto &&a)
 	{
-		return (std::move(a) * 2);
+		return (std::move(a) * Feature::Test(2));
 	});
 	i = 1;
 	tuple::for_each([&](auto &&d) -> auto
 	{
 		assert(d == i * 2);
 		i++;
-		return (d);
+		// return (d);
 	}, std::move(td));
-	assert(-13 == tuple::foldl(std::make_tuple(1, 2, 3, 4, 5), [](auto &&a, auto &&b)
+	std::cout << "_________________________ FOLD" << std::endl;
+	assert(-8 == tuple::foldl(std::move(ta), [](auto &&a, auto &&b)
 	{
 		return (std::move(a) - std::move(b));
 	}));
@@ -57,10 +66,11 @@ static void	test_exec(void)
 	{
 		return (std::move(a) - std::move(b));
 	}));
+	std::cout << "_________________________ ZIP" << std::endl;
 	assert(
 		tuple::foldl(
 			tuple::zip_with(
-				tuple::mult, std::move(ta), std::move(tb), std::move(tc)
+				std::move(tuple::mult), std::move(ta), std::move(tb), std::move(tc)
 			)
 			, [](auto &&a, auto &&b)
 			{
@@ -68,15 +78,25 @@ static void	test_exec(void)
 		})
 	== 100);
 	const auto te = tuple::zip(std::move(ta), std::move(tb));
+	std::cout << "_________________________ MISC" << std::endl;
 	const auto tf = tuple::foldl(std::move(te), [](auto &&lhs, auto &&rhs) -> auto
 	{
-		return (std::make_tuple(std::get<0>(lhs) + std::get<0>(rhs), std::get<1>(lhs) - std::get<1>(rhs)));
+		return (std::make_tuple(
+			std::get<0>(std::move(lhs)) + std::get<0>(std::move(rhs)), std::get<1>(std::move(lhs)) - std::get<1>(std::move(rhs)))
+		);
 	});
-	assert(std::get<0>(tf) == 10 && std::get<1>(tf) == -8);
-	const auto tg = std::make_tuple(ta, tb, tc);
-	const auto th = tuple::transpose(tg);
-	const auto ti = tuple::mult_tuple(std::move(ta), std::move(tg), tuple::add, tuple::mult);
-	const auto tj = tuple::mult_tuple(std::make_tuple(1, 2, 3), std::move(th), tuple::add, tuple::mult);
+	assert(std::get<0>(std::move(tf)) == 10 && std::get<1>(std::move(tf)) == -8);
+	std::cout << "_________________________ TRANSPOSE" << std::endl;
+	const auto tg = std::make_tuple(std::move(ta), std::move(tb), std::move(tc));
+	(void)tg;
+	const auto th = tuple::transpose(std::move(tg));
+	(void)th;
+	std::cout << "_________________________ MULT" << std::endl;
+	const auto ti = tuple::mult_tuple(std::move(ta), std::move(tg), std::move(tuple::add), std::move(tuple::mult));
+	(void)ti;
+	const auto	taa = std::make_tuple(Feature::Test(1), Feature::Test(2), Feature::Test(3));
+	const auto tj = tuple::mult_tuple(std::move(taa), std::move(th), std::move(tuple::add), std::move(tuple::mult));
+	(void)tj;
 	tuple::for_each([](auto &&t)
 	{
 		tuple::print(std::move(t));
@@ -89,10 +109,19 @@ static void	test_exec(void)
 	tuple::print(std::move(tj));
 }
 
+#else
+
+static void	exec(void)
+{
+	std::cout << "PASS" << std::endl;
+}
+
+#endif
+
 int			main(int ac, char **av)
 {
 	(void)ac;
 	(void)av;
-	test_exec();
+	exec();
 	return (0);
 }

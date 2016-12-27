@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/26 11:57:12 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/26 12:13:54 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/27 13:25:49 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ namespace tuple
 // TODO print_tuple rec with
 // is_specialization_of<Type, std::tuple>::value
 	template<typename Tuple>
-	void		print(Tuple &&t)
+	static inline void		print(Tuple const &&t)
 	{
 		for_each([](auto &&v)
 		{

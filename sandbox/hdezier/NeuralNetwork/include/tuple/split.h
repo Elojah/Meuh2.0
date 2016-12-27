@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 19:38:30 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/24 15:42:18 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/27 13:26:05 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ namespace tuple
 {
 // Split tuple
 	template<std::size_t Begin, std::size_t End, class Tuple>
-	constexpr auto	split(Tuple &&t)
+	static inline constexpr auto	split(Tuple const &&t)
 	{
 		return (detail::index_apply<Begin, End>([&](auto...Is)
 		{

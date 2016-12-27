@@ -6,7 +6,7 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/12/22 13:29:08 by leeios           ###   ########.fr        #
+#    Updated: 2016/12/26 21:58:45 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,12 +80,19 @@ fclean :
 
 re : fclean all
 
+test : CFLAGS += -DTEST
+test : all
+retest : CFLAGS += -DTEST
+retest : re
+
 dirbin:
 	mkdir -p $(BIN_DIR)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test
 
 .SILENT: dirlib dirbuild dirbin
+
+.ONE_SHELL: test
 
 #Build rule
 $(BIN_DIR)/$(TARGET) : $(OBJ)

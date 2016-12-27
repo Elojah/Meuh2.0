@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:05:52 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/26 11:44:23 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/26 21:40:53 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ namespace Feature
 	class	Test
 	{
 	public:
-		inline explicit Test(int value) {/*std::cerr << "Constructed with value " << value << std::endl;*/m_value = value;};
-		inline Test(void) : m_value(-1) {/*std::cerr << "Constructed" << std::endl;*/};
-		inline Test(Test &&rhs) {m_value = rhs.get();/*std::cerr << "Copy by lvalue" << std::endl;*/};
-		inline Test(const Test &&rhs) {m_value = rhs.get();/*std::cerr << "Copy by lvalue" << std::endl;*/};
-		inline Test(Test &rhs) {m_value = rhs.get();/*std::cerr << "Copy by reference" << std::endl;*/};
-		inline Test(const Test &rhs) {m_value = rhs.get();/*std::cerr << "Copy by const reference" << std::endl;*/};
-		inline ~Test(void) {/*std::cerr << "Destructed" << std::endl;*/};
+		inline explicit Test(int value) {std::cerr << "Constructed with value " << value << std::endl;m_value = value;};
+		inline Test(void) : m_value(-1) {std::cerr << "Constructed" << std::endl;};
+		inline Test(Test &&rhs) {m_value = std::move(rhs.m_value);std::cerr << "Copy by rvalue" << std::endl;};
+		inline Test(const Test &&rhs) {m_value = std::move(rhs.m_value);std::cerr << "Copy by const rvalue" << std::endl;};
+		inline Test(Test &rhs) {m_value = rhs.m_value;std::cerr << "Copy by reference" << std::endl;};
+		inline Test(const Test &rhs) {m_value = rhs.m_value;std::cerr << "Copy by const reference" << std::endl;};
+		inline ~Test(void) {std::cerr << "Destructed" << std::endl;};
 
 		inline Test&	operator=(const Test &rhs)
 		{
@@ -40,7 +40,10 @@ namespace Feature
 		// 	return (*this);
 		// };
 		inline Test		operator+(const Test &rhs) const {std::cerr << m_value << " + " << rhs.get() << std::endl;return (Test(m_value + rhs.get()));};
+		inline Test		operator-(const Test &rhs) const {std::cerr << m_value << " - " << rhs.get() << std::endl;return (Test(m_value - rhs.get()));};
 		inline Test		operator*(const Test &rhs) const {std::cerr << m_value << " * " << rhs.get() << std::endl;return (Test(m_value * rhs.get()));};
+		inline bool		operator==(const int &rhs) const {return (m_value == rhs);};
+		inline bool		operator==(const Test &rhs) const {return (m_value == rhs.m_value);};
 		inline operator	float(void) {return (m_value);};
 		// inline int		operator*(const Test &rhs) const {return (m_value * rhs.get());};
 

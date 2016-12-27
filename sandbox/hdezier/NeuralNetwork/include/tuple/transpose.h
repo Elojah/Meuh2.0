@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 19:38:34 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/26 11:52:35 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/27 13:26:13 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ namespace tuple
 {
 // Transpose
 	template <class Tuple>
-	inline constexpr auto	transpose(Tuple &&t)
+	static inline constexpr auto	transpose(Tuple const &&t)
 	{
 		return (apply(std::move(t), [](auto&&...ts) { return zip(std::move(ts)...); }));
 	}
