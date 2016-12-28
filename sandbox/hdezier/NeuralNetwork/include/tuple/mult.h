@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/26 12:46:26 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/27 13:00:38 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/28 12:41:31 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ namespace tuple
 
 template<typename TLhs, typename TRhs, typename FFold, typename FZip>
 static inline constexpr auto	mult_tuple(TLhs const &&lhs, TRhs const &&rhs
-	, FFold const &&fnFold, FZip const &&fnZip)
+	, FFold &&fnFold, FZip &&fnZip)
 {
 	return	(map
 				(std::move(rhs), [&](auto &&v)

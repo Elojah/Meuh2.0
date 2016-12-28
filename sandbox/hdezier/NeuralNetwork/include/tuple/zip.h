@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/17 16:40:32 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/27 13:49:45 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/27 20:10:43 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ namespace tuple
 {
 	// zip_with
 	template<typename F, typename Tuple, typename...Tuples>
-	static inline constexpr auto	zip_with(F &&f, Tuple const &&t, Tuples const&&...ts)
+	static inline constexpr auto	zip_with(F &&f, const Tuple &&t, const Tuples &&...ts)
 	{
 		const auto row =
 		[&](auto I)

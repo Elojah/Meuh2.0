@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/16 14:58:38 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/27 13:50:57 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/28 12:07:39 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@
 #include <cassert>
 
 #ifdef TEST
+
+static void	test_neuron(void)
+{
+	std::cout << "_________________________ NEURON" << std::endl;
+	typedef typename tuple::repeat<Feature::Test, 4>::type		t_inputs;
+	typedef typename tuple::repeat<Feature::Test, 2>::type		t_outputs;
+	Neuron<NeuronTypes::classic_test, t_inputs, t_outputs>		n;
+	n.set_initial_params(std::make_tuple(
+			tuple::map(std::make_tuple(52, 98, 14, 32), tuple::convert<Feature::Test>),
+			tuple::map(std::make_tuple(74, 85, 95, 65), tuple::convert<Feature::Test>)
+		));
+	const auto out = n.forward(tuple::map(std::make_tuple(36, 15, 78, 95), tuple::convert<Feature::Test>));
+	tuple::print(std::move(out));
+}
 
 static void	exec(void)
 {
@@ -107,6 +121,7 @@ static void	exec(void)
 	}, std::move(th));
 	tuple::print(std::move(ti));
 	tuple::print(std::move(tj));
+	test_neuron();
 }
 
 #else
