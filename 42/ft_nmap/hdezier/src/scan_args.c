@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 13:12:41 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/29 14:35:08 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/29 18:27:02 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,19 @@
 #include "ft_nmap.h"
 #include "libstr.h"
 
+static void		set_args_map_null(t_args_map *args_map)
+{
+	args_map->ports = 0x0;
+	args_map->ip = 0x0;
+	args_map->file = 0x0;
+	args_map->speedup = 0x0;
+	args_map->scan = 0x0;
+}
+
 static t_err	set_args_map(char *key, char *value, t_args_map *args_map)
 {
 	if (ft_strcmp(key, "help") == 0)
-		return (t_err::HELP);
+		return (HELP);
 	else if (ft_strcmp(key, "ports") == 0)
 		args_map->ports = value;
 	else if (ft_strcmp(key, "ip") == 0)
@@ -29,8 +38,8 @@ static t_err	set_args_map(char *key, char *value, t_args_map *args_map)
 	else if (ft_strcmp(key, "scan") == 0)
 		args_map->scan = value;
 	else
-		return (t_err::HELP);
-	return (t_err::NONE);
+		return (HELP);
+	return (NONE);
 }
 
 static t_err	args_to_map(int ac, char **av, t_args_map *args_map)
@@ -44,36 +53,28 @@ static t_err	args_to_map(int ac, char **av, t_args_map *args_map)
 		if (ft_strncmp(av[i], "--", 2) == 0)
 		{
 			if (i + 1 >= ac)
-				return (t_err::HELP);
+				return (HELP);
 			error = set_args_map(av[i] + 2, av[i + 1], args_map);
-			if (error != t_err::NONE)
+			if (error != NONE)
 				return (error);
 			++i;
 		}
 		else
-			return (t_err::HELP);
+			return (HELP);
 	}
-	return (t_err::NONE);
+	return (NONE);
 }
 
 t_err		scan_args(int ac, char **av, t_spec *specs)
 {
-	(void)ac;
-	(void)av;
 	t_err		error;
 	t_args_map	args_map;
 
+	set_args_map_null(&args_map);
 	error = args_to_map(ac, av, &args_map);
-	if (error != t_err::NONE)
+	if (error != NONE)
 		return (error);
-
-	// Default values
-	specs->n_threads = 0;
-	specs->scan = t_scan_types::SYN | t_scan_types::NULL_SCAN
-				| t_scan_types::ACK | t_scan_types::FIN
-				| t_scan_types::XMAS | t_scan_types::UDP;
-	specs->ports.ranges = (t_range *)malloc(1 * sizeof(t_range));
-	specs->ports.ranges[0] = (t_range){1, 1024};
-
+	error = set_args(&args_map, specs);
 	return (error);
+
 }

@@ -1,20 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libstr.h                                           :+:      :+:    :+:   */
+/*   libmem.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/29 14:02:55 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/29 20:47:05 by leeios           ###   ########.fr       */
+/*   Created: 2016/12/29 19:48:38 by leeios            #+#    #+#             */
+/*   Updated: 2016/12/29 19:54:56 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIB_STR_H
-# define LIB_STR_H
-
-int		ft_strcmp(const char *lhs, const char *rhs);
-int		ft_strncmp(const char *lhs,const char *rhs, int n);
-int		ft_uatoi(char **s);
-
-#endif
+void	ft_memset(void *s, int c, int n)
+{
+	while (--n >= 0)
+		*((char *)s + n) = c;
+}

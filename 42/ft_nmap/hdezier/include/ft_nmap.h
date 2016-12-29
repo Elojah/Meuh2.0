@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 11:37:46 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/29 14:01:01 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/29 21:27:38 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,35 +17,28 @@
 typedef enum			e_err
 {
 						NONE = 0,
+						WIP,
 						HELP,
 						ARGS_WRONG_FORMAT
 }						t_err;
 
 // Ports definnition
-typedef unsigned short	t_port_n;
-typedef struct			s_range
-{
-	t_port_n			start;
-	t_port_n			end;
-}						t_range;
-
 typedef struct			s_ports
 {
-	t_range				*ranges;
-	t_port_n			*n;
+	char				n[1024];
 }						t_ports;
 
 // Arguments specification definition
 typedef unsigned short	t_threads_n;
-typedef unsigned int	t_scan_mask;
+typedef unsigned char	t_scan_mask;
 typedef enum			e_scan_types
 {
-	SYN =		0x00000001,
-	NULL_SCAN =	0x00000010,
-	ACK =		0x00000100,
-	FIN =		0x00001000,
-	XMAS =		0x00010000,
-	UDP =		0x00100000
+	SYN =		0x01,
+	NULL_SCAN =	0x02,
+	ACK =		0x04,
+	FIN =		0x08,
+	XMAS =		0x10,
+	UDP =		0x20
 }						t_scan_types;
 
 typedef struct			s_spec
@@ -66,7 +59,12 @@ typedef struct			s_args_map
 	char				*scan;
 }						t_args_map;
 
-// Scan_args
+// scan_args.c
 t_err		scan_args(int ac,char **av, t_spec *specs);
+// set_args.c
+t_err		set_args(const t_args_map *args_map, t_spec *specs);
+// set_ports.c
+t_err		set_ports(char *arg, t_ports *ports);
 
 #endif
+

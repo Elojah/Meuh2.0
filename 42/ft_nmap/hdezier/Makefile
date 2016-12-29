@@ -6,7 +6,7 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/12/29 12:05:38 by leeios           ###   ########.fr        #
+#    Updated: 2016/12/29 21:29:32 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,11 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
+		scan_args\
+		set_args\
+		set_ports\
+		libstr\
+		libmem\
 
 #List interfaces here
 INTERFACE = \
