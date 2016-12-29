@@ -1,0 +1,16 @@
+{
+    "folders":
+    [
+        {
+            "path": "~/code/meuh/42/ft_nmap/hdezier"
+        }
+    ],
+
+    "settings":
+    {
+        "ecc_common_flags": ["-Iinclude"
+            , "-I/home/leeios/code/meuh/42/ft_nmap/hdezier/include"
+            , "-Wall", "-Wextra", "-Werror"],
+        "easy_clang_complete_verbose": true
+    }
+}
