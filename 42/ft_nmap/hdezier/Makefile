@@ -6,7 +6,7 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/12/29 21:29:32 by leeios           ###   ########.fr        #
+#    Updated: 2016/12/30 18:37:40 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,11 +37,15 @@ RM = rm -rf
 
 #List classes here
 CLASS = main\
-		scan_args\
-		set_args\
-		set_ports\
-		libstr\
-		libmem\
+		launch_scan\
+		args/scan_args\
+		args/set_args\
+		args/set_ports\
+		args/set_ip\
+		args/set_scan_mask\
+		libc/libstr\
+		libc/libmem\
+		libc/list\
 
 #List interfaces here
 INTERFACE = \
@@ -62,6 +66,7 @@ LFLAGS =
 LIB_LOCAL = \
 
 LIB_GLOBAL = \
+			pcap\
 
 LIB_OTHER = \
 

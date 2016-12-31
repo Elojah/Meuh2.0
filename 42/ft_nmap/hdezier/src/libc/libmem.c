@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libmem.h                                           :+:      :+:    :+:   */
+/*   libmem.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/29 14:02:55 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/30 15:49:01 by leeios           ###   ########.fr       */
+/*   Created: 2016/12/29 19:48:38 by leeios            #+#    #+#             */
+/*   Updated: 2016/12/31 11:58:59 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIB_MEM_H
-# define LIB_MEM_H
+#include <stdlib.h>
 
-void	ft_memset(void *s, int c, int n);
-void	ft_free(void *p);
+void	ft_memset(void *s, int c, int n)
+{
+	while (--n >= 0)
+		*((char *)s + n) = c;
+}
 
-#endif
+void	ft_free(void *p)
+{
+	if (p == NULL)
+		return ;
+	free(p);
+	p = NULL;
+}

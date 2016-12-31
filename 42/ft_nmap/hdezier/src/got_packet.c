@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libmem.c                                           :+:      :+:    :+:   */
+/*   got_packet.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/29 19:48:38 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/29 19:54:56 by leeios           ###   ########.fr       */
+/*   Created: 2016/12/30 20:34:22 by leeios            #+#    #+#             */
+/*   Updated: 2016/12/30 20:35:11 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_memset(void *s, int c, int n)
+void	got_packet(unsigned char *args, const struct pcap_pkthdr *header
+	, const unsigned char *packet)
 {
-	while (--n >= 0)
-		*((char *)s + n) = c;
+	(void)args;
+	(void)header;
+	(void)packet;
 }

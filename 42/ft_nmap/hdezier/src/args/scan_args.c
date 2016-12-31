@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 13:12:41 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/29 18:27:02 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/30 17:03:53 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 
 static void		set_args_map_null(t_args_map *args_map)
 {
-	args_map->ports = 0x0;
-	args_map->ip = 0x0;
-	args_map->file = 0x0;
-	args_map->speedup = 0x0;
-	args_map->scan = 0x0;
+	args_map->ports = NULL;
+	args_map->ip = NULL;
+	args_map->file = NULL;
+	args_map->speedup = NULL;
+	args_map->scan = NULL;
 }
 
 static t_err	set_args_map(char *key, char *value, t_args_map *args_map)
@@ -76,5 +76,4 @@ t_err		scan_args(int ac, char **av, t_spec *specs)
 		return (error);
 	error = set_args(&args_map, specs);
 	return (error);
-
 }

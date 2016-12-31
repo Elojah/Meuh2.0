@@ -6,12 +6,17 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 11:37:41 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/29 21:06:30 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/31 11:53:49 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "ft_nmap.h"
+
+static void	free_specs(t_spec *specs)
+{
+	free_list(&specs->ip_adresses);
+}
 
 static int	print_err(const t_err err)
 {
@@ -23,12 +28,14 @@ static int	print_err(const t_err err)
 		"--ip ip addresses to scan in dot format\n"
 		"--file File name containing IP addresses to scan\n"
 		"--speedup [250 max] number of parallel threads to use\n"
-		"--scan SYN/NULL/FIN/XMAS/ACK/UDP\n"
+		"--scan SYN/NULL/FIN/XMAS/ACK/UDP\n",
+		"Couldn't open device :(",
+		"Can't find this ip/hostname"
 	};
-	if (err == HELP || err == ARGS_WRONG_FORMAT)
-		printf("%s\n", err_msg[1]);
-	else if (err == NONE)
+	if (err == NONE)
 		return (0);
+	else
+		printf("%s\n", err_msg[err]);
 	return (-1);
 }
 
@@ -40,5 +47,9 @@ int			main(int ac, char **av)
 	error = scan_args(ac, av, &specs);
 	if (error != NONE)
 		return (print_err(error));
+	error = launch_scan(&specs);
+	if (error != NONE)
+		return (print_err(error));
+	free_specs(&specs);
 	return (0);
 }
