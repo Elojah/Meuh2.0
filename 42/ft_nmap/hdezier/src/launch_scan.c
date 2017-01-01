@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 17:08:15 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/31 14:53:35 by leeios           ###   ########.fr       */
+/*   Updated: 2017/01/01 22:11:12 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,33 @@ static void	print_config(t_spec *specs)
 	print_scan_mask(&specs->scan);
 	printf("\n");
 	printf("No of threads : %u\n", specs->n_threads);
+}
+
+/*
+Checksums - IP and TCP
+*/
+unsigned short	csum(unsigned short *ptr,int nbytes)
+{
+	long			sum;
+	unsigned short	oddbyte;
+	short			answer;
+
+	sum=0;
+	while (nbytes > 1)
+	{
+		sum += *ptr++;
+		nbytes -= 2;
+	}
+	if (nbytes == 1)
+	{
+		oddbyte = 0;
+		*((u_char*)&oddbyte) = *(u_char*)ptr;
+		sum += oddbyte;
+	}
+	sum = (sum>>16)+(sum & 0xffff);
+	sum = sum + (sum>>16);
+	answer = (short)~sum;
+	return(answer);
 }
 
 // static int		create_client(char *addr, int port)
@@ -151,8 +178,36 @@ t_err		launch_scan(t_spec *specs)
 	// Set adresses from/to
 	t.iph.saddr = inet_addr(source_ip);
 	t.iph.daddr = dest_ip.s_addr;
-	// Header length, set at the end
-	t.iph.ihl = htons(5);
+	t.iph.ihl = htons(5); // Header length
+	t.iph.check = csum ((unsigned short *)&t, t.iph.tot_len >> 1);
+
+	//TCP Header
+	int source_port = 4242;
+	t.tcph.source = htons(source_port);
+	t.tcph.dest = htons(80);
+	t.tcph.seq = 0;
+	t.tcph.ack_seq = 0;
+	t.tcph.doff = sizeof(struct tcphdr) / 4; //Size of tcp header
+
+
+	t.tcph.syn=1;
+	t.tcph.ack=0;
+	t.tcph.fin=0;
+
+	t.tcph.rst=0;
+	t.tcph.psh=0;
+	t.tcph.urg=0;
+
+	t.tcph.window = htons(14600); // maximum allowed window size
+	t.tcph.check = 0; //if you set a checksum to zero, your kernel's IP stack should fill in the correct checksum during transmission
+	t.tcph.urg_ptr = 0;
+
+	//IP_HDRINCL to tell the kernel that headers are included in the packet
+	int one = 1;
+	const int *val = &one;
+
+	if (setsockopt(s, IPPROTO_IP, IP_HDRINCL, val, sizeof (one)) < 0)
+		printf ("Error setting IP_HDRINCL. Error number : %d . Error message : %s \n" , errno , strerror(errno));
 
 	return (WIP);
 }
