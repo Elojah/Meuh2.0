@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:05:52 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/28 13:26:56 by leeios           ###   ########.fr       */
+/*   Updated: 2016/12/28 18:10:55 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MAIN_H
 
 #include <iostream>
-
 
 namespace Feature
 {
@@ -39,12 +38,14 @@ namespace Feature
 		// 	m_value = rhs.get();
 		// 	return (*this);
 		// };
-		inline Test		operator+(const Test &rhs) const {std::cerr << m_value << " + " << rhs.get() << std::endl;return (Test(m_value + rhs.get()));};
-		inline Test		operator-(const Test &rhs) const {std::cerr << m_value << " - " << rhs.get() << std::endl;return (Test(m_value - rhs.get()));};
-		inline Test		operator*(const Test &rhs) const {std::cerr << m_value << " * " << rhs.get() << std::endl;return (Test(m_value * rhs.get()));};
+		inline Test		operator+(const Test &rhs) const {std::cerr << m_value << " + " << rhs.m_value << std::endl;return (Test(m_value + rhs.m_value));};
+		inline Test		operator-(const Test &rhs) const {std::cerr << m_value << " - " << rhs.m_value << std::endl;return (Test(m_value - rhs.m_value));};
+		inline Test		operator*(const Test &rhs) const {std::cerr << m_value << " * " << rhs.m_value << std::endl;return (Test(m_value * rhs.m_value));};
 		inline bool		operator==(const int &rhs) const {return (m_value == rhs);};
 		inline bool		operator==(const Test &rhs) const {return (m_value == rhs.m_value);};
-		inline operator	float(void) {return (m_value);};
+		inline operator	int(void) {std::cerr << "Convert Test to int" << std::endl;return (m_value);};
+		// inline operator	double(void) {std::cerr << "Convert Test to double" << std::endl;return (m_value);};
+		// inline operator	float(void) {std::cerr << "Convert Test to float" << std::endl;return (m_value);};
 		// inline int		operator*(const Test &rhs) const {return (m_value * rhs.get());};
 
 		inline int	get(void) const {return (m_value);};

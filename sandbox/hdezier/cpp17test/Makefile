@@ -6,7 +6,7 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2017/03/31 00:07:04 by leeios           ###   ########.fr        #
+#    Updated: 2016/12/24 12:15:27 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ UNAME := $(shell uname)
 
 ifeq ($(UNAME), Linux)
 	# do something Linux-y
-	CC = clang++-3.9
+	CC = clang++-3.6
 endif
 
 ifeq ($(UNAME), Darwin)
@@ -80,19 +80,12 @@ fclean :
 
 re : fclean all
 
-test : CFLAGS += -DTEST
-test : all
-retest : CFLAGS += -DTEST
-retest : re
-
 dirbin:
 	mkdir -p $(BIN_DIR)
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re
 
 .SILENT: dirlib dirbuild dirbin
-
-.ONE_SHELL: test
 
 #Build rule
 $(BIN_DIR)/$(TARGET) : $(OBJ)

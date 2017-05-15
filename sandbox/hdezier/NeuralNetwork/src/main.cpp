@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/16 14:58:38 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/28 12:07:39 by leeios           ###   ########.fr       */
+/*   Updated: 2017/05/08 16:12:49 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	test_neuron(void)
 {
 	std::cout << "_________________________ NEURON" << std::endl;
 	typedef typename tuple::repeat<Feature::Test, 4>::type		t_inputs;
-	typedef typename tuple::repeat<Feature::Test, 2>::type		t_outputs;
+	typedef typename tuple::repeat<int, 2>::type				t_outputs;
 	Neuron<NeuronTypes::classic_test, t_inputs, t_outputs>		n;
 	n.set_initial_params(std::make_tuple(
 			tuple::map(std::make_tuple(52, 98, 14, 32), tuple::convert<Feature::Test>),
@@ -133,8 +133,11 @@ static void	exec(void)
 
 #endif
 
+//#include <variant>
 int			main(int ac, char **av)
 {
+//	std::variant<int, float> a;
+//	(void)a;
 	(void)ac;
 	(void)av;
 	exec();

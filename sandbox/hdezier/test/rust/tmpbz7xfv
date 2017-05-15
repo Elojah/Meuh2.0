@@ -1,0 +1,5 @@
+struct Tas
+
+fn main() {
+	println!("Hello, world!");
+}

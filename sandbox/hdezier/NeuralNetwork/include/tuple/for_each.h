@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 19:38:40 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/27 13:37:24 by leeios           ###   ########.fr       */
+/*   Updated: 2017/05/08 15:53:48 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ namespace tuple
 		f(std::get<I>(std::move(t)), std::get<I>(std::move(ts))...);
 		for_each<I + 1, F>(std::move(f), std::move(t), std::move(ts)...);
 	}
-
 };
 
 #endif
