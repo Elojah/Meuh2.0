@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 11:37:41 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/31 11:53:49 by leeios           ###   ########.fr       */
+/*   Updated: 2017/01/02 12:18:18 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ static int	print_err(const t_err err)
 		"--file File name containing IP addresses to scan\n"
 		"--speedup [250 max] number of parallel threads to use\n"
 		"--scan SYN/NULL/FIN/XMAS/ACK/UDP\n",
-		"Couldn't open device :(",
-		"Can't find this ip/hostname"
+		"Can't open device :(",
+		"Can't find this ip/hostname",
+		"Can't set valid socket options"
 	};
 	if (err == NONE)
 		return (0);

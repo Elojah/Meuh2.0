@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:14 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/30 18:39:28 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/31 20:06:45 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,6 @@ uint32_t			ResourceShop::_get_resource_lcm_prod(const std::string &resource_name
 	for (const auto &task : sub_tasks)
 		lcm = numeric_helper::ft_lcm(lcm, task.second);
 	return (lcm);
-}
-
-// Edge condition
-bool					ResourceShop::_search_paths_empty_stack(
-	const t_resource_stack &res_stack
-	, const t_path &current_path
-	, const t_resource_pack &res_pack
-	, t_paths &result)
-{
-	std::cerr << "[SEARCH]" << "_search_paths_empty_stack" << std::endl;
-	(void)res_stack;
-	(void)res_pack;
-	result.emplace_back(std::move(current_path));
-	return (true);
 }
 
 // Add a prod to resources
@@ -72,6 +58,11 @@ bool					ResourceShop::_search_paths_resource_done(
 	_unlock_resource(res_stack.top().name);
 	auto		next_res_stack = std::move(res_stack);
 	next_res_stack.pop();
+	if (next_res_stack.empty())
+	{
+		std::cerr << "[PATH ADD !!!]" << "^" << std::endl;
+		result.emplace_back(std::move(current_path));
+	}
 	return (_search_paths(next_res_stack, current_path, res_pack, result));
 }
 
@@ -93,7 +84,7 @@ bool					ResourceShop::_search_paths_need(
 	uint32_t	initial_resource = 0;
 	if (res_pack.find(res_stack.top().name) != res_pack.end())
 		initial_resource = res_pack.at(res_stack.top().name);
-	bool		achievable(false);
+	bool		achievable = false;
 	const uint32_t	n_res_max_used = std::min(initial_resource, res_stack.top().n);
 	const uint32_t	n_step = n_res_max_used < m_max_steps_res_used ? 1 : n_res_max_used / m_max_steps_res_used;
 	for (uint32_t i = 0; i <= n_res_max_used; i += n_step) // Condition on overflow, this is bad i know...
@@ -206,7 +197,7 @@ bool					ResourceShop::_search_paths(
 	, t_paths &result)
 {
 	if (res_stack.empty())
-		return (_search_paths_empty_stack(res_stack, current_path, res_pack, result));
+		return (true);
 	switch (res_stack.top().trade)
 	{
 		case (e_trade::PRODUCT) :

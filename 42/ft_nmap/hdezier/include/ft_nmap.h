@@ -6,12 +6,16 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 11:37:46 by leeios            #+#    #+#             */
-/*   Updated: 2016/12/31 14:32:14 by leeios           ###   ########.fr       */
+/*   Updated: 2017/01/02 13:17:06 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_NMAP_H
 # define FT_NMAP_H
+
+# ifndef NULL
+#  define NULL 0x0
+# endif
 
 # include "list.h"
 
@@ -44,7 +48,8 @@ typedef enum			e_err
 						HELP,
 						DEVICE_OPEN,
 						UNKNOWN_HOSTNAME,
-						LOCAL_CONNECT
+						LOCAL_CONNECT,
+						SOCKET_OPTIONS,
 }						t_err;
 
 // Ports definnition

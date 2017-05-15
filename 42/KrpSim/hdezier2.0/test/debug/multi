@@ -8,10 +8,10 @@ yen:20
 #
 # process   name:(need1:qty1;need2:qty2;[...]):(result1:qty1;result2:qty2;[...]):delay
 #
-euro_to_test:(euro:2):(test:10):1
-#yen_to_balls:(yen:5):(balls:3):10
-test_to_balls:(test:5):(balls:3):1
-prod_materiel:(euro:8;dollar:2;balls:5):(client_content:1):10
+yen_to_balls:(yen:6):(balls:3):10
+#euro_to_test:(euro:2):(test:10):1
+test_to_balls:(test:5):(balls:1):1
+prod_materiel:(euro:8;dollar:2;balls:2):(client_content:1):10
 #
 # optimize time for no process possible (eating stock, produce all possible),
 # or maximize some products over a long delay

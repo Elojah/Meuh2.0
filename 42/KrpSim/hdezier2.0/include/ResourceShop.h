@@ -6,7 +6,7 @@
 /*   By: leeios <leeios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 11:43:03 by leeios            #+#    #+#             */
-/*   Updated: 2016/07/30 16:23:48 by leeios           ###   ########.fr       */
+/*   Updated: 2016/07/31 20:05:32 by leeios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ private:
 			return (m_res_lock.at(resource_name));
 	};
 // Paths
+	// Dispatch
 	bool					_search_paths(
 		const t_resource_stack &res_stack
 		, const t_path &current_path
@@ -95,11 +96,6 @@ private:
 		, const t_resource_pack &res_pack
 		, t_paths &result);
 	bool					_search_paths_need(
-		const t_resource_stack &res_stack
-		, const t_path &current_path
-		, const t_resource_pack &res_pack
-		, t_paths &result);
-	bool					_search_paths_empty_stack(
 		const t_resource_stack &res_stack
 		, const t_path &current_path
 		, const t_resource_pack &res_pack

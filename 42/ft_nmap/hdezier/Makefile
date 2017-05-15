@@ -6,7 +6,7 @@
 #    By: leeios <leeios@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/14 16:44:06 by leeios            #+#    #+#              #
-#    Updated: 2016/12/30 18:37:40 by leeios           ###   ########.fr        #
+#    Updated: 2017/01/02 17:52:24 by leeios           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ LIB_LOCAL = \
 
 LIB_GLOBAL = \
 			pcap\
+			pthread\
 
 LIB_OTHER = \
 
