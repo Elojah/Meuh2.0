@@ -1,0 +1,55 @@
+{
+    "bootstrapped": true,
+    "in_process_packages":
+    [
+    ],
+    "installed_packages":
+    [
+        "42 Headers",
+        "AlignTab",
+        "All Autocomplete",
+        "Anaconda",
+        "AutoFileName",
+        "BetterFindBuffer",
+        "Case Conversion",
+        "Clipboard Manager",
+        "Diffy",
+        "DocPy",
+        "File Navigator",
+        "Floobits",
+        "Fold Comments",
+        "Git",
+        "GitGutter",
+        "GitStatusBar",
+        "ImprovedMacros",
+        "Indent XML",
+        "JSON Reindent",
+        "LoremIpsum",
+        "Makefile Improved",
+        "Markdown Preview",
+        "MarkdownEditing",
+        "Material Theme",
+        "Origami",
+        "Package Control",
+        "PackageResourceViewer",
+        "PasteRepeater",
+        "PowerCursors",
+        "Pretty JSON",
+        "requirementstxt",
+        "RestructuredText Improved",
+        "Rust Enhanced",
+        "ScopeHunter",
+        "SelectUntil",
+        "SerializedDataConverter",
+        "SideBarEnhancements",
+        "SqlBeautifier",
+        "SQLTools",
+        "Status Bar Time",
+        "Super Calculator",
+        "Text Pastry"
+    ],
+    "repositories":
+    [
+        "https://github.com/skuroda/ImprovedMacros"
+    ]
+}
